@@ -6,7 +6,6 @@ var respond = function (req, res, next) {
 };
 
 
-debugger;
 var server = restify.createServer({
     certificate: fs.readFileSync('./certs/server.crt'),
     key: fs.readFileSync('./certs/server.key'),
