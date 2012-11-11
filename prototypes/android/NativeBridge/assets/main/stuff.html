@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		
+	    function justdoit(first) {
+	    	var data = 	'';
+			if(first!= '')
+				data = "1="+first+".";
+			else
+				data = "no call";
+			
+			document.getElementById('test').innerHTML = data;
+	    }
+	</script>
+</head>
+
+<body>
+	Testing Parameters.<br>
+	<span id="test"></span>
+	<br >
+	<input type="button" value="hola" onClick="justdoit('1');" />
+</body>
+</html> 

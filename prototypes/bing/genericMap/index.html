@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script charset="UTF-8" type="text/javascript" src="https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1"></script>
+<!-- <script charset="UTF-8" type="text/javascript" src="bingmaps.js"></script> -->
+
+
+<script type="text/javascript">
+	var cred = "AodC7AaauHfjsY9pK8qi6U-JN1s1HfroLZiCw3afJUoicmW-CH9RasOjp5hcsmFe";
+
+	function GetMap()
+	{
+		/** User Push Pins **/
+		var userLocOne = new Microsoft.Maps.Location(37.4, -122.0);
+		var userLocTwo = new Microsoft.Maps.Location(37.6, -121.8);
+		
+		/** Generate Map **/
+		var mapCenter = new Microsoft.Maps.Location((userLocOne.latitude + userLocTwo.latitude) / 2,			//Center Lat
+													(userLocOne.longitude + userLocTwo.longitude) / 2); 		//Center Long
+		var map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), {
+																				credentials:cred,				// API Key
+																				center: mapCenter, 				// Set Map center
+																				zoom: 10,						// Set Zoom 				//TODO change to bounding box instead of zoom
+																				// Limit functionality 
+																				disablePanning:true,			//Disable movement
+																				enableSearchLogo: false,		//Disable search
+																				showDashboard: false,			//Disable controls
+																				disableZooming: true			//Disable Zooming
+																			});
+		
+		
+		/** Push Pins **/
+		//Image Pushpin:
+		var pushpinOptions = {icon: 'crosshairs.png', width: 20, height: 20};
+		
+		//HTML Pushpin:
+		//var pushpinOptions = {width: null, height: null, htmlContent: "<div style='border:solid 2px;background-color:LightBlue;width:100px;'>Pin/Canvas</div>"}; 
+		
+		
+		var userPinOne = new Microsoft.Maps.Pushpin(userLocOne, pushpinOptions);
+		var userPinTwo = new Microsoft.Maps.Pushpin(userLocTwo, pushpinOptions);
+		var mapCenterPin = new Microsoft.Maps.Pushpin(mapCenter, pushpinOptions);
+		map.entities.push(userPinOne);
+		map.entities.push(userPinTwo);
+		map.entities.push(mapCenterPin);
+		
+		
+		
+		
+		
+		/** Generate Curve **/
+		
+		
+		
+		
+	}
+	
+	function CurveCode() {
+		// assumes exisatence of a global VEMap object named 'map' instantiated via LoadMap()
+		// start & finish: required VELatLong
+		// arcHeight: required double latitude degrees
+		// skew: required double left-right degrees
+		// color: optional VEColor for line; default = red
+		// width: optional integer line width; default = 2
+		// upDown: optional string 'up' or 'down'; default = 'up'
+		// numSegments: optional int number of segments to use for line; default = 10
+		// see http://mathforum.org/library/drmath/view/54434.html for the math
+
+		if (typeof color == 'undefined') { var color = new VEColor(255,0,0,1.0); }
+		if (typeof width == 'undefined') { var width = 2; }
+		if (typeof upDown == 'undefined') { var upDown = 'up'; }
+		if (typeof numPoints == 'undefined') { var numPoints = 10; }
+
+		if (start.Longitude > finish.Longitude) {   // adjust so start is to the left of finish
+			var temp = start; start = finish; finish = temp;
+		}
+
+		if (numSegments < 2) numSegments = 2;  
+
+		var midLon = (finish.Longitude - start.Longitude) / 2.0;
+		var midLat = (finish.Latitude - start.Latitude) / 2.0;
+
+		if (Math.abs(start.Longitude - finish.Longitude) < 0.0001) { // nearly vertical
+			if (upDown == 'up')
+				midLon -= arcHeight;
+			else
+				midLon += arcHeight;
+				midLat += skew;
+		}
+		else {
+			if (upDown == 'up')
+				midLat += arcHeight;
+			else
+				midLat -= arcHeight;
+			midLon += skew;
+		}
+
+		var tDelta = 1.0 / numSegments;
+
+		var lons = new Array(); // 'x' values
+		for (t = 0.0; t <= 1.0; t += tDelta) {
+			var firstTerm = (1.0 - t * t) * start.Longitude;
+			var secondTerm = 2.0 * (1.0 - t) * t * midLon;
+			var thirdTerm = t * t * finish.Longitude;
+			var B = firstTerm + secondTerm + thirdTerm;
+			lons.push(B);
+		}
+
+		var lats = new Array(); // 'y' values
+		for (t = 0.0; t <= 1.0; t += tDelta) {
+			var firstTerm = (1.0 - t * t) * start.Latitude;
+			var secondTerm = 2.0 * (1.0 - t) * t * midLat;
+			var thirdTerm = t * t * finish.Latitude;
+			var B = firstTerm + secondTerm + thirdTerm;
+			lats.push(B);
+		}
+
+		var points = new Array();
+		for (i = 0; i < lats.length; ++i) {
+			points.push(new VELatLong(lats[i], lons[i]));
+		}
+
+		var curve = new VEShape(VEShapeType.Polyline, points);
+		curve.HideIcon();
+		curve.SetLineColor(color);
+		curve.SetLineWidth(width);
+		map.AddShape(curve);
+	}
+</script>
+
+
+<style type="text/css">
+.map {
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	width: 600px;
+	height: 400px;
+	margin-left: -300px;
+}
+</style>
+
+
+</head>
+
+<body onload="GetMap()">
+
+<input type="submit" value="Submit" onclick="GetMap()">
+<div id="mapDiv" class="map"></div>
+
+
+</body>
+</html>
