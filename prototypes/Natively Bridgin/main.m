@@ -3,7 +3,7 @@
 //  NativeBridge
 //
 //  Created by NativeBridge on 14/09/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2012 Jomana Sherif. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
