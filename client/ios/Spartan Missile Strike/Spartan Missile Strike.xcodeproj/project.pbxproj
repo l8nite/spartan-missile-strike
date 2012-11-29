@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10EE33E51667376400D95BAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
+		10EE33E71667376400D95BAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
+		10EE33E91667376400D95BAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E81667376400D95BAC /* CoreGraphics.framework */; };
+		10EE33EF1667376400D95BAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33ED1667376400D95BAC /* InfoPlist.strings */; };
+		10EE33F11667376400D95BAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE33F01667376400D95BAC /* main.m */; };
+		10EE33F51667376400D95BAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE33F41667376400D95BAC /* AppDelegate.m */; };
+		10EE33F71667376400D95BAC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F61667376400D95BAC /* Default.png */; };
+		10EE33F91667376400D95BAC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F81667376400D95BAC /* Default@2x.png */; };
+		10EE33FB1667376400D95BAC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33FA1667376400D95BAC /* Default-568h@2x.png */; };
+		10EE34031667376400D95BAC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
+		10EE34041667376400D95BAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
+		10EE34051667376400D95BAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
+		10EE340D1667376400D95BAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10EE340B1667376400D95BAC /* InfoPlist.strings */; };
+		10EE34101667376400D95BAC /* Spartan_Missile_StrikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE340F1667376400D95BAC /* Spartan_Missile_StrikeTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		10EE34061667376400D95BAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10EE33D71667376400D95BAC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 10EE33DF1667376400D95BAC;
+			remoteInfo = "Spartan Missile Strike";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		10EE33E01667376400D95BAC /* Spartan Missile Strike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spartan Missile Strike.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		10EE33E41667376400D95BAC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		10EE33E61667376400D95BAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		10EE33E81667376400D95BAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		10EE33EC1667376400D95BAC /* Spartan Missile Strike-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Spartan Missile Strike-Info.plist"; sourceTree = "<group>"; };
+		10EE33EE1667376400D95BAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		10EE33F01667376400D95BAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		10EE33F21667376400D95BAC /* Spartan Missile Strike-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spartan Missile Strike-Prefix.pch"; sourceTree = "<group>"; };
+		10EE33F31667376400D95BAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		10EE33F41667376400D95BAC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		10EE33F61667376400D95BAC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		10EE33F81667376400D95BAC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		10EE33FA1667376400D95BAC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		10EE34011667376400D95BAC /* Spartan Missile StrikeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Spartan Missile StrikeTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		10EE34021667376400D95BAC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		10EE340A1667376400D95BAC /* Spartan Missile StrikeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Spartan Missile StrikeTests-Info.plist"; sourceTree = "<group>"; };
+		10EE340C1667376400D95BAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		10EE340E1667376400D95BAC /* Spartan_Missile_StrikeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spartan_Missile_StrikeTests.h; sourceTree = "<group>"; };
+		10EE340F1667376400D95BAC /* Spartan_Missile_StrikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Spartan_Missile_StrikeTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		10EE33DD1667376400D95BAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10EE33E51667376400D95BAC /* UIKit.framework in Frameworks */,
+				10EE33E71667376400D95BAC /* Foundation.framework in Frameworks */,
+				10EE33E91667376400D95BAC /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10EE33FD1667376400D95BAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10EE34031667376400D95BAC /* SenTestingKit.framework in Frameworks */,
+				10EE34041667376400D95BAC /* UIKit.framework in Frameworks */,
+				10EE34051667376400D95BAC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		10EE33D51667376400D95BAC = {
+			isa = PBXGroup;
+			children = (
+				10EE33EA1667376400D95BAC /* Spartan Missile Strike */,
+				10EE34081667376400D95BAC /* Spartan Missile StrikeTests */,
+				10EE33E31667376400D95BAC /* Frameworks */,
+				10EE33E11667376400D95BAC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		10EE33E11667376400D95BAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				10EE33E01667376400D95BAC /* Spartan Missile Strike.app */,
+				10EE34011667376400D95BAC /* Spartan Missile StrikeTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		10EE33E31667376400D95BAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10EE33E41667376400D95BAC /* UIKit.framework */,
+				10EE33E61667376400D95BAC /* Foundation.framework */,
+				10EE33E81667376400D95BAC /* CoreGraphics.framework */,
+				10EE34021667376400D95BAC /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		10EE33EA1667376400D95BAC /* Spartan Missile Strike */ = {
+			isa = PBXGroup;
+			children = (
+				10EE33F31667376400D95BAC /* AppDelegate.h */,
+				10EE33F41667376400D95BAC /* AppDelegate.m */,
+				10EE33EB1667376400D95BAC /* Supporting Files */,
+			);
+			path = "Spartan Missile Strike";
+			sourceTree = "<group>";
+		};
+		10EE33EB1667376400D95BAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				10EE33EC1667376400D95BAC /* Spartan Missile Strike-Info.plist */,
+				10EE33ED1667376400D95BAC /* InfoPlist.strings */,
+				10EE33F01667376400D95BAC /* main.m */,
+				10EE33F21667376400D95BAC /* Spartan Missile Strike-Prefix.pch */,
+				10EE33F61667376400D95BAC /* Default.png */,
+				10EE33F81667376400D95BAC /* Default@2x.png */,
+				10EE33FA1667376400D95BAC /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		10EE34081667376400D95BAC /* Spartan Missile StrikeTests */ = {
+			isa = PBXGroup;
+			children = (
+				10EE340E1667376400D95BAC /* Spartan_Missile_StrikeTests.h */,
+				10EE340F1667376400D95BAC /* Spartan_Missile_StrikeTests.m */,
+				10EE34091667376400D95BAC /* Supporting Files */,
+			);
+			path = "Spartan Missile StrikeTests";
+			sourceTree = "<group>";
+		};
+		10EE34091667376400D95BAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				10EE340A1667376400D95BAC /* Spartan Missile StrikeTests-Info.plist */,
+				10EE340B1667376400D95BAC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		10EE33DF1667376400D95BAC /* Spartan Missile Strike */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10EE34131667376400D95BAC /* Build configuration list for PBXNativeTarget "Spartan Missile Strike" */;
+			buildPhases = (
+				10EE33DC1667376400D95BAC /* Sources */,
+				10EE33DD1667376400D95BAC /* Frameworks */,
+				10EE33DE1667376400D95BAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Spartan Missile Strike";
+			productName = "Spartan Missile Strike";
+			productReference = 10EE33E01667376400D95BAC /* Spartan Missile Strike.app */;
+			productType = "com.apple.product-type.application";
+		};
+		10EE34001667376400D95BAC /* Spartan Missile StrikeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10EE34161667376400D95BAC /* Build configuration list for PBXNativeTarget "Spartan Missile StrikeTests" */;
+			buildPhases = (
+				10EE33FC1667376400D95BAC /* Sources */,
+				10EE33FD1667376400D95BAC /* Frameworks */,
+				10EE33FE1667376400D95BAC /* Resources */,
+				10EE33FF1667376400D95BAC /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				10EE34071667376400D95BAC /* PBXTargetDependency */,
+			);
+			name = "Spartan Missile StrikeTests";
+			productName = "Spartan Missile StrikeTests";
+			productReference = 10EE34011667376400D95BAC /* Spartan Missile StrikeTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		10EE33D71667376400D95BAC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Jomana Sherif";
+			};
+			buildConfigurationList = 10EE33DA1667376400D95BAC /* Build configuration list for PBXProject "Spartan Missile Strike" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 10EE33D51667376400D95BAC;
+			productRefGroup = 10EE33E11667376400D95BAC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				10EE33DF1667376400D95BAC /* Spartan Missile Strike */,
+				10EE34001667376400D95BAC /* Spartan Missile StrikeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		10EE33DE1667376400D95BAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10EE33EF1667376400D95BAC /* InfoPlist.strings in Resources */,
+				10EE33F71667376400D95BAC /* Default.png in Resources */,
+				10EE33F91667376400D95BAC /* Default@2x.png in Resources */,
+				10EE33FB1667376400D95BAC /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10EE33FE1667376400D95BAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10EE340D1667376400D95BAC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10EE33FF1667376400D95BAC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		10EE33DC1667376400D95BAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10EE33F11667376400D95BAC /* main.m in Sources */,
+				10EE33F51667376400D95BAC /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10EE33FC1667376400D95BAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10EE34101667376400D95BAC /* Spartan_Missile_StrikeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		10EE34071667376400D95BAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 10EE33DF1667376400D95BAC /* Spartan Missile Strike */;
+			targetProxy = 10EE34061667376400D95BAC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		10EE33ED1667376400D95BAC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				10EE33EE1667376400D95BAC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		10EE340B1667376400D95BAC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				10EE340C1667376400D95BAC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		10EE34111667376400D95BAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		10EE34121667376400D95BAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		10EE34141667376400D95BAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Spartan Missile Strike/Spartan Missile Strike-Prefix.pch";
+				INFOPLIST_FILE = "Spartan Missile Strike/Spartan Missile Strike-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		10EE34151667376400D95BAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Spartan Missile Strike/Spartan Missile Strike-Prefix.pch";
+				INFOPLIST_FILE = "Spartan Missile Strike/Spartan Missile Strike-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		10EE34171667376400D95BAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Spartan Missile Strike.app/Spartan Missile Strike";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Spartan Missile Strike/Spartan Missile Strike-Prefix.pch";
+				INFOPLIST_FILE = "Spartan Missile StrikeTests/Spartan Missile StrikeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		10EE34181667376400D95BAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Spartan Missile Strike.app/Spartan Missile Strike";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Spartan Missile Strike/Spartan Missile Strike-Prefix.pch";
+				INFOPLIST_FILE = "Spartan Missile StrikeTests/Spartan Missile StrikeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		10EE33DA1667376400D95BAC /* Build configuration list for PBXProject "Spartan Missile Strike" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10EE34111667376400D95BAC /* Debug */,
+				10EE34121667376400D95BAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		10EE34131667376400D95BAC /* Build configuration list for PBXNativeTarget "Spartan Missile Strike" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10EE34141667376400D95BAC /* Debug */,
+				10EE34151667376400D95BAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		10EE34161667376400D95BAC /* Build configuration list for PBXNativeTarget "Spartan Missile StrikeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10EE34171667376400D95BAC /* Debug */,
+				10EE34181667376400D95BAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 10EE33D71667376400D95BAC /* Project object */;
+}
