@@ -29,4 +29,15 @@
     STFail(@"Unit tests are not implemented yet in Spartan Missile StrikeTests");
 }
 
+- (void)UIWebViewTest
+{
+    STFail(@"UIWebView couldnot load");
+}
+
+-(void)ClassTest
+{
+
+    
+}
+
 @end

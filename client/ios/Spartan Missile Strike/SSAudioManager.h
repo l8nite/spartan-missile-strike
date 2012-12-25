@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSAudioManager : UIView
+@interface SSAudioManager  
 
 @end
