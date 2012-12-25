@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSMotionManager : CMMotionManager
+@interface SSMotionManager  
 
 @end

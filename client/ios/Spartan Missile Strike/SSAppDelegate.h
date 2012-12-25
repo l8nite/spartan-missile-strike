@@ -8,8 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface SSAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+ 
 
+@end
+@interface AddTwoTextFiledViewController: UIViewController
+{
+    IBOutlet UITextField *textField;
+    IBOutlet UITextField *textField1;
+    IBOutlet UITextField *textField2;
+    
+    NSString *String;
+    
+}
+
+  
 @end
