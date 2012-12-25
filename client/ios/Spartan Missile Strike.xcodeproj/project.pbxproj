@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		106178121685172F001F8770 /* SSNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 106178111685172F001F8770 /* SSNativeBridge.m */; };
+		106178191685A617001F8770 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 106178181685A617001F8770 /* SSAudioManager.m */; };
+		1061781D1685A647001F8770 /* SSFacebookAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061781C1685A647001F8770 /* SSFacebookAuth.m */; };
+		106178201685A667001F8770 /* SSSplashScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061781F1685A667001F8770 /* SSSplashScreenView.m */; };
+		106178231685A685001F8770 /* SSFiringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 106178221685A685001F8770 /* SSFiringView.m */; };
+		106178261685A6BD001F8770 /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 106178251685A6BC001F8770 /* SSLocationManager.m */; };
+		106178291685A6DF001F8770 /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 106178281685A6DF001F8770 /* SSPreferenceManager.m */; };
+		1061782C1685A706001F8770 /* SSMotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061782B1685A706001F8770 /* SSMotionManager.m */; };
+		108465611669CC320073278B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
+		108465621669CC320073278B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
+		108465631669CC320073278B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
 		10EE33E51667376400D95BAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10EE33E71667376400D95BAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
 		10EE33E91667376400D95BAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E81667376400D95BAC /* CoreGraphics.framework */; };
 		10EE33EF1667376400D95BAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33ED1667376400D95BAC /* InfoPlist.strings */; };
 		10EE33F11667376400D95BAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE33F01667376400D95BAC /* main.m */; };
-		10EE33F51667376400D95BAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE33F41667376400D95BAC /* AppDelegate.m */; };
+		10EE33F51667376400D95BAC /* SSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE33F41667376400D95BAC /* SSAppDelegate.m */; };
 		10EE33F71667376400D95BAC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F61667376400D95BAC /* Default.png */; };
 		10EE33F91667376400D95BAC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F81667376400D95BAC /* Default@2x.png */; };
 		10EE33FB1667376400D95BAC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33FA1667376400D95BAC /* Default-568h@2x.png */; };
@@ -34,6 +45,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		106178101685172E001F8770 /* SSNativeBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNativeBridge.h; sourceTree = "<group>"; };
+		106178111685172F001F8770 /* SSNativeBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNativeBridge.m; sourceTree = "<group>"; };
+		106178171685A617001F8770 /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
+		106178181685A617001F8770 /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
+		1061781B1685A647001F8770 /* SSFacebookAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookAuth.h; sourceTree = "<group>"; };
+		1061781C1685A647001F8770 /* SSFacebookAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookAuth.m; sourceTree = "<group>"; };
+		1061781E1685A667001F8770 /* SSSplashScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSplashScreenView.h; sourceTree = "<group>"; };
+		1061781F1685A667001F8770 /* SSSplashScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSplashScreenView.m; sourceTree = "<group>"; };
+		106178211685A685001F8770 /* SSFiringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringView.h; sourceTree = "<group>"; };
+		106178221685A685001F8770 /* SSFiringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFiringView.m; sourceTree = "<group>"; };
+		106178241685A6BC001F8770 /* SSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLocationManager.h; sourceTree = "<group>"; };
+		106178251685A6BC001F8770 /* SSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
+		106178271685A6DF001F8770 /* SSPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPreferenceManager.h; sourceTree = "<group>"; };
+		106178281685A6DF001F8770 /* SSPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManager.m; sourceTree = "<group>"; };
+		1061782A1685A706001F8770 /* SSMotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSMotionManager.h; sourceTree = "<group>"; };
+		1061782B1685A706001F8770 /* SSMotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMotionManager.m; sourceTree = "<group>"; };
+		108465601669CC320073278B /* MyAppLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyAppLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10EE33E01667376400D95BAC /* Spartan Missile Strike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spartan Missile Strike.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10EE33E41667376400D95BAC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		10EE33E61667376400D95BAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -42,8 +70,8 @@
 		10EE33EE1667376400D95BAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		10EE33F01667376400D95BAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		10EE33F21667376400D95BAC /* Spartan Missile Strike-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spartan Missile Strike-Prefix.pch"; sourceTree = "<group>"; };
-		10EE33F31667376400D95BAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		10EE33F41667376400D95BAC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		10EE33F31667376400D95BAC /* SSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAppDelegate.h; sourceTree = "<group>"; };
+		10EE33F41667376400D95BAC /* SSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSAppDelegate.m; sourceTree = "<group>"; };
 		10EE33F61667376400D95BAC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		10EE33F81667376400D95BAC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		10EE33FA1667376400D95BAC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -56,6 +84,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1084655C1669CC320073278B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				108465611669CC320073278B /* SenTestingKit.framework in Frameworks */,
+				108465621669CC320073278B /* UIKit.framework in Frameworks */,
+				108465631669CC320073278B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		10EE33DD1667376400D95BAC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -94,6 +132,7 @@
 			children = (
 				10EE33E01667376400D95BAC /* Spartan Missile Strike.app */,
 				10EE34011667376400D95BAC /* Spartan Missile StrikeTests.octest */,
+				108465601669CC320073278B /* MyAppLogicTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,8 +151,24 @@
 		10EE33EA1667376400D95BAC /* Spartan Missile Strike */ = {
 			isa = PBXGroup;
 			children = (
-				10EE33F31667376400D95BAC /* AppDelegate.h */,
-				10EE33F41667376400D95BAC /* AppDelegate.m */,
+				1061781E1685A667001F8770 /* SSSplashScreenView.h */,
+				1061781F1685A667001F8770 /* SSSplashScreenView.m */,
+				106178211685A685001F8770 /* SSFiringView.h */,
+				106178221685A685001F8770 /* SSFiringView.m */,
+				106178241685A6BC001F8770 /* SSLocationManager.h */,
+				106178251685A6BC001F8770 /* SSLocationManager.m */,
+				106178271685A6DF001F8770 /* SSPreferenceManager.h */,
+				106178281685A6DF001F8770 /* SSPreferenceManager.m */,
+				1061782A1685A706001F8770 /* SSMotionManager.h */,
+				1061782B1685A706001F8770 /* SSMotionManager.m */,
+				106178171685A617001F8770 /* SSAudioManager.h */,
+				106178181685A617001F8770 /* SSAudioManager.m */,
+				1061781B1685A647001F8770 /* SSFacebookAuth.h */,
+				1061781C1685A647001F8770 /* SSFacebookAuth.m */,
+				106178101685172E001F8770 /* SSNativeBridge.h */,
+				106178111685172F001F8770 /* SSNativeBridge.m */,
+				10EE33F31667376400D95BAC /* SSAppDelegate.h */,
+				10EE33F41667376400D95BAC /* SSAppDelegate.m */,
 				10EE33EB1667376400D95BAC /* Supporting Files */,
 			);
 			path = "Spartan Missile Strike";
@@ -155,6 +210,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1084655F1669CC320073278B /* MyAppLogicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 108465701669CC330073278B /* Build configuration list for PBXNativeTarget "MyAppLogicTests" */;
+			buildPhases = (
+				1084655B1669CC320073278B /* Sources */,
+				1084655C1669CC320073278B /* Frameworks */,
+				1084655D1669CC320073278B /* Resources */,
+				1084655E1669CC320073278B /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyAppLogicTests;
+			productName = MyAppLogicTests;
+			productReference = 108465601669CC320073278B /* MyAppLogicTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		10EE33DF1667376400D95BAC /* Spartan Missile Strike */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10EE34131667376400D95BAC /* Build configuration list for PBXNativeTarget "Spartan Missile Strike" */;
@@ -214,11 +287,19 @@
 			targets = (
 				10EE33DF1667376400D95BAC /* Spartan Missile Strike */,
 				10EE34001667376400D95BAC /* Spartan Missile StrikeTests */,
+				1084655F1669CC320073278B /* MyAppLogicTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1084655D1669CC320073278B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		10EE33DE1667376400D95BAC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +322,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1084655E1669CC320073278B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		10EE33FF1667376400D95BAC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -257,12 +351,27 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1084655B1669CC320073278B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		10EE33DC1667376400D95BAC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				10EE33F11667376400D95BAC /* main.m in Sources */,
-				10EE33F51667376400D95BAC /* AppDelegate.m in Sources */,
+				10EE33F51667376400D95BAC /* SSAppDelegate.m in Sources */,
+				106178121685172F001F8770 /* SSNativeBridge.m in Sources */,
+				106178191685A617001F8770 /* SSAudioManager.m in Sources */,
+				1061781D1685A647001F8770 /* SSFacebookAuth.m in Sources */,
+				106178201685A667001F8770 /* SSSplashScreenView.m in Sources */,
+				106178231685A685001F8770 /* SSFiringView.m in Sources */,
+				106178261685A6BD001F8770 /* SSLocationManager.m in Sources */,
+				106178291685A6DF001F8770 /* SSPreferenceManager.m in Sources */,
+				1061782C1685A706001F8770 /* SSMotionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +413,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1084656E1669CC330073278B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MyAppLogicTests/MyAppLogicTests-Prefix.pch";
+				INFOPLIST_FILE = "MyAppLogicTests/MyAppLogicTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1084656F1669CC330073278B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MyAppLogicTests/MyAppLogicTests-Prefix.pch";
+				INFOPLIST_FILE = "MyAppLogicTests/MyAppLogicTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		10EE34111667376400D95BAC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -413,6 +552,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		108465701669CC330073278B /* Build configuration list for PBXNativeTarget "MyAppLogicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1084656E1669CC330073278B /* Debug */,
+				1084656F1669CC330073278B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		10EE33DA1667376400D95BAC /* Build configuration list for PBXProject "Spartan Missile Strike" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -429,6 +577,7 @@
 				10EE34151667376400D95BAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		10EE34161667376400D95BAC /* Build configuration list for PBXNativeTarget "Spartan Missile StrikeTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +586,7 @@
 				10EE34181667376400D95BAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

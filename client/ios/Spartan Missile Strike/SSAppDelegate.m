@@ -6,29 +6,38 @@
 //  Copyright (c) 2012 Jomana Sherif. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "SSAppDelegate.h"
 
-@implementation AppDelegate
+@implementation SSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.6 alpha:1];
     [self.window makeKeyAndVisible];
-    return YES;
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"success" message:@"is this a success" delegate:self cancelButtonTitle:@"yes" otherButtonTitles:@"no", nil];
+    [alert show];
+
+        return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    NSLog(@"The game has been paused");
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pauseGame:) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    NSLog(@"The game came back");
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

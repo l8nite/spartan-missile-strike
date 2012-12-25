@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSPreferenceManager : UIView
+@interface SSPreferenceManager  
 
 @end
