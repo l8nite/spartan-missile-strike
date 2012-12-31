@@ -15,9 +15,11 @@
 		106178261685A6BD001F8770 /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 106178251685A6BC001F8770 /* SSLocationManager.m */; };
 		106178291685A6DF001F8770 /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 106178281685A6DF001F8770 /* SSPreferenceManager.m */; };
 		1061782C1685A706001F8770 /* SSMotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061782B1685A706001F8770 /* SSMotionManager.m */; };
-		108465611669CC320073278B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		108465621669CC320073278B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		108465631669CC320073278B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
+		106A10B3168F82AA0059E189 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
+		106A10B4168F82AA0059E189 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
+		106A10B5168F82AA0059E189 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
+		106A10BB168F82AA0059E189 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 106A10B9168F82AA0059E189 /* InfoPlist.strings */; };
+		106A10BE168F82AA0059E189 /* SSUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 106A10BD168F82AA0059E189 /* SSUnitTests.m */; };
 		10EE33E51667376400D95BAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10EE33E71667376400D95BAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
 		10EE33E91667376400D95BAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E81667376400D95BAC /* CoreGraphics.framework */; };
@@ -27,22 +29,7 @@
 		10EE33F71667376400D95BAC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F61667376400D95BAC /* Default.png */; };
 		10EE33F91667376400D95BAC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F81667376400D95BAC /* Default@2x.png */; };
 		10EE33FB1667376400D95BAC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33FA1667376400D95BAC /* Default-568h@2x.png */; };
-		10EE34031667376400D95BAC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		10EE34041667376400D95BAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		10EE34051667376400D95BAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10EE340D1667376400D95BAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10EE340B1667376400D95BAC /* InfoPlist.strings */; };
-		10EE34101667376400D95BAC /* Spartan_Missile_StrikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE340F1667376400D95BAC /* Spartan_Missile_StrikeTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		10EE34061667376400D95BAC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10EE33D71667376400D95BAC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 10EE33DF1667376400D95BAC;
-			remoteInfo = "Spartan Missile Strike";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		106178101685172E001F8770 /* SSNativeBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNativeBridge.h; sourceTree = "<group>"; };
@@ -61,7 +48,12 @@
 		106178281685A6DF001F8770 /* SSPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManager.m; sourceTree = "<group>"; };
 		1061782A1685A706001F8770 /* SSMotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSMotionManager.h; sourceTree = "<group>"; };
 		1061782B1685A706001F8770 /* SSMotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMotionManager.m; sourceTree = "<group>"; };
-		108465601669CC320073278B /* MyAppLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyAppLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		106A10B2168F82AA0059E189 /* SSUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		106A10B8168F82AA0059E189 /* SSUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSUnitTests-Info.plist"; sourceTree = "<group>"; };
+		106A10BA168F82AA0059E189 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		106A10BC168F82AA0059E189 /* SSUnitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSUnitTests.h; sourceTree = "<group>"; };
+		106A10BD168F82AA0059E189 /* SSUnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSUnitTests.m; sourceTree = "<group>"; };
+		106A10BF168F82AA0059E189 /* SSUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSUnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		10EE33E01667376400D95BAC /* Spartan Missile Strike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spartan Missile Strike.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10EE33E41667376400D95BAC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		10EE33E61667376400D95BAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,22 +67,17 @@
 		10EE33F61667376400D95BAC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		10EE33F81667376400D95BAC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		10EE33FA1667376400D95BAC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		10EE34011667376400D95BAC /* Spartan Missile StrikeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Spartan Missile StrikeTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10EE34021667376400D95BAC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		10EE340A1667376400D95BAC /* Spartan Missile StrikeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Spartan Missile StrikeTests-Info.plist"; sourceTree = "<group>"; };
-		10EE340C1667376400D95BAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		10EE340E1667376400D95BAC /* Spartan_Missile_StrikeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spartan_Missile_StrikeTests.h; sourceTree = "<group>"; };
-		10EE340F1667376400D95BAC /* Spartan_Missile_StrikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Spartan_Missile_StrikeTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1084655C1669CC320073278B /* Frameworks */ = {
+		106A10AE168F82AA0059E189 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				108465611669CC320073278B /* SenTestingKit.framework in Frameworks */,
-				108465621669CC320073278B /* UIKit.framework in Frameworks */,
-				108465631669CC320073278B /* Foundation.framework in Frameworks */,
+				106A10B3168F82AA0059E189 /* SenTestingKit.framework in Frameworks */,
+				106A10B4168F82AA0059E189 /* UIKit.framework in Frameworks */,
+				106A10B5168F82AA0059E189 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,24 +91,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		10EE33FD1667376400D95BAC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10EE34031667376400D95BAC /* SenTestingKit.framework in Frameworks */,
-				10EE34041667376400D95BAC /* UIKit.framework in Frameworks */,
-				10EE34051667376400D95BAC /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		106A10B6168F82AA0059E189 /* SSUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				106A10BC168F82AA0059E189 /* SSUnitTests.h */,
+				106A10BD168F82AA0059E189 /* SSUnitTests.m */,
+				106A10B7168F82AA0059E189 /* Supporting Files */,
+			);
+			path = SSUnitTests;
+			sourceTree = "<group>";
+		};
+		106A10B7168F82AA0059E189 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				106A10B8168F82AA0059E189 /* SSUnitTests-Info.plist */,
+				106A10B9168F82AA0059E189 /* InfoPlist.strings */,
+				106A10BF168F82AA0059E189 /* SSUnitTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		10EE33D51667376400D95BAC = {
 			isa = PBXGroup;
 			children = (
 				10EE33EA1667376400D95BAC /* Spartan Missile Strike */,
-				10EE34081667376400D95BAC /* Spartan Missile StrikeTests */,
+				106A10B6168F82AA0059E189 /* SSUnitTests */,
 				10EE33E31667376400D95BAC /* Frameworks */,
 				10EE33E11667376400D95BAC /* Products */,
 			);
@@ -131,8 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				10EE33E01667376400D95BAC /* Spartan Missile Strike.app */,
-				10EE34011667376400D95BAC /* Spartan Missile StrikeTests.octest */,
-				108465601669CC320073278B /* MyAppLogicTests.octest */,
+				106A10B2168F82AA0059E189 /* SSUnitTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,44 +184,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		10EE34081667376400D95BAC /* Spartan Missile StrikeTests */ = {
-			isa = PBXGroup;
-			children = (
-				10EE340E1667376400D95BAC /* Spartan_Missile_StrikeTests.h */,
-				10EE340F1667376400D95BAC /* Spartan_Missile_StrikeTests.m */,
-				10EE34091667376400D95BAC /* Supporting Files */,
-			);
-			path = "Spartan Missile StrikeTests";
-			sourceTree = "<group>";
-		};
-		10EE34091667376400D95BAC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				10EE340A1667376400D95BAC /* Spartan Missile StrikeTests-Info.plist */,
-				10EE340B1667376400D95BAC /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1084655F1669CC320073278B /* MyAppLogicTests */ = {
+		106A10B1168F82AA0059E189 /* SSUnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 108465701669CC330073278B /* Build configuration list for PBXNativeTarget "MyAppLogicTests" */;
+			buildConfigurationList = 106A10C0168F82AA0059E189 /* Build configuration list for PBXNativeTarget "SSUnitTests" */;
 			buildPhases = (
-				1084655B1669CC320073278B /* Sources */,
-				1084655C1669CC320073278B /* Frameworks */,
-				1084655D1669CC320073278B /* Resources */,
-				1084655E1669CC320073278B /* ShellScript */,
+				106A10AD168F82AA0059E189 /* Sources */,
+				106A10AE168F82AA0059E189 /* Frameworks */,
+				106A10AF168F82AA0059E189 /* Resources */,
+				106A10B0168F82AA0059E189 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MyAppLogicTests;
-			productName = MyAppLogicTests;
-			productReference = 108465601669CC320073278B /* MyAppLogicTests.octest */;
+			name = SSUnitTests;
+			productName = SSUnitTests;
+			productReference = 106A10B2168F82AA0059E189 /* SSUnitTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		10EE33DF1667376400D95BAC /* Spartan Missile Strike */ = {
@@ -244,25 +221,6 @@
 			productName = "Spartan Missile Strike";
 			productReference = 10EE33E01667376400D95BAC /* Spartan Missile Strike.app */;
 			productType = "com.apple.product-type.application";
-		};
-		10EE34001667376400D95BAC /* Spartan Missile StrikeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10EE34161667376400D95BAC /* Build configuration list for PBXNativeTarget "Spartan Missile StrikeTests" */;
-			buildPhases = (
-				10EE33FC1667376400D95BAC /* Sources */,
-				10EE33FD1667376400D95BAC /* Frameworks */,
-				10EE33FE1667376400D95BAC /* Resources */,
-				10EE33FF1667376400D95BAC /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				10EE34071667376400D95BAC /* PBXTargetDependency */,
-			);
-			name = "Spartan Missile StrikeTests";
-			productName = "Spartan Missile StrikeTests";
-			productReference = 10EE34011667376400D95BAC /* Spartan Missile StrikeTests.octest */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -286,17 +244,17 @@
 			projectRoot = "";
 			targets = (
 				10EE33DF1667376400D95BAC /* Spartan Missile Strike */,
-				10EE34001667376400D95BAC /* Spartan Missile StrikeTests */,
-				1084655F1669CC320073278B /* MyAppLogicTests */,
+				106A10B1168F82AA0059E189 /* SSUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1084655D1669CC320073278B /* Resources */ = {
+		106A10AF168F82AA0059E189 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				106A10BB168F82AA0059E189 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,31 +269,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		10EE33FE1667376400D95BAC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10EE340D1667376400D95BAC /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1084655E1669CC320073278B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		10EE33FF1667376400D95BAC /* ShellScript */ = {
+		106A10B0168F82AA0059E189 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -351,10 +288,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1084655B1669CC320073278B /* Sources */ = {
+		106A10AD168F82AA0059E189 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				106A10BE168F82AA0059E189 /* SSUnitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,25 +313,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		10EE33FC1667376400D95BAC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10EE34101667376400D95BAC /* Spartan_Missile_StrikeTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		10EE34071667376400D95BAC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 10EE33DF1667376400D95BAC /* Spartan Missile Strike */;
-			targetProxy = 10EE34061667376400D95BAC /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
+		106A10B9168F82AA0059E189 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				106A10BA168F82AA0059E189 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		10EE33ED1667376400D95BAC /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -402,18 +332,10 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		10EE340B1667376400D95BAC /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10EE340C1667376400D95BAC /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1084656E1669CC330073278B /* Debug */ = {
+		106A10C1168F82AA0059E189 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -421,14 +343,14 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MyAppLogicTests/MyAppLogicTests-Prefix.pch";
-				INFOPLIST_FILE = "MyAppLogicTests/MyAppLogicTests-Info.plist";
+				GCC_PREFIX_HEADER = "SSUnitTests/SSUnitTests-Prefix.pch";
+				INFOPLIST_FILE = "SSUnitTests/SSUnitTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
-		1084656F1669CC330073278B /* Release */ = {
+		106A10C2168F82AA0059E189 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -436,8 +358,8 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MyAppLogicTests/MyAppLogicTests-Prefix.pch";
-				INFOPLIST_FILE = "MyAppLogicTests/MyAppLogicTests-Info.plist";
+				GCC_PREFIX_HEADER = "SSUnitTests/SSUnitTests-Prefix.pch";
+				INFOPLIST_FILE = "SSUnitTests/SSUnitTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -496,6 +418,10 @@
 		10EE34141667376400D95BAC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MyProjTests\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Spartan Missile Strike/Spartan Missile Strike-Prefix.pch";
 				INFOPLIST_FILE = "Spartan Missile Strike/Spartan Missile Strike-Info.plist";
@@ -507,6 +433,10 @@
 		10EE34151667376400D95BAC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MyProjTests\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Spartan Missile Strike/Spartan Missile Strike-Prefix.pch";
 				INFOPLIST_FILE = "Spartan Missile Strike/Spartan Missile Strike-Info.plist";
@@ -515,51 +445,16 @@
 			};
 			name = Release;
 		};
-		10EE34171667376400D95BAC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Spartan Missile Strike.app/Spartan Missile Strike";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Spartan Missile Strike/Spartan Missile Strike-Prefix.pch";
-				INFOPLIST_FILE = "Spartan Missile StrikeTests/Spartan Missile StrikeTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		10EE34181667376400D95BAC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Spartan Missile Strike.app/Spartan Missile Strike";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Spartan Missile Strike/Spartan Missile Strike-Prefix.pch";
-				INFOPLIST_FILE = "Spartan Missile StrikeTests/Spartan Missile StrikeTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		108465701669CC330073278B /* Build configuration list for PBXNativeTarget "MyAppLogicTests" */ = {
+		106A10C0168F82AA0059E189 /* Build configuration list for PBXNativeTarget "SSUnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1084656E1669CC330073278B /* Debug */,
-				1084656F1669CC330073278B /* Release */,
+				106A10C1168F82AA0059E189 /* Debug */,
+				106A10C2168F82AA0059E189 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		10EE33DA1667376400D95BAC /* Build configuration list for PBXProject "Spartan Missile Strike" */ = {
 			isa = XCConfigurationList;
@@ -575,15 +470,6 @@
 			buildConfigurations = (
 				10EE34141667376400D95BAC /* Debug */,
 				10EE34151667376400D95BAC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10EE34161667376400D95BAC /* Build configuration list for PBXNativeTarget "Spartan Missile StrikeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10EE34171667376400D95BAC /* Debug */,
-				10EE34181667376400D95BAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -8,16 +8,29 @@
 
 #import "SSPreferenceManager.h"
 
+@end
 @implementation SSPreferenceManager
+ 
+@end
+
+@implementation UserInfo
+@synthesize userid;
+@synthesize firstname;
+@synthesize lastname;
+@synthesize username;
+@synthesize link;
+@synthesize gender;
+@synthesize friendslist;
+@synthesize locale;
+@end
+
+
 
  
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
-@end
+// suppose to be added to the view controller
+
+/**
+ ourAppDelegate *appDelegate = (YourAppDelegate *)[[UIApplication sharedApplication] delegate];
+ NSMutableArray *myArrayFromAppDelegate = appDelegate.myArray;
+*/

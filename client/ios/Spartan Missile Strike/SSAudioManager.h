@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+// singletin 
 @interface SSAudioManager  
 
 @end
