@@ -10,6 +10,8 @@
 
 @implementation SSAppDelegate
 
+//initialize an instance of the facebook and then call the alert view
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -21,6 +23,21 @@
     [alert show];
 
         return YES;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==0)
+    {
+        //yes reroute to the other page
+        NSLog(@"This is the yes button");
+    }
+    else if (buttonIndex==1)
+    {
+        //no i want to go there
+        NSLog(@"This is the No button");
+    }
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
