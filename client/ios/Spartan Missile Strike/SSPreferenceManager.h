@@ -16,16 +16,19 @@
 
 
 //Jomana Sherif's Code for setting and getting preferences
-@interface UserInfo : NSObject
+@interface UserInfo : NSObject{
+    
+}
 
 //Using singleton
-@property (nonatomic, retain)NSObject *userid;
-@property (nonatomic, retain)NSObject *firstname;
-@property (nonatomic, retain)NSObject *lastname;
-@property (nonatomic, retain)NSObject *username;
+@property (nonatomic, retain)NSString *userid;
+@property (nonatomic, retain)NSString *firstname;
+@property (nonatomic, retain)NSString *lastname;
+@property (nonatomic, retain)NSString *username;
 @property (nonatomic, retain)NSObject *link;
-@property (nonatomic, retain)NSObject *gender;
-@property (nonatomic, retain)NSObject *friendslist;
+@property (nonatomic, retain)NSString *gender;
+@property (nonatomic, retain)NSMutableArray *friendslist;
 @property (nonatomic, retain)NSObject *locale;
+ 
 
  

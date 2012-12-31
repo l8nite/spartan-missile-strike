@@ -30,10 +30,32 @@
     STFail(@"Unit tests are not implemented yet in SSUnitTests");
 }
 
-// Testing for class existance
+// Jomana
 
 - (void)testSSPreference
 {
-    
+ 
+    NSMutableArray *testingArg = [NSMutableArray arrayWithObjects: @"Sai", @"Jomana", @"Shaun", @"Chris"];
+    STassertTrue([pared isEquaTo:expected], @"initialParserWithNSMutableArray failed to return the expected");
 }
+
+// Test casses using Assert
+
+/**
+STAssertEqualObjects asserts two Cocoa objects are equal.
+STAssertEqual asserts two variables of a primitive data type, such as integers, are equal.
+STAssertEqualsWithAccuracy asserts two floating-point variables are equal. This assertion allows you to deal with small inaccuracies in floating-point arithmetic.
+STAssertFalse asserts a condition is false.
+STAssertFalseNoThrow asserts a condition is false and no exceptions are thrown.
+STAssertNil asserts a pointer is nil.
+STAssertNoThrow asserts no exceptions are thrown.
+STAssertNoThrowSpecific asserts no exceptions of a specific class are thrown.
+STAssertNoThrowSpecificNamed asserts a specific exception is not thrown.
+STAssertNotNil asserts a pointer is not nil.
+STAssertThrows asserts an exception is thrown.
+STAssertThrowsSpecific asserts an exception of a specific class is thrown.
+STAssertThrowsSpecificNamed asserts a specific exception is thrown.
+STAssertTrue asserts a condition is true.
+STAssertTrueNoThrow asserts a condition is true and no exceptions are thrown.
+*/
 @end
