@@ -12,6 +12,7 @@
 
 - (void)setUp
 {
+    
     [super setUp];
     
     // Set-up code here.
@@ -29,4 +30,10 @@
     STFail(@"Unit tests are not implemented yet in SSUnitTests");
 }
 
+// Testing for class existance
+
+- (void)testSSPreference
+{
+    
+}
 @end
