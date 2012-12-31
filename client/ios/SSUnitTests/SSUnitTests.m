@@ -39,6 +39,24 @@
     STassertTrue([pared isEquaTo:expected], @"initialParserWithNSMutableArray failed to return the expected");
 }
 
+
+
+- (void)testTestFramework
+{
+    NSString *string1 = @"test";
+    NSString *string2 = @"test";
+    STAssertEquals(string1,
+                   string2,
+                   @"FAILURE");
+    NSUInteger uint_1 = 4;
+    NSUInteger uint_2 = 4;
+    STAssertEquals(uint_1,
+                   uint_2,
+                   @"FAILURE");
+}
+
+
+
 // Test casses using Assert
 
 /**
