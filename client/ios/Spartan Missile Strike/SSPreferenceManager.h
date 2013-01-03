@@ -11,7 +11,7 @@
 //singletin
 // set preference and get preference 
 
-@interface SSPreferenceManager
+@interface SSPreferenceManager :NSObject
 {
 
 NSUserDefaults *userDefault;
