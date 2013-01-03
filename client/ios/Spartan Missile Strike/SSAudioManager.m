@@ -7,6 +7,7 @@
 //
 
 #import "SSAudioManager.h"
+ 
 
 @implementation SSAudioManager
 
@@ -15,7 +16,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ADELE - Skyfall" ofType: @"mp3"]];
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"skyfall" ofType: @"mp3"]];
     
     NSError *error;
     audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
