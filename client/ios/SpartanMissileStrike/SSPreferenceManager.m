@@ -7,6 +7,7 @@
 //
 
 #import "SSPreferenceManager.h"
+//TODO SINGLETON
  
 @implementation SSPreferenceManager
  
@@ -21,13 +22,12 @@
 
 -(void)setPreference: (NSString *)value forKey: (NSString *)key
 {
-//TODO
+    [userDefault setObject:value forKey:key];
 }
 
 -(NSString *)preferenceForKey: (NSString *) key
 {
- //TODO
-    return nil;
+   return [userDefault stringForKey:key];
 }
 
 
