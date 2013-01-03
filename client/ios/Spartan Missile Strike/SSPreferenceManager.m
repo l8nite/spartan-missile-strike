@@ -7,30 +7,31 @@
 //
 
 #import "SSPreferenceManager.h"
-
-@end
+ 
 @implementation SSPreferenceManager
  
+
+
+-(void)init{
+    userDefault = [NSUserDefaults standardUserDefaults ];
+    
+}
+
+-(void)setPreference: (NSString *)value forKey: (NSString *)key
+{
+//TODO
+}
+
+-(NSString *)preferenceForKey: (NSString *) key
+{
+ //TODO
+    return nil;
+}
+
+
+
+
 @end
-
-@implementation UserInfo
-@synthesize userid;
-@synthesize firstname;
-@synthesize lastname;
-@synthesize username;
-@synthesize link;
-@synthesize gender;
-@synthesize friendslist;
-@synthesize locale;
-@end
-
-
 
  
-
-// suppose to be added to the view controller
-
-/**
- ourAppDelegate *appDelegate = (YourAppDelegate *)[[UIApplication sharedApplication] delegate];
- NSMutableArray *myArrayFromAppDelegate = appDelegate.myArray;
-*/
+ 

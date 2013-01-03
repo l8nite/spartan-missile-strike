@@ -12,23 +12,15 @@
 // set preference and get preference 
 
 @interface SSPreferenceManager
-@end
+{
 
+NSUserDefaults *userDefault;
 
-//Jomana Sherif's Code for setting and getting preferences
-@interface UserInfo : NSObject{
-    
 }
 
-//Using singleton
-@property (nonatomic, retain)NSString *userid;
-@property (nonatomic, retain)NSString *firstname;
-@property (nonatomic, retain)NSString *lastname;
-@property (nonatomic, retain)NSString *username;
-@property (nonatomic, retain)NSObject *link;
-@property (nonatomic, retain)NSString *gender;
-@property (nonatomic, retain)NSMutableArray *friendslist;
-@property (nonatomic, retain)NSObject *locale;
- 
+//instance methods
 
+-(void)setPreference:(NSString *) value forKey:(NSString *) key;
+-(NSString *)preferenceForKey: (NSString *)key;
+@end
  
