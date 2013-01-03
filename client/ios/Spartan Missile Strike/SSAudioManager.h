@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 // singletin 
-@interface SSAudioManager  
+@interface SSAudioManager : UIViewController
+<AVAudioPlayerDelegate>
+{
+    AVAudioPlayer *audioPlayer;
+    UISlider *volumeControl;
+}
 
+@property (nonatomic, retain) IBOutlet UISlider *volumeControl;
+-(IBAction)playAudio;
+-(IBAction) stopAudio;
+-(IBAction) adjustVolume;
 @end
