@@ -34,6 +34,7 @@
 		10EE33F71667376400D95BAC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F61667376400D95BAC /* Default.png */; };
 		10EE33F91667376400D95BAC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F81667376400D95BAC /* Default@2x.png */; };
 		10EE33FB1667376400D95BAC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33FA1667376400D95BAC /* Default-568h@2x.png */; };
+		28FCE4D016962D4D00A033AC /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FCE4CF16962D4D00A033AC /* Test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,8 @@
 		10EE33F81667376400D95BAC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		10EE33FA1667376400D95BAC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		10EE34021667376400D95BAC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		28FCE4CE16962D4D00A033AC /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		28FCE4CF16962D4D00A033AC /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +136,8 @@
 		10EE33D51667376400D95BAC = {
 			isa = PBXGroup;
 			children = (
+				28FCE4CE16962D4D00A033AC /* Test.h */,
+				28FCE4CF16962D4D00A033AC /* Test.m */,
 				10EE33EA1667376400D95BAC /* Spartan Missile Strike */,
 				106A10B6168F82AA0059E189 /* SSUnitTests */,
 				10EE33E31667376400D95BAC /* Frameworks */,
@@ -332,6 +337,150 @@
 				106178261685A6BD001F8770 /* SSLocationManager.m in Sources */,
 				106178291685A6DF001F8770 /* SSPreferenceManager.m in Sources */,
 				1061782C1685A706001F8770 /* SSMotionManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		106A10B9168F82AA0059E189 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				106A10BA168F82AA0059E189 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		10EE33ED1667376400D95BAC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				10EE33EE1667376400D95BAC /* en */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		10B5782116939DB6001C97CD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		10B5783716939DCA001C97CD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		10B5784D16939DD7001C97CD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		106A10AD168F82AA0059E189 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				106A10BE168F82AA0059E189 /* SSUnitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10B577AF16939D4D001C97CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10B577C616939D70001C97CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10B577DC16939D83001C97CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10B577F216939D95001C97CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10B5780816939DA8001C97CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10B5781E16939DB6001C97CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10B5783416939DCA001C97CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10B5784A16939DD7001C97CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10EE33DC1667376400D95BAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10EE33F11667376400D95BAC /* main.m in Sources */,
+				10EE33F51667376400D95BAC /* SSAppDelegate.m in Sources */,
+				106178121685172F001F8770 /* SSNativeBridge.m in Sources */,
+				106178191685A617001F8770 /* SSAudioManager.m in Sources */,
+				1061781D1685A647001F8770 /* SSFacebookAuth.m in Sources */,
+				106178201685A667001F8770 /* SSSplashScreenView.m in Sources */,
+				106178231685A685001F8770 /* SSFiringView.m in Sources */,
+				106178261685A6BD001F8770 /* SSLocationManager.m in Sources */,
+				106178291685A6DF001F8770 /* SSPreferenceManager.m in Sources */,
+				1061782C1685A706001F8770 /* SSMotionManager.m in Sources */,
+				28FCE4D016962D4D00A033AC /* Test.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
