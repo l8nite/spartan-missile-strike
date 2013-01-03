@@ -21,6 +21,8 @@
 		108FC6C4169641C8001BABBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A5169641C8001BABBE /* Foundation.framework */; };
 		108FC6CC169641C8001BABBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 108FC6CA169641C8001BABBE /* InfoPlist.strings */; };
 		108FC6CF169641C8001BABBE /* SpartanMissileStrikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */; };
+		10D01EE01696426E00F319F0 /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D01EDF1696426E00F319F0 /* SSPreferenceManager.m */; };
+		10D01EE4169643D400F319F0 /* SSPreferenceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		108FC6CB169641C8001BABBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		108FC6CD169641C8001BABBE /* SpartanMissileStrikeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpartanMissileStrikeTests.h; sourceTree = "<group>"; };
 		108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpartanMissileStrikeTests.m; sourceTree = "<group>"; };
+		10D01EDE1696426E00F319F0 /* SSPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSPreferenceManager.h; path = ../SSPreferenceManager.h; sourceTree = "<group>"; };
+		10D01EDF1696426E00F319F0 /* SSPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSPreferenceManager.m; path = ../SSPreferenceManager.m; sourceTree = "<group>"; };
+		10D01EE2169643D400F319F0 /* SSPreferenceManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPreferenceManagerTests.h; sourceTree = "<group>"; };
+		10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManagerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,8 @@
 		108FC6A9169641C8001BABBE /* SpartanMissileStrike */ = {
 			isa = PBXGroup;
 			children = (
+				10D01EDE1696426E00F319F0 /* SSPreferenceManager.h */,
+				10D01EDF1696426E00F319F0 /* SSPreferenceManager.m */,
 				108FC6B2169641C8001BABBE /* SSAppDelegate.h */,
 				108FC6B3169641C8001BABBE /* SSAppDelegate.m */,
 				108FC6AA169641C8001BABBE /* Supporting Files */,
@@ -136,6 +144,8 @@
 		108FC6C7169641C8001BABBE /* SpartanMissileStrikeTests */ = {
 			isa = PBXGroup;
 			children = (
+				10D01EE2169643D400F319F0 /* SSPreferenceManagerTests.h */,
+				10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */,
 				108FC6CD169641C8001BABBE /* SpartanMissileStrikeTests.h */,
 				108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */,
 				108FC6C8169641C8001BABBE /* Supporting Files */,
@@ -264,6 +274,7 @@
 			files = (
 				108FC6B0169641C8001BABBE /* main.m in Sources */,
 				108FC6B4169641C8001BABBE /* SSAppDelegate.m in Sources */,
+				10D01EE01696426E00F319F0 /* SSPreferenceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				108FC6CF169641C8001BABBE /* SpartanMissileStrikeTests.m in Sources */,
+				10D01EE4169643D400F319F0 /* SSPreferenceManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +442,7 @@
 				108FC6D4169641C8001BABBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		108FC6D5169641C8001BABBE /* Build configuration list for PBXNativeTarget "SpartanMissileStrikeTests" */ = {
 			isa = XCConfigurationList;
@@ -438,6 +451,7 @@
 				108FC6D7169641C8001BABBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
