@@ -12,9 +12,11 @@
  
 
 
--(void)init{
+-(id)init{
+    self = [super init];
+       
     userDefault = [NSUserDefaults standardUserDefaults ];
-    
+    return self;
 }
 
 -(void)setPreference: (NSString *)value forKey: (NSString *)key
