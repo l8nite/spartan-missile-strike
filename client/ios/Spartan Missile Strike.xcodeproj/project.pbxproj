@@ -23,47 +23,32 @@
 		109526151693EEA2007608EB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109526131693EEA2007608EB /* AudioToolbox.framework */; };
 		109526181693F24C007608EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109526171693F24C007608EB /* CoreLocation.framework */; };
 		1095261E16951E84007608EB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1095261D16951E84007608EB /* AVFoundation.framework */; };
-		10952621169521D4007608EB /* ADELE - Skyfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10952620169521D4007608EB /* ADELE - Skyfall.mp3 */; };
+		1095262516952E38007608EB /* skyfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1095262416952E38007608EB /* skyfall.mp3 */; };
+		1095262616952E38007608EB /* skyfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1095262416952E38007608EB /* skyfall.mp3 */; };
 		10B577B516939D4D001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
 		10B577B616939D4D001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10B577B716939D4D001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B577BD16939D4D001C97CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10B577BB16939D4D001C97CD /* InfoPlist.strings */; };
-		10B577C016939D4D001C97CD /* SSSpashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B577BF16939D4D001C97CD /* SSSpashScreen.m */; };
 		10B577CC16939D70001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
 		10B577CD16939D70001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10B577CE16939D70001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B577D416939D70001C97CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10B577D216939D70001C97CD /* InfoPlist.strings */; };
-		10B577D716939D70001C97CD /* SSFiring.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B577D616939D70001C97CD /* SSFiring.m */; };
 		10B577E216939D83001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
 		10B577E316939D83001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10B577E416939D83001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B577EA16939D83001C97CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10B577E816939D83001C97CD /* InfoPlist.strings */; };
-		10B577ED16939D83001C97CD /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B577EC16939D83001C97CD /* SSLocationManager.m */; };
 		10B577F816939D95001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
 		10B577F916939D95001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10B577FA16939D95001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B5780016939D95001C97CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10B577FE16939D95001C97CD /* InfoPlist.strings */; };
-		10B5780316939D95001C97CD /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B5780216939D95001C97CD /* SSPreferenceManager.m */; };
 		10B5780E16939DA8001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
 		10B5780F16939DA8001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10B5781016939DA8001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B5781616939DA8001C97CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10B5781416939DA8001C97CD /* InfoPlist.strings */; };
-		10B5781916939DA8001C97CD /* SSMotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B5781816939DA8001C97CD /* SSMotionManager.m */; };
 		10B5782416939DB6001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
 		10B5782516939DB6001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10B5782616939DB6001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B5782C16939DB6001C97CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10B5782A16939DB6001C97CD /* InfoPlist.strings */; };
-		10B5782F16939DB6001C97CD /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B5782E16939DB6001C97CD /* SSAudioManager.m */; };
 		10B5783A16939DCA001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
 		10B5783B16939DCA001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10B5783C16939DCA001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B5784216939DCA001C97CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10B5784016939DCA001C97CD /* InfoPlist.strings */; };
-		10B5784516939DCA001C97CD /* SSFacebookAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B5784416939DCA001C97CD /* SSFacebookAuth.m */; };
 		10B5785016939DD7001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
 		10B5785116939DD7001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10B5785216939DD7001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B5785816939DD7001C97CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10B5785616939DD7001C97CD /* InfoPlist.strings */; };
-		10B5785B16939DD7001C97CD /* SSNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B5785A16939DD7001C97CD /* SSNativeBridge.m */; };
 		10EE33E51667376400D95BAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10EE33E71667376400D95BAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
 		10EE33E91667376400D95BAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E81667376400D95BAC /* CoreGraphics.framework */; };
@@ -101,55 +86,15 @@
 		109526131693EEA2007608EB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		109526171693F24C007608EB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1095261D16951E84007608EB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		10952620169521D4007608EB /* ADELE - Skyfall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "ADELE - Skyfall.mp3"; path = "../../../../ADELE - Skyfall.mp3"; sourceTree = "<group>"; };
+		1095262416952E38007608EB /* skyfall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = skyfall.mp3; sourceTree = "<group>"; };
 		10B577B416939D4D001C97CD /* SSSpashScreen.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSSpashScreen.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B577BA16939D4D001C97CD /* SSSpashScreen-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSSpashScreen-Info.plist"; sourceTree = "<group>"; };
-		10B577BC16939D4D001C97CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		10B577BE16939D4D001C97CD /* SSSpashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSSpashScreen.h; sourceTree = "<group>"; };
-		10B577BF16939D4D001C97CD /* SSSpashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSSpashScreen.m; sourceTree = "<group>"; };
-		10B577C116939D4D001C97CD /* SSSpashScreen-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSSpashScreen-Prefix.pch"; sourceTree = "<group>"; };
 		10B577CB16939D70001C97CD /* SSFiring.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSFiring.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B577D116939D70001C97CD /* SSFiring-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSFiring-Info.plist"; sourceTree = "<group>"; };
-		10B577D316939D70001C97CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		10B577D516939D70001C97CD /* SSFiring.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSFiring.h; sourceTree = "<group>"; };
-		10B577D616939D70001C97CD /* SSFiring.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSFiring.m; sourceTree = "<group>"; };
-		10B577D816939D70001C97CD /* SSFiring-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSFiring-Prefix.pch"; sourceTree = "<group>"; };
 		10B577E116939D83001C97CD /* SSLocationManager.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSLocationManager.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B577E716939D83001C97CD /* SSLocationManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSLocationManager-Info.plist"; sourceTree = "<group>"; };
-		10B577E916939D83001C97CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		10B577EB16939D83001C97CD /* SSLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSLocationManager.h; sourceTree = "<group>"; };
-		10B577EC16939D83001C97CD /* SSLocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
-		10B577EE16939D83001C97CD /* SSLocationManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSLocationManager-Prefix.pch"; sourceTree = "<group>"; };
 		10B577F716939D95001C97CD /* SSPreferenceManager.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSPreferenceManager.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B577FD16939D95001C97CD /* SSPreferenceManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSPreferenceManager-Info.plist"; sourceTree = "<group>"; };
-		10B577FF16939D95001C97CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		10B5780116939D95001C97CD /* SSPreferenceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSPreferenceManager.h; sourceTree = "<group>"; };
-		10B5780216939D95001C97CD /* SSPreferenceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManager.m; sourceTree = "<group>"; };
-		10B5780416939D95001C97CD /* SSPreferenceManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSPreferenceManager-Prefix.pch"; sourceTree = "<group>"; };
 		10B5780D16939DA8001C97CD /* SSMotionManager.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSMotionManager.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B5781316939DA8001C97CD /* SSMotionManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSMotionManager-Info.plist"; sourceTree = "<group>"; };
-		10B5781516939DA8001C97CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		10B5781716939DA8001C97CD /* SSMotionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSMotionManager.h; sourceTree = "<group>"; };
-		10B5781816939DA8001C97CD /* SSMotionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSMotionManager.m; sourceTree = "<group>"; };
-		10B5781A16939DA8001C97CD /* SSMotionManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSMotionManager-Prefix.pch"; sourceTree = "<group>"; };
 		10B5782316939DB6001C97CD /* SSAudioManager.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSAudioManager.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B5782916939DB6001C97CD /* SSAudioManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSAudioManager-Info.plist"; sourceTree = "<group>"; };
-		10B5782B16939DB6001C97CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		10B5782D16939DB6001C97CD /* SSAudioManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
-		10B5782E16939DB6001C97CD /* SSAudioManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
-		10B5783016939DB6001C97CD /* SSAudioManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSAudioManager-Prefix.pch"; sourceTree = "<group>"; };
 		10B5783916939DCA001C97CD /* SSFacebookAuth.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSFacebookAuth.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B5783F16939DCA001C97CD /* SSFacebookAuth-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSFacebookAuth-Info.plist"; sourceTree = "<group>"; };
-		10B5784116939DCA001C97CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		10B5784316939DCA001C97CD /* SSFacebookAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSFacebookAuth.h; sourceTree = "<group>"; };
-		10B5784416939DCA001C97CD /* SSFacebookAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSFacebookAuth.m; sourceTree = "<group>"; };
-		10B5784616939DCA001C97CD /* SSFacebookAuth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSFacebookAuth-Prefix.pch"; sourceTree = "<group>"; };
 		10B5784F16939DD7001C97CD /* SSNativeBridge.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSNativeBridge.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B5785516939DD7001C97CD /* SSNativeBridge-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSNativeBridge-Info.plist"; sourceTree = "<group>"; };
-		10B5785716939DD7001C97CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		10B5785916939DD7001C97CD /* SSNativeBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSNativeBridge.h; sourceTree = "<group>"; };
-		10B5785A16939DD7001C97CD /* SSNativeBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSNativeBridge.m; sourceTree = "<group>"; };
-		10B5785C16939DD7001C97CD /* SSNativeBridge-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSNativeBridge-Prefix.pch"; sourceTree = "<group>"; };
 		10EE33E01667376400D95BAC /* Spartan Missile Strike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spartan Missile Strike.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10EE33E41667376400D95BAC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		10EE33E61667376400D95BAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -293,178 +238,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		10B577B816939D4D001C97CD /* SSSpashScreen */ = {
-			isa = PBXGroup;
-			children = (
-				10B577BE16939D4D001C97CD /* SSSpashScreen.h */,
-				10B577BF16939D4D001C97CD /* SSSpashScreen.m */,
-				10B577B916939D4D001C97CD /* Supporting Files */,
-			);
-			name = SSSpashScreen;
-			path = ../SSSpashScreen;
-			sourceTree = "<group>";
-		};
-		10B577B916939D4D001C97CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				10B577BA16939D4D001C97CD /* SSSpashScreen-Info.plist */,
-				10B577BB16939D4D001C97CD /* InfoPlist.strings */,
-				10B577C116939D4D001C97CD /* SSSpashScreen-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		10B577CF16939D70001C97CD /* SSFiring */ = {
-			isa = PBXGroup;
-			children = (
-				10B577D516939D70001C97CD /* SSFiring.h */,
-				10B577D616939D70001C97CD /* SSFiring.m */,
-				10B577D016939D70001C97CD /* Supporting Files */,
-			);
-			path = SSFiring;
-			sourceTree = "<group>";
-		};
-		10B577D016939D70001C97CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				10B577D116939D70001C97CD /* SSFiring-Info.plist */,
-				10B577D216939D70001C97CD /* InfoPlist.strings */,
-				10B577D816939D70001C97CD /* SSFiring-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		10B577E516939D83001C97CD /* SSLocationManager */ = {
-			isa = PBXGroup;
-			children = (
-				10B577EB16939D83001C97CD /* SSLocationManager.h */,
-				10B577EC16939D83001C97CD /* SSLocationManager.m */,
-				10B577E616939D83001C97CD /* Supporting Files */,
-			);
-			path = SSLocationManager;
-			sourceTree = "<group>";
-		};
-		10B577E616939D83001C97CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				10B577E716939D83001C97CD /* SSLocationManager-Info.plist */,
-				10B577E816939D83001C97CD /* InfoPlist.strings */,
-				10B577EE16939D83001C97CD /* SSLocationManager-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		10B577FB16939D95001C97CD /* SSPreferenceManager */ = {
-			isa = PBXGroup;
-			children = (
-				10B5780116939D95001C97CD /* SSPreferenceManager.h */,
-				10B5780216939D95001C97CD /* SSPreferenceManager.m */,
-				10B577FC16939D95001C97CD /* Supporting Files */,
-			);
-			path = SSPreferenceManager;
-			sourceTree = "<group>";
-		};
-		10B577FC16939D95001C97CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				10B577FD16939D95001C97CD /* SSPreferenceManager-Info.plist */,
-				10B577FE16939D95001C97CD /* InfoPlist.strings */,
-				10B5780416939D95001C97CD /* SSPreferenceManager-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		10B5781116939DA8001C97CD /* SSMotionManager */ = {
-			isa = PBXGroup;
-			children = (
-				10B5781716939DA8001C97CD /* SSMotionManager.h */,
-				10B5781816939DA8001C97CD /* SSMotionManager.m */,
-				10B5781216939DA8001C97CD /* Supporting Files */,
-			);
-			path = SSMotionManager;
-			sourceTree = "<group>";
-		};
-		10B5781216939DA8001C97CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				10B5781316939DA8001C97CD /* SSMotionManager-Info.plist */,
-				10B5781416939DA8001C97CD /* InfoPlist.strings */,
-				10B5781A16939DA8001C97CD /* SSMotionManager-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		10B5782716939DB6001C97CD /* SSAudioManager */ = {
-			isa = PBXGroup;
-			children = (
-				10B5782D16939DB6001C97CD /* SSAudioManager.h */,
-				10B5782E16939DB6001C97CD /* SSAudioManager.m */,
-				10B5782816939DB6001C97CD /* Supporting Files */,
-			);
-			path = SSAudioManager;
-			sourceTree = "<group>";
-		};
-		10B5782816939DB6001C97CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				10B5782916939DB6001C97CD /* SSAudioManager-Info.plist */,
-				10B5782A16939DB6001C97CD /* InfoPlist.strings */,
-				10B5783016939DB6001C97CD /* SSAudioManager-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		10B5783D16939DCA001C97CD /* SSFacebookAuth */ = {
-			isa = PBXGroup;
-			children = (
-				10B5784316939DCA001C97CD /* SSFacebookAuth.h */,
-				10B5784416939DCA001C97CD /* SSFacebookAuth.m */,
-				10B5783E16939DCA001C97CD /* Supporting Files */,
-			);
-			path = SSFacebookAuth;
-			sourceTree = "<group>";
-		};
-		10B5783E16939DCA001C97CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				10B5783F16939DCA001C97CD /* SSFacebookAuth-Info.plist */,
-				10B5784016939DCA001C97CD /* InfoPlist.strings */,
-				10B5784616939DCA001C97CD /* SSFacebookAuth-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		10B5785316939DD7001C97CD /* SSNativeBridge */ = {
-			isa = PBXGroup;
-			children = (
-				10B5785916939DD7001C97CD /* SSNativeBridge.h */,
-				10B5785A16939DD7001C97CD /* SSNativeBridge.m */,
-				10B5785416939DD7001C97CD /* Supporting Files */,
-			);
-			path = SSNativeBridge;
-			sourceTree = "<group>";
-		};
-		10B5785416939DD7001C97CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				10B5785516939DD7001C97CD /* SSNativeBridge-Info.plist */,
-				10B5785616939DD7001C97CD /* InfoPlist.strings */,
-				10B5785C16939DD7001C97CD /* SSNativeBridge-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		10EE33D51667376400D95BAC = {
 			isa = PBXGroup;
 			children = (
 				10EE33EA1667376400D95BAC /* Spartan Missile Strike */,
-				10B577CF16939D70001C97CD /* SSFiring */,
-				10B577E516939D83001C97CD /* SSLocationManager */,
-				10B577FB16939D95001C97CD /* SSPreferenceManager */,
-				10B5781116939DA8001C97CD /* SSMotionManager */,
-				10B5782716939DB6001C97CD /* SSAudioManager */,
-				10B5783D16939DCA001C97CD /* SSFacebookAuth */,
-				10B5785316939DD7001C97CD /* SSNativeBridge */,
 				106A10B6168F82AA0059E189 /* SSUnitTests */,
 				10EE33E31667376400D95BAC /* Frameworks */,
 				10EE33E11667376400D95BAC /* Products */,
@@ -524,7 +301,6 @@
 				10EE33F31667376400D95BAC /* SSAppDelegate.h */,
 				10EE33F41667376400D95BAC /* SSAppDelegate.m */,
 				10EE33EB1667376400D95BAC /* Supporting Files */,
-				10B577B816939D4D001C97CD /* SSSpashScreen */,
 			);
 			path = "Spartan Missile Strike";
 			sourceTree = "<group>";
@@ -532,7 +308,7 @@
 		10EE33EB1667376400D95BAC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				10952620169521D4007608EB /* ADELE - Skyfall.mp3 */,
+				1095262416952E38007608EB /* skyfall.mp3 */,
 				10EE33EC1667376400D95BAC /* Spartan Missile Strike-Info.plist */,
 				10EE33ED1667376400D95BAC /* InfoPlist.strings */,
 				10EE33F01667376400D95BAC /* main.m */,
@@ -774,7 +550,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B577BD16939D4D001C97CD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,7 +557,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B577D416939D70001C97CD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,7 +564,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B577EA16939D83001C97CD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,7 +571,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5780016939D95001C97CD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,7 +578,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5781616939DA8001C97CD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,7 +585,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5782C16939DB6001C97CD /* InfoPlist.strings in Resources */,
+				1095262616952E38007608EB /* skyfall.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,7 +593,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5784216939DCA001C97CD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,7 +600,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5785816939DD7001C97CD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,7 +611,7 @@
 				10EE33F71667376400D95BAC /* Default.png in Resources */,
 				10EE33F91667376400D95BAC /* Default@2x.png in Resources */,
 				10EE33FB1667376400D95BAC /* Default-568h@2x.png in Resources */,
-				10952621169521D4007608EB /* ADELE - Skyfall.mp3 in Resources */,
+				1095262516952E38007608EB /* skyfall.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,7 +750,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B577C016939D4D001C97CD /* SSSpashScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -989,7 +757,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B577D716939D70001C97CD /* SSFiring.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -997,7 +764,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B577ED16939D83001C97CD /* SSLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,7 +771,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5780316939D95001C97CD /* SSPreferenceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,7 +778,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5781916939DA8001C97CD /* SSMotionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,7 +785,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5782F16939DB6001C97CD /* SSAudioManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1029,7 +792,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5784516939DCA001C97CD /* SSFacebookAuth.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1037,7 +799,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B5785B16939DD7001C97CD /* SSNativeBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,70 +826,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				106A10BA168F82AA0059E189 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		10B577BB16939D4D001C97CD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10B577BC16939D4D001C97CD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		10B577D216939D70001C97CD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10B577D316939D70001C97CD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		10B577E816939D83001C97CD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10B577E916939D83001C97CD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		10B577FE16939D95001C97CD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10B577FF16939D95001C97CD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		10B5781416939DA8001C97CD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10B5781516939DA8001C97CD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		10B5782A16939DB6001C97CD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10B5782B16939DB6001C97CD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		10B5784016939DCA001C97CD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10B5784116939DCA001C97CD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		10B5785616939DD7001C97CD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10B5785716939DD7001C97CD /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
