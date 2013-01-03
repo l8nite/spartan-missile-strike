@@ -25,20 +25,9 @@
     [super tearDown];
 }
 
-- (void)testExample
-{
-    STFail(@"Unit tests are not implemented yet in SSUnitTests");
-}
-
-// Jomana
-
-- (void)testSSPreference
-{
  
-    NSMutableArray *testingArg = [NSMutableArray arrayWithObjects: @"Sai", @"Jomana", @"Shaun", @"Chris"];
-    STassertTrue([pared isEquaTo:expected], @"initialParserWithNSMutableArray failed to return the expected");
-}
 
+ 
 
 
 - (void)testTestFramework

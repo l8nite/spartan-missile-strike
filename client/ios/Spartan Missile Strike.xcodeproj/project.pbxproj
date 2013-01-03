@@ -24,31 +24,7 @@
 		109526181693F24C007608EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109526171693F24C007608EB /* CoreLocation.framework */; };
 		1095261E16951E84007608EB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1095261D16951E84007608EB /* AVFoundation.framework */; };
 		1095262516952E38007608EB /* skyfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1095262416952E38007608EB /* skyfall.mp3 */; };
-		1095262616952E38007608EB /* skyfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1095262416952E38007608EB /* skyfall.mp3 */; };
-		10B577B516939D4D001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		10B577B616939D4D001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		10B577B716939D4D001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B577CC16939D70001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		10B577CD16939D70001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		10B577CE16939D70001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B577E216939D83001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		10B577E316939D83001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		10B577E416939D83001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B577F816939D95001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		10B577F916939D95001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		10B577FA16939D95001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B5780E16939DA8001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		10B5780F16939DA8001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		10B5781016939DA8001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B5782416939DB6001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		10B5782516939DB6001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		10B5782616939DB6001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B5783A16939DCA001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		10B5783B16939DCA001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		10B5783C16939DCA001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
-		10B5785016939DD7001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
-		10B5785116939DD7001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
-		10B5785216939DD7001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
+		10B942A1169636A500257561 /* SSPreferenceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B942A0169636A500257561 /* SSPreferenceManagerTests.m */; };
 		10EE33E51667376400D95BAC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10EE33E71667376400D95BAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
 		10EE33E91667376400D95BAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E81667376400D95BAC /* CoreGraphics.framework */; };
@@ -87,14 +63,8 @@
 		109526171693F24C007608EB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1095261D16951E84007608EB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1095262416952E38007608EB /* skyfall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = skyfall.mp3; sourceTree = "<group>"; };
-		10B577B416939D4D001C97CD /* SSSpashScreen.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSSpashScreen.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B577CB16939D70001C97CD /* SSFiring.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSFiring.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B577E116939D83001C97CD /* SSLocationManager.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSLocationManager.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B577F716939D95001C97CD /* SSPreferenceManager.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSPreferenceManager.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B5780D16939DA8001C97CD /* SSMotionManager.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSMotionManager.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B5782316939DB6001C97CD /* SSAudioManager.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSAudioManager.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B5783916939DCA001C97CD /* SSFacebookAuth.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSFacebookAuth.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		10B5784F16939DD7001C97CD /* SSNativeBridge.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSNativeBridge.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		10B9429F169636A500257561 /* SSPreferenceManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPreferenceManagerTests.h; sourceTree = "<group>"; };
+		10B942A0169636A500257561 /* SSPreferenceManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManagerTests.m; sourceTree = "<group>"; };
 		10EE33E01667376400D95BAC /* Spartan Missile Strike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spartan Missile Strike.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10EE33E41667376400D95BAC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		10EE33E61667376400D95BAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -122,86 +92,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		10B577B016939D4D001C97CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10B577B516939D4D001C97CD /* SenTestingKit.framework in Frameworks */,
-				10B577B616939D4D001C97CD /* UIKit.framework in Frameworks */,
-				10B577B716939D4D001C97CD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577C716939D70001C97CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10B577CC16939D70001C97CD /* SenTestingKit.framework in Frameworks */,
-				10B577CD16939D70001C97CD /* UIKit.framework in Frameworks */,
-				10B577CE16939D70001C97CD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577DD16939D83001C97CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10B577E216939D83001C97CD /* SenTestingKit.framework in Frameworks */,
-				10B577E316939D83001C97CD /* UIKit.framework in Frameworks */,
-				10B577E416939D83001C97CD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577F316939D95001C97CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10B577F816939D95001C97CD /* SenTestingKit.framework in Frameworks */,
-				10B577F916939D95001C97CD /* UIKit.framework in Frameworks */,
-				10B577FA16939D95001C97CD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5780916939DA8001C97CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10B5780E16939DA8001C97CD /* SenTestingKit.framework in Frameworks */,
-				10B5780F16939DA8001C97CD /* UIKit.framework in Frameworks */,
-				10B5781016939DA8001C97CD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5781F16939DB6001C97CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10B5782416939DB6001C97CD /* SenTestingKit.framework in Frameworks */,
-				10B5782516939DB6001C97CD /* UIKit.framework in Frameworks */,
-				10B5782616939DB6001C97CD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5783516939DCA001C97CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10B5783A16939DCA001C97CD /* SenTestingKit.framework in Frameworks */,
-				10B5783B16939DCA001C97CD /* UIKit.framework in Frameworks */,
-				10B5783C16939DCA001C97CD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5784B16939DD7001C97CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10B5785016939DD7001C97CD /* SenTestingKit.framework in Frameworks */,
-				10B5785116939DD7001C97CD /* UIKit.framework in Frameworks */,
-				10B5785216939DD7001C97CD /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		10EE33DD1667376400D95BAC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -223,6 +113,8 @@
 			children = (
 				106A10BC168F82AA0059E189 /* SSUnitTests.h */,
 				106A10BD168F82AA0059E189 /* SSUnitTests.m */,
+				10B9429F169636A500257561 /* SSPreferenceManagerTests.h */,
+				10B942A0169636A500257561 /* SSPreferenceManagerTests.m */,
 				106A10B7168F82AA0059E189 /* Supporting Files */,
 			);
 			path = SSUnitTests;
@@ -253,14 +145,6 @@
 			children = (
 				10EE33E01667376400D95BAC /* Spartan Missile Strike.app */,
 				106A10B2168F82AA0059E189 /* SSUnitTests.octest */,
-				10B577B416939D4D001C97CD /* SSSpashScreen.octest */,
-				10B577CB16939D70001C97CD /* SSFiring.octest */,
-				10B577E116939D83001C97CD /* SSLocationManager.octest */,
-				10B577F716939D95001C97CD /* SSPreferenceManager.octest */,
-				10B5780D16939DA8001C97CD /* SSMotionManager.octest */,
-				10B5782316939DB6001C97CD /* SSAudioManager.octest */,
-				10B5783916939DCA001C97CD /* SSFacebookAuth.octest */,
-				10B5784F16939DD7001C97CD /* SSNativeBridge.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -341,150 +225,6 @@
 			productReference = 106A10B2168F82AA0059E189 /* SSUnitTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		10B577B316939D4D001C97CD /* SSSpashScreen */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10B577C416939D4D001C97CD /* Build configuration list for PBXNativeTarget "SSSpashScreen" */;
-			buildPhases = (
-				10B577AF16939D4D001C97CD /* Sources */,
-				10B577B016939D4D001C97CD /* Frameworks */,
-				10B577B116939D4D001C97CD /* Resources */,
-				10B577B216939D4D001C97CD /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SSSpashScreen;
-			productName = SSSpashScreen;
-			productReference = 10B577B416939D4D001C97CD /* SSSpashScreen.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
-		10B577CA16939D70001C97CD /* SSFiring */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10B577D916939D70001C97CD /* Build configuration list for PBXNativeTarget "SSFiring" */;
-			buildPhases = (
-				10B577C616939D70001C97CD /* Sources */,
-				10B577C716939D70001C97CD /* Frameworks */,
-				10B577C816939D70001C97CD /* Resources */,
-				10B577C916939D70001C97CD /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SSFiring;
-			productName = SSFiring;
-			productReference = 10B577CB16939D70001C97CD /* SSFiring.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
-		10B577E016939D83001C97CD /* SSLocationManager */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10B577EF16939D83001C97CD /* Build configuration list for PBXNativeTarget "SSLocationManager" */;
-			buildPhases = (
-				10B577DC16939D83001C97CD /* Sources */,
-				10B577DD16939D83001C97CD /* Frameworks */,
-				10B577DE16939D83001C97CD /* Resources */,
-				10B577DF16939D83001C97CD /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SSLocationManager;
-			productName = SSLocationManager;
-			productReference = 10B577E116939D83001C97CD /* SSLocationManager.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
-		10B577F616939D95001C97CD /* SSPreferenceManager */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10B5780516939D95001C97CD /* Build configuration list for PBXNativeTarget "SSPreferenceManager" */;
-			buildPhases = (
-				10B577F216939D95001C97CD /* Sources */,
-				10B577F316939D95001C97CD /* Frameworks */,
-				10B577F416939D95001C97CD /* Resources */,
-				10B577F516939D95001C97CD /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SSPreferenceManager;
-			productName = SSPreferenceManager;
-			productReference = 10B577F716939D95001C97CD /* SSPreferenceManager.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
-		10B5780C16939DA8001C97CD /* SSMotionManager */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10B5781B16939DA8001C97CD /* Build configuration list for PBXNativeTarget "SSMotionManager" */;
-			buildPhases = (
-				10B5780816939DA8001C97CD /* Sources */,
-				10B5780916939DA8001C97CD /* Frameworks */,
-				10B5780A16939DA8001C97CD /* Resources */,
-				10B5780B16939DA8001C97CD /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SSMotionManager;
-			productName = SSMotionManager;
-			productReference = 10B5780D16939DA8001C97CD /* SSMotionManager.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
-		10B5782216939DB6001C97CD /* SSAudioManager */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10B5783116939DB6001C97CD /* Build configuration list for PBXNativeTarget "SSAudioManager" */;
-			buildPhases = (
-				10B5781E16939DB6001C97CD /* Sources */,
-				10B5781F16939DB6001C97CD /* Frameworks */,
-				10B5782016939DB6001C97CD /* Resources */,
-				10B5782116939DB6001C97CD /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SSAudioManager;
-			productName = SSAudioManager;
-			productReference = 10B5782316939DB6001C97CD /* SSAudioManager.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
-		10B5783816939DCA001C97CD /* SSFacebookAuth */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10B5784716939DCA001C97CD /* Build configuration list for PBXNativeTarget "SSFacebookAuth" */;
-			buildPhases = (
-				10B5783416939DCA001C97CD /* Sources */,
-				10B5783516939DCA001C97CD /* Frameworks */,
-				10B5783616939DCA001C97CD /* Resources */,
-				10B5783716939DCA001C97CD /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SSFacebookAuth;
-			productName = SSFacebookAuth;
-			productReference = 10B5783916939DCA001C97CD /* SSFacebookAuth.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
-		10B5784E16939DD7001C97CD /* SSNativeBridge */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10B5785D16939DD7001C97CD /* Build configuration list for PBXNativeTarget "SSNativeBridge" */;
-			buildPhases = (
-				10B5784A16939DD7001C97CD /* Sources */,
-				10B5784B16939DD7001C97CD /* Frameworks */,
-				10B5784C16939DD7001C97CD /* Resources */,
-				10B5784D16939DD7001C97CD /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SSNativeBridge;
-			productName = SSNativeBridge;
-			productReference = 10B5784F16939DD7001C97CD /* SSNativeBridge.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 		10EE33DF1667376400D95BAC /* Spartan Missile Strike */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10EE34131667376400D95BAC /* Build configuration list for PBXNativeTarget "Spartan Missile Strike" */;
@@ -525,14 +265,6 @@
 			targets = (
 				10EE33DF1667376400D95BAC /* Spartan Missile Strike */,
 				106A10B1168F82AA0059E189 /* SSUnitTests */,
-				10B577B316939D4D001C97CD /* SSSpashScreen */,
-				10B577CA16939D70001C97CD /* SSFiring */,
-				10B577E016939D83001C97CD /* SSLocationManager */,
-				10B577F616939D95001C97CD /* SSPreferenceManager */,
-				10B5780C16939DA8001C97CD /* SSMotionManager */,
-				10B5782216939DB6001C97CD /* SSAudioManager */,
-				10B5783816939DCA001C97CD /* SSFacebookAuth */,
-				10B5784E16939DD7001C97CD /* SSNativeBridge */,
 			);
 		};
 /* End PBXProject section */
@@ -543,63 +275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				106A10BB168F82AA0059E189 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577B116939D4D001C97CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577C816939D70001C97CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577DE16939D83001C97CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577F416939D95001C97CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5780A16939DA8001C97CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5782016939DB6001C97CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1095262616952E38007608EB /* skyfall.mp3 in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5783616939DCA001C97CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5784C16939DD7001C97CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,110 +306,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
-		10B577B216939D4D001C97CD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		10B577C916939D70001C97CD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		10B577DF16939D83001C97CD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		10B577F516939D95001C97CD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		10B5780B16939DA8001C97CD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		10B5782116939DB6001C97CD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		10B5783716939DCA001C97CD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		10B5784D16939DD7001C97CD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -743,62 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				106A10BE168F82AA0059E189 /* SSUnitTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577AF16939D4D001C97CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577C616939D70001C97CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577DC16939D83001C97CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B577F216939D95001C97CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5780816939DA8001C97CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5781E16939DB6001C97CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5783416939DCA001C97CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10B5784A16939DD7001C97CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				10B942A1169636A500257561 /* SSPreferenceManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,246 +382,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SSUnitTests/SSUnitTests-Prefix.pch";
 				INFOPLIST_FILE = "SSUnitTests/SSUnitTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		10B577C216939D4D001C97CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSSpashScreen/SSSpashScreen-Prefix.pch";
-				INFOPLIST_FILE = "SSSpashScreen/SSSpashScreen-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		10B577C316939D4D001C97CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSSpashScreen/SSSpashScreen-Prefix.pch";
-				INFOPLIST_FILE = "SSSpashScreen/SSSpashScreen-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		10B577DA16939D70001C97CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSFiring/SSFiring-Prefix.pch";
-				INFOPLIST_FILE = "SSFiring/SSFiring-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		10B577DB16939D70001C97CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSFiring/SSFiring-Prefix.pch";
-				INFOPLIST_FILE = "SSFiring/SSFiring-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		10B577F016939D83001C97CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSLocationManager/SSLocationManager-Prefix.pch";
-				INFOPLIST_FILE = "SSLocationManager/SSLocationManager-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		10B577F116939D83001C97CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSLocationManager/SSLocationManager-Prefix.pch";
-				INFOPLIST_FILE = "SSLocationManager/SSLocationManager-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		10B5780616939D95001C97CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSPreferenceManager/SSPreferenceManager-Prefix.pch";
-				INFOPLIST_FILE = "SSPreferenceManager/SSPreferenceManager-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		10B5780716939D95001C97CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSPreferenceManager/SSPreferenceManager-Prefix.pch";
-				INFOPLIST_FILE = "SSPreferenceManager/SSPreferenceManager-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		10B5781C16939DA8001C97CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSMotionManager/SSMotionManager-Prefix.pch";
-				INFOPLIST_FILE = "SSMotionManager/SSMotionManager-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		10B5781D16939DA8001C97CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSMotionManager/SSMotionManager-Prefix.pch";
-				INFOPLIST_FILE = "SSMotionManager/SSMotionManager-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		10B5783216939DB6001C97CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSAudioManager/SSAudioManager-Prefix.pch";
-				INFOPLIST_FILE = "SSAudioManager/SSAudioManager-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		10B5783316939DB6001C97CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSAudioManager/SSAudioManager-Prefix.pch";
-				INFOPLIST_FILE = "SSAudioManager/SSAudioManager-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		10B5784816939DCA001C97CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSFacebookAuth/SSFacebookAuth-Prefix.pch";
-				INFOPLIST_FILE = "SSFacebookAuth/SSFacebookAuth-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		10B5784916939DCA001C97CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSFacebookAuth/SSFacebookAuth-Prefix.pch";
-				INFOPLIST_FILE = "SSFacebookAuth/SSFacebookAuth-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		10B5785E16939DD7001C97CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSNativeBridge/SSNativeBridge-Prefix.pch";
-				INFOPLIST_FILE = "SSNativeBridge/SSNativeBridge-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		10B5785F16939DD7001C97CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SSNativeBridge/SSNativeBridge-Prefix.pch";
-				INFOPLIST_FILE = "SSNativeBridge/SSNativeBridge-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1199,78 +475,6 @@
 			buildConfigurations = (
 				106A10C1168F82AA0059E189 /* Debug */,
 				106A10C2168F82AA0059E189 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10B577C416939D4D001C97CD /* Build configuration list for PBXNativeTarget "SSSpashScreen" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10B577C216939D4D001C97CD /* Debug */,
-				10B577C316939D4D001C97CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10B577D916939D70001C97CD /* Build configuration list for PBXNativeTarget "SSFiring" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10B577DA16939D70001C97CD /* Debug */,
-				10B577DB16939D70001C97CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10B577EF16939D83001C97CD /* Build configuration list for PBXNativeTarget "SSLocationManager" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10B577F016939D83001C97CD /* Debug */,
-				10B577F116939D83001C97CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10B5780516939D95001C97CD /* Build configuration list for PBXNativeTarget "SSPreferenceManager" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10B5780616939D95001C97CD /* Debug */,
-				10B5780716939D95001C97CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10B5781B16939DA8001C97CD /* Build configuration list for PBXNativeTarget "SSMotionManager" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10B5781C16939DA8001C97CD /* Debug */,
-				10B5781D16939DA8001C97CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10B5783116939DB6001C97CD /* Build configuration list for PBXNativeTarget "SSAudioManager" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10B5783216939DB6001C97CD /* Debug */,
-				10B5783316939DB6001C97CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10B5784716939DCA001C97CD /* Build configuration list for PBXNativeTarget "SSFacebookAuth" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10B5784816939DCA001C97CD /* Debug */,
-				10B5784916939DCA001C97CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10B5785D16939DD7001C97CD /* Build configuration list for PBXNativeTarget "SSNativeBridge" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10B5785E16939DD7001C97CD /* Debug */,
-				10B5785F16939DD7001C97CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
