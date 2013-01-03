@@ -7,6 +7,7 @@
 //
 
 #import "SSAppDelegate.h"
+#import "SSAudioManager.h"
 
 @implementation SSAppDelegate
 
@@ -18,6 +19,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.6 alpha:1];
     [self.window makeKeyAndVisible];
+    
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"success" message:@"is this a success" delegate:self cancelButtonTitle:@"yes" otherButtonTitles:@"no", nil];
     [alert show];
@@ -31,6 +33,8 @@
     {
         //yes reroute to the other page
         NSLog(@"This is the yes button");
+        
+        
     }
     else if (buttonIndex==1)
     {

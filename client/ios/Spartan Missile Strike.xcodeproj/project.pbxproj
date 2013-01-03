@@ -22,6 +22,8 @@
 		106A10BE168F82AA0059E189 /* SSUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 106A10BD168F82AA0059E189 /* SSUnitTests.m */; };
 		109526151693EEA2007608EB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109526131693EEA2007608EB /* AudioToolbox.framework */; };
 		109526181693F24C007608EB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109526171693F24C007608EB /* CoreLocation.framework */; };
+		1095261E16951E84007608EB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1095261D16951E84007608EB /* AVFoundation.framework */; };
+		10952621169521D4007608EB /* ADELE - Skyfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10952620169521D4007608EB /* ADELE - Skyfall.mp3 */; };
 		10B577B516939D4D001C97CD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE34021667376400D95BAC /* SenTestingKit.framework */; };
 		10B577B616939D4D001C97CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E41667376400D95BAC /* UIKit.framework */; };
 		10B577B716939D4D001C97CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE33E61667376400D95BAC /* Foundation.framework */; };
@@ -98,6 +100,8 @@
 		106A10BF168F82AA0059E189 /* SSUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SSUnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		109526131693EEA2007608EB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		109526171693F24C007608EB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1095261D16951E84007608EB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		10952620169521D4007608EB /* ADELE - Skyfall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "ADELE - Skyfall.mp3"; path = "../../../../ADELE - Skyfall.mp3"; sourceTree = "<group>"; };
 		10B577B416939D4D001C97CD /* SSSpashScreen.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSSpashScreen.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B577BA16939D4D001C97CD /* SSSpashScreen-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SSSpashScreen-Info.plist"; sourceTree = "<group>"; };
 		10B577BC16939D4D001C97CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1095261E16951E84007608EB /* AVFoundation.framework in Frameworks */,
 				109526181693F24C007608EB /* CoreLocation.framework in Frameworks */,
 				109526151693EEA2007608EB /* AudioToolbox.framework in Frameworks */,
 				10EE33E91667376400D95BAC /* CoreGraphics.framework in Frameworks */,
@@ -486,6 +491,7 @@
 		10EE33E31667376400D95BAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1095261D16951E84007608EB /* AVFoundation.framework */,
 				109526171693F24C007608EB /* CoreLocation.framework */,
 				109526131693EEA2007608EB /* AudioToolbox.framework */,
 				10EE33E41667376400D95BAC /* UIKit.framework */,
@@ -526,6 +532,7 @@
 		10EE33EB1667376400D95BAC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				10952620169521D4007608EB /* ADELE - Skyfall.mp3 */,
 				10EE33EC1667376400D95BAC /* Spartan Missile Strike-Info.plist */,
 				10EE33ED1667376400D95BAC /* InfoPlist.strings */,
 				10EE33F01667376400D95BAC /* main.m */,
@@ -835,6 +842,7 @@
 				10EE33F71667376400D95BAC /* Default.png in Resources */,
 				10EE33F91667376400D95BAC /* Default@2x.png in Resources */,
 				10EE33FB1667376400D95BAC /* Default-568h@2x.png in Resources */,
+				10952621169521D4007608EB /* ADELE - Skyfall.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
