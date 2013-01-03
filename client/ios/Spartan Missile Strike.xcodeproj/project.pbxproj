@@ -58,6 +58,7 @@
 		10EE33F71667376400D95BAC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F61667376400D95BAC /* Default.png */; };
 		10EE33F91667376400D95BAC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33F81667376400D95BAC /* Default@2x.png */; };
 		10EE33FB1667376400D95BAC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10EE33FA1667376400D95BAC /* Default-568h@2x.png */; };
+		28FCE4D016962D4D00A033AC /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FCE4CF16962D4D00A033AC /* Test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,8 @@
 		10EE33F81667376400D95BAC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		10EE33FA1667376400D95BAC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		10EE34021667376400D95BAC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		28FCE4CE16962D4D00A033AC /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		28FCE4CF16962D4D00A033AC /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +244,8 @@
 		10EE33D51667376400D95BAC = {
 			isa = PBXGroup;
 			children = (
+				28FCE4CE16962D4D00A033AC /* Test.h */,
+				28FCE4CF16962D4D00A033AC /* Test.m */,
 				10EE33EA1667376400D95BAC /* Spartan Missile Strike */,
 				106A10B6168F82AA0059E189 /* SSUnitTests */,
 				10EE33E31667376400D95BAC /* Frameworks */,
@@ -816,6 +821,7 @@
 				106178261685A6BD001F8770 /* SSLocationManager.m in Sources */,
 				106178291685A6DF001F8770 /* SSPreferenceManager.m in Sources */,
 				1061782C1685A706001F8770 /* SSMotionManager.m in Sources */,
+				28FCE4D016962D4D00A033AC /* Test.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
