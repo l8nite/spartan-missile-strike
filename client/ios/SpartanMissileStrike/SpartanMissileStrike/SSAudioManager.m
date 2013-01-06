@@ -15,4 +15,23 @@
     self = [super init];
     return self;
 }
+
+-(void)playSound
+{
+    
+}
+
+-(void)muteSoundEffect
+{
+    
+}
+-(void)muteBackgroundMusic
+{
+    
+}
+
+-(void)playBackgroundMusic
+{
+    
+}
 @end
