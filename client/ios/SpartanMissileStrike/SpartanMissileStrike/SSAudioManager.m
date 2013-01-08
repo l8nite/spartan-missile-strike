@@ -21,39 +21,60 @@
 
 -(void)playSoundLaunch
 {
-    NSString* path =[[NSBundle mainBundle] pathForResource:@"skyfall" ofType:@"mp3"];
+    NSString* path =[[NSBundle mainBundle] pathForResource:@"helicopter" ofType:@"mp3"];
     
-    if(theAudio)[theAudio nil];
-    theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:(NSURLfileURLWithPath:path) error:null];
+     
+    theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                [NSURL fileURLWithPath:path] error:NULL];
     theAudio.delegate = self;
     [theAudio play];
 }
 
--(void)stopSoundLaunch
-{
-    
-}
-
-
 -(void)playSoundEffect
 {
+    NSString* path =[[NSBundle mainBundle] pathForResource:@"mlaunch" ofType:@"mp3"];
     
-}
--(void)muteSoundEffect
-{
     
+    theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                [NSURL fileURLWithPath:path] error:NULL];
+    theAudio.delegate = self;
+    [theAudio play];
 }
+//-(void)muteSoundEffect
+//{
+//    
+//}
+//
+
+//-(void)muteBackgroundMusic
+//{
+//    
+//}
+
+//-(void)playBackgroundMusic
+//{
+//    NSString* path =[[NSBundle mainBundle] pathForResource:@"skyfall" ofType:@"mp3"];
+//    
+//    
+//    theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:
+//                [NSURL fileURLWithPath:path] error:NULL];
+//    theAudio.delegate = self;
+//    [theAudio play];
+//    
+//}
 
 
--(void)muteBackgroundMusic
-{
+-(IBAction)play{
+    [theAudio play];
     
 }
-
--(void)playBackgroundMusic
-{
-    
+-(IBAction)stop{
+    [theAudio stop];
+}
+-(IBAction)pause{
+    [theAudio pause]; 
 }
 
-// [player pause]; [player stop];
 @end
+ 
+
