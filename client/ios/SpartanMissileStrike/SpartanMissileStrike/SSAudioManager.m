@@ -16,15 +16,35 @@
     return self;
 }
 
--(void)playSound
+
+
+
+-(void)playSoundLaunch
+{
+    NSString* path =[[NSBundle mainBundle] pathForResource:@"skyfall" ofType:@"mp3"];
+    
+    if(theAudio)[theAudio nil];
+    theAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:(NSURLfileURLWithPath:path) error:null];
+    theAudio.delegate = self;
+    [theAudio play];
+}
+
+-(void)stopSoundLaunch
 {
     
 }
 
+
+-(void)playSoundEffect
+{
+    
+}
 -(void)muteSoundEffect
 {
     
 }
+
+
 -(void)muteBackgroundMusic
 {
     
@@ -34,4 +54,6 @@
 {
     
 }
+
+// [player pause]; [player stop];
 @end
