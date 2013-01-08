@@ -18,9 +18,14 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow* window;
 
--(IBAction)playSoundLaunch;
--(IBAction)stopSoundLaunch;
--(IBAction)muteSoundEffect;
--(IBAction)muteBackgroundMusic;
--(IBAction)playBackgroundMusic;
+//-(IBAction)playSoundLaunch;
+//-(IBAction)stopSoundLaunch;
+//-(IBAction)muteSoundEffect;
+//-(IBAction)muteBackgroundMusic;
+//-(IBAction)playBackgroundMusic;
+
+-(IBAction)play;
+-(IBAction)stop;
+-(IBAction)pause;
+
 @end

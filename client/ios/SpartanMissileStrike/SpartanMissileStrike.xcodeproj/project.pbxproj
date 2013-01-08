@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1015515A169BC9DA0010A8D6 /* skyfall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10155159169BC9D90010A8D6 /* skyfall.mp3 */; };
+		10155167169BD7840010A8D6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
+		10155169169BD79D0010A8D6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155168169BD79D0010A8D6 /* Default@2x.png */; };
+		1015516B169BD8A00010A8D6 /* helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1015516A169BD8A00010A8D6 /* helicopter.mp3 */; };
+		1015516D169BD92A0010A8D6 /* mlaunch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1015516C169BD92A0010A8D6 /* mlaunch.mp3 */; };
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
 		108FC6A4169641C8001BABBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A3169641C8001BABBE /* UIKit.framework */; };
@@ -36,7 +39,6 @@
 		109E51F51699FE63002425B5 /* SSSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51F41699FE63002425B5 /* SSSplashScreen.m */; };
 		109E51F81699FE88002425B5 /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51F71699FE88002425B5 /* SSLocationManager.m */; };
 		109E51FB1699FEBA002425B5 /* SSMotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51FA1699FEBA002425B5 /* SSMotionManager.m */; };
-		109E5201169A018E002425B5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 109E5200169A018E002425B5 /* Default.png */; };
 		109E520F169A02B0002425B5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E520E169A02B0002425B5 /* AVFoundation.framework */; };
 		109E5211169A02C1002425B5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E5210169A02C1002425B5 /* CoreLocation.framework */; };
 		109E5213169A02D1002425B5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E5212169A02D1002425B5 /* CoreMotion.framework */; };
@@ -56,7 +58,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		10155159169BC9D90010A8D6 /* skyfall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = skyfall.mp3; path = ../../../../../extras/skyfall.mp3; sourceTree = "<group>"; };
+		10155166169BD7840010A8D6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		10155168169BD79D0010A8D6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		1015516A169BD8A00010A8D6 /* helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = helicopter.mp3; sourceTree = "<group>"; };
+		1015516C169BD92A0010A8D6 /* mlaunch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mlaunch.mp3; sourceTree = "<group>"; };
 		103DE30216964DF300ED92B4 /* SSAudioManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManagerTests.h; sourceTree = "<group>"; };
 		103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManagerTests.m; sourceTree = "<group>"; };
 		103DE30616964EC300ED92B4 /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
@@ -104,7 +109,6 @@
 		109E51F71699FE88002425B5 /* SSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
 		109E51F91699FEBA002425B5 /* SSMotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSMotionManager.h; sourceTree = "<group>"; };
 		109E51FA1699FEBA002425B5 /* SSMotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMotionManager.m; sourceTree = "<group>"; };
-		109E5200169A018E002425B5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		109E520E169A02B0002425B5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		109E5210169A02C1002425B5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		109E5212169A02D1002425B5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -143,10 +147,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10155161169BD72B0010A8D6 /* Refrences */ = {
+			isa = PBXGroup;
+			children = (
+				1015516C169BD92A0010A8D6 /* mlaunch.mp3 */,
+				1015516A169BD8A00010A8D6 /* helicopter.mp3 */,
+			);
+			name = Refrences;
+			sourceTree = "<group>";
+		};
 		108FC694169641C8001BABBE = {
 			isa = PBXGroup;
 			children = (
-				109E5200169A018E002425B5 /* Default.png */,
+				10155168169BD79D0010A8D6 /* Default@2x.png */,
+				10155166169BD7840010A8D6 /* Default.png */,
+				10155161169BD72B0010A8D6 /* Refrences */,
 				108FC6A9169641C8001BABBE /* SpartanMissileStrike */,
 				108FC6C7169641C8001BABBE /* SpartanMissileStrikeTests */,
 				108FC6A2169641C8001BABBE /* Frameworks */,
@@ -200,7 +215,6 @@
 				109E51F71699FE88002425B5 /* SSLocationManager.m */,
 				109E51F91699FEBA002425B5 /* SSMotionManager.h */,
 				109E51FA1699FEBA002425B5 /* SSMotionManager.m */,
-				10155159169BC9D90010A8D6 /* skyfall.mp3 */,
 			);
 			path = SpartanMissileStrike;
 			sourceTree = "<group>";
@@ -330,8 +344,10 @@
 				108FC6B6169641C8001BABBE /* Default.png in Resources */,
 				108FC6B8169641C8001BABBE /* Default@2x.png in Resources */,
 				108FC6BA169641C8001BABBE /* Default-568h@2x.png in Resources */,
-				109E5201169A018E002425B5 /* Default.png in Resources */,
-				1015515A169BC9DA0010A8D6 /* skyfall.mp3 in Resources */,
+				10155167169BD7840010A8D6 /* Default.png in Resources */,
+				10155169169BD79D0010A8D6 /* Default@2x.png in Resources */,
+				1015516B169BD8A00010A8D6 /* helicopter.mp3 in Resources */,
+				1015516D169BD92A0010A8D6 /* mlaunch.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
