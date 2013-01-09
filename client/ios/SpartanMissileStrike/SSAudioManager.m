@@ -30,16 +30,32 @@
 
 -(void)playSound:(NSString*)identifier
 {
-    //get the path from the helper
-    NSString* path =[self pathForSoundIdentifier:identifier];
-    if (path == nil)
-    {
-        return ;
-    }
+//    //get the path from the helper
+//    NSString* path =[self pathForSoundIdentifier:identifier];
+//    if (path == nil)
+//    {
+//        return ;
+//    }
+//    
+//     
+//    //play the sound
+//    NSURL* url = [NSURL fileURLWithPath:path];
+//    NSError* err;
+//    AVAudioPlayer* player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&err];
+//    player.numberOfLoops=-1;
+//    [player play];
     
-    //play the sound
-    AVAudioPlayer* player = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
-    [player play];
+    
+    NSURL* url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/helicopter.mp3" , [[NSBundle mainBundle] resourcePath]]];
+    AVAudioPlayer* player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
+        player.numberOfLoops=-1;
+       [player play];
+
+}
+
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    return;
 }
 
 @end
