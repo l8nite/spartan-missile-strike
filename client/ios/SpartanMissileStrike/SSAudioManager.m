@@ -28,6 +28,20 @@
     return path;
 }
 
+-(void)playSound:(NSString*)identifier
+{
+    //get the path from the helper
+    NSString* path =[self pathForSoundIdentifier:identifier];
+    if (path == nil)
+    {
+        return ;
+    }
+    
+    //play the sound
+    AVAudioPlayer* player = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+    [player play];
+}
+
 @end
  
 
