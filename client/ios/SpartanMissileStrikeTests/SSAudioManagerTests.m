@@ -42,7 +42,14 @@
     NSString* actual2 = [sa1 pathForSoundIdentifier:@"FOOBAR"];
     STAssertEqualObjects(nil, actual2, @"Testing invaild identifier");
     
-     
+}
+
+-(void)testPlaySound
+{
+   //TODO
+//    SSAudioManager* sa1 = [[SSAudioManager alloc] init];
+//    [sa1 playSound:@"HELICOPTER"];
+ 
 }
  
 
