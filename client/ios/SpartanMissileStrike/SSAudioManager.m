@@ -18,8 +18,14 @@
 
 -(NSString*)pathForSoundIdentifier:(NSString*)identifier
 {
-    
-    return nil;
+    NSString* path = nil;
+ 
+    if ([identifier compare:@"HELICOPTER"] == NSOrderedSame)
+    {
+        path =  [[NSBundle mainBundle] pathForResource:@"helicopter" ofType: @"mp3"];
+    }
+
+    return path;
 }
 
 @end
