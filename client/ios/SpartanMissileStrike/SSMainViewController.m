@@ -7,6 +7,7 @@
 //
 
 #import "SSMainViewController.h"
+#import "SSAudioManager.h"
 
 @interface SSMainViewController ()
 
@@ -35,4 +36,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)ButtonPressed:(id)sender {
+    SSAudioManager* sa1 = [[SSAudioManager alloc]init];
+    [sa1 playSound:@"HELICOPTER"];
+      
+    
+}
 @end

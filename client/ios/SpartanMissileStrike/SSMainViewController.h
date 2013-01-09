@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SSMainViewController : UIViewController
+- (IBAction)ButtonPressed:(id)sender;
 
 @end
