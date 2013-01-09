@@ -16,7 +16,7 @@
 }
 
 -(NSString*)pathForSoundIdentifier:(NSString*)identifier;
-
+-(void)playSound:(NSString*)identifier;
 
 
 @end
