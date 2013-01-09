@@ -8,5 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSMotionManager  
+@interface SSMotionManager  : NSObject
 @end
