@@ -38,7 +38,7 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     //getting value for bird
     NSString* actual = [defaults stringForKey:@"bird"];
-    STAssertEqualObjects(@"goose",actual , @"set prefence worked");
+    STAssertEqualObjects(@"goose", actual , @"set prefence worked");
      
 }
 
