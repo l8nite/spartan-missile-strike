@@ -12,20 +12,9 @@
 
 @interface SSAudioManager : NSObject  
 {
-  
-    AVAudioPlayer* theAudio;
+    
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow* window;
-
-//-(IBAction)playSoundLaunch;
-//-(IBAction)stopSoundLaunch;
-//-(IBAction)muteSoundEffect;
-//-(IBAction)muteBackgroundMusic;
-//-(IBAction)playBackgroundMusic;
-
--(IBAction)play;
--(IBAction)stop;
--(IBAction)pause;
+-(NSString*)pathForSoundIdentifier:(NSString*)identifier;
 
 @end
