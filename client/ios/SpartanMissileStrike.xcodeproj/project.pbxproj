@@ -40,6 +40,7 @@
 		109E5215169A0325002425B5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E5214169A0325002425B5 /* AudioToolbox.framework */; };
 		10A44A0C169DF05D0043FE99 /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A44A0B169DF05D0043FE99 /* SSPreferenceManager.m */; };
 		10D01EE4169643D400F319F0 /* SSPreferenceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */; };
+		10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F35D9B169E09BB00A42045 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		10A44A0B169DF05D0043FE99 /* SSPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManager.m; sourceTree = "<group>"; };
 		10D01EE2169643D400F319F0 /* SSPreferenceManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPreferenceManagerTests.h; sourceTree = "<group>"; };
 		10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManagerTests.m; sourceTree = "<group>"; };
+		10F35D9B169E09BB00A42045 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 		108FC694169641C8001BABBE = {
 			isa = PBXGroup;
 			children = (
+				10F35D9B169E09BB00A42045 /* Default-568h@2x.png */,
 				10155168169BD79D0010A8D6 /* Default@2x.png */,
 				10155166169BD7840010A8D6 /* Default.png */,
 				108FC6A9169641C8001BABBE /* SpartanMissileStrike */,
@@ -322,6 +325,7 @@
 				108FC6AE169641C8001BABBE /* InfoPlist.strings in Resources */,
 				10155167169BD7840010A8D6 /* Default.png in Resources */,
 				10852433169E009300EE241C /* shared in Resources */,
+				10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
