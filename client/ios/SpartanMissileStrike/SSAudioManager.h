@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface SSAudioManager : NSObject  
+@interface SSAudioManager : NSObject <AVAudioPlayerDelegate>
 {
     
 }
