@@ -22,12 +22,6 @@
 		108FC6C4169641C8001BABBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A5169641C8001BABBE /* Foundation.framework */; };
 		108FC6CC169641C8001BABBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 108FC6CA169641C8001BABBE /* InfoPlist.strings */; };
 		108FC6CF169641C8001BABBE /* SpartanMissileStrikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */; };
-		109E51D61699FBE9002425B5 /* SSFacebookAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51D51699FBE9002425B5 /* SSFacebookAuth.m */; };
-		109E51DA1699FC05002425B5 /* SSFiringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51D91699FC05002425B5 /* SSFiringView.m */; };
-		109E51DD1699FC8B002425B5 /* SSNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51DC1699FC8B002425B5 /* SSNativeBridge.m */; };
-		109E51E01699FCA0002425B5 /* SSSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51DF1699FCA0002425B5 /* SSSplashScreen.m */; };
-		109E51E31699FCBA002425B5 /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51E21699FCBA002425B5 /* SSLocationManager.m */; };
-		109E51E91699FD1E002425B5 /* SSMotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51E81699FD1E002425B5 /* SSMotionManager.m */; };
 		109E51EC1699FDF5002425B5 /* SSFacebookAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51EB1699FDF5002425B5 /* SSFacebookAuth.m */; };
 		109E51EF1699FE1B002425B5 /* SSFiringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51EE1699FE1B002425B5 /* SSFiringView.m */; };
 		109E51F21699FE3F002425B5 /* SSNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51F11699FE3F002425B5 /* SSNativeBridge.m */; };
@@ -41,6 +35,9 @@
 		10A44A0C169DF05D0043FE99 /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A44A0B169DF05D0043FE99 /* SSPreferenceManager.m */; };
 		10D01EE4169643D400F319F0 /* SSPreferenceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */; };
 		10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F35D9B169E09BB00A42045 /* Default-568h@2x.png */; };
+		10F35DA5169E173500A42045 /* SSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F35DA3169E173500A42045 /* SSMainViewController.m */; };
+		10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F35DA4169E173500A42045 /* SSMainViewController.xib */; };
+		10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,18 +74,6 @@
 		108FC6CB169641C8001BABBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		108FC6CD169641C8001BABBE /* SpartanMissileStrikeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpartanMissileStrikeTests.h; sourceTree = "<group>"; };
 		108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpartanMissileStrikeTests.m; sourceTree = "<group>"; };
-		109E51D41699FBE9002425B5 /* SSFacebookAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookAuth.h; sourceTree = "<group>"; };
-		109E51D51699FBE9002425B5 /* SSFacebookAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookAuth.m; sourceTree = "<group>"; };
-		109E51D81699FC05002425B5 /* SSFiringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringView.h; sourceTree = "<group>"; };
-		109E51D91699FC05002425B5 /* SSFiringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFiringView.m; sourceTree = "<group>"; };
-		109E51DB1699FC8B002425B5 /* SSNativeBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNativeBridge.h; sourceTree = "<group>"; };
-		109E51DC1699FC8B002425B5 /* SSNativeBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNativeBridge.m; sourceTree = "<group>"; };
-		109E51DE1699FCA0002425B5 /* SSSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSplashScreen.h; sourceTree = "<group>"; };
-		109E51DF1699FCA0002425B5 /* SSSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSplashScreen.m; sourceTree = "<group>"; };
-		109E51E11699FCBA002425B5 /* SSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLocationManager.h; sourceTree = "<group>"; };
-		109E51E21699FCBA002425B5 /* SSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
-		109E51E71699FD1E002425B5 /* SSMotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSMotionManager.h; sourceTree = "<group>"; };
-		109E51E81699FD1E002425B5 /* SSMotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMotionManager.m; sourceTree = "<group>"; };
 		109E51EA1699FDF5002425B5 /* SSFacebookAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookAuth.h; sourceTree = "<group>"; };
 		109E51EB1699FDF5002425B5 /* SSFacebookAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookAuth.m; sourceTree = "<group>"; };
 		109E51ED1699FE1B002425B5 /* SSFiringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringView.h; sourceTree = "<group>"; };
@@ -110,6 +95,10 @@
 		10D01EE2169643D400F319F0 /* SSPreferenceManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPreferenceManagerTests.h; sourceTree = "<group>"; };
 		10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManagerTests.m; sourceTree = "<group>"; };
 		10F35D9B169E09BB00A42045 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		10F35DA2169E173500A42045 /* SSMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSMainViewController.h; sourceTree = "<group>"; };
+		10F35DA3169E173500A42045 /* SSMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMainViewController.m; sourceTree = "<group>"; };
+		10F35DA4169E173500A42045 /* SSMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSMainViewController.xib; sourceTree = "<group>"; };
+		10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpartanMissileStrike.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +189,10 @@
 				109E51F71699FE88002425B5 /* SSLocationManager.m */,
 				109E51F91699FEBA002425B5 /* SSMotionManager.h */,
 				109E51FA1699FEBA002425B5 /* SSMotionManager.m */,
+				10F35DA2169E173500A42045 /* SSMainViewController.h */,
+				10F35DA3169E173500A42045 /* SSMainViewController.m */,
+				10F35DA4169E173500A42045 /* SSMainViewController.xib */,
+				10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */,
 			);
 			path = SpartanMissileStrike;
 			sourceTree = "<group>";
@@ -225,18 +218,6 @@
 				10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */,
 				108FC6CD169641C8001BABBE /* SpartanMissileStrikeTests.h */,
 				108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */,
-				109E51D41699FBE9002425B5 /* SSFacebookAuth.h */,
-				109E51D51699FBE9002425B5 /* SSFacebookAuth.m */,
-				109E51D81699FC05002425B5 /* SSFiringView.h */,
-				109E51D91699FC05002425B5 /* SSFiringView.m */,
-				109E51DB1699FC8B002425B5 /* SSNativeBridge.h */,
-				109E51DC1699FC8B002425B5 /* SSNativeBridge.m */,
-				109E51DE1699FCA0002425B5 /* SSSplashScreen.h */,
-				109E51DF1699FCA0002425B5 /* SSSplashScreen.m */,
-				109E51E11699FCBA002425B5 /* SSLocationManager.h */,
-				109E51E21699FCBA002425B5 /* SSLocationManager.m */,
-				109E51E71699FD1E002425B5 /* SSMotionManager.h */,
-				109E51E81699FD1E002425B5 /* SSMotionManager.m */,
 			);
 			path = SpartanMissileStrikeTests;
 			sourceTree = "<group>";
@@ -326,6 +307,8 @@
 				10155167169BD7840010A8D6 /* Default.png in Resources */,
 				10852433169E009300EE241C /* shared in Resources */,
 				10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */,
+				10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */,
+				10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +353,7 @@
 				109E51F81699FE88002425B5 /* SSLocationManager.m in Sources */,
 				109E51FB1699FEBA002425B5 /* SSMotionManager.m in Sources */,
 				10A44A0C169DF05D0043FE99 /* SSPreferenceManager.m in Sources */,
+				10F35DA5169E173500A42045 /* SSMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,12 +364,6 @@
 				108FC6CF169641C8001BABBE /* SpartanMissileStrikeTests.m in Sources */,
 				10D01EE4169643D400F319F0 /* SSPreferenceManagerTests.m in Sources */,
 				103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */,
-				109E51D61699FBE9002425B5 /* SSFacebookAuth.m in Sources */,
-				109E51DA1699FC05002425B5 /* SSFiringView.m in Sources */,
-				109E51DD1699FC8B002425B5 /* SSNativeBridge.m in Sources */,
-				109E51E01699FCA0002425B5 /* SSSplashScreen.m in Sources */,
-				109E51E31699FCBA002425B5 /* SSLocationManager.m in Sources */,
-				109E51E91699FD1E002425B5 /* SSMotionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
