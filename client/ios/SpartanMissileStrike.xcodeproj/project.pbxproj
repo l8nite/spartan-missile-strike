@@ -8,18 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		10155167169BD7840010A8D6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
-		10155169169BD79D0010A8D6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155168169BD79D0010A8D6 /* Default@2x.png */; };
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
+		10852433169E009300EE241C /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 10852432169E009300EE241C /* shared */; };
 		108FC6A4169641C8001BABBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A3169641C8001BABBE /* UIKit.framework */; };
 		108FC6A6169641C8001BABBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A5169641C8001BABBE /* Foundation.framework */; };
 		108FC6A8169641C8001BABBE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A7169641C8001BABBE /* CoreGraphics.framework */; };
 		108FC6AE169641C8001BABBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 108FC6AC169641C8001BABBE /* InfoPlist.strings */; };
 		108FC6B0169641C8001BABBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FC6AF169641C8001BABBE /* main.m */; };
 		108FC6B4169641C8001BABBE /* SSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FC6B3169641C8001BABBE /* SSAppDelegate.m */; };
-		108FC6B6169641C8001BABBE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 108FC6B5169641C8001BABBE /* Default.png */; };
-		108FC6B8169641C8001BABBE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 108FC6B7169641C8001BABBE /* Default@2x.png */; };
-		108FC6BA169641C8001BABBE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 108FC6B9169641C8001BABBE /* Default-568h@2x.png */; };
 		108FC6C2169641C8001BABBE /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6C1169641C8001BABBE /* SenTestingKit.framework */; };
 		108FC6C3169641C8001BABBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A3169641C8001BABBE /* UIKit.framework */; };
 		108FC6C4169641C8001BABBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A5169641C8001BABBE /* Foundation.framework */; };
@@ -62,6 +59,7 @@
 		103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManagerTests.m; sourceTree = "<group>"; };
 		103DE30616964EC300ED92B4 /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
 		103DE30716964EC300ED92B4 /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
+		10852432169E009300EE241C /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../shared; sourceTree = "<group>"; };
 		108FC69F169641C8001BABBE /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		108FC6A3169641C8001BABBE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		108FC6A5169641C8001BABBE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -72,9 +70,6 @@
 		108FC6B1169641C8001BABBE /* SpartanMissileStrike-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpartanMissileStrike-Prefix.pch"; sourceTree = "<group>"; };
 		108FC6B2169641C8001BABBE /* SSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAppDelegate.h; sourceTree = "<group>"; };
 		108FC6B3169641C8001BABBE /* SSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSAppDelegate.m; sourceTree = "<group>"; };
-		108FC6B5169641C8001BABBE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		108FC6B7169641C8001BABBE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		108FC6B9169641C8001BABBE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		108FC6C0169641C8001BABBE /* SpartanMissileStrikeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpartanMissileStrikeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		108FC6C1169641C8001BABBE /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		108FC6C9169641C8001BABBE /* SpartanMissileStrikeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpartanMissileStrikeTests-Info.plist"; sourceTree = "<group>"; };
@@ -182,9 +177,12 @@
 		108FC6A9169641C8001BABBE /* SpartanMissileStrike */ = {
 			isa = PBXGroup;
 			children = (
+				10852432169E009300EE241C /* shared */,
 				108FC6AA169641C8001BABBE /* Supporting Files */,
 				103DE30616964EC300ED92B4 /* SSAudioManager.h */,
 				103DE30716964EC300ED92B4 /* SSAudioManager.m */,
+				10A44A0A169DF05D0043FE99 /* SSPreferenceManager.h */,
+				10A44A0B169DF05D0043FE99 /* SSPreferenceManager.m */,
 				108FC6B2169641C8001BABBE /* SSAppDelegate.h */,
 				108FC6B3169641C8001BABBE /* SSAppDelegate.m */,
 				109E51EA1699FDF5002425B5 /* SSFacebookAuth.h */,
@@ -210,11 +208,6 @@
 				108FC6AC169641C8001BABBE /* InfoPlist.strings */,
 				108FC6AF169641C8001BABBE /* main.m */,
 				108FC6B1169641C8001BABBE /* SpartanMissileStrike-Prefix.pch */,
-				108FC6B5169641C8001BABBE /* Default.png */,
-				108FC6B7169641C8001BABBE /* Default@2x.png */,
-				108FC6B9169641C8001BABBE /* Default-568h@2x.png */,
-				10A44A0A169DF05D0043FE99 /* SSPreferenceManager.h */,
-				10A44A0B169DF05D0043FE99 /* SSPreferenceManager.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -327,11 +320,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				108FC6AE169641C8001BABBE /* InfoPlist.strings in Resources */,
-				108FC6B6169641C8001BABBE /* Default.png in Resources */,
-				108FC6B8169641C8001BABBE /* Default@2x.png in Resources */,
-				108FC6BA169641C8001BABBE /* Default-568h@2x.png in Resources */,
 				10155167169BD7840010A8D6 /* Default.png in Resources */,
-				10155169169BD79D0010A8D6 /* Default@2x.png in Resources */,
+				10852433169E009300EE241C /* shared in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
