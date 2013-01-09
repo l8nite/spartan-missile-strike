@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
  
 
-@interface SSFacebookAuth : UIView
+@interface SSFacebookAuth : NSObject
 
 @end
