@@ -36,8 +36,14 @@
     SSAudioManager* sa1 = [[SSAudioManager alloc] init];
     NSString* actual = [sa1 pathForSoundIdentifier:@"HELICOPTER"];
     NSString* expected =[[NSBundle mainBundle] pathForResource:@"helicopter" ofType:@"mp3"];
-    STAssertEqualObjects(expected, actual, @"path for sound works");
-
+    STAssertEqualObjects(expected, actual, @"Testing helicopter vaild identifier");
+    
+    //if something other than identifier
+    NSString* actual2 = [sa1 pathForSoundIdentifier:@"FOOBAR"];
+    STAssertEqualObjects(nil, actual2, @"Testing invaild identifier");
+    
+     
 }
+ 
 
 @end
