@@ -40,6 +40,7 @@
 		10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */; };
 		10F35DB2169F4A2900A42045 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB1169F4A2900A42045 /* QuartzCore.framework */; };
 		10F35DB4169F4A3100A42045 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB3169F4A3100A42045 /* OpenGLES.framework */; };
+		10F35E08169F527B00A42045 /* helicopter.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 10F35E07169F527B00A42045 /* helicopter.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpartanMissileStrike.xib; sourceTree = "<group>"; };
 		10F35DB1169F4A2900A42045 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		10F35DB3169F4A3100A42045 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		10F35E07169F527B00A42045 /* helicopter.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = helicopter.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 		108FC6AA169641C8001BABBE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				10F35E07169F527B00A42045 /* helicopter.m4a */,
 				108FC6AB169641C8001BABBE /* SpartanMissileStrike-Info.plist */,
 				108FC6AC169641C8001BABBE /* InfoPlist.strings */,
 				108FC6AF169641C8001BABBE /* main.m */,
@@ -317,6 +320,7 @@
 				10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */,
 				10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */,
 				10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */,
+				10F35E08169F527B00A42045 /* helicopter.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
