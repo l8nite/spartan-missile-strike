@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface SSMainViewController : UIViewController
-- (IBAction)ButtonPressed:(id)sender;
+{
+    
+}
+-(IBAction) boom;
 
 @end
