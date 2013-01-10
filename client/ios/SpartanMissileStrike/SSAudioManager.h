@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface SSAudioManager : NSObject <AVAudioPlayerDelegate>
 {
@@ -17,6 +18,7 @@
 
 -(NSString*)pathForSoundIdentifier:(NSString*)identifier;
 -(void)playSound:(NSString*)identifier;
+
 
 
 @end
