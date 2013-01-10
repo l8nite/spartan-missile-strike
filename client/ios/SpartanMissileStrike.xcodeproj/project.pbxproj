@@ -38,6 +38,8 @@
 		10F35DA5169E173500A42045 /* SSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F35DA3169E173500A42045 /* SSMainViewController.m */; };
 		10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F35DA4169E173500A42045 /* SSMainViewController.xib */; };
 		10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */; };
+		10F35DB2169F4A2900A42045 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB1169F4A2900A42045 /* QuartzCore.framework */; };
+		10F35DB4169F4A3100A42045 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB3169F4A3100A42045 /* OpenGLES.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,8 @@
 		10F35DA3169E173500A42045 /* SSMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMainViewController.m; sourceTree = "<group>"; };
 		10F35DA4169E173500A42045 /* SSMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSMainViewController.xib; sourceTree = "<group>"; };
 		10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpartanMissileStrike.xib; sourceTree = "<group>"; };
+		10F35DB1169F4A2900A42045 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		10F35DB3169F4A3100A42045 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,12 +110,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				108FC6A6169641C8001BABBE /* Foundation.framework in Frameworks */,
+				108FC6A4169641C8001BABBE /* UIKit.framework in Frameworks */,
+				10F35DB4169F4A3100A42045 /* OpenGLES.framework in Frameworks */,
+				10F35DB2169F4A2900A42045 /* QuartzCore.framework in Frameworks */,
+				109E520F169A02B0002425B5 /* AVFoundation.framework in Frameworks */,
 				109E5215169A0325002425B5 /* AudioToolbox.framework in Frameworks */,
 				109E5213169A02D1002425B5 /* CoreMotion.framework in Frameworks */,
 				109E5211169A02C1002425B5 /* CoreLocation.framework in Frameworks */,
-				109E520F169A02B0002425B5 /* AVFoundation.framework in Frameworks */,
-				108FC6A4169641C8001BABBE /* UIKit.framework in Frameworks */,
-				108FC6A6169641C8001BABBE /* Foundation.framework in Frameworks */,
 				108FC6A8169641C8001BABBE /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,6 +160,8 @@
 		108FC6A2169641C8001BABBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10F35DB3169F4A3100A42045 /* OpenGLES.framework */,
+				10F35DB1169F4A2900A42045 /* QuartzCore.framework */,
 				109E5214169A0325002425B5 /* AudioToolbox.framework */,
 				109E5212169A02D1002425B5 /* CoreMotion.framework */,
 				109E5210169A02C1002425B5 /* CoreLocation.framework */,
