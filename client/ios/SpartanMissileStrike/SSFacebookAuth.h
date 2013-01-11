@@ -11,4 +11,9 @@
 
 @interface SSFacebookAuth : NSObject
 
+
+
+/**
+ http://thinkdiff.net/facebook/how-to-develop-facebook-application-for-iphone/
+*/
 @end
