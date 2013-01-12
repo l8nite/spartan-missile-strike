@@ -15,17 +15,17 @@
 
 @implementation SSMainViewController
 
--(IBAction)boom;
-{
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef soundFileURLRef;
-    soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef) @"helicopter", CFSTR ("m4a"), NULL);
-    
-    //telling it to play over the system sound 
-    UInt32 soundID;
-    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundID);
-    AudioServicesPlaySystemSound(soundID);
-}
+//-(IBAction)boom;
+//{
+//    CFBundleRef mainBundle = CFBundleGetMainBundle();
+//    CFURLRef soundFileURLRef;
+//    soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef) @"helicopter", CFSTR ("m4a"), NULL);
+//    
+//    //telling it to play over the system sound 
+//    UInt32 soundID;
+//    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundID);
+//    AudioServicesPlaySystemSound(soundID);
+//}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
