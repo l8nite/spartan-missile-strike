@@ -15,5 +15,10 @@
 
 /**
  http://thinkdiff.net/facebook/how-to-develop-facebook-application-for-iphone/
+ 
+ https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/3.1/
+ 
+ 
+ https://developers.facebook.com/docs/tutorials/ios-sdk-tutorial/
 */
 @end
