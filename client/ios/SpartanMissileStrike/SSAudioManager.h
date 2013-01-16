@@ -13,7 +13,7 @@
 
 @interface SSAudioManager : NSObject <AVAudioPlayerDelegate>
 {
-    
+    AVAudioPlayer* player;
 }
 
 -(NSString*)pathForSoundIdentifier:(NSString*)identifier;
