@@ -13,11 +13,9 @@
 
 @interface SSAudioManager : NSObject <AVAudioPlayerDelegate>
 {
-    AVAudioPlayer* player;
-    NSDictionary* sounds;
+    NSMutableDictionary* playerForSound;
+    NSDictionary* filenameForSound;
 }
-
--(NSString*)pathForSoundIdentifier:(NSString*)identifier;
 -(void)playSound:(NSString*)identifier;
 
 

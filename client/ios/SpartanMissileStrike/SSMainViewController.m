@@ -34,7 +34,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     sa1 = [[SSAudioManager alloc]init];
-    [sa1 playSound:@"HELICOPTER"];
+    [sa1 playSound:@"MODERATO"];
 }
 
 @end
