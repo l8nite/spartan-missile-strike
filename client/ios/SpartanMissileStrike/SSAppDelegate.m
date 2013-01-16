@@ -18,12 +18,14 @@
   
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+   
     // Override point for customization after application launch.
     SSMainViewController* mainViewController= [[SSMainViewController alloc] init];
    [self.window addSubview:mainViewController.view];
     
     self.window.rootViewController = mainViewController;
-      
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
@@ -31,7 +33,7 @@
    
  
     
-    return YES;
+   return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

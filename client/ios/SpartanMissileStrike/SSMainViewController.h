@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AudioToolbox/AudioToolbox.h>
-
+#import "SSAudioManager.h"
 @interface SSMainViewController : UIViewController
 {
-    
+    SSAudioManager* sa1;
 }
--(IBAction) boom;
+ 
 
 @end

@@ -8,24 +8,8 @@
 
 #import "SSMainViewController.h"
 #import "SSAudioManager.h"
-
-@interface SSMainViewController ()
-
-@end
-
-@implementation SSMainViewController
-
-//-(IBAction)boom;
-//{
-//    CFBundleRef mainBundle = CFBundleGetMainBundle();
-//    CFURLRef soundFileURLRef;
-//    soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef) @"helicopter", CFSTR ("m4a"), NULL);
-//    
-//    //telling it to play over the system sound 
-//    UInt32 soundID;
-//    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundID);
-//    AudioServicesPlaySystemSound(soundID);
-//}
+ 
+@implementation SSMainViewController 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +21,7 @@
 }
 
 - (void)viewDidLoad
-{
+{    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
@@ -47,11 +31,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (IBAction)ButtonPressed:(id)sender {
-    SSAudioManager* sa1 = [[SSAudioManager alloc]init];
+-(void)viewDidAppear:(BOOL)animated
+{
+    sa1 = [[SSAudioManager alloc]init];
     [sa1 playSound:@"HELICOPTER"];
-      
-    
 }
+
 @end
