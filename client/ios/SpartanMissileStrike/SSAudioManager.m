@@ -14,32 +14,29 @@
 -(id)init{
     self = [super init];
     
-    sounds = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource: @"sounds" ofType: @"plist"] ];
-    return self;
-}
-
-
--(NSString*)pathForSoundIdentifier:(NSString*)identifier
-{
+    filenameForSound = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource: @"sounds" ofType: @"plist"] ];
+    playerForSound = [[NSMutableDictionary alloc] init];
     
-    NSString* path = nil;
- 
-    if ([identifier compare:@"HELICOPTER"] == NSOrderedSame)
+    for (NSString* key in filenameForSound)
     {
-        path =  [[NSBundle mainBundle] pathForResource:@"helicopter" ofType: @"m4a"];
+        NSURL* url = [[NSBundle mainBundle] URLForResource: [filenameForSound objectForKey:key]  withExtension:@"mp3"];
+        AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+        [playerForSound setObject:player forKey:key];
+        
     }
-
-    return path;
+    return self;
 }
 
 -(void)playSound:(NSString*)identifier
 {
+    // get the nsobject pointer from playerforsound dictionary
+    NSObject* obj1 = [playerForSound objectForKey:identifier];
+    // cast the nsobject pointer to an avudioplayer pointer
+    AVAudioPlayer* av1= (AVAudioPlayer*)obj1;
+     //play
+    [av1 play]; 
     
-    NSURL* url = [NSURL fileURLWithPath:[self pathForSoundIdentifier:identifier]];
-     player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
-        player.numberOfLoops=-1;
-       [player play];
-
+    
 }
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
