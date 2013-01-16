@@ -16,6 +16,7 @@
     return self;
 }
 
+
 -(NSString*)pathForSoundIdentifier:(NSString*)identifier
 {
     NSString* path = nil;
@@ -30,24 +31,9 @@
 
 -(void)playSound:(NSString*)identifier
 {
-//    //get the path from the helper
-//    NSString* path =[self pathForSoundIdentifier:identifier];
-//    if (path == nil)
-//    {
-//        return ;
-//    }
-//    
-//     
-//    //play the sound
-//    NSURL* url = [NSURL fileURLWithPath:path];
-//    NSError* err;
-//    AVAudioPlayer* player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&err];
-//    player.numberOfLoops=-1;
-//    [player play];
     
-    
-    NSURL* url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/helicopter.mp3" , [[NSBundle mainBundle] resourcePath]]];
-    AVAudioPlayer* player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
+    NSURL* url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Moderato.mp3" , [[NSBundle mainBundle] resourcePath]]];
+     player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
         player.numberOfLoops=-1;
        [player play];
 
