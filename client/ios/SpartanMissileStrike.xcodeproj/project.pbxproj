@@ -10,6 +10,7 @@
 		10155167169BD7840010A8D6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
+		10594FE716A6383400E41072 /* Moderato.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10594FE616A6383400E41072 /* Moderato.mp3 */; };
 		10852433169E009300EE241C /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 10852432169E009300EE241C /* shared */; };
 		108FC6A4169641C8001BABBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A3169641C8001BABBE /* UIKit.framework */; };
 		108FC6A6169641C8001BABBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A5169641C8001BABBE /* Foundation.framework */; };
@@ -22,6 +23,12 @@
 		108FC6C4169641C8001BABBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A5169641C8001BABBE /* Foundation.framework */; };
 		108FC6CC169641C8001BABBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 108FC6CA169641C8001BABBE /* InfoPlist.strings */; };
 		108FC6CF169641C8001BABBE /* SpartanMissileStrikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */; };
+		1092784C16A0900C007FEF8B /* SSFacebookAuthTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1092784B16A0900C007FEF8B /* SSFacebookAuthTests.m */; };
+		1092784F16A091B3007FEF8B /* SSFiringViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1092784E16A091B3007FEF8B /* SSFiringViewTests.m */; };
+		1092785216A091E3007FEF8B /* SSNativeBridgeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1092785116A091E3007FEF8B /* SSNativeBridgeTests.m */; };
+		1092785516A09278007FEF8B /* SSSplashScreenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1092785416A09278007FEF8B /* SSSplashScreenTests.m */; };
+		1092785816A09291007FEF8B /* SSLocationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1092785716A09291007FEF8B /* SSLocationManagerTests.m */; };
+		1092785B16A092B6007FEF8B /* SSMotionManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1092785A16A092B6007FEF8B /* SSMotionManagerTests.m */; };
 		109E51EC1699FDF5002425B5 /* SSFacebookAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51EB1699FDF5002425B5 /* SSFacebookAuth.m */; };
 		109E51EF1699FE1B002425B5 /* SSFiringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51EE1699FE1B002425B5 /* SSFiringView.m */; };
 		109E51F21699FE3F002425B5 /* SSNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51F11699FE3F002425B5 /* SSNativeBridge.m */; };
@@ -60,6 +67,7 @@
 		103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManagerTests.m; sourceTree = "<group>"; };
 		103DE30616964EC300ED92B4 /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
 		103DE30716964EC300ED92B4 /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
+		10594FE616A6383400E41072 /* Moderato.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Moderato.mp3; sourceTree = "<group>"; };
 		10852432169E009300EE241C /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../shared; sourceTree = "<group>"; };
 		108FC69F169641C8001BABBE /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		108FC6A3169641C8001BABBE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -77,6 +85,18 @@
 		108FC6CB169641C8001BABBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		108FC6CD169641C8001BABBE /* SpartanMissileStrikeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpartanMissileStrikeTests.h; sourceTree = "<group>"; };
 		108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpartanMissileStrikeTests.m; sourceTree = "<group>"; };
+		1092784A16A0900C007FEF8B /* SSFacebookAuthTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookAuthTests.h; sourceTree = "<group>"; };
+		1092784B16A0900C007FEF8B /* SSFacebookAuthTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookAuthTests.m; sourceTree = "<group>"; };
+		1092784D16A091B3007FEF8B /* SSFiringViewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringViewTests.h; sourceTree = "<group>"; };
+		1092784E16A091B3007FEF8B /* SSFiringViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFiringViewTests.m; sourceTree = "<group>"; };
+		1092785016A091E3007FEF8B /* SSNativeBridgeTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNativeBridgeTests.h; sourceTree = "<group>"; };
+		1092785116A091E3007FEF8B /* SSNativeBridgeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNativeBridgeTests.m; sourceTree = "<group>"; };
+		1092785316A09278007FEF8B /* SSSplashScreenTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSplashScreenTests.h; sourceTree = "<group>"; };
+		1092785416A09278007FEF8B /* SSSplashScreenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSplashScreenTests.m; sourceTree = "<group>"; };
+		1092785616A09291007FEF8B /* SSLocationManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLocationManagerTests.h; sourceTree = "<group>"; };
+		1092785716A09291007FEF8B /* SSLocationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManagerTests.m; sourceTree = "<group>"; };
+		1092785916A092B6007FEF8B /* SSMotionManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSMotionManagerTests.h; sourceTree = "<group>"; };
+		1092785A16A092B6007FEF8B /* SSMotionManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMotionManagerTests.m; sourceTree = "<group>"; };
 		109E51EA1699FDF5002425B5 /* SSFacebookAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookAuth.h; sourceTree = "<group>"; };
 		109E51EB1699FDF5002425B5 /* SSFacebookAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookAuth.m; sourceTree = "<group>"; };
 		109E51ED1699FE1B002425B5 /* SSFiringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringView.h; sourceTree = "<group>"; };
@@ -210,6 +230,7 @@
 		108FC6AA169641C8001BABBE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				10594FE616A6383400E41072 /* Moderato.mp3 */,
 				10F35E07169F527B00A42045 /* helicopter.m4a */,
 				108FC6AB169641C8001BABBE /* SpartanMissileStrike-Info.plist */,
 				108FC6AC169641C8001BABBE /* InfoPlist.strings */,
@@ -229,6 +250,18 @@
 				10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */,
 				108FC6CD169641C8001BABBE /* SpartanMissileStrikeTests.h */,
 				108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */,
+				1092784A16A0900C007FEF8B /* SSFacebookAuthTests.h */,
+				1092784B16A0900C007FEF8B /* SSFacebookAuthTests.m */,
+				1092784D16A091B3007FEF8B /* SSFiringViewTests.h */,
+				1092784E16A091B3007FEF8B /* SSFiringViewTests.m */,
+				1092785016A091E3007FEF8B /* SSNativeBridgeTests.h */,
+				1092785116A091E3007FEF8B /* SSNativeBridgeTests.m */,
+				1092785316A09278007FEF8B /* SSSplashScreenTests.h */,
+				1092785416A09278007FEF8B /* SSSplashScreenTests.m */,
+				1092785616A09291007FEF8B /* SSLocationManagerTests.h */,
+				1092785716A09291007FEF8B /* SSLocationManagerTests.m */,
+				1092785916A092B6007FEF8B /* SSMotionManagerTests.h */,
+				1092785A16A092B6007FEF8B /* SSMotionManagerTests.m */,
 			);
 			path = SpartanMissileStrikeTests;
 			sourceTree = "<group>";
@@ -321,6 +354,7 @@
 				10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */,
 				10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */,
 				10F35E08169F527B00A42045 /* helicopter.m4a in Resources */,
+				10594FE716A6383400E41072 /* Moderato.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +410,12 @@
 				108FC6CF169641C8001BABBE /* SpartanMissileStrikeTests.m in Sources */,
 				10D01EE4169643D400F319F0 /* SSPreferenceManagerTests.m in Sources */,
 				103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */,
+				1092784C16A0900C007FEF8B /* SSFacebookAuthTests.m in Sources */,
+				1092784F16A091B3007FEF8B /* SSFiringViewTests.m in Sources */,
+				1092785216A091E3007FEF8B /* SSNativeBridgeTests.m in Sources */,
+				1092785516A09278007FEF8B /* SSSplashScreenTests.m in Sources */,
+				1092785816A09291007FEF8B /* SSLocationManagerTests.m in Sources */,
+				1092785B16A092B6007FEF8B /* SSMotionManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
