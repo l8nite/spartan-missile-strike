@@ -11,6 +11,7 @@
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
 		10594FE716A6383400E41072 /* Moderato.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10594FE616A6383400E41072 /* Moderato.mp3 */; };
+		10594FEA16A6426900E41072 /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10594FE916A6426900E41072 /* sounds.plist */; };
 		10852433169E009300EE241C /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 10852432169E009300EE241C /* shared */; };
 		108FC6A4169641C8001BABBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A3169641C8001BABBE /* UIKit.framework */; };
 		108FC6A6169641C8001BABBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A5169641C8001BABBE /* Foundation.framework */; };
@@ -68,6 +69,7 @@
 		103DE30616964EC300ED92B4 /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
 		103DE30716964EC300ED92B4 /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
 		10594FE616A6383400E41072 /* Moderato.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Moderato.mp3; sourceTree = "<group>"; };
+		10594FE916A6426900E41072 /* sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sounds.plist; sourceTree = "<group>"; };
 		10852432169E009300EE241C /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../shared; sourceTree = "<group>"; };
 		108FC69F169641C8001BABBE /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		108FC6A3169641C8001BABBE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -233,6 +235,7 @@
 				10594FE616A6383400E41072 /* Moderato.mp3 */,
 				10F35E07169F527B00A42045 /* helicopter.m4a */,
 				108FC6AB169641C8001BABBE /* SpartanMissileStrike-Info.plist */,
+				10594FE916A6426900E41072 /* sounds.plist */,
 				108FC6AC169641C8001BABBE /* InfoPlist.strings */,
 				108FC6AF169641C8001BABBE /* main.m */,
 				108FC6B1169641C8001BABBE /* SpartanMissileStrike-Prefix.pch */,
@@ -355,6 +358,7 @@
 				10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */,
 				10F35E08169F527B00A42045 /* helicopter.m4a in Resources */,
 				10594FE716A6383400E41072 /* Moderato.mp3 in Resources */,
+				10594FEA16A6426900E41072 /* sounds.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
