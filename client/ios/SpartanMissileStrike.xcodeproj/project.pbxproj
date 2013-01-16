@@ -10,7 +10,6 @@
 		10155167169BD7840010A8D6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
-		10594FE716A6383400E41072 /* Moderato.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 10594FE616A6383400E41072 /* Moderato.mp3 */; };
 		10594FEA16A6426900E41072 /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10594FE916A6426900E41072 /* sounds.plist */; };
 		10852433169E009300EE241C /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 10852432169E009300EE241C /* shared */; };
 		108FC6A4169641C8001BABBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A3169641C8001BABBE /* UIKit.framework */; };
@@ -48,7 +47,6 @@
 		10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */; };
 		10F35DB2169F4A2900A42045 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB1169F4A2900A42045 /* QuartzCore.framework */; };
 		10F35DB4169F4A3100A42045 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB3169F4A3100A42045 /* OpenGLES.framework */; };
-		10F35E08169F527B00A42045 /* helicopter.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 10F35E07169F527B00A42045 /* helicopter.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +66,6 @@
 		103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManagerTests.m; sourceTree = "<group>"; };
 		103DE30616964EC300ED92B4 /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
 		103DE30716964EC300ED92B4 /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
-		10594FE616A6383400E41072 /* Moderato.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Moderato.mp3; sourceTree = "<group>"; };
 		10594FE916A6426900E41072 /* sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sounds.plist; sourceTree = "<group>"; };
 		10852432169E009300EE241C /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../shared; sourceTree = "<group>"; };
 		108FC69F169641C8001BABBE /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +123,6 @@
 		10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpartanMissileStrike.xib; sourceTree = "<group>"; };
 		10F35DB1169F4A2900A42045 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		10F35DB3169F4A3100A42045 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		10F35E07169F527B00A42045 /* helicopter.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = helicopter.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,8 +228,6 @@
 		108FC6AA169641C8001BABBE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				10594FE616A6383400E41072 /* Moderato.mp3 */,
-				10F35E07169F527B00A42045 /* helicopter.m4a */,
 				108FC6AB169641C8001BABBE /* SpartanMissileStrike-Info.plist */,
 				10594FE916A6426900E41072 /* sounds.plist */,
 				108FC6AC169641C8001BABBE /* InfoPlist.strings */,
@@ -356,8 +350,6 @@
 				10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */,
 				10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */,
 				10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */,
-				10F35E08169F527B00A42045 /* helicopter.m4a in Resources */,
-				10594FE716A6383400E41072 /* Moderato.mp3 in Resources */,
 				10594FEA16A6426900E41072 /* sounds.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
