@@ -11,6 +11,7 @@ var startAPIServer = function () {
         version: '0.0.1',
     });
 
+    server.use(restify.bodyParser());
     server.use(restify.queryParser());
 
     routes.install(server);

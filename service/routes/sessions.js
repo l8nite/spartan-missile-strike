@@ -4,7 +4,13 @@ var install = function (server) {
 };
 
 var createSession = function(req, res, next) {
-    res.send(201, 'created session');
+    if (req.params.facebook !== undefined) {
+        // match facebook access token against uid?
+        res.send(201, 'created session');
+    }
+    else {
+        res.send(400, 'missing facebook parameter');
+    }
     return next();
 };
 
