@@ -31,25 +31,25 @@
     
 }
 
--(void)testPathForSoundIdentifier
-{
-    SSAudioManager* sa1 = [[SSAudioManager alloc] init];
-    NSString* actual = [sa1 pathForSoundIdentifier:@"HELICOPTER"];
-    NSString* expected =[[NSBundle mainBundle] pathForResource:@"helicopter" ofType:@"mp3"];
-    STAssertEqualObjects(expected, actual, @"Testing helicopter vaild identifier");
-    
-    //if something other than identifier
-    NSString* actual2 = [sa1 pathForSoundIdentifier:@"FOOBAR"];
-    STAssertEqualObjects(nil, actual2, @"Testing invaild identifier");
-    
-}
-
 -(void)testPlaySound
 {
-   //TODO
-//    SSAudioManager* sa1 = [[SSAudioManager alloc] init];
-//    [sa1 playSound:@"HELICOPTER"];
+  
+    SSAudioManager* sa1 = [[SSAudioManager alloc] init];
+    [sa1 playSound:@"Moderato"];
+    
+    //mock avaudio player
+    AVAudioPlayer* pl1;
+    STAssertEqualObjects(sa1, @"Moderato.mp3", @"playing Moderato");
  
+}
+
+-(void)testSSAudioManagerMocked
+{
+    // injection code goes here
+    
+    SSAudioManager* am;
+   // SSAudioManager.play;
+  //  STAssertEquals(ourMock, wasPlayed, @"Success");
 }
  
 
