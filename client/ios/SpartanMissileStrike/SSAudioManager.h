@@ -11,7 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface SSAudioManager : NSObject <AVAudioPlayerDelegate>
+@interface SSAudioManager : NSObject
 {
     NSMutableDictionary* playerForSound;
     NSDictionary* filenameForSound;
@@ -22,3 +22,4 @@
 
 
 @end
+
