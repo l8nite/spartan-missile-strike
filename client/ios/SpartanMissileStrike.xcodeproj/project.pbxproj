@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1014E9D816AB36EA00FDBE4F /* SSAudioManagerMocked.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014E9D716AB36EA00FDBE4F /* SSAudioManagerMocked.m */; };
 		10155167169BD7840010A8D6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1014E9D616AB36EA00FDBE4F /* SSAudioManagerMocked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManagerMocked.h; sourceTree = "<group>"; };
+		1014E9D716AB36EA00FDBE4F /* SSAudioManagerMocked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManagerMocked.m; sourceTree = "<group>"; };
 		10155166169BD7840010A8D6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		10155168169BD79D0010A8D6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		103DE30216964DF300ED92B4 /* SSAudioManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManagerTests.h; sourceTree = "<group>"; };
@@ -243,6 +246,8 @@
 				108FC6C8169641C8001BABBE /* Supporting Files */,
 				103DE30216964DF300ED92B4 /* SSAudioManagerTests.h */,
 				103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */,
+				1014E9D616AB36EA00FDBE4F /* SSAudioManagerMocked.h */,
+				1014E9D716AB36EA00FDBE4F /* SSAudioManagerMocked.m */,
 				10D01EE2169643D400F319F0 /* SSPreferenceManagerTests.h */,
 				10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */,
 				108FC6CD169641C8001BABBE /* SpartanMissileStrikeTests.h */,
@@ -412,6 +417,7 @@
 				1092785516A09278007FEF8B /* SSSplashScreenTests.m in Sources */,
 				1092785816A09291007FEF8B /* SSLocationManagerTests.m in Sources */,
 				1092785B16A092B6007FEF8B /* SSMotionManagerTests.m in Sources */,
+				1014E9D816AB36EA00FDBE4F /* SSAudioManagerMocked.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
