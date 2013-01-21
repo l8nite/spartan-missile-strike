@@ -15,10 +15,10 @@
 {
     NSMutableDictionary* playerForSound;
     NSDictionary* filenameForSound;
+    
 }
 -(void)playSound:(NSString*)identifier;
-
-
+-(AVAudioPlayer*)createAVAudioPlayer;
 
 
 @end
