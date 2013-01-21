@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1014E9D816AB36EA00FDBE4F /* SSAudioManagerMocked.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014E9D716AB36EA00FDBE4F /* SSAudioManagerMocked.m */; };
 		10155167169BD7840010A8D6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
 		10594FEA16A6426900E41072 /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10594FE916A6426900E41072 /* sounds.plist */; };
+		1080A10316ADBDFF00C836E3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E520E169A02B0002425B5 /* AVFoundation.framework */; };
+		1080A10616ADCC2700C836E3 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1080A10516ADCC2700C836E3 /* libOCMock.a */; };
 		10852433169E009300EE241C /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 10852432169E009300EE241C /* shared */; };
 		108FC6A4169641C8001BABBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A3169641C8001BABBE /* UIKit.framework */; };
 		108FC6A6169641C8001BABBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 108FC6A5169641C8001BABBE /* Foundation.framework */; };
@@ -61,8 +62,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1014E9D616AB36EA00FDBE4F /* SSAudioManagerMocked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManagerMocked.h; sourceTree = "<group>"; };
-		1014E9D716AB36EA00FDBE4F /* SSAudioManagerMocked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManagerMocked.m; sourceTree = "<group>"; };
 		10155166169BD7840010A8D6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		10155168169BD79D0010A8D6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		103DE30216964DF300ED92B4 /* SSAudioManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManagerTests.h; sourceTree = "<group>"; };
@@ -70,6 +69,7 @@
 		103DE30616964EC300ED92B4 /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
 		103DE30716964EC300ED92B4 /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
 		10594FE916A6426900E41072 /* sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sounds.plist; sourceTree = "<group>"; };
+		1080A10516ADCC2700C836E3 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = usr/lib/libOCMock.a; sourceTree = "<group>"; };
 		10852432169E009300EE241C /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../shared; sourceTree = "<group>"; };
 		108FC69F169641C8001BABBE /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		108FC6A3169641C8001BABBE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -149,6 +149,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1080A10616ADCC2700C836E3 /* libOCMock.a in Frameworks */,
+				1080A10316ADBDFF00C836E3 /* AVFoundation.framework in Frameworks */,
 				108FC6C2169641C8001BABBE /* SenTestingKit.framework in Frameworks */,
 				108FC6C3169641C8001BABBE /* UIKit.framework in Frameworks */,
 				108FC6C4169641C8001BABBE /* Foundation.framework in Frameworks */,
@@ -161,6 +163,7 @@
 		108FC694169641C8001BABBE = {
 			isa = PBXGroup;
 			children = (
+				1080A10516ADCC2700C836E3 /* libOCMock.a */,
 				10F35D9B169E09BB00A42045 /* Default-568h@2x.png */,
 				10155168169BD79D0010A8D6 /* Default@2x.png */,
 				10155166169BD7840010A8D6 /* Default.png */,
@@ -246,8 +249,6 @@
 				108FC6C8169641C8001BABBE /* Supporting Files */,
 				103DE30216964DF300ED92B4 /* SSAudioManagerTests.h */,
 				103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */,
-				1014E9D616AB36EA00FDBE4F /* SSAudioManagerMocked.h */,
-				1014E9D716AB36EA00FDBE4F /* SSAudioManagerMocked.m */,
 				10D01EE2169643D400F319F0 /* SSPreferenceManagerTests.h */,
 				10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */,
 				108FC6CD169641C8001BABBE /* SpartanMissileStrikeTests.h */,
@@ -417,7 +418,6 @@
 				1092785516A09278007FEF8B /* SSSplashScreenTests.m in Sources */,
 				1092785816A09291007FEF8B /* SSLocationManagerTests.m in Sources */,
 				1092785B16A092B6007FEF8B /* SSMotionManagerTests.m in Sources */,
-				1014E9D816AB36EA00FDBE4F /* SSAudioManagerMocked.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,8 +473,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/usr/include";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -494,8 +496,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/usr/include";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -507,6 +511,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
 				INFOPLIST_FILE = "SpartanMissileStrike/SpartanMissileStrike-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -518,6 +523,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
 				INFOPLIST_FILE = "SpartanMissileStrike/SpartanMissileStrike-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -534,6 +540,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
 				INFOPLIST_FILE = "SpartanMissileStrikeTests/SpartanMissileStrikeTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/usr/lib/libOCMock.a\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -551,6 +566,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
 				INFOPLIST_FILE = "SpartanMissileStrikeTests/SpartanMissileStrikeTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/usr/lib/libOCMock.a\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

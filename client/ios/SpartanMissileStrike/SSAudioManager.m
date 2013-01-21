@@ -20,15 +20,17 @@
     for (NSString* key in filenameForSound)
     {
         NSURL* url = [[NSBundle mainBundle] URLForResource: [filenameForSound objectForKey:key]  withExtension:@"mp3"];
-        AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+        AVAudioPlayer* player = [self createAVAudioPlayer];
+        (void) [player initWithContentsOfURL:url error:nil];
         [playerForSound setObject:player forKey:key];
-        
     }
+    
     return self;
 }
 
 -(void)playSound:(NSString*)identifier
 {
+    
     // get the nsobject pointer from playerforsound dictionary
     NSObject* obj1 = [playerForSound objectForKey:identifier];
     // cast the nsobject pointer to an avudioplayer pointer
@@ -37,6 +39,14 @@
     [av1 play]; 
     
     
+}
+/**
+    Factory Method
+ */
+
+-(AVAudioPlayer*)createAVAudioPlayer
+{
+    return [AVAudioPlayer alloc];
 }
 
 @end

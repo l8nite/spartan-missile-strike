@@ -16,7 +16,7 @@ bool  wasPlayed= FALSE;
 NSString* urlPassedToMe;
 
 // init
-AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:wasPlayed error:nil];
+//-->AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:wasPlayed error:nil];
 
 
 // play
