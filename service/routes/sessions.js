@@ -4,12 +4,12 @@ var install = function (server) {
 };
 
 var createSession = function(req, res, next) {
-    if (req.params.facebook !== undefined) {
+    if (req.params.facebook_access_token !== undefined) {
         // match facebook access token against uid?
         res.send(201, 'created session');
     }
     else {
-        res.send(400, 'missing facebook parameter');
+        res.send(400, 'missing facebook_access_token parameter');
     }
     return next();
 };
