@@ -7,14 +7,14 @@ var client = restify.createJsonClient({
 
 
 describe('/sessions', function() {
-    it('should return a 201 when facebook param is sent', function (done) {
-        client.post('/sessions', { facebook: "abcdefg" }, function(err, req, res, obj) {
+    it('should return a 201 when facebook_access_token param is sent', function (done) {
+        client.post('/sessions', { facebook_access_token: "abcdefg" }, function(err, req, res, obj) {
             res.statusCode.should.equal(201);
             done();
         });
     });
 
-    it('should not allow missing facebook parameter', function (done) {
+    it('should not allow missing facebook_access_token parameter', function (done) {
         client.post('/sessions', { }, function(err, req, res, obj) {
             res.statusCode.should.equal(400);
             done();
