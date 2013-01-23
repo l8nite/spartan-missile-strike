@@ -14,7 +14,7 @@ describe('/sessions', function() {
         });
     });
 
-    it('should not allow missing facebook_access_token parameter', function (done) {
+    it('should return a 400 when missing facebook_access_token parameter', function (done) {
         client.post('/sessions', { }, function(err, req, res, obj) {
             res.statusCode.should.equal(400);
             done();
