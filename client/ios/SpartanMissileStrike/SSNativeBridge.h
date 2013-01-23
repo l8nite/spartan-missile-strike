@@ -8,6 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSNativeBridge : UIView
+//supporting the native funtions
+//no UI view
+// UIwebview delegate for SSNAtive bridge to contain everything
+@interface SSNativeBridge : NSObject <UIApplicationDelegate>
+{
+    /**
+     creating a json parser that makes ther equest from the API
+     */
+
+    UIWindow* window;
+    NSMutableData* responseData;
+    
+}
+@property(nonatomic,retain) IBOutlet UIWindow* window;
+ 
+
+
+
 
 @end
