@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SSAudioManager.h"
  
 @interface SSNativeBridge : NSObject 
 {
   
-    
+    SSAudioManager* sa1;
+
 }
 
 
