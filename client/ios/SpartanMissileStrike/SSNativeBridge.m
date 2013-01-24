@@ -28,14 +28,13 @@
     // parse native-bridge method being invoked (i.e), playsound), store it in an NSString* called methodToBeInvoked
     if ([methodToBeInvoked length]==0)
     {
-        [methodToBeInvoked nil];
     }
     else if (methodToBeInvoked == @"playSound")
     {
         //parse arguments out of the url to determine what sound effect we will play (JSON,query-string parameters...)
         NSString* string = @"";
         NSArray* contents = [string componentsSeparatedByString:@"?"];
-        NSString* sound= [contents objectAtIndex:4];
+        NSString* sound= [contents objectAtIndex:2];
         //once we have the sound-effect desired, call SSAudioMnagers playSound method
         
         SSAudioManager* sa1 = [[SSAudioManager alloc]init];
