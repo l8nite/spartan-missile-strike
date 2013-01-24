@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-//supporting the native funtions
-//no UI view
-// UIwebview delegate for SSNAtive bridge to contain everything
+ 
 @interface SSNativeBridge : NSObject 
 {
   
     
 }
+
+
 
 @end
