@@ -11,20 +11,10 @@
 //supporting the native funtions
 //no UI view
 // UIwebview delegate for SSNAtive bridge to contain everything
-@interface SSNativeBridge : NSObject <UIApplicationDelegate>
+@interface SSNativeBridge : NSObject 
 {
-    /**
-     creating a json parser that makes ther equest from the API
-     */
-
-    UIWindow* window;
-    NSMutableData* responseData;
+  
     
 }
-@property(nonatomic,retain) IBOutlet UIWindow* window;
- 
-
-
-
 
 @end
