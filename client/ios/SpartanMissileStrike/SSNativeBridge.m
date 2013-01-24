@@ -37,8 +37,10 @@
         NSArray* contents = [string componentsSeparatedByString:@"?"];
         NSString* sound= [contents objectAtIndex:4];
         //once we have the sound-effect desired, call SSAudioMnagers playSound method
-        [sa1 playSound:soundEffectThatWeParsedGoesHere];
-         
+        
+        SSAudioManager* sa1 = [[SSAudioManager alloc]init];
+        [sa1 playSound:urlString];
+        
     }
     
 }
