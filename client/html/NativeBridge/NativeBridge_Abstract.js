@@ -119,3 +119,31 @@
  * vibrate(int time)
  *     See "Public methods"
  */
+
+function NativeBridge_Abstract() {
+	var that = this;
+	
+	//
+	// Private
+	//
+	
+	// Holds callback functions
+	var callbacks = new Array();
+	
+	// Save callback function, returns callbackID
+	// persist can be undefined :)
+	var registerCallback = function(callbackFn, persist) {
+		return callbacks.push({
+			callback : callbackFn,
+			persist : persist
+		}) - 1;
+	};
+	
+	//
+	// Public
+	//
+	
+	this.callback = function(identifier, arguments) {
+		
+	}
+}
