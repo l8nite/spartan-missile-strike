@@ -12,9 +12,11 @@
  *                 prop_two: "val_two" } )
  *                 See Native Bride API for more details.
  * 
- * resumeGame()
- *     Called by native client to notify HTML that we have returned from
- *     suspension.
+ * resumeGame(function func)
+ *     Called by native client with no argument to notify HTML that we have
+ *     returned from suspension.
+ *     Also called by HTML with function as argument to register what to do
+ *     when resumed!
  * 
  * subscribeLocation(boolean activate, function callback)
  *     Called by HTML to get location data as it changes.
@@ -121,29 +123,87 @@
  */
 
 function NativeBridge_Abstract() {
-	var that = this;
-	
-	//
-	// Private
-	//
-	
-	// Holds callback functions
-	var callbacks = new Array();
-	
-	// Save callback function, returns callbackID
-	// persist can be undefined :)
-	var registerCallback = function(callbackFn, persist) {
-		return callbacks.push({
-			callback : callbackFn,
-			persist : persist
-		}) - 1;
-	};
 	
 	//
 	// Public
 	//
 	
-	this.callback = function(identifier, arguments) {
-		
-	}
+	this.callback = function(identifier, response) {
+		if (callback[identifier]) {
+			callbacks[identifier].callback(response);
+			if (!callbacks[identifier].persist])
+				delete callbacks[identifier];
+		}
+	};
+	
+	this.resumeGame = function(fx) {
+		if (fx) {
+			if (resumeGameCallbackID)
+				delete callbacks[resumeGameCallbackID];
+			resumeGameCallbackID = registerCallback(fx, true);
+		}
+		else
+			this.callback(resumeGameCallbackID);
+	};
+	
+	this.subscribeLocation = function(activate, callback) {
+		if (activate) {
+			if (subscribeLocationCallbackID)
+				delete callbacks[subscribeLocationCallbackID];
+			subscribeLocationCallbackID = registerCallback(callback, true);
+			this.getLocationUpdates(true, subscribeLocationCallbackID);
+		}
+		else
+			this.getLocationUpdates(false);
+	};
+	
+	this.subscribeOrientation = function(activate, callback) {
+		if (activate) {
+			if (subscribeOrientationCallbackID)
+				delete callbacks[subscribeOrientationCallbackID];
+			subscribeOrientationCallbackID = registerCallback(callback, true);
+			this.getOrientationUpdates(true, subscribeOrientationCallbackID);
+		}
+		else
+			this.getOrientationUpdates(false);
+	};
+	
+	this.getLocation = function(callback) {
+		this.getCurrentLocation(registerCallback(callback));
+	};
+	
+	this.getLocalPreference = function(preference, callback) {
+		this.getPreference(preference, registerCallback(callback));
+	};
+	
+	this.setLocalPreference = function(preferences, callback) {
+		this.setPreference(preferences, registerCallback(callback));
+	};
+	
+	this.getFacebookToken = function(callback) {
+		this.getFacebookAccessToken(registerCallback(callback));
+	};
+	
+	
+	//
+	// Private
+	//
+	
+	// Save callback function, returns callbackID
+	// persist can be undefined :)
+	var registerCallback = function(callbackFn, persist) {
+		if (callbackFn) {
+			return callbacks.push({
+				callback : callbackFn,
+				persist : persist
+			}) - 1;
+		}
+	};
+	
+	// Holds callback functions
+	var callbacks = new Array();
+	
+	var resumeGameCallbackID;
+	var subscribeLocationCallbackID;
+	var subscribeOrientationCallbackID;
 }
