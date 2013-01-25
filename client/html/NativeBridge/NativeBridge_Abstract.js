@@ -131,8 +131,11 @@ function NativeBridge_Abstract() {
 	this.callback = function(identifier, response) {
 		if (callback[identifier]) {
 			callbacks[identifier].callback(response);
-			if (!callbacks[identifier].persist])
+			if (!callbacks[identifier].persist]) {
 				delete callbacks[identifier];
+				if (identifier < lowestAvailableCallbackID)
+					lowestAvailableCallbackID = identifier;
+			}
 		}
 	};
 	
@@ -192,6 +195,17 @@ function NativeBridge_Abstract() {
 	// Save callback function, returns callbackID
 	// persist can be undefined :)
 	var registerCallback = function(callbackFn, persist) {
+		callbacks[lowestAvailableCallbackID] = {
+				callback : callbackFn,
+				persist : persist
+		};
+		var thisID = lowestAvailableCallbackID;
+		// Increment pointer to next available slot in array
+		while (callbacks[++lowestAvailableCallbackID])
+			;
+		return thisID;
+	};
+	var registerCallback = function(callbackFn, persist) {
 		return callbacks.push({
 			callback : callbackFn,
 			persist : persist
@@ -200,6 +214,7 @@ function NativeBridge_Abstract() {
 	
 	// Holds callback functions
 	var callbacks = new Array();
+	var lowestAvailableCallbackID = 0;
 	
 	var resumeGameCallbackID;
 	var subscribeLocationCallbackID;
