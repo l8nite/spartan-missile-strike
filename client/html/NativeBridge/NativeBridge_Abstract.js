@@ -192,12 +192,10 @@ function NativeBridge_Abstract() {
 	// Save callback function, returns callbackID
 	// persist can be undefined :)
 	var registerCallback = function(callbackFn, persist) {
-		if (callbackFn) {
-			return callbacks.push({
-				callback : callbackFn,
-				persist : persist
-			}) - 1;
-		}
+		return callbacks.push({
+			callback : callbackFn,
+			persist : persist
+		}) - 1;
 	};
 	
 	// Holds callback functions
