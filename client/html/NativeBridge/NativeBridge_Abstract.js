@@ -129,9 +129,9 @@ function NativeBridge_Abstract() {
 	//
 	
 	this.callback = function(identifier, response) {
-		if (callback[identifier]) {
+		if (callbacks[identifier]) {
 			callbacks[identifier].callback(response);
-			if (!callbacks[identifier].persist]) {
+			if (!callbacks[identifier].persist) {
 				delete callbacks[identifier];
 				if (identifier < lowestAvailableCallbackID)
 					lowestAvailableCallbackID = identifier;
@@ -200,16 +200,10 @@ function NativeBridge_Abstract() {
 				persist : persist
 		};
 		var thisID = lowestAvailableCallbackID;
-		// Increment pointer to next available slot in array
+		// Increment index to next available slot in array
 		while (callbacks[++lowestAvailableCallbackID])
 			;
 		return thisID;
-	};
-	var registerCallback = function(callbackFn, persist) {
-		return callbacks.push({
-			callback : callbackFn,
-			persist : persist
-		}) - 1;
 	};
 	
 	// Holds callback functions
