@@ -12,10 +12,12 @@
  *                 prop_two: "val_two" } )
  *                 See Native Bride API for more details.
  * 
- * resumeGame(function func)
+ * resumeGame()
  *     Called by native client with no argument to notify HTML that we have
  *     returned from suspension.
- *     Also called by HTML with function as argument to register what to do
+ *
+ * resumeHandler(function fx)
+ *     Called by HTML with function as argument to register what to do
  *     when resumed!
  * 
  * subscribeLocation(boolean activate, function callback)
@@ -139,14 +141,14 @@ function NativeBridge_Abstract() {
 		}
 	};
 	
-	this.resumeGame = function(fx) {
-		if (fx) {
-			if (resumeGameCallbackID)
-				delete callbacks[resumeGameCallbackID];
-			resumeGameCallbackID = registerCallback(fx, true);
-		}
-		else
-			this.callback(resumeGameCallbackID);
+	this.resumeGame = function() {
+		this.callback(resumeGameCallbackID);
+	};
+
+	this.resumeHandler = function(fx) {
+		if (resumeGameCallbackID)
+			delete callbacks[resumeGameCallbackID];
+		resumeGameCallbackID = registerCallback(fx, true);
 	};
 	
 	this.subscribeLocation = function(activate, callback) {
