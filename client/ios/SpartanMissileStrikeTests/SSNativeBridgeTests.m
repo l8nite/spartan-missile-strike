@@ -7,7 +7,32 @@
 //
 
 #import "SSNativeBridgeTests.h"
+#import "SSNativeBridge.h"
 
 @implementation SSNativeBridgeTests
 
+- (void)setUp
+{
+    [super setUp];
+    
+    // Set-up code here.
+}
+
+- (void)tearDown
+{
+    // Tear-down code here.
+    
+    [super tearDown];
+}
+
+
+-(void)testdispatchNativeBridgeEventsFromURL
+{
+    SSNativeBridge* na1 = [[SSNativeBridge alloc] init];
+    NSURL* url = [NSURL URLWithString:@"spartan-missile-strike://playSound"];
+    [na1 dispatchNativeBridgeEventsFromURL:url];
+    
+    STAssertNotNil(na1,@"Dispatch Native Bridge Events From URL initialization test");
+
+}
 @end
