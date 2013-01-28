@@ -12,37 +12,40 @@
 
 /**
  NSURL looks like this
- "spartan-missile-strike://playSound?sound=EXPLOSION"
+ "spartan-missile-strike://functionName [host]
+ //:arguments(callbackIdentifier)"
  */
 
-//NSURL* url = [NSURL URLWithString:@"spartan-missile-strike://playSound?sound=Explosion"];
--(void)dispatchNativeBridgeEventsFromURL:(NSURL*)url
+-(id)init
 {
-    // get NSString* from url (nsurl absolutestring method)
-    NSString* urlString = [url absoluteString];
-    //NSString* query = [urlString stringByReplacingOccurrencesOfString:@"spartan-missile-strike" withString:@""];
+    self = [super init];
+    sa1 = [[SSAudioManager alloc] init];
+    return self;
+}
+
+-(BOOL)dispatchNativeBridgeEventsFromURL:(NSURL*)url
+{
+    NSString* scheme = [url scheme];
+    if (![scheme isEqualToString:@"spartan-missile-strike"])
+    {
+        return YES;
+    }
     
-    //parse the schema and validate that it is spartan-missile-strike://
-    NSString* methodToBeInvoked = [[NSString alloc] initWithContentsOfURL:url];
+    NSString* functionName = [url host];
+    
     
     // parse native-bridge method being invoked (i.e), playsound), store it in an NSString* called methodToBeInvoked
-    if ([methodToBeInvoked length]==0)
+    if ([functionName isEqualToString:@"playSound"])
     {
-    }
-    else if (methodToBeInvoked == @"playSound")
-    {
-        //parse arguments out of the url to determine what sound effect we will play (JSON,query-string parameters...)
-        NSString* string = @"";
-        NSArray* contents = [string componentsSeparatedByString:@"?"];
-        NSString* sound= [contents objectAtIndex:2];
-        //once we have the sound-effect desired, call SSAudioMnagers playSound method
         
-        SSAudioManager* sa1 = [[SSAudioManager alloc]init];
-        [sa1 playSound:urlString];
+        [sa1 playSound:@"MODERATO"];
         
     }
-    
+        
 }
+
+//register for updates
+// call back id
 
 
 @end
