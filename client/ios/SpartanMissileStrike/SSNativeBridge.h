@@ -15,7 +15,7 @@
     SSAudioManager* sa1;
 
 }
-
+-(BOOL)dispatchNativeBridgeEventsFromURL:(NSURL*)url; 
 
 
 @end
