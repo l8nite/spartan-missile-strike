@@ -41,7 +41,19 @@
         [sa1 playSound:@"MODERATO"];
         
     }
-        
+    
+    /** parse out @"{sound:"MODERATO"}" getting an NSString* "MODERATO" then playSound on it
+        spartan-missile-strike://functionName [host]
+        :arguments(callbackIdentifier)"
+    */
+    NSString* jsonString = @"spartan-missile-strike://functionName:arguments(callbackIdentifier)";
+    NSData* jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError* e;
+    
+    NSMutableArray* jsonList = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&e];
+    NSLog(@"jsonList: %@", jsonList);
+    
+    
 }
 
 //register for updates
