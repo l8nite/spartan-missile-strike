@@ -25,6 +25,19 @@
 
 -(BOOL)dispatchNativeBridgeEventsFromURL:(NSURL*)url
 {
+    /** parse out @"{sound:"MODERATO"}" getting an NSString* "MODERATO" then playSound on it
+     spartan-missile-strike://functionName [host]
+     :arguments(callbackIdentifier)"
+     */
+   // NSString* jsonString = @"spartan-missile-strike://functionName:arguments(callbackIdentifier)";
+    NSData* jsonData = [[url absoluteString] dataUsingEncoding:NSUTF8StringEncoding];
+    NSError* e;
+    NSMutableArray* jsonList = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&e];
+    NSLog(@"argument is: %@", jsonList);
+    
+    [sa1 playSound:jsonData];
+    
+    
     NSString* scheme = [url scheme];
     if (![scheme isEqualToString:@"spartan-missile-strike"])
     {
@@ -40,19 +53,7 @@
         
         [sa1 playSound:@"MODERATO"];
         
-    }
-    
-    /** parse out @"{sound:"MODERATO"}" getting an NSString* "MODERATO" then playSound on it
-        spartan-missile-strike://functionName [host]
-        :arguments(callbackIdentifier)"
-    */
-    NSString* jsonString = @"spartan-missile-strike://functionName:arguments(callbackIdentifier)";
-    NSData* jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSError* e;
-    
-    NSMutableArray* jsonList = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&e];
-    NSLog(@"jsonList: %@", jsonList);
-    
+    } 
     
 }
 
