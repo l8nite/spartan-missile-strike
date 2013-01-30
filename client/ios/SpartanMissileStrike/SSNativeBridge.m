@@ -11,9 +11,8 @@
 @implementation SSNativeBridge
 
 /**
- NSURL looks like this
- "spartan-missile-strike://functionName [host]
- //:arguments(callbackIdentifier)"
+ "spartan-missile-strike://functionName[calledHOST]:arguments(callbackIdentifier)" 
+ schema://hostname/path?key=value1&key2=value2
  */
 
 -(id)init
@@ -25,40 +24,64 @@
 
 -(BOOL)dispatchNativeBridgeEventsFromURL:(NSURL*)url
 {
-        
-    
+    /**
+     Bails out if not spartan-missile-strike
+    */
     NSString* scheme = [url scheme];
     if (![scheme isEqualToString:@"spartan-missile-strike"])
-    {
-
-        
+    {       
         return YES;
     }
+    /**
+     setting up the querry
+     getting what is after the question mark
+     */
+    NSString* query = [url query];
+ 
     
-    NSString* functionName = [url host];
-    
-    
-    // parse native-bridge method being invoked (i.e), playsound), store it in an NSString* called methodToBeInvoked
+    /**
+     parsing after the question mark with one argument
+     getting the arguments
+     gettingn the key and the value
+     playing on the value
+     */
+    NSString* functionName = [url host]; 
     if ([functionName isEqualToString:@"playSound"])
     {
-        /** parse out @"{sound:"MODERATO"}" getting an NSString* "MODERATO" then playSound on it
-         spartan-missile-strike://functionName [host]
-         :arguments(callbackIdentifier)"
+        /**
+         I have arguments=%7Bidentifier%3A%20%22MODERATO%22%7D
          */
-        // NSString* jsonString = @"spartan-missile-strike://functionName:arguments(callbackIdentifier)";
-        NSData* jsonData = [[url absoluteString] dataUsingEncoding:NSUTF8StringEncoding];
+        NSMutableArray* components = [query componentsSeparatedByString:@"="];
+        /**
+         arguments
+         %7Bidentifier%3A%20%22MODERATO%22%7D
+         */
+        
+        NSMutableDictionary* parameters = [[NSMutableDictionary alloc] init];
+        
+        for (int i=0; i<[components count]; i++)
+        {
+            [parameters setObject:[components objectAtIndex:i] forKey:@"firstone"];
+        }
+        
+                 
+        NSData* jsonData = [[components objectAtIndex:1]  dataUsingEncoding:NSUTF8StringEncoding];
         NSError* e;
-        NSMutableArray* jsonList = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&e];
-        NSLog(@"argument is: %@", jsonList);
+        NSDictionary* jsonList = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&e];
+        NSLog(@"parameters are : %@", jsonList);
         
-        [sa1 playSound:jsonData];
+        [sa1 playSound:jsonData ];
+       
+        // getting the sound idetifer for the sound playSound json arguments
         
-    } 
+        
+    }
+    /**
+     more than one argument 
+     */
     
 }
 
-//register for updates
-// call back id
 
 
 @end
