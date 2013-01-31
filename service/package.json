@@ -1,7 +1,7 @@
 {
   "author": "Shaun Guth <shaun.guth@gmail.com>",
-  "name": "Spartan Missile Strike Service",
-  "version": "0.1",
+  "name": "smss",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node start"
