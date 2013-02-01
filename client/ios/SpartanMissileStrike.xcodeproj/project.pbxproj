@@ -42,6 +42,7 @@
 		109E5213169A02D1002425B5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E5212169A02D1002425B5 /* CoreMotion.framework */; };
 		109E5215169A0325002425B5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E5214169A0325002425B5 /* AudioToolbox.framework */; };
 		10A44A0C169DF05D0043FE99 /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A44A0B169DF05D0043FE99 /* SSPreferenceManager.m */; };
+		10CB354416BA4D7C00839527 /* File in Resources */ = {isa = PBXBuildFile; fileRef = 10CB354316BA4D7C00839527 /* File */; };
 		10D01EE4169643D400F319F0 /* SSPreferenceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */; };
 		10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F35D9B169E09BB00A42045 /* Default-568h@2x.png */; };
 		10F35DA5169E173500A42045 /* SSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F35DA3169E173500A42045 /* SSMainViewController.m */; };
@@ -117,6 +118,7 @@
 		109E5214169A0325002425B5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		10A44A0A169DF05D0043FE99 /* SSPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPreferenceManager.h; sourceTree = "<group>"; };
 		10A44A0B169DF05D0043FE99 /* SSPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManager.m; sourceTree = "<group>"; };
+		10CB354316BA4D7C00839527 /* File */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 		10D01EE2169643D400F319F0 /* SSPreferenceManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPreferenceManagerTests.h; sourceTree = "<group>"; };
 		10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManagerTests.m; sourceTree = "<group>"; };
 		10F35D9B169E09BB00A42045 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				109E51EE1699FE1B002425B5 /* SSFiringView.m */,
 				109E51F01699FE3F002425B5 /* SSNativeBridge.h */,
 				109E51F11699FE3F002425B5 /* SSNativeBridge.m */,
+				10CB354316BA4D7C00839527 /* File */,
 				109E51F31699FE63002425B5 /* SSSplashScreen.h */,
 				109E51F41699FE63002425B5 /* SSSplashScreen.m */,
 				109E51F61699FE88002425B5 /* SSLocationManager.h */,
@@ -357,6 +360,7 @@
 				10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */,
 				10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */,
 				10594FEA16A6426900E41072 /* sounds.plist in Resources */,
+				10CB354416BA4D7C00839527 /* File in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

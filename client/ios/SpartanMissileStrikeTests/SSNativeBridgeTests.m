@@ -29,7 +29,7 @@
 -(void)testdispatchNativeBridgeEventsFromURL
 {
     SSNativeBridge* na1 = [[SSNativeBridge alloc] init];
-    NSURL* url = [NSURL URLWithString:@"spartan-missile-strike://playSound?arguments=%7Bidentifier%3A%20%22MODERATO%22%7D"];
+    NSURL* url = [NSURL URLWithString:@"spartan-missile-strike://playSound/?argument=%7bsound%3A%22Moderato%22%7D"];
     [na1 dispatchNativeBridgeEventsFromURL:url];
     
     STAssertNotNil(na1,@"Dispatch Native Bridge Events From URL initialization test");
