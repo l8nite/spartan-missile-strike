@@ -13,6 +13,7 @@
 /**
  "spartan-missile-strike://functionName[calledHOST]:arguments(callbackIdentifier)" 
  schema://hostname/path?key=value1&key2=value2
+ /?:&
  */
 
 -(id)init
@@ -32,53 +33,28 @@
     {       
         return YES;
     }
-    /**
-     setting up the querry
-     getting what is after the question mark
-     */
-    NSString* query = [url query];
- 
+    NSString* query= [url query];
+    NSArray* parameters= [query componentsSeparatedByString:@"="];
+    NSString* arguments= [parameters objectAtIndex:1];
+    NSString* decoded = [arguments stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData* dDecoded = [decoded dataUsingEncoding:NSUTF8StringEncoding];
+    NSError* e;
     
-    /**
-     parsing after the question mark with one argument
-     getting the arguments
-     gettingn the key and the value
-     playing on the value
-     */
-    NSString* functionName = [url host]; 
+    NSDictionary* jsonObject = [NSJSONSerialization JSONObjectWithData:dDecoded options:0 error:&e];
+    
+    
+    
+    NSString* functionName = [url host];
     if ([functionName isEqualToString:@"playSound"])
     {
-        /**
-         I have arguments=%7Bidentifier%3A%20%22MODERATO%22%7D
-         */
-        NSMutableArray* components = [query componentsSeparatedByString:@"="];
-        /**
-         arguments
-         %7Bidentifier%3A%20%22MODERATO%22%7D
-         */
-        
-        NSMutableDictionary* parameters = [[NSMutableDictionary alloc] init];
-        
-        for (int i=0; i<[components count]; i++)
+        for (NSDictionary* result in jsonObject)
         {
-            [parameters setObject:[components objectAtIndex:i] forKey:@"firstone"];
-        }
-        
-                 
-        NSData* jsonData = [[components objectAtIndex:1]  dataUsingEncoding:NSUTF8StringEncoding];
-        NSError* e;
-        NSDictionary* jsonList = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&e];
-        NSLog(@"parameters are : %@", jsonList);
-        
-        [sa1 playSound:jsonData ];
-       
-        // getting the sound idetifer for the sound playSound json arguments
-        
-        
+            NSString* results= [jsonObject objectForKey:@"sound"];
+             [sa1 playSound:results];
+         }
+                
     }
-    /**
-     more than one argument 
-     */
+    
     
 }
 
