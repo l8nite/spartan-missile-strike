@@ -1,4 +1,10 @@
 ###
+### Other
+###
+.DS_Store
+
+
+###
 ### Node.JS
 ###
 
@@ -50,6 +56,7 @@ DerivedData
 
 # Package Files #
 *.jar
+!/client/android/libs/*
 *.war
 *.ear
 # built application files
@@ -63,6 +70,7 @@ DerivedData
 *.class
 
 # generated files
+.settings/
 bin/
 gen/
 
