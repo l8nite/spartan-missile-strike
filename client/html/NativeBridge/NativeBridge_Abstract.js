@@ -16,21 +16,21 @@
  *     Called by native client with no argument to notify HTML that we have
  *     returned from suspension.
  *
- * resumeHandler(function fx)
+ * setResumeHandler(function fx)
  *     Called by HTML with function as argument to register what to do
  *     when resumed!
  * 
- * subscribeLocation(boolean activate, function callback)
+ * getLocationUpdates(boolean activate, function callback)
  *     Called by HTML to get location data as it changes.
  *     activate - de/activate the updates
  *     callback - callback method, takes {latitude, longitude} in degrees
  *     
- * subscribeOrientation(boolean activate, function callback)
+ * getOrientationUpdates(boolean activate, function callback)
  *     Called by HTML to get orientation data as it changes.
  *     activate - de/activate the updates
  *     callback - callback method, takes {pitch, roll, yaw} in radians
  *     
- * getLocation(function callback)
+ * getCurrentLocation(function callback)
  *     Called by HTML to get current location
  *     callback - callback method, takes {latitude, longitude} in degrees
  *     
@@ -38,17 +38,17 @@
  *     Called by HTML when showing/hiding fire missile screen
  *     activate - show/hide screen
  *     
- * getLocalPreference(String preference, function callback)
+ * getPreference(String preference, function callback)
  *     Get specific preference from native client
  *     preference - preference to get
- *     callback - callback method, takes {*preference*}
+ *     callback - callback method, takes preference
  *     
- * setLocalPreference(Object preferences, function callback)
+ * setPreference(Object preference, function callback)
  *     Set one or multiple persisting preferences
- *     preferences - Hash of preference keys and values to store
+ *     preferences - Hash of preference key and value to store
  *     callback - callback method, takes {boolean suceeded}
  *     
- * getFacebookToken(function callback)
+ * getFacebookAccessToken(function callback)
  *     Get Facebook access token
  *     callback -  callback method, takes {String token}
  *     
@@ -77,34 +77,34 @@
  * 
  * Unimplemented methods:
  * 
- * getLocationUpdates(boolean activate, int callbackID)
+ * _getLocationUpdates(boolean activate, int callbackID)
  *     Request location updates through callback() as they change.
  *     activate - de/activate the updates
  *     callbackID - Callback identifier to pass to callback()
  * 
- * getOrientationUpdates(boolean activate, int callbackID)
+ * _getOrientationUpdates(boolean activate, int callbackID)
  *     Request orientation updates through callback() as they change.
  *     activate - de/activate the updates
  *     callbackID - Callback identifier to pass to callback()
  *     
- * getCurrentLocation(int callbackID)
+ * _getCurrentLocation(int callbackID)
  *     Request current location through callback().
  *     callbackID - Callback identifier to pass to callback()
  *     
  * showFireMissileScreen(boolean activate)
  *     See "Public methods"
  *     
- * getPreference(String preference, int callbackID)
+ * _getPreference(String preference, int callbackID)
  *     Retrieve preference and return value through callback()
  *     preference - preference to get
  *     callbackID - Callback identifier to pass to callback()
  *     
- * setPreference(Object preferences, int callbackID)
+ * _setPreference(Object preferences, int callbackID)
  *     Set preferences locally, indicate success through callback()
- *     preferences - Hash of preference keys and values to store
+ *     preferences - Hash of preference key and value to store
  *     callbackID - Callback identifier to pass to callback()
  *     
- * getFacebookAccessToken(int callbackID)
+ * _getFacebookAccessToken(int callbackID)
  *     Request Facebook token through callback()
  *     callbackID - Callback identifier to pass to callback()
  *     
@@ -125,94 +125,94 @@
  */
 
 function NativeBridge_Abstract() {
-	
-	//
-	// Public
-	//
-	
-	this.callback = function(identifier, response) {
-		if (callbacks[identifier]) {
-			callbacks[identifier].callback(response);
-			if (!callbacks[identifier].persist) {
-				delete callbacks[identifier];
-				if (identifier < lowestAvailableCallbackID)
-					lowestAvailableCallbackID = identifier;
-			}
-		}
-	};
-	
-	this.resumeGame = function() {
-		this.callback(resumeGameCallbackID);
-	};
-
-	this.resumeHandler = function(fx) {
-		if (resumeGameCallbackID)
-			delete callbacks[resumeGameCallbackID];
-		resumeGameCallbackID = registerCallback(fx, true);
-	};
-	
-	this.subscribeLocation = function(activate, callback) {
-		if (activate) {
-			if (subscribeLocationCallbackID)
-				delete callbacks[subscribeLocationCallbackID];
-			subscribeLocationCallbackID = registerCallback(callback, true);
-			this.getLocationUpdates(true, subscribeLocationCallbackID);
-		}
-		else
-			this.getLocationUpdates(false);
-	};
-	
-	this.subscribeOrientation = function(activate, callback) {
-		if (activate) {
-			if (subscribeOrientationCallbackID)
-				delete callbacks[subscribeOrientationCallbackID];
-			subscribeOrientationCallbackID = registerCallback(callback, true);
-			this.getOrientationUpdates(true, subscribeOrientationCallbackID);
-		}
-		else
-			this.getOrientationUpdates(false);
-	};
-	
-	this.getLocation = function(callback) {
-		this.getCurrentLocation(registerCallback(callback));
-	};
-	
-	this.getLocalPreference = function(preference, callback) {
-		this.getPreference(preference, registerCallback(callback));
-	};
-	
-	this.setLocalPreference = function(preferences, callback) {
-		this.setPreference(preferences, registerCallback(callback));
-	};
-	
-	this.getFacebookToken = function(callback) {
-		this.getFacebookAccessToken(registerCallback(callback));
-	};
-	
-	
-	//
-	// Private
-	//
-	
-	// Save callback function, returns callbackID
-	// persist can be undefined :)
-	var registerCallback = function(callbackFn, persist) {
-		callbacks[lowestAvailableCallbackID] = {
-				callback : callbackFn,
-				persist : persist
-		};
-		var thisID = lowestAvailableCallbackID;
-		// Increment index to next available slot in array
-		while (callbacks[++lowestAvailableCallbackID])
-			;
-		return thisID;
-	};
-	
 	// Holds callback functions
-	var callbacks = new Array();
-	var lowestAvailableCallbackID = 0;
+	this._callbacks = new Array();
+	this._lowestAvailableCallbackID = 0;
 	
-	var resumeGameCallbackID;
-	var subscribeLocationCallbackID;
-	var subscribeOrientationCallbackID;
+	// Callback IDs for persistent this._callbacks
+	this._resumeGameCallbackID = null;
+	this._locationCallbackID = null;
+	this._orientationCallbackID = null;
 }
+
+//
+// Public
+//
+
+NativeBridge_Abstract.prototype.callback = function(identifier, response) {
+	if (this._callbacks[identifier]) {
+		this._callbacks[identifier].callback(response);
+		if (!this._callbacks[identifier].persist) {
+			delete this._callbacks[identifier];
+			if (identifier < this._lowestAvailableCallbackID)
+				this._lowestAvailableCallbackID = identifier;
+		}
+	}
+};
+
+NativeBridge_Abstract.prototype.resumeGame = function() {
+	this.callback(this._resumeGameCallbackID);
+};
+
+NativeBridge_Abstract.prototype.setResumeHandler = function(fx) {
+	if (this._resumeGameCallbackID)
+		delete this._callbacks[this._resumeGameCallbackID];
+	this._resumeGameCallbackID = this._registerCallback(fx, true);
+};
+
+NativeBridge_Abstract.prototype.getLocationUpdates = function(activate, callback) {
+	if (activate) {
+		if (this._locationCallbackID)
+			delete this._callbacks[this._locationCallbackID];
+		this._locationCallbackID = this._registerCallback(callback, true);
+		this._getLocationUpdates(true, this._locationCallbackID);
+	}
+	else
+		this._getLocationUpdates(false);
+};
+
+NativeBridge_Abstract.prototype.getOrientationUpdates = function(activate, callback) {
+	if (activate) {
+		if (this._orientationCallbackID)
+			delete this._callbacks[this._orientationCallbackID];
+		this._orientationCallbackID = this._registerCallback(callback, true);
+		this._getOrientationUpdates(true, this._orientationCallbackID);
+	}
+	else
+		this._getOrientationUpdates(false);
+};
+
+NativeBridge_Abstract.prototype.getCurrentLocation = function(callback) {
+	this._getCurrentLocation(this._registerCallback(callback));
+};
+
+NativeBridge_Abstract.prototype.getPreference = function(preference, callback) {
+	this._getPreference(preference, this._registerCallback(callback));
+};
+
+NativeBridge_Abstract.prototype.setPreference = function(preferences, callback) {
+	this._setPreference(preferences, this._registerCallback(callback));
+};
+
+NativeBridge_Abstract.prototype.getFacebookAccessToken = function(callback) {
+	this._getFacebookAccessToken(this._registerCallback(callback));
+};
+
+
+//
+// Private
+//
+
+// Save callback function, returns callbackID
+// persist can be undefined :)
+NativeBridge_Abstract.prototype._registerCallback = function(callbackFn, persist) {
+	this._callbacks[this._lowestAvailableCallbackID] = {
+			callback : callbackFn,
+			persist : persist
+	};
+	var thisID = this._lowestAvailableCallbackID;
+	// Increment index to next available slot in array
+	while (this._callbacks[++this._lowestAvailableCallbackID])
+		;
+	return thisID;
+};

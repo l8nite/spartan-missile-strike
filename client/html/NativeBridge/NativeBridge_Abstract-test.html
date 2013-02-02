@@ -12,7 +12,7 @@
 			test("Callback handler test", function() {
 				var nb = new NativeBridge_Abstract();
 				var largest = 0;
-				var calls = 100000;
+				var calls = 10000;
 				stop(calls);
 
 				setTimeout(function() {
@@ -20,7 +20,7 @@
 				}, 10000);
 
 				// Reappropriation of setPreference()
-				nb.setPreference = function(pref, callback) {
+				nb._setPreference = function(pref, callback) {
 					if (callback + 1 > largest)
 						largest = callback + 1;
 					setTimeout(function() {
@@ -29,7 +29,7 @@
 				}
 				for (var i = 0; i < calls; i++) {
 					setTimeout(function() {
-						nb.setLocalPreference(i, function(result) {
+						nb.setPreference(i, function(result) {
 							equal(result, i, "Callback " + i);
 							start();
 						});
@@ -39,7 +39,7 @@
 
 			asyncTest("Resume game", 1, function() {
 				var NativeBridge = new NativeBridge_Abstract();
-				NativeBridge.resumeHandler(function(){
+				NativeBridge.setResumeHandler(function(){
 					ok(true, "Resume handler successfully registered and called");
 					start();
 				});
