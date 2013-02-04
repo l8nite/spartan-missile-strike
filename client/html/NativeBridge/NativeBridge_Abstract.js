@@ -127,7 +127,7 @@
 function NativeBridge_Abstract() {
 	// Holds callback functions
 	this._callbacks = new Array();
-	this._lowestAvailableCallbackID = 0;
+	this._callbacksHoles = new Array();
 	
 	// Callback IDs for persistent this._callbacks
 	this._resumeGameCallbackID = null;
@@ -143,9 +143,7 @@ NativeBridge_Abstract.prototype.callback = function(identifier, response) {
 	if (this._callbacks[identifier]) {
 		this._callbacks[identifier].callback(response);
 		if (!this._callbacks[identifier].persist) {
-			delete this._callbacks[identifier];
-			if (identifier < this._lowestAvailableCallbackID)
-				this._lowestAvailableCallbackID = identifier;
+			this._callbacksHoles.push(identifier);
 		}
 	}
 };
@@ -206,13 +204,14 @@ NativeBridge_Abstract.prototype.getFacebookAccessToken = function(callback) {
 // Save callback function, returns callbackID
 // persist can be undefined :)
 NativeBridge_Abstract.prototype._registerCallback = function(callbackFn, persist) {
-	this._callbacks[this._lowestAvailableCallbackID] = {
+	var callbackObj = {
 			callback : callbackFn,
 			persist : persist
 	};
-	var thisID = this._lowestAvailableCallbackID;
-	// Increment index to next available slot in array
-	while (this._callbacks[++this._lowestAvailableCallbackID])
-		;
-	return thisID;
+	var i;
+	if (i = this._callbacksHoles.pop()) {
+		this._callbacks[i] = callbackObj;
+		return i;
+	}
+	return (this._callbacks.push(callbackObj) - 1);
 };
