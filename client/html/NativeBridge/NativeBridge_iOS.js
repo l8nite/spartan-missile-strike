@@ -9,7 +9,7 @@ function NativeBridge_iOS() {
 NativeBridge_iOS.prototype = new NativeBridge_Abstract();
 NativeBridge_iOS.prototype.constructor = NativeBridge_iOS;
 
-NativeBridge_iOS.prototype._getLocationUpdates = function(activate, callbackID) {
+NativeBridge_iOS.prototype._getLocationUpdates = function (activate, callbackID) {
 	this._appendIframe("spartan-missile-strike://getLocationUpdates/?arguments="
 		+ JSON.stringify({
 			activate : activate,
@@ -18,7 +18,7 @@ NativeBridge_iOS.prototype._getLocationUpdates = function(activate, callbackID) 
 	);
 };
 
-NativeBridge_iOS.prototype._getOrientationUpdates = function(activate, callbackID) {
+NativeBridge_iOS.prototype._getOrientationUpdates = function (activate, callbackID) {
 	this._appendIframe("spartan-missile-strike://getOrientationUpdates/?arguments="
 		+ JSON.stringify({
 			activate : activate,
@@ -27,7 +27,7 @@ NativeBridge_iOS.prototype._getOrientationUpdates = function(activate, callbackI
 	);
 };
 
-NativeBridge_iOS.prototype._getCurrentLocation = function(callbackID) {
+NativeBridge_iOS.prototype._getCurrentLocation = function (callbackID) {
 	this._appendIframe("spartan-missile-strike://getCurrentLocation/?arguments="
 		+ JSON.stringify({
 			identifier : callbackID
@@ -35,7 +35,7 @@ NativeBridge_iOS.prototype._getCurrentLocation = function(callbackID) {
 	);
 };
 
-NativeBridge_iOS.prototype.showFireMissileScreen = function(activate) {
+NativeBridge_iOS.prototype.showFireMissileScreen = function (activate) {
 	this._appendIframe("spartan-missile-strike://showFireMissileScreen/?arguments="
 		+ JSON.stringify({
 			activate : activate
@@ -43,7 +43,7 @@ NativeBridge_iOS.prototype.showFireMissileScreen = function(activate) {
 	);
 };
 
-NativeBridge_iOS.prototype._getPreference = function(preference, callbackID) {
+NativeBridge_iOS.prototype._getPreference = function (preference, callbackID) {
 	this._appendIframe("spartan-missile-strike://getPreference/?arguments="
 		+ JSON.stringify({
 			preference : preference,
@@ -52,7 +52,7 @@ NativeBridge_iOS.prototype._getPreference = function(preference, callbackID) {
 	);
 };
 
-NativeBridge_iOS.prototype._setPreference = function(preferences, callbackID) {
+NativeBridge_iOS.prototype._setPreference = function (preferences, callbackID) {
 	var keyvalue = new Object();
 	for (var i in preference) {
 		keyvalue.key = i;
@@ -67,7 +67,7 @@ NativeBridge_iOS.prototype._setPreference = function(preferences, callbackID) {
 	);
 };
 
-NativeBridge_iOS.prototype._getFacebookAccessToken = function(callbackID) {
+NativeBridge_iOS.prototype._getFacebookAccessToken = function (callbackID) {
 	this._appendIframe("spartan-missile-strike://getFacebookAccessToken/?arguments="
 		+ JSON.stringify({
 			identifier : callbackID
@@ -75,17 +75,17 @@ NativeBridge_iOS.prototype._getFacebookAccessToken = function(callbackID) {
 	);
 };
 
-NativeBridge_iOS.prototype.logoutFacebook = function() {
+NativeBridge_iOS.prototype.logoutFacebook = function () {
 	this._appendIframe("spartan-missile-strike://logoutFacebook/?arguments=");
 };
 
-NativeBridge_iOS.prototype.playSound = function(options) {
+NativeBridge_iOS.prototype.playSound = function (options) {
 	this._appendIframe("spartan-missile-strike://playSound/?arguments="
 		+ JSON.stringify(options)
 	);
 };
 
-NativeBridge_iOS.prototype.stopSound = function(soundID) {
+NativeBridge_iOS.prototype.stopSound = function (soundID) {
 	this._appendIframe("spartan-missile-strike://stopSound/?arguments="
 		+ JSON.stringify({
 			soundID : soundID
@@ -93,11 +93,11 @@ NativeBridge_iOS.prototype.stopSound = function(soundID) {
 	);
 };
 
-NativeBridge_iOS.prototype.hideSplash = function() {
+NativeBridge_iOS.prototype.hideSplash = function () {
 	this._appendIframe("spartan-missile-strike://hideSplash/?arguments=");
 };
 
-NativeBridge_iOS.prototype.vibrate = function(time) {
+NativeBridge_iOS.prototype.vibrate = function (time) {
 	this._appendIframe("spartan-missile-strike://vibrate/?arguments="
 		+ JSON.stringify({
 			duration : time
@@ -105,7 +105,7 @@ NativeBridge_iOS.prototype.vibrate = function(time) {
 	);
 };
 
-NativeBridge_iOS.prototype._appendIframe = function(src) {
+NativeBridge_iOS.prototype._appendIframe = function (src) {
 	var iframe = document.createElement("iframe");
 	iframe.style.display = "none";
 	iframe.src = src;
