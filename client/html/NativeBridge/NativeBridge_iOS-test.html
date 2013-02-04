@@ -32,6 +32,18 @@
 					ok(response == "two", "Second preference set/got correctly");
 				});
 			});
+
+			test("appendIframe", function () {
+				var NativeBridge = new NativeBridge_iOS();
+				var srcStr = "spartan-missile-strike://dummySrc/?arguments={\"some\":\"json\",\"object\":999}";
+				NativeBridge._appendIframe(srcStr);
+				var iframes = document.getElementsByTagName("iframe");
+				for (var i in iframes) {
+					if (!isNaN(i) && iframes[i].getAttribute("src") == srcStr && iframes[i].getAttribute("style") == "display: none;") {
+						ok(true, "iframe appended correctly");
+					}
+				}
+			});
 		</script>
 	</body>
 </html>
