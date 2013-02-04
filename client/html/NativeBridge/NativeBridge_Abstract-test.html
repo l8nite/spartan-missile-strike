@@ -9,27 +9,28 @@
 		<script src="../qunit/qunit.js"></script>
 		<script src="NativeBridge_Abstract.js"></script>
 		<script>
-			test("Callback handler test", function() {
+			test("Callback handler test", function () {
 				var nb = new NativeBridge_Abstract();
 				var largest = 0;
 				var calls = 10000;
 				stop(calls);
 
-				setTimeout(function() {
+				setTimeout(function () {
 					console.log(largest);
 				}, 10000);
 
 				// Reappropriation of setPreference()
-				nb._setPreference = function(pref, callback) {
-					if (callback + 1 > largest)
+				nb._setPreference = function (pref, callback) {
+					if (callback + 1 > largest) {
 						largest = callback + 1;
-					setTimeout(function() {
+					}
+					setTimeout(function () {
 						nb.callback(callback, pref);
 					}, Math.random() * 100);
 				}
 				for (var i = 0; i < calls; i++) {
-					setTimeout(function() {
-						nb.setPreference(i, function(result) {
+					setTimeout(function () {
+						nb.setPreference(i, function (result) {
 							equal(result, i, "Callback " + i);
 							start();
 						});
@@ -37,9 +38,9 @@
 				}
 			});
 
-			asyncTest("Resume game", 1, function() {
+			asyncTest("Resume game", 1, function () {
 				var NativeBridge = new NativeBridge_Abstract();
-				NativeBridge.setResumeHandler(function(){
+				NativeBridge.setResumeHandler(function (){
 					ok(true, "Resume handler successfully registered and called");
 					start();
 				});

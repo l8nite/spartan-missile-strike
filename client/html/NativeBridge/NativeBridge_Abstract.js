@@ -139,7 +139,7 @@ function NativeBridge_Abstract() {
 // Public
 //
 
-NativeBridge_Abstract.prototype.callback = function(identifier, response) {
+NativeBridge_Abstract.prototype.callback = function (identifier, response) {
 	if (this._callbacks[identifier]) {
 		this._callbacks[identifier].callback(response);
 		if (!this._callbacks[identifier].persist) {
@@ -148,51 +148,56 @@ NativeBridge_Abstract.prototype.callback = function(identifier, response) {
 	}
 };
 
-NativeBridge_Abstract.prototype.resumeGame = function() {
+NativeBridge_Abstract.prototype.resumeGame = function () {
 	this.callback(this._resumeGameCallbackID);
 };
 
-NativeBridge_Abstract.prototype.setResumeHandler = function(fx) {
-	if (this._resumeGameCallbackID)
+NativeBridge_Abstract.prototype.setResumeHandler = function (fx) {
+	if (this._resumeGameCallbackID) {
 		delete this._callbacks[this._resumeGameCallbackID];
+	}
 	this._resumeGameCallbackID = this._registerCallback(fx, true);
 };
 
-NativeBridge_Abstract.prototype.getLocationUpdates = function(activate, callback) {
+NativeBridge_Abstract.prototype.getLocationUpdates = function (activate, callback) {
 	if (activate) {
-		if (this._locationCallbackID)
+		if (this._locationCallbackID) {
 			delete this._callbacks[this._locationCallbackID];
+		}
 		this._locationCallbackID = this._registerCallback(callback, true);
 		this._getLocationUpdates(true, this._locationCallbackID);
 	}
-	else
+	else {
 		this._getLocationUpdates(false);
+	}
 };
 
-NativeBridge_Abstract.prototype.getOrientationUpdates = function(activate, callback) {
+NativeBridge_Abstract.prototype.getOrientationUpdates = function (activate, callback) {
 	if (activate) {
-		if (this._orientationCallbackID)
+		if (this._orientationCallbackID) {
 			delete this._callbacks[this._orientationCallbackID];
+		}
 		this._orientationCallbackID = this._registerCallback(callback, true);
 		this._getOrientationUpdates(true, this._orientationCallbackID);
 	}
-	else
+	else {
 		this._getOrientationUpdates(false);
+	}
 };
 
-NativeBridge_Abstract.prototype.getCurrentLocation = function(callback) {
+NativeBridge_Abstract.prototype.getCurrentLocation = function (callback) {
 	this._getCurrentLocation(this._registerCallback(callback));
 };
 
-NativeBridge_Abstract.prototype.getPreference = function(preference, callback) {
+NativeBridge_Abstract.prototype.getPreference = function (preference, callback) {
 	this._getPreference(preference, this._registerCallback(callback));
 };
 
-NativeBridge_Abstract.prototype.setPreference = function(preferences, callback) {
+NativeBridge_Abstract.prototype.setPreference = function (preferences, callback) {
 	this._setPreference(preferences, this._registerCallback(callback));
 };
 
-NativeBridge_Abstract.prototype.getFacebookAccessToken = function(callback) {
+NativeBridge_Abstract.prototype.getFacebookAccessToken = function (callback) {
 	this._getFacebookAccessToken(this._registerCallback(callback));
 };
 
@@ -203,7 +208,7 @@ NativeBridge_Abstract.prototype.getFacebookAccessToken = function(callback) {
 
 // Save callback function, returns callbackID
 // persist can be undefined :)
-NativeBridge_Abstract.prototype._registerCallback = function(callbackFn, persist) {
+NativeBridge_Abstract.prototype._registerCallback = function (callbackFn, persist) {
 	var callbackObj = {
 			callback : callbackFn,
 			persist : persist
