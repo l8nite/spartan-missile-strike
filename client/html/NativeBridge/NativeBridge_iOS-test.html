@@ -10,25 +10,25 @@
 		<script src="NativeBridge_Abstract.js"></script>
 		<script src="NativeBridge_iOS.js"></script>
 		<script>
-			asyncTest("getCurrentLocation()", 2, function() {
+			asyncTest("getCurrentLocation()", 2, function () {
 				var NativeBridge = new NativeBridge_iOS();
-				NativeBridge.getCurrentLocation(function(response) {
+				NativeBridge.getCurrentLocation(function (response) {
 					ok(("latitude" in response) && ("longitude" in response), "Correct properties names");
 					ok((typeof(response.latitude) == "number") && (typeof(response.longitude) == "number"), "Correct property types");
 					start();
 				});
 			});
 
-			asyncTest("getPreference & setPreference", 2, function() {
+			asyncTest("getPreference & setPreference", 2, function () {
 				var NativeBridge = new NativeBridge_iOS();
 				NativeBridge.setPreference({
 					one : "one",
 					two : "two"
 				});
-				NativeBridge.getPreference("one", function(response) {
+				NativeBridge.getPreference("one", function (response) {
 					ok(response == "one", "First preference set/got correctly");
 				});
-				NativeBridge.getPreference("two", function(response) {
+				NativeBridge.getPreference("two", function (response) {
 					ok(response == "two", "Second preference set/got correctly");
 				});
 			});
