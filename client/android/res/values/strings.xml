@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Spartan Missile Strike</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="splashscreendesc">Splash Screen</string>
     <string name="menu_settings">Settings</string>
 
 </resources>
