@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class Missileapp extends Activity {
+public class MissileApp extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
