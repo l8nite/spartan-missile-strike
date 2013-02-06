@@ -2,6 +2,4 @@
 <resources>
     <string name="app_name">Spartan Missile Strike</string>
     <string name="splashscreendesc">Splash Screen</string>
-    <string name="menu_settings">Settings</string>
-
 </resources>
