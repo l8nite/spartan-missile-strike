@@ -1,5 +1,7 @@
 package com.missileapp.android;
 
+import java.io.IOException;
+
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
@@ -47,17 +49,45 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback{
     /********************************
      * Camera access functions 
      ********************************/
-    private void openCam() {
+    
+    /**
+     * Locks the front facing camera
+     */
+    public void openCam(SurfaceHolder holder) {
+    	//TODO Exception Handling
     	if(cam != null) {
     		cam = Camera.open();
     	}
+    	if(holder != null) {
+    		try {
+				cam.setPreviewDisplay(holder);
+    		}
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
     }
     
-    private void closeCam() {
+    /**
+     * Roll Camera
+     */
+    public void startCam() {
+    	if(cam != null) {
+    		cam.startPreview();
+    	}
+    }
+    
+    /**
+     * Close the camera and set it to null
+     */
+    public void closeCam() {
     	try {
-        	cam.stopPreview();
-        	cam.release();
-        	cam = null;
+    		if(cam != null ) {
+	        	cam.stopPreview();
+	        	cam.release();
+	        	cam = null;
+    		}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -68,12 +98,17 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback{
     /*********************************
 	 * Surface call back function
 	 *********************************/
-    
 	@Override
+	/**
+	 * Surface holder is created and we can reserve the camera nad 
+	 */
 	public void surfaceCreated(SurfaceHolder holder) {
 		try {
-			cam.setPreviewDisplay(holder);
-		} catch (Exception e) {
+			if(cam == null) {
+				this.openCam(holder);
+			}
+		}
+		catch (Exception e) {
 			// TODO: handle exception
 		}
 		
@@ -82,8 +117,10 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback{
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 		try {
-			cam.setPreviewDisplay(holder);
-		} catch (Exception e) {
+			if (cam == null)
+				this.openCam(holder);
+		}
+		catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
