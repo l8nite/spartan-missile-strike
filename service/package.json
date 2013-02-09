@@ -12,6 +12,7 @@
     "restify": "~1.4.4",
     "dtrace-provider": "~0.2.2",
     "should": "~1.2.0",
-    "node-static": "~0.6.7"
+    "node-static": "~0.6.7",
+    "fbgraph": "~0.2.6"
   }
 }

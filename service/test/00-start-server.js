@@ -1,5 +1,5 @@
-restify = require('restify');
-assert = require('assert');
+var restify = require('restify');
+var assert = require('assert');
 
 before(function(done) {
     require('../server').start();
