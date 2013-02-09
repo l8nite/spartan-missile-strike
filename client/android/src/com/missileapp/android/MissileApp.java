@@ -156,7 +156,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             
             // Launch WebView
             webView = (WebView) findViewById(R.id.webView);
-            webView.addJavascriptInterface(new AndroidBridge(), "AndroidInterface");
+            webView.addJavascriptInterface(new AndroidBridge(this, webView), "AndroidInterface");
             webView.getSettings().setJavaScriptEnabled(true);
             webView.loadUrl("file:///android_asset/view.html");
         }
