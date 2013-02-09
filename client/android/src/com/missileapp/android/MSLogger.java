@@ -1,11 +1,14 @@
 package com.missileapp.android;
 
+import java.util.Date;
+
 import android.util.Log;
 
 import com.missileapp.android.BuildConfig;
 
 public class MSLogger {
 	public static void log(String tag, int LogType, String msg, Throwable tr) {
+		msg = (msg != null) ? (new Date() +  ": " + msg) : (new Date() +  ": No Msg!") ; 
 		if(BuildConfig.DEBUG) {
 			switch (LogType) {
 				case Log.DEBUG:
