@@ -1,5 +1,5 @@
 package com.missileapp.android;
 
-public class AndroidBridge extends Missileapp {
+public class AndroidBridge extends MissileApp {
 	
 }
