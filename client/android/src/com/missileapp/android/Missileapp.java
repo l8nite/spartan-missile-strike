@@ -4,13 +4,14 @@ import java.io.IOException;
 
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
 import android.app.Activity;
 
-public class MissileApp extends Activity implements SurfaceHolder.Callback{
-	//TODO create log functions
+public class MissileApp extends Activity implements SurfaceHolder.Callback {
+	private static final String TAG = "com.missileapp.android.MissileApp";
 	
 	//Variables
 	private Camera cam;
@@ -25,6 +26,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MSLogger.log(TAG, Log.INFO, "Starting activity.", null);
         setContentView(R.layout.main);
     }
     
@@ -100,7 +102,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback{
 	 *********************************/
 	@Override
 	/**
-	 * Surface holder is created and we can reserve the camera nad 
+	 * Surface holder is created and we can reserve the camera and
 	 */
 	public void surfaceCreated(SurfaceHolder holder) {
 		try {
@@ -130,6 +132,4 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback{
 		// TODO exception handling
 		this.closeCam();
 	}
-	
-
 }
