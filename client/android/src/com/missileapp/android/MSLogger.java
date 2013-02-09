@@ -8,7 +8,7 @@ import com.missileapp.android.BuildConfig;
 
 public class MSLogger {
 	public static void log(String tag, int LogType, String msg, Throwable tr) {
-		msg = (msg != null) ? (new Date() +  ": " + msg) : (new Date() +  ": No Msg!") ; 
+		msg = (msg != null) ? (new Date() +  ": " + msg) : (new Date() +  ": No Msg!"); 
 		if(BuildConfig.DEBUG) {
 			switch (LogType) {
 				case Log.DEBUG:
