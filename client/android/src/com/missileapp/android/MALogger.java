@@ -4,7 +4,7 @@ import java.util.Date;
 import android.util.Log;
 import com.missileapp.android.BuildConfig;
 
-public class MSLogger {
+public class MALogger {
 	/**
 	 * Logging function, See {@link Log}
 	 * @param tag - Class that needs to log 
