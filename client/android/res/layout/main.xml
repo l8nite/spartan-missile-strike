@@ -6,7 +6,7 @@
     tools:context=".Missileapp" >
 
     <ImageView android:id="@+id/splashScreenView"
-        android:contentDescription="@string/splashscreendesc"
+        android:contentDescription="@string/splash_screen_info"
 		android:layout_height="fill_parent"
 		android:layout_width="fill_parent"
 		android:visibility="visible"
