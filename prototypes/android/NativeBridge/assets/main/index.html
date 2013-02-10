@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+	    function makedoit() {
+	    	document.getElementById('test').innerHTML = document.getElementById('test').innerHTML + 'Got it <br >';
+	        SpartanMissileStrike.smsDoIt();
+	    }
+	    
+	    function testAll(somedata) {
+	    	document.getElementById('test').innerHTML += somedata + "<br>";
+	    }
+	</script>
+</head>
+
+<body>
+	Boo Yea!<br>
+	<span id="test"></span>
+	<br >
+	<input type="button" value="hola" onClick="makedoit();" />
+</body>
+</html> 

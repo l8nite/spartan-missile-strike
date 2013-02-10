@@ -17,3 +17,5 @@ Spartan Missile Strike
       | /       \ |
       |/         \|
   ---------------------
+
+Test of github integration with Trello, updating README
