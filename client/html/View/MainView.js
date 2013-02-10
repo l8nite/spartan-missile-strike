@@ -4,12 +4,12 @@ function MainView() {
     this._animating = false;
 }
 
-MainView.prototype.loadView = function (view) {
-    this._viewAnimationQueue.push(this._loadViewAnimation.bind(this, view));
+MainView.prototype.loadView = function (view, arbitraryPrevView) {
+    this._viewAnimationQueue.push(this._loadViewAnimation.bind(this, view, arbitraryPrevView));
     this._doAnimation();
 };
 
-MainView.prototype.previousView = function () {
+MainView.prototype.previousView = function (view) {
     this._viewAnimationQueue.push(this._previousViewAnimation.bind(this));
     this._doAnimation();
 };
@@ -28,7 +28,7 @@ MainView.prototype._postAnimation = function () {
     }
 };
 
-MainView.prototype._loadViewAnimation = function (view) {
+MainView.prototype._loadViewAnimation = function (view, arbitraryPrevView) {
     var that = this;
     if (this._viewStack.length > 0) {
         var oldView = this._viewStack[this._viewStack.length - 1];
@@ -39,6 +39,9 @@ MainView.prototype._loadViewAnimation = function (view) {
             y: 0
         }, this._TRANSITIONSPEED, function () {
             oldView.offView();
+            if (arbitraryPrevView) {
+                that._viewStack = that._viewStack.slice(0, that._viewStack.indexOf(arbitraryPrevView) + 1);
+            }
             that._viewStack.push(view);
             that._postAnimation();
         });
