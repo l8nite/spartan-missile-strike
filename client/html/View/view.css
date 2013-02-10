@@ -18,19 +18,3 @@ body {
 .active-view {
     display: block;
 }
-
-#view-0 {
-    background-color: blue;
-}
-
-#view-1 {
-    background-color: green;
-}
-
-#view-2 {
-    background-color: red;
-}
-
-#view-3 {
-    background-color: yellow;
-}
