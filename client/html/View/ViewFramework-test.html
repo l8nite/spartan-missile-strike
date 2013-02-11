@@ -37,6 +37,7 @@
 		<div onclick="mainView.loadView(opponents)">New game</div>
 		<div onclick="mainView.loadView(base)">Accept invitation</div>
 		<div onclick="mainView.loadView(options)">Options</div>
+		<div style="height: 2000px;"></div>
 	</div>
 	<div id="map">
 		<div>Map view</div><br>
@@ -67,7 +68,7 @@
 		Imports = {};
 		Imports.DomHelper = new DomHelper();
 		mainView = new MainView();
-		mainMenu = new FixedHeightView("main-menu");
+		mainMenu = new View("main-menu");
 		map = new FixedHeightView("map");
 		fire = new FixedHeightView("fire");
 		options = new FixedHeightView("options");
