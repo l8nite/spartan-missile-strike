@@ -28,13 +28,17 @@ DomHelper.prototype.removeClass = function (node, classname) {
 };
 
 DomHelper.prototype.moveTo = function (node, x, y) {
-    node._domNode.style.left = x;
-    node._domNode.style.top = y;
+    if (x === 0 || x) {
+        node._domNode.style.left = x;
+    }
+    if (x === 0 || y) {
+        node._domNode.style.top = y;
+    }
 };
 
 DomHelper.prototype.getPos = function (node) {
     return {
-        x: parseInt(node._domNode.style.left.slice(0, -2)),
-        y: parseInt(node._domNode.style.top.slice(0, -2))
+        x: node._domNode.style.left ? parseInt(node._domNode.style.left.slice(0, -2)) : 0,
+        y: node._domNode.style.top ? parseInt(node._domNode.style.top.slice(0, -2)) : 0
     };
 };
