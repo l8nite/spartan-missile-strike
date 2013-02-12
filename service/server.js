@@ -5,8 +5,9 @@ var startAPIServer = function () {
     var routes = require('./routes.js');
 
     var server = restify.createServer({
-        certificate: fs.readFileSync('./certs/server.crt'),
-        key: fs.readFileSync('./certs/server.key'),
+        ca: fs.readFileSync('./certs/api.missileapp.com.ca-bundle'),
+        certificate: fs.readFileSync('./certs/api.missileapp.com.crt'),
+        key: fs.readFileSync('./certs/api.missileapp.com.key'),
         name: 'api.missileapp.com',
         version: '0.0.1',
     });
