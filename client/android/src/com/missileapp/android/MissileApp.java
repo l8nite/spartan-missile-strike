@@ -7,8 +7,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
 import android.widget.Toast;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
+@SuppressLint("SetJavaScriptEnabled")
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
     // Static final vars
     private static final String TAG = "com.missileapp.android.MissileApp"; // Class Name for Logging
@@ -152,14 +154,18 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
                 cam.setPreviewDisplay(holder);
             }
             
-            // TODO Webview Goes Here
+            // Launch WebView
+            webView = (WebView) findViewById(R.id.webView);
+            webView.addJavascriptInterface(new AndroidBridge(this, webView), "AndroidInterface");
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.loadUrl("file:///android_asset/view.html");
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.INFO, "Could not open Cam", e);
         }
     }
 
-/**
+    /**
 	 * Surface Holder changes
 	 * @param holder - the holder to draw the camera preview, {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
 	 * @param format - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
@@ -167,8 +173,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
 	 * @param height - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
 	 */
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width,
-            int height) {
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         try {
             if (cam == null) {
                 this.openCam(holder);
