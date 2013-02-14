@@ -31,7 +31,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         MALogger.log(TAG, Log.INFO, "Starting activity.", null);
         setContentView(R.layout.main);
         
-        //TODO Prompt user for GPS status
+        //TODO Prompt user to turn on GPS and preference  
         
         surfaceView = (SurfaceView) findViewById(R.id.camView);
         surfaceHolder = surfaceView.getHolder();
