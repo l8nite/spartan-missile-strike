@@ -1,10 +1,18 @@
 var should = require('should');
 var client = require('./lib/service-test.js').client;
-require('./lib/facebook-test.js');
+var fbtest = require('./lib/facebook-test.js');
 
 describe('/sessions', function() {
-    it('should return a 201 when facebook_access_token param is sent', function (done) {
+    it('should return a 400 when an invalid facebook_access_token parameter is sent', function (done) {
         client.post('/sessions', { facebook_access_token: "abcdefg" }, function(err, req, res, obj) {
+            res.statusCode.should.equal(400);
+            done();
+        });
+    });
+
+    it('should return a 201 when a valid facebook_access_token parameter is sent', function (done) {
+        var user = fbtest.getFacebookTestData().user;
+        client.post('/sessions', { facebook_access_token: user.access_token }, function(err, req, res, obj) {
             res.statusCode.should.equal(201);
             done();
         });
