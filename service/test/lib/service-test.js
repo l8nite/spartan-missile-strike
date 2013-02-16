@@ -2,7 +2,8 @@ var restify = require('restify');
 var ports = require('../../conf/ports.json');
 
 before(function(done) {
-    require('../../server').start(done);
+    // require('../../server').start(done);
+    done();
 });
 
 var client = restify.createJsonClient({
