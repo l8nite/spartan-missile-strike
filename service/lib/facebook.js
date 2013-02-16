@@ -12,13 +12,17 @@ var getApplicationAccessToken = function(done) {
         "client_secret": configuration.client_secret,
         "grant_type": "client_credentials"
     }, function (err, res) {
-        if (!err) {
-            configuration.access_token = res.access_token;
-            done(undefined, configuration.access_token);
-        }
-        else {
+        if (err) {
             console.log(err);
             done(err);
+        }
+        else if (res.hasOwnProperty('error')) {
+            console.log(res);
+            done(res);
+        }
+        else {
+            configuration.access_token = res.access_token;
+            done(undefined, configuration.access_token);
         }
     });
 };
@@ -40,8 +44,6 @@ var createTestUser = function(name, done) {
             }
         }
     );
-
-    done();
 };
 
 var deleteTestUser = function(user, done) {
@@ -50,5 +52,5 @@ var deleteTestUser = function(user, done) {
 
 module.exports.configuration = configuration;
 module.exports.getApplicationAccessToken = getApplicationAccessToken;
-module.exports.createTestuser = createTestUser;
+module.exports.createTestUser = createTestUser;
 module.exports.deleteTestUser = deleteTestUser;
