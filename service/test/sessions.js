@@ -1,6 +1,6 @@
 var should = require('should');
 var client = require('./lib/service-test.js').client;
-//var fbUser = require('./lib/facebook-test.js').user;
+require('./lib/facebook-test.js');
 
 describe('/sessions', function() {
     it('should return a 201 when facebook_access_token param is sent', function (done) {
