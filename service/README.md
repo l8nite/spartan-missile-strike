@@ -12,3 +12,6 @@ Steps:
   - node start
   - browse to http://localhost:8080 to see API documentation
   - browse to (i.e.) https://localhost:8443/cities to use the API
+
+To run the tests:
+ - make test -or- mocha
