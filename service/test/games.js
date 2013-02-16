@@ -1,9 +1,5 @@
 var should = require('should');
-var restify = require('restify');
-
-var client = restify.createJsonClient({
-    url: 'https://localhost:8433',
-    version: '*'});
+var client = require('./lib/service-test.js').client;
 
 describe('/games', function() {
     it('should return a 200', function (done) {
