@@ -1,4 +1,5 @@
 var async = require('async');
+var ports = require('./conf/ports.json');
 
 var startAPIServer = function (done) {
     async.series([
@@ -24,16 +25,13 @@ var startAPIServer = function (done) {
 
             routes.install(server);
 
-            server.listen(8443, function () {
+            server.listen(ports.apiServer, function () {
                 console.log('%s listening at %s', server.name, server.url);
             });
 
             server.on('listening', done);
         },
-
-        // finally, signal that we're done
-        done
-    ]);
+    ], done);
 };
 
 var startDocumentationServer = function (done) {
@@ -48,8 +46,8 @@ var startDocumentationServer = function (done) {
         });
     });
 
-    docServer.listen(8080, function () {
-        console.log('documentation server listening on :8080');
+    docServer.listen(ports.documentationServer, function () {
+        console.log('documentation server listening on :' + ports.documentationServer);
     });
 
     docServer.on('listening', done);
