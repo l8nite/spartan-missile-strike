@@ -29,6 +29,8 @@
 	<script src="MainView.js"></script>
 	<script src="View.js"></script>
 	<script src="FixedHeightView.js"></script>
+	<script src="../NativeBridge/NativeBridge_Abstract.js"></script>
+    <script src="../NativeBridge/NativeBridge_Android.js"></script>
 </head>
 <body>
 	<div id="main-menu">
@@ -75,6 +77,8 @@
 		opponents = new FixedHeightView("opponents");
 		base = new FixedHeightView("base");
 		mainView.loadView(mainMenu);
+		NativeBridge = new NativeBridge_Android();
+		NativeBridge.hideSplash();
 	</script>
 </body>
 </html>
