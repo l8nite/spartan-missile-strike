@@ -1,5 +1,6 @@
 package com.missileapp.android;
 
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
@@ -103,9 +104,12 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     public void rollCam() {
         try {
+            if(webView != null) {
+                webView.setBackgroundColor(Color.TRANSPARENT);
+            }
+            
             if (cam != null) {
                 cam.lock();
-                
                 cam.startPreview();
             }
             else {
@@ -124,6 +128,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     public void cutCam() {
         try {
+            if(webView != null) {
+                webView.setBackgroundColor(Color.WHITE);
+            }
             if (cam != null) {
                 cam.stopPreview();
                 cam.unlock();
@@ -178,6 +185,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             webView = (WebView) findViewById(R.id.webView);
             webView.addJavascriptInterface(new AndroidBridge(this, webView), DROIDNB_VARNAME);
             webView.getSettings().setJavaScriptEnabled(true);
+            webView.setBackgroundColor(Color.WHITE);
             webView.loadUrl("file:///android_asset/view.html");
         }
         catch (Exception e) {
