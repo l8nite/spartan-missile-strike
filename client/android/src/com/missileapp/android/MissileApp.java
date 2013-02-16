@@ -2,7 +2,6 @@ package com.missileapp.android;
 
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
