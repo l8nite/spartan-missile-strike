@@ -12,6 +12,9 @@ import android.app.Activity;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
+    //TODO [MARKER] REMOVE WAKELOCK FROM ANDROID MANIFEST FILE
+    
+    
     // Static final vars
     private static final String TAG = "com.missileapp.android.MissileApp"; // Class Name for Logging
     private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
@@ -48,7 +51,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onPause() {
         super.onPause();
         MALogger.log(TAG, Log.INFO, "Pausing activity.", null);
-        stopCam();
+        cutCam();
     }
     
     @Override
@@ -88,7 +91,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     /**
      * Lock the Camera and Start the Preview
      */
-    public void startCam() {
+    public void rollCam() {
         try {
             if (cam != null) {
                 cam.lock();
@@ -104,7 +107,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     /**
      * Stop the Camera Preview and Unlock
      */
-    public void stopCam() {
+    public void cutCam() {
         try {
             if (cam != null) {
                 cam.stopPreview();
