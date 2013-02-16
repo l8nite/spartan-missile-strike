@@ -9,7 +9,11 @@ import android.webkit.WebView;
 
 @SuppressWarnings({"unused"})
 public class AndroidBridge extends MissileApp {
+    // Data
     private static final String TAG = "AndroidBridge";          //TAG for logging
+    private static final String NBCallBack_prefix = "javascript:NativeBridge.callback(";
+    private static final String NBCallBack_postfix = ");";
+    
     private Context context;
     private WebView webview;
     
@@ -30,8 +34,22 @@ public class AndroidBridge extends MissileApp {
         v = (Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE);
         if(!v.hasVibrator())
             v = null;
-        
     }
+    
+    
+    /**
+     * Calls the NativeBridge CallBack function
+     * @param callbackident - callback identifier, see Native Bridge
+     * @param callbackData - data to pass to the callback identifier
+     */
+    public void callJS(String callbackident, String callbackData) {
+        String url = NBCallBack_prefix + callbackident + "," + callbackData + NBCallBack_postfix;
+        webview.loadUrl(url);
+    }
+
+
+    
+    
     
     /**
      * Hides Splash Screen when the webView has been fully loaded
