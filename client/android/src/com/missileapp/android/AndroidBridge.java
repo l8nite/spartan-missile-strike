@@ -1,5 +1,6 @@
 package com.missileapp.android;
 
+import android.R.bool;
 import android.content.Context;
 import android.os.Vibrator;
 import android.util.Log;
@@ -66,13 +67,13 @@ public class AndroidBridge extends MissileApp {
     }
     
     
-    /**
-     * Vibrates the Android device
-     * @param time - time to vibrate the device
-     */
-    public void vibrate(long time){
-        this.vibrate(String.valueOf(time));
-    }
+//    /**
+//     * Vibrates the Android device
+//     * @param time - time to vibrate the device
+//     */
+//    public void vibrate(long time){
+//        this.vibrate(String.valueOf(time));
+//    }
     
     /**
      * Vibrates the Android device 
@@ -96,7 +97,26 @@ public class AndroidBridge extends MissileApp {
     }
     
     
-    
+    /**
+     * If in firescreen, cuts camera and sets the background white
+     * If not in firescreen, rolls camera and sets the background transparent
+     * @param showFireScreen - true to enter fire screen, false to exit
+     */
+    public void showFireMissileScreen(String showFireScreen) {
+        boolean showScreen;
+        //Parse time
+        try {
+            showScreen = Boolean.parseBoolean(showFireScreen);
+        }
+        catch (Exception e) {
+            showScreen = false;
+        }
+        
+        if(showScreen)
+            super.rollCam();
+        else
+            super.cutCam();
+    }
     
     
     
