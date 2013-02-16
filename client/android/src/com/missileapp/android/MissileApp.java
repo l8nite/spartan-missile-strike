@@ -37,7 +37,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MALogger.log(TAG, Log.INFO, "Starting activity.", null);
+        MALogger.log(TAG, Log.INFO, "Starting activity.");
         setContentView(R.layout.main);
         
         // Get user settings, mode_private --> accessible only by this process
@@ -54,20 +54,20 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onResume() {
         super.onResume();
-        MALogger.log(TAG, Log.INFO, "Resuming activity.", null);
+        MALogger.log(TAG, Log.INFO, "Resuming activity.");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MALogger.log(TAG, Log.INFO, "Pausing activity.", null);
+        MALogger.log(TAG, Log.INFO, "Pausing activity.");
         cutCam();
     }
     
     @Override
     protected void onStop() {
         super.onStop();
-        MALogger.log(TAG, Log.INFO, "Stopping activity.", null);
+        MALogger.log(TAG, Log.INFO, "Stopping activity.");
         closeCam();
     }
 
@@ -81,7 +81,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      *            the SurfaceHolder that the camera data should be drawn on
      */
     public void openCam(SurfaceHolder holder) {
-        MALogger.log(TAG, Log.INFO, "Opening Cam", null);
+        MALogger.log(TAG, Log.INFO, "Opening Cam");
         
         // Camera should not have been open. Reset cam
         closeCam();
@@ -105,8 +105,13 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         try {
             if (cam != null) {
                 cam.lock();
+                
                 cam.startPreview();
             }
+            else {
+                MALogger.log(TAG, Log.ERROR, "Camera is null.");
+            }
+                
         }
         catch (Exception e) {
             Toast.makeText(this, "Camera Error...", Toast.LENGTH_SHORT).show();
@@ -159,7 +164,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        MALogger.log(TAG, Log.INFO, "Surface Created!", null);
+        MALogger.log(TAG, Log.INFO, "Surface Created!");
         try {
             // Create cam and set surface
             if (cam == null) {
