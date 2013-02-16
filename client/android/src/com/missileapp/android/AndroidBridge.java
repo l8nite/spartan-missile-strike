@@ -56,42 +56,34 @@ public class AndroidBridge extends MissileApp {
      */
     public void hideSplash() {
         try {
-            //Show WebView
+            // Show WebView
             super.findViewById(R.id.webView).setVisibility(View.VISIBLE);
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.ERROR, "Could not show webview", e);
-            //TODO send event back to Native Bridge
+            // TODO send event back to Native Bridge
         }
         
         try {
-            //Show Camera View
+            // Show Camera View
             super.findViewById(R.id.camView).setVisibility(View.VISIBLE);
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.ERROR, "Could not show camView", e);
-            //TODO send event back to Native Bridge
+            // TODO send event back to Native Bridge
         }
         
         try {
-            //Hide Splash Screen
+            // Hide Splash Screen
             super.findViewById(R.id.splashScreenView).setVisibility(View.GONE);
         }
         catch (Exception e) {
             // This shouldn't be a problem because the webview and cam view take precedence
             MALogger.log(TAG, Log.INFO, "Could not hide splash screen", e);
-            //TODO send event back to Native Bridge
+            // TODO send event back to Native Bridge
         }
     }
     
-    
-//    /**
-//     * Vibrates the Android device
-//     * @param time - time to vibrate the device
-//     */
-//    public void vibrate(long time){
-//        this.vibrate(String.valueOf(time));
-//    }
     
     /**
      * Vibrates the Android device 
@@ -100,7 +92,7 @@ public class AndroidBridge extends MissileApp {
     public void vibrate(String time) {
         long milliseconds;
         
-        //Parse time
+        // Parse time
         try {
             milliseconds = Long.parseLong(time);
         }
@@ -109,7 +101,7 @@ public class AndroidBridge extends MissileApp {
         }
         
         // Vibrate if vibrator exists and time is greater than 0
-        if(v != null && milliseconds > 0) {
+        if (v != null && milliseconds > 0) {
             v.vibrate(milliseconds);
         }
     }
@@ -122,7 +114,7 @@ public class AndroidBridge extends MissileApp {
      */
     public void showFireMissileScreen(String showFireScreen) {
         boolean showScreen;
-        //Parse time
+        // Parse time
         try {
             showScreen = Boolean.parseBoolean(showFireScreen);
         }
@@ -130,10 +122,12 @@ public class AndroidBridge extends MissileApp {
             showScreen = false;
         }
         
-        if(showScreen)
+        if (showScreen) {
             super.rollCam();
-        else
+        }
+        else {
             super.cutCam();
+        }
     }
     
     

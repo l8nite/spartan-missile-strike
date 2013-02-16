@@ -20,6 +20,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     // Settings Variables
     private static final String TAG = "com.missileapp.android.MissileApp"; // Class Name for Logging
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
+    private static final String DROIDWB_FILENAME = "file:///android_asset/" + "view" + ".html"; // Webview file to load
     private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
     private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location
                                                                            // True -> Ask user, False -> skip
@@ -185,8 +186,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             webView = (WebView) findViewById(R.id.webView);
             webView.addJavascriptInterface(new AndroidBridge(this, webView), DROIDNB_VARNAME);
             webView.getSettings().setJavaScriptEnabled(true);
+            //TODO VERIFY NEED FOR SETTING BACKGROUND COLOR.
             webView.setBackgroundColor(Color.WHITE);
-            webView.loadUrl("file:///android_asset/view.html");
+            webView.loadUrl(DROIDWB_FILENAME);
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.INFO, "Could not open Cam", e);
