@@ -66,6 +66,13 @@ public class AndroidBridge extends MissileApp {
     }
     
     
+    /**
+     * Vibrates the Android device
+     * @param time - time to vibrate the device
+     */
+    public void vibrate(long time){
+        this.vibrate(String.valueOf(time));
+    }
     
     /**
      * Vibrates the Android device 
