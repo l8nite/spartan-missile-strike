@@ -5,6 +5,13 @@ import android.util.Log;
 import com.missileapp.android.BuildConfig;
 
 public class MALogger {
+    /**
+     * Overloaded Constructor, see {@link MALogger#log(String, int, String, Throwable)}
+     */
+    public static void log(String tag, int LogType, String msg) {
+        log(tag, LogType, msg, null);
+    }
+    
 	/**
 	 * Logging function, See {@link Log}
 	 * @param tag - Class that needs to log 
