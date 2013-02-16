@@ -2,6 +2,7 @@ package com.missileapp.android;
 
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -9,21 +10,27 @@ import android.webkit.WebView;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.SharedPreferences;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
     //TODO [MARKER] REMOVE WAKELOCK FROM ANDROID MANIFEST FILE
     
     
-    // Static final vars
+    // Settings Variables
     private static final String TAG = "com.missileapp.android.MissileApp"; // Class Name for Logging
+    private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
+    private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
+    private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location
+                                                                           // True -> Ask user, False -> skip
     private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
     
     // Variables
-    private Camera cam;
-    private SurfaceView surfaceView;
-    private SurfaceHolder surfaceHolder;
-    private WebView webView;
+    private Camera cam;                        // Camera settings
+    private SurfaceView surfaceView;           // Surface View for layout options
+    private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
+    private WebView webView;                   // WebView for UI
+    private SharedPreferences settings;        // User Preferences 
     
     /*********************************
      * Android OS call back functions
@@ -34,7 +41,11 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         MALogger.log(TAG, Log.INFO, "Starting activity.", null);
         setContentView(R.layout.main);
         
-        //TODO Prompt user to turn on GPS and preference  
+        // Get user settings, mode_private --> accessible only by this process
+        settings = getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE);
+        if(settings.getBoolean(PREFERENCES_GPSPROMPT, true)) {
+            //TODO Prompt user to turn on GPS and preference
+        }
         
         surfaceView = (SurfaceView) findViewById(R.id.camView);
         surfaceHolder = surfaceView.getHolder();
@@ -161,7 +172,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             
             // Launch WebView
             webView = (WebView) findViewById(R.id.webView);
-            webView.addJavascriptInterface(new AndroidBridge(this, webView), "AndroidInterface");
+            webView.addJavascriptInterface(new AndroidBridge(this, webView), DROIDNB_VARNAME);
             webView.getSettings().setJavaScriptEnabled(true);
             webView.loadUrl("file:///android_asset/view.html");
         }
