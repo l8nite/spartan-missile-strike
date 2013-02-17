@@ -73,38 +73,38 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
             then();
         }
         else {
-            var dt = currentFrameTime - prevFrameTime,
-                smoothingFactor = Math.min(
-                    (currentFrameTime - initialTime) / (dt + smoothing),
-                    (initialTime + actualTime - prevFrameTime + smoothing) / (dt + smoothing),
-                    1
-                ),
-                dx = baseVelocity * dt * smoothingFactor;
+            var x = 0,
+                t_total = currentFrameTime - initialTime;
+                t = Math.min(smoothing, Math.max(t_total, 0));
+            x += t * t * velocity / 2 / smoothing;
+            t = Math.min(plateauTime, Math.max(t_total - smoothing, 0));
+            x += t * velocity;
+            t = Math.min(smoothing, Math.max(t_total - smoothing - plateauTime, 0));
+            x += (2 * smoothing - t) * velocity * t / 2 / smoothing;
             for (var i in nodes) {
-                pos[i] += dx;
-                Imports.DomHelper.moveTo(nodes[i], pos[i]);
+                Imports.DomHelper.moveTo(nodes[i], initialPos[i] + x);
             }
-            prevFrameTime = currentFrameTime;
             setTimeout(function () {
                 doMove();
-            }, 1 / this._MAXFPS - new Date().getTime() + currentFrameTime);
+            }, 1000 / that._MAXFPS - new Date().getTime() + currentFrameTime);
         }
     }
 
-    var actualTime = time - smoothing,
-        initialTime = prevFrameTime = new Date().getTime(),
-        pos = [],
+    var that = this,
         initialPos = [],
-        baseVelocity = translation_x / actualTime;
+        initialTime = new Date().getTime(),
+        velocity = translation_x / (time - smoothing),
+        plateauTime = time - 2 * smoothing,
+        startDecelTime = time - smoothing;
     for (var i in nodes) {
-        pos[i] = Imports.DomHelper.getPos(nodes[i]).x;
-        initialPos[i] = pos[i];
+        initialPos[i] = Imports.DomHelper.getPos(nodes[i]).x;
     }
     setTimeout(function () {
         doMove()
-    }, 1 / this._MAXFPS - new Date().getTime() + initialTime);
+    }, 1000 / this._MAXFPS - new Date().getTime() + initialTime);
 };
 
 MainView.prototype._TRANSITIONSPEED = 200;
-MainView.prototype._SMOOTHING = 50;
+// _SMOOTHING <= _TRANSITIONSPEED / 2
+MainView.prototype._SMOOTHING = 83;
 MainView.prototype._MAXFPS = 60;
