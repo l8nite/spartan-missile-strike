@@ -32,6 +32,10 @@ MainView.prototype._loadViewAnimation = function (view, arbitraryPrevView) {
     var that = this;
     if (this._viewStack.length > 0) {
         var oldView = this._viewStack[this._viewStack.length - 1];
+        if (view === oldView) {
+            this._postAnimation();
+            return;
+        }
         Imports.DomHelper.moveTo(view, window.innerWidth, 0);
         view.onView();
         this._moveAnimation([view, oldView], window.innerWidth * -1, this._TRANSITIONSPEED, this._SMOOTHING, function () {
@@ -54,6 +58,14 @@ MainView.prototype._previousViewAnimation = function () {
     var that = this;
     var oldView = this._viewStack[this._viewStack.length - 1];
     var newView = this._viewStack[this._viewStack.length - 2];
+    if (!newView) {
+        this._postAnimation();
+        return;
+    } else if (oldView === newView) {
+        that._viewStack.pop();
+        this._postAnimation();
+        return;
+    }
     Imports.DomHelper.moveTo(newView, window.innerWidth * -1, 0);
     newView.onView();
     this._moveAnimation([newView, oldView], window.innerWidth, this._TRANSITIONSPEED, this._SMOOTHING, function () {
