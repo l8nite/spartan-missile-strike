@@ -5,23 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".Missileapp" >
 
-    <ImageView android:id="@+id/splashScreenView"
-        android:contentDescription="@string/splash_screen_info"
-		android:layout_height="fill_parent"
-		android:layout_width="fill_parent"
-		android:visibility="visible"
-		android:src="@drawable/splashscreen"
-	/>
-    
     <SurfaceView android:id="@+id/camView"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:visibility="gone"
 	/>
     
     <WebView android:id="@+id/webView"
 		android:layout_height="fill_parent"
 		android:layout_width="fill_parent"
-		android:visibility="gone"
 	/>
+    
+    <ImageView android:id="@+id/splashScreenView"
+        android:contentDescription="@string/splash_screen_info"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:visibility="visible"
+        android:src="@drawable/splashscreen"
+    />
 </RelativeLayout>
