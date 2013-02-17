@@ -55,14 +55,14 @@ MainView.prototype._loadViewAnimation = function (view, arbitraryPrevView) {
 };
 
 MainView.prototype._previousViewAnimation = function () {
-    var that = this;
-    var oldView = this._viewStack[this._viewStack.length - 1];
-    var newView = this._viewStack[this._viewStack.length - 2];
+    var that = this,
+        oldView = this._viewStack[this._viewStack.length - 1],
+        newView = this._viewStack[this._viewStack.length - 2];
     if (!newView) {
         this._postAnimation();
         return;
     } else if (oldView === newView) {
-        that._viewStack.pop();
+        this._viewStack.pop();
         this._postAnimation();
         return;
     }
