@@ -33,6 +33,11 @@ public class MissileAppProto extends Activity implements SurfaceHolder.Callback 
     private WebView webView;                   // WebView for UI
     private SharedPreferences settings;        // User Preferences 
     
+    private void toast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+    
+    
     /*********************************
      * Android OS call back functions
      *********************************/
@@ -41,6 +46,8 @@ public class MissileAppProto extends Activity implements SurfaceHolder.Callback 
         super.onCreate(savedInstanceState);
         MALogger.log(TAG, Log.INFO, "Starting activity.");
         setContentView(R.layout.main);
+        
+        toast("Started Activity");
         
         // Get user settings, mode_private --> accessible only by this process
         settings = getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE);
@@ -91,9 +98,14 @@ public class MissileAppProto extends Activity implements SurfaceHolder.Callback 
         // Get the default reverse facing camera
         try {
             cam = Camera.open();
-            cam.setDisplayOrientation(CAMERA_ORIENTATION);
-            cam.setPreviewDisplay(holder);
-            cam.unlock();
+            if(cam != null) {
+                cam.setDisplayOrientation(CAMERA_ORIENTATION);
+                cam.setPreviewDisplay(holder);
+                cam.unlock();
+            }
+            else {
+                toast("No Camera!");
+            }
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.ERROR, "Could not get camera instance!", e);
