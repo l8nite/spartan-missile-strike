@@ -38,7 +38,7 @@ MainView.prototype._loadViewAnimation = function (view, arbitraryPrevView) {
         }
         Imports.DomHelper.moveTo(view, window.innerWidth, 0);
         view.onView();
-        this._moveAnimation([view, oldView], window.innerWidth * -1, this._TRANSITIONSPEED, this._SMOOTHING, function () {
+        this._moveAnimation([view, oldView], window.innerWidth * -1, this._TRANSITION_TIME, this._SMOOTHING, function () {
             oldView.offView();
             if (arbitraryPrevView) {
                 that._viewStack = that._viewStack.slice(0, that._viewStack.indexOf(arbitraryPrevView) + 1);
@@ -68,7 +68,7 @@ MainView.prototype._previousViewAnimation = function () {
     }
     Imports.DomHelper.moveTo(newView, window.innerWidth * -1, 0);
     newView.onView();
-    this._moveAnimation([newView, oldView], window.innerWidth, this._TRANSITIONSPEED, this._SMOOTHING, function () {
+    this._moveAnimation([newView, oldView], window.innerWidth, this._TRANSITION_TIME, this._SMOOTHING, function () {
         oldView.offView();
         that._viewStack.pop();
         that._postAnimation();
@@ -115,7 +115,10 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
     }, 1000 / this._MAXFPS - new Date().getTime() + initialTime);
 };
 
-MainView.prototype._TRANSITIONSPEED = 200;
-// _SMOOTHING <= _TRANSITIONSPEED / 2
+// View transition animation time in milliseconds
+MainView.prototype._TRANSITION_TIME = 200;
+// Time in milliseconds to seperately accelerate/decelerate transition animations
+// _SMOOTHING <= _TRANSITION_TIME / 2
 MainView.prototype._SMOOTHING = 83;
+// Framerate limiter
 MainView.prototype._MAXFPS = 60;
