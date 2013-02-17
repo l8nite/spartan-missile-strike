@@ -17,7 +17,7 @@ public class AndroidBridge extends MissileApp {
     private Context context;
     private WebView webview;
     
-    private Vibrator v;                    //Device vibrator
+    private Vibrator vibrator;                    //Device vibrator
     
     /**
      * Android Concrete Methods for HTML/Native Bridge
@@ -31,9 +31,9 @@ public class AndroidBridge extends MissileApp {
         
         
         //Vibrator
-        v = (Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE);
-        if(!v.hasVibrator())
-            v = null;
+        vibrator = (Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE);
+        if(!vibrator.hasVibrator())
+            vibrator = null;
     }
     
     
@@ -101,8 +101,8 @@ public class AndroidBridge extends MissileApp {
         }
         
         // Vibrate if vibrator exists and time is greater than 0
-        if (v != null && milliseconds > 0) {
-            v.vibrate(milliseconds);
+        if (vibrator != null && milliseconds > 0) {
+            vibrator.vibrate(milliseconds);
         }
     }
     
