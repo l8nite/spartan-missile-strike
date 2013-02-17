@@ -55,32 +55,31 @@ public class AndroidBridge extends MissileApp {
      */
     public void hideSplash() {
         super.toast("Hide Splash Command Recieved.");
-        try {
-            // Show WebView
-            super.findViewById(R.id.webView).setVisibility(View.VISIBLE);
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Could not show webview", e);
-            // TODO send event back to Native Bridge
-        }
-        
-        try {
-            // Show Camera View
-            super.findViewById(R.id.camView).setVisibility(View.VISIBLE);
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Could not show camView", e);
-            // TODO send event back to Native Bridge
-        }
+//        try {
+//            // Show WebView
+//            super.findViewById(R.id.webView).setVisibility(View.VISIBLE);
+//        }
+//        catch (Exception e) {
+//            MALogger.log(TAG, Log.ERROR, "Could not show webview", e);
+//            // TODO send event back to Native Bridge
+//        }
+//        
+//        try {
+//            // Show Camera View
+//            super.findViewById(R.id.camView).setVisibility(View.VISIBLE);
+//        }
+//        catch (Exception e) {
+//            MALogger.log(TAG, Log.ERROR, "Could not show camView", e);
+//            // TODO send event back to Native Bridge
+//        }
         
         try {
             // Hide Splash Screen
             super.findViewById(R.id.splashScreenView).setVisibility(View.GONE);
         }
         catch (Exception e) {
-            // This shouldn't be a problem because the webview and cam view take precedence
             MALogger.log(TAG, Log.INFO, "Could not hide splash screen", e);
-            // TODO send event back to Native Bridge
+            // TODO send event back to Native Bridge?
         }
     }
     
