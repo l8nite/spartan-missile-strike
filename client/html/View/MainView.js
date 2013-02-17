@@ -106,8 +106,7 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
         initialPos = [],
         initialTime = new Date().getTime(),
         velocity = translation_x / (time - smoothing),
-        plateauTime = time - 2 * smoothing,
-        startDecelTime = time - smoothing;
+        plateauTime = time - 2 * smoothing;
     for (var i in nodes) {
         initialPos[i] = Imports.DomHelper.getPos(nodes[i]).x;
     }
