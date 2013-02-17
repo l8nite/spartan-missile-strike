@@ -54,6 +54,7 @@ public class AndroidBridge extends MissileApp {
      * Hides Splash Screen when the webView has been fully loaded
      */
     public void hideSplash() {
+        super.toast("Hide Splash Command Recieved.");
         try {
             // Show WebView
             super.findViewById(R.id.webView).setVisibility(View.VISIBLE);

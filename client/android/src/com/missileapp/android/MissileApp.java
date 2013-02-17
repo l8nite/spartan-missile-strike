@@ -18,7 +18,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     
     
     // Settings Variables
-    private static final String TAG = "com.missileapp.android.MissileApp"; // Class Name for Logging
+    private static final String TAG = "MainApp";                           // Class Name for Logging
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
     private static final String DROIDWB_FILENAME = "file:///android_asset/" + "index" + ".html"; // Webview file to load
     private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
@@ -31,7 +31,13 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private SurfaceView surfaceView;           // Surface View for layout options
     private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
     private WebView webView;                   // WebView for UI
-    private SharedPreferences settings;        // User Preferences 
+    private SharedPreferences settings;        // User Preferences
+    
+    
+    
+    public void toast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
     
     /*********************************
      * Android OS call back functions
@@ -48,9 +54,13 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             //TODO Prompt user to turn on GPS and preference
         }
         
+        MALogger.log(TAG, Log.INFO, "Loaded Preferences");
+        
         surfaceView = (SurfaceView) findViewById(R.id.camView);
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
+        
+        MALogger.log(TAG, Log.INFO, "Loading Surface Holder");
     }
 
     @Override
