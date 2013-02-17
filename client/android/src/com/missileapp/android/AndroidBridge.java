@@ -1,6 +1,5 @@
 package com.missileapp.android;
 
-import android.R.bool;
 import android.content.Context;
 import android.os.Vibrator;
 import android.util.Log;

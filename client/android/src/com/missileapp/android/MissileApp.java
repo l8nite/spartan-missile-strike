@@ -20,7 +20,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     // Settings Variables
     private static final String TAG = "com.missileapp.android.MissileApp"; // Class Name for Logging
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
-    private static final String DROIDWB_FILENAME = "file:///android_asset/" + "View/ViewFramework-test" + ".html"; // Webview file to load
+    private static final String DROIDWB_FILENAME = "file:///android_asset/" + "index" + ".html"; // Webview file to load
     private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
     private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location
                                                                            // True -> Ask user, False -> skip
