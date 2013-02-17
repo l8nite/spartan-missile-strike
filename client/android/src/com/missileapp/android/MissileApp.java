@@ -58,9 +58,10 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         surfaceView = (SurfaceView) findViewById(R.id.camView);
         surfaceHolder = surfaceView.getHolder();
+        MALogger.log(TAG, Log.INFO, "Adding Callback");
         surfaceHolder.addCallback(this);
         
-        MALogger.log(TAG, Log.INFO, "Loading Surface Holder");
+        MALogger.log(TAG, Log.INFO, "Loaded Surface Holder");
     }
 
     @Override
