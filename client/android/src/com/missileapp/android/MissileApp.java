@@ -91,9 +91,11 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Get the default reverse facing camera
         try {
             cam = Camera.open();
-            cam.setDisplayOrientation(CAMERA_ORIENTATION);
-            cam.setPreviewDisplay(holder);
-            cam.unlock();
+            if(cam != null) {
+                cam.setDisplayOrientation(CAMERA_ORIENTATION);
+                cam.setPreviewDisplay(holder);
+                cam.unlock();
+            }
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.ERROR, "Could not get camera instance!", e);
