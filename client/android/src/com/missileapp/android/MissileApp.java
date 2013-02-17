@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
@@ -62,6 +63,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         surfaceHolder.addCallback(this);
         
         MALogger.log(TAG, Log.INFO, "Loaded Surface Holder");
+        
+        super.findViewById(R.id.camView).setVisibility(View.INVISIBLE);
+        super.findViewById(R.id.webView).setVisibility(View.INVISIBLE);
     }
 
     @Override
