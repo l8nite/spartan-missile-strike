@@ -6,8 +6,8 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebView;
+import android.widget.Toast;
 import android.app.Activity;
 import android.content.SharedPreferences;
 
@@ -78,6 +78,104 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     
     
     
+    
+    
+    
+    
+    
+    
+    /********************************
+     * Camera functions
+     ********************************/
+    /**
+     * Locks the front facing camera
+     * @param holder the SurfaceHolder that the camera data should be drawn on
+     */
+    public void openCam(SurfaceHolder holder) {
+        MALogger.log(TAG, Log.INFO, "Opening Cam");
+        
+        // Camera should not have been open. Reset cam
+        closeCam();
+        
+        // Get the default reverse facing camera
+        try {
+            cam = Camera.open();
+            if(cam != null) {
+                cam.setDisplayOrientation(CAMERA_ORIENTATION);
+                cam.setPreviewDisplay(holder);
+                cam.unlock();
+            }
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, "Could not get camera instance!", e);
+        }
+    }
+    
+    /**
+     * Lock the Camera and Start the Preview
+     */
+    public void rollCam() {
+        try {
+            if (cam != null) {
+                cam.lock();
+                cam.startPreview();
+            }
+            else {
+                MALogger.log(TAG, Log.ERROR, "Camera is null.");
+            }
+        }
+        catch (Exception e) {
+            Toast.makeText(this, "Error Starting Camera...", Toast.LENGTH_SHORT).show();
+            MALogger.log(TAG, Log.ERROR, "Error starting camera", e);
+        }
+    }
+    
+    /**
+     * Stop the Camera Preview and Unlock
+     */
+    public void cutCam() {
+        try {
+            if (cam != null) {
+                cam.stopPreview();
+                cam.unlock();
+            }
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, "Error starting camera", e);
+        }
+    }
+    
+    /**
+     * Permenantly release the camera
+     */
+    public void closeCam() {
+        if (cam != null) {
+            try {
+                // Stop the preview and release
+                cam.stopPreview();
+                cam.release();
+            }
+            catch (Exception e) {
+                MALogger.log(TAG, Log.ERROR, "Camera Reset Error", e);
+            }
+            finally {
+                cam = null;
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*********************************
+     * Surface call back function
+     *********************************/
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         // TODO Auto-generated method stub
