@@ -8,9 +8,11 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 
+@SuppressLint("SetJavaScriptEnabled")
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
     //TODO [MARKER] REMOVE WAKELOCK FROM ANDROID MANIFEST FILE
     
@@ -56,7 +58,10 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.findViewById(R.id.webView).setVisibility(View.INVISIBLE);
         
         // Set up WebView
-        
+        webView = (WebView) findViewById(R.id.webView);
+        webView.addJavascriptInterface(new AndroidBridge(this, webView), DROIDNB_VARNAME);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(DROIDWB_FILENAME);
     }
     
     
@@ -64,7 +69,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onResume() {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
-        //TODO: Handle unlock case.
+        //TODO: Handle unlock case and in firescreen.
     }
     
     
