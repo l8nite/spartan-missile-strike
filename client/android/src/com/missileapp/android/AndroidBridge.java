@@ -38,4 +38,21 @@ public class AndroidBridge extends MissileApp {
         String url = NBCallBack_prefix + callbackident + "," + callbackData + NBCallBack_postfix;
         webview.loadUrl(url);
     }
+    
+    
+    
+    
+    /**
+     * Hides Splash Screen when the webView has been fully loaded
+     */
+    public void hideSplash() {
+        try {
+            // Hide Splash Screen
+            super.findViewById(R.id.splashScreenView).setVisibility(View.GONE);
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.INFO, "Could not hide splash screen", e);
+            // TODO send event back to Native Bridge?
+        }
+    }
 }
