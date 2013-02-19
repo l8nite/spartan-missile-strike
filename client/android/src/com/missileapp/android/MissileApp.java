@@ -53,10 +53,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
         
-        // Trigger Callback functions
-        super.findViewById(R.id.camView).setVisibility(View.INVISIBLE);
-        super.findViewById(R.id.webView).setVisibility(View.INVISIBLE);
-        
         // Set up WebView
         webView = (WebView) findViewById(R.id.webView);
         webView.addJavascriptInterface(new AndroidBridge(this, webView), DROIDNB_VARNAME);
