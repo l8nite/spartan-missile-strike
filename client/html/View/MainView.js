@@ -32,9 +32,13 @@ MainView.prototype._loadViewAnimation = function (view, arbitraryPrevView) {
     var that = this;
     if (this._viewStack.length > 0) {
         var oldView = this._viewStack[this._viewStack.length - 1];
+        if (view === oldView) {
+            this._postAnimation();
+            return;
+        }
         Imports.DomHelper.moveTo(view, window.innerWidth, 0);
         view.onView();
-        this._moveAnimation([view, oldView], window.innerWidth * -1, this._TRANSITIONSPEED, this._SMOOTHING, function () {
+        this._moveAnimation([view, oldView], window.innerWidth * -1, this._TRANSITION_TIME, this._SMOOTHING, function () {
             oldView.offView();
             if (arbitraryPrevView) {
                 that._viewStack = that._viewStack.slice(0, that._viewStack.indexOf(arbitraryPrevView) + 1);
@@ -51,12 +55,20 @@ MainView.prototype._loadViewAnimation = function (view, arbitraryPrevView) {
 };
 
 MainView.prototype._previousViewAnimation = function () {
-    var that = this;
-    var oldView = this._viewStack[this._viewStack.length - 1];
-    var newView = this._viewStack[this._viewStack.length - 2];
+    var that = this,
+        oldView = this._viewStack[this._viewStack.length - 1],
+        newView = this._viewStack[this._viewStack.length - 2];
+    if (!newView) {
+        this._postAnimation();
+        return;
+    } else if (oldView === newView) {
+        this._viewStack.pop();
+        this._postAnimation();
+        return;
+    }
     Imports.DomHelper.moveTo(newView, window.innerWidth * -1, 0);
     newView.onView();
-    this._moveAnimation([newView, oldView], window.innerWidth, this._TRANSITIONSPEED, this._SMOOTHING, function () {
+    this._moveAnimation([newView, oldView], window.innerWidth, this._TRANSITION_TIME, this._SMOOTHING, function () {
         oldView.offView();
         that._viewStack.pop();
         that._postAnimation();
@@ -73,38 +85,40 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
             then();
         }
         else {
-            var dt = currentFrameTime - prevFrameTime,
-                smoothingFactor = Math.min(
-                    (currentFrameTime - initialTime) / (dt + smoothing),
-                    (initialTime + actualTime - prevFrameTime + smoothing) / (dt + smoothing),
-                    1
-                ),
-                dx = baseVelocity * dt * smoothingFactor;
+            var x = 0,
+                t_total = currentFrameTime - initialTime,
+                t = Math.min(smoothing, Math.max(t_total, 0));
+            x += t * t * velocity / 2 / smoothing;
+            t = Math.min(plateauTime, Math.max(t_total - smoothing, 0));
+            x += t * velocity;
+            t = Math.min(smoothing, Math.max(t_total - smoothing - plateauTime, 0));
+            x += (2 * smoothing - t) * velocity * t / 2 / smoothing;
             for (var i in nodes) {
-                pos[i] += dx;
-                Imports.DomHelper.moveTo(nodes[i], pos[i]);
+                Imports.DomHelper.moveTo(nodes[i], initialPos[i] + x);
             }
-            prevFrameTime = currentFrameTime;
             setTimeout(function () {
                 doMove();
-            }, 1 / this._MAXFPS - new Date().getTime() + currentFrameTime);
+            }, 1000 / that._MAXFPS - new Date().getTime() + currentFrameTime);
         }
     }
 
-    var actualTime = time - smoothing,
-        initialTime = prevFrameTime = new Date().getTime(),
-        pos = [],
+    var that = this,
         initialPos = [],
-        baseVelocity = translation_x / actualTime;
+        initialTime = new Date().getTime(),
+        velocity = translation_x / (time - smoothing),
+        plateauTime = time - 2 * smoothing;
     for (var i in nodes) {
-        pos[i] = Imports.DomHelper.getPos(nodes[i]).x;
-        initialPos[i] = pos[i];
+        initialPos[i] = Imports.DomHelper.getPos(nodes[i]).x;
     }
     setTimeout(function () {
         doMove()
-    }, 1 / this._MAXFPS - new Date().getTime() + initialTime);
+    }, 1000 / this._MAXFPS - new Date().getTime() + initialTime);
 };
 
-MainView.prototype._TRANSITIONSPEED = 200;
-MainView.prototype._SMOOTHING = 50;
+// View transition animation time in milliseconds
+MainView.prototype._TRANSITION_TIME = 200;
+// Time in milliseconds to seperately accelerate/decelerate transition animations
+// _SMOOTHING <= _TRANSITION_TIME / 2
+MainView.prototype._SMOOTHING = 83;
+// Framerate limiter
 MainView.prototype._MAXFPS = 60;
