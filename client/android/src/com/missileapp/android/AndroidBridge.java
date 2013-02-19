@@ -28,4 +28,14 @@ public class AndroidBridge extends MissileApp {
         this.context = context;
         this.webview = webview;
     }
+    
+    /**
+     * Calls the NativeBridge CallBack function
+     * @param callbackident - callback identifier, see Native Bridge
+     * @param callbackData - data to pass to the callback identifier
+     */
+    public void callJS(String callbackident, String callbackData) {
+        String url = NBCallBack_prefix + callbackident + "," + callbackData + NBCallBack_postfix;
+        webview.loadUrl(url);
+    }
 }
