@@ -13,6 +13,9 @@
 			background-color: #F08080;
 		}
 		#fire {
+			background-color: transparent;
+		}
+		#fire div {
 			background-color: #80F080;
 		}
 		#options {
@@ -33,36 +36,36 @@
 <body>
 	<div id="main-menu">
 		<div>Main Menu</div><br>
-		<div onclick="mainView.loadView(map)">Resume game</div>
-		<div onclick="mainView.loadView(opponents)">New game</div>
-		<div onclick="mainView.loadView(base)">Accept invitation</div>
-		<div onclick="mainView.loadView(options)">Options</div>
+		<div onmousedown="mainView.loadView(map)">Resume game</div>
+		<div onmousedown="mainView.loadView(opponents)">New game</div>
+		<div onmousedown="mainView.loadView(base)">Accept invitation</div>
+		<div onmousedown="mainView.loadView(options)">Options</div>
 		<div style="height: 2000px;"></div>
 	</div>
 	<div id="map">
 		<div>Map view</div><br>
-		<div onclick="mainView.previousView()">Back</div><br>
-		<div onclick="mainView.loadView(fire)">Fire</div>
-		<div onclick="mainView.loadView(options)">Options</div>
+		<div onmousedown="mainView.previousView()">Back</div><br>
+		<div onmousedown="mainView.loadView(fire)">Fire</div>
+		<div onmousedown="mainView.loadView(options)">Options</div>
 	</div>
 	<div id="fire">
 		<div>Fire view</div><br>
-		<div onclick="mainView.previousView()">Back</div><br>
-		<div onclick="mainView.loadView(options)">Options</div><br>
+		<div onmousedown="mainView.previousView()">Back</div><br>
+		<div onmousedown="mainView.loadView(options)">Options</div><br>
 	</div>
 	<div id="options">
 		<div>Options</div><br>
-		<div onclick="mainView.previousView()">Back</div><br>
+		<div onmousedown="mainView.previousView()">Back</div><br>
 	</div>
 	<div id="opponents">
 		<div>Opponents</div><br>
-		<div onclick="mainView.previousView()">Back</div><br>
-		<div onclick="mainView.loadView(base)">Choose base</div>
+		<div onmousedown="mainView.previousView()">Back</div><br>
+		<div onmousedown="mainView.loadView(base)">Choose base</div>
 	</div>
 	<div id="base">
 		<div>Choose base</div><br>
-		<div onclick="mainView.previousView()">Back</div><br>
-		<div onclick="mainView.loadView(map, mainMenu)">Begin game</div>
+		<div onmousedown="mainView.previousView()">Back</div><br>
+		<div onmousedown="mainView.loadView(map, mainMenu)">Begin game</div>
 	</div>
 	<script>
 		Imports = {};
