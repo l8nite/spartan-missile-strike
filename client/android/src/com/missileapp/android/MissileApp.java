@@ -43,7 +43,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Get user settings, mode_private --> accessible only by this process
         settings = getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE);
         if(settings.getBoolean(PREFERENCES_GPSPROMPT, true)) {
-            //TODO Prompt user to turn on GPS and preference
+            //TODO Prompt user to turn on GPS and preference to prompts
         }
         
         // Create surface view for cam preview and register callback functions
@@ -54,6 +54,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Trigger Callback functions
         super.findViewById(R.id.camView).setVisibility(View.INVISIBLE);
         super.findViewById(R.id.webView).setVisibility(View.INVISIBLE);
+        
+        // Set up WebView
+        
     }
     
     
@@ -61,6 +64,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onResume() {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
+        //TODO: Handle unlock case.
     }
     
     
@@ -68,6 +72,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onPause() {
         super.onPause();
         MALogger.log(TAG, Log.INFO, "Pausing activity.");
+        cutCam();
     }
     
     
@@ -75,6 +80,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onStop() {
         super.onStop();
         MALogger.log(TAG, Log.INFO, "Stopping activity.");
+        closeCam();
     }
     
     
