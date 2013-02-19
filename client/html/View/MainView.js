@@ -86,7 +86,7 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
         }
         else {
             var x = 0,
-                t_total = currentFrameTime - initialTime;
+                t_total = currentFrameTime - initialTime,
                 t = Math.min(smoothing, Math.max(t_total, 0));
             x += t * t * velocity / 2 / smoothing;
             t = Math.min(plateauTime, Math.max(t_total - smoothing, 0));
