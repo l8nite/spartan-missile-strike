@@ -32,7 +32,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private WebView webView;                   // WebView for UI
     private SharedPreferences settings;        // User Preferences
     
-    
     /*********************************
      * Android OS call back functions
      *********************************/
@@ -57,17 +56,20 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.findViewById(R.id.webView).setVisibility(View.INVISIBLE);
     }
     
+    
     @Override
     protected void onResume() {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
     }
-
+    
+    
     @Override
     protected void onPause() {
         super.onPause();
         MALogger.log(TAG, Log.INFO, "Pausing activity.");
     }
+    
     
     @Override
     protected void onStop() {
@@ -111,6 +113,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         }
     }
     
+    
     /**
      * Lock the Camera and Start the Preview
      */
@@ -129,6 +132,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             MALogger.log(TAG, Log.ERROR, "Error starting camera", e);
         }
     }
+    
     
     /**
      * Stop the Camera Preview and Unlock
@@ -178,22 +182,51 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      *********************************/
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        // TODO Auto-generated method stub
-        
+        try {
+            // Create camera if it doesn't exist, else set the preview surface
+            if (cam == null) {
+                this.openCam(holder);
+            }
+            else {
+                cam.setPreviewDisplay(holder);
+            }
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.INFO, "Could not open Cam", e);
+        }
     }
     
     
+    /**
+     * Surface Holder changes
+     * @param holder - the holder to draw the camera preview, {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
+     * @param format - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
+     * @param width - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)
+     * @param height - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
+     */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        // TODO Auto-generated method stub
-        
+        try {
+            // Create camera if it doesn't exist, else set the preview surface
+            if (cam == null) {
+                this.openCam(holder);
+            }
+            else {
+                cam.setPreviewDisplay(holder);
+            }
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.INFO, "Could not open Cam", e);
+        }
     }
+
     
+    /**
+     * Surface Holder was destroyed
+     * @param holder Holder that was destroyed
+     */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        // TODO Auto-generated method stub
-        
+        this.closeCam();
     }
-    
-    
 }
