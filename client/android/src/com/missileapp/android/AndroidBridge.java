@@ -7,7 +7,6 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
-@SuppressWarnings({"unused"})
 public class AndroidBridge extends MissileApp {
     // Data
     private static final String TAG = "AndroidBridge";          //TAG for logging
@@ -25,7 +24,6 @@ public class AndroidBridge extends MissileApp {
      * @param webview - MissileApp webView {@link WebView}
      */
     public AndroidBridge(Context context, WebView webview) {
-        super();
         this.context = context;
         this.webview = webview;
         
@@ -54,7 +52,7 @@ public class AndroidBridge extends MissileApp {
     public void hideSplash() {
         try {
             // Hide Splash Screen
-            ImageView splash = (ImageView) findViewById(R.id.splashview);
+            ImageView splash = (ImageView) ((MissileApp) context).findViewById(R.id.splashview);
             splash.setVisibility(View.GONE);
         }
         catch (Exception e) {

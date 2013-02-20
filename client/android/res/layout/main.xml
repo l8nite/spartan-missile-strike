@@ -22,7 +22,6 @@
         android:contentDescription="@string/splash_screen_info"
         android:background="@android:color/black"
         android:src="@drawable/splashscreen"
-        android:visibility="invisible"
     />
 
 </RelativeLayout>
