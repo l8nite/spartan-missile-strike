@@ -5,6 +5,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
 
 @SuppressWarnings({"unused"})
 public class AndroidBridge extends MissileApp {
@@ -53,7 +54,8 @@ public class AndroidBridge extends MissileApp {
     public void hideSplash() {
         try {
             // Hide Splash Screen
-            super.findViewById(R.id.splashScreenView).setVisibility(View.GONE);
+            ImageView splash = (ImageView) findViewById(R.id.splashview);
+            splash.setVisibility(View.GONE);
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.INFO, "Could not hide splash screen", e);

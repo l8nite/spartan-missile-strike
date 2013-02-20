@@ -48,12 +48,12 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         }
         
         // Create surface view for cam preview and register callback functions
-        surfaceView = (SurfaceView) findViewById(R.id.camView);
+        surfaceView = (SurfaceView) findViewById(R.id.camview);
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
         
         // Set up WebView
-        webView = (WebView) findViewById(R.id.webView);
+        webView = (WebView) findViewById(R.id.webview);
         webView.addJavascriptInterface(new AndroidBridge(this, webView), DROIDNB_VARNAME);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(DROIDWB_FILENAME);
