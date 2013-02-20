@@ -27,6 +27,11 @@ public class AndroidBridge extends MissileApp {
         super();
         this.context = context;
         this.webview = webview;
+        
+        
+        //NOTE: System Services are not available during this phase 
+        // Init variables
+        vibrator = null;
     }
     
     /**
@@ -53,6 +58,34 @@ public class AndroidBridge extends MissileApp {
         catch (Exception e) {
             MALogger.log(TAG, Log.INFO, "Could not hide splash screen", e);
             // TODO send event back to Native Bridge?
+        }
+    }
+    
+    
+    
+    /**
+     * Vibrates the Android device 
+     * @param time - time to vibrate the device
+     */
+    public void vibrate(String time) {
+        long milliseconds;
+        
+        // Parse time
+        try {
+            milliseconds = Long.parseLong(time);
+        }
+        catch (Exception e) {
+            milliseconds = 0;
+        }
+        
+        // Create Vibrator if it existst
+        if(vibrator == null) {
+            vibrator = (Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE);
+        }
+        
+        // Vibrate if the vibrator instance is created, has a vibrator, and the time to vibrate is greater than 0ms 
+        if (vibrator != null && vibrator.hasVibrator() && milliseconds > 0) {
+            vibrator.vibrate(milliseconds);
         }
     }
 }
