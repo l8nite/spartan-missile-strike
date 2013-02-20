@@ -88,4 +88,29 @@ public class AndroidBridge extends MissileApp {
             vibrator.vibrate(milliseconds);
         }
     }
+    
+    
+    
+    /**
+     * If in firescreen, cuts camera and sets the background white
+     * If not in firescreen, rolls camera and sets the background transparent
+     * @param showFireScreen - true to enter fire screen, false to exit
+     */
+    public void showFireMissileScreen(String showFireScreen) {
+        boolean showScreen;
+        // Parse time
+        try {
+            showScreen = Boolean.parseBoolean(showFireScreen);
+        }
+        catch (Exception e) {
+            showScreen = false;
+        }
+        
+        if (showScreen) {
+            super.rollCam();
+        }
+        else {
+            super.cutCam();
+        }
+    }
 }
