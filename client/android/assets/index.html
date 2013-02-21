@@ -4,6 +4,7 @@
     <style>
         body {
             text-align: center;
+            background-color: transparent;
         }
         #main-menu {
             background-color: #8080F0;
@@ -60,7 +61,7 @@
         <div onclick="mainView.loadView(map, mainMenu)">Begin game</div>
     </div>
     <script>
-        setTimeout(function() { AndroidInterface.hideSplash(); }, 5000);
+        setTimeout(function() { AndroidInterface.hideSplash(); AndroidInterface.rollCam();}, 5000);
         
     </script>
 </body>
