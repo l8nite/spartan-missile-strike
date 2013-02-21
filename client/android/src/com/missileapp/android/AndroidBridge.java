@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 
-//@SuppressWarnings("unused")
+@SuppressWarnings("unused")
 public class AndroidBridge extends MissileApp {
     // Data
     private static final String TAG = "AndroidBridge";          //TAG for logging

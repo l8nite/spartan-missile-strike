@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 
 @SuppressLint("SetJavaScriptEnabled")
+@SuppressWarnings({"unused"})
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
     //TODO [MARKER] REMOVE WAKELOCK FROM ANDROID MANIFEST FILE
     
@@ -192,6 +193,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      *********************************/
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        MALogger.log(TAG, Log.VERBOSE, "Surface Created.");
         try {
             // Create camera if it doesn't exist, else set the preview surface
             if (cam == null) {
@@ -216,6 +218,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        MALogger.log(TAG, Log.VERBOSE, "Surface Changed.");
         try {
             // Create camera if it doesn't exist, else set the preview surface
             if (cam == null) {
