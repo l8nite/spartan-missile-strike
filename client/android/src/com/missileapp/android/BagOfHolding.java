@@ -11,7 +11,7 @@ import android.widget.ImageView;
 /**
  * Bag of Holding - Holds the application data and variables
  */
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public class BagOfHolding extends Application {
     private static BagOfHolding boh;
     
