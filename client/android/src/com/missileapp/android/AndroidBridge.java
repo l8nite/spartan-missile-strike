@@ -5,8 +5,8 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.ImageView;
 
+//@SuppressWarnings("unused")
 public class AndroidBridge extends MissileApp {
     // Data
     private static final String TAG = "AndroidBridge";          //TAG for logging
@@ -14,17 +14,20 @@ public class AndroidBridge extends MissileApp {
     private static final String NBCallBack_postfix = ");";
     
     private Context context;
+    private MissileApp missileapp;
     private WebView webview;
     
     private Vibrator vibrator;                    //Device vibrator
     
     /**
      * Android Concrete Methods for HTML/Native Bridge
-     * @param context - Android MissileApp Context {@link Context}
+     * @param context - Android MissileApp/Context {@link Context}
      * @param webview - MissileApp webView {@link WebView}
      */
-    public AndroidBridge(Context context, WebView webview) {
-        this.context = context;
+    public AndroidBridge(MissileApp missileApp, WebView webview) {
+        MALogger.log(TAG, Log.INFO, "Init Android Bridge");
+        this.context = (Context) missileApp;
+        this.missileapp = missileApp;
         this.webview = webview;
         
         
@@ -50,15 +53,22 @@ public class AndroidBridge extends MissileApp {
      * Hides Splash Screen when the webView has been fully loaded
      */
     public void hideSplash() {
-        try {
-            // Hide Splash Screen
-            ImageView splash = (ImageView) ((MissileApp) context).findViewById(R.id.splashview);
-            splash.setVisibility(View.GONE);
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.INFO, "Could not hide splash screen", e);
-            // TODO send event back to Native Bridge?
-        }
+        MALogger.log(TAG, Log.VERBOSE, "CMD Hide Splash");
+        // Runs on the UI Thread
+        runOnUiThread(new Runnable() {
+            
+            @Override
+            public void run() {
+                try {
+                    missileapp.findViewById(R.id.splashview).setVisibility(View.GONE);
+                    MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
+                }
+                catch (Exception e) {
+                    // There should be no exception here but just in case...
+                    MALogger.log(TAG, Log.ERROR, "Unable to hid splash: " + e.getMessage(), e);
+                }
+            }
+        });
     }
     
     
