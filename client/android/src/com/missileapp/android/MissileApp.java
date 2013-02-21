@@ -19,13 +19,15 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     
     // Settings Variables
     private static final String TAG = "MainApp";                           // Class Name for Logging
+    private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
+    private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location, True -> Ask user, False -> skip
+    private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
     private static final String DROIDWB_FILENAME =                         // Webview file to load
             "file:///android_asset/" + "index" + ".html";
-    private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
-    private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location
-                                                                           // True -> Ask user, False -> skip
-    private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
+
+    // Varible Bag
+    private static BagOfHolding varBag;
     
     // Variables
     private Camera cam;                        // Camera settings
