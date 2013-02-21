@@ -6,17 +6,14 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 
-@SuppressWarnings("unused")
 public class AndroidBridge extends MissileApp {
     // Data
     private static final String TAG = "AndroidBridge";          //TAG for logging
     private static final String NBCallBack_prefix = "javascript:NativeBridge.callback(";
     private static final String NBCallBack_postfix = ");";
     
-    private Context context;
-    private MissileApp missileapp;
-    private WebView webview;
-    
+    // Variables
+    private static BagOfHolding varBag;           // Bag Of Holding for Variables
     private Vibrator vibrator;                    //Device vibrator
     
     /**
@@ -24,12 +21,8 @@ public class AndroidBridge extends MissileApp {
      * @param context - Android MissileApp/Context {@link Context}
      * @param webview - MissileApp webView {@link WebView}
      */
-    public AndroidBridge(MissileApp missileApp, WebView webview) {
+    public AndroidBridge(BagOfHolding varBag) {
         MALogger.log(TAG, Log.INFO, "Init Android Bridge");
-        this.context = (Context) missileApp;
-        this.missileapp = missileApp;
-        this.webview = webview;
-        
         
         //NOTE: System Services are not available during this phase 
         // Init variables
@@ -43,7 +36,7 @@ public class AndroidBridge extends MissileApp {
      */
     public void callJS(String callbackident, String callbackData) {
         String url = NBCallBack_prefix + callbackident + "," + callbackData + NBCallBack_postfix;
-        webview.loadUrl(url);
+        varBag.getWebView().loadUrl(url);
     }
     
     
@@ -60,7 +53,7 @@ public class AndroidBridge extends MissileApp {
             @Override
             public void run() {
                 try {
-                    missileapp.findViewById(R.id.splashview).setVisibility(View.GONE);
+                    varBag.getMissileApp().findViewById(R.id.splashview).setVisibility(View.GONE);
                     MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
                 }
                 catch (Exception e) {

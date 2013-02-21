@@ -29,25 +29,28 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     // Varible Bag
     private static BagOfHolding varBag;
     
-    // Variables
-    private Camera cam;                        // Camera settings
-    private SurfaceView surfaceView;           // Surface View for layout options
-    private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
-    private WebView webView;                   // WebView for UI
-    private AndroidBridge droidBridge;         // Android Interface to the WebView
-    private ImageView splashScreen;            // ImageView
-    private SharedPreferences settings;        // User Preferences
-    
     /*********************************
      * Android OS call back functions
      *********************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Variables
+        Camera cam;                        // Camera settings
+        SurfaceView surfaceView;           // Surface View for layout options
+        SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
+        WebView webView;                   // WebView for UI
+        AndroidBridge droidBridge;         // Android Interface to the WebView
+        ImageView splashScreen;            // ImageView
+        SharedPreferences settings;        // User Preferences
+        
+        // Init -> super create, set view, get variable data
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        varBag = BagOfHolding.getInstance();
         
         // Get user settings, mode_private --> accessible only by this process
         settings = getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE);
+        varBag.setSettings(settings);
         if(settings.getBoolean(PREFERENCES_GPSPROMPT, true)) {
             //TODO Prompt user to turn on GPS and preference to prompts
         }
@@ -55,14 +58,19 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Create surface view for cam preview and register callback functions
         surfaceView = (SurfaceView) findViewById(R.id.camview);
         surfaceHolder = surfaceView.getHolder();
+        varBag.setSurfaceView(surfaceView);
+        varBag.setSurfaceHolder(surfaceHolder);
         surfaceHolder.addCallback(this);
         
         // Store Image View for later call
         splashScreen = (ImageView) findViewById(R.id.splashview);
+        varBag.setSplashScreen(splashScreen);
         
         // Set up WebView
         webView = (WebView) findViewById(R.id.webview);
-        droidBridge = new AndroidBridge(this, webView);
+        droidBridge = new AndroidBridge(varBag);
+        varBag.setWebView(webView);
+        varBag.setDroidBridge(droidBridge);
         webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(DROIDWB_FILENAME);
@@ -116,7 +124,8 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Get the default reverse facing camera
         try {
-            cam = Camera.open();
+            Camera cam = Camera.open();
+            varBag.setCam(cam);
             if(cam != null) {
                 cam.setDisplayOrientation(CAMERA_ORIENTATION);
                 cam.setPreviewDisplay(holder);
@@ -134,6 +143,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     public void rollCam() {
         try {
+            Camera cam = varBag.getCam();
             if (cam != null) {
                 cam.lock();
                 cam.startPreview();
@@ -154,6 +164,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     public void cutCam() {
         try {
+            Camera cam = varBag.getCam();
             if (cam != null) {
                 cam.stopPreview();
                 cam.unlock();
@@ -168,6 +179,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      * Permenantly release the camera
      */
     public void closeCam() {
+        Camera cam = varBag.getCam();
         if (cam != null) {
             try {
                 // Stop the preview and release
@@ -179,6 +191,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             }
             finally {
                 cam = null;
+                varBag.setCam(null);
             }
         }
     }
@@ -200,6 +213,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         MALogger.log(TAG, Log.VERBOSE, "Surface Created.");
         try {
             // Create camera if it doesn't exist, else set the preview surface
+            Camera cam = varBag.getCam();
             if (cam == null) {
                 this.openCam(holder);
             }
@@ -225,6 +239,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         MALogger.log(TAG, Log.VERBOSE, "Surface Changed.");
         try {
             // Create camera if it doesn't exist, else set the preview surface
+            Camera cam = varBag.getCam();
             if (cam == null) {
                 this.openCam(holder);
             }
