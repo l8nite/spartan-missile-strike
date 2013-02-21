@@ -11,15 +11,16 @@ import android.widget.ImageView;
 /**
  * Bag of Holding - Holds the application data and variables
  */
-//@SuppressWarnings("unused")
 public class BagOfHolding extends Application {
     private static BagOfHolding boh;
     
     // Variables
+    private MissileApp missileApp;             // MissileApp instance
     private Camera cam;                        // Camera settings
     private SurfaceView surfaceView;           // Surface View for layout options
     private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
     private WebView webView;                   // WebView for UI
+    private AndroidBridge droidBridge;         // Android Interface to the WebView
     private ImageView splashScreen;            // ImageView
     private SharedPreferences settings;        // User Preferences
     
@@ -33,6 +34,7 @@ public class BagOfHolding extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        BagOfHolding.boh = this;
     }
     
     
@@ -72,6 +74,23 @@ public class BagOfHolding extends Application {
     public static BagOfHolding getInstance() {
         return boh;
     }
+    
+    /**
+     * Returns an instance of the MissileApp
+     * @return the instance of the missile app
+     */
+    public MissileApp getMissileApp() {
+        return missileApp;
+    }
+
+    /**
+     * Sets the instance of MissileApp
+     * @param missileApp the new instance of the missile app
+     */
+    public void setMissileApp(MissileApp missileApp) {
+        this.missileApp = missileApp;
+    }
+
 
     /**
      * Returns the Camera
@@ -152,6 +171,23 @@ public class BagOfHolding extends Application {
     public void setWebView(WebView webView) {
         this.webView = webView;
     }
+    
+    /**
+     * Get Android Bridge instance
+     * @return instance of Android Bridge
+     */
+    public AndroidBridge getDroidBridge() {
+        return droidBridge;
+    }
+
+    /**
+     * Sets an instance of Android Bridge
+     * @param droidBridge
+     */
+    public void setDroidBridge(AndroidBridge droidBridge) {
+        this.droidBridge = droidBridge;
+    }
+
 
     /**
      * A User's preferences in terms of SharedPreferences
