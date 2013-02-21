@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -25,12 +26,12 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
                                                                            // True -> Ask user, False -> skip
     private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
     
-
     // Variables
     private Camera cam;                        // Camera settings
     private SurfaceView surfaceView;           // Surface View for layout options
     private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
     private WebView webView;                   // WebView for UI
+    private ImageView splashScreen;            // ImageView
     private SharedPreferences settings;        // User Preferences
     
     /*********************************
@@ -51,6 +52,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         surfaceView = (SurfaceView) findViewById(R.id.camview);
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
+        
+        // Store Image View for later call
+        splashScreen = (ImageView) findViewById(R.id.splashview);
         
         // Set up WebView
         webView = (WebView) findViewById(R.id.webview);
