@@ -32,6 +32,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private SurfaceView surfaceView;           // Surface View for layout options
     private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
     private WebView webView;                   // WebView for UI
+    private AndroidBridge droidBridge;         // Android Interface to the WebView
     private ImageView splashScreen;            // ImageView
     private SharedPreferences settings;        // User Preferences
     
@@ -59,7 +60,8 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Set up WebView
         webView = (WebView) findViewById(R.id.webview);
-        webView.addJavascriptInterface(new AndroidBridge(this, webView), DROIDNB_VARNAME);
+        droidBridge = new AndroidBridge(this, webView);
+        webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(DROIDWB_FILENAME);
     }
