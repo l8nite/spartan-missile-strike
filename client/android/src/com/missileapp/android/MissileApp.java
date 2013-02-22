@@ -81,7 +81,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onResume() {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
-        //TODO: Handle unlock case and in firescreen.
         this.reopenCam();
     }
     
