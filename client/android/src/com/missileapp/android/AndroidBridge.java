@@ -23,6 +23,7 @@ public class AndroidBridge extends MissileApp {
      */
     public AndroidBridge(BagOfHolding varBag) {
         MALogger.log(TAG, Log.INFO, "Init Android Bridge");
+        AndroidBridge.varBag = varBag;
         
         //NOTE: System Services are not available during this phase 
         // Init variables
@@ -53,7 +54,7 @@ public class AndroidBridge extends MissileApp {
             @Override
             public void run() {
                 try {
-                    varBag.getMissileApp().findViewById(R.id.splashview).setVisibility(View.GONE);
+                    varBag.getSplashScreen().setVisibility(View.GONE);
                     MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
                 }
                 catch (Exception e) {

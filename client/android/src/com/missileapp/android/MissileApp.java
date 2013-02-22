@@ -47,6 +47,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         varBag = BagOfHolding.getInstance();
+        varBag.setMissileApp(this);
         
         // Get user settings, mode_private --> accessible only by this process
         settings = getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE);
