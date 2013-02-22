@@ -21,7 +21,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private static final String TAG = "MainApp";                           // Class Name for Logging
     private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
     private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location, True -> Ask user, False -> skip
-    private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
     private static final String DROIDWB_FILENAME =                         // Webview file to load
             "file:///android_asset/" + "index" + ".html";
@@ -83,6 +82,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
         //TODO: Handle unlock case and in firescreen.
+        this.reopenCam();
     }
     
     
@@ -90,7 +90,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onPause() {
         super.onPause();
         MALogger.log(TAG, Log.INFO, "Pausing activity.");
-        cutCam();
+        releaseCam();
     }
     
     
@@ -98,110 +98,45 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onStop() {
         super.onStop();
         MALogger.log(TAG, Log.INFO, "Stopping activity.");
-        closeCam();
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /********************************
-     * Camera functions
-     ********************************/
-    /**
-     * Locks the front facing camera
-     * @param holder the SurfaceHolder that the camera data should be drawn on
-     */
-    public void openCam(SurfaceHolder holder) {
-        MALogger.log(TAG, Log.INFO, "Opening Cam");
-        
-        // Camera should not have been open. Reset cam
-        closeCam();
-        
-        // Get the default reverse facing camera
-        try {
-            Camera cam = Camera.open();
-            varBag.setCam(cam);
-            if(cam != null) {
-                cam.setDisplayOrientation(CAMERA_ORIENTATION);
-                cam.setPreviewDisplay(holder);
-                cam.unlock();
-            }
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Could not get camera instance!", e);
-        }
+        releaseCam();
     }
     
     
     /**
-     * Lock the Camera and Start the Preview
+     * Reopen camera if it was in firescreen
      */
-    public void rollCam() {
-        try {
-            Camera cam = varBag.getCam();
-            if (cam != null) {
+    private void reopenCam() {
+        MALogger.log(TAG, Log.INFO, "Reopening Cam Method.");
+        Camera cam = varBag.getCam();
+        if(cam != null) {
+            try {
+                MALogger.log(TAG, Log.INFO, "Reopening Cam.");
                 cam.lock();
                 cam.startPreview();
             }
-            else {
-                MALogger.log(TAG, Log.ERROR, "Camera is null.");
+            catch (Exception e) {
+                MALogger.log(TAG, Log.ERROR, "Error Restarting Camera!", e);
             }
-        }
-        catch (Exception e) {
-            Toast.makeText(this, "Error Starting Camera...", Toast.LENGTH_SHORT).show();
-            MALogger.log(TAG, Log.ERROR, "Error starting camera", e);
         }
     }
     
-    
     /**
-     * Stop the Camera Preview and Unlock
+     * Release cam temporarily if it's in firescreen
      */
-    public void cutCam() {
-        try {
-            Camera cam = varBag.getCam();
-            if (cam != null) {
+    private void releaseCam() {
+        MALogger.log(TAG, Log.INFO, "Release Cam Method.");
+        Camera cam = varBag.getCam();
+        if(cam != null) {
+            try {
+                MALogger.log(TAG, Log.INFO, "Releasing Cam.");
                 cam.stopPreview();
                 cam.unlock();
             }
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Error starting camera", e);
-        }
-    }
-    
-    /**
-     * Permenantly release the camera
-     */
-    public void closeCam() {
-        Camera cam = varBag.getCam();
-        if (cam != null) {
-            try {
-                // Stop the preview and release
-                cam.stopPreview();
-                cam.release();
-            }
             catch (Exception e) {
-                MALogger.log(TAG, Log.ERROR, "Camera Reset Error", e);
-            }
-            finally {
-                cam = null;
-                varBag.setCam(null);
+                MALogger.log(TAG, Log.ERROR, "Error Releasing Camera!", e);
             }
         }
     }
-    
-    
-    
-    
-    
-    
     
     
     
@@ -212,19 +147,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         MALogger.log(TAG, Log.VERBOSE, "Surface Created.");
-        try {
-            // Create camera if it doesn't exist, else set the preview surface
-            Camera cam = varBag.getCam();
-            if (cam == null) {
-                this.openCam(holder);
-            }
-            else {
-                cam.setPreviewDisplay(holder);
-            }
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.INFO, "Could not open Cam", e);
-        }
+        varBag.setSurfaceHolder(holder);
     }
     
     
@@ -238,19 +161,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         MALogger.log(TAG, Log.VERBOSE, "Surface Changed.");
-        try {
-            // Create camera if it doesn't exist, else set the preview surface
-            Camera cam = varBag.getCam();
-            if (cam == null) {
-                this.openCam(holder);
-            }
-            else {
-                cam.setPreviewDisplay(holder);
-            }
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.INFO, "Could not open Cam", e);
-        }
+        varBag.setSurfaceHolder(holder);
     }
 
     
@@ -260,6 +171,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        this.closeCam();
+        MALogger.log(TAG, Log.INFO, "SurfaceHolder destroyed.");
+        varBag.setSurfaceHolder(null);
     }
 }
