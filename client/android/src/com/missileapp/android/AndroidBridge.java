@@ -106,13 +106,15 @@ public class AndroidBridge extends MissileApp {
      */
     public void showFireMissileScreen(String showFireScreen) {
         boolean showScreen;
-        // Parse time
+        
+        // Parse command
         try {
             showScreen = Boolean.parseBoolean(showFireScreen);
         }
         catch (Exception e) {
             showScreen = false;
         }
+        MALogger.log(TAG, Log.INFO, "Fire Screen command: " + showFireScreen + ", parsed to: " + showScreen + ".");
         
         if (showScreen) {
             this.rollCam();
@@ -124,6 +126,7 @@ public class AndroidBridge extends MissileApp {
     
     
     public void rollCam() {
+        MALogger.log(TAG, Log.INFO, "Roll Cam.");
         try {
             // Create and Save Variables, default to rear facing camera
             Camera cam = Camera.open();
@@ -151,6 +154,7 @@ public class AndroidBridge extends MissileApp {
     }
     
     public void stopCam() {
+        MALogger.log(TAG, Log.INFO, "Stop Cam.");
         try {
             // Stop Preview, unlock, and release
             Camera cam = varBag.getCam();
