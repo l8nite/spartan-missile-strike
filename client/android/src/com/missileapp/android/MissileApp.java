@@ -7,13 +7,11 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 
 @SuppressLint("SetJavaScriptEnabled")
-@SuppressWarnings({"unused"})
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
     //TODO [MARKER] REMOVE WAKELOCK FROM ANDROID MANIFEST FILE
     
@@ -34,7 +32,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Variables
-        Camera cam;                        // Camera settings
         SurfaceView surfaceView;           // Surface View for layout options
         SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
         WebView webView;                   // WebView for UI
