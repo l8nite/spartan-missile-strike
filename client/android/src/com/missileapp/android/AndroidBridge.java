@@ -100,6 +100,7 @@ public class AndroidBridge extends MissileApp {
      * @param time - time to vibrate the device
      */
     public void vibrate(String time) {
+        //TODO VERIFY THIS WORKS, SYSTEM SRVICES MAY NOT BE AVAILABLE HERE 
         long milliseconds;
         
         // Parse time
