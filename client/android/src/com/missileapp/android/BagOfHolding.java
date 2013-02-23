@@ -48,7 +48,6 @@ public class BagOfHolding extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        
     }
     
     
@@ -58,7 +57,6 @@ public class BagOfHolding extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        
     }
 
 
