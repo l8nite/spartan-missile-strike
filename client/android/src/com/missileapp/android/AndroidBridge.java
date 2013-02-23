@@ -2,6 +2,7 @@ package com.missileapp.android;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.provider.CallLog;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -9,7 +10,8 @@ import android.webkit.WebView;
 public class AndroidBridge extends MissileApp {
     // Data
     private static final String TAG = "AndroidBridge";                     // TAG for logging
-    private static final String NBCallBack_prefix = "javascript:NativeBridge.callback(";
+    private static final String CallJSPrefix = "javascript:"; 
+    private static final String NBCallBack_prefix = "NativeBridge.callback(";
     private static final String NBCallBack_postfix = ");";
     
     // Variables
@@ -37,9 +39,17 @@ public class AndroidBridge extends MissileApp {
      */
     public void callJS(String callbackident, String callbackData) {
         String url = NBCallBack_prefix + callbackident + "," + callbackData + NBCallBack_postfix;
-        varBag.getWebView().loadUrl(url);
+        this.callJS(url);
     }
     
+    
+    /**
+     * Calls the JavaScript and executes the 
+     * @param url - javascript to run
+     */
+    public void callJS(String url) {
+        varBag.getWebView().loadUrl(CallJSPrefix +  url);
+    }
     
     
     
