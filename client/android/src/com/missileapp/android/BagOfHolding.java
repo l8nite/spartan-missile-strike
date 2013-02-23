@@ -1,6 +1,7 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.UserPreferences;
 
 import android.app.Application;
@@ -30,6 +31,7 @@ public class BagOfHolding extends Application {
     private SharedPreferences settings;        // System User Preferences
     private UserPreferences userPrefs;         // Droid Native Bridge user prefs implementation
     private FireScreen fireScreen;             // FireScreen, contains the camear framework
+    private MediaManager mediaManager;         // Media Manager that keeps track of all files
     
     /*********************************
      * Android OS call back functions
@@ -253,4 +255,22 @@ public class BagOfHolding extends Application {
         this.fireScreen = fireScreen;
     }
 
+    /**
+     * Returns the instance of the {@link MediaManager}
+     * @return {@link MediaManager} instance
+     */
+    public MediaManager getMediaManager() {
+        return mediaManager;
+    }
+
+    /**
+     * Set the instance of the {@link MediaManager}
+     * @param mediaManager the new instance of the {@link MediaManager}
+     */
+    public void setMediaManager(MediaManager mediaManager) {
+        this.mediaManager = mediaManager;
+    }
+
+    
+    
 }
