@@ -12,16 +12,16 @@ public class FireScreen {
     // DATA
     private static final String TAG = "FireScreen";                        // TAG for logging
     private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
-    private static BagOfHolding varBag;                                    // Variable bag
+    private static BagOfHolding variables;                                    // Variable bag
     private static Camera cam;                                             // Camera
     
     
     /**
      * FireScreen constructoer
-     * @param varBag - MissileApp Application 
+     * @param variables - MissileApp Application 
      */
-    public FireScreen(BagOfHolding varBag) {
-        FireScreen.varBag = varBag;
+    public FireScreen(BagOfHolding variables) {
+        FireScreen.variables = variables;
     }
     
     
@@ -37,7 +37,7 @@ public class FireScreen {
             // Create and Save Variables, default to rear facing camera
             cam = Camera.open();
             if(cam != null) {
-                SurfaceHolder holder = varBag.getSurfaceHolder();
+                SurfaceHolder holder = variables.getSurfaceHolder();
                 
                 // Set Orientation and display  
                 cam.setDisplayOrientation(CAMERA_ORIENTATION);
@@ -49,7 +49,7 @@ public class FireScreen {
             }
             else {
                 MALogger.log(TAG, Log.WARN, "No Camera.");
-                Toast.makeText(varBag.getMissileApp(), "No Camera", Toast.LENGTH_SHORT).show();
+                Toast.makeText(variables.getMissileApp(), "No Camera", Toast.LENGTH_SHORT).show();
             }
                 
         }

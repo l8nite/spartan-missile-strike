@@ -14,7 +14,7 @@ public class AndroidBridge extends MissileApp {
     private static final String NBCallBack_postfix = ");";
     
     // Variables
-    private static BagOfHolding varBag;           // Bag Of Holding for Variables
+    private static BagOfHolding variables;           // Bag Of Holding for Variables
     private Vibrator vibrator;                    // Device vibrator
     
     /**
@@ -22,9 +22,9 @@ public class AndroidBridge extends MissileApp {
      * @param context - Android MissileApp/Context {@link Context}
      * @param webview - MissileApp webView {@link WebView}
      */
-    public AndroidBridge(BagOfHolding varBag) {
+    public AndroidBridge(BagOfHolding variables) {
         MALogger.log(TAG, Log.INFO, "Init Android Bridge");
-        AndroidBridge.varBag = varBag;
+        AndroidBridge.variables = variables;
         
         //NOTE: System Services are not available during this phase 
         // Init variables
@@ -47,7 +47,7 @@ public class AndroidBridge extends MissileApp {
      * @param url - javascript to run
      */
     public void callJS(String url) {
-        varBag.getWebView().loadUrl(CallJSPrefix +  url);
+        variables.getWebView().loadUrl(CallJSPrefix +  url);
     }
     
     
@@ -63,7 +63,7 @@ public class AndroidBridge extends MissileApp {
             @Override
             public void run() {
                 try {
-                    varBag.getSplashScreen().setVisibility(View.GONE);
+                    variables.getSplashScreen().setVisibility(View.GONE);
                     MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
                 }
                 catch (Exception e) {
@@ -81,7 +81,7 @@ public class AndroidBridge extends MissileApp {
      * @param callbackID - callback function to asscoiate with
      */
     public void getPreference(String preference, String callbackID) {
-        varBag.getUserPrefs().getPreference(callbackID, preference);
+        variables.getUserPrefs().getPreference(callbackID, preference);
     }
     
     
@@ -91,7 +91,7 @@ public class AndroidBridge extends MissileApp {
      * @param callbackID - callback function to asscoiate with
      */
     public void setPreference(String preference, String callbackID) {
-        varBag.getUserPrefs().setPreferences(callbackID, preference);
+        variables.getUserPrefs().setPreferences(callbackID, preference);
     }
     
     
@@ -142,10 +142,10 @@ public class AndroidBridge extends MissileApp {
         MALogger.log(TAG, Log.INFO, "Fire Screen command: " + showFireScreen + ", parsed to: " + showScreen + ".");
         
         if (showScreen) {
-            varBag.getFireScreen().enterFireScreen();
+            variables.getFireScreen().enterFireScreen();
         }
         else {
-            varBag.getFireScreen().exitFireScreen();
+            variables.getFireScreen().exitFireScreen();
         }
     }
     

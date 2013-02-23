@@ -15,15 +15,15 @@ public class UserPreferences {
     
     // Variables
     private static final String TAG = "UserPrefs";             // TAG for logging
-    private static BagOfHolding varBag;                        // Bag Of Holding for Variables
+    private static BagOfHolding varibles;                        // Bag Of Holding for Variables
     
     
     /**
      * User Preference Constructor
-     * @param varBag - {@link BagOfHolding} var bag
+     * @param variables - {@link BagOfHolding} var bag
      */
-    public UserPreferences(BagOfHolding varBag) {
-        UserPreferences.varBag = varBag;
+    public UserPreferences(BagOfHolding variables) {
+        UserPreferences.varibles = variables;
     }
     
     
@@ -35,7 +35,7 @@ public class UserPreferences {
     public void setPreferences(String callbackIdent, String newPreferences) {
         MALogger.log(TAG, Log.INFO, "Saving User Prefs: " + newPreferences);
         // Get Editor and preference from JSON Object
-        SharedPreferences.Editor prefs = varBag.getSettings().edit();
+        SharedPreferences.Editor prefs = varibles.getSettings().edit();
         boolean success = false;
         
         try {
@@ -74,7 +74,7 @@ public class UserPreferences {
         
         
         // Notify the Native Bridge
-        varBag.getDroidBridge().callJS(callbackIdent, callbackData);
+        varibles.getDroidBridge().callJS(callbackIdent, callbackData);
     }
     
     
@@ -85,12 +85,12 @@ public class UserPreferences {
      */
     public void getPreference(String callbackIdent, String key) {
         // Get Data from the application manager
-        SharedPreferences prefs =  varBag.getSettings();
+        SharedPreferences prefs =  varibles.getSettings();
         
         // Default to null as specced in Native Bridge Doc
         String callbackData = prefs.getString(key, null);
         
         // Call Back Native Bridge
-        varBag.getDroidBridge().callJS(callbackIdent, callbackData);
+        varibles.getDroidBridge().callJS(callbackIdent, callbackData);
     }
 }
