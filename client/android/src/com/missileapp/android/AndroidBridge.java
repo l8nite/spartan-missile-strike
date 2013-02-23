@@ -2,7 +2,6 @@ package com.missileapp.android;
 
 import android.content.Context;
 import android.os.Vibrator;
-import android.provider.CallLog;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
