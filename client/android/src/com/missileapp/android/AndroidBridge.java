@@ -66,6 +66,25 @@ public class AndroidBridge extends MissileApp {
     }
     
     
+    /**
+     * Get a user preference
+     * @param preference - retrieve user preference associated with the key 
+     * @param callbackID - callback function to asscoiate with
+     */
+    public void getPreference(String preference, String callbackID) {
+        varBag.getUserPrefs().getPreference(callbackID, preference);
+    }
+    
+    
+    /**
+     * Set (a) user preference(s)
+     * @param preference - json data with key value pairs 
+     * @param callbackID - callback function to asscoiate with
+     */
+    public void setPreference(String preference, String callbackID) {
+        varBag.getUserPrefs().setPreferences(callbackID, preference);
+    }
+    
     
     /**
      * Vibrates the Android device 

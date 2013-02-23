@@ -1,6 +1,7 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.UserPreferences;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -75,6 +76,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Store resource variables
         varBag.setFireScreen(new FireScreen(varBag));
+        varBag.setUserPrefs(new UserPreferences(varBag));
     }
     
     

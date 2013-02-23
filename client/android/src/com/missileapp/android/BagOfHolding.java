@@ -1,6 +1,7 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.UserPreferences;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -26,7 +27,8 @@ public class BagOfHolding extends Application {
     private ImageView splashScreen;            // ImageView
     
     // Resource variables
-    private SharedPreferences settings;        // User Preferences
+    private SharedPreferences settings;        // System User Preferences
+    private UserPreferences userPrefs;         // Droid Native Bridge user prefs implementation
     private FireScreen fireScreen;             // FireScreen, contains the camear framework
     
     /*********************************
@@ -218,7 +220,23 @@ public class BagOfHolding extends Application {
         this.settings = settings;
     }
     
-    
+    /**
+     * Instance of the User Perfences
+     * @return {@link UserPreferences} instance
+     */
+    public UserPreferences getUserPrefs() {
+        return userPrefs;
+    }
+
+    /**
+     * Sets the user preference class
+     * @param userPrefs new {@link UserPreferences} instance
+     */
+    public void setUserPrefs(UserPreferences userPrefs) {
+        this.userPrefs = userPrefs;
+    }
+
+
     /**
      * Returns ths {@link FireScreen} insance 
      * @return the instance of the {@link FireScreen}
