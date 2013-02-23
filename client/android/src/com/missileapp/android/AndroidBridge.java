@@ -11,14 +11,14 @@ import android.widget.Toast;
 
 public class AndroidBridge extends MissileApp {
     // Data
-    private static final String TAG = "AndroidBridge";                     //TAG for logging
+    private static final String TAG = "AndroidBridge";                     // TAG for logging
     private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
     private static final String NBCallBack_prefix = "javascript:NativeBridge.callback(";
     private static final String NBCallBack_postfix = ");";
     
     // Variables
     private static BagOfHolding varBag;           // Bag Of Holding for Variables
-    private Vibrator vibrator;                    //Device vibrator
+    private Vibrator vibrator;                    // Device vibrator
     
     /**
      * Android Concrete Methods for HTML/Native Bridge
@@ -63,7 +63,7 @@ public class AndroidBridge extends MissileApp {
                 }
                 catch (Exception e) {
                     // There should be no exception here but just in case...
-                    MALogger.log(TAG, Log.ERROR, "Unable to hid splash: " + e.getMessage(), e);
+                    MALogger.log(TAG, Log.ERROR, "Unable to hide splash: " + e.getMessage(), e);
                 }
             }
         });
@@ -85,6 +85,7 @@ public class AndroidBridge extends MissileApp {
         catch (Exception e) {
             milliseconds = 0;
         }
+        MALogger.log(TAG, Log.INFO, "Vibrate command: " + time + ", parsed to: " + milliseconds + ".");
         
         // Create Vibrator if it existst
         if(vibrator == null) {
