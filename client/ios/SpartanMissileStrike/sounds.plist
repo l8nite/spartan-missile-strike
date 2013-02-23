@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>MODERATO</key>
-	<string>Moderato</string>
+	<string>shared/audio/Moderato</string>
 </dict>
 </plist>
