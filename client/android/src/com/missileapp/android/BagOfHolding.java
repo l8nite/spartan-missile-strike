@@ -15,17 +15,18 @@ import android.widget.ImageView;
 public class BagOfHolding extends Application {
     private static BagOfHolding boh;
     
-    // Variables
+    // Primary Classes
     private MissileApp missileApp;             // MissileApp instance
+    private AndroidBridge droidBridge;         // Android Interface to the WebView
+    
+    // Android Views
     private SurfaceView surfaceView;           // Surface View for layout options
     private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
     private WebView webView;                   // WebView for UI
-    private AndroidBridge droidBridge;         // Android Interface to the WebView
     private ImageView splashScreen;            // ImageView
-    private SharedPreferences settings;        // User Preferences
-    
     
     // Resource variables
+    private SharedPreferences settings;        // User Preferences
     private FireScreen fireScreen;             // FireScreen, contains the camear framework
     
     /*********************************
@@ -67,9 +68,11 @@ public class BagOfHolding extends Application {
     
     
     
-    /*********************************
-     *       Getters and Setters
-     *********************************/
+    ///////////////////////////////////////////////
+    //
+    //          Primary Android Classes
+    //
+    ///////////////////////////////////////////////
     /**
      * Returns this class
      * @return this class holding all the variables
@@ -93,8 +96,33 @@ public class BagOfHolding extends Application {
     public void setMissileApp(MissileApp missileApp) {
         this.missileApp = missileApp;
     }
+    
+    /**
+     * Get {@link AndroidBridge} instance
+     * @return instance of {@link AndroidBridge}
+     */
+    public AndroidBridge getDroidBridge() {
+        return droidBridge;
+    }
 
-
+    /**
+     * Sets an instance of {@link AndroidBridge}
+     * @param droidBridge - the new instance of the {@link AndroidBridge}
+     */
+    public void setDroidBridge(AndroidBridge droidBridge) {
+        this.droidBridge = droidBridge;
+    }
+    
+    
+    
+    
+    
+    
+    ///////////////////////////////////////////////
+    //
+    //              Android Views
+    //
+    ///////////////////////////////////////////////
 
     /**
      * Returns the {@link SurfaceView} where the camera preview is drawn on
@@ -160,21 +188,20 @@ public class BagOfHolding extends Application {
         this.webView = webView;
     }
     
-    /**
-     * Get {@link AndroidBridge} instance
-     * @return instance of {@link AndroidBridge}
-     */
-    public AndroidBridge getDroidBridge() {
-        return droidBridge;
-    }
+    
 
-    /**
-     * Sets an instance of {@link AndroidBridge}
-     * @param droidBridge - the new instance of the {@link AndroidBridge}
-     */
-    public void setDroidBridge(AndroidBridge droidBridge) {
-        this.droidBridge = droidBridge;
-    }
+
+    
+    
+    
+    
+    
+    
+    ///////////////////////////////////////////////
+    //
+    //      Android Native Bridge Resources
+    //
+    ///////////////////////////////////////////////
 
 
     /**
@@ -192,19 +219,8 @@ public class BagOfHolding extends Application {
     public void setSettings(SharedPreferences settings) {
         this.settings = settings;
     }
-
     
     
-    
-    
-    
-    
-    ///////////////////////////////////////////////
-    //
-    //       Native Bridge Resources
-    //
-    ///////////////////////////////////////////////
-
     /**
      * Returns ths {@link FireScreen} insance 
      * @return the instance of the {@link FireScreen}
