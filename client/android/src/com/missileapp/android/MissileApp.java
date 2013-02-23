@@ -1,6 +1,7 @@
 package com.missileapp.android;
 
-import android.hardware.Camera;
+import com.missileapp.android.res.FireScreen;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -71,6 +72,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(DROIDWB_FILENAME);
+        
+        // Store resource variables
+        varBag.setFireScreen(new FireScreen(varBag));
     }
     
     
@@ -78,7 +82,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onResume() {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
-        this.reopenCam();
+        varBag.getFireScreen().processResumeRequest();
     }
     
     
@@ -86,7 +90,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onPause() {
         super.onPause();
         MALogger.log(TAG, Log.INFO, "Pausing activity.");
-        releaseCam();
+        varBag.getFireScreen().processPauseRequest();
     }
     
     
@@ -94,45 +98,16 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onStop() {
         super.onStop();
         MALogger.log(TAG, Log.INFO, "Stopping activity.");
-        releaseCam();
+        varBag.getFireScreen().processPauseRequest();
     }
     
-    
-    /**
-     * Reopen camera if it was in firescreen
-     */
-    private void reopenCam() {
-        MALogger.log(TAG, Log.INFO, "Reopening Cam Method.");
-        Camera cam = varBag.getCam();
-        if(cam != null) {
-            try {
-                MALogger.log(TAG, Log.INFO, "Reopening Cam.");
-                cam.lock();
-                cam.startPreview();
-            }
-            catch (Exception e) {
-                MALogger.log(TAG, Log.ERROR, "Error Restarting Camera!", e);
-            }
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MALogger.log(TAG, Log.INFO, "Activity Destroying");
+        varBag.getFireScreen().exitFireScreen();
     }
     
-    /**
-     * Release cam temporarily if it's in firescreen
-     */
-    private void releaseCam() {
-        MALogger.log(TAG, Log.INFO, "Release Cam Method.");
-        Camera cam = varBag.getCam();
-        if(cam != null) {
-            try {
-                MALogger.log(TAG, Log.INFO, "Releasing Cam.");
-                cam.stopPreview();
-                cam.unlock();
-            }
-            catch (Exception e) {
-                MALogger.log(TAG, Log.ERROR, "Error Releasing Camera!", e);
-            }
-        }
-    }
     
     
     

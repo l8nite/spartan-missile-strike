@@ -4,7 +4,6 @@ import com.missileapp.android.res.FireScreen;
 
 import android.app.Application;
 import android.content.SharedPreferences;
-import android.hardware.Camera;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
@@ -18,7 +17,6 @@ public class BagOfHolding extends Application {
     
     // Variables
     private MissileApp missileApp;             // MissileApp instance
-    private Camera cam;                        // Camera settings
     private SurfaceView surfaceView;           // Surface View for layout options
     private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
     private WebView webView;                   // WebView for UI
@@ -97,21 +95,6 @@ public class BagOfHolding extends Application {
     }
 
 
-    /**
-     * Returns the Camera
-     * @return Camera {@link Camera}
-     */
-    public Camera getCam() {
-        return cam;
-    }
-
-    /**
-     * Sets the Camera
-     * @param cam - Camera to save 
-     */
-    public void setCam(Camera cam) {
-        this.cam = cam;
-    }
 
     /**
      * Returns the {@link SurfaceView} where the camera preview is drawn on

@@ -13,6 +13,8 @@ public class FireScreen {
     private static final String TAG = "FireScreen";                        // TAG for logging
     private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
     private static BagOfHolding varBag;                                    // Variable bag
+    private static Camera cam;                                             // Camera
+    
     
     /**
      * FireScreen constructoer
@@ -23,14 +25,18 @@ public class FireScreen {
     }
     
     
-    //TODO Enter FireScreen here
-    public void rollCam() {
+    /**
+     * Enters the firesceen
+     *  Requests the reat-facing  {@link Camera}
+     *  Sets the draw screen
+     *  Starts the Preview (in Portrat)
+     */
+    public void enterFireScreen() {
         MALogger.log(TAG, Log.INFO, "Roll Cam.");
         try {
             // Create and Save Variables, default to rear facing camera
-            Camera cam = Camera.open();
+            cam = Camera.open();
             if(cam != null) {
-                varBag.setCam(cam);
                 SurfaceHolder holder = varBag.getSurfaceHolder();
                 
                 // Set Orientation and display  
@@ -51,20 +57,66 @@ public class FireScreen {
             MALogger.log(TAG, Log.ERROR, "Error Starting Camera", e);
         }
     }
+    
+    
+    /**
+     * Exits the FireScreen
+     *  Stop and Release the {@link Camera} 
+     */
+    public void exitFireScreen() {
+        MALogger.log(TAG, Log.INFO, "Stop Cam.");
+        try {
+            // Stop Preview, unlock, and release
+            if(cam != null) {
+                cam.stopPreview();
+                cam.unlock();
+                cam.release();
+            }
+            else {
+                MALogger.log(TAG, Log.WARN, "Camera is null.");
+            }
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, "Stopping Camera failed.", e);
+        }
+        finally {
+            cam = null;
+        }
+    }
 
     
-    //TODO Exit FireScreen Here
+    /**
+     * Release cam temporarily if it's in firescreen
+     */
+    public void processPauseRequest() {
+        MALogger.log(TAG, Log.INFO, "Release Cam Method.");
+        if(cam != null) {
+            try {
+                MALogger.log(TAG, Log.INFO, "Releasing Cam.");
+                cam.stopPreview();
+                cam.unlock();
+            }
+            catch (Exception e) {
+                MALogger.log(TAG, Log.ERROR, "Error Releasing Camera!", e);
+            }
+        }
+    }
+
     
-    
-    
-    
-    
-    
-    //TODO Process Pause Request
-    
-    
-    //TODO Process Reume Request
-    
-    
-    
+    /**
+     * Reopen camera if it was in firescreen
+     */
+    public void processResumeRequest() {
+        MALogger.log(TAG, Log.INFO, "Reopening Cam Method.");
+        if(cam != null) {
+            try {
+                MALogger.log(TAG, Log.INFO, "Reopening Cam.");
+                cam.lock();
+                cam.startPreview();
+            }
+            catch (Exception e) {
+                MALogger.log(TAG, Log.ERROR, "Error Restarting Camera!", e);
+            }
+        }
+    }
 }

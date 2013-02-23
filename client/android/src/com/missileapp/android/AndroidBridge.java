@@ -1,18 +1,14 @@
 package com.missileapp.android;
 
 import android.content.Context;
-import android.hardware.Camera;
 import android.os.Vibrator;
 import android.util.Log;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 public class AndroidBridge extends MissileApp {
     // Data
     private static final String TAG = "AndroidBridge";                     // TAG for logging
-    private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
     private static final String NBCallBack_prefix = "javascript:NativeBridge.callback(";
     private static final String NBCallBack_postfix = ");";
     
@@ -118,61 +114,12 @@ public class AndroidBridge extends MissileApp {
         MALogger.log(TAG, Log.INFO, "Fire Screen command: " + showFireScreen + ", parsed to: " + showScreen + ".");
         
         if (showScreen) {
-            this.rollCam();
+            varBag.getFireScreen().enterFireScreen();
         }
         else {
-            this.stopCam();
+            varBag.getFireScreen().exitFireScreen();
         }
     }
     
     
-    public void rollCam() {
-        MALogger.log(TAG, Log.INFO, "Roll Cam.");
-        try {
-            // Create and Save Variables, default to rear facing camera
-            Camera cam = Camera.open();
-            if(cam != null) {
-                varBag.setCam(cam);
-                SurfaceHolder holder = varBag.getSurfaceHolder();
-                
-                // Set Orientation and display  
-                cam.setDisplayOrientation(CAMERA_ORIENTATION);
-                cam.setPreviewDisplay(holder);
-                
-                // Lock and Start Preview
-                cam.lock();
-                cam.startPreview();
-            }
-            else {
-                MALogger.log(TAG, Log.WARN, "No Camera.");
-                Toast.makeText(varBag.getMissileApp(), "No Camera", Toast.LENGTH_SHORT).show();
-            }
-                
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Error Starting Camera", e);
-        }
-    }
-    
-    public void stopCam() {
-        MALogger.log(TAG, Log.INFO, "Stop Cam.");
-        try {
-            // Stop Preview, unlock, and release
-            Camera cam = varBag.getCam();
-            if(cam != null) {
-                cam.stopPreview();
-                cam.unlock();
-                cam.release();
-            }
-            else {
-                MALogger.log(TAG, Log.WARN, "Camera is null.");
-            }
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Stopping Camera failed.", e);
-        }
-        finally {
-            varBag.setCam(null);
-        }
-    }
 }
