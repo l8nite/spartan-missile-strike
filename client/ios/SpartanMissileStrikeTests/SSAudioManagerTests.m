@@ -34,7 +34,7 @@
     id mockInstance = [OCMockObject partialMockForObject:sa1];
     
     id mockedAVAudioPlayer= [OCMockObject mockForClass:[AVAudioPlayer class]];
-    NSURL* url = [[NSBundle mainBundle] URLForResource: @"Moderato"  withExtension:@"mp3"];
+    NSURL* url = [[NSBundle mainBundle] URLForResource: @"shared/audio/Moderato"  withExtension:@"mp3"];
    (void) [[mockedAVAudioPlayer expect] initWithContentsOfURL:url error:nil];
     [[[mockInstance stub] andReturn:mockedAVAudioPlayer] createAVAudioPlayer];
     (void)[sa1 init];
@@ -54,7 +54,7 @@
     [(AVAudioPlayer*)[mockedAVAudioPlayer expect] play];
     //injection code
     [[[mockInstance stub] andReturn:mockedAVAudioPlayer] createAVAudioPlayer];
-    NSURL* url = [[NSBundle mainBundle] URLForResource: @"Moderato"  withExtension:@"mp3"];
+    NSURL* url = [[NSBundle mainBundle] URLForResource: @"shared/audio/Moderato"  withExtension:@"mp3"];
    (void) [[[mockedAVAudioPlayer stub] andReturn:mockedAVAudioPlayer] initWithContentsOfURL:url error:nil];
    (void) [sa1 init];
     [sa1 playSound:@"MODERATO"];
