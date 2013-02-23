@@ -1,5 +1,7 @@
 package com.missileapp.android;
 
+import com.missileapp.android.res.FireScreen;
+
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.hardware.Camera;
@@ -24,6 +26,9 @@ public class BagOfHolding extends Application {
     private ImageView splashScreen;            // ImageView
     private SharedPreferences settings;        // User Preferences
     
+    
+    // Resource variables
+    private FireScreen fireScreen;             // FireScreen, contains the camear framework
     
     /*********************************
      * Android OS call back functions
@@ -68,7 +73,7 @@ public class BagOfHolding extends Application {
      *       Getters and Setters
      *********************************/
     /**
-     * Returns this class.
+     * Returns this class
      * @return this class holding all the variables
      */
     public static BagOfHolding getInstance() {
@@ -76,7 +81,7 @@ public class BagOfHolding extends Application {
     }
     
     /**
-     * Returns an instance of the MissileApp
+     * Returns an instance of the {@link MissileApp}
      * @return the instance of the missile app
      */
     public MissileApp getMissileApp() {
@@ -84,7 +89,7 @@ public class BagOfHolding extends Application {
     }
 
     /**
-     * Sets the instance of MissileApp
+     * Sets the instance of {@link MissileApp}
      * @param missileApp the new instance of the missile app
      */
     public void setMissileApp(MissileApp missileApp) {
@@ -109,31 +114,31 @@ public class BagOfHolding extends Application {
     }
 
     /**
-     * Returns the SurfaceView where the camera preview is drawn on
-     * @return the SurfaceView
+     * Returns the {@link SurfaceView} where the camera preview is drawn on
+     * @return the {@link SurfaceView} intance
      */
     public SurfaceView getSurfaceView() {
         return surfaceView;
     }
 
     /**
-     * Sets the SurfaceView where the camera preview is drawn on
-     * @param surfaceView the SurfaceView to be drawn on
+     * Sets the {@link SurfaceView} where the camera preview is drawn on
+     * @param surfaceView the {@link SurfaceView} to be drawn on
      */
     public void setSurfaceView(SurfaceView surfaceView) {
         this.surfaceView = surfaceView;
     }
 
     /**
-     * Returns the SurfaceHolder, communication medium for camera and surface view
-     * @return the SurfaceHolder
+     * Returns the {@link SurfaceHolder}, communication medium for camera and surface view
+     * @return the {@link SurfaceHolder} medium
      */
     public SurfaceHolder getSurfaceHolder() {
         return surfaceHolder;
     }
 
     /**
-     * Returns the SurfaceHolder, communication medium for camera and surface view
+     * Returns the {@link SurfaceHolder}, communication medium for camera and surface view
      * @param surfaceHolder, the medium between the camera and the surface
      */
     public void setSurfaceHolder(SurfaceHolder surfaceHolder) {
@@ -141,48 +146,48 @@ public class BagOfHolding extends Application {
     }
     
     /**
-     * Returns the SplashScreen ImageView
-     * @return Returns the SplashScreen ImageView 
+     * Returns the SplashScreen {@link ImageView}
+     * @return Returns the SplashScreen {@link ImageView} 
      */
     public ImageView getSplashScreen() {
         return splashScreen;
     }
 
     /**
-     * Sets the SplashScreen ImageView
-     * @param splashScreen
+     * Sets the SplashScreen {@link ImageView}
+     * @param splashScreen - the splashScreen {@link ImageView}
      */
     public void setSplashScreen(ImageView splashScreen) {
         this.splashScreen = splashScreen;
     }
 
     /**
-     * Returns the WebView where core logic of the game is
-     * @return the WebView
+     * Returns the {@link WebView} where core logic of the game is
+     * @return the {@link WebView}
      */
     public WebView getWebView() {
         return webView;
     }
 
     /**
-     * Sets the WebView
-     * @param webView the new webview for game play
+     * Sets the {@link WebView}
+     * @param webView the new {@link WebView} for game play
      */
     public void setWebView(WebView webView) {
         this.webView = webView;
     }
     
     /**
-     * Get Android Bridge instance
-     * @return instance of Android Bridge
+     * Get {@link AndroidBridge} instance
+     * @return instance of {@link AndroidBridge}
      */
     public AndroidBridge getDroidBridge() {
         return droidBridge;
     }
 
     /**
-     * Sets an instance of Android Bridge
-     * @param droidBridge
+     * Sets an instance of {@link AndroidBridge}
+     * @param droidBridge - the new instance of the {@link AndroidBridge}
      */
     public void setDroidBridge(AndroidBridge droidBridge) {
         this.droidBridge = droidBridge;
@@ -190,7 +195,7 @@ public class BagOfHolding extends Application {
 
 
     /**
-     * A User's preferences in terms of SharedPreferences
+     * A User's preferences in terms of {@link SharedPreferences}
      * @return the user's preferences
      */
     public SharedPreferences getSettings() {
@@ -199,9 +204,38 @@ public class BagOfHolding extends Application {
 
     /**
      * Sets the User's Perferences
-     * @param settings
+     * @param settings {@link SharedPreferences} of the application
      */
     public void setSettings(SharedPreferences settings) {
         this.settings = settings;
     }
+
+    
+    
+    
+    
+    
+    
+    ///////////////////////////////////////////////
+    //
+    //       Native Bridge Resources
+    //
+    ///////////////////////////////////////////////
+
+    /**
+     * Returns ths {@link FireScreen} insance 
+     * @return the instance of the {@link FireScreen}
+     */
+    public FireScreen getFireScreen() {
+        return fireScreen;
+    }
+
+    /**
+     * Sets the instance of {@link FireScreen}
+     * @param fireScreen the new instance of the {@link FireScreen}
+     */
+    public void setFireScreen(FireScreen fireScreen) {
+        this.fireScreen = fireScreen;
+    }
+
 }
