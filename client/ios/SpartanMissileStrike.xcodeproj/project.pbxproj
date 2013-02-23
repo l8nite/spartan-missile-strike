@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10155167169BD7840010A8D6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
 		10594FEA16A6426900E41072 /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10594FE916A6426900E41072 /* sounds.plist */; };
@@ -50,6 +49,10 @@
 		10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */; };
 		10F35DB2169F4A2900A42045 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB1169F4A2900A42045 /* QuartzCore.framework */; };
 		10F35DB4169F4A3100A42045 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB3169F4A3100A42045 /* OpenGLES.framework */; };
+		10FA386616D49AEE004D63F0 /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FA386516D49AEE004D63F0 /* spartan_appIcon_57.png */; };
+		10FA386816D49B05004D63F0 /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FA386716D49B05004D63F0 /* spartan_appIcon_114.png */; };
+		10FA386916D49B25004D63F0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155168169BD79D0010A8D6 /* Default@2x.png */; };
+		10FA386A16D49B31004D63F0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +131,8 @@
 		10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpartanMissileStrike.xib; sourceTree = "<group>"; };
 		10F35DB1169F4A2900A42045 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		10F35DB3169F4A3100A42045 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		10FA386516D49AEE004D63F0 /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_57.png; sourceTree = "<group>"; };
+		10FA386716D49B05004D63F0 /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_114.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +170,8 @@
 		108FC694169641C8001BABBE = {
 			isa = PBXGroup;
 			children = (
+				10FA386716D49B05004D63F0 /* spartan_appIcon_114.png */,
+				10FA386516D49AEE004D63F0 /* spartan_appIcon_57.png */,
 				1080A10516ADCC2700C836E3 /* libOCMock.a */,
 				10F35D9B169E09BB00A42045 /* Default-568h@2x.png */,
 				10155168169BD79D0010A8D6 /* Default@2x.png */,
@@ -354,13 +361,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				108FC6AE169641C8001BABBE /* InfoPlist.strings in Resources */,
-				10155167169BD7840010A8D6 /* Default.png in Resources */,
 				10852433169E009300EE241C /* shared in Resources */,
 				10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */,
 				10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */,
 				10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */,
 				10594FEA16A6426900E41072 /* sounds.plist in Resources */,
 				10CB354416BA4D7C00839527 /* File in Resources */,
+				10FA386616D49AEE004D63F0 /* spartan_appIcon_57.png in Resources */,
+				10FA386816D49B05004D63F0 /* spartan_appIcon_114.png in Resources */,
+				10FA386916D49B25004D63F0 /* Default@2x.png in Resources */,
+				10FA386A16D49B31004D63F0 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
