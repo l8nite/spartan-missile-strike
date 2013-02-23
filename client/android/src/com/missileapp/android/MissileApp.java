@@ -1,6 +1,7 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.UserPreferences;
 
 import android.os.Bundle;
@@ -75,8 +76,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         webView.loadUrl(DROIDWB_FILENAME);
         
         // Store resource variables
-        variables.setFireScreen(new FireScreen(variables));
-        variables.setUserPrefs(new UserPreferences(variables));
+        variables.setFireScreen(new FireScreen(variables));           // Fire Screen, camera
+        variables.setUserPrefs(new UserPreferences(variables));       // User Preferences, app data 
+        variables.setMediaManager(new MediaManager(variables));       // Media Manager, audio system
     }
     
     
