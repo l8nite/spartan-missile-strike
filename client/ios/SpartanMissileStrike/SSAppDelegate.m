@@ -1,22 +1,39 @@
 //
-//  AppDelegate.m
-//  Spartan Missile Strike
+//  SSAppDelegate.m
+//  SpartanMissileStrike
 //
-//  Created by Sherif on 11/28/12.
-//  Copyright (c) 2012 Jomana Sherif. All rights reserved.
+//  Created by Sherif on 1/3/13.
+//  Copyright (c) 2013 Group 2. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "SSAppDelegate.h"
+#import "SSAudioManager.h"
+#import "SSMainViewController.h"
+@implementation SSAppDelegate
 
-@implementation AppDelegate
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+   
     // Override point for customization after application launch.
+    SSMainViewController* mainViewController= [[SSMainViewController alloc] init];
+   [self.window addSubview:mainViewController.view];
+    
+    self.window.rootViewController = mainViewController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    return YES;
+    
+
+   
+ 
+    
+   return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
