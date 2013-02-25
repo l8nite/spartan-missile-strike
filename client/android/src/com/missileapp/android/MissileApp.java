@@ -1,202 +1,148 @@
 package com.missileapp.android;
 
-import android.hardware.Camera;
+import com.missileapp.android.res.FireScreen;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
-import android.widget.Toast;
+import android.widget.ImageView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.SharedPreferences;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
-    // Static final vars
-    private static final String TAG = "com.missileapp.android.MissileApp"; // Class Name for Logging
-    private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
+    //TODO [MARKER] REMOVE WAKELOCK FROM ANDROID MANIFEST FILE
     
-    // Variables
-    private Camera cam;
-    private SurfaceView surfaceView;
-    private SurfaceHolder surfaceHolder;
-    private WebView webView;
+    // Settings Variables
+    private static final String TAG = "MainApp";                           // Class Name for Logging
+    private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
+    private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location, True -> Ask user, False -> skip
+    private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
+    private static final String DROIDWB_FILENAME =                         // Webview file to load
+            "file:///android_asset/" + "index" + ".html";
+
+    // Varible Bag
+    private static BagOfHolding varBag;
     
     /*********************************
      * Android OS call back functions
      *********************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Variables
+        SurfaceView surfaceView;           // Surface View for layout options
+        SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
+        WebView webView;                   // WebView for UI
+        AndroidBridge droidBridge;         // Android Interface to the WebView
+        ImageView splashScreen;            // ImageView
+        SharedPreferences settings;        // User Preferences
+        
+        // Init -> super create, set view, get variable data
         super.onCreate(savedInstanceState);
-        MALogger.log(TAG, Log.INFO, "Starting activity.", null);
         setContentView(R.layout.main);
+        varBag = BagOfHolding.getInstance();
+        varBag.setMissileApp(this);
         
-        //TODO Prompt user for GPS status
+        // Get user settings, mode_private --> accessible only by this process
+        settings = getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE);
+        varBag.setSettings(settings);
+        if(settings.getBoolean(PREFERENCES_GPSPROMPT, true)) {
+            //TODO Prompt user to turn on GPS and preference to prompts
+        }
         
-        surfaceView = (SurfaceView) findViewById(R.id.camView);
+        // Create surface view for cam preview and register callback functions
+        surfaceView = (SurfaceView) findViewById(R.id.camview);
         surfaceHolder = surfaceView.getHolder();
+        varBag.setSurfaceView(surfaceView);
+        varBag.setSurfaceHolder(surfaceHolder);
         surfaceHolder.addCallback(this);
+        
+        // Store Image View for later call
+        splashScreen = (ImageView) findViewById(R.id.splashview);
+        varBag.setSplashScreen(splashScreen);
+        
+        // Set up WebView
+        webView = (WebView) findViewById(R.id.webview);
+        droidBridge = new AndroidBridge(varBag);
+        varBag.setWebView(webView);
+        varBag.setDroidBridge(droidBridge);
+        webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(DROIDWB_FILENAME);
+        
+        // Store resource variables
+        varBag.setFireScreen(new FireScreen(varBag));
     }
-
+    
+    
     @Override
     protected void onResume() {
         super.onResume();
-        MALogger.log(TAG, Log.INFO, "Resuming activity.", null);
+        MALogger.log(TAG, Log.INFO, "Resuming activity.");
+        varBag.getFireScreen().processResumeRequest();
     }
-
+    
+    
     @Override
     protected void onPause() {
         super.onPause();
-        MALogger.log(TAG, Log.INFO, "Pausing activity.", null);
-        stopCam();
+        MALogger.log(TAG, Log.INFO, "Pausing activity.");
+        varBag.getFireScreen().processPauseRequest();
     }
+    
     
     @Override
     protected void onStop() {
         super.onStop();
-        MALogger.log(TAG, Log.INFO, "Stopping activity.", null);
-        closeCam();
-    }
-
-    /********************************
-     * Camera functions
-     ********************************/
-    /**
-     * Locks the front facing camera
-     * 
-     * @param holder
-     *            the SurfaceHolder that the camera data should be drawn on
-     */
-    public void openCam(SurfaceHolder holder) {
-        MALogger.log(TAG, Log.INFO, "Opening Cam", null);
-        
-        // Camera should not have been open. Reset cam
-        closeCam();
-        
-        // Get the default reverse facing camera
-        try {
-            cam = Camera.open();
-            cam.setDisplayOrientation(CAMERA_ORIENTATION);
-            cam.setPreviewDisplay(holder);
-            cam.unlock();
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Could not get camera instance!", e);
-        }
+        MALogger.log(TAG, Log.INFO, "Stopping activity.");
+        varBag.getFireScreen().processPauseRequest();
     }
     
-    /**
-     * Lock the Camera and Start the Preview
-     */
-    public void startCam() {
-        try {
-            if (cam != null) {
-                cam.lock();
-                cam.startPreview();
-            }
-        }
-        catch (Exception e) {
-            Toast.makeText(this, "Camera Error...", Toast.LENGTH_SHORT).show();
-            MALogger.log(TAG, Log.ERROR, "Error starting camera", e);
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MALogger.log(TAG, Log.INFO, "Activity Destroying");
+        varBag.getFireScreen().exitFireScreen();
     }
     
-    /**
-     * Stop the Camera Preview and Unlock
-     */
-    public void stopCam() {
-        try {
-            if (cam != null) {
-                cam.stopPreview();
-                cam.unlock();
-            }
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Error starting camera", e);
-        }
-    }
     
-    /**
-     * Permenantly release the camera
-     */
-    public void closeCam() {
-        if (cam != null) {
-            try {
-                cam.stopPreview();
-                cam.release();
-            }
-            catch (Exception e) {
-                MALogger.log(TAG, Log.ERROR, "Camera Reset Error", e);
-            }
-            finally {
-                cam = null;
-            }
-        }
-    }
-
+    
+    
+    
     /*********************************
      * Surface call back function
      *********************************/
-    /**
-     * Surface holder is created and we can reserve the camera and set the
-     * location of the camera preview
-     * 
-     * @param holder
-     *            surface holder to draw cam view
-     */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        MALogger.log(TAG, Log.INFO, "Surface Created!", null);
-        try {
-            // Create cam and set surface
-            if (cam == null) {
-                this.openCam(holder);
-            }
-            else {
-                cam.setPreviewDisplay(holder);
-            }
-            
-            // Launch WebView
-            webView = (WebView) findViewById(R.id.webView);
-            webView.addJavascriptInterface(new AndroidBridge(this, webView), "AndroidInterface");
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl("file:///android_asset/view.html");
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.INFO, "Could not open Cam", e);
-        }
+        MALogger.log(TAG, Log.VERBOSE, "Surface Created.");
+        varBag.setSurfaceHolder(holder);
     }
-
+    
+    
     /**
-	 * Surface Holder changes
-	 * @param holder - the holder to draw the camera preview, {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
-	 * @param format - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
-	 * @param width - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)
-	 * @param height - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
-	 */
+     * Surface Holder changes
+     * @param holder - the holder to draw the camera preview, {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
+     * @param format - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
+     * @param width - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)
+     * @param height - {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
+     */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        try {
-            if (cam == null) {
-                this.openCam(holder);
-            }
-            else {
-                cam.setPreviewDisplay(holder);
-            }
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.INFO, "Could not open Cam", e);
-        }
+        MALogger.log(TAG, Log.VERBOSE, "Surface Changed.");
+        varBag.setSurfaceHolder(holder);
     }
+
     
     /**
      * Surface Holder was destroyed
-     * 
-     * @param holder
-     *            Holder that was destroyed
+     * @param holder Holder that was destroyed
      */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        this.closeCam();
+        MALogger.log(TAG, Log.INFO, "SurfaceHolder destroyed.");
+        varBag.setSurfaceHolder(null);
     }
 }

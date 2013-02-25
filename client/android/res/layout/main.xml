@@ -3,24 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Missileapp" >
+    tools:context=".MissileApp" >
 
-    <ImageView android:id="@+id/splashScreenView"
+    <SurfaceView android:id="@+id/camview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+    />
+
+    <WebView android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent"
+    />
+
+    <ImageView android:id="@+id/splashview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:contentDescription="@string/splash_screen_info"
-		android:layout_height="fill_parent"
-		android:layout_width="fill_parent"
-		android:visibility="visible"
-		android:src="@drawable/splashscreen"
-	/>
-    
-    <SurfaceView android:id="@+id/camView"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-	/>
-    
-    <WebView android:id="@+id/webView"
-		android:layout_height="fill_parent"
-		android:layout_width="fill_parent"
-		android:visibility="gone"
-	/>
+        android:background="@android:color/black"
+        android:src="@drawable/splashscreen"
+    />
+
 </RelativeLayout>
