@@ -5,11 +5,6 @@ var async = require('async'),
 
 var DEFAULT_SESSION_EXPIRY_SECONDS = 2592000;
 
-function install (server) {
-    server.post('/sessions', createSession);
-    server.del('/sessions/:id', deleteSession);
-}
-
 function createSession (request, response, done) {
     async.waterfall([
         function (next) { next(null, request); }, // enables arguments to first callback
@@ -143,4 +138,10 @@ function deleteSession (request, response, done) {
     return done();
 }
 
-module.exports.install = install;
+module.exports.installAuthenticatedRouteHandlers = function (server) {
+    server.del('/sessions/:id', deleteSession);
+};
+
+module.exports.installPublicRouteHandlers = function (server) {
+    server.post('/sessions', createSession);
+};
