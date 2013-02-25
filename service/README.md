@@ -11,4 +11,7 @@ Steps:
   - Launch Redis listening on port 6379
   - node start
   - browse to http://localhost:8080 to see API documentation
-  - browse to (i.e.) https://localhost:8433/cities to use the API
+  - browse to (i.e.) https://localhost:8443/cities to use the API
+
+To run the tests:
+ - make test -or- mocha
