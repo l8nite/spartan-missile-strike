@@ -29,4 +29,7 @@ var connect = function(done) {
 };
 
 module.exports.connect = connect;
-module.exports.redisClient = client;
+
+Object.defineProperty(module.exports, "client", {
+    get: function() { return client; }
+});
