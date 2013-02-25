@@ -1,6 +1,7 @@
 var should = require('should');
-var client = require('./lib/service-test.js').client;
-var fbtest = require('./lib/facebook-test.js');
+var svctest = require('./lib/service-client.js');
+var fbtest = require('./lib/test-user.js');
+var client = svctest.client;
 
 describe('/sessions', function() {
     this.timeout(15000);
@@ -54,7 +55,7 @@ describe('/sessions', function() {
 });
 
 describe('/sessions/:id', function() {
-    it('should return a 200', function (done) {
+    it('should return a 403 if no SMSS-Session-ID is sent', function (done) {
         client.del('/sessions/fe4d37b8-ff94-452d-ae6a-e31e30bbafd9', function(err, req, res, obj) {
             res.statusCode.should.equal(200);
             done();

@@ -1,104 +1,23 @@
-var should = require('should');
+// test/lib/test-user.js
+// require this file for tests requiring a logged in smss user
 var async = require('async');
-var fs = require('fs');
-var path = require('path');
-var fb = require('./facebook.js');
+var client = require('./service-client').client;
 
-var facebookTestDataPath = path.join(__dirname, './facebook-test-data.json');
+// this is a long-lived access token, valid for 60 days
+// if it expires, generate a new one by following the instructions here:
+// https://developers.facebook.com/docs/howtos/login/extending-tokens/
+var fbTestUserId = '100005307998484';
+var fbTestUserAccessToken = 'AAABvzfRP6w0BAMYUjyRnd1IoByfy8WbrYYIgvVFzSkZCQ3ByN7UpJnz2PMXFoSI1gvbDGjg5vPyI6E4AxJrZA8Ev9seadm0ibFHFrubAZDZD';
 
-var facebookTestData;
+var smssSessionId;
 
-before(function(done) {
-    if (checkForCachedFacebookTestData()) {
-        return done();
+function getLoggedInSessionId (callback) {
+    if (smssSessionId !== undefined) {
+        return callback(null, smssSessionId);
     }
 
-    facebookTestData = {};
-
-    this.timeout(20000);
-
-    async.series([
-        getApplicationAccessToken,
-        createTestUser,
-        writeTestDataToCacheFile,
-    ], done);
-});
-
-function checkForCachedFacebookTestData () {
-    console.log('Checking for cached facebook test data...');
-
-    if (fs.existsSync(facebookTestDataPath)) {
-        facebookTestData = require(facebookTestDataPath);
-        return true;
-    }
-
-    return false;
-}
-
-function getApplicationAccessToken (done) {
-    console.log('Fetching facebook application access token...');
-
-    fb.getApplicationAccessToken(function(err, token) {
-        if (err) {
-            done(err);
-        }
-
-        facebookTestData.application_access_token = token;
-
-        done();
+    client.post('/sessions', { facebook_access_token: fbTestUserAccessToken }, function (err, req, res, obj) {
+        smssSessionId = obj.session.id;
+        callback(err, smssSessionId);
     });
 }
-
-function createTestUser (done) {
-    console.log('Creating facebook test user...');
-
-    fb.createTestUser('Genghis Khan', function (err, user) {
-        if (err) {
-            done(err);
-        }
-
-        facebookTestData.user = user;
-
-        done();
-    });
-}
-
-function writeTestDataToCacheFile (done) {
-    console.log('Writing facebook test data cache...');
-
-    var ppJson = JSON.stringify(facebookTestData, null, 4);
-
-    fs.writeFile(facebookTestDataPath, ppJson, function (err) {
-        if (err) {
-            console.log(err);
-            done(err);
-        }
-        else {
-            console.log(ppJson);
-            done();
-        }
-    });
-}
-
-/*
-after(function(done) {
-    this.timeout(20000);
-
-    console.log('Deleting test user: ', facebookTestUser);
-
-    fb.deleteTestUser(facebookTestUser, function (err, res) {
-        if (err) {
-            console.log('Error deleting: ' + err);
-            throw err;
-        }
-        else {
-            console.log(res);
-            done();
-        }
-    });
-});
-*/
-
-module.exports.getFacebookTestData = function() {
-    return facebookTestData;
-};
