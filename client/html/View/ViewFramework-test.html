@@ -1,0 +1,83 @@
+<html>
+<head>
+	<title>Spartan Missile Strike</title>
+	<link rel="stylesheet" href="view.css">
+	<style>
+		body {
+			text-align: center;
+		}
+		#main-menu {
+			background-color: #8080F0;
+		}
+		#map {
+			background-color: #F08080;
+		}
+		#fire {
+			background-color: transparent;
+		}
+		#fire div {
+			background-color: #80F080;
+		}
+		#options {
+			background-color: #F0F080;
+		}
+		#opponents {
+			background-color: #808080;
+		}
+		#base {
+			background-color: #F080F0;
+		}
+	</style>
+	<script src="../Util/DomHelper.js"></script>
+	<script src="MainView.js"></script>
+	<script src="View.js"></script>
+	<script src="FixedHeightView.js"></script>
+</head>
+<body>
+	<div id="main-menu">
+		<div>Main Menu</div><br>
+		<div onmousedown="mainView.loadView(map)">Resume game</div>
+		<div onmousedown="mainView.loadView(opponents)">New game</div>
+		<div onmousedown="mainView.loadView(base)">Accept invitation</div>
+		<div onmousedown="mainView.loadView(options)">Options</div>
+		<div style="height: 2000px;"></div>
+	</div>
+	<div id="map">
+		<div>Map view</div><br>
+		<div onmousedown="mainView.previousView()">Back</div><br>
+		<div onmousedown="mainView.loadView(fire)">Fire</div>
+		<div onmousedown="mainView.loadView(options)">Options</div>
+	</div>
+	<div id="fire">
+		<div>Fire view</div><br>
+		<div onmousedown="mainView.previousView()">Back</div><br>
+		<div onmousedown="mainView.loadView(options)">Options</div><br>
+	</div>
+	<div id="options">
+		<div>Options</div><br>
+		<div onmousedown="mainView.previousView()">Back</div><br>
+	</div>
+	<div id="opponents">
+		<div>Opponents</div><br>
+		<div onmousedown="mainView.previousView()">Back</div><br>
+		<div onmousedown="mainView.loadView(base)">Choose base</div>
+	</div>
+	<div id="base">
+		<div>Choose base</div><br>
+		<div onmousedown="mainView.previousView()">Back</div><br>
+		<div onmousedown="mainView.loadView(map, mainMenu)">Begin game</div>
+	</div>
+	<script>
+		Imports = {};
+		Imports.DomHelper = new DomHelper();
+		mainView = new MainView();
+		mainMenu = new View("main-menu");
+		map = new FixedHeightView("map");
+		fire = new FixedHeightView("fire");
+		options = new FixedHeightView("options");
+		opponents = new FixedHeightView("opponents");
+		base = new FixedHeightView("base");
+		mainView.loadView(mainMenu);
+	</script>
+</body>
+</html>
