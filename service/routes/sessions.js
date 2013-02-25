@@ -1,56 +1,146 @@
-var install = function (server) {
+var async = require('async'),
+    uuid = require('node-uuid'),
+    redis = require('../lib/database.js').client,
+    fbgraph = require('fbgraph');
+
+var DEFAULT_SESSION_EXPIRY_SECONDS = 2592000;
+
+function install (server) {
     server.post('/sessions', createSession);
     server.del('/sessions/:id', deleteSession);
-};
+}
 
-var redisClient = require('../lib/database.js').redisClient;
-var fbgraph = require('fbgraph');
+function createSession (request, response, done) {
+    async.waterfall([
+        function (next) { next(null, request); }, // enables arguments to first callback
+        _getFacebookAccessTokenFromRequest,
+        _validateFacebookAccessTokenByQueryingGraphAPI,
+        _loadMissileStrikeUser,
+        _createOrUpdateSession,
+        _formatCreateSessionResponse,
+    ],
 
-var createSession = function(req, res, next) {
-    if (req.params.facebook_access_token === undefined) {
-        res.send(400, 'missing facebook_access_token parameter');
-        return next();
+    function (err, code, body) {
+        if (code) {
+            response.send(code, body);
+        }
+        else {
+            response.send(500, err);
+        }
+    });
+}
+
+function _getFacebookAccessTokenFromRequest (request, next) {
+    var fbAccessToken = request.params.facebook_access_token;
+
+    if (fbAccessToken === undefined) {
+        return next('error', 400, 'missing facebook_access_token parameter');
     }
 
-    fbgraph.setAccessToken(req.params.facebook_access_token);
-    fbgraph.get('/me', function (err, fbresponse) {
-        if (err && err.type === 'OAuthException') {
-            res.send(400, 'invalid facebook_access_token');
-            return next();
+    next (null, fbAccessToken);
+}
+
+function _validateFacebookAccessTokenByQueryingGraphAPI (fbAccessToken, next) {
+    fbgraph.setAccessToken(fbAccessToken);
+
+    fbgraph.get('/me', function (err, fbUser) {
+        if (err) {
+            if (err.type === 'OAuthException') {
+                return next(err, 400, 'invalid facebook_access_token');
+            }
+            else {
+                return next(err, 500);
+            }
         }
-        else if (err) {
-            console.log('unknown facebook /me error: ' + err);
-            res.send(500);
-            return next();
-        }
 
-        /*{ id: '100005209452549',
-            name: 'Genghis Khan',
-            first_name: 'Genghis',
-            last_name: 'Khan',
-            link: 'http://www.facebook.com/profile.php?id=100005209452549',
-            gender: 'female',
-            timezone: 0,
-            locale: 'en_US',
-            updated_time: '2013-02-16T10:14:41+0000' } */
+        fbUser.access_token = fbAccessToken;
 
-        /** TODO:
-            1. check if this user exists in our database
-            2. if so, check if they have an existing session
-            3. if not, create new user record
-            4. create or update existing session
-            5. return newly-created information
-            **/
-
-        res.send(201, 'created session');
-
-        return next();
+        next(null, fbUser);
     });
-};
+}
 
-var deleteSession = function(req, res, next) {
-    res.send(200, 'deleted session with id: ' + req.params.id);
-    return next()
-};
+function _loadMissileStrikeUser (fbUser, next) {
+    redis.get('facebook:' + fbUser.id, function (err, msUserId) {
+        if (err) {
+            return next(err, 500);
+        }
+
+        if (msUserId === null) {
+            _createNewUser(fbUser, next);
+        }
+        else {
+            _loadExistingUser(msUserId, next);
+        }
+    });
+}
+
+function _createNewUser (fbUser, next) {
+    var msUser = {
+        id: 'user:' + uuid.v4(),
+        username: fbUser.name,
+        created: (new Date()).toJSON(),
+        facebook: fbUser,
+    };
+
+    redis.mset(
+        'facebook:' + fbUser.id, msUser.id,
+        msUser.id, JSON.stringify(msUser),
+        function (err, res) {
+            if (err) {
+                return next(err, 500);
+            }
+
+            next(null, msUser);
+        }
+    );
+}
+
+function _loadExistingUser (msUserId, next) {
+    redis.get(msUserId, function (err, msUserSerialized) {
+        if (err) {
+            return next(err, 500);
+        }
+
+        var msUser = JSON.parse(msUserSerialized);
+
+        next(null, msUser);
+    });
+}
+
+function _createOrUpdateSession (msUser, next) {
+    var sessionId,
+        multi = redis.multi();
+
+    if (msUser.hasOwnProperty('session')) {
+        sessionId = msUser.session;
+    }
+    else {
+        sessionId = msUser.session = 'session:' + uuid.v4();
+        multi.set(msUser.id, JSON.stringify(msUser));
+    }
+
+    multi.setex(sessionId, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id);
+    multi.exec(function (err, replies) {
+        if (err) {
+            return next(err, 500);
+        }
+
+        next(null, msUser, sessionId);
+    });
+}
+
+function _formatCreateSessionResponse (msUser, sessionId, next) {
+    var response = {
+        session: { id: sessionId },
+        user: msUser,
+    };
+
+    next(null, 201, response);
+}
+
+function deleteSession (request, response, done) {
+    response.send(500, 'not implemented');
+    return done();
+}
 
 module.exports.install = install;
