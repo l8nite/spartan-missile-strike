@@ -2,6 +2,8 @@ var redis = require('redis');
 var client;
 
 var connect = function(done) {
+    var initializing = true;
+
     if (client !== undefined) {
         done(undefined, client);
     }
@@ -18,7 +20,10 @@ var connect = function(done) {
         console.log("Redis Connected");
         client.select(1, function (err) {
             if (!err) {
-                done(undefined, client);
+                if (initializing) {
+                    initializing = false;
+                    done(undefined, client);
+                }
             }
             else {
                 console.log("Could not select(1): " + err);
