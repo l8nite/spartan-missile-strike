@@ -1,15 +1,53 @@
 var should = require('should');
-var restify = require('restify');
-
-var client = restify.createJsonClient({
-    url: 'https://localhost:8433',
-    version: '*'});
-
+var client = require('./lib/service-test.js').client;
+var fbtest = require('./lib/facebook-test.js');
 
 describe('/sessions', function() {
-    it('should return a 200', function (done) {
-        client.post('/sessions', { facebook: "abcdefg" }, function(err, req, res, obj) {
+    this.timeout(15000);
+
+    it('should return a 400 when an invalid facebook_access_token parameter is sent', function (done) {
+        client.post('/sessions', { facebook_access_token: "abcdefg" }, function(err, req, res, obj) {
+            res.statusCode.should.equal(400);
+            done();
+        });
+    });
+
+    describe('creating a valid session', function(done) {
+        var err, req, res, obj, fbuser;
+
+        before(function(done) {
+            fbuser = fbtest.getFacebookTestData().user;
+            console.log(fbuser);
+
+            client.post('/sessions', { facebook_access_token: fbuser.access_token }, function(er, rq, rs, ob) {
+                err = er;
+                req = rq;
+                res = rs;
+                obj = ob;
+
+                console.log(obj);
+
+                done();
+            });
+        });
+
+        it('should return a 201 when a valid facebook_access_token parameter is sent', function (done) {
             res.statusCode.should.equal(201);
+            done();
+        });
+
+        it('should have valid properties in the returned object', function (done) {
+            obj.should.have.property('session');
+            obj.session.should.have.property('id');
+            obj.should.have.property('user');
+            obj.user.facebook.should.have.property('access_token');
+            done();
+        });
+    });
+
+    it('should return a 400 when missing facebook_access_token parameter', function (done) {
+        client.post('/sessions', { }, function(err, req, res, obj) {
+            res.statusCode.should.equal(400);
             done();
         });
     });

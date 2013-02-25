@@ -1,27 +1,40 @@
-var startAPIServer = function () {
-    var restify = require('restify');
-    var fs = require('fs');
-    var redis = require('./lib/database.js').redis;
-    var routes = require('./routes.js');
+var async = require('async');
+var ports = require('./conf/ports.json');
 
-    var server = restify.createServer({
-        ca: fs.readFileSync('./certs/api.missileapp.com.ca-bundle'),
-        certificate: fs.readFileSync('./certs/api.missileapp.com.crt'),
-        key: fs.readFileSync('./certs/api.missileapp.com.key'),
-        name: 'api.missileapp.com',
-        version: '0.0.1',
-    });
+var startAPIServer = function (done) {
+    async.series([
+        // first, connect to database
+        require('./lib/database.js').connect,
 
-    server.use(restify.queryParser());
+        // then, initialize restify server
+        function (done) {
+            var restify = require('restify');
+            var fs = require('fs');
+            var routes = require('./routes.js');
 
-    routes.install(server);
+            var server = restify.createServer({
+                ca: fs.readFileSync('./certs/api.missileapp.com.ca-bundle'),
+                certificate: fs.readFileSync('./certs/api.missileapp.com.crt'),
+                key: fs.readFileSync('./certs/api.missileapp.com.key'),
+                name: 'api.missileapp.com',
+                version: '0.0.1',
+            });
 
-    server.listen(8443, function () {
-        console.log('%s listening at %s', server.name, server.url);
-    });
+            server.use(restify.bodyParser());
+            server.use(restify.queryParser());
+
+            routes.install(server);
+
+            server.listen(ports.apiServer, function () {
+                console.log('%s listening at %s', server.name, server.url);
+            });
+
+            server.on('listening', done);
+        },
+    ], done);
 };
 
-var startDocumentationServer = function () {
+var startDocumentationServer = function (done) {
     // documentation server
     var static = require('node-static');
     var http = require('http');
@@ -33,12 +46,16 @@ var startDocumentationServer = function () {
         });
     });
 
-    docServer.listen(8080, function () {
-        console.log('documentation server listening on :8080');
+    docServer.listen(ports.documentationServer, function () {
+        console.log('documentation server listening on :' + ports.documentationServer);
     });
+
+    docServer.on('listening', done);
 };
 
-exports.start = function () {
-    startAPIServer();
-    startDocumentationServer();
+exports.start = function (done) {
+    async.parallel([
+        startAPIServer,
+        startDocumentationServer
+    ], done);
 };
