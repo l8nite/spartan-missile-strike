@@ -1,5 +1,5 @@
 var should = require('should');
-var client = require('./lib/service-test.js').client;
+var client = require('./lib/service-client.js').client;
 
 describe('/users/:id', function() {
     it('should return a 200', function (done) {
