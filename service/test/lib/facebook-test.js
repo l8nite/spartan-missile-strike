@@ -2,7 +2,7 @@ var should = require('should');
 var async = require('async');
 var fs = require('fs');
 var path = require('path');
-var fb = require('../../lib/facebook.js');
+var fb = require('./facebook.js');
 
 var facebookTestDataPath = path.join(__dirname, './facebook-test-data.json');
 
@@ -102,4 +102,3 @@ after(function(done) {
 module.exports.getFacebookTestData = function() {
     return facebookTestData;
 };
-
