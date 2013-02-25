@@ -111,15 +111,16 @@ function _createOrUpdateSession (msUser, next) {
     var sessionId,
         multi = redis.multi();
 
+    // delete existing session if the user had one
     if (msUser.hasOwnProperty('session')) {
-        sessionId = msUser.session;
-    }
-    else {
-        sessionId = msUser.session = 'session:' + uuid.v4();
-        multi.set(msUser.id, JSON.stringify(msUser));
+        multi.del(msUser.session);
     }
 
+    // create new session identifier and persist it
+    sessionId = msUser.session = 'session:' + uuid.v4();;
     multi.setex(sessionId, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id);
+    multi.set(msUser.id, JSON.stringify(msUser));
+
     multi.exec(function (err, replies) {
         if (err) {
             return next(err, 500);
