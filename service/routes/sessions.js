@@ -108,8 +108,7 @@ function _loadExistingUser (msUserId, next) {
 }
 
 function _createOrUpdateSession (msUser, next) {
-    var sessionId,
-        multi = redis.multi();
+    var multi = redis.multi();
 
     // delete existing session if the user had one
     if (msUser.hasOwnProperty('session')) {
@@ -117,8 +116,8 @@ function _createOrUpdateSession (msUser, next) {
     }
 
     // create new session identifier and persist it
-    sessionId = msUser.session = 'session:' + uuid.v4();;
-    multi.setex(sessionId, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id);
+    msUser.session = 'session:' + uuid.v4();;
+    multi.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id);
     multi.set(msUser.id, JSON.stringify(msUser));
 
     multi.exec(function (err, replies) {
@@ -126,13 +125,13 @@ function _createOrUpdateSession (msUser, next) {
             return next(err, 500);
         }
 
-        next(null, msUser, sessionId);
+        next(null, msUser);
     });
 }
 
-function _formatCreateSessionResponse (msUser, sessionId, next) {
+function _formatCreateSessionResponse (msUser, next) {
     var response = {
-        session: { id: sessionId },
+        session: { id: msUser.session },
         user: msUser,
     };
 
