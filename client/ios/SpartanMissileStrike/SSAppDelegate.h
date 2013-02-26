@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class SSMainViewController;
 @interface SSAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow* window;
+@property (strong, nonatomic) SSMainViewController* viewController; 
 
 @end
