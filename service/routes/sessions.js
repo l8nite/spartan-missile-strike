@@ -16,6 +16,7 @@ function createSession (request, response, done) {
         _getFacebookAccessTokenFromRequest,
         _validateFacebookAccessTokenByQueryingGraphAPI,
         _loadMissileStrikeUser,
+        _checkForExistingSession,
         _createOrUpdateSession,
         _formatCreateSessionResponse,
     ],
@@ -107,15 +108,39 @@ function _loadExistingUser (msUserId, next) {
     });
 }
 
-function _createOrUpdateSession (msUser, next) {
-    var multi = redis.multi();
-
-    // delete existing session if the user had one
-    if (msUser.hasOwnProperty('session')) {
-        multi.del(msUser.session);
+function _checkForExistingSession (msUser, next) {
+    if (!msUser.hasOwnProperty('session')) {
+        return next(null, msUser, false);
     }
 
-    // create new session identifier and persist it
+    redis.exists(msUser.session, function (err, exists) {
+        if (err) {
+            return next(err, 500);
+        }
+
+        next(null, msUser, exists);
+    });
+}
+
+function _createOrUpdateSession (msUser, sessionExists, next) {
+    // refresh existing session
+    if (sessionExists) {
+        return redis.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id, function (err, res) {
+            if (err) {
+                return next(err, 500);
+            }
+
+            next(null, msUser);
+        });
+    }
+
+    // create new session
+    var multi = redis.multi();
+
+    if (msUser.hasOwnProperty('session')) {
+        multi.del(msUser.session); // delete stale session pointer
+    }
+
     msUser.session = 'session:' + uuid.v4();;
     multi.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id);
     multi.set(msUser.id, JSON.stringify(msUser));
