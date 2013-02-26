@@ -2338,7 +2338,7 @@ however, when used within the API, only the UUID portion is used.<o:p></o:p></sp
 authorization mechanism for all APIs in the SMSS.<span
 style='mso-spacerun:yes'>  </span>In order for an SMSS API to authenticate and authorize
 your request, you must send a valid session key along with every request as the
-value of a header named 'SMSS-Session-ID', excepting of course the
+value of a header named 'MissileAppSessionId', excepting of course the
 authentication API itself.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='mso-no-proof:yes'>In the event that the SMSS is
@@ -2399,7 +2399,7 @@ Content-Type: application/json; charset=utf-8<o:p></o:p></span></p>
 <h4><span style='mso-no-proof:yes'>Inputs<o:p></o:p></span></h4>
 
 <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
-style='mso-no-proof:yes'>facebook</span></b><span style='mso-no-proof:yes'>:
+style='mso-no-proof:yes'>facebook_access_token</span></b><span style='mso-no-proof:yes'>:
 The authorization code obtained from the Facebook sign-on SDK.<br
 style='mso-special-character:line-break'>
 <![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
@@ -2422,7 +2422,7 @@ style='mso-no-proof:yes'>&quot;c5172a...&quot;,newUser: true } }<o:p></o:p></spa
 
 <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
 style='mso-no-proof:yes'>session.id</span></b><span style='mso-no-proof:yes'>:
-The new session identifier (to be used in the SMSS-Session-ID header for all
+The new session identifier (to be used in the MissileAppSessionId header for all
 subsequent API interactions)<o:p></o:p></span></p>
 
 <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
@@ -2489,7 +2489,7 @@ information associated with the given id.</p>
 <h3><span style='mso-no-proof:yes'>Example Request (Getting user details)<o:p></o:p></span></h3>
 
 <p class=Code><span style='mso-no-proof:yes'>GET /users/c5172af3zhg1y221fa HTTP/1.1<br>
-SMSS-Session-ID: a74f733635a19aefb1f7...<o:p></o:p></span></p>
+MissileAppSessionId: a74f733635a19aefb1f7...<o:p></o:p></span></p>
 
 <h3><span style='mso-no-proof:yes'>Example Response <o:p></o:p></span></h3>
 
@@ -2507,7 +2507,7 @@ information associated with the given id.</p>
 <h3><span style='mso-no-proof:yes'>Example Request (Setting username)<o:p></o:p></span></h3>
 
 <p class=Code><span style='mso-no-proof:yes'>PUT /users/c5172af3zhg1y221fa HTTP/1.1<br>
-SMSS-Session-ID: a74f733635a19aefb1f7...<o:p></o:p></span></p>
+MissileAppSessionId: a74f733635a19aefb1f7...<o:p></o:p></span></p>
 
 <p class=Code><span style='mso-no-proof:yes'>Content-Type: application/json;
 charset=utf-8<o:p></o:p></span></p>
@@ -2618,7 +2618,7 @@ which are in progress for the given user.<o:p></o:p></span></p>
 HTTP/1.1<br>
 Host: api.missileapp.com<o:p></o:p></span></p>
 
-<p class=Code><span style='mso-no-proof:yes'>SMSS-Session-ID: a74f733635a19aefb1f7...<o:p></o:p></span></p>
+<p class=Code><span style='mso-no-proof:yes'>MissileAppSessionId: a74f733635a19aefb1f7...<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
 
@@ -2682,7 +2682,7 @@ opponents for the current user to start a game against.<o:p></o:p></span></p>
 
 <p class=Code><span style='mso-no-proof:yes'>GET /users/a1ce217f7sa7900aff/opponents
 HTTP/1.1<br>
-SMSS-Session-ID: a74f733635a19aefb1f7...<o:p></o:p></span></p>
+MissileAppSessionId: a74f733635a19aefb1f7...<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
 
@@ -2724,7 +2724,7 @@ issuing a POST request containing the game details to this resource.<o:p></o:p><
 <h3><span style='mso-no-proof:yes'>Example Request<o:p></o:p></span></h3>
 
 <p class=Code><span style='mso-no-proof:yes'>POST /games HTTP/1.1<br>
-SMSS-Session-ID: a74f733635a19aefb1f7...<o:p></o:p></span></p>
+MissileAppSessionId: a74f733635a19aefb1f7...<o:p></o:p></span></p>
 
 <p class=Code><span style='mso-no-proof:yes'>Content-Type: application/json;
 charset=utf-8<o:p></o:p></span></p>
@@ -2774,7 +2774,7 @@ against an opponent in a game.<o:p></o:p></span></p>
 
 <p class=Code><span style='mso-no-proof:yes'>PUT /games/1234azyws75423424/fire-missile
 HTTP/1.1<br>
-SMSS-Session-ID: a74f733635a19aefb1f7...<o:p></o:p></span></p>
+MissileAppSessionId: a74f733635a19aefb1f7...<o:p></o:p></span></p>
 
 <p class=Code><span style='mso-no-proof:yes'>Content-Type: application/json;
 charset=utf-8<o:p></o:p></span></p>
@@ -2889,7 +2889,7 @@ an opponent's challenge and selected their own base for the game.<o:p></o:p></sp
 
 <p class=Code><span style='mso-no-proof:yes'>PUT /games/1234azyws752424sasas/select-base
 HTTP/1.1<br>
-SMSS-Session-ID: a74f733635a19aefb1f7...<o:p></o:p></span></p>
+MissileAppSessionId: a74f733635a19aefb1f7...<o:p></o:p></span></p>
 
 <p class=Code><span style='mso-no-proof:yes'>Content-Type: application/json;
 charset=utf-8<o:p></o:p></span></p>
