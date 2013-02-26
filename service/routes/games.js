@@ -1,15 +1,17 @@
 function createGame (req, res, next) {
-    res.send(201, 'game created');
+    res.send(500, 'not implemented');
     return next();
 }
 
 function fireMissile (req, res, next) {
-    res.send(200, 'missile fired for game: ' + req.params.id);
+    res.send(500, 'not implemented');
+    // 'missile fired for game: ' + req.params.id);
     return next();
 }
 
 function selectBase (req, res, next) {
-    res.send(200, 'select base for game: ' + req.params.id);
+    res.send(500, 'not implemented');
+    // 'select base for game: ' + req.params.id);
     return next();
 }
 
