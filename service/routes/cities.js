@@ -1,5 +1,5 @@
 function searchCities (req, res, next) {
-    res.send(200, 'list of cities will go here');
+    res.send(500, 'not implemented');
     return next();
 }
 
