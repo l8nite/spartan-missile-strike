@@ -1,3 +1,55 @@
+package com.missileapp.android.res;
+
+import com.missileapp.android.R;
+
+public class SoundMapping {
+
+	/**
+	 * Returns the Native Bridge sound id map to the raw identifier
+	 * @param id - Native Bridge ID
+	 * @return R.raw.* sound file id
+	 */
+	public static int getSoundMappingfromID(String id) {
+		if(id.equalsIgnoreCase("background_music")){
+			return R.raw.background_music;
+		}
+		else if(id.equalsIgnoreCase("explosion")){
+			return R.raw.background_music;
+		}
+		else if(id.equalsIgnoreCase("camera_focused")){
+			return R.raw.background_music;
+		}
+		else if(id.equalsIgnoreCase("missile_launched")){
+			return R.raw.background_music;
+		}
+		else if(id.equalsIgnoreCase("page_transition")){
+			return R.raw.background_music;
+		}
+		else if(id.equalsIgnoreCase("turret_moving")){
+			return R.raw.background_music;
+		}
+		else {
+			return -1;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //package com.missileapp.android.res;
 //
 //import java.io.IOException;
