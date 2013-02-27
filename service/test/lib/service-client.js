@@ -15,7 +15,7 @@ function ServiceClient () {
 module.exports = ServiceClient;
 
 ServiceClient.prototype.login = function (fbUserName, callback) {
-    if (this.sessionId !== undefined) {
+    if (this.session !== undefined) {
         return callback('already logged in');
     }
 
@@ -27,8 +27,9 @@ ServiceClient.prototype.login = function (fbUserName, callback) {
     this.post('/sessions', { facebook_access_token: fbAccessTokenForUser[fbUserName] },
     function (err, req, res, obj) {
         if (!err) {
-            self.sessionId = obj.session.id;
-            self.client.headers.missileappsessionid = self.sessionId;
+            self.user = obj.user;
+            self.session = obj.session;
+            self.client.headers.MissileAppSessionId = self.session.id;
         }
 
         return callback(err);
