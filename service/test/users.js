@@ -17,6 +17,7 @@ describe('/users', function () {
                 should.exist(obj);
                 obj.should.have.property('id');
                 obj.id.should.equal(client.user.id);
+                // especially this:
                 obj.facebook.should.not.have.property('access_token');
                 res.statusCode.should.equal(200);
                 done();
@@ -26,7 +27,7 @@ describe('/users', function () {
 
     describe('PUT /users/:id', function () {
         it('should return a 500 not implemented', function (done) {
-            client.put('/users/user%3A00000000-0000-0000-0000-000000000000', {}, function(err, req, res, obj) {
+            client.put('/users/' + encodeURIComponent(client.user.id), {}, function(err, req, res, obj) {
                 res.statusCode.should.equal(500);
                 done();
             });
@@ -35,7 +36,7 @@ describe('/users', function () {
 
     describe('/users/:id/games', function() {
         it('should return a 500 not implemented', function (done) {
-            client.get('/users/user%3A00000000-0000-0000-0000-000000000000/games', function(err, req, res, obj) {
+            client.get('/users/' + encodeURIComponent(client.user.id) + '/games', function(err, req, res, obj) {
                 res.statusCode.should.equal(500);
                 done();
             });
@@ -44,7 +45,7 @@ describe('/users', function () {
 
     describe('/users/:id/opponents', function() {
         it('should return a 500 not implemented', function (done) {
-            client.get('/users/user%3A00000000-0000-0000-0000-000000000000/opponents', function(err, req, res, obj) {
+            client.get('/users/' + encodeURIComponent(client.user.id) + '/opponents', function(err, req, res, obj) {
                 res.statusCode.should.equal(500);
                 done();
             });
