@@ -53,10 +53,12 @@ describe('deleting /sessions', function() {
         client.del('/sessions', function(err, req, res, obj) {
             should.not.exist(err);
             res.statusCode.should.equal(204);
-        client.del('/sessions', function(err, req, res, obj) {
-            // 403 means we're not authorized any more, aka the session was invalidated
-            res.statusCode.should.equal(403);
-            done();
-        });});
+
+            client.del('/sessions', function(err, req, res, obj) {
+                // 403 means we're not authorized any more, aka the session was invalidated
+                res.statusCode.should.equal(403);
+                done();
+            });
+        });
     });
 });
