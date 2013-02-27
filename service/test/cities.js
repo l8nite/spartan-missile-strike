@@ -1,22 +1,16 @@
 var should = require('should');
-var serviceClient = require('./lib/service-client.js');
-
-var authnClient;
-
-before(function () {
-    authnClient = serviceClient.getAuthenticatedClient();
-});
+var ServiceClient = require('./lib/service-client.js');
 
 describe('/cities', function() {
-    it('should return a 403 when unauthenticated', function (done) {
-        serviceClient.getClient().get('/cities', function (err, req, res) {
-            res.statusCode.should.equal(403);
-            done();
-        });
+    var client;
+
+    before(function (done) {
+        client = new ServiceClient();
+        client.login('Service General Unit Tests', done);
     });
 
     it('should return a 500 not implemented', function (done) {
-        authnClient.get('/cities', function(err, req, res, obj) {
+        client.get('/cities', function(err, req, res, obj) {
             res.statusCode.should.equal(500);
             done();
         });
