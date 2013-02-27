@@ -3,46 +3,47 @@ var redis = require('../lib/database.js');
 var async = require('async');
 var _ = require('underscore');
 
-function showUser (msUser, done) {
-    async.waterfall([
-        function (next) { next(null, msUser); },
-        _renderUserDetails
-    ], done);
-}
-
-function _renderUserDetails (msUser, next) {
+function showUser (request, msUser, done) {
     var sanitizedUser = _.pick(msUser, 'id', 'username');
     var sanitizedFacebook = _.pick(msUser.facebook, 'id', 'name', 'link');
 
     sanitizedUser.facebook = sanitizedFacebook;
 
-    next(null, 200, sanitizedUser);
+    done(null, 200, sanitizedUser);
 }
 
-function _fetchUserFromDatabase (msUserId, next) {
-    redis.client.get(msUserId, function (err, msUserSerialized) {
+function updateUser (request, msUser, done) {
+    var username = request.params.username;
+
+    if (username === undefined ) {
+        return done(new restify.MissingParameterError());
+    }
+
+    if (username === msUser.username) {
+        return done(undefined, 304);
+    }
+
+    if (!/^[a-zA-Z ]+$/.test(username)) {
+        return done(new restify.InvalidArgumentError());
+    }
+
+    msUser.username = username;
+
+    redis.client.set(msUser.id, JSON.stringify(msUser), function (err, result) {
         if (err) {
-            return next(err, 500);
+            return done(new restify.InternalError());
         }
 
-        if (msUserSerialized === null) {
-            return next(new restify.ResourceNotFoundError(), 404);
-        }
-
-        next(null, JSON.parse(msUserSerialized));
+        return done(null, 200);
     });
 }
 
-function updateUser (msUser, done) {
-    return done('not implemented', 500);
+function listGames (request, msUser, done) {
+    return done(new restify.InternalError({message: 'not implemented'}));
 }
 
-function listGames (msUser, done) {
-    return done('not implemented', 500);
-}
-
-function listOpponents (msUser, done) {
-    return done('not implemented', 500);
+function listOpponents (request, msUser, done) {
+    return done(new restify.InternalError({message: 'not implemented'}));
 }
 
 
@@ -56,13 +57,11 @@ function userIdRequiredHandler (handler) {
         ],
 
         function (err, code, body) {
-            if (code) {
-                response.send(code, body);
-            }
-            else {
-                response.send(500, err);
+            if (err) {
+                return done(err);
             }
 
+            response.send(code, body);
             done();
         });
     };
@@ -70,11 +69,26 @@ function userIdRequiredHandler (handler) {
 
 function _validateUserIdParameter (request, next) {
     if (!/user:[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/.test(request.params.id)) {
-        return next(new restify.InvalidArgumentError(), 400);
+        return next(new restify.InvalidArgumentError());
     }
 
-    return next(null, request.params.id);
+    return next(null, request, request.params.id);
 }
+
+function _fetchUserFromDatabase (request, msUserId, next) {
+    redis.client.get(msUserId, function (err, msUserSerialized) {
+        if (err) {
+            return next(err);
+        }
+
+        if (msUserSerialized === null) {
+            return next(new restify.ResourceNotFoundError());
+        }
+
+        next(null, request, JSON.parse(msUserSerialized));
+    });
+}
+
 
 module.exports.installAuthenticatedRouteHandlers = function (server) {
     server.get('/users/:id', userIdRequiredHandler(showUser));
