@@ -23,6 +23,8 @@ function createSession (request, response, done) {
         else {
             response.send(500, err);
         }
+
+        done();
     });
 }
 
@@ -93,7 +95,7 @@ function _createNewUser (fbUser, next) {
 
 function _loadExistingUser (msUserId, next) {
     redis.client.get(msUserId, function (err, msUserSerialized) {
-        if (err) {
+        if (err || msUserSerialized === null) {
             return next(err, 500);
         }
 
