@@ -1,17 +1,25 @@
 var should = require('should');
+var async = require('async');
 var ServiceClient = require('./lib/service-client.js');
 
 describe('/users', function () {
     var client;
+    var path;
 
     before(function (done) {
         client = new ServiceClient();
-        client.login('Service General Unit Tests', done);
+        client.login('Service General Unit Tests', function (err) {
+            if (err) {
+                return done(err);
+            }
+
+            path = '/users/' + encodeURIComponent(client.user.id);
+            done();
+        });
     });
 
     describe('GET /users/:id', function() {
         it('should return user details', function (done) {
-            var path = '/users/' + encodeURIComponent(client.user.id);
             client.get(path, function(err, req, res, obj) {
                 should.not.exist(err);
                 should.exist(obj);
@@ -26,17 +34,62 @@ describe('/users', function () {
     });
 
     describe('PUT /users/:id', function () {
-        it('should return a 500 not implemented', function (done) {
-            client.put('/users/' + encodeURIComponent(client.user.id), {}, function(err, req, res, obj) {
-                res.statusCode.should.equal(500);
+        it('should return a 304 if you try to set the same username', function (done) {
+            client.put(path, { username: client.user.username }, function(err, req, res, obj) {
+                res.statusCode.should.equal(304);
                 done();
+            });
+        });
+    });
+
+    describe('PUT /users/:id', function () {
+        it('should return a 409 if you use an invalid username', function (done) {
+            var username = client.user.username;
+            client.put(path, { username: username + '_' }, function (err, req, res, obj) {
+                res.statusCode.should.equal(409);
+                done();
+            });
+        });
+
+        it('should return a 409 if you use an empty username', function (done) {
+            async.parallel([
+                function (next) {
+                    client.put(path, { username: undefined }, function (err, req, res, obj) {
+                        res.statusCode.should.equal(409);
+                        next();
+                    });
+                },
+                function (next) {
+                    client.put(path, {}, function (err, req, res, obj) {
+                        res.statusCode.should.equal(409);
+                        next();
+                    });
+                },
+            ], function () {
+                done();
+            });
+        });
+    });
+
+    describe('PUT /users/:id', function () {
+        it('should return a 200 if you set a new username', function (done) {
+            var username = client.user.username;
+            client.put(path, { username: username + ' A' }, function (err, req, res, obj) {
+                res.statusCode.should.equal(200);
+
+                // then restore it...
+                client.put(path, { username: username }, function (err, req, res, obj) {
+                    should.not.exist(err);
+                    res.statusCode.should.equal(200);
+                    done(err);
+                });
             });
         });
     });
 
     describe('/users/:id/games', function() {
         it('should return a 500 not implemented', function (done) {
-            client.get('/users/' + encodeURIComponent(client.user.id) + '/games', function(err, req, res, obj) {
+            client.get(path + '/games', function(err, req, res, obj) {
                 res.statusCode.should.equal(500);
                 done();
             });
@@ -45,7 +98,7 @@ describe('/users', function () {
 
     describe('/users/:id/opponents', function() {
         it('should return a 500 not implemented', function (done) {
-            client.get('/users/' + encodeURIComponent(client.user.id) + '/opponents', function(err, req, res, obj) {
+            client.get(path + '/opponents', function(err, req, res, obj) {
                 res.statusCode.should.equal(500);
                 done();
             });
@@ -53,9 +106,9 @@ describe('/users', function () {
     });
 
     describe('invalid id', function () {
-        it('should return a 400 bad request', function (done) {
+        it('should return a 409 conflict', function (done) {
             client.get('/users/user%3Ainvalid', function (err, req, res, obj) {
-                res.statusCode.should.equal(400);
+                res.statusCode.should.equal(409);
                 done();
             });
         });
