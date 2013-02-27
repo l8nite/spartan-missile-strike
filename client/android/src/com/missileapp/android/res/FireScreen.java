@@ -12,7 +12,7 @@ public class FireScreen {
     // DATA
     private static final String TAG = "FireScreen";                        // TAG for logging
     private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
-    private static BagOfHolding variables;                                    // Variable bag
+    private static BagOfHolding variables;                                 // Variable bag
     private static Camera cam;                                             // Camera
     
     
