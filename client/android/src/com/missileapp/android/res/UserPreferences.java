@@ -79,6 +79,7 @@ public class UserPreferences {
     
     
     /**
+     * TODO update to new specs: multiple values requested
      * Returns a specific user preference
      * @param callbackIdent - callback identifier to notify with data
      * @param key - the resulting value to retreive  
