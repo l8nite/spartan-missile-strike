@@ -9,7 +9,6 @@
   "dependencies": {
     "redis": "~0.8.1",
     "hiredis": "~0.1.14",
-    "restify": "~1.4.4",
     "dtrace-provider": "~0.2.2",
     "should": "~1.2.0",
     "node-static": "~0.6.7",
@@ -17,6 +16,7 @@
     "async": "~0.2.5",
     "mocha": "~1.8.1",
     "node-uuid": "~1.4.0",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "restify": "~2.2.1"
   }
 }
