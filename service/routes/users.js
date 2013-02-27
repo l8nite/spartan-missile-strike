@@ -3,10 +3,9 @@ var redis = require('../lib/database.js');
 var async = require('async');
 var _ = require('underscore');
 
-function showUser (msUserId, done) {
+function showUser (msUser, done) {
     async.waterfall([
-        function (next) { next(null, msUserId); },
-        _fetchUserFromDatabase,
+        function (next) { next(null, msUser); },
         _renderUserDetails
     ], done);
 }
@@ -34,15 +33,15 @@ function _fetchUserFromDatabase (msUserId, next) {
     });
 }
 
-function updateUser (msUserId, done) {
+function updateUser (msUser, done) {
     return done('not implemented', 500);
 }
 
-function listGames (msUserId, done) {
+function listGames (msUser, done) {
     return done('not implemented', 500);
 }
 
-function listOpponents (msUserId, done) {
+function listOpponents (msUser, done) {
     return done('not implemented', 500);
 }
 
@@ -52,6 +51,7 @@ function userIdRequiredHandler (handler) {
         async.waterfall([
             function (next) { next(null, request); }, // enables arguments to first callback
             _validateUserIdParameter,
+            _fetchUserFromDatabase,
             handler,
         ],
 
