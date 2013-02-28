@@ -10,10 +10,23 @@ describe('/games', function () {
     });
 
     describe('/games', function () {
-        it('should return a 500 not implemented', function (done) {
-            client.post('/games', {}, function (err, req, res, obj) {
-                res.statusCode.should.equal(500);
-                done();
+        var parameters = [
+            // missing parameters
+            { opponent: undefined, latitude: 0, longitude: 0 },
+            { opponent: "random", latitude: undefined, longitude: 0 },
+            { opponent: "random", latitude: 0, longitude: undefined },
+            // invalid parameters
+            { opponent: "invalid", latitude: 0, longitude: 0 },
+            { opponent: "random", latitude: -91, longitude: 0 },
+            { opponent: "random", latitude: 0, longitude: -181 },
+        ];
+
+        parameters.forEach(function (body) {
+            it('should return a 409 conflict', function (done) {
+                client.post('/games', body, function (err, req, res, obj) {
+                    res.statusCode.should.equal(409);
+                    done();
+                });
             });
         });
     });
