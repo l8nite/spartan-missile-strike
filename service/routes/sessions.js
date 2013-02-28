@@ -23,6 +23,8 @@ function createSession (request, response, done) {
         else {
             response.send(500, err);
         }
+
+        done();
     });
 }
 
@@ -95,6 +97,10 @@ function _loadExistingUser (msUserId, next) {
     redis.client.get(msUserId, function (err, msUserSerialized) {
         if (err) {
             return next(err, 500);
+        }
+
+        if (msUserSerialized === null) {
+            return next('inconsistent user state', 500);
         }
 
         var msUser = JSON.parse(msUserSerialized);
