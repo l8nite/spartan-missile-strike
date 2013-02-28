@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebSettings.RenderPriority;
 import android.widget.ImageView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -24,7 +27,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location, True -> Ask user, False -> skip
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
     private static final String DROIDWB_FILENAME =                         // Webview file to load
-            "file:///android_asset/" + "index" + ".html";
+            "file:///android_asset/" + "View/ViewFramework-test" + ".html";
 
     // Varible Bag
     private static BagOfHolding variables;
@@ -32,7 +35,8 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     /*********************************
      * Android OS call back functions
      *********************************/
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         // Variables
         SurfaceView surfaceView;           // Surface View for layout options
@@ -73,6 +77,11 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.setDroidBridge(droidBridge);
         webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setRenderPriority(RenderPriority.HIGH);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webView.getSettings().setSupportZoom(false);
+        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        webView.getSettings().enableSmoothTransition(); // Deprecated but lets leave it for now
         webView.loadUrl(DROIDWB_FILENAME);
         
         // Store resource variables
