@@ -75,8 +75,10 @@ TheGM.prototype._startPollingService = function () {
 				that._games.games = response;
 				that._games.when = new Date();
 				that._notifyListeners();
+				that._poll = setTimeout(poll, that._STALE);
+			}).fail(function () {
+				that._poll = setTimeout(poll, that._STALE);
 			});
-			that._poll = setTimeout(poll, that._STALE);
 		})();
 	}
 }
