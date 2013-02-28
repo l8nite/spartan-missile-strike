@@ -68,7 +68,7 @@ function userIdRequiredHandler (handler) {
 }
 
 function _validateUserIdParameter (request, next) {
-    if (!/user:[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/.test(request.params.id)) {
+    if (!/^user:[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/.test(request.params.id)) {
         return next(new restify.InvalidArgumentError());
     }
 
