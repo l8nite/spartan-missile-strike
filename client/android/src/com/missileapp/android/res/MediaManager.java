@@ -1,6 +1,5 @@
 package com.missileapp.android.res;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
