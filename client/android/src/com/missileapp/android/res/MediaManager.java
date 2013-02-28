@@ -92,6 +92,7 @@ public class MediaManager {
 
     
     /**
+     * TODO UPDATE VOLUME SETTINGS
      * Play a sound with the provided options
      * @param options - the audio options:
      *            soundID - sound to play
@@ -107,6 +108,8 @@ public class MediaManager {
 			int soundPoolID = getSoundPoolMappingFromRawID(playSound.getString("soundID"));
 			boolean foreground = playSound.getBoolean("foreground");
 			boolean loop = playSound.getBoolean("loop");
+			
+			//TODO:  isn't foreground inherently not loop ?
 			
 			// Play sound with options
 			soundPool.play(soundPoolID, SPEAKER_VOLUME_LEFT, SPEAKER_VOLUME_RIGHT,
