@@ -80,7 +80,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         webView.getSettings().setRenderPriority(RenderPriority.HIGH);
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setSupportZoom(false);
-        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         webView.getSettings().enableSmoothTransition(); // Deprecated but lets leave it for now
         webView.loadUrl(DROIDWB_FILENAME);
         
