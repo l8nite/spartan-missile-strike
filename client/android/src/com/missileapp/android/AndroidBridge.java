@@ -16,7 +16,6 @@ public class AndroidBridge extends MissileApp {
     
     // Variables
     private static BagOfHolding variables;           // Bag Of Holding for Variables
-    private Vibrator vibrator;                    // Device vibrator
     
     /**
      * Android Concrete Methods for HTML/Native Bridge
@@ -29,7 +28,6 @@ public class AndroidBridge extends MissileApp {
         
         //NOTE: System Services are not available during this phase 
         // Init variables
-        vibrator = null;
     }
     
     /**
@@ -41,7 +39,6 @@ public class AndroidBridge extends MissileApp {
         String url = NBCallBack_prefix + callbackident + "," + callbackData + NBCallBack_postfix;
         this.callJS(url);
     }
-    
     
     /**
      * Calls the JavaScript and executes the 
@@ -101,8 +98,8 @@ public class AndroidBridge extends MissileApp {
      * @param time - time to vibrate the device
      */
     public void vibrate(String time) {
-        //TODO EDIT AND VERIFY THIS WORKS, SYSTEM SRVICES MAY NOT BE AVAILABLE HERE 
         long milliseconds;
+        Vibrator vibrator = variables.getVibrator();
         
         // Parse time
         try {
@@ -112,27 +109,12 @@ public class AndroidBridge extends MissileApp {
             milliseconds = 0;
         }
         MALogger.log(TAG, Log.INFO, "Vibrate command: " + time + ", parsed to: " + milliseconds + ".");
-        Toast.makeText(variables.getMissileApp(), "Vibrate command: " + time + ", parsed to: " + milliseconds + ".", Toast.LENGTH_SHORT).show();
-        
-        // Create Vibrator if it existst
-        if(vibrator == null) {
-        	Toast.makeText(variables.getMissileApp(), "creating Vibrator.", Toast.LENGTH_SHORT).show();
-        	try {
-        		vibrator = (Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE);
-			} catch (Exception e) {
-				Toast.makeText(variables.getMissileApp(), "Vibrator:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-			}
-            
-            Toast.makeText(variables.getMissileApp(), "Vibrator created.", Toast.LENGTH_SHORT).show();
-        }
         
         // Vibrate if the vibrator instance is created, has a vibrator, and the time to vibrate is greater than 0ms 
         if (vibrator != null && vibrator.hasVibrator() && milliseconds > 0) {
-        	Toast.makeText(variables.getMissileApp(), "Vibrating.", Toast.LENGTH_SHORT).show();
             vibrator.vibrate(milliseconds);
         }
     }
-    
     
     
     /**

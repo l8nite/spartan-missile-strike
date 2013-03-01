@@ -6,6 +6,7 @@ import com.missileapp.android.res.UserPreferences;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.os.Vibrator;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
@@ -30,6 +31,7 @@ public class BagOfHolding extends Application {
     // Resource variables
     private SharedPreferences settings;        // System User Preferences
     private UserPreferences userPrefs;         // Droid Native Bridge user prefs implementation
+    private Vibrator vibrator;                  // Vibrator unit
     private FireScreen fireScreen;             // FireScreen, contains the camear framework
     private MediaManager mediaManager;         // Media Manager that keeps track of all files
     
@@ -270,6 +272,22 @@ public class BagOfHolding extends Application {
     public void setMediaManager(MediaManager mediaManager) {
         this.mediaManager = mediaManager;
     }
+
+    /**
+     * Returns {@link Vibrator}
+     * @return {@link Vibrator}
+     */
+	public Vibrator getVibrator() {
+		return vibrator;
+	}
+
+	/**
+	 * Set {@link Vibrator}
+	 * @param vibrate instance of {@link Vibrator}
+	 */
+	public void setVibrator(Vibrator vibrator) {
+		this.vibrator = vibrator;
+	}
 
     
     

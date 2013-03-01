@@ -13,7 +13,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebSettings.RenderPriority;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -98,8 +97,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Store resource variables
         variables.setFireScreen(new FireScreen(variables));           // Fire Screen, camera
-        variables.setUserPrefs(new UserPreferences(variables));       // User Preferences, app data 
+        variables.setUserPrefs(new UserPreferences(variables));       // User Preferences, app data
         variables.setMediaManager(new MediaManager(variables));       // Media Manager, audio system
+        variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE)); // Vibrator
     }
     
     
