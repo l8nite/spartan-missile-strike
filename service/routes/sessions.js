@@ -1,6 +1,6 @@
 var async = require('async'),
     uuid = require('node-uuid'),
-    redis = require('../lib/database.js').client,
+    redis = require('../lib/database.js'),
     fbgraph = require('fbgraph');
 
 var DEFAULT_SESSION_EXPIRY_SECONDS = 2592000;
@@ -23,6 +23,8 @@ function createSession (request, response, done) {
         else {
             response.send(500, err);
         }
+
+        done();
     });
 }
 
@@ -56,7 +58,7 @@ function _validateFacebookAccessTokenByQueryingGraphAPI (fbAccessToken, next) {
 }
 
 function _loadMissileStrikeUser (fbUser, next) {
-    redis.get('facebook:' + fbUser.id, function (err, msUserId) {
+    redis.client.get('facebook:' + fbUser.id, function (err, msUserId) {
         if (err) {
             return next(err, 500);
         }
@@ -78,7 +80,7 @@ function _createNewUser (fbUser, next) {
         facebook: fbUser,
     };
 
-    redis.mset(
+    redis.client.mset(
         'facebook:' + fbUser.id, msUser.id,
         msUser.id, JSON.stringify(msUser),
         function (err, res) {
@@ -92,9 +94,13 @@ function _createNewUser (fbUser, next) {
 }
 
 function _loadExistingUser (msUserId, next) {
-    redis.get(msUserId, function (err, msUserSerialized) {
+    redis.client.get(msUserId, function (err, msUserSerialized) {
         if (err) {
             return next(err, 500);
+        }
+
+        if (msUserSerialized === null) {
+            return next('inconsistent user state', 500);
         }
 
         var msUser = JSON.parse(msUserSerialized);
@@ -108,7 +114,7 @@ function _checkForExistingSession (msUser, next) {
         return next(null, msUser, false);
     }
 
-    redis.exists(msUser.session, function (err, exists) {
+    redis.client.exists(msUser.session, function (err, exists) {
         if (err) {
             return next(err, 500);
         }
@@ -120,7 +126,7 @@ function _checkForExistingSession (msUser, next) {
 function _createOrUpdateSession (msUser, sessionExists, next) {
     // refresh existing session
     if (sessionExists) {
-        return redis.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id, function (err, res) {
+        return redis.client.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id, function (err, res) {
             if (err) {
                 return next(err, 500);
             }
@@ -130,7 +136,7 @@ function _createOrUpdateSession (msUser, sessionExists, next) {
     }
 
     // create new session
-    var multi = redis.multi();
+    var multi = redis.client.multi();
 
     if (msUser.hasOwnProperty('session')) {
         multi.del(msUser.session); // delete stale session pointer
@@ -159,12 +165,33 @@ function _formatCreateSessionResponse (msUser, next) {
 }
 
 function deleteSession (request, response, done) {
-    response.send(500, 'not implemented');
-    return done();
+    async.waterfall([
+        function (next) { next(null, request); }, // enables arguments to first callback
+        _deleteSessionFromDatabase,
+    ],
+
+    function (err, code, body) {
+        if (code) {
+            response.send(code, body);
+        }
+        else {
+            response.send(500, err);
+        }
+    });
+}
+
+function _deleteSessionFromDatabase(request, next) {
+    redis.client.del(request.headers.missileappsessionid, function (err, res) {
+        if (err) {
+            return next(err, 500);
+        }
+
+        next(null, 204);
+    });
 }
 
 module.exports.installAuthenticatedRouteHandlers = function (server) {
-    server.del('/sessions/:id', deleteSession);
+    server.del('/sessions', deleteSession);
 };
 
 module.exports.installPublicRouteHandlers = function (server) {
