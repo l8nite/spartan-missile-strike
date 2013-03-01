@@ -33,6 +33,7 @@ public class UserPreferences {
      * @param newPreferences - JSON of User Preferences
      */
     public void setPreferences(String callbackIdent, String newPreferences) {
+    	// TODO update to new specs: volume preferences
         MALogger.log(TAG, Log.INFO, "Saving User Prefs: " + newPreferences);
         // Get Editor and preference from JSON Object
         SharedPreferences.Editor prefs = varibles.getSettings().edit();
@@ -59,7 +60,6 @@ public class UserPreferences {
             success = false;
         }
         
-        
         // Construct callback data, default to failed
         JSONObject jsonData = new JSONObject();
         String callbackData = "";
@@ -67,7 +67,7 @@ public class UserPreferences {
             jsonData.put("succeeded" , success );
         }
         catch (Exception e) {
-            //Fa
+            // Fallback to failed
             callbackData = "{ succeeded:\"false\" }";
             MALogger.log(TAG, Log.ERROR, "Could Not Construct Callback", e);
         }
@@ -79,12 +79,13 @@ public class UserPreferences {
     
     
     /**
-     * TODO update to new specs: multiple values requested
      * Returns a specific user preference
      * @param callbackIdent - callback identifier to notify with data
      * @param key - the resulting value to retreive  
      */
     public void getPreference(String callbackIdent, String key) {
+    	//TODO: update to new specs: multiple values requested
+    	
         // Get Data from the application manager
         SharedPreferences prefs =  varibles.getSettings();
         

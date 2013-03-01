@@ -5,7 +5,6 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 public class AndroidBridge extends MissileApp {
     // Data
