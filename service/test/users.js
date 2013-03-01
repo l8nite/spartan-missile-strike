@@ -1,57 +1,125 @@
 var should = require('should');
-var serviceClient = require('./lib/service-client.js');
+var async = require('async');
+var ServiceClient = require('./lib/service-client.js');
 
-var authnClient, client;
+describe('/users', function () {
+    var client;
+    var path;
 
-before(function () {
-    client = serviceClient.getClient();
-    authnClient = serviceClient.getAuthenticatedClient();
-});
+    before(function (done) {
+        client = new ServiceClient();
+        client.login('Service General Unit Tests', function (err) {
+            if (err) {
+                return done(err);
+            }
 
-describe('/users/:id', function() {
-    it('should return a 403 when unauthenticated', function (done) {
-        client.get('/users/fe4d37b8-ff94-452d-ae6a-e31e30bbafd9', function (err, req, res, obj) {
-            res.statusCode.should.equal(403);
+            path = '/users/' + encodeURIComponent(client.user.id);
             done();
         });
     });
 
-    it('should return a 500 not implemented', function (done) {
-        authnClient.get('/users/fe4d37b8-ff94-452d-ae6a-e31e30bbafd9', function(err, req, res, obj) {
-            res.statusCode.should.equal(500);
-            done();
-        });
-    });
-});
-
-describe('/users/:id/games', function() {
-    it('should return a 403 when unauthenticated', function (done) {
-        client.get('/users/fe4d37b8-ff94-452d-ae6a-e31e30bbafd9/games', function (err, req, res, obj) {
-            res.statusCode.should.equal(403);
-            done();
-        });
-    });
-
-    it('should return a 500 not implemented', function (done) {
-        authnClient.get('/users/fe4d37b8-ff94-452d-ae6a-e31e30bbafd9/games', function(err, req, res, obj) {
-            res.statusCode.should.equal(500);
-            done();
-        });
-    });
-});
-
-describe('/users/:id/opponents', function() {
-    it('should return a 403 when unauthenticated', function (done) {
-        client.get('/users/fe4d37b8-ff94-452d-ae6a-e31e30bbafd9/opponents', function (err, req, res, obj) {
-            res.statusCode.should.equal(403);
-            done();
+    describe('GET /users/:id', function() {
+        it('should return user details', function (done) {
+            client.get(path, function(err, req, res, obj) {
+                should.not.exist(err);
+                should.exist(obj);
+                obj.should.have.property('id');
+                obj.id.should.equal(client.user.id);
+                // especially this:
+                obj.facebook.should.not.have.property('access_token');
+                res.statusCode.should.equal(200);
+                done();
+            });
         });
     });
 
-    it('should return a 500 not implemented', function (done) {
-        authnClient.get('/users/fe4d37b8-ff94-452d-ae6a-e31e30bbafd9/opponents', function(err, req, res, obj) {
-            res.statusCode.should.equal(500);
-            done();
+    describe('PUT /users/:id', function () {
+        it('should return a 304 if you try to set the same username', function (done) {
+            client.put(path, { username: client.user.username }, function(err, req, res, obj) {
+                res.statusCode.should.equal(304);
+                done();
+            });
+        });
+    });
+
+    describe('PUT /users/:id', function () {
+        it('should return a 409 if you use an invalid username', function (done) {
+            var username = client.user.username;
+            client.put(path, { username: username + '_' }, function (err, req, res, obj) {
+                res.statusCode.should.equal(409);
+                done();
+            });
+        });
+
+        it('should return a 409 if you use an empty username', function (done) {
+            async.parallel([
+                function (next) {
+                    client.put(path, { username: undefined }, function (err, req, res, obj) {
+                        res.statusCode.should.equal(409);
+                        next();
+                    });
+                },
+                function (next) {
+                    client.put(path, {}, function (err, req, res, obj) {
+                        res.statusCode.should.equal(409);
+                        next();
+                    });
+                },
+            ], function () {
+                done();
+            });
+        });
+    });
+
+    describe('PUT /users/:id', function () {
+        it('should return a 200 if you set a new username', function (done) {
+            var username = client.user.username;
+            client.put(path, { username: username + ' A' }, function (err, req, res, obj) {
+                res.statusCode.should.equal(200);
+
+                // then restore it...
+                client.put(path, { username: username }, function (err, req, res, obj) {
+                    should.not.exist(err);
+                    res.statusCode.should.equal(200);
+                    done(err);
+                });
+            });
+        });
+    });
+
+    describe('/users/:id/games', function() {
+        it('should return a 500 not implemented', function (done) {
+            client.get(path + '/games', function(err, req, res, obj) {
+                res.statusCode.should.equal(500);
+                done();
+            });
+        });
+    });
+
+    describe('/users/:id/opponents', function() {
+        it('should return a 500 not implemented', function (done) {
+            client.get(path + '/opponents', function(err, req, res, obj) {
+                res.statusCode.should.equal(500);
+                done();
+            });
+        });
+    });
+
+    describe('invalid id', function () {
+        it('should return a 409 conflict', function (done) {
+            client.get('/users/user%3Ainvalid', function (err, req, res, obj) {
+                res.statusCode.should.equal(409);
+                done();
+            });
+        });
+    });
+
+    describe('GET /users/:id with a valid but nonexistent id', function () {
+        it('should return a 404 not found', function (done) {
+            client.get('/users/user%3A00000000-0000-0000-0000-000000000000', function (err, req, res, obj) {
+                res.statusCode.should.equal(404);
+                done();
+            });
         });
     });
 });
