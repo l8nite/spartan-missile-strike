@@ -5,6 +5,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 public class AndroidBridge extends MissileApp {
     // Data
@@ -100,7 +101,7 @@ public class AndroidBridge extends MissileApp {
      * @param time - time to vibrate the device
      */
     public void vibrate(String time) {
-        //TODO VERIFY THIS WORKS, SYSTEM SRVICES MAY NOT BE AVAILABLE HERE 
+        //TODO EDIT AND VERIFY THIS WORKS, SYSTEM SRVICES MAY NOT BE AVAILABLE HERE 
         long milliseconds;
         
         // Parse time
@@ -111,14 +112,23 @@ public class AndroidBridge extends MissileApp {
             milliseconds = 0;
         }
         MALogger.log(TAG, Log.INFO, "Vibrate command: " + time + ", parsed to: " + milliseconds + ".");
+        Toast.makeText(variables.getMissileApp(), "Vibrate command: " + time + ", parsed to: " + milliseconds + ".", Toast.LENGTH_SHORT).show();
         
         // Create Vibrator if it existst
         if(vibrator == null) {
-            vibrator = (Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE);
+        	Toast.makeText(variables.getMissileApp(), "creating Vibrator.", Toast.LENGTH_SHORT).show();
+        	try {
+        		vibrator = (Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE);
+			} catch (Exception e) {
+				Toast.makeText(variables.getMissileApp(), "Vibrator:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+			}
+            
+            Toast.makeText(variables.getMissileApp(), "Vibrator created.", Toast.LENGTH_SHORT).show();
         }
         
         // Vibrate if the vibrator instance is created, has a vibrator, and the time to vibrate is greater than 0ms 
         if (vibrator != null && vibrator.hasVibrator() && milliseconds > 0) {
+        	Toast.makeText(variables.getMissileApp(), "Vibrating.", Toast.LENGTH_SHORT).show();
             vibrator.vibrate(milliseconds);
         }
     }
@@ -149,6 +159,4 @@ public class AndroidBridge extends MissileApp {
             variables.getFireScreen().exitFireScreen();
         }
     }
-    
-    
 }

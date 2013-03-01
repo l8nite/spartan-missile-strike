@@ -5,7 +5,6 @@ import com.missileapp.android.MALogger;
 
 import android.hardware.Camera;
 import android.util.Log;
-import android.view.SurfaceHolder;
 import android.widget.Toast;
 
 public class FireScreen {
@@ -37,11 +36,9 @@ public class FireScreen {
             // Create and Save Variables, default to rear facing camera
             cam = Camera.open();
             if(cam != null) {
-                SurfaceHolder holder = variables.getSurfaceHolder();
-                
                 // Set Orientation and display  
                 cam.setDisplayOrientation(CAMERA_ORIENTATION);
-                cam.setPreviewDisplay(holder);
+                cam.setPreviewDisplay(variables.getSurfaceHolder());
                 
                 // Lock and Start Preview
                 cam.lock();
@@ -51,7 +48,6 @@ public class FireScreen {
                 MALogger.log(TAG, Log.WARN, "No Camera.");
                 Toast.makeText(variables.getMissileApp(), "No Camera", Toast.LENGTH_SHORT).show();
             }
-                
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.ERROR, "Error Starting Camera", e);

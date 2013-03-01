@@ -5,17 +5,20 @@ import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.UserPreferences;
 
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebSettings.RenderPriority;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
@@ -27,8 +30,8 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location, True -> Ask user, False -> skip
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
     private static final String DROIDWB_FILENAME =                         // Webview file to load
-            "file:///android_asset/" + "View/ViewFramework-test" + ".html";
-
+            "file:///android_asset/" + "index" + ".html";
+    
     // Varible Bag
     private static BagOfHolding variables;
     
@@ -70,18 +73,28 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         splashScreen = (ImageView) findViewById(R.id.splashview);
         variables.setSplashScreen(splashScreen);
         
-        // Set up WebView
+        // Set up webview and android interface
         webView = (WebView) findViewById(R.id.webview);
         droidBridge = new AndroidBridge(variables);
         variables.setWebView(webView);
         variables.setDroidBridge(droidBridge);
-        webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
-        webView.getSettings().setJavaScriptEnabled(true);
+        
+        // Smooth Transition
         webView.getSettings().setRenderPriority(RenderPriority.HIGH);
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setSupportZoom(false);
         webView.getSettings().enableSmoothTransition(); // Deprecated but lets leave it for now
+        
+        // JavaScript
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
+        
+        // Color Transparent
+        webView.setBackgroundColor(Color.TRANSPARENT);
+        
+        // Load WebView
         webView.loadUrl(DROIDWB_FILENAME);
+        
         
         // Store resource variables
         variables.setFireScreen(new FireScreen(variables));           // Fire Screen, camera
@@ -104,7 +117,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         MALogger.log(TAG, Log.INFO, "Pausing activity.");
         variables.getFireScreen().processPauseRequest();
     }
-    
     
     @Override
     protected void onStop() {
