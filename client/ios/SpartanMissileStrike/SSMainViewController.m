@@ -8,85 +8,132 @@
 
 #import "SSMainViewController.h"
 #import "SSAudioManager.h"
-#import "SSNewGameViewController.h"
-
-
-@interface SSMainViewController()
-@end
+#import "SSAppDelegate.h"
 
 @implementation SSMainViewController
-@synthesize myHTML;
+@synthesize webView = _webView;
+@synthesize nativeBridge;
+@synthesize session,firingViewController;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSString* pathforAddress = [[NSBundle mainBundle] pathForResource:@"ViewFramework-test" ofType:@"html"];
-    NSURL* url = [NSURL fileURLWithPath:pathforAddress];
-    NSURLRequest* requestobj = [NSURLRequest requestWithURL:url];
+    nativeBridge = [[SSNativeBridge alloc]init];    
+    [_webView setDelegate:nativeBridge];
+    
+    [ self  loadHTMLContent];
+
+        
+    
+    //////////v/////////FB Blocks////////////v/////////
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sessionStateChanged:)
+                                                 name:SMSSessionStateChangedNotification
+                                               object:nil];
+    
+    [FBSession openActiveSessionWithAllowLoginUI:YES];
+    
+    if(FBSession.activeSession.isOpen){
+        [[FBRequest requestForMe] startWithCompletionHandler:
+         ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+             if (!error) {
+              //  self.userNameLabel.text = user.name;
+                // self.userProfileImage.profileID = [user objectForKey:@"id"];
+                 NSLog(@"Facebook User: %@",user.name);
+             }
+         }];
+    }
+    //////////^/////////FB Blocks///////^//////////////
     
     
-    //Going to UIView
-    [self.view setBackgroundColor:[UIColor colorWithRed:108.0/255.0 green:98.0/255.0 blue:239.0/255.0 alpha:1]];
-    
-    UIButton *mainViewButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    mainViewButton.frame = CGRectMake(80, 50, 160, 30);
-    [mainViewButton setTitle:@"Resume Game" forState:UIControlStateNormal];
-    [mainViewButton addTarget:self action:@selector(resumeGame:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:mainViewButton];
-    
-    UIButton *newGameButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    newGameButton.frame = CGRectMake(80, 100, 160, 30);
-    [newGameButton setTitle:@"New Game" forState:UIControlStateNormal];
-    [newGameButton addTarget:self action:@selector(newGame:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:newGameButton];
-    
-    UIButton *acceptInviteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    acceptInviteButton.frame = CGRectMake(80, 150, 160, 30);
-    [acceptInviteButton setTitle:@"Accept Invitation" forState:UIControlStateNormal];
-    [acceptInviteButton addTarget:self action:@selector(acceptInvite:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:acceptInviteButton];
-    
-    UIButton *optionsButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    optionsButton.frame = CGRectMake(280, 10, 30, 30);
-    [optionsButton addTarget:self action:@selector(myOptions:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:optionsButton]; 
+    ////Setting up a UIToolbar and Camera View/////
+   
 }
 
-/**
- 1. Set up these methods for each button action
- 2. Create new View controller for each method
- 3. Include each class at the top of this class
- 4. Init each instance of the class
-*/
+#pragma mark -
+#pragma CameraController Methods
 
-/*
--(void)resumeGame:(id)sender{
-    SSMainViewController* ng = [[SSMainViewController alloc] initWithNibName:@"SSNewGameViewController" bundle:nil];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ng];
-    [self presentViewController:navigationController animated:YES completion:nil];
+
+//-(IBAction)callForFireMission:(id)sender{
+//   [self showImagePicker:UIImagePickerControllerSourceTypeCamera];
+//}
+//
+//
+//- (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType
+//{
+//    
+//    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+//    {
+//        NSLog(@"Image");
+//
+//        [firingViewController setupImagePicker:sourceType];
+//        [self presentViewController:self.firingViewController.imagePickerController animated:YES completion:nil];
+//    }
+//}
+
+
+//- (IBAction)cameraAction:(id)sender
+//{
+//    [self showImagePicker:UIImagePickerControllerSourceTypeCamera];
+//}
+
+
+#pragma mark -
+#pragma mark OverlayViewControllerDelegate
+
+// as a delegate we are being told a picture was taken
+- (void)didTakePicture:(UIImage *)picture
+{
+//    [self.capturedImages addObject:picture];
 }
-*/
 
--(void)newGame:(id)sender{
+// as a delegate we are told to finished with the camera
+- (void)didFinishWithCamera
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+ 
     
-    SSNewGameViewController* ng = [[SSNewGameViewController alloc] initWithNibName:@"SSNewGameViewController" bundle:nil];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ng];
-    [self presentViewController:navigationController animated:YES completion:nil];
-    
-    
+//    if ([self.capturedImages count] > 0)
+//    {
+//        if ([self.capturedImages count] == 1)
+//        {
+//            // we took a single shot
+//            [self.imageView setImage:[self.capturedImages objectAtIndex:0]];
+//        }
+//        else
+//        {
+//            // we took multiple shots, use the list of images for animation
+//            self.imageView.animationImages = self.capturedImages;
+//            
+//            if (self.capturedImages.count > 0)
+//                // we are done with the image list until next time
+//                [self.capturedImages removeAllObjects];
+//            
+//            self.imageView.animationDuration = 5.0;    // show each captured photo for 5 seconds
+//            self.imageView.animationRepeatCount = 0;   // animate forever (show all photos)
+//            [self.imageView startAnimating];
+//        }
+//    }
 }
 
--(void) acceptInvitation:(id)sender{
-    
-    
-}
 
 
--(void)optionsButton:(id)sender{
-    
-    
+
+
+
+
+#pragma mark -
+#pragma Web View Methods
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+
+
+    NSLog(@"webview: %@",webView.description);
+
+    return YES;
 }
+
 
 
 
@@ -97,11 +144,59 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
+    NSLog(@"ViewDID appear");
+
     
     
-    
-    sa1 = [[SSAudioManager alloc]init];
-    [sa1 playSound:@"MODERATO"];
+//    sa1 = [[SSAudioManager alloc]init];
+//    [sa1 playSound:@"MODERATO"];
 }
+-(void) loadHTMLContent
+{
+   /**
+    testing usig chris's code
+    @"html/View/ViewFramework-test"
+    */
+    
+         [_webView loadRequest: [NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/View/ViewFramework-test" ofType:@"html"] isDirectory:NO]]];
+        [_webView setScalesPageToFit:YES];
+        _webView.backgroundColor = [UIColor clearColor];
+    
+    }
+
+-(void) sayHello
+{
+    NSLog(@"HEllo");
+}
+
+
+
+
+/*if ([[url scheme] isEqualToString:@"js2objc"]) {
+    // remove leading / from path
+    [self helloFromJavaScript:[[url path] substringFromIndex:1]];
+    return NO; // prevent request
+} else {
+    return YES; // allow request
+}*/
+
+
+#pragma mark - FBUserSettingsDelegate methods
+
+- (void)sessionStateChanged:(NSNotification*)notification {
+}
+
+- (void)loginViewController:(id)sender receivedError:(NSError *)error{
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",
+                                                                     [SSAppDelegate FBErrorCodeDescription:error.code]]
+                                                            message:error.localizedDescription
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
 
 @end
