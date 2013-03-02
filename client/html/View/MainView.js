@@ -116,9 +116,9 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
 };
 
 // View transition animation time in milliseconds
-MainView.prototype._TRANSITION_TIME = 200;
+MainView.prototype._TRANSITION_TIME = 333;
 // Time in milliseconds to seperately accelerate/decelerate transition animations
 // _SMOOTHING <= _TRANSITION_TIME / 2
-MainView.prototype._SMOOTHING = 83;
+MainView.prototype._SMOOTHING = 111;
 // Framerate limiter
 MainView.prototype._MAXFPS = 60;
