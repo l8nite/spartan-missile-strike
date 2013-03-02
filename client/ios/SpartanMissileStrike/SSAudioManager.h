@@ -16,7 +16,10 @@
     NSMutableDictionary* playerForSound;
     NSDictionary* filenameForSound;
     
+    __strong AVAudioPlayer *player;
+    
 }
+@property (nonatomic,strong) AVAudioPlayer *player;
 -(void)playSound:(NSString*)identifier;
 -(AVAudioPlayer*)createAVAudioPlayer;
 
