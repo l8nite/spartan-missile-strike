@@ -26,14 +26,14 @@ public class MediaManager {
 	
 	// Sound loading variables
 	private static final String TAG = "MediaManager";
-	private static final int MAX_FILES_PLAYED_SIMULTANEOUS =  10;          // MAX # of audio files playing at any given time TODO VERIFY THIS 
+	private static final int MAX_FILES_PLAYED_SIMULTANEOUS =  10;          // MAX # of audio files playing at any given time 
 	private static final int SOURCE_QUALITY = 0;                           // QUALITY, currently unused, future android operation
-	private static final int SOURCE_PRIORITY = 1;                          // Load Priority, currently unused, future android operation
+	private static final int SOURCE_PRIORITY = 1;                          // Priority, currently unused, future android operation
 	private static final float DEFAULT_SPEAKER_VOLUME = 1.0f;              // Default Speaker Volume
-	private static final float DEFAULT_PLAY_RATE = 1.0f;                           // Play Rate - Normal
+	private static final float DEFAULT_PLAY_RATE = 1.0f;                   // Play Rate - Normal
 	private static final int DEFAULT_PRIORITY = 2;                         // Default Priority
 	private static final int BACKGROUND_PRIORITY = 1;                      // Background Priority
-	private static final int PLAYBACK_DEFAULT_VALUE = 0;                   // Default number of playback times - 1
+	private static final int PLAYBACK_DEFAULT_VALUE = 0;                   // Default number of playback times (minus 1)
 	private static final int PLAYBACK_LOOP_VALUE = -1;                     // Value to loop
 	
 	// Application data 
@@ -66,14 +66,12 @@ public class MediaManager {
         soundMap.put(FX_MISSILE_LAUNCHED, soundPool.load(variables.getMissileApp(), FX_MISSILE_LAUNCHED, SOURCE_PRIORITY));
         soundMap.put(FX_PAGE_TRANSITION, soundPool.load(variables.getMissileApp(), FX_PAGE_TRANSITION, SOURCE_PRIORITY));
         soundMap.put(FX_TURRET_MOVING, soundPool.load(variables.getMissileApp(), FX_TURRET_MOVING, SOURCE_PRIORITY));
-        
-        //TODO Implement listener for load
     }
     
     /**
-     * Transltes
-     * @param nativeBridgeID
-     * @return
+     * Translates the native bridge sound id to android raw identifier
+     * @param nativeBridgeID - native bridge identifier
+     * @return Android music raw identifier
      */
     public int translateSoundIDToRawPointer(String nativeBridgeID) {
     	if(nativeBridgeID.equalsIgnoreCase("background_music")){
@@ -122,7 +120,6 @@ public class MediaManager {
     
     
     /**
-     * TODO UPDATE VOLUME SETTINGS
      * Play a sound with the provided options
      * @param options - the audio options:
      *            soundID - sound to play
@@ -143,7 +140,6 @@ public class MediaManager {
 			boolean foreground = playSound.getBoolean("foreground");
 			boolean loop = playSound.getBoolean("loop");
 			
-			//TODO: isn't background inherently loop ?
 			// Set up volume, loop time, priority, and play rate
 			if(foreground) {
 				volume = foregroundVolume;
@@ -211,16 +207,31 @@ public class MediaManager {
 		}
     }
     
-    //TODO: MAKE volume function
+    /**
+     * Sets foreground volume and updates sound pool
+     * @param volume the new volume
+     */
     public void setForegroundVolume(float volume) {
     	foregroundVolume = volume;
     	
-    	//TODO: Change Volume for forground
     	for (int i = 0; i < foregroundMap.size(); i++) {
+    		if(foregroundMap.valueAt(i)) {
+    			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), foregroundVolume, foregroundVolume);
+    		}
 		}
     }
     
+    /**
+     * Sets background volume and updates sound pool
+     * @param volume the new volume
+     */
     public void setBackgroundVolume(float volume) {
+    	backgroundVolume = volume;
     	
+    	for (int i = 0; i < foregroundMap.size(); i++) {
+    		if(!foregroundMap.valueAt(i)) {
+    			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), backgroundVolume, backgroundVolume);
+    		}
+		}
     }
 }
