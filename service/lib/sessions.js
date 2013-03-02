@@ -6,14 +6,17 @@ return function (req, res, next) {
         return next(new restify.NotAuthorizedError());
     }
 
-    redis.exists(req.headers.missileappsessionid, function (err, sessionExists) {
+    redis.get(req.headers.missileappsessionid, function (err, userIdForSession) {
         if (err) {
             return next(new restify.InternalError());
         }
 
-        if (!sessionExists) {
+        if (!userIdForSession) {
             return next(new restify.NotAuthorizedError());
         }
+
+        req.missileStrikeUserId = userIdForSession;
+        req.missileStrikeSessionId = req.headers.missileappsessionid;
 
         return next();
     });
