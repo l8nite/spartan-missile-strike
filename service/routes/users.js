@@ -72,6 +72,10 @@ function _validateUserIdParameter (request, next) {
         return next(new restify.InvalidArgumentError());
     }
 
+    if (request.missileStrikeUserId !== request.params.id) {
+        return next(new restify.NotAuthorizedError());
+    }
+
     return next(null, request, request.params.id);
 }
 
