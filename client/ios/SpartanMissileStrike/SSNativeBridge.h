@@ -16,6 +16,6 @@
 
 }
 -(BOOL)dispatchNativeBridgeEventsFromURL:(NSURL*)url; 
-
+-(void) loadHTMLContent;
 
 @end

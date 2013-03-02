@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SSAudioManager.h"
+#import "SSNativeBridge.h"
 @interface SSMainViewController : UIViewController
 {
     SSAudioManager* sa1;
-}
- 
+ }
+@property (nonatomic,retain)IBOutlet UIWebView* myHTML;
 
 @end
