@@ -114,10 +114,10 @@ describe('/users', function () {
         });
     });
 
-    describe('GET /users/:id with a valid but nonexistent id', function () {
-        it('should return a 404 not found', function (done) {
+    describe('GET /users/:id with a valid but not authorized id', function () {
+        it('should return a 403 forbidden', function (done) {
             client.get('/users/user%3A00000000-0000-0000-0000-000000000000', function (err, req, res, obj) {
-                res.statusCode.should.equal(404);
+                res.statusCode.should.equal(403);
                 done();
             });
         });
