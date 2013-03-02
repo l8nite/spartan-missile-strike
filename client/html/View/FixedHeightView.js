@@ -6,3 +6,4 @@ function FixedHeightView(domNode) {
 }
 
 FixedHeightView.prototype = View.prototype;
+

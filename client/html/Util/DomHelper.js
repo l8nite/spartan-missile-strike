@@ -27,47 +27,18 @@ DomHelper.prototype.removeClass = function (node, classname) {
     }
 };
 
-DomHelper.prototype.moveTo = function (node, x, y, z) {
-    // if (x === 0 || x) {
-    //     node._domNode.style.left = x;
-    // }
-    // if (x === 0 || y) {
-    //     node._domNode.style.top = y;
-    // }
-
-    if (!node._domNode._coords) {
-        node._domNode._coords = {
-            x: 0,
-            y: 0,
-            z: 0
-        };
-    }
+DomHelper.prototype.moveTo = function (node, x, y) {
     if (x === 0 || x) {
-        node._domNode._coords.x = x;
+        node._domNode.style.left = x;
     }
-    if (y === 0 || y) {
-        node._domNode._coords.y = y;
+    if (x === 0 || y) {
+        node._domNode.style.top = y;
     }
-    if (z === 0 || z) {
-        node._domNode._coords.z = z;
-    }
-
-    node._domNode.style.webkitTransform = "translate3d(" +
-        node._domNode._coords.x + "px," +
-        node._domNode._coords.y + "px," +
-        node._domNode._coords.z + "px)";
 };
 
 DomHelper.prototype.getPos = function (node) {
-    // return {
-    //     x: node._domNode.style.left ? parseInt(node._domNode.style.left.slice(0, -2)) : 0,
-    //     y: node._domNode.style.top ? parseInt(node._domNode.style.top.slice(0, -2)) : 0
-    //     z:
-    // };
-
-    return node._domNode._coords ? node._domNode._coords : {
-        x: 0,
-        y: 0,
-        z: 0
+    return {
+        x: node._domNode.style.left ? parseInt(node._domNode.style.left.slice(0, -2)) : 0,
+        y: node._domNode.style.top ? parseInt(node._domNode.style.top.slice(0, -2)) : 0
     };
 };
