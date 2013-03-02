@@ -2,7 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BOMB</key>
+	<string>shared/audio/Bomb</string>
+	<key>MISSILELAUNCHED</key>
+	<string>shared/audio/MissileLaunched</string>
 	<key>MODERATO</key>
 	<string>shared/audio/Moderato</string>
+	<key>EXPLOSION</key>
+	<string>shared/audio/Explosion</string>
 </dict>
 </plist>

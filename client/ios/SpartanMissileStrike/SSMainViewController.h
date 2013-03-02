@@ -9,10 +9,26 @@
 #import <UIKit/UIKit.h>
 #import "SSAudioManager.h"
 #import "SSNativeBridge.h"
-@interface SSMainViewController : UIViewController
+#import <FacebookSDK/FacebookSDK.h>
+@class SSFiringViewController;
+@interface SSMainViewController : UIViewController 
 {
     SSAudioManager* sa1;
+    FBSession* session;
+    IBOutlet UIToolbar* toolBar;
+    SSFiringViewController *firingViewController;
+    
  }
-@property (nonatomic,retain)IBOutlet UIWebView* myHTML;
+
+@property  (nonatomic,strong) IBOutlet UIToolbar *toolBar;
+@property (nonatomic, strong) SSFiringViewController* firingViewController;
+@property (nonatomic,retain) IBOutlet SSNativeBridge* nativeBridge;
+@property (nonatomic, strong) FBSession* session;
+@property (nonatomic,retain) IBOutlet UIWebView* webView;
+
+-(IBAction)callForFireMission:(id)sender;
+- (void)showImagePicker;
+
+
 
 @end
