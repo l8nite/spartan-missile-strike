@@ -68,7 +68,7 @@ public class UserPreferences {
         }
         catch (Exception e) {
             // Fallback to failed
-            callbackData = "{ succeeded:\"false\" }";
+            callbackData = "{\"succeeded\":\"false\"}";
             MALogger.log(TAG, Log.ERROR, "Could Not Construct Callback", e);
         }
         
