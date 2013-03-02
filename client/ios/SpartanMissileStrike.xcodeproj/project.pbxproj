@@ -10,6 +10,7 @@
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
 		10594FEA16A6426900E41072 /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10594FE916A6426900E41072 /* sounds.plist */; };
+		106E551016E2845C00E68F43 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 106E550F16E2845C00E68F43 /* html */; };
 		1080A10316ADBDFF00C836E3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E520E169A02B0002425B5 /* AVFoundation.framework */; };
 		1080A10616ADCC2700C836E3 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1080A10516ADCC2700C836E3 /* libOCMock.a */; };
 		10852433169E009300EE241C /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 10852432169E009300EE241C /* shared */; };
@@ -25,7 +26,6 @@
 		108FC6CC169641C8001BABBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 108FC6CA169641C8001BABBE /* InfoPlist.strings */; };
 		108FC6CF169641C8001BABBE /* SpartanMissileStrikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */; };
 		1092785216A091E3007FEF8B /* SSNativeBridgeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1092785116A091E3007FEF8B /* SSNativeBridgeTests.m */; };
-		109D48AC16DC88CC0086E354 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 109D48AB16DC88CC0086E354 /* html */; };
 		109E51F21699FE3F002425B5 /* SSNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E51F11699FE3F002425B5 /* SSNativeBridge.m */; };
 		109E520F169A02B0002425B5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E520E169A02B0002425B5 /* AVFoundation.framework */; };
 		109E5211169A02C1002425B5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E5210169A02C1002425B5 /* CoreLocation.framework */; };
@@ -68,6 +68,7 @@
 		103DE30616964EC300ED92B4 /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
 		103DE30716964EC300ED92B4 /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
 		10594FE916A6426900E41072 /* sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sounds.plist; sourceTree = "<group>"; };
+		106E550F16E2845C00E68F43 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = ../html; sourceTree = "<group>"; };
 		1080A10516ADCC2700C836E3 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = usr/lib/libOCMock.a; sourceTree = "<group>"; };
 		10852432169E009300EE241C /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../shared; sourceTree = "<group>"; };
 		108FC69F169641C8001BABBE /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +89,6 @@
 		108FC6CE169641C8001BABBE /* SpartanMissileStrikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpartanMissileStrikeTests.m; sourceTree = "<group>"; };
 		1092785016A091E3007FEF8B /* SSNativeBridgeTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNativeBridgeTests.h; sourceTree = "<group>"; };
 		1092785116A091E3007FEF8B /* SSNativeBridgeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNativeBridgeTests.m; sourceTree = "<group>"; };
-		109D48AB16DC88CC0086E354 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = SpartanMissileStrike/html; sourceTree = "<group>"; };
 		109E51F01699FE3F002425B5 /* SSNativeBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNativeBridge.h; sourceTree = "<group>"; };
 		109E51F11699FE3F002425B5 /* SSNativeBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNativeBridge.m; sourceTree = "<group>"; };
 		109E520E169A02B0002425B5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -155,7 +155,7 @@
 		108FC694169641C8001BABBE = {
 			isa = PBXGroup;
 			children = (
-				109D48AB16DC88CC0086E354 /* html */,
+				106E550F16E2845C00E68F43 /* html */,
 				10FA386516D49AEE004D63F0 /* spartan_appIcon_57.png */,
 				10FA386716D49B05004D63F0 /* spartan_appIcon_114.png */,
 				1080A10516ADCC2700C836E3 /* libOCMock.a */,
@@ -341,7 +341,7 @@
 				10FA386816D49B05004D63F0 /* spartan_appIcon_114.png in Resources */,
 				10FA386916D49B25004D63F0 /* Default@2x.png in Resources */,
 				10FA386A16D49B31004D63F0 /* Default.png in Resources */,
-				109D48AC16DC88CC0086E354 /* html in Resources */,
+				106E551016E2845C00E68F43 /* html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
