@@ -9,35 +9,177 @@
 #import "SSAppDelegate.h"
 #import "SSAudioManager.h"
 #import "SSMainViewController.h"
-#import "SSNativeBridge.h"
-#import "SSNewGameViewController.h"
 
+static NSString* smsAppID = @"122930357857037";
+NSString *const SMSSessionStateChangedNotification = @"com.missileapp.Spartan-Missile-Strike:SMSSessionStateChangedNotification";
 @implementation SSAppDelegate
 
+@synthesize session = _session;
+@synthesize sessionDict;
+@synthesize navController = _navController;
+@synthesize loginViewController = _loginViewController;
 
 @synthesize window;
 @synthesize viewController;
+
+
+/**
+ Facebook Logging
+ */
+
+
+- (void)createAndPresentLoginView {
+    if (self.loginViewController == nil) {
+        self.loginViewController = [[SSFaceBookAuthViewController alloc] init];
+        UIViewController *topViewController = [self.navController topViewController];
+        [topViewController presentViewController:self.loginViewController animated:NO completion:nil];
+    }
+}
+
+- (void)showLoginView {
+    if (self.loginViewController == nil) {
+        [self createAndPresentLoginView];
+    } else {
+        [self.loginViewController loginFailed];
+    }
+}
+
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState)state
+                      error:(NSError *)error
+{
+    NSLog(@"Session Status: FBSessionState %@",[session description]);
+    sessionDict = (NSMutableDictionary *)session;
+    NSLog(@"Session Dict: FBSessionState %@",[sessionDict description]);
+    NSLog(@"SMS ID: %@",smsAppID);
+    
+    switch (state) {
+        case FBSessionStateOpen: {
+            
+            if (self.loginViewController != nil) {
+                UIViewController *topViewController = [self.navController topViewController];
+                [topViewController dismissViewControllerAnimated:YES completion:nil];
+                self.loginViewController = nil;
+            }
+            
+            FBCacheDescriptor *cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
+            [cacheDescriptor prefetchAndCacheForSession:session];
+        }
+            break;
+        case FBSessionStateClosed: {
+            NSLog(@"Session Closed: FBSessionState %@",[session description]);
+            
+            UIViewController *topViewController = [self.navController topViewController];
+            UIViewController *presentViewController = [topViewController presentedViewController];
+            if (presentViewController != nil) {
+                [topViewController dismissViewControllerAnimated:YES completion:nil];
+            }
+            [self.navController popToRootViewControllerAnimated:NO];
+            [FBSession.activeSession closeAndClearTokenInformation];
+            
+            [self performSelector:@selector(showLoginView)
+                       withObject:nil
+                       afterDelay:0.5f];
+        }
+            break;
+        case FBSessionStateClosedLoginFailed: {
+            [self performSelector:@selector(showLoginView)
+                       withObject:nil
+                       afterDelay:0.5f];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SMSSessionStateChangedNotification
+                                                        object:session];
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",[SSAppDelegate FBErrorCodeDescription:error.code]]
+                                                            message:error.localizedDescription
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
+    NSLog(@"allowLoginUI :%i",allowLoginUI);
+    
+    return [FBSession openActiveSessionWithReadPermissions:nil
+                                              allowLoginUI:allowLoginUI
+                                         completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                             [self sessionStateChanged:session state:state error:error];
+                                         }];
+}
+
+
++ (NSString *)FBErrorCodeDescription:(FBErrorCode) code {
+    switch(code){
+        case FBErrorInvalid :{
+            return @"FBErrorInvalid";
+        }
+        case FBErrorOperationCancelled:{
+            return @"FBErrorOperationCancelled";
+        }
+        case FBErrorLoginFailedOrCancelled:{
+            return @"FBErrorLoginFailedOrCancelled";
+        }
+        case FBErrorRequestConnectionApi:{
+            return @"FBErrorRequestConnectionApi";
+        }case FBErrorProtocolMismatch:{
+            return @"FBErrorProtocolMismatch";
+        }
+        case FBErrorHTTPError:{
+            return @"FBErrorHTTPError";
+        }
+        case FBErrorNonTextMimeTypeReturned:{
+            return @"FBErrorNonTextMimeTypeReturned";
+        }
+        case FBErrorNativeDialog:{
+            return @"FBErrorNativeDialog";
+        }
+        default:
+            return @"[Unknown]";
+    }
+}
+
+- (void) closeSession {
+    [FBSession.activeSession closeAndClearTokenInformation];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // FBSample logic
+    // We need to handle URLs by passing them to FBSession in order for SSO authentication
+    // to work.
+    NSLog(@"FBSession URL:%@",[url description]);
+    NSLog(@"FBSession URL:%@",[url description]);
+    return [FBSession.activeSession handleOpenURL:url];
+}
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+       
     
+
     // Override point for customization after application launch.
-    SSMainViewController* mainViewController= [[SSMainViewController alloc] init];
-    self.window.rootViewController = mainViewController;
-    
     self.viewController= [[SSMainViewController alloc] initWithNibName:@"SSMainViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
-     
-    
-    
-
-
+   
     [window addSubview:viewController.view];
     //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -68,4 +210,10 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
++ (SSAppDelegate *)sharedAppDelegate{
+
+    return (SSAppDelegate *)[UIApplication sharedApplication].delegate;
+
+}
 @end

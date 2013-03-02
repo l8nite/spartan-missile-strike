@@ -9,13 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "SSAudioManager.h"
  
-@interface SSNativeBridge : NSObject 
+@interface SSNativeBridge : NSObject <UIWebViewDelegate>
 {
   
     SSAudioManager* sa1;
 
 }
 -(BOOL)dispatchNativeBridgeEventsFromURL:(NSURL*)url; 
--(void) loadHTMLContent;
-
+- (BOOL)webView: (UIWebView*)webView shouldStartLoadWithRequest: (NSURLRequest*)request navigationType: (UIWebViewNavigationType)navigationType;
 @end
