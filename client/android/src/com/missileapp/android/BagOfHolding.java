@@ -31,7 +31,7 @@ public class BagOfHolding extends Application {
     // Resource variables
     private SharedPreferences settings;        // System User Preferences
     private UserPreferences userPrefs;         // Droid Native Bridge user prefs implementation
-    private Vibrator vibrator;                  // Vibrator unit
+    private Vibrator vibrator;                 // Vibrator unit
     private FireScreen fireScreen;             // FireScreen, contains the camear framework
     private MediaManager mediaManager;         // Media Manager that keeps track of all files
     
