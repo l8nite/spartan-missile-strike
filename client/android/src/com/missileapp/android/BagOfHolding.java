@@ -1,9 +1,12 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.MediaManager;
+import com.missileapp.android.res.UserPreferences;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.os.Vibrator;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
@@ -26,8 +29,11 @@ public class BagOfHolding extends Application {
     private ImageView splashScreen;            // ImageView
     
     // Resource variables
-    private SharedPreferences settings;        // User Preferences
+    private SharedPreferences settings;        // System User Preferences
+    private UserPreferences userPrefs;         // Droid Native Bridge user prefs implementation
+    private Vibrator vibrator;                 // Vibrator unit
     private FireScreen fireScreen;             // FireScreen, contains the camear framework
+    private MediaManager mediaManager;         // Media Manager that keeps track of all files
     
     /*********************************
      * Android OS call back functions
@@ -218,7 +224,23 @@ public class BagOfHolding extends Application {
         this.settings = settings;
     }
     
-    
+    /**
+     * Instance of the User Perfences
+     * @return {@link UserPreferences} instance
+     */
+    public UserPreferences getUserPrefs() {
+        return userPrefs;
+    }
+
+    /**
+     * Sets the user preference class
+     * @param userPrefs new {@link UserPreferences} instance
+     */
+    public void setUserPrefs(UserPreferences userPrefs) {
+        this.userPrefs = userPrefs;
+    }
+
+
     /**
      * Returns ths {@link FireScreen} insance 
      * @return the instance of the {@link FireScreen}
@@ -235,4 +257,38 @@ public class BagOfHolding extends Application {
         this.fireScreen = fireScreen;
     }
 
+    /**
+     * Returns the instance of the {@link MediaManager}
+     * @return {@link MediaManager} instance
+     */
+    public MediaManager getMediaManager() {
+        return mediaManager;
+    }
+
+    /**
+     * Set the instance of the {@link MediaManager}
+     * @param mediaManager the new instance of the {@link MediaManager}
+     */
+    public void setMediaManager(MediaManager mediaManager) {
+        this.mediaManager = mediaManager;
+    }
+
+    /**
+     * Returns {@link Vibrator}
+     * @return {@link Vibrator}
+     */
+	public Vibrator getVibrator() {
+		return vibrator;
+	}
+
+	/**
+	 * Set {@link Vibrator}
+	 * @param vibrate instance of {@link Vibrator}
+	 */
+	public void setVibrator(Vibrator vibrator) {
+		this.vibrator = vibrator;
+	}
+
+    
+    
 }

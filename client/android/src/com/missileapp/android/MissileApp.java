@@ -1,16 +1,23 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.MediaManager;
+import com.missileapp.android.res.UserPreferences;
 
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebSettings.RenderPriority;
 import android.widget.ImageView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
@@ -23,14 +30,15 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
     private static final String DROIDWB_FILENAME =                         // Webview file to load
             "file:///android_asset/" + "index" + ".html";
-
+    
     // Varible Bag
-    private static BagOfHolding varBag;
+    private static BagOfHolding variables;
     
     /*********************************
      * Android OS call back functions
      *********************************/
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         // Variables
         SurfaceView surfaceView;           // Surface View for layout options
@@ -43,12 +51,12 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Init -> super create, set view, get variable data
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        varBag = BagOfHolding.getInstance();
-        varBag.setMissileApp(this);
+        variables = BagOfHolding.getInstance();
+        variables.setMissileApp(this);
         
         // Get user settings, mode_private --> accessible only by this process
         settings = getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE);
-        varBag.setSettings(settings);
+        variables.setSettings(settings);
         if(settings.getBoolean(PREFERENCES_GPSPROMPT, true)) {
             //TODO Prompt user to turn on GPS and preference to prompts
         }
@@ -56,25 +64,42 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Create surface view for cam preview and register callback functions
         surfaceView = (SurfaceView) findViewById(R.id.camview);
         surfaceHolder = surfaceView.getHolder();
-        varBag.setSurfaceView(surfaceView);
-        varBag.setSurfaceHolder(surfaceHolder);
+        variables.setSurfaceView(surfaceView);
+        variables.setSurfaceHolder(surfaceHolder);
         surfaceHolder.addCallback(this);
         
         // Store Image View for later call
         splashScreen = (ImageView) findViewById(R.id.splashview);
-        varBag.setSplashScreen(splashScreen);
+        variables.setSplashScreen(splashScreen);
         
-        // Set up WebView
+        // Set up webview and android interface
         webView = (WebView) findViewById(R.id.webview);
-        droidBridge = new AndroidBridge(varBag);
-        varBag.setWebView(webView);
-        varBag.setDroidBridge(droidBridge);
-        webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
+        droidBridge = new AndroidBridge(variables);
+        variables.setWebView(webView);
+        variables.setDroidBridge(droidBridge);
+        
+        // Smooth Transition
+        webView.getSettings().setRenderPriority(RenderPriority.HIGH);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webView.getSettings().setSupportZoom(false);
+        webView.getSettings().enableSmoothTransition(); // Deprecated but lets leave it for now
+        
+        // JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
+        
+        // Color Transparent
+        webView.setBackgroundColor(Color.TRANSPARENT);
+        
+        // Load WebView
         webView.loadUrl(DROIDWB_FILENAME);
         
+        
         // Store resource variables
-        varBag.setFireScreen(new FireScreen(varBag));
+        variables.setFireScreen(new FireScreen(variables));           // Fire Screen, camera
+        variables.setUserPrefs(new UserPreferences(variables));       // User Preferences, app data
+        variables.setMediaManager(new MediaManager(variables));       // Media Manager, audio system
+        variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE)); // Vibrator
     }
     
     
@@ -82,7 +107,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onResume() {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
-        varBag.getFireScreen().processResumeRequest();
+        variables.getFireScreen().processResumeRequest();
     }
     
     
@@ -90,22 +115,21 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onPause() {
         super.onPause();
         MALogger.log(TAG, Log.INFO, "Pausing activity.");
-        varBag.getFireScreen().processPauseRequest();
+        variables.getFireScreen().processPauseRequest();
     }
-    
     
     @Override
     protected void onStop() {
         super.onStop();
         MALogger.log(TAG, Log.INFO, "Stopping activity.");
-        varBag.getFireScreen().processPauseRequest();
+        variables.getFireScreen().processPauseRequest();
     }
     
     @Override
     protected void onDestroy() {
         super.onDestroy();
         MALogger.log(TAG, Log.INFO, "Activity Destroying");
-        varBag.getFireScreen().exitFireScreen();
+        variables.getFireScreen().exitFireScreen();
     }
     
     
@@ -118,7 +142,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         MALogger.log(TAG, Log.VERBOSE, "Surface Created.");
-        varBag.setSurfaceHolder(holder);
+        variables.setSurfaceHolder(holder);
     }
     
     
@@ -132,7 +156,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         MALogger.log(TAG, Log.VERBOSE, "Surface Changed.");
-        varBag.setSurfaceHolder(holder);
+        variables.setSurfaceHolder(holder);
     }
 
     
@@ -143,6 +167,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         MALogger.log(TAG, Log.INFO, "SurfaceHolder destroyed.");
-        varBag.setSurfaceHolder(null);
+        variables.setSurfaceHolder(null);
     }
 }

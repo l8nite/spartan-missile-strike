@@ -9,25 +9,24 @@ import android.webkit.WebView;
 public class AndroidBridge extends MissileApp {
     // Data
     private static final String TAG = "AndroidBridge";                     // TAG for logging
-    private static final String NBCallBack_prefix = "javascript:NativeBridge.callback(";
+    private static final String CallJSPrefix = "javascript:"; 
+    private static final String NBCallBack_prefix = "NativeBridge.callback(";
     private static final String NBCallBack_postfix = ");";
     
     // Variables
-    private static BagOfHolding varBag;           // Bag Of Holding for Variables
-    private Vibrator vibrator;                    // Device vibrator
+    private static BagOfHolding variables;           // Bag Of Holding for Variables
     
     /**
      * Android Concrete Methods for HTML/Native Bridge
      * @param context - Android MissileApp/Context {@link Context}
      * @param webview - MissileApp webView {@link WebView}
      */
-    public AndroidBridge(BagOfHolding varBag) {
+    public AndroidBridge(BagOfHolding variables) {
         MALogger.log(TAG, Log.INFO, "Init Android Bridge");
-        AndroidBridge.varBag = varBag;
+        AndroidBridge.variables = variables;
         
         //NOTE: System Services are not available during this phase 
         // Init variables
-        vibrator = null;
     }
     
     /**
@@ -37,9 +36,16 @@ public class AndroidBridge extends MissileApp {
      */
     public void callJS(String callbackident, String callbackData) {
         String url = NBCallBack_prefix + callbackident + "," + callbackData + NBCallBack_postfix;
-        varBag.getWebView().loadUrl(url);
+        this.callJS(url);
     }
     
+    /**
+     * Calls the JavaScript and executes the 
+     * @param url - javascript to run
+     */
+    public void callJS(String url) {
+        variables.getWebView().loadUrl(CallJSPrefix +  url);
+    }
     
     
     
@@ -54,7 +60,7 @@ public class AndroidBridge extends MissileApp {
             @Override
             public void run() {
                 try {
-                    varBag.getSplashScreen().setVisibility(View.GONE);
+                    variables.getSplashScreen().setVisibility(View.GONE);
                     MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
                 }
                 catch (Exception e) {
@@ -66,6 +72,25 @@ public class AndroidBridge extends MissileApp {
     }
     
     
+    /**
+     * Get a user preference
+     * @param preference - retrieve user preference associated with the key 
+     * @param callbackID - callback function to asscoiate with
+     */
+    public void getPreference(String preference, String callbackID) {
+        variables.getUserPrefs().getPreference(callbackID, preference);
+    }
+    
+    
+    /**
+     * Set (a) user preference(s)
+     * @param preference - json data with key value pairs 
+     * @param callbackID - callback function to asscoiate with
+     */
+    public void setPreference(String preference, String callbackID) {
+        variables.getUserPrefs().setPreferences(callbackID, preference);
+    }
+    
     
     /**
      * Vibrates the Android device 
@@ -73,6 +98,7 @@ public class AndroidBridge extends MissileApp {
      */
     public void vibrate(String time) {
         long milliseconds;
+        Vibrator vibrator = variables.getVibrator();
         
         // Parse time
         try {
@@ -83,17 +109,11 @@ public class AndroidBridge extends MissileApp {
         }
         MALogger.log(TAG, Log.INFO, "Vibrate command: " + time + ", parsed to: " + milliseconds + ".");
         
-        // Create Vibrator if it existst
-        if(vibrator == null) {
-            vibrator = (Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE);
-        }
-        
         // Vibrate if the vibrator instance is created, has a vibrator, and the time to vibrate is greater than 0ms 
         if (vibrator != null && vibrator.hasVibrator() && milliseconds > 0) {
             vibrator.vibrate(milliseconds);
         }
     }
-    
     
     
     /**
@@ -114,12 +134,10 @@ public class AndroidBridge extends MissileApp {
         MALogger.log(TAG, Log.INFO, "Fire Screen command: " + showFireScreen + ", parsed to: " + showScreen + ".");
         
         if (showScreen) {
-            varBag.getFireScreen().enterFireScreen();
+            variables.getFireScreen().enterFireScreen();
         }
         else {
-            varBag.getFireScreen().exitFireScreen();
+            variables.getFireScreen().exitFireScreen();
         }
     }
-    
-    
 }
