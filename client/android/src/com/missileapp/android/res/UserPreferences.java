@@ -31,8 +31,9 @@ public class UserPreferences {
      * Sets the new user preferences  
      * @param callbackIdent - JavaScript Callback Identifier to notify success result
      * @param newPreferences - JSON of User Preferences
+     * @throws JSONException if it can't parse data
      */
-    public void setPreferences(String callbackIdent, String newPreferences) {
+    public void setPreferences(String callbackIdent, String newPreferences) throws JSONException {
     	// TODO update to new specs: volume preferences
         MALogger.log(TAG, Log.INFO, "Saving User Prefs: " + newPreferences);
         // Get Editor and preference from JSON Object
@@ -60,21 +61,8 @@ public class UserPreferences {
             success = false;
         }
         
-        // Construct callback data, default to failed
-        JSONObject jsonData = new JSONObject();
-        String callbackData = "";
-        try {
-            jsonData.put("succeeded" , success );
-        }
-        catch (Exception e) {
-            // Fallback to failed
-            callbackData = "{\"succeeded\":\"false\"}";
-            MALogger.log(TAG, Log.ERROR, "Could Not Construct Callback", e);
-        }
-        
-        
         // Notify the Native Bridge
-        varibles.getDroidBridge().callJS(callbackIdent, callbackData);
+        varibles.getDroidBridge().callJS(callbackIdent, (new JSONObject()).put("succeeded", success).toString());
     }
     
     
