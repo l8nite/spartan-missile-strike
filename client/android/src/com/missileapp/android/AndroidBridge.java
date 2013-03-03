@@ -1,5 +1,7 @@
 package com.missileapp.android;
 
+import org.json.JSONException;
+
 import com.missileapp.android.res.MediaManager;
 
 import android.content.Context;
@@ -107,8 +109,9 @@ public class AndroidBridge extends MissileApp {
      * Get a user preference
      * @param preference - retrieve user preference associated with the key 
      * @param callbackID - callback function to asscoiate with
+     * @throws JSONException - thrown if there was an exception 
      */
-    public void getPreference(String preference, String callbackID) {
+    public void getPreference(String preference, String callbackID) throws JSONException {
         variables.getUserPrefs().getPreference(callbackID, preference);
     }
     
@@ -117,8 +120,9 @@ public class AndroidBridge extends MissileApp {
      * Set (a) user preference(s)
      * @param preference - json data with key value pairs 
      * @param callbackID - callback function to asscoiate with
+     * @throws JSONException - throws {@link JSONException} if error
      */
-    public void setPreference(String preference, String callbackID) {
+    public void setPreference(String preference, String callbackID) throws JSONException {
         variables.getUserPrefs().setPreferences(callbackID, preference);
     }
     
