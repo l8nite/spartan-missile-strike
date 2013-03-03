@@ -1,5 +1,7 @@
 package com.missileapp.android;
 
+import com.missileapp.android.res.MediaManager;
+
 import android.content.Context;
 import android.os.Vibrator;
 import android.util.Log;
@@ -48,71 +50,30 @@ public class AndroidBridge extends MissileApp {
     }
     
     
-    
     /**
-     * Hides Splash Screen when the webView has been fully loaded
+     * Subscribe to location updates 
+     * @param activate - true to subscribe; else false
+     * @param callbackID - native bridge callback identifer
      */
-    public void hideSplash() {
-        MALogger.log(TAG, Log.VERBOSE, "CMD Hide Splash");
-        // Runs on the UI Thread
-        runOnUiThread(new Runnable() {
-            
-            @Override
-            public void run() {
-                try {
-                    variables.getSplashScreen().setVisibility(View.GONE);
-                    MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
-                }
-                catch (Exception e) {
-                    // There should be no exception here but just in case...
-                    MALogger.log(TAG, Log.ERROR, "Unable to hide splash: " + e.getMessage(), e);
-                }
-            }
-        });
+    public void getLocationUpdates(String activate, String callbackID) {
+    	//TODO: Implement
     }
     
-    
     /**
-     * Get a user preference
-     * @param preference - retrieve user preference associated with the key 
-     * @param callbackID - callback function to asscoiate with
+     * Return's the user current location
+     * @param callbackIdentifier
      */
-    public void getPreference(String preference, String callbackID) {
-        variables.getUserPrefs().getPreference(callbackID, preference);
+    public void getCurrentLocation(String callbackIdentifier) {
+    	//TODO: Implement
     }
     
-    
     /**
-     * Set (a) user preference(s)
-     * @param preference - json data with key value pairs 
-     * @param callbackID - callback function to asscoiate with
+     * Subscribe to location updates 
+     * @param activate - true to subscribe; else false
+     * @param callbackID - native bridge callback identifer
      */
-    public void setPreference(String preference, String callbackID) {
-        variables.getUserPrefs().setPreferences(callbackID, preference);
-    }
-    
-    
-    /**
-     * Vibrates the Android device 
-     * @param time - time to vibrate the device
-     */
-    public void vibrate(String time) {
-        long milliseconds;
-        Vibrator vibrator = variables.getVibrator();
-        
-        // Parse time
-        try {
-            milliseconds = Long.parseLong(time);
-        }
-        catch (Exception e) {
-            milliseconds = 0;
-        }
-        MALogger.log(TAG, Log.INFO, "Vibrate command: " + time + ", parsed to: " + milliseconds + ".");
-        
-        // Vibrate if the vibrator instance is created, has a vibrator, and the time to vibrate is greater than 0ms 
-        if (vibrator != null && vibrator.hasVibrator() && milliseconds > 0) {
-            vibrator.vibrate(milliseconds);
-        }
+    public void getOrientationUpdates(String activate, String callbackID) {
+    	//TODO: Implement
     }
     
     
@@ -138,6 +99,106 @@ public class AndroidBridge extends MissileApp {
         }
         else {
             variables.getFireScreen().exitFireScreen();
+        }
+    }
+    
+    
+    /**
+     * Get a user preference
+     * @param preference - retrieve user preference associated with the key 
+     * @param callbackID - callback function to asscoiate with
+     */
+    public void getPreference(String preference, String callbackID) {
+        variables.getUserPrefs().getPreference(callbackID, preference);
+    }
+    
+    
+    /**
+     * Set (a) user preference(s)
+     * @param preference - json data with key value pairs 
+     * @param callbackID - callback function to asscoiate with
+     */
+    public void setPreference(String preference, String callbackID) {
+        variables.getUserPrefs().setPreferences(callbackID, preference);
+    }
+    
+    
+    /**
+     * Returns the Facebook Access Token
+     * @param callbackID - Native Bridge Callback Identifier
+     */
+    public void getFacebookAccessToken(String callbackID) {
+    	//TODO: Implement
+    }
+    
+    /**
+     * Logout of Facebook
+     */
+    public void logoutFacebook() {
+    	//TODO: Implement
+    }
+    
+    
+    /**
+     * Plays Sound Effect/Music
+     * @param options {@link MediaManager#playSound(String)}
+     */
+    public void playSound(String options) {
+    	variables.getMediaManager().playSound(options);
+    }
+    
+    /**
+     * Stops Sound Effect/Music
+     * @param soundID {@link MediaManager#stopSound(String)}
+     */
+    public void stopSound(String soundID) {
+    	variables.getMediaManager().stopSound(soundID);
+    }
+    
+    
+    /**
+     * Hides Splash Screen when the webView has been fully loaded
+     */
+    public void hideSplash() {
+        MALogger.log(TAG, Log.VERBOSE, "CMD Hide Splash");
+        // Runs on the UI Thread
+        runOnUiThread(new Runnable() {
+            
+            @Override
+            public void run() {
+                try {
+                    variables.getSplashScreen().setVisibility(View.GONE);
+                    MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
+                }
+                catch (Exception e) {
+                    // There should be no exception here but just in case...
+                    MALogger.log(TAG, Log.ERROR, "Unable to hide splash: " + e.getMessage(), e);
+                }
+            }
+        });
+    }
+    
+    
+    /**
+     * Vibrates the Android device 
+     * @param time - time to vibrate the device
+     */
+    public void vibrate(String time) {
+        long milliseconds;
+        Vibrator vibrator = variables.getVibrator();
+        
+        // Parse time
+        try {
+            milliseconds = Long.parseLong(time);
+        }
+        catch (Exception e) {
+            milliseconds = 0;
+        }
+        MALogger.log(TAG, Log.INFO, "Vibrate command: " + time + ", parsed to: " + milliseconds + ".");
+        
+        // Vibrate if the vibrator instance is created, has a vibrator, and the time to vibrate is greater than 0ms 
+        if (vibrator != null && vibrator.hasVibrator() && milliseconds > 0) {
+            vibrator.vibrate(milliseconds);
         }
     }
 }
