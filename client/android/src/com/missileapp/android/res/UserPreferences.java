@@ -16,7 +16,7 @@ public class UserPreferences {
     
     // Variables
     private static final String TAG = "UserPrefs";             // TAG for logging
-    private static BagOfHolding varibles;                        // Bag Of Holding for Variables
+    private static BagOfHolding varibles;                      // Bag Of Holding for Variables
     
     
     /**
@@ -35,7 +35,6 @@ public class UserPreferences {
      * @throws JSONException if it can't parse data
      */
     public void setPreferences(String callbackIdent, String newPreferences) throws JSONException {
-    	// TODO update to new specs: volume preferences
         MALogger.log(TAG, Log.INFO, "Saving User Prefs: " + newPreferences);
         // Get Editor and preference from JSON Object
         SharedPreferences.Editor prefs = varibles.getSettings().edit();
@@ -53,11 +52,19 @@ public class UserPreferences {
                 
                 // Save new preference
                 prefs.putString(key, value);
+                
+                // Notify Media Manager to change volume
+                if(key.equalsIgnoreCase("foreVolume")) {
+                	varibles.getMediaManager().setForegroundVolume(value);
+                }
+                else if(key.equalsIgnoreCase("backVolume")) {
+                	varibles.getMediaManager().setBackgroundVolume(value);
+                }
             }
             
             success = prefs.commit();
         }
-        catch (JSONException e) {
+        catch (Exception e) {
             MALogger.log(TAG, Log.ERROR, "Could Not Parse Data", e);
             success = false;
         }
@@ -74,7 +81,6 @@ public class UserPreferences {
      * @throws JSONException - throws {@link JSONException} if there was an error 
      */
     public void getPreference(String callbackIdent, String jsonkeys) throws JSONException {
-    	//TODO: update to new specs: multiple values requested
     	
     	// Get Keys and Get Data from the application manager
     	JSONArray keys = new JSONArray(jsonkeys);
