@@ -2,6 +2,7 @@ package com.missileapp.android.res;
 
 import java.util.Iterator;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -70,17 +71,23 @@ public class UserPreferences {
      * Returns a specific user preference
      * @param callbackIdent - callback identifier to notify with data
      * @param key - the resulting value to retreive  
+     * @throws JSONException - throws {@link JSONException} if there was an error 
      */
-    public void getPreference(String callbackIdent, String key) {
+    public void getPreference(String callbackIdent, String jsonkeys) throws JSONException {
     	//TODO: update to new specs: multiple values requested
     	
-        // Get Data from the application manager
-        SharedPreferences prefs =  varibles.getSettings();
-        
-        // Default to null as specced in Native Bridge Doc
-        String callbackData = prefs.getString(key, null);
-        
+    	// Get Keys and Get Data from the application manager
+    	JSONArray keys = new JSONArray(jsonkeys);
+    	JSONObject values = new JSONObject();
+    	SharedPreferences prefs =  varibles.getSettings();
+    	
+    	for (int i = 0; i < keys.length(); i++) {
+            // Default to null as specced in Native Bridge Doc
+    		String key = keys.getString(i);
+    		values.put(key, prefs.getString(key, null));
+		}
+    	
         // Call Back Native Bridge
-        varibles.getDroidBridge().callJS(callbackIdent, callbackData);
+        varibles.getDroidBridge().callJS(callbackIdent, values.toString());
     }
 }
