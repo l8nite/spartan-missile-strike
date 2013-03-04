@@ -16,30 +16,22 @@ function TheGM(userid, sessionid) {
 	};
 }
 
-TheGM.prototype.getGames = function (when) {
-	if (this._games.when === null || this._isStale()) {
-		return $.ajax({
-			url: Imports.serviceurl + "/users/" + this._userid + "/games",
-			headers: {
-				"SMSS-Session-ID": this._sessionid
-			},
-			dataType: "json"
-		}).done(function (response) {
-			this._games.games = response;
-			this._games.when = new Date();
-			when(this._games.games);
-			this._notifyListeners();
-		}).fail(function () {
-			Imports.log("Failed to get games from webservice; using stale games");
-			when(this._games.games);
-		});
-	}
-	else {
-		when(this._games.games);
-	}
+TheGM.prototype.getGames = function () {
+	return $.ajax({
+		url: Imports.serviceurl + "/users/" + this._userid + "/games",
+		headers: {
+			"SMSS-Session-ID": this._sessionid
+		},
+		dataType: "json"
+	}).done(function (response) {
+		this._games.games = response;
+		this._games.when = new Date();
+		this._notifyListeners();
+	});
 }
 
 TheGM.prototype.subscribe = function (when) {
+	when(this._games.games);
 	var i;
 	if (i = this._listeners.holes.pop()) {
 		this._listeners.listeners[i] = when;
@@ -65,18 +57,7 @@ TheGM.prototype._startPollingService = function () {
 	if (!this._poll) {
 		var that = this;
 		(function poll() {
-			$.ajax({
-				url: Imports.serviceurl + "/users/" + that._userid + "/games",
-				headers: {
-					"SMSS-Session-ID": that._sessionid
-				},
-				dataType: "json"
-			}).done(function (response) {
-				that._games.games = response;
-				that._games.when = new Date();
-				that._notifyListeners();
-				that._poll = setTimeout(poll, that._STALE);
-			}).fail(function () {
+			that.getGames().always(function () {
 				that._poll = setTimeout(poll, that._STALE);
 			});
 		})();
