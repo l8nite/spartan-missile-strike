@@ -18,7 +18,7 @@ function TheGM(userid, sessionid) {
 
 TheGM.prototype.getGames = function (when) {
 	if (this._games.when === null || this._isStale()) {
-		$.ajax({
+		return $.ajax({
 			url: Imports.serviceurl + "/users/" + this._userid + "/games",
 			headers: {
 				"SMSS-Session-ID": this._sessionid
