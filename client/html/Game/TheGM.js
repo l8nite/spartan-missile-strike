@@ -17,16 +17,11 @@ function TheGM(userid, sessionid) {
 }
 
 TheGM.prototype.getGames = function () {
-	return $.ajax({
-		url: Imports.serviceurl + "/users/" + this._userid + "/games",
-		headers: {
-			"SMSS-Session-ID": this._sessionid
-		},
-		dataType: "json"
-	}).done(function (response) {
-		this._games.games = response;
-		this._games.when = new Date();
-		this._notifyListeners();
+	var that = this;
+	return this._getGamesFromService().done(function (response) {
+		that._games.games = response;
+		that._games.when = new Date();
+		that._notifyListeners();
 	});
 }
 
@@ -53,14 +48,30 @@ TheGM.prototype.unsubscribe = function (callbackid) {
 	}
 }
 
+TheGM.prototype._getGamesFromService = function () {
+	return $.ajax({
+		url: Imports.serviceurl + "/users/" + this._userid + "/games",
+		headers: {
+			"SMSS-Session-ID": this._sessionid
+		},
+		dataType: "json"
+	});
+}
+
 TheGM.prototype._startPollingService = function () {
 	if (!this._poll) {
 		var that = this;
-		(function poll() {
+		function poll() {
 			that.getGames().always(function () {
 				that._poll = setTimeout(poll, that._STALE);
 			});
-		})();
+		};
+		if (this._games.when) {
+			this._poll = setTimeout(poll, this._games.when.getTime() + this._STALE - new Date().getTime());
+		}
+		else {
+			poll();
+		}
 	}
 }
 
