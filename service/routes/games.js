@@ -1,5 +1,6 @@
 var restify = require('restify'),
     redis = require('../lib/database.js'),
+    uuid = require('node-uuid'),
     async = require('async');
 
 function createGame (request, response, done) {
@@ -7,6 +8,8 @@ function createGame (request, response, done) {
         function (next) { next(null, request); }, // enables arguments to first callback
         _validateCreateGameParameters,
         _determineOpponent,
+        _createNewGame,
+        _renderGameCreatedResponse,
     ],
 
     function (err, code, body) {
@@ -56,7 +59,60 @@ function _validateCreateGameParameters (request, next) {
 }
 
 function _determineOpponent (request, next) {
+    var opponent = request.params.opponent;
+
+    if (opponent === 'random') {
+        return _selectRandomOpponent(request, next);
+    }
+
+    redis.client.exists(opponent, function (err, opponentExists) {
+        if (err) {
+            return next(err);
+        }
+
+        if (!opponentExists) {
+            return next(new restify.InvalidArgumentError({message: 'opponent does not exist'}));
+        }
+
+        next(null, request);
+    });
+}
+
+function _selectRandomOpponent (request, next) {
     return next(new restify.InternalError({message: 'not implemented'}));
+}
+
+function _createNewGame (request, next) {
+    var game = {
+        id: 'game:' + uuid.v4(),
+        status: 'active',
+        created: (new Date()).toJSON(),
+        creator: request.missileStrikeUserId,
+        opponent: request.params.opponent,
+        current: request.params.opponent,
+    };
+
+    game[request.missileStrikeUserId] = {
+        base: {
+            latitude: request.params.latitude,
+            longitude: request.params.longitude,
+        },
+        shots: [ ],
+    };
+
+    game[request.params.opponent] = {};
+
+    redis.client.set(game.id, JSON.stringify(game), function (err, res) {
+        if (err) {
+            return next(err);
+        }
+
+        next(null, game);
+    });
+}
+
+function _renderGameCreatedResponse (game, next) {
+    next(null, 201, game);
 }
 
 function fireMissile (req, res, next) {
