@@ -59,6 +59,13 @@ describe('/games', function () {
             });
         });
 
+        it('should create a new game against a random opponent', function (done) {
+            client.post('/games', { opponent: 'random', latitude: 0, longitude: 0 }, function (err, req, res, obj) {
+                res.statusCode.should.equal(201);
+                done();
+            });
+        });
+
         it('should not allow a new game against yourself', function (done) {
             client.post('/games', { opponent: client.user.id, latitude: 0, longitude: 0 }, function (err, req, res, obj) {
                 res.statusCode.should.equal(409);

@@ -83,7 +83,23 @@ function _determineOpponent (request, next) {
 }
 
 function _selectRandomOpponent (request, next) {
-    return next(new restify.InternalError({message: 'not implemented'}));
+    var multi = redis.client.multi();
+
+    // hacky, but fast (O(1)!)
+    // remove ourself from the list, get random, put us back
+    multi.smove('users', 'tmp-users', request.missileStrikeUserId);
+    multi.srandmember('users');
+    multi.smove('tmp-users', 'users', request.missileStrikeUserId);
+
+    multi.exec(function (err, replies) {
+        if (err) {
+            return next(err);
+        }
+
+        request.params.opponent = replies[1];
+
+        return next(null, request);
+    });
 }
 
 function _createNewGame (request, next) {
