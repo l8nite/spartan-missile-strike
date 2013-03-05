@@ -27,8 +27,8 @@ TheGM.prototype.getGames = function () {
 
 TheGM.prototype.subscribe = function (when) {
 	when(this._games.games);
-	var i;
-	if (i = this._listeners.holes.pop()) {
+	var i = this._listeners.holes.pop();
+	if (i || i === 0) {
 		this._listeners.listeners[i] = when;
 	}
 	else {
