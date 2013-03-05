@@ -31,7 +31,7 @@ describe('/games', function () {
         });
     });
 
-    describe('/games', function () {
+    describe('creating new game', function () {
         var otherClient = new ServiceClient();
 
         before(function (done) {
@@ -55,6 +55,13 @@ describe('/games', function () {
                 obj.opponent.should.equal(otherClient.user.id);
                 obj.creator.should.equal(client.user.id);
 
+                done();
+            });
+        });
+
+        it('should not allow a new game against yourself', function (done) {
+            client.post('/games', { opponent: client.user.id, latitude: 0, longitude: 0 }, function (err, req, res, obj) {
+                res.statusCode.should.equal(409);
                 done();
             });
         });
