@@ -30,7 +30,12 @@
 				return true;
 			}
 
-			asyncTest("Scenario", 14, function () {
+			function datesClose(a, b, expectedDelta, skew) {
+				var dt = b.getTime() - a.getTime();
+				return (dt >= expectedDelta - skew && dt <= expectedDelta + skew);
+			}
+
+			asyncTest("Many callbacks, service dropouts, stop poll at end", 14, function () {
 				var thegm = new TheGM("fake-user", "fake-session-id");
 				// Since the service doesn't work yet, we need to reappropriate _getGamesFromService. It returns a jQuery deferred and resolves with a games datastructure.
 				var timescalled = 0;
@@ -125,6 +130,86 @@
 
 				c0 = 0;
 				cb0 = thegm.subscribe(f0);
+			});
+
+			var serviceLatency = 500;
+			asyncTest("Many callbacks, stop poll during test and immediately resume", 13, function () {
+				var thegm = new TheGM("fake-user", "fake-session-id");
+				var timescalled = 0;
+				thegm._getGamesFromService = function () {
+					var d = $.Deferred();
+					setTimeout(function () {
+						if (timescalled >= 0 && timescalled < 2) {
+							d.resolve(["g0"]);
+						}
+						else {
+							d.resolve(["g0", "g1"]);
+						}
+						timescalled++;
+					}, serviceLatency);
+					return d;
+				};
+
+				thegm._STALE = 1000;
+
+				var cb0, cb1;
+				var c0, c1;
+				var stash_t0, stash_t1;
+
+				function f0(games) {
+					if (c0 === 0) {
+						c0++;
+						ok(games.length === 0, "CB0 0");
+						stash_t0 = new Date();
+					}
+					else if (c0 === 1) {
+						c0++;
+						ok(arrEqual(games, ["g0"]), "CB0 1");
+						var d = new Date();
+						ok(datesClose(stash_t0, d, serviceLatency, 5), "CB0 1 time");
+						stash_t0 = d;
+					}
+					else if (c0 === 2) {
+						c0++;
+						ok(arrEqual(games, ["g0"]), "CB0 2");
+						var d = new Date();
+						ok(datesClose(stash_t0, d, thegm._STALE + serviceLatency, 5), "CB0 2 time");
+						stash_t0 = d;
+						thegm.unsubscribe(cb0);
+						ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
+						ok(!thegm._poll, "No longer polling service");
+						console.log(thegm);
+						cb0 = thegm.subscribe(f0);
+						console.log(cb0);
+					}
+					else if (c0 === 3) {
+						c0++;
+						ok(arrEqual(games, ["g0"]), "CB0 3");
+						var d = new Date();
+						ok(datesClose(stash_t0, d, 0, 5), "CB0 3 time");
+						stash_t0 = d;
+					}
+					else if (c0 === 4) {
+						c0++;
+						ok(arrEqual(games, ["g0", "g1"]), "CB0 4");
+						var d = new Date();
+						ok(datesClose(stash_t0, d, thegm._STALE + serviceLatency, 5), "CB0 4 time");
+						stash_t0 = d;
+						thegm.unsubscribe(cb0);
+						ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
+						ok(!thegm._poll, "No longer polling service");
+						console.log(thegm);
+						start();
+					}
+				}
+
+				function f1(games) {
+					c1++;
+				}
+
+				c0 = 0;
+				cb0 = thegm.subscribe(f0);
+				console.log(thegm);
 			});
 		</script>
 	</body>
