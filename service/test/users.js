@@ -88,9 +88,30 @@ describe('/users', function () {
     });
 
     describe('/users/:id/games', function() {
-        it('should return a 500 not implemented', function (done) {
+        // create a game before we attempt to test list games..
+        before(function (done) {
+            client.post('/games', { opponent: 'random', latitude: 0, longitude: 0 }, function (err, req, res, obj) {
+                res.statusCode.should.equal(201);
+                done();
+            });
+        });
+
+        it('should return no games if modified since 5 minutes into the future...', function (done) {
+            client.client.headers['If-Modified-Since'] = (new Date((new Date()).getTime() + 5*60000)).toUTCString();
+            client.get(path + '/games', function (err, req, res, obj) {
+                should.not.exist(err);
+                res.statusCode.should.equal(304);
+                done();
+            });
+            delete client.client.headers['If-Modified-Since'];
+        });
+
+        it('should return a list of games', function (done) {
             client.get(path + '/games', function(err, req, res, obj) {
-                res.statusCode.should.equal(500);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+                obj.should.have.property('games');
+                obj.games.length.should.be.above(0);
                 done();
             });
         });
