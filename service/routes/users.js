@@ -39,7 +39,30 @@ function updateUser (request, msUser, done) {
 }
 
 function listGames (request, msUser, done) {
-    return done(new restify.InternalError({message: 'not implemented'}));
+    var rangeMin = '-inf',
+        rangeMax = '+inf';
+
+    if (request.headers.hasOwnProperty('if-modified-since')) {
+        rangeMin = (new Date(request.headers['if-modified-since'])).getTime();
+    }
+
+    redis.client.zrangebyscore('games:' + msUser.id, rangeMin, rangeMax, function (err, gameIdentifiers) {
+        if (err) {
+            return done(new restify.InternalError());
+        }
+
+        if (gameIdentifiers === undefined || gameIdentifiers.length == 0) {
+            return done(null, 304);
+        }
+
+        redis.client.mget(gameIdentifiers, function (err, gameData) {
+            if (err) {
+                return done(new restify.InternalError());
+            }
+
+            done(null, 200, { games: gameData } );
+        });
+    });
 }
 
 function listOpponents (request, msUser, done) {
