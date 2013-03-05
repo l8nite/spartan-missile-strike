@@ -61,6 +61,10 @@ function _validateCreateGameParameters (request, next) {
 function _determineOpponent (request, next) {
     var opponent = request.params.opponent;
 
+    if (opponent === request.missileStrikeUserId) {
+        return next(new restify.InvalidArgumentError({message: "can't play against yourself"}));
+    }
+
     if (opponent === 'random') {
         return _selectRandomOpponent(request, next);
     }
