@@ -103,10 +103,12 @@ function _selectRandomOpponent (request, next) {
 }
 
 function _createNewGame (request, next) {
+    var now = new Date();
     var game = {
         id: 'game:' + uuid.v4(),
         status: 'active',
-        created: (new Date()).toJSON(),
+        created: now.toJSON(),
+        updated: now.toJSON(),
         creator: request.missileStrikeUserId,
         opponent: request.params.opponent,
         current: request.params.opponent,
@@ -122,7 +124,13 @@ function _createNewGame (request, next) {
 
     game[request.params.opponent] = {};
 
-    redis.client.set(game.id, JSON.stringify(game), function (err, res) {
+    var multi = redis.client.multi();
+
+    multi.set(game.id, JSON.stringify(game));
+    multi.zadd('games:' + request.missileStrikeUserId, now.getTime(), game.id);
+    multi.zadd('games:' + request.params.opponent, now.getTime(), game.id);
+
+    multi.exec(function (err, replies) {
         if (err) {
             return next(err);
         }
