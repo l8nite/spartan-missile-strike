@@ -133,7 +133,7 @@
 			});
 
 			var serviceLatency = 500;
-			asyncTest("Many callbacks, stop poll during test and immediately resume", 13, function () {
+			asyncTest("Many callbacks, stop poll during test and immediately resume", 17, function () {
 				var thegm = new TheGM("fake-user", "fake-session-id");
 				var timescalled = 0;
 				thegm._getGamesFromService = function () {
@@ -163,6 +163,8 @@
 						stash_t0 = new Date();
 					}
 					else if (c0 === 1) {
+						c1 = c0;
+						cb1 = thegm.subscribe(f1);
 						c0++;
 						ok(arrEqual(games, ["g0"]), "CB0 1");
 						var d = new Date();
@@ -176,11 +178,12 @@
 						ok(datesClose(stash_t0, d, thegm._STALE + serviceLatency, 5), "CB0 2 time");
 						stash_t0 = d;
 						thegm.unsubscribe(cb0);
-						ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
-						ok(!thegm._poll, "No longer polling service");
-						console.log(thegm);
-						cb0 = thegm.subscribe(f0);
-						console.log(cb0);
+						setTimeout(function () {
+							ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
+							ok(!thegm._poll, "No longer polling service");
+							cb0 = thegm.subscribe(f0);
+							cb1 = thegm.subscribe(f1);
+						}, 1000);
 					}
 					else if (c0 === 3) {
 						c0++;
@@ -196,20 +199,37 @@
 						ok(datesClose(stash_t0, d, thegm._STALE + serviceLatency, 5), "CB0 4 time");
 						stash_t0 = d;
 						thegm.unsubscribe(cb0);
-						ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
-						ok(!thegm._poll, "No longer polling service");
-						console.log(thegm);
-						start();
+						setTimeout(function () {
+							ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
+							ok(!thegm._poll, "No longer polling service");
+							start();
+						}, 1000);
 					}
 				}
 
 				function f1(games) {
-					c1++;
+					if (c1 === 1) {
+						c1++;
+						ok(arrEqual(games, ["g0"]), "CB1 1");
+					}
+					else if (c1 === 2) {
+						c1++;
+						ok(arrEqual(games, ["g0"]), "CB1 2");
+						thegm.unsubscribe(cb1);
+					}
+					else if (c1 === 3) {
+						c1++;
+						ok(arrEqual(games, ["g0"]), "CB1 3");
+					}
+					else if (c1 === 4) {
+						c1++;
+						ok(arrEqual(games, ["g0", "g1"]), "CB1 4");
+						thegm.unsubscribe(cb1);
+					}
 				}
 
 				c0 = 0;
 				cb0 = thegm.subscribe(f0);
-				console.log(thegm);
 			});
 		</script>
 	</body>
