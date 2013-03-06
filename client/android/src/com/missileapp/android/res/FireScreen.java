@@ -11,8 +11,8 @@ public class FireScreen {
     // DATA
     private static final String TAG = "FireScreen";                        // TAG for logging
     private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
-    private static BagOfHolding variables;                                 // Variable bag
-    private static Camera cam;                                             // Camera
+    private BagOfHolding variables;                                 // Variable bag
+    private Camera cam;                                             // Camera
     
     
     /**
@@ -20,7 +20,7 @@ public class FireScreen {
      * @param variables - MissileApp Application 
      */
     public FireScreen(BagOfHolding variables) {
-        FireScreen.variables = variables;
+        this.variables = variables;
     }
     
     
