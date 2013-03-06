@@ -60,18 +60,24 @@ TheGM.prototype._getGamesFromService = function () {
 }
 
 TheGM.prototype._startPollingService = function () {
-	if (!this._poll) {
+	if (!this._polling) {
+		this._polling = true;
 		var that = this;
-		this._poll = setInterval(function () {
-			that.getGames();
-		}, this._STALE);
-		this.getGames();
+		function poll() {
+			that.getGames().always(function () {
+				if (that._polling) {
+					that._poll = setTimeout(poll, that._STALE);
+				}
+			});
+		};
+		this._poll = setTimeout(poll, this._games.when ? this._games.when.getTime() + this._STALE - new Date().getTime() : 0);
 	}
 }
 
 TheGM.prototype._stopPollingService = function () {
-	if (this._poll) {
-		clearInterval(this._poll);
+	if (this._polling) {
+		delete this._polling;
+		clearTimeout(this._poll);
 		delete this._poll;
 	}
 }
