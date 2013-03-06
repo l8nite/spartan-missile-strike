@@ -53,14 +53,25 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Init -> super create, set view, get variable data
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        variables = BagOfHolding.getInstance();
+        variables = (BagOfHolding) super.getApplication(); 
+        		//BagOfHolding.getInstance();
         variables.setMissileApp(this);
+
+        // Store resource variables
+        variables.setFireScreen(new FireScreen(variables));                                               // Fire Screen, camera
+        variables.setUserPrefs(new UserPreferences(variables));                                           // User Preferences, app data
+        variables.setMediaManager(new MediaManager(variables));                                           // Media Manager, preloads the necessary audio
+        variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE));               // Android System Service Vibrator
+        variables.setLocationManager((LocationManager) getSystemService(Context.LOCATION_SERVICE));       // Android System Service Location Manager
+        variables.setLocationManagement(new LocationManagement(variables));                               // MissileApp Location Implementation
+        
         
         // Get user settings, mode_private --> accessible only by this process
         settings = getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE);
         variables.setSettings(settings);
-        if(settings.getBoolean(PREFERENCES_GPSPROMPT, true)) {
-            //TODO Prompt user to turn on GPS and preference to prompts
+        if(settings.getBoolean(PREFERENCES_GPSPROMPT, true) ||
+        		!variables.getLocationManager().isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            //TODO Prompt user to turn on location services / GPS and preference to prompts
         }
         
         // Create surface view for cam preview and register callback functions
@@ -95,15 +106,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Load WebView
         webView.loadUrl(DROIDWB_FILENAME);
-        
-        
-        // Store resource variables
-        variables.setFireScreen(new FireScreen(variables));                                               // Fire Screen, camera
-        variables.setUserPrefs(new UserPreferences(variables));                                           // User Preferences, app data
-        variables.setMediaManager(new MediaManager(variables));                                           // Media Manager, audio system
-        variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE));               // Android Sys Service Vibrator
-        variables.setLocationManager((LocationManager) getSystemService(Context.LOCATION_SERVICE));       // Android Sys Service Location Manager
-        variables.setLocationManagement(new LocationManagement(variables));                               // MissileApp Location Implementation
     }
     
     
@@ -111,7 +113,14 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onResume() {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
+        
+        // Re-enter Fire Screen
         variables.getFireScreen().processResumeRequest();
+        
+        // Get Location Updates using Network and GPS
+        variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, variables.getLocationManagement());
+        //TODO: GPS
+        
     }
     
     
@@ -119,7 +128,12 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onPause() {
         super.onPause();
         MALogger.log(TAG, Log.INFO, "Pausing activity.");
+        
+        // Exit Fire Screen
         variables.getFireScreen().processPauseRequest();
+        
+        // Remove Location Updates for GPS and Network
+        variables.getLocationManager().removeUpdates(variables.getLocationManagement());
     }
     
     @Override
