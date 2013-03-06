@@ -180,7 +180,10 @@
 						thegm.unsubscribe(cb0);
 						setTimeout(function () {
 							ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
+							console.log(thegm._poll);
 							ok(!thegm._poll, "No longer polling service");
+							start();
+							stop();
 							cb0 = thegm.subscribe(f0);
 							cb1 = thegm.subscribe(f1);
 						}, 1000);
@@ -201,8 +204,9 @@
 						thegm.unsubscribe(cb0);
 						setTimeout(function () {
 							ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
+							console.log(thegm._poll);
 							ok(!thegm._poll, "No longer polling service");
-							start();
+							setTimeout(start, 0);
 						}, 1000);
 					}
 				}
