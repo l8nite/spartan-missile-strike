@@ -32,6 +32,7 @@
 
 			function datesClose(a, b, expectedDelta, skew) {
 				var dt = b.getTime() - a.getTime();
+				console.log(dt);
 				return (dt >= expectedDelta - skew && dt <= expectedDelta + skew);
 			}
 
@@ -168,14 +169,14 @@
 						c0++;
 						ok(arrEqual(games, ["g0"]), "CB0 1");
 						var d = new Date();
-						ok(datesClose(stash_t0, d, serviceLatency, 5), "CB0 1 time");
+						ok(datesClose(stash_t0, d, serviceLatency, 50), "CB0 1 time");
 						stash_t0 = d;
 					}
 					else if (c0 === 2) {
 						c0++;
 						ok(arrEqual(games, ["g0"]), "CB0 2");
 						var d = new Date();
-						ok(datesClose(stash_t0, d, thegm._STALE + serviceLatency, 5), "CB0 2 time");
+						ok(datesClose(stash_t0, d, thegm._STALE + serviceLatency, 50), "CB0 2 time");
 						stash_t0 = d;
 						thegm.unsubscribe(cb0);
 						setTimeout(function () {
@@ -192,14 +193,14 @@
 						c0++;
 						ok(arrEqual(games, ["g0"]), "CB0 3");
 						var d = new Date();
-						ok(datesClose(stash_t0, d, 0, 5), "CB0 3 time");
+						ok(datesClose(stash_t0, d, 1000, 50), "CB0 3 time");
 						stash_t0 = d;
 					}
 					else if (c0 === 4) {
 						c0++;
 						ok(arrEqual(games, ["g0", "g1"]), "CB0 4");
 						var d = new Date();
-						ok(datesClose(stash_t0, d, thegm._STALE + serviceLatency, 5), "CB0 4 time");
+						ok(datesClose(stash_t0, d, serviceLatency, 50), "CB0 4 time");
 						stash_t0 = d;
 						thegm.unsubscribe(cb0);
 						setTimeout(function () {
