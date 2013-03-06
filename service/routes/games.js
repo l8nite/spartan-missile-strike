@@ -1,7 +1,8 @@
 var restify = require('restify'),
     redis = require('../lib/database.js'),
     uuid = require('node-uuid'),
-    async = require('async');
+    async = require('async'),
+    _ = require('underscore');
 
 function createGame (request, response, done) {
     async.waterfall([
@@ -20,6 +21,14 @@ function createGame (request, response, done) {
         response.send(code, body);
         done();
     });
+}
+
+function isValidLatitude (latitude) {
+    return _.isNumber(latitude) && latitude >= -90 && latitude <= 90;
+}
+
+function isValidLongitude (longitude) {
+    return _.isNumber(longitude) && longitude >= -180 && longitude <= 180;
 }
 
 function _validateCreateGameParameters (request, next) {
@@ -43,15 +52,11 @@ function _validateCreateGameParameters (request, next) {
         return next(new restify.InvalidArgumentError({message: 'opponent must be a valid userid or "random"'}));
     }
 
-    function isNumber(n) {
-          return (typeof n == 'string' || typeof n == 'number') && !isNaN(n - 0) && n !== '';
-    }
-
-    if (!isNumber(latitude) || latitude < -90 || latitude > 90) {
+    if (!isValidLatitude(latitude)) {
         return next(new restify.InvalidArgumentError({message: 'latitude must be -90 to 90'}));
     }
 
-    if (!isNumber(longitude) || longitude < -180 || longitude > 180) {
+    if (!isValidLongitude(longitude)) {
         return next(new restify.InvalidArgumentError({message: 'longitude must be -180 to 180'}));
     }
 
@@ -147,8 +152,86 @@ function fireMissile (req, res, next) {
     return next(new restify.InternalError({message: 'not implemented'}));
 }
 
-function selectBase (req, res, next) {
-    return next(new restify.InternalError({message: 'not implemented'}));
+function selectBase (request, response, done) {
+    async.waterfall([
+        function (next) { next(null, request); }, // enables arguments to first callback
+        _validateSelectBaseParameters,
+        _validateSelectBaseConditions,
+        _updateGameData,
+    ],
+
+    function (err, code, body) {
+        if (err) {
+            return done(err);
+        }
+
+        response.send(code, body);
+        done();
+    });
+}
+
+function _validateSelectBaseParameters (request, next) {
+    var latitude = request.params.latitude,
+        longitude = request.params.longitude;
+
+    if (longitude === undefined) {
+        return next(new restify.MissingParameterError({message: 'longitude parameter is missing'}));
+    }
+
+    if (latitude === undefined) {
+        return next(new restify.MissingParameterError({message: 'latitude parameter is missing'}));
+    }
+
+    if (!isValidLatitude(latitude)) {
+        return next(new restify.InvalidArgumentError({message: 'latitude must be -90 to 90'}));
+    }
+
+    if (!isValidLongitude(longitude)) {
+        return next(new restify.InvalidArgumentError({message: 'longitude must be -180 to 180'}));
+    }
+
+    next(null, request);
+}
+
+function _validateSelectBaseConditions (request, next) {
+    redis.client.get(request.params.id, function (err, gameSerialized) {
+        if (err) {
+            return next(err);
+        }
+
+        if (gameSerialized === null) {
+            return next(new restify.InvalidArgumentError({message: 'game is not found'}));
+        }
+
+        var game = JSON.parse(gameSerialized);
+        if (game.current !== request.missileStrikeUserId) {
+            return next(new restify.NotAuthorizedError());
+        }
+
+        next(null, request, game);
+    });
+}
+
+function _updateGameData (request, game, next) {
+    if (game[request.missileStrikeUserId].hasOwnProperty('base')) {
+        return next(null, 304);
+    }
+
+    game.updated = (new Date()).toJSON();
+    game[request.missileStrikeUserId].base = {
+        latitude: request.params.latitude,
+        longitude: request.params.longitude,
+    };
+    // currently opponent's turn (creator base set @ creation)
+    game.current = game.creator;
+
+    redis.client.set(game.id, JSON.stringify(game), function (err) {
+        if (err) {
+            return next(new restify.InternalError());
+        }
+
+        return next(null, 200);
+    });
 }
 
 module.exports.installAuthenticatedRouteHandlers = function (server) {
