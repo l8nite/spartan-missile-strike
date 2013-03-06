@@ -16,7 +16,7 @@ public class UserPreferences {
     
     // Variables
     private static final String TAG = "UserPrefs";             // TAG for logging
-    private static BagOfHolding varibles;                      // Bag Of Holding for Variables
+    private BagOfHolding varibles;                             // Bag Of Holding for Variables
     
     
     /**
@@ -24,7 +24,7 @@ public class UserPreferences {
      * @param variables - {@link BagOfHolding} var bag
      */
     public UserPreferences(BagOfHolding variables) {
-        UserPreferences.varibles = variables;
+        this.varibles = variables;
     }
     
     
