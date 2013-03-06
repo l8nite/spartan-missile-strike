@@ -1,11 +1,13 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.LocationManagement;
 import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.UserPreferences;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.Vibrator;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -34,6 +36,8 @@ public class BagOfHolding extends Application {
     private Vibrator vibrator;                 // Vibrator unit
     private FireScreen fireScreen;             // FireScreen, contains the camear framework
     private MediaManager mediaManager;         // Media Manager that keeps track of all files
+    private LocationManager locationManager;   // Android System Service giving access to location info
+    private LocationManagement locationManage; // MissileApp Local Location Managements 
     
     /*********************************
      * Android OS call back functions
@@ -289,6 +293,37 @@ public class BagOfHolding extends Application {
 		this.vibrator = vibrator;
 	}
 
-    
-    
+
+	/**
+	 * Returns the {@link LocationManager} Android Sys Service
+	 * @return {@link LocationManager} system service
+	 */
+	public LocationManager getLocationManager() {
+		return locationManager;
+	}
+
+	/**
+	 * Sets the {@link LocationManager} Android Sys Service
+	 * @param locationManager {@link LocationManager} system service
+	 */
+	public void setLocationManager(LocationManager locationManager) {
+		this.locationManager = locationManager;
+	}
+
+
+	/**
+	 * Returns the MissileApp {@link LocationManagement} implementation
+	 * @return {@link LocationManagement} implementation
+	 */
+	public LocationManagement getLocationManagement() {
+		return locationManage;
+	}
+	
+	/**
+	 * Set the {@link LocationManagement} implementation
+	 * @param locationManagement {@link LocationManagement} implementation
+	 */
+	public void setLocationManagement(LocationManagement locationManagement) {
+		this.locationManage = locationManagement;
+	}
 }
