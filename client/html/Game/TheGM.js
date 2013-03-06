@@ -22,6 +22,7 @@ TheGM.prototype.getGames = function () {
 		that._games.games = response;
 		that._games.when = new Date();
 		that._notifyListeners();
+		return response;
 	});
 }
 
@@ -61,23 +62,16 @@ TheGM.prototype._getGamesFromService = function () {
 TheGM.prototype._startPollingService = function () {
 	if (!this._poll) {
 		var that = this;
-		function poll() {
-			that.getGames().always(function () {
-				that._poll = setTimeout(poll, that._STALE);
-			});
-		};
-		if (this._games.when) {
-			this._poll = setTimeout(poll, this._games.when.getTime() + this._STALE - new Date().getTime());
-		}
-		else {
-			poll();
-		}
+		this._poll = setInterval(function () {
+			that.getGames();
+		}, this._STALE);
+		this.getGames();
 	}
 }
 
 TheGM.prototype._stopPollingService = function () {
 	if (this._poll) {
-		clearTimeout(this._poll);
+		clearInterval(this._poll);
 		delete this._poll;
 	}
 }
