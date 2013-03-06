@@ -2,17 +2,44 @@ package com.missileapp.android.res;
 
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.missileapp.android.MALogger;
+import com.missileapp.android.MissileApp;
 
 public class Misc {
+	
+	/**
+     * Hides Splash Screen when the webView has been fully loaded
+     */
+    public static void hideSplash(final MissileApp missileapp, final ImageView splashScreen) {
+    	final String TAG = "HideSplash";
+        MALogger.log(TAG, Log.VERBOSE, "CMD Hide Splash");
+        // Runs on the UI Thread
+        missileapp.runOnUiThread(new Runnable() {
+            
+            @Override
+            public void run() {
+                try {
+                    splashScreen.setVisibility(View.GONE);
+                    MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
+                }
+                catch (Exception e) {
+                    // There should be no exception here but just in case...
+                    MALogger.log(TAG, Log.ERROR, "Unable to hide splash: " + e.getMessage(), e);
+                }
+            }
+        });
+    }
+    
 	
 	/**
      * Vibrates the Android device 
      * @param time - time to vibrate the device
      */
     public static void vibrate(Vibrator vibrator, String time) {
-    	String TAG = "Vibrate";
+    	final String TAG = "Vibrate";
         long milliseconds;
         
         // Parse time
