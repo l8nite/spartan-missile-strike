@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 
-public class AndroidBridge extends MissileApp {
+public class AndroidBridge {
     // Data
     private static final String TAG = "AndroidBridge";                     // TAG for logging
     private static final String CallJSPrefix = "javascript:"; 
@@ -166,7 +166,7 @@ public class AndroidBridge extends MissileApp {
     public void hideSplash() {
         MALogger.log(TAG, Log.VERBOSE, "CMD Hide Splash");
         // Runs on the UI Thread
-        runOnUiThread(new Runnable() {
+        variables.getMissileApp().runOnUiThread(new Runnable() {
             
             @Override
             public void run() {
