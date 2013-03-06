@@ -1,9 +1,11 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.LocationManagement;
 import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.UserPreferences;
 
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -96,10 +98,12 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         
         // Store resource variables
-        variables.setFireScreen(new FireScreen(variables));           // Fire Screen, camera
-        variables.setUserPrefs(new UserPreferences(variables));       // User Preferences, app data
-        variables.setMediaManager(new MediaManager(variables));       // Media Manager, audio system
-        variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE)); // Vibrator
+        variables.setFireScreen(new FireScreen(variables));                                               // Fire Screen, camera
+        variables.setUserPrefs(new UserPreferences(variables));                                           // User Preferences, app data
+        variables.setMediaManager(new MediaManager(variables));                                           // Media Manager, audio system
+        variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE));               // Android Sys Service Vibrator
+        variables.setLocationManager((LocationManager) getSystemService(Context.LOCATION_SERVICE));       // Android Sys Service Location Manager
+        variables.setLocationManagement(new LocationManagement(variables));                               // MissileApp Location Implementation
     }
     
     
