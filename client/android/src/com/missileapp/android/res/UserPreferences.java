@@ -81,6 +81,7 @@ public class UserPreferences {
      * @throws JSONException - throws {@link JSONException} if there was an error 
      */
     public void getPreference(String callbackIdent, String jsonkeys) throws JSONException {
+    	MALogger.log(TAG, Log.INFO, "Retrieve User Prefs: " + jsonkeys);
     	
     	// Get Keys and Get Data from the application manager
     	JSONArray keys = new JSONArray(jsonkeys);
