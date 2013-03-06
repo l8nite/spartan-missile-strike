@@ -80,17 +80,22 @@ function _createNewUser (fbUser, next) {
         facebook: fbUser,
     };
 
-    redis.client.mset(
-        'facebook:' + fbUser.id, msUser.id,
-        msUser.id, JSON.stringify(msUser),
-        function (err, res) {
-            if (err) {
-                return next(err, 500);
-            }
+    var multi = redis.client.multi();
 
-            next(null, msUser);
-        }
+    multi.mset(
+        'facebook:' + fbUser.id, msUser.id,
+        msUser.id, JSON.stringify(msUser)
     );
+
+    multi.sadd('users', msUser.id);
+
+    multi.exec(function (err, res) {
+        if (err) {
+            return next(err, 500);
+        }
+
+        next(null, msUser);
+    });
 }
 
 function _loadExistingUser (msUserId, next) {
