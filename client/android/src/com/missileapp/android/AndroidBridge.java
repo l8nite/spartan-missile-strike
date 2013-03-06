@@ -3,6 +3,7 @@ package com.missileapp.android;
 import org.json.JSONException;
 
 import com.missileapp.android.res.MediaManager;
+import com.missileapp.android.res.Misc;
 
 import android.content.Context;
 import android.os.Vibrator;
@@ -173,21 +174,6 @@ public class AndroidBridge {
      * @param time - time to vibrate the device
      */
     public void vibrate(String time) {
-        long milliseconds;
-        Vibrator vibrator = variables.getVibrator();
-        
-        // Parse time
-        try {
-            milliseconds = Long.parseLong(time);
-        }
-        catch (Exception e) {
-            milliseconds = 0;
-        }
-        MALogger.log(TAG, Log.INFO, "Vibrate command: " + time + ", parsed to: " + milliseconds + ".");
-        
-        // Vibrate if the vibrator instance is created, has a vibrator, and the time to vibrate is greater than 0ms 
-        if (vibrator != null && vibrator.hasVibrator() && milliseconds > 0) {
-            vibrator.vibrate(milliseconds);
-        }
+    	Misc.vibrate(variables.getVibrator(), time);
     }
 }
