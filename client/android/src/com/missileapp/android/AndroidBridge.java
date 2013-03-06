@@ -6,9 +6,7 @@ import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.Misc;
 
 import android.content.Context;
-import android.os.Vibrator;
 import android.util.Log;
-import android.view.View;
 import android.webkit.WebView;
 
 public class AndroidBridge {
