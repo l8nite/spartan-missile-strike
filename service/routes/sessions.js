@@ -3,6 +3,7 @@ var async = require('async'),
     redis = require('../lib/database.js'),
     fbgraph = require('fbgraph');
 
+// 30 days * 24 hours * 60 minutes * 60 seconds
 var DEFAULT_SESSION_EXPIRY_SECONDS = 2592000;
 
 function createSession (request, response, done) {
