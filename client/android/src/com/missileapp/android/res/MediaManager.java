@@ -164,7 +164,7 @@ public class MediaManager {
     		soundPool.autoPause();
     	}
     	catch (Exception e) {
-    		MALogger.log(TAG, Log.ERROR, "Could not pause data", e);
+    		MALogger.log(TAG, Log.ERROR, "Could not pause music.", e);
     	}
     }
     
@@ -177,7 +177,7 @@ public class MediaManager {
     		soundPool.autoResume();
     	}
     	catch (Exception e) {
-    		MALogger.log(TAG, Log.ERROR, "Could not resume data", e);
+    		MALogger.log(TAG, Log.ERROR, "Could not resume music.", e);
     	}
     }
     
@@ -205,20 +205,29 @@ public class MediaManager {
      * @param newVolume the new volume
      */
     public void setForegroundVolume(String newVolume) {
+    	MALogger.log(TAG, Log.INFO, "Setting Foreground: " + newVolume);
     	// Parse Volume
     	float volume = DEFAULT_SPEAKER_VOLUME;
     	try {
 			volume = Float.parseFloat(newVolume);
-		} catch (Exception e) {}
+		}
+    	catch (Exception e) {
+			MALogger.log(TAG, Log.ERROR, "Parse New Volume: " + e.getMessage() , e);
+		}
     	
     	// Save Volume
     	foregroundVolume = volume;
     	
     	// Update all foreground music
-    	for (int i = 0; i < foregroundMap.size(); i++) {
-    		if(foregroundMap.valueAt(i)) {
-    			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), foregroundVolume, foregroundVolume);
+    	try {
+    		for (int i = 0; i < foregroundMap.size(); i++) {
+        		if(foregroundMap.valueAt(i)) {
+        			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), foregroundVolume, foregroundVolume);
+        		}
     		}
+		}
+    	catch (Exception e) {
+			MALogger.log(TAG, Log.ERROR, "Update all forevol: " + e.getMessage() , e);
 		}
     }
     
@@ -227,20 +236,29 @@ public class MediaManager {
      * @param newVolume the new volume
      */
     public void setBackgroundVolume(String newVolume) {
+    	MALogger.log(TAG, Log.INFO, "Setting Foreground: " + newVolume);
     	// Parse Volume
     	float volume = DEFAULT_SPEAKER_VOLUME;
     	try {
 			volume = Float.parseFloat(newVolume);
-		} catch (Exception e) {}
+		}
+    	catch (Exception e) {
+			MALogger.log(TAG, Log.ERROR, "Parse New Volume: " + e.getMessage() , e);
+		}
     	
     	// Save Volume
     	backgroundVolume = volume;
     	
     	// Update all foreground music
-    	for (int i = 0; i < foregroundMap.size(); i++) {
-    		if(!foregroundMap.valueAt(i)) {
-    			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), backgroundVolume, backgroundVolume);
-    		}
+    	try {
+	    	for (int i = 0; i < foregroundMap.size(); i++) {
+	    		if(!foregroundMap.valueAt(i)) {
+	    			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), backgroundVolume, backgroundVolume);
+	    		}
+			}
+    	}
+    	catch (Exception e) {
+			MALogger.log(TAG, Log.ERROR, "Update all forevol: " + e.getMessage() , e);
 		}
     }
 }
