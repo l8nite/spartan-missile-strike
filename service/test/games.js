@@ -82,13 +82,4 @@ describe('/games', function () {
             });
         });
     });
-
-    describe('/games/:id/select-base', function() {
-        it('should return a 500 not implemented', function (done) {
-            client.put('/games/fe4d37b8-ff94-452d-ae6a-e31e30bbafd9/select-base', {}, function(err, req, res, obj) {
-                res.statusCode.should.equal(500);
-                done();
-            });
-        });
-    });
 });
