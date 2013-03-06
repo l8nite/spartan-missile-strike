@@ -25,6 +25,32 @@ public class FireScreen {
     
     
     /**
+     * If in firescreen, cuts camera and sets the background white
+     * If not in firescreen, rolls camera and sets the background transparent
+     * @param showFireScreen - true to enter fire screen, false to exit
+     */
+    public void showFireMissileScreen(String showFireScreen) {
+        boolean showScreen;
+        
+        // Parse command
+        try {
+            showScreen = Boolean.parseBoolean(showFireScreen);
+        }
+        catch (Exception e) {
+            showScreen = false;
+        }
+        MALogger.log(TAG, Log.INFO, "Fire Screen command: " + showFireScreen + ", parsed to: " + showScreen + ".");
+        
+        if (showScreen) {
+            variables.getFireScreen().enterFireScreen();
+        }
+        else {
+            variables.getFireScreen().exitFireScreen();
+        }
+    }
+    
+    
+    /**
      * Enters the firesceen
      *  Requests the reat-facing  {@link Camera}
      *  Sets the draw screen

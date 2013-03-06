@@ -86,23 +86,7 @@ public class AndroidBridge {
      * @param showFireScreen - true to enter fire screen, false to exit
      */
     public void showFireMissileScreen(String showFireScreen) {
-        boolean showScreen;
-        
-        // Parse command
-        try {
-            showScreen = Boolean.parseBoolean(showFireScreen);
-        }
-        catch (Exception e) {
-            showScreen = false;
-        }
-        MALogger.log(TAG, Log.INFO, "Fire Screen command: " + showFireScreen + ", parsed to: " + showScreen + ".");
-        
-        if (showScreen) {
-            variables.getFireScreen().enterFireScreen();
-        }
-        else {
-            variables.getFireScreen().exitFireScreen();
-        }
+        variables.getFireScreen().showFireMissileScreen(showFireScreen);
     }
     
     
