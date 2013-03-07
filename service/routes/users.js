@@ -77,7 +77,7 @@ function listOpponents (request, msUser, done) {
 }
 
 function _getFacebookFriendsWithAppInstalled (request, msUser, next) {
-    fbgraph.setAccessToken(msUser.facebook.access_token);
+    fbgraph.setAccessToken(msUser.facebook_access_token);
     fbgraph.get('/me/friends?fields=id,name,installed', function (err, result) {
         if (err) {
             // TODO: should we force them to log out on OAuthErrors?
