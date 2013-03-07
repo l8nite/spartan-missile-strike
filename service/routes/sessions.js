@@ -1,6 +1,8 @@
 var async = require('async'),
     uuid = require('node-uuid'),
     redis = require('../lib/database.js'),
+    util = require('../lib/util.js'),
+    restify = require('restify'),
     fbgraph = require('fbgraph');
 
 // 30 days * 24 hours * 60 minutes * 60 seconds
@@ -15,25 +17,14 @@ function createSession (request, response, done) {
         _checkForExistingSession,
         _createOrUpdateSession,
         _formatCreateSessionResponse,
-    ],
-
-    function (err, code, body) {
-        if (code) {
-            response.send(code, body);
-        }
-        else {
-            response.send(500, err);
-        }
-
-        done();
-    });
+    ], util.routeResponder(response, done));
 }
 
 function _getFacebookAccessTokenFromRequest (request, next) {
     var fbAccessToken = request.params.facebook_access_token;
 
     if (fbAccessToken === undefined) {
-        return next('error', 400, 'missing facebook_access_token parameter');
+        return next(new restify.MissingParameterError({message: 'missing facebook_access_token parameter'}));
     }
 
     next (null, fbAccessToken);
@@ -45,10 +36,10 @@ function _validateFacebookAccessTokenByQueryingGraphAPI (fbAccessToken, next) {
     fbgraph.get('/me', function (err, fbUser) {
         if (err) {
             if (err.type === 'OAuthException') {
-                return next(err, 400, 'invalid facebook_access_token');
+                return next(new restify.InvalidArgumentError({message: 'invalid facebook_access_token'}));
             }
             else {
-                return next(err, 500);
+                return next(new restify.InternalError());
             }
         }
 
@@ -59,7 +50,7 @@ function _validateFacebookAccessTokenByQueryingGraphAPI (fbAccessToken, next) {
 function _loadMissileStrikeUser (fbAccessToken, fbUser, next) {
     redis.client.get('facebook:' + fbUser.id, function (err, msUserId) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         if (msUserId === null) {
@@ -91,7 +82,7 @@ function _createNewUser (fbAccessToken, fbUser, next) {
 
     multi.exec(function (err, res) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         next(null, msUser);
@@ -101,11 +92,11 @@ function _createNewUser (fbAccessToken, fbUser, next) {
 function _loadExistingUser (fbAccessToken, msUserId, next) {
     redis.client.get(msUserId, function (err, msUserSerialized) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         if (msUserSerialized === null) {
-            return next('inconsistent user state', 500);
+            return next(new restify.InternalError({message: 'inconsistent user state'}));
         }
 
         var msUser = JSON.parse(msUserSerialized);
@@ -122,7 +113,7 @@ function _checkForExistingSession (msUser, next) {
 
     redis.client.exists(msUser.session, function (err, exists) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         next(null, msUser, exists);
@@ -145,7 +136,7 @@ function _createOrUpdateSession (msUser, sessionExists, next) {
 
     multi.exec(function (err, replies) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         next(null, msUser);
@@ -165,22 +156,13 @@ function deleteSession (request, response, done) {
     async.waterfall([
         function (next) { next(null, request); }, // enables arguments to first callback
         _deleteSessionFromDatabase,
-    ],
-
-    function (err, code, body) {
-        if (code) {
-            response.send(code, body);
-        }
-        else {
-            response.send(500, err);
-        }
-    });
+    ], util.routeResponder(response, done));
 }
 
 function _deleteSessionFromDatabase(request, next) {
     redis.client.del(request.headers.missileappsessionid, function (err, res) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         next(null, 204);
