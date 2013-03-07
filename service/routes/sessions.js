@@ -52,32 +52,31 @@ function _validateFacebookAccessTokenByQueryingGraphAPI (fbAccessToken, next) {
             }
         }
 
-        fbUser.access_token = fbAccessToken;
-
-        next(null, fbUser);
+        next(null, fbAccessToken, fbUser);
     });
 }
 
-function _loadMissileStrikeUser (fbUser, next) {
+function _loadMissileStrikeUser (fbAccessToken, fbUser, next) {
     redis.client.get('facebook:' + fbUser.id, function (err, msUserId) {
         if (err) {
             return next(err, 500);
         }
 
         if (msUserId === null) {
-            _createNewUser(fbUser, next);
+            _createNewUser(fbAccessToken, fbUser, next);
         }
         else {
-            _loadExistingUser(msUserId, next);
+            _loadExistingUser(fbAccessToken, msUserId, next);
         }
     });
 }
 
-function _createNewUser (fbUser, next) {
+function _createNewUser (fbAccessToken, fbUser, next) {
     var msUser = {
         id: 'user:' + uuid.v4(),
         username: fbUser.name,
         created: (new Date()).toJSON(),
+        facebook_access_token: fbAccessToken,
         facebook: fbUser,
     };
 
@@ -99,7 +98,7 @@ function _createNewUser (fbUser, next) {
     });
 }
 
-function _loadExistingUser (msUserId, next) {
+function _loadExistingUser (fbAccessToken, msUserId, next) {
     redis.client.get(msUserId, function (err, msUserSerialized) {
         if (err) {
             return next(err, 500);
@@ -110,6 +109,7 @@ function _loadExistingUser (msUserId, next) {
         }
 
         var msUser = JSON.parse(msUserSerialized);
+        msUser.facebook_access_token = fbAccessToken;
 
         next(null, msUser);
     });
@@ -130,25 +130,16 @@ function _checkForExistingSession (msUser, next) {
 }
 
 function _createOrUpdateSession (msUser, sessionExists, next) {
-    // refresh existing session
-    if (sessionExists) {
-        return redis.client.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id, function (err, res) {
-            if (err) {
-                return next(err, 500);
-            }
-
-            next(null, msUser);
-        });
-    }
-
-    // create new session
     var multi = redis.client.multi();
 
-    if (msUser.hasOwnProperty('session')) {
-        multi.del(msUser.session); // delete stale session pointer
+    if (!sessionExists) {
+        if (msUser.hasOwnProperty('session')) {
+            multi.del(msUser.session); // delete stale session pointer
+        }
+
+        msUser.session = 'session:' + uuid.v4();;
     }
 
-    msUser.session = 'session:' + uuid.v4();;
     multi.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id);
     multi.set(msUser.id, JSON.stringify(msUser));
 
