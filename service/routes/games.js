@@ -327,7 +327,7 @@ function _loadGameAndEnsureItsOurTurn (request, next) {
 
         var game = JSON.parse(gameSerialized);
         if (game.current !== request.missileStrikeUserId) {
-            return next(new restify.InvalidGameStateError());
+            return next(new errors.InvalidGameStateError());
         }
 
         next(null, request, game);
