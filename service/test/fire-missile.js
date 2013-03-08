@@ -137,7 +137,7 @@ describe('fire-missile', function () {
     describe("attempting to fire-missile and hitting", function () {
         it('should return a 200 with hit: true', function (done) {
             var path = '/games/' + encodeURIComponent(game12.id) + '/fire-missile';
-            var shot = { latitude: PORTLAND.latitude, longitude: PORTLAND.longitude, angle: 45, heading: 175, power: 5};
+            var shot = { latitude: PORTLAND.latitude, longitude: PORTLAND.longitude, angle: 45, heading: 175.52, power: 22.6};
             client2.put(path, shot, function (err, req, res, obj) {
                 res.statusCode.should.equal(200);
                 should.not.exist(err);
