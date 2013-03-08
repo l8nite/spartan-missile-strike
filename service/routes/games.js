@@ -220,8 +220,12 @@ function _validateFireMissileParameters (request, next) {
 }
 
 function _validateFireMissileConditions (request, game, next) {
-    if (!game[game.opponent].hasOwnProperty('base') || game.status !== 'active') {
-        return next(new errors.InvalidGameStateError());
+    if (!game[game.opponent].hasOwnProperty('base')) {
+        return next(new errors.InvalidGameStateError("base selection isn't complete"));
+    }
+
+    if (game.status !== 'active') {
+        return next(new errors.InvalidGameStateError("game is not active"));
     }
 
     next(null, request, game);
@@ -291,7 +295,7 @@ function _validateSelectBaseParameters (request, next) {
 
 function _validateSelectBaseConditions (request, game, next) {
     if (game[request.missileStrikeUserId].hasOwnProperty('base')) {
-        return next(new errors.InvalidGameStateError());
+        return next(new errors.InvalidGameStateError("base has already been selected"));
     }
 
     next(null, request, game);
@@ -327,7 +331,7 @@ function _loadGameAndEnsureItsOurTurn (request, next) {
 
         var game = JSON.parse(gameSerialized);
         if (game.current !== request.missileStrikeUserId) {
-            return next(new errors.InvalidGameStateError());
+            return next(new errors.InvalidGameStateError("wrong player's turn"));
         }
 
         next(null, request, game);
