@@ -248,7 +248,7 @@ function _calculateMissileTrajectory (request, game, next) {
 
     // it's a "hit" if it's within 8km of the target (~5 miles)
     var hit = false;
-    if (vDistance < 8000) {
+    if (vDistance.distance < 8000) {
         hit = true;
     }
 
