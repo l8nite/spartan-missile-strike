@@ -105,11 +105,13 @@ describe('fire-missile', function () {
 
     // - fire-missile on a game that we don't own (player 1 attempts to fire in game23)
     describe("attempting to fire-missile on game that isn't ours", function () {
-        it('should be not authorized', function (done) {
+        it('should return an InvalidGameStateError', function (done) {
             var path = '/games/' + encodeURIComponent(game23.id) + '/fire-missile';
             var shot = { latitude: SAN_JOSE.latitude, longitude: SAN_JOSE.longitude, angle: 45, heading: 355, power: 5 };
             client1.put(path, shot, function (err, req, res, obj) {
-                res.statusCode.should.equal(403);
+                should.exist(err);
+                err.name.should.equal('InvalidGameStateError');
+                res.statusCode.should.equal(409);
                 done();
             });
         });
