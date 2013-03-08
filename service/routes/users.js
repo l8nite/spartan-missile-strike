@@ -20,7 +20,7 @@ function updateUser (request, msUser, done) {
     }
 
     if (username === msUser.username) {
-        return done(undefined, 304);
+        return done(null, 304);
     }
 
     if (!/^[a-zA-Z ]+$/.test(username)) {
