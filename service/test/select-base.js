@@ -65,11 +65,11 @@ describe('select-base', function () {
     });
 
     describe("attempting to select-base when we already have...", function () {
-        it('should return a 304', function (done) {
+        it('should return a 409', function (done) {
             var path = '/games/' + encodeURIComponent(game12.id) + '/select-base';
             var base = { latitude: 0, longitude: 0 };
             client1.put(path, base, function (err, req, res, obj) {
-                res.statusCode.should.equal(304);
+                res.statusCode.should.equal(409);
                 done();
             });
         });
