@@ -134,7 +134,6 @@ function _createNewGame (request, next) {
             latitude: request.params.latitude,
             longitude: request.params.longitude,
         },
-        shots: [ ],
     };
 
     game[request.params.opponent] = {};
@@ -253,11 +252,40 @@ function _calculateMissileTrajectory (request, game, next) {
         hit = true;
     }
 
-    next(null, { destination: { latitude: vDestination.lat, longitude: vDestination.lon }, hit: hit });
+    var shot = {
+        angle: angle,
+        heading: heading,
+        power: power,
+        origin: { latitude: latitude, longitude: longitude },
+        destination: { latitude: vDestination.lat, longitude: vDestination.lon },
+        hit: hit,
+    };
+
+    next(null, game, shot);
 }
 
-function _updateGameWithShotFired (shot, next) {
-    next(null, 200, shot);
+function _updateGameWithShotFired (game, shot, next) {
+    if (!game.hasOwnProperty('shots')) {
+        game.shots = [];
+    }
+
+    game.shots.push(shot);
+
+    if (shot.hit) {
+        game.status = 'completed';
+        game.winner = game.current;
+    }
+
+    // switch players
+    game.current = game.current === game.creator ? game.opponent : game.creator;
+
+    redis.client.set(game.id, JSON.stringify(game), function (err, res) {
+        if (err) {
+            return next(new restify.InternalError());
+        }
+
+        next(null, 200, shot);
+    });
 }
 
 function selectBase (request, response, done) {
