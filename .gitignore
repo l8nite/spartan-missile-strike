@@ -73,6 +73,7 @@ DerivedData
 .settings/
 bin/
 gen/
+/client/android/assets/html/
 
 # Local configuration file (sdk path, etc)
 local.properties
