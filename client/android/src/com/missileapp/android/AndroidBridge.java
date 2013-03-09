@@ -27,10 +27,6 @@ public class AndroidBridge {
     public AndroidBridge(BagOfHolding variables) {
         MALogger.log(TAG, Log.INFO, "Init Android Bridge");
         AndroidBridge.variables = variables;
-        
-        //TODO: REMOVE?
-        //NOTE: System Services are not available during this phase 
-        // Init variables
     }
     
     /**
