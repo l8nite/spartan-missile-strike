@@ -134,7 +134,6 @@ function NativeBridge_Abstract() {
 	this._callbacksHoles = new Array();
 	
 	// Callback IDs for persistent this._callbacks
-	this._resumeGameCallbackID = null;
 	this._locationCallbackID = null;
 	this._orientationCallbackID = null;
 }
@@ -150,17 +149,6 @@ NativeBridge_Abstract.prototype.callback = function (identifier, response) {
 			this._callbacksHoles.push(identifier);
 		}
 	}
-};
-
-NativeBridge_Abstract.prototype.resumeGame = function () {
-	this.callback(this._resumeGameCallbackID);
-};
-
-NativeBridge_Abstract.prototype.setResumeHandler = function (fx) {
-	if (this._resumeGameCallbackID) {
-		delete this._callbacks[this._resumeGameCallbackID];
-	}
-	this._resumeGameCallbackID = this._registerCallback(fx, true);
 };
 
 NativeBridge_Abstract.prototype.getLocationUpdates = function (activate, callback) {
