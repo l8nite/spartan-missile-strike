@@ -1,8 +1,17 @@
-/* Centralized handling and retrieval of games data structure.
+/* TheGM
+ * 
+ * Centralized handling and retrieval of games data structure.
  * Has interface where other game components can ask for the current games
  * datastructure, or can un/subscribe from updates via callback registration.
+ * 
+ * Polls webservice for new games datastructure when the local copy goes "stale".
  */
 
+/* Constructor.
+ *
+ * userid: User ID as per webservice
+ * sessionid: Session ID as per webservice
+ */
 function TheGM(userid, sessionid) {
 	this._userid = userid;
 	this._sessionid = sessionid;
@@ -16,6 +25,12 @@ function TheGM(userid, sessionid) {
 	};
 }
 
+/* Returns a $.Deferred which will be resolved with a fresh games data structure.
+ * The deferred will reject if a problem was encountered getting fresh games.
+ * If no problems were encountered, getGames records the fresh games data structure and when it was received
+ * (used to determine when fresh games go stale and need to be fetched again), then calls listeners with the
+ * fresh games array.
+ */
 TheGM.prototype.getGames = function () {
 	var that = this;
 	return this._getGamesFromService().done(function (response) {
@@ -26,6 +41,11 @@ TheGM.prototype.getGames = function () {
 	});
 }
 
+/* Subscribe a listener function.
+ * Returns a callback ID with which you can unsubscribe the specified listener.
+ * On subscribe, listener is immediately called with current games array.
+ * If TheGM is currently not polling the webservice, it starts polling.
+ */
 TheGM.prototype.subscribe = function (when) {
 	when(this._games.games);
 	var i = this._listeners.holes.pop();
@@ -39,6 +59,8 @@ TheGM.prototype.subscribe = function (when) {
 	return i;
 }
 
+/* Unsubscribe a listener function.
+ */
 TheGM.prototype.unsubscribe = function (callbackid) {
 	if (this._listeners.listeners[callbackid]) {
 		this._listeners.holes.push(callbackid);
@@ -49,6 +71,9 @@ TheGM.prototype.unsubscribe = function (callbackid) {
 	}
 }
 
+/* Call to the webservice.
+ * Returns a deferred to be resolved with the games array
+ */
 TheGM.prototype._getGamesFromService = function () {
 	return $.ajax({
 		url: Imports.serviceurl + "/users/" + this._userid + "/games",
@@ -59,13 +84,14 @@ TheGM.prototype._getGamesFromService = function () {
 	});
 }
 
+/* If not already polling, start polling!
+ */
 TheGM.prototype._startPollingService = function () {
-	if (!this._polling) {
-		this._polling = true;
+	if (!this._poll) {
 		var that = this;
 		function poll() {
 			that.getGames().always(function () {
-				if (that._polling) {
+				if (that._poll) {
 					that._poll = setTimeout(poll, that._STALE);
 				}
 			});
@@ -74,20 +100,25 @@ TheGM.prototype._startPollingService = function () {
 	}
 }
 
+/* Stop polling
+ */
 TheGM.prototype._stopPollingService = function () {
-	if (this._polling) {
-		delete this._polling;
+	if (this._poll) {
 		clearTimeout(this._poll);
 		delete this._poll;
 	}
 }
 
+/* Call all listeners with current games array
+ */
 TheGM.prototype._notifyListeners = function () {
 	for (var i in this._listeners.listeners) {
 		this._listeners.listeners[i](this._games.games);
 	}
 }
 
+/* Check if games array is stale
+ */
 TheGM.prototype._isStale = function () {
 	return (new Date().getTime() - this._games.when.getTime() >= this._STALE);
 }
