@@ -39,6 +39,24 @@
 		<div onmousedown="mainView.loadView(map)">Resume game</div>
 		<div onmousedown="mainView.loadView(opponents)">New game</div>
 		<div onmousedown="mainView.loadView(base)">Accept invitation</div>
+        
+        
+        <div></br></br>
+            <a href="spartan-missile-strike://playSound/?arguments=%7B%0A%20%20%20%20%22soundID%22%3A%20%22MODERATO%22%2C%0A%20%20%20%20%22foreground%22%3A%20false%2C%0A%20%20%20%20%22loop%22%3A%20true%0A%7D">SHOULD PLAY MODERATO IF YOU CLICK ME!</a></br></br>
+        </div>
+        <div>
+            <a href="spartan-missile-strike://playSound/?arguments=%7B%0A%20%20%20%20%22soundID%22%3A%20%22BOMB%22%2C%0A%20%20%20%20%22foreground%22%3A%20false%2C%0A%20%20%20%20%22loop%22%3A%20true%0A%7D">SHOULD PLAY BOMB IF YOU CLICK ME!</a></br></br>
+        </div>
+        <div>
+            <a href="spartan-missile-strike://playSound/?arguments=%7B%0A%20%20%20%20%22soundID%22%3A%20%22MISSILELAUNCHED%22%2C%0A%20%20%20%20%22foreground%22%3A%20false%2C%0A%20%20%20%20%22loop%22%3A%20true%0A%7D">SHOULD PLAY MissileLaunched IF YOU CLICK ME!</a>
+        </div>
+        
+        <div></br></br>
+            <a href="spartan-missile-strike://playSound/?arguments=%7B%0A%20%20%20%20%22soundID%22%3A%20%22EXPLOSION%22%2C%0A%20%20%20%20%22foreground%22%3A%20false%2C%0A%20%20%20%20%22loop%22%3A%20true%0A%7D">SHOULD PLAY EXPLOSION IF YOU CLICK ME!</a></br></br>
+        </div>
+        
+        
+        
 		<div onmousedown="mainView.loadView(options)">Options</div>
 		<div style="height: 2000px;"></div>
 	</div>
@@ -51,7 +69,11 @@
 	<div id="fire">
 		<div>Fire view</div><br>
 		<div onmousedown="mainView.previousView()">Back</div><br>
-		<div onmousedown="mainView.loadView(options)">Options</div><br>
+        <div onmousedown="mainView.loadView(options)">Options</div><br><br><br><br>
+        
+        <div>
+            <a href="spartan-missile-strike://playSound/?arguments=%7B%0A%20%20%20%20%22soundID%22%3A%20%22MISSILELAUNCHED%22%2C%0A%20%20%20%20%22foreground%22%3A%20false%2C%0A%20%20%20%20%22loop%22%3A%20true%0A%7D">SHOULD PLAY MissileLaunched IF YOU CLICK ME!</a>
+        </div>
 	</div>
 	<div id="options">
 		<div>Options</div><br>
@@ -77,7 +99,8 @@
 		options = new FixedHeightView("options");
 		opponents = new FixedHeightView("opponents");
 		base = new FixedHeightView("base");
-		mainView.loadView(mainMenu);
-	</script>
+        mainView.loadView(mainMenu);
+        //mainView.loadView(fire);
+        </script>
 </body>
 </html>

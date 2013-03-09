@@ -10,24 +10,25 @@
 #import "SSAudioManager.h"
 #import "SSNativeBridge.h"
 #import <FacebookSDK/FacebookSDK.h>
-@class SSFiringViewController;
-@interface SSMainViewController : UIViewController 
+#import "SSFiringViewController.h"
+
+@class SSFiringManager, AVCaptureVideoPreviewLayer;///Took this out: AVCamPreviewView
+@interface SSMainViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     SSAudioManager* sa1;
     FBSession* session;
-    IBOutlet UIToolbar* toolBar;
-    SSFiringViewController *firingViewController;
+    SSFiringManager *captureManager;
     
  }
 
-@property  (nonatomic,strong) IBOutlet UIToolbar *toolBar;
-@property (nonatomic, strong) SSFiringViewController* firingViewController;
+@property (nonatomic,strong) SSFiringManager *captureManager;
+@property (nonatomic,strong) UIView *videoPreviewView;
+@property (nonatomic,strong) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
+
 @property (nonatomic,retain) IBOutlet SSNativeBridge* nativeBridge;
 @property (nonatomic, strong) FBSession* session;
 @property (nonatomic,retain) IBOutlet UIWebView* webView;
 
--(IBAction)callForFireMission:(id)sender;
-- (void)showImagePicker;
 
 
 
