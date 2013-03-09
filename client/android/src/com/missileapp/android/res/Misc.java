@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.missileapp.android.BagOfHolding;
 import com.missileapp.android.MALogger;
 import com.missileapp.android.MissileApp;
 
@@ -13,24 +14,30 @@ public class Misc {
 	/**
      * Hides Splash Screen when the webView has been fully loaded
      */
-    public static void hideSplash(final MissileApp missileapp, final ImageView splashScreen) {
+    public static void hideSplash(BagOfHolding variables, final MissileApp missileapp, final ImageView splashScreen) {
     	final String TAG = "HideSplash";
         MALogger.log(TAG, Log.VERBOSE, "CMD Hide Splash");
-        // Runs on the UI Thread
-        missileapp.runOnUiThread(new Runnable() {
-            
-            @Override
-            public void run() {
-                try {
-                    splashScreen.setVisibility(View.GONE);
-                    MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
-                }
-                catch (Exception e) {
-                    // There should be no exception here but just in case...
-                    MALogger.log(TAG, Log.ERROR, "Unable to hide splash: " + e.getMessage(), e);
-                }
-            }
-        });
+        
+        if(!variables.isEnabled()) {
+	        // Runs on the UI Thread
+	        missileapp.runOnUiThread(new Runnable() {
+	            
+	            @Override
+	            public void run() {
+	                try {
+	                    splashScreen.setVisibility(View.GONE);
+	                    MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
+	                }
+	                catch (Exception e) {
+	                    // There should be no exception here but just in case...
+	                    MALogger.log(TAG, Log.ERROR, "Unable to hide splash: " + e.getMessage(), e);
+	                }
+	            }
+	        });
+        }
+        else {
+        	variables.setHideSplash(true);
+        }
     }
     
 	

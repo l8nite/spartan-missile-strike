@@ -148,7 +148,7 @@ public class AndroidBridge {
      * Hides Splash Screen when the webView has been fully loaded
      */
     public void hideSplash() {
-    	Misc.hideSplash(variables.getMissileApp(), variables.getSplashScreen());
+    	Misc.hideSplash(variables, variables.getMissileApp(), variables.getSplashScreen());
     }
     
     
