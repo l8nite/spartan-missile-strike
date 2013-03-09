@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.missileapp.android.BagOfHolding;
 
+@SuppressWarnings("unused")
 public class LocationManagement implements LocationListener {
 	// DATA
     private static final String TAG = "Location";                 // TAG for logging
