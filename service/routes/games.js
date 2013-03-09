@@ -3,7 +3,13 @@ var restify = require('restify'),
     util = require('../lib/util.js'),
     uuid = require('node-uuid'),
     async = require('async'),
+    vincenty = require('../lib/vincenty.js'),
+    errors = require('../lib/errors.js'),
     _ = require('underscore');
+
+// 14000 m/s at 45 deg will travel ~20000 km, or halfway around earth
+var MAXIMUM_VELOCITY = 14000;
+var GRAVITY = 9.8;
 
 function createGame (request, response, done) {
     async.waterfall([
@@ -21,6 +27,18 @@ function isValidLatitude (latitude) {
 
 function isValidLongitude (longitude) {
     return _.isNumber(longitude) && longitude >= -180 && longitude <= 180;
+}
+
+function isValidAngle (angle) {
+    return _.isNumber(angle) && angle >= 0 && angle <= 90;
+}
+
+function isValidHeading (heading) {
+    return _.isNumber(heading) && heading >= 0 && heading < 360;
+}
+
+function isValidPower (power) {
+    return _.isNumber(power) && power >= 0 && power <= 100;
 }
 
 function _validateCreateGameParameters (request, next) {
@@ -116,18 +134,11 @@ function _createNewGame (request, next) {
             latitude: request.params.latitude,
             longitude: request.params.longitude,
         },
-        shots: [ ],
     };
 
     game[request.params.opponent] = {};
 
-    var multi = redis.client.multi();
-
-    multi.set(game.id, JSON.stringify(game));
-    multi.zadd('games:' + request.missileStrikeUserId, now.getTime(), game.id);
-    multi.zadd('games:' + request.params.opponent, now.getTime(), game.id);
-
-    multi.exec(function (err, replies) {
+    _updateGameRecord(game, function (err) {
         if (err) {
             return next(err);
         }
@@ -140,16 +151,144 @@ function _renderGameCreatedResponse (game, next) {
     next(null, 201, game);
 }
 
-function fireMissile (req, res, next) {
-    return next(new restify.InternalError({message: 'not implemented'}));
+function fireMissile (request, response, done) {
+    async.waterfall([
+        function (next) { next(null, request); },
+        _validateFireMissileParameters,
+        _loadGameAndEnsureItsOurTurn,
+        _validateFireMissileConditions,
+        _calculateMissileTrajectory,
+        _updateGameWithShotFired,
+    ], util.routeResponder(response, done));
+}
+
+function _validateFireMissileParameters (request, next) {
+    var latitude = request.params.latitude,
+        longitude = request.params.longitude,
+        angle = request.params.angle,
+        heading = request.params.heading,
+        power = request.params.power;
+
+    if (longitude === undefined) {
+        return next(new restify.MissingParameterError({message: 'longitude parameter is missing'}));
+    }
+
+    if (latitude === undefined) {
+        return next(new restify.MissingParameterError({message: 'latitude parameter is missing'}));
+    }
+
+    if (angle === undefined ) {
+        return next(new restify.MissingParameterError({message: 'angle parameter is missing'}));
+    }
+
+    if (heading === undefined) {
+        return next(new restify.MissingParameterError({message: 'heading parameter is missing'}));
+    }
+
+    if (power === undefined) {
+        return next(new restify.MissingParameterError({message: 'power parameter is missing'}));
+    }
+
+    if (!isValidLatitude(latitude)) {
+        return next(new restify.InvalidArgumentError({message: 'latitude must be -90 to 90'}));
+    }
+
+    if (!isValidLongitude(longitude)) {
+        return next(new restify.InvalidArgumentError({message: 'longitude must be -180 to 180'}));
+    }
+
+    if (!isValidAngle(angle)) {
+        return next(new restify.InvalidArgumentError({message: 'angle must be 0 to 90'}));
+    }
+
+    if (!isValidHeading(heading)) {
+        return next(new restify.InvalidArgumentError({message: 'heading must be [0,360)'}));
+    }
+
+    if (!isValidPower(power)) {
+        return next(new restify.InvalidArgumentError({message: 'power must be 0 to 100'}));
+    }
+
+    next(null, request);
+}
+
+function _validateFireMissileConditions (request, game, next) {
+    if (!game[game.opponent].hasOwnProperty('base')) {
+        return next(new errors.InvalidGameStateError("base selection isn't complete"));
+    }
+
+    if (game.status !== 'active') {
+        return next(new errors.InvalidGameStateError("game is not active"));
+    }
+
+    next(null, request, game);
+}
+
+function _calculateMissileTrajectory (request, game, next) {
+    var latitude = request.params.latitude,
+        longitude = request.params.longitude,
+        angle = request.params.angle,
+        heading = request.params.heading,
+        power = request.params.power;
+
+    var velocity = (MAXIMUM_VELOCITY * power) / 100,
+        distance = velocity*velocity * Math.sin(2 * angle) / GRAVITY
+        vDestination = vincenty.destVincenty(latitude, longitude, heading, distance);
+
+    var opponent = game.current === game.creator ? game.opponent : game.creator,
+        opponentBase = game[opponent].base;
+
+    var vDistance = vincenty.distVincenty(vDestination.lat, vDestination.lon, opponentBase.latitude, opponentBase.longitude);
+
+    // it's a "hit" if it's within 8km of the target (~5 miles)
+    var hit = false;
+    if (vDistance.distance < 8000) {
+        hit = true;
+    }
+
+    var shot = {
+        angle: angle,
+        heading: heading,
+        power: power,
+        origin: { latitude: latitude, longitude: longitude },
+        destination: { latitude: vDestination.lat, longitude: vDestination.lon },
+        hit: hit,
+    };
+
+    next(null, game, shot);
+}
+
+function _updateGameWithShotFired (game, shot, next) {
+    if (!game.hasOwnProperty('shots')) {
+        game.shots = [];
+    }
+
+    game.shots.push(shot);
+
+    if (shot.hit) {
+        game.status = 'completed';
+        game.winner = game.current;
+    }
+
+    // switch players
+    game.current = game.current === game.creator ? game.opponent : game.creator;
+
+    _updateGameRecord(game, function (err) {
+        if (err) {
+            return next(new restify.InternalError());
+        }
+
+        next(null, 200, shot);
+    });
 }
 
 function selectBase (request, response, done) {
     async.waterfall([
         function (next) { next(null, request); }, // enables arguments to first callback
         _validateSelectBaseParameters,
+        _loadGameAndEnsureItsOurTurn,
         _validateSelectBaseConditions,
-        _updateGameData,
+        _updateGameWithSelectedBase,
     ], util.routeResponder(response, done));
 }
 
@@ -176,7 +315,51 @@ function _validateSelectBaseParameters (request, next) {
     next(null, request);
 }
 
-function _validateSelectBaseConditions (request, next) {
+function _validateSelectBaseConditions (request, game, next) {
+    if (game[request.missileStrikeUserId].hasOwnProperty('base')) {
+        return next(new errors.InvalidGameStateError("base has already been selected"));
+    }
+
+    next(null, request, game);
+}
+
+function _updateGameWithSelectedBase (request, game, next) {
+    game.updated = (new Date()).toJSON();
+    game[request.missileStrikeUserId].base = {
+        latitude: request.params.latitude,
+        longitude: request.params.longitude,
+    };
+    // currently opponent's turn (creator base set @ creation)
+    game.current = game.creator;
+
+    _updateGameRecord(game, function (err) {
+        if (err) {
+            return next(new restify.InternalError());
+        }
+
+        return next(null);
+    });
+
+}
+
+function _updateGameRecord (game, next) {
+    var multi = redis.client.multi(),
+        now = new Date();
+
+    multi.set(game.id, JSON.stringify(game));
+    multi.zadd('games:' + game.creator, now.getTime(), game.id);
+    multi.zadd('games:' + game.opponent, now.getTime(), game.id);
+
+    multi.exec(function (err, replies) {
+        if (err) {
+            return next(err);
+        }
+
+        next(null, game);
+    });
+}
+
+function _loadGameAndEnsureItsOurTurn (request, next) {
     redis.client.get(request.params.id, function (err, gameSerialized) {
         if (err) {
             return next(err);
@@ -188,34 +371,13 @@ function _validateSelectBaseConditions (request, next) {
 
         var game = JSON.parse(gameSerialized);
         if (game.current !== request.missileStrikeUserId) {
-            return next(new restify.NotAuthorizedError());
+            return next(new errors.InvalidGameStateError("wrong player's turn"));
         }
 
         next(null, request, game);
     });
 }
 
-function _updateGameData (request, game, next) {
-    if (game[request.missileStrikeUserId].hasOwnProperty('base')) {
-        return next(null, 304);
-    }
-
-    game.updated = (new Date()).toJSON();
-    game[request.missileStrikeUserId].base = {
-        latitude: request.params.latitude,
-        longitude: request.params.longitude,
-    };
-    // currently opponent's turn (creator base set @ creation)
-    game.current = game.creator;
-
-    redis.client.set(game.id, JSON.stringify(game), function (err) {
-        if (err) {
-            return next(new restify.InternalError());
-        }
-
-        return next(null, 200);
-    });
-}
 
 module.exports.installAuthenticatedRouteHandlers = function (server) {
     server.post('/games', createGame);
