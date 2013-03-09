@@ -2,6 +2,7 @@
 <head>
 	<!-- Includes -->
 	<script src="Game/GameMaster.js"></script>
+	<script src="Game/SuspendManager.js"></script>
 	<script src="jquery/jquery.js"></script>
 	<script src="NativeBridge/NativeBridge_Abstract.js"></script>
 	<script src="NativeBridge/NativeBridge_Android.js"></script>
@@ -21,7 +22,8 @@
 		var Imports = {
 			NativeBridge: new NativeBridge_Android(),
 			DomHelper: new DomHelper(),
-			ViewManager: new MainView()
+			ViewManager: new MainView(),
+			SuspendManager: new SuspendManager()
 		};
 
 		MissileAppHTML = {
@@ -29,6 +31,7 @@
 				callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge),
 				onMainMenu: Imports.NativeBridge.onMainMenu.bind(Imports.NativeBridge)
 			}
+			wake: Imports.SuspendManager.wake.bind(Imports.SuspendManager)
 		};
 	})();
 	</script>
