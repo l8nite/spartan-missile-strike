@@ -138,13 +138,7 @@ function _createNewGame (request, next) {
 
     game[request.params.opponent] = {};
 
-    var multi = redis.client.multi();
-
-    multi.set(game.id, JSON.stringify(game));
-    multi.zadd('games:' + request.missileStrikeUserId, now.getTime(), game.id);
-    multi.zadd('games:' + request.params.opponent, now.getTime(), game.id);
-
-    multi.exec(function (err, replies) {
+    _updateGameRecord(game, function (err) {
         if (err) {
             return next(err);
         }
@@ -279,7 +273,7 @@ function _updateGameWithShotFired (game, shot, next) {
     // switch players
     game.current = game.current === game.creator ? game.opponent : game.creator;
 
-    redis.client.set(game.id, JSON.stringify(game), function (err, res) {
+    _updateGameRecord(game, function (err) {
         if (err) {
             return next(new restify.InternalError());
         }
@@ -338,12 +332,30 @@ function _updateGameWithSelectedBase (request, game, next) {
     // currently opponent's turn (creator base set @ creation)
     game.current = game.creator;
 
-    redis.client.set(game.id, JSON.stringify(game), function (err) {
+    _updateGameRecord(game, function (err) {
         if (err) {
             return next(new restify.InternalError());
         }
 
-        return next(null, 200);
+        return next(null);
+    });
+
+}
+
+function _updateGameRecord (game, next) {
+    var multi = redis.client.multi(),
+        now = new Date();
+
+    multi.set(game.id, JSON.stringify(game));
+    multi.zadd('games:' + game.creator, now.getTime(), game.id);
+    multi.zadd('games:' + game.opponent, now.getTime(), game.id);
+
+    multi.exec(function (err, replies) {
+        if (err) {
+            return next(err);
+        }
+
+        next(null, game);
     });
 }
 
