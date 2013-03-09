@@ -1,5 +1,6 @@
 var restify = require('restify'),
     redis = require('../lib/database.js'),
+    util = require('../lib/util.js'),
     uuid = require('node-uuid'),
     async = require('async'),
     _ = require('underscore');
@@ -11,16 +12,7 @@ function createGame (request, response, done) {
         _determineOpponent,
         _createNewGame,
         _renderGameCreatedResponse,
-    ],
-
-    function (err, code, body) {
-        if (err) {
-            return done(err);
-        }
-
-        response.send(code, body);
-        done();
-    });
+    ], util.routeResponder(response, done));
 }
 
 function isValidLatitude (latitude) {
@@ -158,16 +150,7 @@ function selectBase (request, response, done) {
         _validateSelectBaseParameters,
         _validateSelectBaseConditions,
         _updateGameData,
-    ],
-
-    function (err, code, body) {
-        if (err) {
-            return done(err);
-        }
-
-        response.send(code, body);
-        done();
-    });
+    ], util.routeResponder(response, done));
 }
 
 function _validateSelectBaseParameters (request, next) {
