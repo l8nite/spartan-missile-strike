@@ -17,6 +17,7 @@
     "mocha": "~1.8.1",
     "node-uuid": "~1.4.0",
     "underscore": "~1.4.4",
-    "restify": "~2.2.1"
+    "restify": "~2.2.1",
+    "node-vincenty": "0.0.4"
   }
 }

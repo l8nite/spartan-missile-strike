@@ -3,7 +3,7 @@ var restify = require('restify'),
     util = require('../lib/util.js'),
     uuid = require('node-uuid'),
     async = require('async'),
-    vincenty = require('../lib/vincenty.js'),
+    vincenty = require('node-vincenty'),
     errors = require('../lib/errors.js'),
     _ = require('underscore');
 
