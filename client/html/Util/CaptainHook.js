@@ -22,4 +22,13 @@ CaptainHook.prototype.removeHook = function (hookId) {
 
 CaptainHook.prototype.countHooks = function () {
 	return this._hooks.length - this._holes.length;
-}
+};
+
+CaptainHook.prototype.getHooks = function () {
+	var a = [];
+	for (var i in this._hooks) {
+		a.push(this._hooks[i]);
+	}
+	return a;
+};
+
