@@ -130,13 +130,10 @@
 
 function NativeBridge_Abstract() {
 	// Holds callback functions
-	this._callbacks = new Array();
-	this._callbacksHoles = new Array();
+	this._callbacks = new Fridge();
 	
 	// Callback IDs for persistent this._callbacks
 	this._resumeGameCallbackID = null;
-	this._locationCallbackID = null;
-	this._orientationCallbackID = null;
 }
 
 //
@@ -144,10 +141,11 @@ function NativeBridge_Abstract() {
 //
 
 NativeBridge_Abstract.prototype.callback = function (identifier, response) {
-	if (this._callbacks[identifier]) {
-		this._callbacks[identifier].callback(response);
-		if (!this._callbacks[identifier].persist) {
-			this._callbacksHoles.push(identifier);
+	var stored = this._callbacks.get(identifier);
+	if (stored) {
+		stored.callback(response);
+		if (!stored.persist) {
+			this._callbacks.remove(identifier);
 		}
 	}
 };
@@ -164,28 +162,56 @@ NativeBridge_Abstract.prototype.setResumeHandler = function (fx) {
 };
 
 NativeBridge_Abstract.prototype.getLocationUpdates = function (activate, callback) {
+	var that = this;
 	if (activate) {
-		if (this._locationCallbackID) {
-			delete this._callbacks[this._locationCallbackID];
+		if (this._getLocationUpdatesCBs) {
+			return this._getLocationUpdatesCBs.add(callback);
+		} else {
+			this._getLocationUpdatesCBs = new Fridge();
+			var id = this._getLocationUpdatesCBs.add(callback);
+			this._getLocationUpdates(true, this._registerCallback(function (response) {
+				var a = that._getLocationUpdatesCBs.get();
+				for (var i in a) {
+					a[i](response);
+				}
+			}, true));
+			return id;
 		}
-		this._locationCallbackID = this._registerCallback(callback, true);
-		this._getLocationUpdates(true, this._locationCallbackID);
-	}
-	else {
-		this._getLocationUpdates(false);
+	} else {
+		if (this._getLocationUpdatesCBs) {
+			this._getLocationUpdatesCBs.remove(callback);
+			if (this._getLocationUpdatesCBs.count() === 0) {
+				delete this._getLocationUpdatesCBs;
+				this._getLocationUpdates(false);
+			}
+		}
 	}
 };
 
 NativeBridge_Abstract.prototype.getOrientationUpdates = function (activate, callback) {
+	var that = this;
 	if (activate) {
-		if (this._orientationCallbackID) {
-			delete this._callbacks[this._orientationCallbackID];
+		if (this._getOrientationUpdatesCBs) {
+			return this._getOrientationUpdatesCBs.add(callback);
+		} else {
+			this._getOrientationUpdatesCBs = new Fridge();
+			var id = this._getOrientationUpdatesCBs.add(callback);
+			this._getOrientationUpdates(true, this._registerCallback(function (response) {
+				var a = that._getOrientationUpdatesCBs.get();
+				for (var i in a) {
+					a[i](response);
+				}
+			}, true));
+			return id;
 		}
-		this._orientationCallbackID = this._registerCallback(callback, true);
-		this._getOrientationUpdates(true, this._orientationCallbackID);
-	}
-	else {
-		this._getOrientationUpdates(false);
+	} else {
+		if (this._getOrientationUpdatesCBs) {
+			this._getOrientationUpdatesCBs.remove(callback);
+			if (this._getOrientationUpdatesCBs.count() === 0) {
+				delete this._getOrientationUpdatesCBs;
+				this._getOrientationUpdates(false);
+			}
+		}
 	}
 };
 
@@ -217,14 +243,8 @@ NativeBridge_Abstract.prototype.onMainMenu = function () {
 // Save callback function, returns callbackID
 // persist can be undefined :)
 NativeBridge_Abstract.prototype._registerCallback = function (callbackFn, persist) {
-	var callbackObj = {
+	return this._callbacks.add({
 			callback : callbackFn,
 			persist : persist
-	};
-	var i = this._callbacksHoles.pop();
-	if (i || i === 0) {
-		this._callbacks[i] = callbackObj;
-		return i;
-	}
-	return (this._callbacks.push(callbackObj) - 1);
+	});
 };
