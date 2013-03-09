@@ -133,10 +133,10 @@
 				cb0 = thegm.subscribe(f0);
 			});
 
-			var serviceLatency = 500;
 			asyncTest("Many callbacks, stop poll during test and immediately resume", 17, function () {
 				var thegm = new TheGM("fake-user", "fake-session-id");
 				var timescalled = 0;
+				var serviceLatency = 500;
 				thegm._getGamesFromService = function () {
 					var d = $.Deferred();
 					setTimeout(function () {
@@ -181,7 +181,6 @@
 						thegm.unsubscribe(cb0);
 						setTimeout(function () {
 							ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
-							console.log(thegm._poll);
 							ok(!thegm._poll, "No longer polling service");
 							start();
 							stop();
@@ -205,7 +204,6 @@
 						thegm.unsubscribe(cb0);
 						setTimeout(function () {
 							ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
-							console.log(thegm._poll);
 							ok(!thegm._poll, "No longer polling service");
 							setTimeout(start, 0);
 						}, 1000);
@@ -235,6 +233,34 @@
 
 				c0 = 0;
 				cb0 = thegm.subscribe(f0);
+			});
+
+			asyncTest("Subscribe then immediately unsubscribe", 4, function () {
+				var serviceLatency = 500;
+				var thegm = new TheGM("fake-user", "fake-session-id");
+				thegm._getGamesFromService = function () {
+					var d = $.Deferred();
+					setTimeout(function () {
+						d.resolve(["g0"]);
+					}, serviceLatency);
+					return d;
+				};
+				thegm._STALE = 1000;
+
+				var timescalled = 0;
+				function f0(games) {
+					timescalled++;
+					ok(games.length === 0, "f0 called with empty array");
+				}
+
+				var cb = thegm.subscribe(f0);
+				thegm.unsubscribe(cb);
+				ok(thegm._listeners.holes.length === thegm._listeners.listeners.length, "Listeners is empty");
+				ok(!thegm._poll, "No longer polling service");
+				setTimeout(function () {
+					ok(timescalled === 1, "f0 called only once");
+					start();
+				});
 			});
 		</script>
 	</body>
