@@ -42,6 +42,10 @@ NativeBridge_Android.prototype._getFacebookAccessToken = function (callbackID) {
 	AndroidInterface.getFacebookAccessToken(callbackID);
 };
 
+NativeBridge_Android.prototype._onMainMenu = function (areWe) {
+	AndroidInterface.onMainMenu(areWe);
+};
+
 NativeBridge_Android.prototype.logoutFacebook = function () {
 	AndroidInterface.logoutFacebook();
 };

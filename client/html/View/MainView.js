@@ -14,6 +14,10 @@ MainView.prototype.previousView = function (view) {
     this._doAnimation();
 };
 
+MainView.prototype.onInitialView = function () {
+    return !(this._viewStack.length > 1);
+};
+
 MainView.prototype._doAnimation = function () {
     if (!this._animating) {
         this._animating = true;
