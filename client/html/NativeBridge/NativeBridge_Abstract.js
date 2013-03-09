@@ -213,8 +213,8 @@ NativeBridge_Abstract.prototype._registerCallback = function (callbackFn, persis
 			callback : callbackFn,
 			persist : persist
 	};
-	var i;
-	if (i = this._callbacksHoles.pop()) {
+	var i = this._callbacksHoles.pop();
+	if (i || i === 0) {
 		this._callbacks[i] = callbackObj;
 		return i;
 	}

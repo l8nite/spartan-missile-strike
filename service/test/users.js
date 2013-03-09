@@ -1,10 +1,11 @@
-var should = require('should');
-var async = require('async');
-var ServiceClient = require('./lib/service-client.js');
+var should = require('should'),
+    async = require('async'),
+    ServiceClient = require('./lib/service-client.js'),
+    _ = require('underscore');
 
 describe('/users', function () {
-    var client;
-    var path;
+    var client,
+        path;
 
     before(function (done) {
         client = new ServiceClient();
@@ -88,18 +89,40 @@ describe('/users', function () {
     });
 
     describe('/users/:id/games', function() {
-        it('should return a 500 not implemented', function (done) {
+        // create a game before we attempt to test list games..
+        before(function (done) {
+            client.post('/games', { opponent: 'random', latitude: 0, longitude: 0 }, function (err, req, res, obj) {
+                res.statusCode.should.equal(201);
+                done();
+            });
+        });
+
+        it('should return no games if modified since 5 minutes into the future...', function (done) {
+            client.client.headers['If-Modified-Since'] = (new Date((new Date()).getTime() + 5*60000)).toUTCString();
+            client.get(path + '/games', function (err, req, res, obj) {
+                should.not.exist(err);
+                res.statusCode.should.equal(304);
+                done();
+            });
+            delete client.client.headers['If-Modified-Since'];
+        });
+
+        it('should return a list of games', function (done) {
             client.get(path + '/games', function(err, req, res, obj) {
-                res.statusCode.should.equal(500);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+                obj.should.have.property('games');
+                obj.games.length.should.be.above(0);
                 done();
             });
         });
     });
 
     describe('/users/:id/opponents', function() {
-        it('should return a 500 not implemented', function (done) {
+        it('should return a list containing facebook friends and recent opponents', function (done) {
             client.get(path + '/opponents', function(err, req, res, obj) {
-                res.statusCode.should.equal(500);
+                res.statusCode.should.equal(200);
+                obj.should.have.property('opponents');
                 done();
             });
         });
@@ -114,10 +137,10 @@ describe('/users', function () {
         });
     });
 
-    describe('GET /users/:id with a valid but nonexistent id', function () {
-        it('should return a 404 not found', function (done) {
+    describe('GET /users/:id with a valid but not authorized id', function () {
+        it('should return a 403 forbidden', function (done) {
             client.get('/users/user%3A00000000-0000-0000-0000-000000000000', function (err, req, res, obj) {
-                res.statusCode.should.equal(404);
+                res.statusCode.should.equal(403);
                 done();
             });
         });

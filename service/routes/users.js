@@ -1,15 +1,15 @@
-var restify = require('restify');
-var redis = require('../lib/database.js');
-var async = require('async');
-var _ = require('underscore');
+var restify = require('restify'),
+    redis = require('../lib/database.js'),
+    util = require('../lib/util.js'),
+    async = require('async'),
+    fbgraph = require('fbgraph'),
+    _ = require('underscore');
+
+// 30 days ago in ms = -1 * 1000 * 60 * 60 * 24 * 30
+var RECENT_GAMES_DELTA_MS = -2592000000;
 
 function showUser (request, msUser, done) {
-    var sanitizedUser = _.pick(msUser, 'id', 'username');
-    var sanitizedFacebook = _.pick(msUser.facebook, 'id', 'name', 'link');
-
-    sanitizedUser.facebook = sanitizedFacebook;
-
-    done(null, 200, sanitizedUser);
+    done(null, 200, sanitizeUser(msUser));
 }
 
 function updateUser (request, msUser, done) {
@@ -20,7 +20,7 @@ function updateUser (request, msUser, done) {
     }
 
     if (username === msUser.username) {
-        return done(undefined, 304);
+        return done(null, 304);
     }
 
     if (!/^[a-zA-Z ]+$/.test(username)) {
@@ -39,13 +39,128 @@ function updateUser (request, msUser, done) {
 }
 
 function listGames (request, msUser, done) {
-    return done(new restify.InternalError({message: 'not implemented'}));
+    var rangeMin = '-inf',
+        rangeMax = '+inf';
+
+    if (request.headers.hasOwnProperty('if-modified-since')) {
+        rangeMin = (new Date(request.headers['if-modified-since'])).getTime();
+    }
+
+    redis.client.zrangebyscore('games:' + msUser.id, rangeMin, rangeMax, function (err, gameIdentifiers) {
+        if (err) {
+            return done(new restify.InternalError());
+        }
+
+        if (gameIdentifiers === undefined || gameIdentifiers.length == 0) {
+            return done(null, 304);
+        }
+
+        redis.client.mget(gameIdentifiers, function (err, gameData) {
+            if (err) {
+                return done(new restify.InternalError());
+            }
+
+            done(null, 200, { games: gameData } );
+        });
+    });
 }
 
 function listOpponents (request, msUser, done) {
-    return done(new restify.InternalError({message: 'not implemented'}));
+    async.waterfall([
+            function (next) { next(null, request, msUser); },
+            _getFacebookFriendsWithAppInstalled,
+            _getUserIdsForFacebookFriends,
+            _getRecentParticipatedGames,
+            _getOpponentIdsForRecentGames,
+            _mergeListsAndFetchUserInformation,
+            _formatListOpponentsResponse,
+    ], done);
 }
 
+function _getFacebookFriendsWithAppInstalled (request, msUser, next) {
+    fbgraph.setAccessToken(msUser.facebook_access_token);
+    fbgraph.get('/me/friends?fields=id,name,installed', function (err, result) {
+        if (err) {
+            // TODO: should we force them to log out on OAuthErrors?
+            return next(new restify.NotAuthorizedError());
+        }
+
+        var friends = _.where(result.data, {installed: true});
+
+        next(null, msUser, friends);
+    });
+
+}
+
+function _getUserIdsForFacebookFriends (msUser, facebookFriends, next) {
+    var facebookIds = _.map(_.pluck(facebookFriends, 'id'), function (id) { return "facebook:" + id; });
+
+    redis.client.mget(facebookIds, function (err, userIds) {
+        if (err) {
+            return next(new restify.InternalError());
+        }
+
+        next(null, msUser, _.compact(userIds));
+    });
+}
+
+function _getRecentParticipatedGames (msUser, userIdsFromFacebook, next) {
+    var now = new Date();
+    var rangeMin = (new Date(now.getTime() + RECENT_GAMES_DELTA_MS)).getTime(),
+        rangeMax = '+inf';
+
+    redis.client.zrangebyscore('games:' + msUser.id, rangeMin, rangeMax, function (err, gameIdentifiers) {
+        if (err) {
+            return next(new restify.InternalError());
+        }
+
+        next(null, msUser, userIdsFromFacebook, gameIdentifiers);
+    });
+}
+
+function _getOpponentIdsForRecentGames (msUser, userIdsFromFacebook, gameIdentifiers, next) {
+    if (gameIdentifiers.length === 0) {
+        return next(null, userIdsFromFacebook, []);
+    }
+
+    redis.client.mget(gameIdentifiers, function (err, games) {
+        if (err) {
+            return next(new restify.InternalError());
+        }
+
+        games = _.map(games, JSON.parse);
+
+        var opponents = _.map(games, function (game) {
+            return game.creator === msUser.id ? game.opponent : game.creator;
+        });
+
+        next(null, userIdsFromFacebook, opponents);
+    });
+}
+
+
+function _mergeListsAndFetchUserInformation (userIdsFromFacebook, recentOpponentIds, next) {
+    var merged = _.union(recentOpponentIds, userIdsFromFacebook);
+
+    if (merged.length === 0) {
+        return next(null, []);
+    }
+
+    redis.client.mget(merged, function (err, users) {
+        if (err) {
+            return next(new restify.InternalError());
+        }
+
+        users = _.map(users, JSON.parse);
+
+        next(null, users);
+    });
+}
+
+function _formatListOpponentsResponse (potentialOpponents, next) {
+    var opponents = _.map(potentialOpponents, sanitizeUser);
+    next(null, 200, { opponents: opponents });
+}
 
 function userIdRequiredHandler (handler) {
     return function (request, response, done) {
@@ -54,22 +169,17 @@ function userIdRequiredHandler (handler) {
             _validateUserIdParameter,
             _fetchUserFromDatabase,
             handler,
-        ],
-
-        function (err, code, body) {
-            if (err) {
-                return done(err);
-            }
-
-            response.send(code, body);
-            done();
-        });
+        ], util.routeResponder(response, done));
     };
 }
 
 function _validateUserIdParameter (request, next) {
-    if (!/user:[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/.test(request.params.id)) {
+    if (!/^user:[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/.test(request.params.id)) {
         return next(new restify.InvalidArgumentError());
+    }
+
+    if (request.missileStrikeUserId !== request.params.id) {
+        return next(new restify.NotAuthorizedError());
     }
 
     return next(null, request, request.params.id);
@@ -87,6 +197,15 @@ function _fetchUserFromDatabase (request, msUserId, next) {
 
         next(null, request, JSON.parse(msUserSerialized));
     });
+}
+
+function sanitizeUser (msUser) {
+    var sanitizedUser = _.pick(msUser, 'id', 'username');
+    var sanitizedFacebook = _.pick(msUser.facebook, 'id', 'name', 'link');
+
+    sanitizedUser.facebook = sanitizedFacebook;
+
+    return sanitizedUser;
 }
 
 
