@@ -73,6 +73,10 @@
  * vibrate(int time)
  *     Called by HTML to tell the device to dance
  *     time - milliseconds to vibrate for
+ *
+ * onMainMenu()
+ *     Called by native client to check if we're on the main menu.
+ *     Native client is called with the response asynchronously.
  *     
  * 
  * Unimplemented methods:
@@ -199,6 +203,10 @@ NativeBridge_Abstract.prototype.setPreference = function (preferences, callback)
 
 NativeBridge_Abstract.prototype.getFacebookAccessToken = function (callback) {
 	this._getFacebookAccessToken(this._registerCallback(callback));
+};
+
+NativeBridge_Abstract.prototype.onMainMenu = function () {
+	this._onMainMenu(Imports.ViewManager.onInitialView());
 };
 
 
