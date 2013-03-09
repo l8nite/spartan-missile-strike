@@ -8,19 +8,33 @@
 
 #import "SSAppDelegate.h"
 #import "SSAudioManager.h"
+#import "SSNativeBridge.h"
+#import "SSFiringManager.h"
 #import "SSMainViewController.h"
+
 
 static NSString* smsAppID = @"122930357857037";
 NSString *const SMSSessionStateChangedNotification = @"com.missileapp.Spartan-Missile-Strike:SMSSessionStateChangedNotification";
+
+@interface SSAppDelegate ()
+{
+    CMMotionManager *motionManager;
+}
+@property (nonatomic,strong,readonly) CMDeviceMotion *motionManager;
+@end
+
 @implementation SSAppDelegate
 
 @synthesize session = _session;
 @synthesize sessionDict;
 @synthesize navController = _navController;
 @synthesize loginViewController = _loginViewController;
+@synthesize locationManager =_locationManager;
+@synthesize motionManager= _motionManager;
 
 @synthesize window;
 @synthesize viewController;
+@synthesize firingViewController; 
 
 
 /**
@@ -49,6 +63,14 @@ NSString *const SMSSessionStateChangedNotification = @"com.missileapp.Spartan-Mi
                       error:(NSError *)error
 {
     NSLog(@"Session Status: FBSessionState %@",[session description]);
+    NSLog(@"Session Status: FBToken %@",session.accessTokenData.accessToken);
+
+    
+//    SSNativeBridge *fbtoken = [[SSNativeBridge alloc] init];
+//    NSURL* url = [NSURL URLWithString:@"spartan-missile-strike://getFacebookAccessToken/?argument=%7bsound%3A%22Moderato%22%7D"];
+//    [fbtoken dispatchNativeBridgeEventsFromURL:url];
+   
+    
     sessionDict = (NSMutableDictionary *)session;
     NSLog(@"Session Dict: FBSessionState %@",[sessionDict description]);
     NSLog(@"SMS ID: %@",smsAppID);
@@ -157,7 +179,6 @@ NSString *const SMSSessionStateChangedNotification = @"com.missileapp.Spartan-Mi
     // We need to handle URLs by passing them to FBSession in order for SSO authentication
     // to work.
     NSLog(@"FBSession URL:%@",[url description]);
-    NSLog(@"FBSession URL:%@",[url description]);
     return [FBSession.activeSession handleOpenURL:url];
 }
 
@@ -165,21 +186,25 @@ NSString *const SMSSessionStateChangedNotification = @"com.missileapp.Spartan-Mi
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    
+    NSLog(@"Shared LocationManager latitude: %f",self.sharedLocationManager.location.coordinate.latitude);
+      
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-       
-    
-
     // Override point for customization after application launch.
     self.viewController= [[SSMainViewController alloc] initWithNibName:@"SSMainViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
    
     [window addSubview:viewController.view];
-    //self.window.backgroundColor = [UIColor whiteColor];
+   
     [self.window makeKeyAndVisible];
     
+    // FBSample logic
+    // See if we have a valid token for the current state.
+    if (![self openSessionWithAllowLoginUI:NO]) {
+        // No? Display the login page.
+        [self showLoginView];
+    }
+
     return YES;
 }
 
@@ -215,5 +240,27 @@ NSString *const SMSSessionStateChangedNotification = @"com.missileapp.Spartan-Mi
 
     return (SSAppDelegate *)[UIApplication sharedApplication].delegate;
 
+}
+
+- (CMMotionManager *)sharedMotionManager
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        motionManager = [[CMMotionManager alloc] init];
+    });
+    return motionManager;
+}
+
+- (CLLocationManager *)sharedLocationManager
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        locationManager.distanceFilter = kCLDistanceFilterNone;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [locationManager startUpdatingLocation];
+    });
+    return locationManager;
 }
 @end

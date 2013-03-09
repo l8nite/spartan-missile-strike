@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1025364D16E6A97A00BD6ACF /* SSFiringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1025364C16E6A97A00BD6ACF /* SSFiringViewController.m */; };
+		1025365016E6A9C400BD6ACF /* SSFiringManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1025364F16E6A9C400BD6ACF /* SSFiringManager.m */; };
+		1025366416E6B1C000BD6ACF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1025366316E6B1C000BD6ACF /* MediaPlayer.framework */; };
+		1025366616E6B1C600BD6ACF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1025366516E6B1C600BD6ACF /* CoreMedia.framework */; };
+		1025366816E6B1CD00BD6ACF /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1025366716E6B1CD00BD6ACF /* CoreVideo.framework */; };
+		1025366A16E6B1D200BD6ACF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1025366916E6B1D200BD6ACF /* MobileCoreServices.framework */; };
+		1025366C16E6B1D800BD6ACF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1025366B16E6B1D800BD6ACF /* AssetsLibrary.framework */; };
+		1025366E16E6B1E000BD6ACF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1025366D16E6B1E000BD6ACF /* ImageIO.framework */; };
 		103DE30416964DF300ED92B4 /* SSAudioManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */; };
 		103DE30816964EC300ED92B4 /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 103DE30716964EC300ED92B4 /* SSAudioManager.m */; };
 		10594FEA16A6426900E41072 /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10594FE916A6426900E41072 /* sounds.plist */; };
@@ -48,6 +56,8 @@
 		10FA386816D49B05004D63F0 /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FA386716D49B05004D63F0 /* spartan_appIcon_114.png */; };
 		10FA386916D49B25004D63F0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155168169BD79D0010A8D6 /* Default@2x.png */; };
 		10FA386A16D49B31004D63F0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
+		10FFCF8E16E94B470020E705 /* SSOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FFCF8D16E94B470020E705 /* SSOverlay.m */; };
+		55383E6716E7ADE70037169B /* artilleryreticle3.png in Resources */ = {isa = PBXBuildFile; fileRef = 55383E6616E7ADE70037169B /* artilleryreticle3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +73,16 @@
 /* Begin PBXFileReference section */
 		10155166169BD7840010A8D6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		10155168169BD79D0010A8D6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		1025364B16E6A97A00BD6ACF /* SSFiringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringViewController.h; sourceTree = "<group>"; };
+		1025364C16E6A97A00BD6ACF /* SSFiringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFiringViewController.m; sourceTree = "<group>"; };
+		1025364E16E6A9C300BD6ACF /* SSFiringManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringManager.h; sourceTree = "<group>"; };
+		1025364F16E6A9C400BD6ACF /* SSFiringManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFiringManager.m; sourceTree = "<group>"; };
+		1025366316E6B1C000BD6ACF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		1025366516E6B1C600BD6ACF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1025366716E6B1CD00BD6ACF /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		1025366916E6B1D200BD6ACF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		1025366B16E6B1D800BD6ACF /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		1025366D16E6B1E000BD6ACF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		103DE30216964DF300ED92B4 /* SSAudioManagerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManagerTests.h; sourceTree = "<group>"; };
 		103DE30316964DF300ED92B4 /* SSAudioManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManagerTests.m; sourceTree = "<group>"; };
 		103DE30616964EC300ED92B4 /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
@@ -114,6 +134,9 @@
 		10F35DB3169F4A3100A42045 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		10FA386516D49AEE004D63F0 /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_57.png; sourceTree = "<group>"; };
 		10FA386716D49B05004D63F0 /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_114.png; sourceTree = "<group>"; };
+		10FFCF8C16E94B470020E705 /* SSOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOverlay.h; sourceTree = "<group>"; };
+		10FFCF8D16E94B470020E705 /* SSOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOverlay.m; sourceTree = "<group>"; };
+		55383E6616E7ADE70037169B /* artilleryreticle3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artilleryreticle3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +144,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1025366C16E6B1D800BD6ACF /* AssetsLibrary.framework in Frameworks */,
+				1025366E16E6B1E000BD6ACF /* ImageIO.framework in Frameworks */,
+				1025366A16E6B1D200BD6ACF /* MobileCoreServices.framework in Frameworks */,
+				1025366816E6B1CD00BD6ACF /* CoreVideo.framework in Frameworks */,
+				1025366616E6B1C600BD6ACF /* CoreMedia.framework in Frameworks */,
+				1025366416E6B1C000BD6ACF /* MediaPlayer.framework in Frameworks */,
 				10C2C83116DD7CD600D816AB /* FacebookSDK.framework in Frameworks */,
 				10BE4EA716DC41EB009FD27A /* Social.framework in Frameworks */,
 				10BE4EA416DC41D8009FD27A /* Accounts.framework in Frameworks */,
@@ -181,6 +210,12 @@
 		108FC6A2169641C8001BABBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1025366D16E6B1E000BD6ACF /* ImageIO.framework */,
+				1025366B16E6B1D800BD6ACF /* AssetsLibrary.framework */,
+				1025366916E6B1D200BD6ACF /* MobileCoreServices.framework */,
+				1025366716E6B1CD00BD6ACF /* CoreVideo.framework */,
+				1025366516E6B1C600BD6ACF /* CoreMedia.framework */,
+				1025366316E6B1C000BD6ACF /* MediaPlayer.framework */,
 				10C2C83016DD7CD600D816AB /* FacebookSDK.framework */,
 				10BE4EA616DC41EB009FD27A /* Social.framework */,
 				10BE4EA216DC41D8009FD27A /* Accounts.framework */,
@@ -204,6 +239,12 @@
 			children = (
 				10852432169E009300EE241C /* shared */,
 				108FC6AA169641C8001BABBE /* Supporting Files */,
+				1025364E16E6A9C300BD6ACF /* SSFiringManager.h */,
+				1025364F16E6A9C400BD6ACF /* SSFiringManager.m */,
+				1025364B16E6A97A00BD6ACF /* SSFiringViewController.h */,
+				1025364C16E6A97A00BD6ACF /* SSFiringViewController.m */,
+				10FFCF8C16E94B470020E705 /* SSOverlay.h */,
+				10FFCF8D16E94B470020E705 /* SSOverlay.m */,
 				103DE30616964EC300ED92B4 /* SSAudioManager.h */,
 				103DE30716964EC300ED92B4 /* SSAudioManager.m */,
 				10A44A0A169DF05D0043FE99 /* SSPreferenceManager.h */,
@@ -225,6 +266,7 @@
 		108FC6AA169641C8001BABBE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				55383E6616E7ADE70037169B /* artilleryreticle3.png */,
 				108FC6AB169641C8001BABBE /* SpartanMissileStrike-Info.plist */,
 				10594FE916A6426900E41072 /* sounds.plist */,
 				108FC6AC169641C8001BABBE /* InfoPlist.strings */,
@@ -342,6 +384,7 @@
 				10FA386916D49B25004D63F0 /* Default@2x.png in Resources */,
 				10FA386A16D49B31004D63F0 /* Default.png in Resources */,
 				106E551016E2845C00E68F43 /* html in Resources */,
+				55383E6716E7ADE70037169B /* artilleryreticle3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +426,9 @@
 				10A44A0C169DF05D0043FE99 /* SSPreferenceManager.m in Sources */,
 				10F35DA5169E173500A42045 /* SSMainViewController.m in Sources */,
 				10EA5A2216DD86360083C68C /* SSFaceBookAuthViewController.m in Sources */,
+				1025364D16E6A97A00BD6ACF /* SSFiringViewController.m in Sources */,
+				1025365016E6A9C400BD6ACF /* SSFiringManager.m in Sources */,
+				10FFCF8E16E94B470020E705 /* SSOverlay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +495,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/usr/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(SRCROOT)/usr/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lsqlite3.0";
@@ -472,8 +521,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/usr/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(SRCROOT)/usr/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				SDKROOT = iphoneos;
