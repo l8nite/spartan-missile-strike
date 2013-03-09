@@ -1,0 +1,31 @@
+<html>
+<head>
+	<!-- Includes -->
+	<script src="Game/GameMaster.js"></script>
+	<script src="jquery/jquery.js"></script>
+	<script src="NativeBridge/NativeBridge_Abstract.js"></script>
+	<script src="NativeBridge/NativeBridge_iOS.js"></script>
+	<script src="Util/DomHelper.js"></script>
+	<script src="View/FixedHeightView.js"></script>
+	<script src="View/MainView.js"></script>
+	<script src="View/View.js"></script>
+
+	<!-- Globals -->
+	<script>
+	var MissileAppHTML = {
+		NativeBridge: new NativeBridge_iOS(),
+		ViewManager: new MainView()
+	};
+	</script>
+
+	<!-- Main closure -->
+	<script>
+	(function () {
+		// MissileAppHTML entry point
+	})();
+	</script>
+</head>
+<body>
+	<!-- Copy View HTMLs here -->
+</body>
+</html>

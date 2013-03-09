@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "SSAudioManager.h"
+#import <CoreLocation/CoreLocation.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
  
 @interface SSNativeBridge : NSObject <UIWebViewDelegate>
 {
@@ -17,4 +21,6 @@
 }
 -(BOOL)dispatchNativeBridgeEventsFromURL:(NSURL*)url; 
 - (BOOL)webView: (UIWebView*)webView shouldStartLoadWithRequest: (NSURLRequest*)request navigationType: (UIWebViewNavigationType)navigationType;
+
+-(void)vibrate;
 @end
