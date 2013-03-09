@@ -34,7 +34,7 @@ describe('creating /sessions', function() {
                 obj.should.have.property('session');
                 obj.session.should.have.property('id');
                 obj.should.have.property('user');
-                obj.user.facebook.should.have.property('access_token');
+                obj.user.should.have.property('facebook_access_token');
                 done();
             }
         );

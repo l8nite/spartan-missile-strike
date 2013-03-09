@@ -7,8 +7,7 @@
 //
 
 #import "SSPreferenceManager.h"
-//TODO SINGLETON
- 
+  
 @implementation SSPreferenceManager
  
 
