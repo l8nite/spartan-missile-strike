@@ -10,18 +10,26 @@
 	<script src="View/MainView.js"></script>
 	<script src="View/View.js"></script>
 
-	<!-- Globals -->
+	<!-- Global -->
 	<script>
-	var MissileAppHTML = {
-		NativeBridge: new NativeBridge_Android(),
-		ViewManager: new MainView()
-	};
+	var MissileAppHTML;
 	</script>
 
 	<!-- Main closure -->
 	<script>
 	(function () {
-		// MissileAppHTML entry point
+		var Imports = {
+			NativeBridge: new NativeBridge_Android(),
+			DomHelper: new DomHelper(),
+			ViewManager: new MainView()
+		};
+
+		MissileAppHTML = {
+			NativeBridge: {
+				callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge),
+				onMainMenu: Imports.NativeBridge.onMainMenu.bind(Imports.NativeBridge)
+			}
+		};
 	})();
 	</script>
 </head>
