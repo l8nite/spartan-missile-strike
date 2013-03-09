@@ -10,16 +10,16 @@ describe('creating /sessions', function() {
     });
 
     describe('invalid parameters', function () {
-        it('should return a 400 when missing facebook_access_token parameter', function (done) {
+        it('should return a 409 when missing facebook_access_token parameter', function (done) {
             client.post('/sessions', { }, function (err, req, res, obj) {
-                res.statusCode.should.equal(400);
+                res.statusCode.should.equal(409);
                 done();
             });
         });
 
-        it('should return a 400 when an invalid facebook_access_token parameter is sent', function (done) {
+        it('should return a 409 when an invalid facebook_access_token parameter is sent', function (done) {
             client.post('/sessions', { facebook_access_token: "abcdefg" }, function (err, req, res, obj) {
-                res.statusCode.should.equal(400);
+                res.statusCode.should.equal(409);
                 done();
             });
         });
@@ -34,7 +34,7 @@ describe('creating /sessions', function() {
                 obj.should.have.property('session');
                 obj.session.should.have.property('id');
                 obj.should.have.property('user');
-                obj.user.facebook.should.have.property('access_token');
+                obj.user.should.have.property('facebook_access_token');
                 done();
             }
         );

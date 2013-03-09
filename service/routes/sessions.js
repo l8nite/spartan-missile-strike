@@ -1,8 +1,11 @@
 var async = require('async'),
     uuid = require('node-uuid'),
     redis = require('../lib/database.js'),
+    util = require('../lib/util.js'),
+    restify = require('restify'),
     fbgraph = require('fbgraph');
 
+// 30 days * 24 hours * 60 minutes * 60 seconds
 var DEFAULT_SESSION_EXPIRY_SECONDS = 2592000;
 
 function createSession (request, response, done) {
@@ -14,25 +17,14 @@ function createSession (request, response, done) {
         _checkForExistingSession,
         _createOrUpdateSession,
         _formatCreateSessionResponse,
-    ],
-
-    function (err, code, body) {
-        if (code) {
-            response.send(code, body);
-        }
-        else {
-            response.send(500, err);
-        }
-
-        done();
-    });
+    ], util.routeResponder(response, done));
 }
 
 function _getFacebookAccessTokenFromRequest (request, next) {
     var fbAccessToken = request.params.facebook_access_token;
 
     if (fbAccessToken === undefined) {
-        return next('error', 400, 'missing facebook_access_token parameter');
+        return next(new restify.MissingParameterError({message: 'missing facebook_access_token parameter'}));
     }
 
     next (null, fbAccessToken);
@@ -44,66 +36,71 @@ function _validateFacebookAccessTokenByQueryingGraphAPI (fbAccessToken, next) {
     fbgraph.get('/me', function (err, fbUser) {
         if (err) {
             if (err.type === 'OAuthException') {
-                return next(err, 400, 'invalid facebook_access_token');
+                return next(new restify.InvalidArgumentError({message: 'invalid facebook_access_token'}));
             }
             else {
-                return next(err, 500);
+                return next(new restify.InternalError());
             }
         }
 
-        fbUser.access_token = fbAccessToken;
-
-        next(null, fbUser);
+        next(null, fbAccessToken, fbUser);
     });
 }
 
-function _loadMissileStrikeUser (fbUser, next) {
+function _loadMissileStrikeUser (fbAccessToken, fbUser, next) {
     redis.client.get('facebook:' + fbUser.id, function (err, msUserId) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         if (msUserId === null) {
-            _createNewUser(fbUser, next);
+            _createNewUser(fbAccessToken, fbUser, next);
         }
         else {
-            _loadExistingUser(msUserId, next);
+            _loadExistingUser(fbAccessToken, msUserId, next);
         }
     });
 }
 
-function _createNewUser (fbUser, next) {
+function _createNewUser (fbAccessToken, fbUser, next) {
     var msUser = {
         id: 'user:' + uuid.v4(),
         username: fbUser.name,
         created: (new Date()).toJSON(),
+        facebook_access_token: fbAccessToken,
         facebook: fbUser,
     };
 
-    redis.client.mset(
-        'facebook:' + fbUser.id, msUser.id,
-        msUser.id, JSON.stringify(msUser),
-        function (err, res) {
-            if (err) {
-                return next(err, 500);
-            }
+    var multi = redis.client.multi();
 
-            next(null, msUser);
-        }
+    multi.mset(
+        'facebook:' + fbUser.id, msUser.id,
+        msUser.id, JSON.stringify(msUser)
     );
+
+    multi.sadd('users', msUser.id);
+
+    multi.exec(function (err, res) {
+        if (err) {
+            return next(new restify.InternalError());
+        }
+
+        next(null, msUser);
+    });
 }
 
-function _loadExistingUser (msUserId, next) {
+function _loadExistingUser (fbAccessToken, msUserId, next) {
     redis.client.get(msUserId, function (err, msUserSerialized) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         if (msUserSerialized === null) {
-            return next('inconsistent user state', 500);
+            return next(new restify.InternalError({message: 'inconsistent user state'}));
         }
 
         var msUser = JSON.parse(msUserSerialized);
+        msUser.facebook_access_token = fbAccessToken;
 
         next(null, msUser);
     });
@@ -116,7 +113,7 @@ function _checkForExistingSession (msUser, next) {
 
     redis.client.exists(msUser.session, function (err, exists) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         next(null, msUser, exists);
@@ -124,31 +121,22 @@ function _checkForExistingSession (msUser, next) {
 }
 
 function _createOrUpdateSession (msUser, sessionExists, next) {
-    // refresh existing session
-    if (sessionExists) {
-        return redis.client.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id, function (err, res) {
-            if (err) {
-                return next(err, 500);
-            }
-
-            next(null, msUser);
-        });
-    }
-
-    // create new session
     var multi = redis.client.multi();
 
-    if (msUser.hasOwnProperty('session')) {
-        multi.del(msUser.session); // delete stale session pointer
+    if (!sessionExists) {
+        if (msUser.hasOwnProperty('session')) {
+            multi.del(msUser.session); // delete stale session pointer
+        }
+
+        msUser.session = 'session:' + uuid.v4();
     }
 
-    msUser.session = 'session:' + uuid.v4();;
     multi.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id);
     multi.set(msUser.id, JSON.stringify(msUser));
 
     multi.exec(function (err, replies) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         next(null, msUser);
@@ -168,22 +156,13 @@ function deleteSession (request, response, done) {
     async.waterfall([
         function (next) { next(null, request); }, // enables arguments to first callback
         _deleteSessionFromDatabase,
-    ],
-
-    function (err, code, body) {
-        if (code) {
-            response.send(code, body);
-        }
-        else {
-            response.send(500, err);
-        }
-    });
+    ], util.routeResponder(response, done));
 }
 
 function _deleteSessionFromDatabase(request, next) {
     redis.client.del(request.headers.missileappsessionid, function (err, res) {
         if (err) {
-            return next(err, 500);
+            return next(new restify.InternalError());
         }
 
         next(null, 204);
