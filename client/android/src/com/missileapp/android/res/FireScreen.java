@@ -9,10 +9,10 @@ import android.widget.Toast;
 
 public class FireScreen {
     // DATA
-    private static final String TAG = "FireScreen";                        // TAG for logging
-    private static final int CAMERA_ORIENTATION = 90;                      // Camera orientation -> portrait
-    private static BagOfHolding variables;                                 // Variable bag
-    private static Camera cam;                                             // Camera
+    private static final String TAG = "FireScreen";                 // TAG for logging
+    private static final int CAMERA_ORIENTATION = 90;               // Camera orientation -> portrait
+    private BagOfHolding variables;                                 // Variable bag
+    private Camera cam;                                             // Camera
     
     
     /**
@@ -20,7 +20,33 @@ public class FireScreen {
      * @param variables - MissileApp Application 
      */
     public FireScreen(BagOfHolding variables) {
-        FireScreen.variables = variables;
+        this.variables = variables;
+    }
+    
+    
+    /**
+     * If in firescreen, cuts camera and sets the background white
+     * If not in firescreen, rolls camera and sets the background transparent
+     * @param showFireScreen - true to enter fire screen, false to exit
+     */
+    public void showFireMissileScreen(String showFireScreen) {
+        boolean showScreen;
+        
+        // Parse command
+        try {
+            showScreen = Boolean.parseBoolean(showFireScreen);
+        }
+        catch (Exception e) {
+            showScreen = false;
+        }
+        MALogger.log(TAG, Log.INFO, "Fire Screen command: " + showFireScreen + ", parsed to: " + showScreen + ".");
+        
+        if (showScreen) {
+            variables.getFireScreen().enterFireScreen();
+        }
+        else {
+            variables.getFireScreen().exitFireScreen();
+        }
     }
     
     

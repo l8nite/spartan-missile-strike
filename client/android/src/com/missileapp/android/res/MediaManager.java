@@ -56,7 +56,7 @@ public class MediaManager {
         soundPool = new SoundPool(MAX_FILES_PLAYED_SIMULTANEOUS, AudioManager.STREAM_MUSIC, SOURCE_QUALITY);
         
         // Get Volume Data
-        foregroundVolume = variables.getSettings().getFloat("backVolume", DEFAULT_SPEAKER_VOLUME);
+        foregroundVolume = variables.getSettings().getFloat("foreVolume", DEFAULT_SPEAKER_VOLUME);
         backgroundVolume = variables.getSettings().getFloat("backVolume", DEFAULT_SPEAKER_VOLUME);
         
         // Load Files
@@ -74,27 +74,20 @@ public class MediaManager {
      * @return Android music raw identifier
      */
     public int translateSoundIDToRawPointer(String nativeBridgeID) {
-    	if(nativeBridgeID.equalsIgnoreCase("background_music")){
-			return FX_BACKGROUND_MUSIC;
-		}
-		else if(nativeBridgeID.equalsIgnoreCase("explosion")){
-			return FX_EXPLOSION;
-		}
-		else if(nativeBridgeID.equalsIgnoreCase("camera_focused")){
-			return FX_CAMERA_FOCUSED;
-		}
-		else if(nativeBridgeID.equalsIgnoreCase("missile_launched")){
-			return FX_MISSILE_LAUNCHED;
-		}
-		else if(nativeBridgeID.equalsIgnoreCase("page_transition")){
-			return FX_PAGE_TRANSITION;
-		}
-		else if(nativeBridgeID.equalsIgnoreCase("turret_moving")){
-			return FX_TURRET_MOVING;
-		}
-		else {
-			return -1;
-		}
+    	if(nativeBridgeID.equalsIgnoreCase("background_music"))
+    	{	return FX_BACKGROUND_MUSIC;	 }
+		else if(nativeBridgeID.equalsIgnoreCase("explosion"))
+		{	return FX_EXPLOSION;	}
+		else if(nativeBridgeID.equalsIgnoreCase("camera_focused"))
+		{	return FX_CAMERA_FOCUSED; 	}
+		else if(nativeBridgeID.equalsIgnoreCase("missile_launched"))
+		{	return FX_MISSILE_LAUNCHED; 	}
+		else if(nativeBridgeID.equalsIgnoreCase("page_transition"))
+		{	return FX_PAGE_TRANSITION;	}
+		else if(nativeBridgeID.equalsIgnoreCase("turret_moving"))
+		{	return FX_TURRET_MOVING; 	}
+		else
+		{	return -1;	}
     }
     
     
@@ -171,7 +164,7 @@ public class MediaManager {
     		soundPool.autoPause();
     	}
     	catch (Exception e) {
-    		MALogger.log(TAG, Log.ERROR, "Could not pause data", e);
+    		MALogger.log(TAG, Log.ERROR, "Could not pause music.", e);
     	}
     }
     
@@ -184,7 +177,7 @@ public class MediaManager {
     		soundPool.autoResume();
     	}
     	catch (Exception e) {
-    		MALogger.log(TAG, Log.ERROR, "Could not resume data", e);
+    		MALogger.log(TAG, Log.ERROR, "Could not resume music.", e);
     	}
     }
     
@@ -209,29 +202,63 @@ public class MediaManager {
     
     /**
      * Sets foreground volume and updates sound pool
-     * @param volume the new volume
+     * @param newVolume the new volume
      */
-    public void setForegroundVolume(float volume) {
+    public void setForegroundVolume(String newVolume) {
+    	MALogger.log(TAG, Log.INFO, "Setting Foreground: " + newVolume);
+    	// Parse Volume
+    	float volume = DEFAULT_SPEAKER_VOLUME;
+    	try {
+			volume = Float.parseFloat(newVolume);
+		}
+    	catch (Exception e) {
+			MALogger.log(TAG, Log.ERROR, "Parse New Volume: " + e.getMessage() , e);
+		}
+    	
+    	// Save Volume
     	foregroundVolume = volume;
     	
-    	for (int i = 0; i < foregroundMap.size(); i++) {
-    		if(foregroundMap.valueAt(i)) {
-    			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), foregroundVolume, foregroundVolume);
+    	// Update all foreground music
+    	try {
+    		for (int i = 0; i < foregroundMap.size(); i++) {
+        		if(foregroundMap.valueAt(i)) {
+        			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), foregroundVolume, foregroundVolume);
+        		}
     		}
+		}
+    	catch (Exception e) {
+			MALogger.log(TAG, Log.ERROR, "Update all forevol: " + e.getMessage() , e);
 		}
     }
     
     /**
      * Sets background volume and updates sound pool
-     * @param volume the new volume
+     * @param newVolume the new volume
      */
-    public void setBackgroundVolume(float volume) {
+    public void setBackgroundVolume(String newVolume) {
+    	MALogger.log(TAG, Log.INFO, "Setting Foreground: " + newVolume);
+    	// Parse Volume
+    	float volume = DEFAULT_SPEAKER_VOLUME;
+    	try {
+			volume = Float.parseFloat(newVolume);
+		}
+    	catch (Exception e) {
+			MALogger.log(TAG, Log.ERROR, "Parse New Volume: " + e.getMessage() , e);
+		}
+    	
+    	// Save Volume
     	backgroundVolume = volume;
     	
-    	for (int i = 0; i < foregroundMap.size(); i++) {
-    		if(!foregroundMap.valueAt(i)) {
-    			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), backgroundVolume, backgroundVolume);
-    		}
+    	// Update all foreground music
+    	try {
+	    	for (int i = 0; i < foregroundMap.size(); i++) {
+	    		if(!foregroundMap.valueAt(i)) {
+	    			soundPool.setVolume(soundMap.get(foregroundMap.keyAt(i)), backgroundVolume, backgroundVolume);
+	    		}
+			}
+    	}
+    	catch (Exception e) {
+			MALogger.log(TAG, Log.ERROR, "Update all forevol: " + e.getMessage() , e);
 		}
     }
 }
