@@ -130,7 +130,7 @@
 
 function NativeBridge_Abstract() {
 	// Holds callback functions
-	this._callbacks = new FunctionFridge();
+	this._callbacks = new Fridge();
 	
 	// Callback IDs for persistent this._callbacks
 	this._resumeGameCallbackID = null;
@@ -141,11 +141,11 @@ function NativeBridge_Abstract() {
 //
 
 NativeBridge_Abstract.prototype.callback = function (identifier, response) {
-	var stored = this._callbacks.getFunction(identifier);
+	var stored = this._callbacks.get(identifier);
 	if (stored) {
 		stored.callback(response);
 		if (!stored.persist) {
-			this._callbacks.removeFunction(identifier);
+			this._callbacks.remove(identifier);
 		}
 	}
 };
@@ -165,12 +165,12 @@ NativeBridge_Abstract.prototype.getLocationUpdates = function (activate, callbac
 	var that = this;
 	if (activate) {
 		if (this._getLocationUpdatesCBs) {
-			return this._getLocationUpdatesCBs.addFunction(callback);
+			return this._getLocationUpdatesCBs.add(callback);
 		} else {
-			this._getLocationUpdatesCBs = new FunctionFridge();
-			var id = this._getLocationUpdatesCBs.addFunction(callback);
+			this._getLocationUpdatesCBs = new Fridge();
+			var id = this._getLocationUpdatesCBs.add(callback);
 			this._getLocationUpdates(true, this._registerCallback(function (response) {
-				var a = that._getLocationUpdatesCBs.getFunctions();
+				var a = that._getLocationUpdatesCBs.get();
 				for (var i in a) {
 					a[i](response);
 				}
@@ -179,8 +179,8 @@ NativeBridge_Abstract.prototype.getLocationUpdates = function (activate, callbac
 		}
 	} else {
 		if (this._getLocationUpdatesCBs) {
-			this._getLocationUpdatesCBs.removeFunction(callback);
-			if (this._getLocationUpdatesCBs.countFunctions() === 0) {
+			this._getLocationUpdatesCBs.remove(callback);
+			if (this._getLocationUpdatesCBs.count() === 0) {
 				delete this._getLocationUpdatesCBs;
 				this._getLocationUpdates(false);
 			}
@@ -192,12 +192,12 @@ NativeBridge_Abstract.prototype.getOrientationUpdates = function (activate, call
 	var that = this;
 	if (activate) {
 		if (this._getOrientationUpdatesCBs) {
-			return this._getOrientationUpdatesCBs.addFunction(callback);
+			return this._getOrientationUpdatesCBs.add(callback);
 		} else {
-			this._getOrientationUpdatesCBs = new FunctionFridge();
-			var id = this._getOrientationUpdatesCBs.addFunction(callback);
+			this._getOrientationUpdatesCBs = new Fridge();
+			var id = this._getOrientationUpdatesCBs.add(callback);
 			this._getOrientationUpdates(true, this._registerCallback(function (response) {
-				var a = that._getOrientationUpdatesCBs.getFunctions();
+				var a = that._getOrientationUpdatesCBs.get();
 				for (var i in a) {
 					a[i](response);
 				}
@@ -206,8 +206,8 @@ NativeBridge_Abstract.prototype.getOrientationUpdates = function (activate, call
 		}
 	} else {
 		if (this._getOrientationUpdatesCBs) {
-			this._getOrientationUpdatesCBs.removeFunction(callback);
-			if (this._getOrientationUpdatesCBs.countFunctions() === 0) {
+			this._getOrientationUpdatesCBs.remove(callback);
+			if (this._getOrientationUpdatesCBs.count() === 0) {
 				delete this._getOrientationUpdatesCBs;
 				this._getOrientationUpdates(false);
 			}
@@ -243,7 +243,7 @@ NativeBridge_Abstract.prototype.onMainMenu = function () {
 // Save callback function, returns callbackID
 // persist can be undefined :)
 NativeBridge_Abstract.prototype._registerCallback = function (callbackFn, persist) {
-	return this._callbacks.addFunction({
+	return this._callbacks.add({
 			callback : callbackFn,
 			persist : persist
 	});
