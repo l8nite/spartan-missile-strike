@@ -5,7 +5,7 @@ var connect = function(done) {
     var initializing = true;
 
     if (client !== undefined) {
-        done(undefined, client);
+        done(null, client);
     }
 
     console.log("Connecting to database...");
@@ -22,7 +22,7 @@ var connect = function(done) {
             if (!err) {
                 if (initializing) {
                     initializing = false;
-                    done(undefined, client);
+                    done(null, client);
                 }
             }
             else {
