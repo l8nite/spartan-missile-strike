@@ -15,7 +15,7 @@
 function GameMaster(userid, sessionid) {
 	this._userid = userid;
 	this._sessionid = sessionid;
-	this._listeners = new FunctionFridge();
+	this._listeners = new Fridge();
 	this._games = {
 		when: null,
 		games: []
@@ -45,14 +45,14 @@ GameMaster.prototype.getGames = function () {
  */
 GameMaster.prototype.subscribe = function (when) {
 	when(this._games.games);
-	return this._listeners.addFunction(when);
+	return this._listeners.add(when);
 }
 
 /* Unsubscribe a listener function.
  */
 GameMaster.prototype.unsubscribe = function (callbackid) {
-	this._listeners.removeFunction(callbackid);
-	if (this._listeners.countFunctions() === 0) {
+	this._listeners.remove(callbackid);
+	if (this._listeners.count() === 0) {
 		this._stopPollingService();
 	}
 }
@@ -98,7 +98,7 @@ GameMaster.prototype._stopPollingService = function () {
 /* Call all listeners with current games array
  */
 GameMaster.prototype._notifyListeners = function () {
-	var a = this._listeners.getFunctions();
+	var a = this._listeners.getAll();
 	for (var i in a) {
 		a[i](this._games.games);
 	}
