@@ -73,13 +73,4 @@ describe('/games', function () {
             });
         });
     });
-
-    describe('/games/:id/fire-missile', function() {
-        it('should return a 500 not implemented', function (done) {
-            client.put('/games/fe4d37b8-ff94-452d-ae6a-e31e30bbafd9/fire-missile', {}, function(err, req, res, obj) {
-                res.statusCode.should.equal(500);
-                done();
-            });
-        });
-    });
 });
