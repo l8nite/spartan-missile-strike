@@ -1,10 +1,11 @@
-var should = require('should');
-var async = require('async');
-var ServiceClient = require('./lib/service-client.js');
+var should = require('should'),
+    async = require('async'),
+    ServiceClient = require('./lib/service-client.js'),
+    _ = require('underscore');
 
 describe('/users', function () {
-    var client;
-    var path;
+    var client,
+        path;
 
     before(function (done) {
         client = new ServiceClient();
@@ -118,9 +119,10 @@ describe('/users', function () {
     });
 
     describe('/users/:id/opponents', function() {
-        it('should return a 500 not implemented', function (done) {
+        it('should return a list containing facebook friends and recent opponents', function (done) {
             client.get(path + '/opponents', function(err, req, res, obj) {
-                res.statusCode.should.equal(500);
+                res.statusCode.should.equal(200);
+                obj.should.have.property('opponents');
                 done();
             });
         });
