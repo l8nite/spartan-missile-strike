@@ -45,18 +45,18 @@
 		10C2C83116DD7CD600D816AB /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C2C83016DD7CD600D816AB /* FacebookSDK.framework */; };
 		10D01EE4169643D400F319F0 /* SSPreferenceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */; };
 		10EA5A2216DD86360083C68C /* SSFacebookAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EA5A2116DD86360083C68C /* SSFacebookAuthViewController.m */; };
-		10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F35D9B169E09BB00A42045 /* Default-568h@2x.png */; };
 		10F35DA5169E173500A42045 /* SSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F35DA3169E173500A42045 /* SSMainViewController.m */; };
 		10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F35DA4169E173500A42045 /* SSMainViewController.xib */; };
 		10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */; };
 		10F35DB2169F4A2900A42045 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB1169F4A2900A42045 /* QuartzCore.framework */; };
 		10F35DB4169F4A3100A42045 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F35DB3169F4A3100A42045 /* OpenGLES.framework */; };
-		10FA386616D49AEE004D63F0 /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FA386516D49AEE004D63F0 /* spartan_appIcon_57.png */; };
-		10FA386816D49B05004D63F0 /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FA386716D49B05004D63F0 /* spartan_appIcon_114.png */; };
-		10FA386916D49B25004D63F0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155168169BD79D0010A8D6 /* Default@2x.png */; };
-		10FA386A16D49B31004D63F0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 10155166169BD7840010A8D6 /* Default.png */; };
 		10FFCF8E16E94B470020E705 /* SSOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FFCF8D16E94B470020E705 /* SSOverlay.m */; };
 		284680D016EBC57100CA188B /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 284680CF16EBC57100CA188B /* audio */; };
+		284680D716EBCB5600CA188B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 284680D416EBCB5600CA188B /* Default-568h@2x.png */; };
+		284680D816EBCB5600CA188B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 284680D516EBCB5600CA188B /* Default.png */; };
+		284680D916EBCB5600CA188B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 284680D616EBCB5600CA188B /* Default@2x.png */; };
+		284680DC16EBCBB000CA188B /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 284680DA16EBCBB000CA188B /* spartan_appIcon_57.png */; };
+		284680DD16EBCBB000CA188B /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 284680DB16EBCBB000CA188B /* spartan_appIcon_114.png */; };
 		55383E6716E7ADE70037169B /* artilleryreticle3.png in Resources */ = {isa = PBXBuildFile; fileRef = 55383E6616E7ADE70037169B /* artilleryreticle3.png */; };
 /* End PBXBuildFile section */
 
@@ -71,8 +71,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		10155166169BD7840010A8D6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
-		10155168169BD79D0010A8D6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		1025364B16E6A97A00BD6ACF /* SSFiringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringViewController.h; sourceTree = "<group>"; };
 		1025364C16E6A97A00BD6ACF /* SSFiringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFiringViewController.m; sourceTree = "<group>"; };
 		1025364E16E6A9C300BD6ACF /* SSFiringManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringManager.h; sourceTree = "<group>"; };
@@ -124,18 +122,20 @@
 		10D01EE3169643D400F319F0 /* SSPreferenceManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManagerTests.m; sourceTree = "<group>"; };
 		10EA5A2016DD86360083C68C /* SSFacebookAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookAuthViewController.h; sourceTree = "<group>"; };
 		10EA5A2116DD86360083C68C /* SSFacebookAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookAuthViewController.m; sourceTree = "<group>"; };
-		10F35D9B169E09BB00A42045 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		10F35DA2169E173500A42045 /* SSMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSMainViewController.h; sourceTree = "<group>"; };
 		10F35DA3169E173500A42045 /* SSMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSMainViewController.m; sourceTree = "<group>"; };
 		10F35DA4169E173500A42045 /* SSMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSMainViewController.xib; sourceTree = "<group>"; };
 		10F35DA7169E17F500A42045 /* SpartanMissileStrike.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpartanMissileStrike.xib; sourceTree = "<group>"; };
 		10F35DB1169F4A2900A42045 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		10F35DB3169F4A3100A42045 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		10FA386516D49AEE004D63F0 /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_57.png; sourceTree = "<group>"; };
-		10FA386716D49B05004D63F0 /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_114.png; sourceTree = "<group>"; };
 		10FFCF8C16E94B470020E705 /* SSOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOverlay.h; sourceTree = "<group>"; };
 		10FFCF8D16E94B470020E705 /* SSOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOverlay.m; sourceTree = "<group>"; };
 		284680CF16EBC57100CA188B /* audio */ = {isa = PBXFileReference; lastKnownFileType = file; name = audio; path = ../../shared/audio; sourceTree = "<group>"; };
+		284680D416EBCB5600CA188B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		284680D516EBCB5600CA188B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		284680D616EBCB5600CA188B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		284680DA16EBCBB000CA188B /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_57.png; path = SpartanMissileStrike/spartan_appIcon_57.png; sourceTree = "<group>"; };
+		284680DB16EBCBB000CA188B /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_114.png; path = SpartanMissileStrike/spartan_appIcon_114.png; sourceTree = "<group>"; };
 		55383E6616E7ADE70037169B /* artilleryreticle3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artilleryreticle3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,8 +294,8 @@
 		284680CC16EBC3D500CA188B /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				10FA386516D49AEE004D63F0 /* spartan_appIcon_57.png */,
-				10FA386716D49B05004D63F0 /* spartan_appIcon_114.png */,
+				284680DA16EBCBB000CA188B /* spartan_appIcon_57.png */,
+				284680DB16EBCBB000CA188B /* spartan_appIcon_114.png */,
 			);
 			name = Icons;
 			path = ..;
@@ -317,10 +317,10 @@
 		284680CE16EBC52D00CA188B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				284680D416EBCB5600CA188B /* Default-568h@2x.png */,
+				284680D516EBCB5600CA188B /* Default.png */,
+				284680D616EBCB5600CA188B /* Default@2x.png */,
 				55383E6616E7ADE70037169B /* artilleryreticle3.png */,
-				10F35D9B169E09BB00A42045 /* Default-568h@2x.png */,
-				10155168169BD79D0010A8D6 /* Default@2x.png */,
-				10155166169BD7840010A8D6 /* Default.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -415,17 +415,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				108FC6AE169641C8001BABBE /* InfoPlist.strings in Resources */,
-				10F35D9C169E09BB00A42045 /* Default-568h@2x.png in Resources */,
 				10F35DA6169E173500A42045 /* SSMainViewController.xib in Resources */,
 				10F35DA8169E17F500A42045 /* SpartanMissileStrike.xib in Resources */,
 				10594FEA16A6426900E41072 /* sounds.plist in Resources */,
-				10FA386616D49AEE004D63F0 /* spartan_appIcon_57.png in Resources */,
-				10FA386816D49B05004D63F0 /* spartan_appIcon_114.png in Resources */,
-				10FA386916D49B25004D63F0 /* Default@2x.png in Resources */,
-				10FA386A16D49B31004D63F0 /* Default.png in Resources */,
 				106E551016E2845C00E68F43 /* html in Resources */,
 				55383E6716E7ADE70037169B /* artilleryreticle3.png in Resources */,
 				284680D016EBC57100CA188B /* audio in Resources */,
+				284680D716EBCB5600CA188B /* Default-568h@2x.png in Resources */,
+				284680D816EBCB5600CA188B /* Default.png in Resources */,
+				284680D916EBCB5600CA188B /* Default@2x.png in Resources */,
+				284680DC16EBCBB000CA188B /* spartan_appIcon_57.png in Resources */,
+				284680DD16EBCBB000CA188B /* spartan_appIcon_114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,7 +540,7 @@
 					"$(SRCROOT)",
 					"$(SRCROOT)/usr/include",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				SDKROOT = iphoneos;
@@ -566,7 +566,7 @@
 					"$(SRCROOT)",
 					"$(SRCROOT)/usr/include",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-lsqlite3.0";
@@ -585,11 +585,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
 				INFOPLIST_FILE = "SpartanMissileStrike/SpartanMissileStrike-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../My Resources/Facebook Information/FacebookSDK/FacebookSDK.framework/Versions/A\"",
-					"\"$(SRCROOT)/../../../My Resources/iOS References Samples/Facebook Information/FacebookSDK/FacebookSDK.framework/Versions/A\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -605,11 +601,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
 				INFOPLIST_FILE = "SpartanMissileStrike/SpartanMissileStrike-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../My Resources/Facebook Information/FacebookSDK/FacebookSDK.framework/Versions/A\"",
-					"\"$(SRCROOT)/../../../My Resources/iOS References Samples/Facebook Information/FacebookSDK/FacebookSDK.framework/Versions/A\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
