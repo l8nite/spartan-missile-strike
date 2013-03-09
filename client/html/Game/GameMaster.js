@@ -15,10 +15,7 @@
 function GameMaster(userid, sessionid) {
 	this._userid = userid;
 	this._sessionid = sessionid;
-	this._listeners = {
-		listeners: [],
-		holes: []
-	};
+	this._listeners = new FunctionFridge();
 	this._games = {
 		when: null,
 		games: []
@@ -48,26 +45,15 @@ GameMaster.prototype.getGames = function () {
  */
 GameMaster.prototype.subscribe = function (when) {
 	when(this._games.games);
-	var i = this._listeners.holes.pop();
-	if (i || i === 0) {
-		this._listeners.listeners[i] = when;
-	}
-	else {
-		i = this._listeners.listeners.push(when) - 1;
-	}
-	this._startPollingService();
-	return i;
+	return this._listeners.addFunction(when);
 }
 
 /* Unsubscribe a listener function.
  */
 GameMaster.prototype.unsubscribe = function (callbackid) {
-	if (this._listeners.listeners[callbackid]) {
-		this._listeners.holes.push(callbackid);
-		delete this._listeners.listeners[callbackid];
-		if (this._listeners.holes.length === this._listeners.listeners.length) {
-			this._stopPollingService();
-		}
+	this._listeners.removeFunction(callbackid);
+	if (this._listeners.countFunctions() === 0) {
+		this._stopPollingService();
 	}
 }
 
@@ -112,8 +98,9 @@ GameMaster.prototype._stopPollingService = function () {
 /* Call all listeners with current games array
  */
 GameMaster.prototype._notifyListeners = function () {
-	for (var i in this._listeners.listeners) {
-		this._listeners.listeners[i](this._games.games);
+	var a = this._listeners.getFunctions();
+	for (var i in a) {
+		a[i](this._games.games);
 	}
 }
 
