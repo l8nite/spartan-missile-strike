@@ -11,23 +11,34 @@
 #import "SSAppDelegate.h"
 #import "SSFaceBookAuthViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
-
+#import <CoreLocation/CoreLocation.h>
+#import <CoreMotion/CoreMotion.h>
+#import "SSFiringManager.h"
 
 extern NSString *const SMSSessionStateChangedNotification;
+extern NSString *const SMSActivatesCameraPreviewNotification;
 
 @class SSMainViewController;
-@interface SSAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SSAppDelegate : UIResponder <UIApplicationDelegate,CLLocationManagerDelegate, UIApplicationDelegate>
 {
     NSMutableDictionary* sessionDict;
+    CLLocationManager *locationManager;
     
+    UIWindow *window;
+	SSFiringManager *firingViewController;
+    SSMainViewController* viewController;
 }
 
 @property (strong, nonatomic) UIWindow* window;
 @property (strong, nonatomic) SSMainViewController* viewController;
+@property (strong, nonatomic) SSFiringManager* firingViewController;
 @property (strong, nonatomic) FBSession *session;
 @property (retain, nonatomic) NSMutableDictionary *sessionDict;
 @property (strong, nonatomic) SSFaceBookAuthViewController *loginViewController;
 @property (strong, nonatomic) UINavigationController *navController;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic, readonly) CMMotionManager *sharedMotionManager;
+
 
 
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
@@ -37,3 +48,4 @@ extern NSString *const SMSSessionStateChangedNotification;
 
 
 @end
+
