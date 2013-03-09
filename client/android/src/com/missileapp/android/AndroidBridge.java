@@ -91,8 +91,10 @@ public class AndroidBridge {
      * @param callbackID - callback function to asscoiate with
      * @throws JSONException - thrown if there was an exception 
      */
-    public void getPreference(String preference, String callbackID) throws JSONException {
-        variables.getUserPrefs().getPreference(callbackID, preference);
+    public void getPreference(String preference, String callbackID) {
+        try {
+			variables.getUserPrefs().getPreference(callbackID, preference);
+		} catch (JSONException e) {}
     }
     
     
@@ -102,8 +104,10 @@ public class AndroidBridge {
      * @param callbackID - callback function to asscoiate with
      * @throws JSONException - throws {@link JSONException} if error
      */
-    public void setPreference(String preference, String callbackID) throws JSONException {
-        variables.getUserPrefs().setPreferences(callbackID, preference);
+    public void setPreference(String preference, String callbackID) {
+        try {
+			variables.getUserPrefs().setPreferences(callbackID, preference);
+		} catch (JSONException e) { }
     }
     
     
