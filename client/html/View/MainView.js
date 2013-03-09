@@ -15,7 +15,7 @@ MainView.prototype.previousView = function (view) {
 };
 
 MainView.prototype.onInitialView = function () {
-    return this._viewStack.length === 1;
+    return !(this._viewStack.length > 1);
 };
 
 MainView.prototype._doAnimation = function () {
