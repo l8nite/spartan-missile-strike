@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">Spartan Missile Strike</string>
     <string name="splash_screen_info">Splash Screen</string>
+    <string name="location_gps_prompt_again_msg">Don\'t prompt for GPS again</string>
+    <string name="location_prompt_msg">MissileApp requires location services for game play. Please enable location services and GPS for accuracy.</string>
+    <string name="location_gps_prompt_msg">For greater location accuracy, please enable GPS.</string>
 </resources>
