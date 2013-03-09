@@ -128,7 +128,7 @@ function _createOrUpdateSession (msUser, sessionExists, next) {
             multi.del(msUser.session); // delete stale session pointer
         }
 
-        msUser.session = 'session:' + uuid.v4();;
+        msUser.session = 'session:' + uuid.v4();
     }
 
     multi.setex(msUser.session, DEFAULT_SESSION_EXPIRY_SECONDS, msUser.id);

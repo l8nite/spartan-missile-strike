@@ -20,7 +20,7 @@ function updateUser (request, msUser, done) {
     }
 
     if (username === msUser.username) {
-        return done(undefined, 304);
+        return done(null, 304);
     }
 
     if (!/^[a-zA-Z ]+$/.test(username)) {
@@ -85,7 +85,9 @@ function _getFacebookFriendsWithAppInstalled (request, msUser, next) {
             return next(new restify.NotAuthorizedError());
         }
 
-        next(null, msUser, result.data);
+        var friends = _.where(result.data, {installed: true});
+
+        next(null, msUser, friends);
     });
 
 }
