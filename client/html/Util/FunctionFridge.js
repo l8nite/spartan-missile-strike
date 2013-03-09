@@ -32,3 +32,7 @@ FunctionFridge.prototype.getFunctions = function () {
 	return a;
 };
 
+FunctionFridge.prototype.getFunction = function (id) {
+	return this._functions[id];
+}
+
