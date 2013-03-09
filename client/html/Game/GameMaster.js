@@ -45,6 +45,7 @@ GameMaster.prototype.getGames = function () {
  */
 GameMaster.prototype.subscribe = function (when) {
 	when(this._games.games);
+	this._startPollingService();
 	return this._listeners.add(when);
 }
 
