@@ -13,7 +13,7 @@
 
 	<!-- Global -->
 	<script>
-	var MissileAppHTML;
+	var NativeBridge;
 	</script>
 
 	<!-- Main closure -->
@@ -26,11 +26,10 @@
 			SuspendManager: new SuspendManager()
 		};
 
-		MissileAppHTML = {
-			NativeBridge: {
-				callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge),
-				onMainMenu: Imports.NativeBridge.onMainMenu.bind(Imports.NativeBridge)
-			}
+		NativeBridge = {
+			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge),
+			onMainMenu: Imports.NativeBridge.onMainMenu.bind(Imports.NativeBridge),
+			previousView: Imports.ViewManager.previousView.bind(Imports.ViewManager),
 			wake: Imports.SuspendManager.wake.bind(Imports.SuspendManager)
 		};
 	})();
