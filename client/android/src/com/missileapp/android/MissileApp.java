@@ -37,7 +37,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location, True -> Ask user, False -> skip
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
     private static final String DROIDWB_FILENAME =                         // Webview file to load
-            "file:///android_asset/" + "index" + ".html";
+            "file:///android_asset/html/MissileApp-Android.html";
     
     // Varible Bag
     private static BagOfHolding variables;
