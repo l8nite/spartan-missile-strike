@@ -9,7 +9,7 @@ MainView.prototype.loadView = function (view, arbitraryPrevView) {
     this._doAnimation();
 };
 
-MainView.prototype.previousView = function (view) {
+MainView.prototype.previousView = function () {
     this._viewAnimationQueue.push(this._previousViewAnimation.bind(this));
     this._doAnimation();
 };
