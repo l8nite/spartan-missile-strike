@@ -119,14 +119,14 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
         
-        // check location services are enabled.
+        // Check location services are enabled.
         this.processLocationServices();
         
         // Re-enter Fire Screen
         variables.getFireScreen().processResumeRequest();
         
-        //TODO: Notify Native Bridge
-        
+        // Notify Native Bridge to Wake
+        variables.getDroidBridge().callJSforWake();
     }
     
 

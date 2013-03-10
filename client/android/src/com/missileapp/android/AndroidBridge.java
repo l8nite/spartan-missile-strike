@@ -13,7 +13,7 @@ public class AndroidBridge {
     // Data
     private static final String TAG = "AndroidBridge";                     // TAG for logging
     private static final String CallJSPrefix = "javascript:"; 
-    private static final String NBCallBack_prefix = "NativeBridge.callback(";
+    private static final String NBCallBack_prefix = "MissileAppHTML.NativeBridge.callback(";
     private static final String NBCallBack_postfix = ");";
     
     // Variables
@@ -22,11 +22,19 @@ public class AndroidBridge {
     /**
      * Android Concrete Methods for HTML/Native Bridge
      * @param context - Android MissileApp/Context {@link Context}
-     * @param webview - MissileApp webView {@link WebView}
+     * @param webview - MissileApp {@link WebView}
      */
     public AndroidBridge(BagOfHolding variables) {
         MALogger.log(TAG, Log.INFO, "Init Android Bridge");
         AndroidBridge.variables = variables;
+    }
+    
+    /**
+     * Notify Native Bridge to Wake
+     */
+    public void callJSforWake() {
+    	String url = "MissileAppHTML.wake()";
+    	this.callJS(url);
     }
     
     /**
@@ -46,7 +54,6 @@ public class AndroidBridge {
     public void callJS(String url) {
         variables.getWebView().loadUrl(CallJSPrefix +  url);
     }
-    
     
     /**
      * Subscribe to location updates 
