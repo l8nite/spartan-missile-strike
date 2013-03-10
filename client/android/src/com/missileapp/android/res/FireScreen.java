@@ -69,6 +69,8 @@ public class FireScreen {
                 // Lock and Start Preview
                 cam.lock();
                 cam.startPreview();
+                
+                variables.getSurfaceHolder().setKeepScreenOn(true);
             }
             else {
                 MALogger.log(TAG, Log.WARN, "No Camera.");
@@ -90,6 +92,7 @@ public class FireScreen {
         try {
             // Stop Preview, unlock, and release
             if(cam != null) {
+            	variables.getSurfaceHolder().setKeepScreenOn(false);
                 cam.stopPreview();
                 cam.unlock();
                 cam.release();

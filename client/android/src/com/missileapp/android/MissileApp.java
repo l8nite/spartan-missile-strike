@@ -29,8 +29,6 @@ import android.graphics.Color;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
-    //TODO [MARKER] REMOVE WAKELOCK FROM ANDROID MANIFEST FILE
-    
     // Settings Variables
     private static final String TAG = "MainApp";                           // Class Name for Logging
     private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
