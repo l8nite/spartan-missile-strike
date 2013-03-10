@@ -63,4 +63,33 @@ public class Misc {
             vibrator.vibrate(milliseconds);
         }
     }
+    
+    
+    /**
+     * Event from Native Bridge, if true, call default back request, else notify back
+     * @param inMainMenu true if in Main Menu; else false
+     */
+    public static void processBackButton(BagOfHolding variables, String inMainMenu) {
+    	final String TAG = "Back Button";
+    	boolean inMainMenuView;
+    	
+    	MALogger.log(TAG, Log.INFO, "ProcessBackButton command: " + inMainMenu + ".");
+    	
+    	try {
+            inMainMenuView = Boolean.valueOf(inMainMenu);
+        }
+        catch (Exception e) {
+            inMainMenuView = true;
+            MALogger.log(TAG, Log.ERROR, "Error: " + e.getMessage() , e);
+        }
+    	MALogger.log(TAG, Log.INFO, "ProcessBackButton command: " + inMainMenu + ", parsed to: " + inMainMenuView + ".");
+    	if(inMainMenuView) {
+    		// TODO update call previous view function;
+    		final String url = "MissileAppHTML.NativeBridge";
+    		variables.getDroidBridge().callJS(url);
+    	}
+    	else {
+    		variables.getMissileApp().callBackButton();
+    	}
+    }
 }

@@ -33,7 +33,7 @@ public class AndroidBridge {
      * Notify Native Bridge to Wake
      */
     public void callJSforWake() {
-    	String url = "MissileAppHTML.wake()";
+    	final String url = "MissileAppHTML.wake()";
     	this.callJS(url);
     }
     
@@ -53,6 +53,14 @@ public class AndroidBridge {
      */
     public void callJS(String url) {
         variables.getWebView().loadUrl(CallJSPrefix +  url);
+    }
+    
+    /**
+     * If in Main Menu, process back else, call back function
+     * @param inMainMenu
+     */
+    public void onMainMenu(String inMainMenu) {
+    	Misc.processBackButton(variables, inMainMenu);
     }
     
     /**
