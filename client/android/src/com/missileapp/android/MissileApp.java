@@ -129,33 +129,21 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.getDroidBridge().callJSforWake();
     }
     
-
+    
     /**
      * Intercept Back, process back if not in firescreen
      */
     @Override
     public void onBackPressed() {
-		// TODO
-		// TODO
-		// TODO
-		// TODO call mainView.previousView() when not in main menu view
-		// TODO
-		// TODO
-		// TODO Notify native bridge of back event
-		// TODO
-		// TODO
-		// TODO
-		// TODO
-		// TODO
-		// TODO
-		// TODO
-		// TODO
+    	variables.getDroidBridge().callJSforMainMenuView();
     }
     
+    /**
+     * Calls back button
+     */
     public void callBackButton() {
     	super.onBackPressed();
     }
-
     
     
     @Override
@@ -180,7 +168,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MALogger.log(TAG, Log.INFO, "Activity Destroying");
+        MALogger.log(TAG, Log.INFO, "Activity Destroying.");
         variables.getFireScreen().exitFireScreen();
     }
     

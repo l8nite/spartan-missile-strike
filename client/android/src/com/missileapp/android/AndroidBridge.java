@@ -33,7 +33,15 @@ public class AndroidBridge {
      * Notify Native Bridge to Wake
      */
     public void callJSforWake() {
-    	final String url = "MissileAppHTML.wake()";
+    	final String url = "MissileAppHTML.wake();";
+    	this.callJS(url);
+    }
+    
+    /**
+     * Asks native if in main menu
+     */
+    public void callJSforMainMenuView() {
+    	final String url = "MissileAppHTML.NativeBridge.onMainMenu();";
     	this.callJS(url);
     }
     
