@@ -17,7 +17,7 @@ public class AndroidBridge {
     private static final String NBCallBack_postfix = ");";
     
     // Variables
-    private static BagOfHolding variables;           // Bag Of Holding for Variables
+    private BagOfHolding variables;           // Bag Of Holding for Variables
     
     /**
      * Android Concrete Methods for HTML/Native Bridge
@@ -26,7 +26,7 @@ public class AndroidBridge {
      */
     public AndroidBridge(BagOfHolding variables) {
         MALogger.log(TAG, Log.INFO, "Init Android Bridge");
-        AndroidBridge.variables = variables;
+        this.variables = variables;
     }
     
     /**
