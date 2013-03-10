@@ -58,7 +58,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         variables = (BagOfHolding) super.getApplication(); 
-        		//BagOfHolding.getInstance(); TODO REMOVE
         variables.setMissileApp(this);
         variables.setEnabled(false);
         
