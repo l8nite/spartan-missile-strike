@@ -70,7 +70,7 @@ public class UserPreferences {
         }
         
         // Notify the Native Bridge
-        varibles.getDroidBridge().callJS(callbackIdent, (new JSONObject()).put("succeeded", success).toString());
+        varibles.getDroidBridge().callJSforCallBack(callbackIdent, (new JSONObject()).put("succeeded", success).toString());
     }
     
     
@@ -95,6 +95,6 @@ public class UserPreferences {
 		}
     	
         // Call Back Native Bridge
-        varibles.getDroidBridge().callJS(callbackIdent, values.toString());
+        varibles.getDroidBridge().callJSforCallBack(callbackIdent, values.toString());
     }
 }

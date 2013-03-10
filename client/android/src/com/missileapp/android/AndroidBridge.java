@@ -50,7 +50,7 @@ public class AndroidBridge {
      * @param callbackident - callback identifier, see Native Bridge
      * @param callbackData - data to pass to the callback identifier
      */
-    public void callJS(String callbackident, String callbackData) {
+    public void callJSforCallBack(String callbackident, String callbackData) {
         String url = NBCallBack_prefix + callbackident + "," + callbackData + NBCallBack_postfix;
         this.callJS(url);
     }
