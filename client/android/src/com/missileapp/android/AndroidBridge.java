@@ -13,7 +13,7 @@ public class AndroidBridge {
     // Data
     private static final String TAG = "AndroidBridge";                     // TAG for logging
     private static final String CallJSPrefix = "javascript:"; 
-    private static final String NBCallBack_prefix = "MissileAppHTML.NativeBridge.callback(";
+    private static final String NBCallBack_prefix = "NativeBridge.callback(";
     private static final String NBCallBack_postfix = ");";
     
     // Variables
@@ -33,7 +33,7 @@ public class AndroidBridge {
      * Notify Native Bridge to Wake
      */
     public void callJSforWake() {
-    	final String url = "MissileAppHTML.wake();";
+    	final String url = "NativeBridge.wake();";
     	this.callJS(url);
     }
     
@@ -41,7 +41,7 @@ public class AndroidBridge {
      * Asks native if in main menu
      */
     public void callJSforMainMenuView() {
-    	final String url = "MissileAppHTML.NativeBridge.onMainMenu();";
+    	final String url = "NativeBridge.onMainMenu();";
     	this.callJS(url);
     }
     
