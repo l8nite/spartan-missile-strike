@@ -84,8 +84,7 @@ public class Misc {
         }
     	MALogger.log(TAG, Log.INFO, "ProcessBackButton command: " + inMainMenu + ", parsed to: " + inMainMenuView + ".");
     	if(inMainMenuView) {
-    		// TODO update call previous view function;
-    		final String url = "MissileAppHTML.NativeBridge";
+    		final String url = "NativeBridge.previousView()";
     		variables.getDroidBridge().callJS(url);
     	}
     	else {
