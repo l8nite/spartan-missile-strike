@@ -7,13 +7,14 @@
 	<script src="NativeBridge/NativeBridge_Abstract.js"></script>
 	<script src="NativeBridge/NativeBridge_iOS.js"></script>
 	<script src="Util/DomHelper.js"></script>
+	<script src="Util/Fridge.js"></script>
 	<script src="View/FixedHeightView.js"></script>
 	<script src="View/MainView.js"></script>
 	<script src="View/View.js"></script>
 
 	<!-- Global -->
 	<script>
-	var MissileAppHTML;
+	var NativeBridge;
 	</script>
 
 	<!-- Main closure -->
@@ -26,10 +27,8 @@
 			SuspendManager: new SuspendManager()
 		};
 
-		MissileAppHTML = {
-			NativeBridge: {
-				callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
-			}
+		NativeBridge = {
+			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge),
 			wake: Imports.SuspendManager.wake.bind(Imports.SuspendManager)
 		};
 	})();
