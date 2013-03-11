@@ -74,6 +74,14 @@ public class AndroidBridge {
     /**
      * Subscribe to location updates 
      * @param activate - true to subscribe; else false
+     */
+    public void getLocationUpdates(String activate) {
+        this.getLocationUpdates(activate, null);
+    }
+    
+    /**
+     * Subscribe to location updates 
+     * @param activate - true to subscribe; else false
      * @param callbackID - native bridge callback identifer
      */
     public void getLocationUpdates(String activate, String callbackID) {
@@ -91,10 +99,18 @@ public class AndroidBridge {
     /**
      * Subscribe to location updates 
      * @param activate - true to subscribe; else false
+     */
+    public void getOrientationUpdates(String activate) {
+        this.getOrientationUpdates(activate, null);
+    }
+    
+    /**
+     * Subscribe to location updates 
+     * @param activate - true to subscribe; else false
      * @param callbackID - native bridge callback identifer
      */
     public void getOrientationUpdates(String activate, String callbackID) {
-    	//TODO: Implement
+        //TODO: Implement
     }
     
     

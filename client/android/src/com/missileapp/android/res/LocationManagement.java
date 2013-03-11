@@ -62,20 +62,22 @@ public class LocationManagement implements LocationListener {
      * @throws JSONException could not constuct JSON
      */
     public void sendLocationToNativeBridge(String callbackIdent) throws JSONException {
-        double latitude = 0.0;
-        double longitude = 0.0;
-        synchronized (lastKnownLocation) {
-            if (lastKnownLocation != null) {
-                latitude = lastKnownLocation.getLatitude();
-                longitude = lastKnownLocation.getLongitude();
+        if(lastKnownLocation != null && callbackIdent != null) {
+            double latitude = 0.0;
+            double longitude = 0.0;
+            synchronized (lastKnownLocation) {
+                if (lastKnownLocation != null) {
+                    latitude = lastKnownLocation.getLatitude();
+                    longitude = lastKnownLocation.getLongitude();
+                }
             }
-        }
 
-        if (isNativeBridgeSubscribed) {
-            JSONObject callbackData = new JSONObject();
-            callbackData.put("latitude", latitude);
-            callbackData.put("longitude", longitude);
-            variables.getDroidBridge().callJSforCallBack(callbackIdent, callbackData.toString());
+            if (isNativeBridgeSubscribed) {
+                JSONObject callbackData = new JSONObject();
+                callbackData.put("latitude", latitude);
+                callbackData.put("longitude", longitude);
+                variables.getDroidBridge().callJSforCallBack(callbackIdent, callbackData.toString());
+            }
         }
     }
 
