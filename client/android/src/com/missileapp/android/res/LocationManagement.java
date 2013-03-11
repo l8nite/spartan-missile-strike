@@ -17,7 +17,7 @@ public class LocationManagement implements LocationListener {
     private BagOfHolding variables;                               // Variable bag
     private Location lastKnownLocation;                           // Last known lcoation
     private boolean isNativeBridgeSubscribed;                     // true of native bridge is subscribed
-    private String callbackID;                                    // call back ident for
+    private String callbackID;                                    // call back ident for native brigde
 
     /**
      * Location Manager for Android
