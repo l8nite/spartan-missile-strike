@@ -1,12 +1,14 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
 import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.UserPreferences;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.Vibrator;
 import android.view.SurfaceHolder;
@@ -42,6 +44,8 @@ public class BagOfHolding extends Application {
     private MediaManager mediaManager;                // Media Manager that keeps track of all files
     private LocationManager locationManager;          // Android System Service giving access to location info
     private LocationManagement locationManagement;    // MissileApp Local Location Managements 
+    private Gyro gyro;                                // Gyroscope implementation
+    private SensorManager sensorManager;              // Android hardware sensor manager
     
     /*********************************
      * Android OS call back functions
@@ -361,7 +365,6 @@ public class BagOfHolding extends Application {
 		this.locationManager = locationManager;
 	}
 
-
 	/**
 	 * Returns the MissileApp {@link LocationManagement} implementation
 	 * @return {@link LocationManagement} implementation
@@ -377,4 +380,36 @@ public class BagOfHolding extends Application {
 	public void setLocationManagement(LocationManagement locationManagement) {
 		this.locationManagement = locationManagement;
 	}
+	
+	/**
+	 * Returns {@link Gyro} implementation
+	 * @return {@link Gyro} class
+	 */
+    public Gyro getGyro() {
+        return gyro;
+    }
+    
+    /**
+     * Set {@link Gyro} implementation
+     * @param gyro implement the gyro class.
+     */
+    public void setGyro(Gyro gyro) {
+        this.gyro = gyro;
+    }
+    
+    /**
+     * Returns {@link SensorManager} implemetation
+     * @return {@link SensorManager} implemenation
+     */
+    public SensorManager getSensorManager() {
+        return sensorManager;
+    }
+    
+    /**
+     * Set {@link SensorManager} implemenation
+     * @param sensorManager {@link SensorManager} implementation
+     */
+    public void setSensorManager(SensorManager sensorManager) {
+        this.sensorManager = sensorManager;
+    }
 }

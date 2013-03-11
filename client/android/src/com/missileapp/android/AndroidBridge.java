@@ -110,7 +110,7 @@ public class AndroidBridge {
      * @param callbackID - native bridge callback identifer
      */
     public void getOrientationUpdates(String activate, String callbackID) {
-        //TODO: Implement
+        variables.getGyro().getOrientationUpdates(activate, callbackID);
     }
     
     

@@ -1,6 +1,7 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
 import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.Misc;
@@ -26,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.hardware.SensorManager;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class MissileApp extends Activity implements SurfaceHolder.Callback {
@@ -75,6 +77,8 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE));               // Android System Service Vibrator
         variables.setLocationManager((LocationManager) getSystemService(Context.LOCATION_SERVICE));       // Android System Service Location Manager
         variables.setLocationManagement(new LocationManagement(variables));                               // MissileApp Location Implementation
+        variables.setGyro(new Gyro(variables));                                                           // Gyroscope implementation
+        variables.setSensorManager((SensorManager) super.getSystemService(Context.SENSOR_SERVICE));       // Android Sensor Service Implementation
         
         // Store the Dialog checkbox
         variables.setLocationCheckBox(checkBoxView);
