@@ -94,6 +94,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.setDroidBridge(droidBridge);
         
         // Smooth Transition
+        webView.setScrollbarFadingEnabled(true);
         webView.getSettings().setRenderPriority(RenderPriority.HIGH);
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setSupportZoom(false);

@@ -63,6 +63,11 @@ public class BagOfHolding extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+        if(webView != null) {
+        	webView.clearAnimation();
+        	webView.clearCache(true);
+        	webView.freeMemory();
+        }
     }
     
     
