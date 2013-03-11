@@ -77,7 +77,7 @@ public class AndroidBridge {
      * @param callbackID - native bridge callback identifer
      */
     public void getLocationUpdates(String activate, String callbackID) {
-    	//TODO: Implement
+    	variables.getLocationManagement().getLocationUpdates(activate, callbackID);
     }
     
     /**
@@ -85,7 +85,7 @@ public class AndroidBridge {
      * @param callbackIdentifier
      */
     public void getCurrentLocation(String callbackIdentifier) {
-    	//TODO: Implement
+        variables.getLocationManagement().getCurrentLocation(callbackIdentifier);
     }
     
     /**
