@@ -11,25 +11,56 @@
 #import "SSNativeBridge.h"
 #import "SSAudioManager.h"
 #import "NSString+CaseInsensitiveComparison.h"
+#import "SSFacebookManager.h"
 
 @implementation SSMainViewController
 
 @synthesize webView;
 @synthesize nativeBridge;
 @synthesize audioManager;
+@synthesize facebookManager;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    // initialize facebook sdk and start log-in process
+    facebookManager = [[SSFacebookManager alloc] init];
+    [facebookManager setDelegate:self];
+
+    [facebookManager openSession];
+
+    // listen for events that interest us
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     
+}
+
+- (void)applicationDidBecomeActive
+{
+    [facebookManager handleDidBecomeActive];
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url
+{
+    return [facebookManager handleOpenURL:url];
+}
+
+- (void)facebookUserDidLogIn
+{
     audioManager = [[SSAudioManager alloc] init];
 
     // initialize the native bridge
     nativeBridge = [[SSNativeBridge alloc] init];
     [nativeBridge setDelegate:self];
     [webView setDelegate:nativeBridge];
+
     [self initializeHtmlContent];
+}
+
+- (void)facebookUserDidLogOut
+{
+    [facebookManager openSession];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,6 +71,7 @@
 
 - (void)viewDidUnload
 {
+    [self setFacebookManager:nil];
     [self setAudioManager:nil];
     [self setNativeBridge:nil];
     [self setWebView:nil];
@@ -72,7 +104,9 @@
     else if ([function isEqualIgnoringCase:@"setPreference"]) {
     }
     else if ([function isEqualIgnoringCase:@"getFacebookAccessToken"]) {
-        // trigger facebook authentication flow if we don't have access token already
+        NSInteger callbackIdentifier = (NSInteger)[arguments objectForKey:@"identifier"];
+        NSString *facebookAccessToken = [facebookManager accessToken];
+        [self nativeBridgeCallback:callbackIdentifier withString:facebookAccessToken];
     }
     else if ([function isEqualIgnoringCase:@"playSound"]) {
         NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
@@ -89,6 +123,13 @@
     }
     else if ([function isEqualIgnoringCase:@"vibrate"]) {
     }
+}
+
+-(void)nativeBridgeCallback:(NSInteger)callbackIdentifier withString:(NSString *)argument
+{
+    // TODO - this doesn't appear to be working yet?
+    NSString *callbackJS = [NSString stringWithFormat:@"NativeBridge.callback(%d, '%@')", callbackIdentifier, argument];
+    [webView stringByEvaluatingJavaScriptFromString:callbackJS];
 }
 
 @end

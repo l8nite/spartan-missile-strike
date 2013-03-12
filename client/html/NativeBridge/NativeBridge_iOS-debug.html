@@ -5,9 +5,9 @@
 		<script src="NativeBridge_Abstract.js"></script>
 		<script src="NativeBridge_iOS.js"></script>
 		<script type="text/javascript">
+            var NativeBridge = new NativeBridge_iOS();
+            
             window.onload = function () {
-                var NativeBridge = new NativeBridge_iOS();
-
                 document.getElementById("debugGetCurrentLocation").onclick = function () {
                     NativeBridge.getCurrentLocation(function (response) { alert(response); });
                     return false;
@@ -33,6 +33,11 @@
                     return false;
                 }
                 
+                document.getElementById("debugGetFacebookAccessToken").onclick = function () {
+                    NativeBridge.getFacebookAccessToken(function (accessToken) { alert(accessToken); });
+                    return false;
+                }
+                
                 window.setTimeout(function () {
                                   NativeBridge.hideSplash();
                                   NativeBridge.playSound({soundID: "background_music", loop: true});
@@ -44,6 +49,7 @@
         <a id="debugGetCurrentLocation" href="#">Get Current Location</a> <br/>
         <a id="debugSetPreference" href="#">Set Preference</a> <br/>
         <a id="debugGetPreference" href="#">Get Preference</a> <br/>
+        <a id="debugGetFacebookAccessToken" href="#">Get Facebook Access Token</a> <br/>
         <a id="debugPlaySound" href="#">Play Sound</a> <br/>
         <a id="debugStopSound" href="#">Stop Sound</a> <br/>
         <a href="spartan-missile-strike://hideSplash/?arguments=">hideSplash</a>

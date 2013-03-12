@@ -11,6 +11,7 @@
 @class SSMainViewController;
 @class SSSplashScreenViewController;
 
+
 @interface SSAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
