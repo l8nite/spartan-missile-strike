@@ -43,25 +43,19 @@ NativeBridge_iOS.prototype.showFireMissileScreen = function (activate) {
 	);
 };
 
-NativeBridge_iOS.prototype._getPreference = function (preference, callbackID) {
+NativeBridge_iOS.prototype._getPreference = function (preferences, callbackID) {
 	this._appendIframe("spartan-missile-strike://getPreference/?arguments="
 		+ JSON.stringify({
-			preference : preference,
+			preferences : preferences,
 			identifier : callbackID
 		})
 	);
 };
 
 NativeBridge_iOS.prototype._setPreference = function (preferences, callbackID) {
-	var keyvalue = new Object();
-	for (var i in preference) {
-		keyvalue.key = i;
-		keyvalue.value = preference[i];
-		break;
-	}
 	this._appendIframe("spartan-missile-strike://setPreference/?arguments="
 		+ JSON.stringify({
-			preference : keyvalue,
+			preferences : preferences,
 			identifier : callbackID
 		})
 	);
@@ -80,12 +74,11 @@ NativeBridge_iOS.prototype.logoutFacebook = function () {
 };
 
 NativeBridge_iOS.prototype.playSound = function (soundID, options) {
-	if (!options) {
-		options = {};
-	}
-	options.soundID = soundID;
 	this._appendIframe("spartan-missile-strike://playSound/?arguments="
-		+ JSON.stringify(options)
+		+ JSON.stringify({
+			soundID: soundID,
+			options: options
+		})
 	);
 };
 
