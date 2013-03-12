@@ -16,11 +16,11 @@ function GameMaster(userid, sessionid) {
 	this.userid = userid;
 	this._sessionid = sessionid;
 	this._listeners = new Fridge();
+	this._cachedNames = [];
 	this._games = {
 		when: null,
 		games: []
 	};
-	this.nameCache = [];
 }
 
 /* Returns a $.Deferred which will be resolved with a fresh games data structure.
@@ -31,34 +31,29 @@ function GameMaster(userid, sessionid) {
  */
 GameMaster.prototype.getGames = function () {
 	var that = this;
-	var d = new $.Deferred();
-	this._getGamesFromService().done(function (response) {
+	return this._getGamesFromService().done(function (response) {
 		that._games.games = response;
 		that._games.when = new Date();
-		var weHaventMet = [];
-		for (var i in response) {
-			if (!that.nameCache[response[i].creator]) {
-				weHaventMet.push(response[i].creator);
-			}
-			if (!that.nameCache[response[i].opponent]) {
-				weHaventMet.push(response[i].opponent);
-			}
-		}
-		if (weHaventMet.length === 0) {
-			d.resolve(response);
-		} else {
-			that._getNamesFromService(weHaventMet).done(function (names) {
-				for (var i in names) {
-					that.nameCache[i] = names[i];
-				}
-			}).always(function () {
-				d.resolve(response);
-			});
-		}
-	});
-	d.done(function () {
 		that._notifyListeners();
 	});
+};
+
+/* Returns a $.Deferred which will be resolved with a the name belonging to the requested userid.
+ * For speed, a names are cached to later retrieval!
+ */
+GameMaster.prototype.getName = function (userid) {
+	var that = this;
+	var d = new $.Deferred();
+	if (this._cachedNames[userid]) {
+		d.resolve(this._cachedNames[userid]);
+	} else {
+		this._getNameFromService(userid).done(function (name) {
+			that._cachedNames[userid] = name;
+			d.resolve(name);
+		}).fail(function () {
+			d.reject();
+		});
+	}
 	return d;
 };
 
@@ -99,38 +94,29 @@ GameMaster.prototype._getGamesFromService = function () {
  * Returns a deferred to be resolved with array of names.
  * Takes a contiguous array.
  */
-GameMaster.prototype._getNamesFromService = function (userids) {
+GameMaster.prototype._getNameFromService = function (userid) {
 	var d = new $.Deferred();
-	var names = [];
-	var responses = 0;
-	function checkAndResolve() {
-		if (++responses === userids.length) {
-			d.resolve(names);
-		}
-	}
-	for (var j in userids) {
+	$.ajax({
+		url: Imports.serviceurl + "/users/" + userid,
+		headers: {
+			"MissileAppSessionId": this._sessionid
+		},
+		dataType: "json"
+	}).done(function (MAResponse) {
+		name = {
+			username: MAResponse.username
+		};
 		$.ajax({
-			url: Imports.serviceurl + "/users/" + userids[j],
-			headers: {
-				"MissileAppSessionId": this._sessionid
-			},
+			url: "http://graph.facebook.com/" + response.facebook_id,
 			dataType: "json"
-		}).done(function (response) {
-			names[response.id] = {
-				username: response.username
-			};
-			$.ajax({
-				url: "http://graph.facebook.com/" + response.facebook_id,
-				dataType: "json"
-			}).done(function (fbResponse) {
-				names[response.id].realname = fbResponse.name;
-			}).always(function () {
-				checkAndResolve();
-			});
-		}).fail(function () {
-			checkAndResolve();
+		}).done(function (fbResponse) {
+			name.realname = fbResponse.name;
+		}).always(function () {
+			d.resolve(name);
 		});
-	}
+	}).fail(function () {
+		d.reject();
+	});
 	return d;
 };
 
