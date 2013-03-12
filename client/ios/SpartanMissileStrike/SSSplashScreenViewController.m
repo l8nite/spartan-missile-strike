@@ -34,7 +34,7 @@
     [super viewDidAppear:animated];
 
     // TODO: query webview for status and hide when it is done rendering
-    [self performSelector:@selector(dismissSplashScreen) withObject:nil afterDelay:10];
+    [self performSelector:@selector(dismissSplashScreen) withObject:nil afterDelay:3];
 }
      
 - (void)dismissSplashScreen
