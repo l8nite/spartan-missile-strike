@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SSNativeBridge;
 
 @interface SSMainViewController : UIViewController
 
+@property (strong, nonatomic) SSNativeBridge *nativeBridge;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 -(void)initializeHtmlContent;
