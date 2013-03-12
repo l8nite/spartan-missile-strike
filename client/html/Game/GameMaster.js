@@ -13,7 +13,7 @@
  * sessionid: Session ID as per webservice
  */
 function GameMaster(userid, sessionid) {
-	this._userid = userid;
+	this.userid = userid;
 	this._sessionid = sessionid;
 	this._listeners = new Fridge();
 	this._games = {
@@ -63,7 +63,7 @@ GameMaster.prototype.unsubscribe = function (callbackid) {
  */
 GameMaster.prototype._getGamesFromService = function () {
 	return $.ajax({
-		url: Imports.serviceurl + "/users/" + this._userid + "/games",
+		url: Imports.serviceurl + "/users/" + this.userid + "/games",
 		headers: {
 			"MissileAppSessionId": this._sessionid
 		},
