@@ -10,4 +10,8 @@
 
 @interface SSMainViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
+-(void)initializeHtmlContent;
+
 @end
