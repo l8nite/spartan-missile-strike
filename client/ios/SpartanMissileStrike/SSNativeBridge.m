@@ -12,7 +12,8 @@
 
 @implementation SSNativeBridge
 
-static SSNativeBridge *sharedSingleton;
+@synthesize delegate;
+static SSNativeBridge *singleton;
 
 +(void)initialize
 {
@@ -20,28 +21,13 @@ static SSNativeBridge *sharedSingleton;
 
     if (!initialized) {
         initialized = YES;
-        sharedSingleton = [[SSNativeBridge alloc] init];
+        singleton = [[SSNativeBridge alloc] init];
     }
 }
 
 +(SSNativeBridge *)sharedInstance
 {
-    return sharedSingleton;
-}
-
--(id)init
-{
-    if (self = [super init]) {
-        delegates = [[NSDictionary alloc] init];
-    }
-
-    return self;
-}
-
--(void)addDelegate:(id <SSNativeBridgeDelegate>)delegate forFunction:(NSString *)function
-{
-    NSAssert([delegates objectForKey:function] != nil, @"addDelegate called twice for same function");
-    [delegates setValue:delegate forKey:function];
+    return singleton;
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -54,13 +40,7 @@ static SSNativeBridge *sharedSingleton;
     }
        
     NSString *nativeBridgeFunction = [url host];
-    
-    // if we don't have a delegate registered for this request, ignore it
-    if ([delegates objectForKey:nativeBridgeFunction] == nil) {
-        NSLog(@"Ignoring NativeBridge '%@', no delegate registered", nativeBridgeFunction);
-        return NO;
-    }
-    
+
     // parse query parameters into a dictionary
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSArray *keyValuePairs = [[url query] componentsSeparatedByString:@"&"];
@@ -79,10 +59,8 @@ static SSNativeBridge *sharedSingleton;
         nativeBridgeFunctionArguments = [NSJSONSerialization JSONObjectWithData:[argumentsParam dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
     }
     
-    NSLog(@"Dispatching NativeBridge '%@' with arguments: %@", nativeBridgeFunction, nativeBridgeFunctionArguments);
-    
     // dispatch event to delegate
-    [(id<SSNativeBridgeDelegate>)[delegates objectForKey:nativeBridgeFunction] nativeBridgeFunction:nativeBridgeFunction withArguments:nativeBridgeFunctionArguments];
+    [delegate nativeBridgeFunction:nativeBridgeFunction withArguments:nativeBridgeFunctionArguments];
 
     return NO;
 }
