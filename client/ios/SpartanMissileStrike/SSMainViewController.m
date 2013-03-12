@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
-#import "SSViewController.h"
+#import "SSMainViewController.h"
 
-@interface SSViewController ()
+@interface SSMainViewController ()
 
 @end
 
-@implementation SSViewController
+@implementation SSMainViewController
 
 - (void)viewDidLoad
 {
