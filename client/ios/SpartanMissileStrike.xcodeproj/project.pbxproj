@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		28A9753A16EED0C7007B970E /* SSSplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */; };
-		28A9753B16EED0C7007B970E /* SSSplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9753916EED0C7007B970E /* SSSplashScreenViewController.xib */; };
+		28A9753D16EEDB92007B970E /* SSSplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9753F16EEDB92007B970E /* SSSplashScreenViewController.xib */; };
 		28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
 		28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DE16EEB7D800C4F389 /* Foundation.framework */; };
 		28DC54E116EEB7D800C4F389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */; };
@@ -41,7 +41,7 @@
 /* Begin PBXFileReference section */
 		28A9753716EED0C7007B970E /* SSSplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSSplashScreenViewController.h; path = SpartanMissileStrike/SSSplashScreenViewController.h; sourceTree = "<group>"; };
 		28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSSplashScreenViewController.m; path = SpartanMissileStrike/SSSplashScreenViewController.m; sourceTree = "<group>"; };
-		28A9753916EED0C7007B970E /* SSSplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSSplashScreenViewController.xib; path = SpartanMissileStrike/SSSplashScreenViewController.xib; sourceTree = "<group>"; };
+		28A9753E16EEDB92007B970E /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/SSSplashScreenViewController.xib; sourceTree = "<group>"; };
 		28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DC54DC16EEB7D800C4F389 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28DC54DE16EEB7D800C4F389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -91,12 +91,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		28DC54D016EEB7D800C4F389 = {
+		28A9753C16EEDA78007B970E /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
 				28A9753716EED0C7007B970E /* SSSplashScreenViewController.h */,
 				28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */,
-				28A9753916EED0C7007B970E /* SSSplashScreenViewController.xib */,
+				28A9753F16EEDB92007B970E /* SSSplashScreenViewController.xib */,
+			);
+			name = SplashScreen;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		28DC54D016EEB7D800C4F389 = {
+			isa = PBXGroup;
+			children = (
 				28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */,
 				28DC550916EEB7D800C4F389 /* SpartanMissileStrikeTests */,
 				28DC54DB16EEB7D800C4F389 /* Frameworks */,
@@ -127,6 +135,7 @@
 		28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */ = {
 			isa = PBXGroup;
 			children = (
+				28A9753C16EEDA78007B970E /* SplashScreen */,
 				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
 				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
 				28DC54F416EEB7D800C4F389 /* SSMainViewController.h */,
@@ -249,7 +258,7 @@
 				28DC54F316EEB7D800C4F389 /* Default-568h@2x.png in Resources */,
 				28DC54F916EEB7D800C4F389 /* SSMainViewController_iPhone.xib in Resources */,
 				28DC54FC16EEB7D800C4F389 /* SSMainViewController_iPad.xib in Resources */,
-				28A9753B16EED0C7007B970E /* SSSplashScreenViewController.xib in Resources */,
+				28A9753D16EEDB92007B970E /* SSSplashScreenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +319,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		28A9753F16EEDB92007B970E /* SSSplashScreenViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28A9753E16EEDB92007B970E /* en */,
+			);
+			name = SSSplashScreenViewController.xib;
+			path = SpartanMissileStrike;
+			sourceTree = "<group>";
+		};
 		28DC54E516EEB7D800C4F389 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
