@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2872BE9C16EFB9190051E707 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BE9B16EFB9190051E707 /* FacebookSDK.framework */; };
+		2872BE9E16EFB9400051E707 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2872BE9D16EFB9400051E707 /* FacebookSDKResources.bundle */; };
+		2872BEA016EFB9640051E707 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BE9F16EFB9640051E707 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2872BEA216EFB96B0051E707 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BEA116EFB96B0051E707 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2872BEA416EFB9730051E707 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BEA316EFB9730051E707 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2872BEA716EFBA2C0051E707 /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */; };
+		2872BEA816EFBA2C0051E707 /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */; };
 		28A9753A16EED0C7007B970E /* SSSplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */; };
 		28A9754216EEDE77007B970E /* SSSplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9754016EEDE77007B970E /* SSSplashScreenViewController.xib */; };
 		28A9754616EEE72D007B970E /* html in Resources */ = {isa = PBXBuildFile; fileRef = 28A9754516EEE72D007B970E /* html */; };
@@ -16,8 +23,6 @@
 		28A9755916EF9C4A007B970E /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755816EF9C4A007B970E /* sounds.plist */; };
 		28A9755B16EFA104007B970E /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755A16EFA104007B970E /* audio */; };
 		28A9755D16EFA1A1007B970E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A9755C16EFA1A1007B970E /* AVFoundation.framework */; };
-		28A9756A16EFAB90007B970E /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A9756916EFAB90007B970E /* spartan_appIcon_114.png */; };
-		28A9756C16EFAB97007B970E /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A9756B16EFAB97007B970E /* spartan_appIcon_57.png */; };
 		28A9756F16EFAFD5007B970E /* SSFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9756E16EFAFD5007B970E /* SSFacebookManager.m */; };
 		28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
 		28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DE16EEB7D800C4F389 /* Foundation.framework */; };
@@ -49,6 +54,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2872BE9B16EFB9190051E707 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "External/facebook-ios-sdk/build/FacebookSDK.framework"; sourceTree = "<group>"; };
+		2872BE9D16EFB9400051E707 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = "External/facebook-ios-sdk/build/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle"; sourceTree = "<group>"; };
+		2872BE9F16EFB9640051E707 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2872BEA116EFB96B0051E707 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		2872BEA316EFB9730051E707 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_57.png; sourceTree = "<group>"; };
+		2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_114.png; sourceTree = "<group>"; };
 		28A9753716EED0C7007B970E /* SSSplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSSplashScreenViewController.h; path = SpartanMissileStrike/SSSplashScreenViewController.h; sourceTree = "<group>"; };
 		28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSSplashScreenViewController.m; path = SpartanMissileStrike/SSSplashScreenViewController.m; sourceTree = "<group>"; };
 		28A9754116EEDE77007B970E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SpartanMissileStrike/en.lproj/SSSplashScreenViewController.xib; sourceTree = "<group>"; };
@@ -63,8 +75,6 @@
 		28A9755816EF9C4A007B970E /* sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sounds.plist; sourceTree = "<group>"; };
 		28A9755A16EFA104007B970E /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = audio; path = ../../shared/audio; sourceTree = "<group>"; };
 		28A9755C16EFA1A1007B970E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		28A9756916EFAB90007B970E /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_114.png; path = ../spartan_appIcon_114.png; sourceTree = "<group>"; };
-		28A9756B16EFAB97007B970E /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_57.png; path = ../spartan_appIcon_57.png; sourceTree = "<group>"; };
 		28A9756D16EFAFD4007B970E /* SSFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookManager.h; sourceTree = "<group>"; };
 		28A9756E16EFAFD5007B970E /* SSFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookManager.m; sourceTree = "<group>"; };
 		28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,10 +107,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2872BEA416EFB9730051E707 /* Social.framework in Frameworks */,
+				2872BEA216EFB96B0051E707 /* Accounts.framework in Frameworks */,
+				2872BEA016EFB9640051E707 /* AdSupport.framework in Frameworks */,
 				28A9755D16EFA1A1007B970E /* AVFoundation.framework in Frameworks */,
 				28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */,
 				28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */,
 				28DC54E116EEB7D800C4F389 /* CoreGraphics.framework in Frameworks */,
+				2872BE9C16EFB9190051E707 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +203,9 @@
 		28DC54D016EEB7D800C4F389 = {
 			isa = PBXGroup;
 			children = (
-				28A9755C16EFA1A1007B970E /* AVFoundation.framework */,
+				2872BEA316EFB9730051E707 /* Social.framework */,
+				2872BEA116EFB96B0051E707 /* Accounts.framework */,
+				2872BE9F16EFB9640051E707 /* AdSupport.framework */,
 				28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */,
 				28DC550916EEB7D800C4F389 /* SpartanMissileStrikeTests */,
 				28DC54DB16EEB7D800C4F389 /* Frameworks */,
@@ -209,6 +225,9 @@
 		28DC54DB16EEB7D800C4F389 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2872BE9D16EFB9400051E707 /* FacebookSDKResources.bundle */,
+				2872BE9B16EFB9190051E707 /* FacebookSDK.framework */,
+				28A9755C16EFA1A1007B970E /* AVFoundation.framework */,
 				28DC54DC16EEB7D800C4F389 /* UIKit.framework */,
 				28DC54DE16EEB7D800C4F389 /* Foundation.framework */,
 				28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */,
@@ -241,8 +260,8 @@
 				28DC54E516EEB7D800C4F389 /* InfoPlist.strings */,
 				28DC54E816EEB7D800C4F389 /* main.m */,
 				28DC54EA16EEB7D800C4F389 /* SpartanMissileStrike-Prefix.pch */,
-				28A9756B16EFAB97007B970E /* spartan_appIcon_57.png */,
-				28A9756916EFAB90007B970E /* spartan_appIcon_114.png */,
+				2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */,
+				2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */,
 				28DC54EE16EEB7D800C4F389 /* Default.png */,
 				28DC54F016EEB7D800C4F389 /* Default@2x.png */,
 				28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */,
@@ -351,8 +370,9 @@
 				28A9754616EEE72D007B970E /* html in Resources */,
 				28A9755916EF9C4A007B970E /* sounds.plist in Resources */,
 				28A9755B16EFA104007B970E /* audio in Resources */,
-				28A9756A16EFAB90007B970E /* spartan_appIcon_114.png in Resources */,
-				28A9756C16EFAB97007B970E /* spartan_appIcon_57.png in Resources */,
+				2872BE9E16EFB9400051E707 /* FacebookSDKResources.bundle in Resources */,
+				2872BEA716EFBA2C0051E707 /* spartan_appIcon_57.png in Resources */,
+				2872BEA816EFBA2C0051E707 /* spartan_appIcon_114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,10 +541,19 @@
 		28DC551516EEB7D800C4F389 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/facebook-ios-sdk/build\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
+				HEADER_SEARCH_PATHS = "External/**";
 				INFOPLIST_FILE = "SpartanMissileStrike/SpartanMissileStrike-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -534,10 +563,19 @@
 		28DC551616EEB7D800C4F389 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/facebook-ios-sdk/build\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
+				HEADER_SEARCH_PATHS = "External/**";
 				INFOPLIST_FILE = "SpartanMissileStrike/SpartanMissileStrike-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
