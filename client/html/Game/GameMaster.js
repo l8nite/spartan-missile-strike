@@ -20,6 +20,7 @@ function GameMaster(userid, sessionid) {
 		when: null,
 		games: []
 	};
+	this.nameCache = [];
 }
 
 /* Returns a $.Deferred which will be resolved with a fresh games data structure.
@@ -30,13 +31,36 @@ function GameMaster(userid, sessionid) {
  */
 GameMaster.prototype.getGames = function () {
 	var that = this;
-	return this._getGamesFromService().done(function (response) {
+	var d = new $.Deferred();
+	this._getGamesFromService().done(function (response) {
 		that._games.games = response;
 		that._games.when = new Date();
-		that._notifyListeners();
-		return response;
+		var weHaventMet = [];
+		for (var i in response) {
+			if (!that.nameCache[response[i].creator]) {
+				weHaventMet.push(response[i].creator);
+			}
+			if (!that.nameCache[response[i].opponent]) {
+				weHaventMet.push(response[i].opponent);
+			}
+		}
+		if (weHaventMet.length === 0) {
+			d.resolve(response);
+		} else {
+			that._getNamesFromService(weHaventMet).done(function (names) {
+				for (var i in names) {
+					that.nameCache[i] = names[i];
+				}
+			}).always(function () {
+				d.resolve(response);
+			});
+		}
 	});
-}
+	d.done(function () {
+		that._notifyListeners();
+	});
+	return d;
+};
 
 /* Subscribe a listener function.
  * Returns a callback ID with which you can unsubscribe the specified listener.
@@ -47,7 +71,7 @@ GameMaster.prototype.subscribe = function (when) {
 	when(this._games.games);
 	this._startPollingService();
 	return this._listeners.add(when);
-}
+};
 
 /* Unsubscribe a listener function.
  */
@@ -56,7 +80,7 @@ GameMaster.prototype.unsubscribe = function (callbackid) {
 	if (this._listeners.count() === 0) {
 		this._stopPollingService();
 	}
-}
+};
 
 /* Call to the webservice.
  * Returns a deferred to be resolved with the games array
@@ -69,7 +93,33 @@ GameMaster.prototype._getGamesFromService = function () {
 		},
 		dataType: "json"
 	});
-}
+};
+
+/* Find out the common names of obscure user ids.
+ * Returns a deferred to be resolved with array of names.
+ */
+GameMaster.prototype._getNamesFromService = function (userids) {
+	function allNamesResolved() {
+		for (var i in userids) {
+			if (!names[i]) {
+				return false;
+			}
+			return true;
+		}
+	}
+	var d = new $.Deferred();
+	var names = [];
+	for (var j in userids) {
+		$.ajax({
+			url: Imports.serviceurl + "/users/" + this.userid + "/games",
+			headers: {
+				"MissileAppSessionId": this._sessionid
+			},
+			dataType: "json"
+		});
+	}
+	return d;
+};
 
 /* If not already polling, start polling!
  */
@@ -85,7 +135,7 @@ GameMaster.prototype._startPollingService = function () {
 		};
 		this._poll = setTimeout(poll, this._games.when ? this._games.when.getTime() + this._STALE - new Date().getTime() : 0);
 	}
-}
+};
 
 /* Stop polling
  */
@@ -94,7 +144,7 @@ GameMaster.prototype._stopPollingService = function () {
 		clearTimeout(this._poll);
 		delete this._poll;
 	}
-}
+};
 
 /* Call all listeners with current games array
  */
@@ -103,13 +153,13 @@ GameMaster.prototype._notifyListeners = function () {
 	for (var i in a) {
 		a[i](this._games.games);
 	}
-}
+};
 
 /* Check if games array is stale
  */
 GameMaster.prototype._isStale = function () {
 	return (new Date().getTime() - this._games.when.getTime() >= this._STALE);
-}
+};
 
 // How long before games datastructure becomes stale
 GameMaster.prototype._STALE = 60000;
