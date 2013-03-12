@@ -11,10 +11,7 @@
 @protocol SSNativeBridgeDelegate;
 
 @interface SSNativeBridge : NSObject <UIWebViewDelegate>
-{
-    NSDictionary *delegates;
-}
 
--(void)addDelegate:(id <SSNativeBridgeDelegate>)delegate forFunction:(NSString *)function;
+@property (unsafe_unretained) id<SSNativeBridgeDelegate> delegate;
 
 @end
