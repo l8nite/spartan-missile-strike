@@ -65,6 +65,7 @@
     else if ([function isEqualIgnoringCase:@"setPreference"]) {
     }
     else if ([function isEqualIgnoringCase:@"getFacebookAccessToken"]) {
+        // trigger facebook authentication flow if we don't have access token already
     }
     else if ([function isEqualIgnoringCase:@"playSound"]) {
     }

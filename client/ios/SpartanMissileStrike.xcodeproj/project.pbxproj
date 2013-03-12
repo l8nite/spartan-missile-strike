@@ -191,6 +191,8 @@
 		28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */ = {
 			isa = PBXGroup;
 			children = (
+				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
+				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
 				28A9755216EF11E0007B970E /* NativeBridge */,
 				28A9754416EEDF03007B970E /* Views */,
 				28A9754716EEE737007B970E /* Resources */,
@@ -203,8 +205,6 @@
 		28DC54E316EEB7D800C4F389 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
-				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
 				28DC54E416EEB7D800C4F389 /* SpartanMissileStrike-Info.plist */,
 				28DC54E516EEB7D800C4F389 /* InfoPlist.strings */,
 				28DC54E816EEB7D800C4F389 /* main.m */,

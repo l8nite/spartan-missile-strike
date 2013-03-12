@@ -45,9 +45,9 @@
 
 - (void)hideSplashScreen
 {
-        NSLog(@"hiding splash screen...");
     NSAssert(splashScreenViewController != nil, @"hideSplashScreen but splashScreenViewController is nil");
     [splashScreenViewController dismissViewControllerAnimated:YES completion:nil];
+    splashScreenViewController = nil;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
