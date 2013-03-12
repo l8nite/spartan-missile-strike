@@ -29,6 +29,19 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    // TODO: query webview for status and hide when it is done rendering
+    [self performSelector:@selector(dismissSplashScreen) withObject:nil afterDelay:10];
+}
+     
+- (void)dismissSplashScreen
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
