@@ -7,7 +7,6 @@ function NativeBridge_iOS() {
 	NativeBridge_Abstract.call(this);
 }
 NativeBridge_iOS.prototype = new NativeBridge_Abstract();
-NativeBridge_iOS.prototype.constructor = NativeBridge_iOS;
 
 NativeBridge_iOS.prototype._getLocationUpdates = function (activate, callbackID) {
 	this._appendIframe("spartan-missile-strike://getLocationUpdates/?arguments="
@@ -74,11 +73,12 @@ NativeBridge_iOS.prototype.logoutFacebook = function () {
 };
 
 NativeBridge_iOS.prototype.playSound = function (soundID, options) {
+	if (!options) {
+		options = {};
+	}
+	options.soundID = soundID;
 	this._appendIframe("spartan-missile-strike://playSound/?arguments="
-		+ JSON.stringify({
-			soundID: soundID,
-			options: options
-		})
+		+ JSON.stringify(options)
 	);
 };
 
