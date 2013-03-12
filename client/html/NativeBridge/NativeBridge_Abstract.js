@@ -138,6 +138,7 @@ function NativeBridge_Abstract() {
 //
 
 NativeBridge_Abstract.prototype.callback = function (identifier, response) {
+    alert('callback(' + identifier + ', ' + response + ')');
 	var stored = this._callbacks.get(identifier);
 	if (stored) {
 		stored.callback(response);
