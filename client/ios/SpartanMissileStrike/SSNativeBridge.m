@@ -82,7 +82,7 @@ static SSNativeBridge *sharedSingleton;
     NSLog(@"Dispatching NativeBridge '%@' with arguments: %@", nativeBridgeFunction, nativeBridgeFunctionArguments);
     
     // dispatch event to delegate
-    [(id<SSNativeBridgeDelegate>)[delegates objectForKey:nativeBridgeFunction] nativeBridgeRequestWithArguments:nativeBridgeFunctionArguments];
+    [(id<SSNativeBridgeDelegate>)[delegates objectForKey:nativeBridgeFunction] nativeBridgeFunction:nativeBridgeFunction withArguments:nativeBridgeFunctionArguments];
 
     return NO;
 }
