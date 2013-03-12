@@ -103,6 +103,11 @@ GameMaster.prototype._getNamesFromService = function (userids) {
 	var d = new $.Deferred();
 	var names = [];
 	var responses = 0;
+	function checkAndResolve() {
+		if (++responses === userids.length) {
+			d.resolve(names);
+		}
+	}
 	for (var j in userids) {
 		$.ajax({
 			url: Imports.serviceurl + "/users/" + userids[j],
@@ -120,17 +125,10 @@ GameMaster.prototype._getNamesFromService = function (userids) {
 			}).done(function (fbResponse) {
 				names[response.id].realname = fbResponse.name;
 			}).always(function () {
-				responses++;
-				if (responses === userids.length) {
-					d.resolve(names);
-				}
+				checkAndResolve();
 			});
 		}).fail(function () {
-			responses++;
-		}).always(function () {
-			if (responses === userids.length) {
-				d.resolve(names);
-			}
+			checkAndResolve();
 		});
 	}
 	return d;
