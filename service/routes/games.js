@@ -124,6 +124,7 @@ function _createNewGame (request, next) {
         status: 'active',
         created: now.toJSON(),
         updated: now.toJSON(),
+        modified: now.toJSON(),
         creator: request.missileStrikeUserId,
         opponent: request.params.opponent,
         current: request.params.opponent,
@@ -346,7 +347,7 @@ function _updateGameRecord (game, next) {
     var multi = redis.client.multi(),
         now = new Date();
 
-    game.modified = now.getTime();
+    game.modified = now.toJSON();
 
     multi.set(game.id, JSON.stringify(game));
     multi.zadd('games:' + game.creator, now.getTime(), game.id);
