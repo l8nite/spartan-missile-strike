@@ -22,6 +22,10 @@
                 NativeBridge.getPreference("one", function (response) { alert(response); });
                 return false;
             }
+                
+                window.setTimeout(function () {
+                                  NativeBridge.hideSplash();
+                                  }, 3000);
             }
         </script>
     </head>
@@ -29,5 +33,6 @@
         <a id="debugGetCurrentLocation" href="#">Get Current Location</a> <br/>
         <a id="debugSetPreference" href="#">Set Preference</a> <br/>
         <a id="debugGetPreference" href="#">Get Preference</a> <br/>
+        <a href="spartan-missile-strike://hideSplash/?arguments=">hideSplash</a>
 	</body>
 </html>

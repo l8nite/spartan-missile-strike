@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SSNativeBridgeDelegate.h"
+#import "SSSplashScreenViewController.h"
+
 @class SSNativeBridge;
 
-@interface SSMainViewController : UIViewController
+@interface SSMainViewController : UIViewController <SSNativeBridgeDelegate>
 
 @property (strong, nonatomic) SSNativeBridge *nativeBridge;
+
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 -(void)initializeHtmlContent;
