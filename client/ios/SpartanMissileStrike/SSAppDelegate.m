@@ -13,6 +13,8 @@
 
 @implementation SSAppDelegate
 
+@synthesize splashScreenViewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -25,15 +27,27 @@
     }
     
     self.window.rootViewController = self.viewController;
-    
+
     [self.window makeKeyAndVisible];
-    
-    SSSplashScreenViewController* splashScreenViewController = [[SSSplashScreenViewController alloc] initWithNibName:@"SSSplashScreenViewController" bundle:[NSBundle mainBundle]];
-    splashScreenViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-    [self.window.rootViewController presentViewController:splashScreenViewController animated:NO completion:nil];
-    
+
+    [self showSplashScreen];
+
     return YES;
+}
+
+- (void)showSplashScreen
+{
+    NSAssert(splashScreenViewController == nil, @"showSplashScreen but splashScreenViewController is not nil");
+    splashScreenViewController = [[SSSplashScreenViewController alloc] initWithNibName:@"SSSplashScreenViewController" bundle:[NSBundle mainBundle]];
+    splashScreenViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self.viewController presentViewController:splashScreenViewController animated:NO completion:nil];
+}
+
+- (void)hideSplashScreen
+{
+        NSLog(@"hiding splash screen...");
+    NSAssert(splashScreenViewController != nil, @"hideSplashScreen but splashScreenViewController is nil");
+    [splashScreenViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

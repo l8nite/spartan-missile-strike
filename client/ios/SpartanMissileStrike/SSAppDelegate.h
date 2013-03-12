@@ -9,11 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @class SSMainViewController;
+@class SSSplashScreenViewController;
 
 @interface SSAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) SSMainViewController *viewController;
+@property (strong, nonatomic) SSSplashScreenViewController *splashScreenViewController;
+
+- (void)showSplashScreen;
+- (void)hideSplashScreen;
 
 @end
