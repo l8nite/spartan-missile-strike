@@ -6,22 +6,32 @@
 		<script src="NativeBridge_iOS.js"></script>
 		<script type="text/javascript">
             window.onload = function () {
-            var NativeBridge = new NativeBridge_iOS();
+                var NativeBridge = new NativeBridge_iOS();
 
-            document.getElementById("debugGetCurrentLocation").onclick = function () {
-                NativeBridge.getCurrentLocation(function (response) { alert(response); });
-                return false;
-            }
+                document.getElementById("debugGetCurrentLocation").onclick = function () {
+                    NativeBridge.getCurrentLocation(function (response) { alert(response); });
+                    return false;
+                }
 
-            document.getElementById("debugSetPreference").onclick = function () {
-                NativeBridge.setPreference({one: "one", two: "two"});
-                return false;
-            }
-            
-            document.getElementById("debugGetPreference").onclick = function () {
-                NativeBridge.getPreference("one", function (response) { alert(response); });
-                return false;
-            }
+                document.getElementById("debugSetPreference").onclick = function () {
+                    NativeBridge.setPreference({one: "one", two: "two"});
+                    return false;
+                }
+                
+                document.getElementById("debugGetPreference").onclick = function () {
+                    NativeBridge.getPreference("one", function (response) { alert(response); });
+                    return false;
+                }
+                
+                document.getElementById("debugStopSound").onclick = function () {
+                    NativeBridge.stopSound("background_music");
+                    return false;
+                }
+                
+                document.getElementById("debugPlaySound").onclick = function () {
+                    NativeBridge.playSound({soundID: "background_music"});
+                    return false;
+                }
                 
                 window.setTimeout(function () {
                                   NativeBridge.hideSplash();
@@ -34,6 +44,8 @@
         <a id="debugGetCurrentLocation" href="#">Get Current Location</a> <br/>
         <a id="debugSetPreference" href="#">Set Preference</a> <br/>
         <a id="debugGetPreference" href="#">Get Preference</a> <br/>
+        <a id="debugPlaySound" href="#">Play Sound</a> <br/>
+        <a id="debugStopSound" href="#">Stop Sound</a> <br/>
         <a href="spartan-missile-strike://hideSplash/?arguments=">hideSplash</a>
 	</body>
 </html>
