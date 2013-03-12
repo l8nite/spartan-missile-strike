@@ -31,8 +31,25 @@ function GameMaster(userid, sessionid) {
  */
 GameMaster.prototype.getGames = function () {
 	var that = this;
-	return this._getGamesFromService().done(function (response) {
-		that._games.games = response;
+	var updated;
+	if (this._games.games[0]) {
+		updated = this._games.games[0].updated;
+	}
+	return this._getGamesFromService(updated).done(function (response) {
+		var newGames = response;
+		for (var i in that._games.games) {
+			var outofdate = false;
+			for (var j in newGames) {
+				if (that._games.games[i].id === newGames[j].id) {
+					outofdate = true;
+					break;
+				}
+			}
+			if (!outofdate) {
+				newGames.push(that._games.games[i].id);
+			}
+		}
+		that._games.games = newGames;
 		that._games.when = new Date();
 		that._notifyListeners();
 	});
@@ -80,11 +97,12 @@ GameMaster.prototype.unsubscribe = function (callbackid) {
 /* Call to the webservice.
  * Returns a deferred to be resolved with the games array
  */
-GameMaster.prototype._getGamesFromService = function () {
+GameMaster.prototype._getGamesFromService = function (fromWhen) {
 	return $.ajax({
 		url: Imports.serviceurl + "/users/" + this.userid + "/games",
 		headers: {
-			"MissileAppSessionId": this._sessionid
+			"MissileAppSessionId": this._sessionid,
+			"If-Modified-Since": fromWhen.toGMTString()
 		},
 		dataType: "json"
 	});
@@ -152,12 +170,6 @@ GameMaster.prototype._notifyListeners = function () {
 	for (var i in a) {
 		a[i](this._games.games);
 	}
-};
-
-/* Check if games array is stale
- */
-GameMaster.prototype._isStale = function () {
-	return (new Date().getTime() - this._games.when.getTime() >= this._STALE);
 };
 
 // How long before games datastructure becomes stale
