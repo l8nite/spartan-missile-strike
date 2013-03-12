@@ -50,6 +50,7 @@
 		28A9754916EEEA67007B970E /* SSNativeBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNativeBridge.m; sourceTree = "<group>"; };
 		28A9754B16EEEF86007B970E /* NSString+CaseInsensitiveComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CaseInsensitiveComparison.h"; sourceTree = "<group>"; };
 		28A9754C16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CaseInsensitiveComparison.m"; sourceTree = "<group>"; };
+		28A9755116EF03F0007B970E /* SSNativeBridgeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSNativeBridgeDelegate.h; sourceTree = "<group>"; };
 		28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DC54DC16EEB7D800C4F389 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28DC54DE16EEB7D800C4F389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -184,6 +185,7 @@
 				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
 				28A9754816EEEA67007B970E /* SSNativeBridge.h */,
 				28A9754916EEEA67007B970E /* SSNativeBridge.m */,
+				28A9755116EF03F0007B970E /* SSNativeBridgeDelegate.h */,
 				28A9754416EEDF03007B970E /* Views */,
 				28A9754716EEE737007B970E /* Resources */,
 				28DC54E316EEB7D800C4F389 /* Supporting Files */,
