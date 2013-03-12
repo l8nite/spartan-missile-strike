@@ -10,6 +10,6 @@
 
 @protocol SSNativeBridgeDelegate <NSObject>
 
--(BOOL)nativeBridgeRequestWithArguments:(NSDictionary *)arguments;
+-(BOOL)nativeBridgeFunction:(NSString *)function withArguments:(NSDictionary *)arguments;
 
 @end
