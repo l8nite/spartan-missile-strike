@@ -60,7 +60,9 @@ function listGames (request, msUser, done) {
                 return done(new restify.InternalError());
             }
 
-            done(null, 200, { games: gameData } );
+            var games = _.map(gameData, JSON.parse);
+
+            done(null, 200, { games: games } );
         });
     });
 }
