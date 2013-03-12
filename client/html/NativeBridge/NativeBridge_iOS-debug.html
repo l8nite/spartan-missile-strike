@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>NativeBridge_iOS Debug</title>
+        <script src="../Util/Fridge.js"></script>
+		<script src="NativeBridge_Abstract.js"></script>
+		<script src="NativeBridge_iOS.js"></script>
+		<script type="text/javascript">
+            window.onload = function () {
+            var NativeBridge = new NativeBridge_iOS();
+
+            document.getElementById("debugGetCurrentLocation").onclick = function () {
+                NativeBridge.getCurrentLocation(function (response) { alert(response); });
+                return false;
+            }
+
+            document.getElementById("debugSetPreference").onclick = function () {
+                NativeBridge.setPreference({one: "one", two: "two"});
+                return false;
+            }
+            
+            document.getElementById("debugGetPreference").onclick = function () {
+                NativeBridge.getPreference("one", function (response) { alert(response); });
+                return false;
+            }
+            }
+        </script>
+    </head>
+	<body>
+        <a id="debugGetCurrentLocation" href="#">Get Current Location</a> <br/>
+        <a id="debugSetPreference" href="#">Set Preference</a> <br/>
+        <a id="debugGetPreference" href="#">Get Preference</a> <br/>
+	</body>
+</html>
