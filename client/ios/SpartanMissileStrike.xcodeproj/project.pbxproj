@@ -18,6 +18,7 @@
 		28A9755D16EFA1A1007B970E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A9755C16EFA1A1007B970E /* AVFoundation.framework */; };
 		28A9756A16EFAB90007B970E /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A9756916EFAB90007B970E /* spartan_appIcon_114.png */; };
 		28A9756C16EFAB97007B970E /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A9756B16EFAB97007B970E /* spartan_appIcon_57.png */; };
+		28A9756F16EFAFD5007B970E /* SSFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9756E16EFAFD5007B970E /* SSFacebookManager.m */; };
 		28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
 		28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DE16EEB7D800C4F389 /* Foundation.framework */; };
 		28DC54E116EEB7D800C4F389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */; };
@@ -64,6 +65,8 @@
 		28A9755C16EFA1A1007B970E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		28A9756916EFAB90007B970E /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_114.png; path = ../spartan_appIcon_114.png; sourceTree = "<group>"; };
 		28A9756B16EFAB97007B970E /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_57.png; path = ../spartan_appIcon_57.png; sourceTree = "<group>"; };
+		28A9756D16EFAFD4007B970E /* SSFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookManager.h; sourceTree = "<group>"; };
+		28A9756E16EFAFD5007B970E /* SSFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookManager.m; sourceTree = "<group>"; };
 		28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DC54DC16EEB7D800C4F389 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28DC54DE16EEB7D800C4F389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -217,6 +220,8 @@
 		28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */ = {
 			isa = PBXGroup;
 			children = (
+				28A9756D16EFAFD4007B970E /* SSFacebookManager.h */,
+				28A9756E16EFAFD5007B970E /* SSFacebookManager.m */,
 				28A9755E16EFA6BC007B970E /* AudioManager */,
 				28A9755216EF11E0007B970E /* NativeBridge */,
 				28A9754416EEDF03007B970E /* Views */,
@@ -389,6 +394,7 @@
 				28A9754A16EEEA67007B970E /* SSNativeBridge.m in Sources */,
 				28A9754D16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m in Sources */,
 				28A9755516EF9AD8007B970E /* SSAudioManager.m in Sources */,
+				28A9756F16EFAFD5007B970E /* SSFacebookManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
