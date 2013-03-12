@@ -14,4 +14,8 @@
 
 @implementation SSSplashScreenViewController
 
+- (void)viewDidUnload {
+    [self setSplashImage:nil];
+    [super viewDidUnload];
+}
 @end

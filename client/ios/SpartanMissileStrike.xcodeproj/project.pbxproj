@@ -16,6 +16,8 @@
 		28A9755916EF9C4A007B970E /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755816EF9C4A007B970E /* sounds.plist */; };
 		28A9755B16EFA104007B970E /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755A16EFA104007B970E /* audio */; };
 		28A9755D16EFA1A1007B970E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A9755C16EFA1A1007B970E /* AVFoundation.framework */; };
+		28A9756A16EFAB90007B970E /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A9756916EFAB90007B970E /* spartan_appIcon_114.png */; };
+		28A9756C16EFAB97007B970E /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A9756B16EFAB97007B970E /* spartan_appIcon_57.png */; };
 		28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
 		28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DE16EEB7D800C4F389 /* Foundation.framework */; };
 		28DC54E116EEB7D800C4F389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */; };
@@ -60,6 +62,8 @@
 		28A9755816EF9C4A007B970E /* sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sounds.plist; sourceTree = "<group>"; };
 		28A9755A16EFA104007B970E /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = audio; path = ../../shared/audio; sourceTree = "<group>"; };
 		28A9755C16EFA1A1007B970E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		28A9756916EFAB90007B970E /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_114.png; path = ../spartan_appIcon_114.png; sourceTree = "<group>"; };
+		28A9756B16EFAB97007B970E /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_57.png; path = ../spartan_appIcon_57.png; sourceTree = "<group>"; };
 		28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DC54DC16EEB7D800C4F389 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28DC54DE16EEB7D800C4F389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -232,6 +236,8 @@
 				28DC54E516EEB7D800C4F389 /* InfoPlist.strings */,
 				28DC54E816EEB7D800C4F389 /* main.m */,
 				28DC54EA16EEB7D800C4F389 /* SpartanMissileStrike-Prefix.pch */,
+				28A9756B16EFAB97007B970E /* spartan_appIcon_57.png */,
+				28A9756916EFAB90007B970E /* spartan_appIcon_114.png */,
 				28DC54EE16EEB7D800C4F389 /* Default.png */,
 				28DC54F016EEB7D800C4F389 /* Default@2x.png */,
 				28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */,
@@ -340,6 +346,8 @@
 				28A9754616EEE72D007B970E /* html in Resources */,
 				28A9755916EF9C4A007B970E /* sounds.plist in Resources */,
 				28A9755B16EFA104007B970E /* audio in Resources */,
+				28A9756A16EFAB90007B970E /* spartan_appIcon_114.png in Resources */,
+				28A9756C16EFAB97007B970E /* spartan_appIcon_57.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
