@@ -102,6 +102,26 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		28A9754316EEDEE0007B970E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				28DC54F416EEB7D800C4F389 /* SSMainViewController.h */,
+				28DC54F516EEB7D800C4F389 /* SSMainViewController.m */,
+				28DC54F716EEB7D800C4F389 /* SSMainViewController_iPhone.xib */,
+				28DC54FA16EEB7D800C4F389 /* SSMainViewController_iPad.xib */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		28A9754416EEDF03007B970E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28A9753C16EEDA78007B970E /* SplashScreen */,
+				28A9754316EEDEE0007B970E /* Main */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		28DC54D016EEB7D800C4F389 = {
 			isa = PBXGroup;
 			children = (
@@ -135,13 +155,9 @@
 		28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */ = {
 			isa = PBXGroup;
 			children = (
-				28A9753C16EEDA78007B970E /* SplashScreen */,
 				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
 				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
-				28DC54F416EEB7D800C4F389 /* SSMainViewController.h */,
-				28DC54F516EEB7D800C4F389 /* SSMainViewController.m */,
-				28DC54F716EEB7D800C4F389 /* SSMainViewController_iPhone.xib */,
-				28DC54FA16EEB7D800C4F389 /* SSMainViewController_iPad.xib */,
+				28A9754416EEDF03007B970E /* Views */,
 				28DC54E316EEB7D800C4F389 /* Supporting Files */,
 			);
 			path = SpartanMissileStrike;
