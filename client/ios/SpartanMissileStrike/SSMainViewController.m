@@ -76,7 +76,9 @@
     }
     else if ([function isEqualIgnoringCase:@"playSound"]) {
         NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
-        [audioManager playSound:soundIdentifier];
+        NSInteger loop = (NSInteger)[arguments objectForKey:@"loop"];
+        
+        [audioManager playSound:soundIdentifier loopCount:(loop ? -1 : 0)];
     }
     else if ([function isEqualIgnoringCase:@"stopSound"]) {
         NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];

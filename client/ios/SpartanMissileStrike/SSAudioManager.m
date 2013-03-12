@@ -36,10 +36,11 @@
     }
 }
 
--(void)playSound:(NSString *)soundIdentifier
+-(void)playSound:(NSString *)soundIdentifier loopCount:(NSInteger)loops
 {
     AVAudioPlayer *player = (AVAudioPlayer *)[playerForSoundId objectForKey:soundIdentifier];
     NSAssert(player != nil, @"soundIdentifier is not recognized");
+    [player setNumberOfLoops:loops];
     [player play];
 }
 
