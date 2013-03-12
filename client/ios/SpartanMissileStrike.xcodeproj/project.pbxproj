@@ -170,6 +170,15 @@
 			name = NativeBridge;
 			sourceTree = "<group>";
 		};
+		28A9755E16EFA6BC007B970E /* AudioManager */ = {
+			isa = PBXGroup;
+			children = (
+				28A9755316EF9AD8007B970E /* SSAudioManager.h */,
+				28A9755416EF9AD8007B970E /* SSAudioManager.m */,
+			);
+			name = AudioManager;
+			sourceTree = "<group>";
+		};
 		28DC54D016EEB7D800C4F389 = {
 			isa = PBXGroup;
 			children = (
@@ -204,10 +213,7 @@
 		28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */ = {
 			isa = PBXGroup;
 			children = (
-				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
-				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
-				28A9755316EF9AD8007B970E /* SSAudioManager.h */,
-				28A9755416EF9AD8007B970E /* SSAudioManager.m */,
+				28A9755E16EFA6BC007B970E /* AudioManager */,
 				28A9755216EF11E0007B970E /* NativeBridge */,
 				28A9754416EEDF03007B970E /* Views */,
 				28A9754716EEE737007B970E /* Resources */,
@@ -220,6 +226,8 @@
 		28DC54E316EEB7D800C4F389 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
+				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
 				28DC54E416EEB7D800C4F389 /* SpartanMissileStrike-Info.plist */,
 				28DC54E516EEB7D800C4F389 /* InfoPlist.strings */,
 				28DC54E816EEB7D800C4F389 /* main.m */,
