@@ -13,27 +13,13 @@
 @implementation SSNativeBridge
 
 @synthesize delegate;
-static SSNativeBridge *singleton;
-
-+(void)initialize
-{
-    static BOOL initialized = NO;
-
-    if (!initialized) {
-        initialized = YES;
-        singleton = [[SSNativeBridge alloc] init];
-    }
-}
-
-+(SSNativeBridge *)sharedInstance
-{
-    return singleton;
-}
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSURL *url = [request URL];
     NSString *urlScheme = [url scheme];
+
+    // NSLog(@"%@", url);
 
     if (![urlScheme isEqualIgnoringCase:@"spartan-missile-strike"]) {
         return YES;
