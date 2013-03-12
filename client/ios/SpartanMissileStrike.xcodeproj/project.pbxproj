@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28A9753A16EED0C7007B970E /* SSSplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */; };
+		28A9753B16EED0C7007B970E /* SSSplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9753916EED0C7007B970E /* SSSplashScreenViewController.xib */; };
 		28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
 		28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DE16EEB7D800C4F389 /* Foundation.framework */; };
 		28DC54E116EEB7D800C4F389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */; };
@@ -16,9 +18,9 @@
 		28DC54EF16EEB7D800C4F389 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54EE16EEB7D800C4F389 /* Default.png */; };
 		28DC54F116EEB7D800C4F389 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F016EEB7D800C4F389 /* Default@2x.png */; };
 		28DC54F316EEB7D800C4F389 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */; };
-		28DC54F616EEB7D800C4F389 /* SSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DC54F516EEB7D800C4F389 /* SSViewController.m */; };
-		28DC54F916EEB7D800C4F389 /* SSViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F716EEB7D800C4F389 /* SSViewController_iPhone.xib */; };
-		28DC54FC16EEB7D800C4F389 /* SSViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54FA16EEB7D800C4F389 /* SSViewController_iPad.xib */; };
+		28DC54F616EEB7D800C4F389 /* SSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DC54F516EEB7D800C4F389 /* SSMainViewController.m */; };
+		28DC54F916EEB7D800C4F389 /* SSMainViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F716EEB7D800C4F389 /* SSMainViewController_iPhone.xib */; };
+		28DC54FC16EEB7D800C4F389 /* SSMainViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54FA16EEB7D800C4F389 /* SSMainViewController_iPad.xib */; };
 		28DC550416EEB7D800C4F389 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC550316EEB7D800C4F389 /* SenTestingKit.framework */; };
 		28DC550516EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
 		28DC550616EEB7D800C4F389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DE16EEB7D800C4F389 /* Foundation.framework */; };
@@ -37,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28A9753716EED0C7007B970E /* SSSplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSSplashScreenViewController.h; path = SpartanMissileStrike/SSSplashScreenViewController.h; sourceTree = "<group>"; };
+		28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSSplashScreenViewController.m; path = SpartanMissileStrike/SSSplashScreenViewController.m; sourceTree = "<group>"; };
+		28A9753916EED0C7007B970E /* SSSplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SSSplashScreenViewController.xib; path = SpartanMissileStrike/SSSplashScreenViewController.xib; sourceTree = "<group>"; };
 		28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DC54DC16EEB7D800C4F389 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28DC54DE16EEB7D800C4F389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -50,10 +55,10 @@
 		28DC54EE16EEB7D800C4F389 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		28DC54F016EEB7D800C4F389 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		28DC54F416EEB7D800C4F389 /* SSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSViewController.h; sourceTree = "<group>"; };
-		28DC54F516EEB7D800C4F389 /* SSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSViewController.m; sourceTree = "<group>"; };
-		28DC54F816EEB7D800C4F389 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SSViewController_iPhone.xib; sourceTree = "<group>"; };
-		28DC54FB16EEB7D800C4F389 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SSViewController_iPad.xib; sourceTree = "<group>"; };
+		28DC54F416EEB7D800C4F389 /* SSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSMainViewController.h; sourceTree = "<group>"; };
+		28DC54F516EEB7D800C4F389 /* SSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSMainViewController.m; sourceTree = "<group>"; };
+		28DC54F816EEB7D800C4F389 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SSMainViewController_iPhone.xib; sourceTree = "<group>"; };
+		28DC54FB16EEB7D800C4F389 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SSMainViewController_iPad.xib; sourceTree = "<group>"; };
 		28DC550216EEB7D800C4F389 /* SpartanMissileStrikeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpartanMissileStrikeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DC550316EEB7D800C4F389 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		28DC550B16EEB7D800C4F389 /* SpartanMissileStrikeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpartanMissileStrikeTests-Info.plist"; sourceTree = "<group>"; };
@@ -89,6 +94,9 @@
 		28DC54D016EEB7D800C4F389 = {
 			isa = PBXGroup;
 			children = (
+				28A9753716EED0C7007B970E /* SSSplashScreenViewController.h */,
+				28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */,
+				28A9753916EED0C7007B970E /* SSSplashScreenViewController.xib */,
 				28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */,
 				28DC550916EEB7D800C4F389 /* SpartanMissileStrikeTests */,
 				28DC54DB16EEB7D800C4F389 /* Frameworks */,
@@ -121,10 +129,10 @@
 			children = (
 				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
 				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
-				28DC54F416EEB7D800C4F389 /* SSViewController.h */,
-				28DC54F516EEB7D800C4F389 /* SSViewController.m */,
-				28DC54F716EEB7D800C4F389 /* SSViewController_iPhone.xib */,
-				28DC54FA16EEB7D800C4F389 /* SSViewController_iPad.xib */,
+				28DC54F416EEB7D800C4F389 /* SSMainViewController.h */,
+				28DC54F516EEB7D800C4F389 /* SSMainViewController.m */,
+				28DC54F716EEB7D800C4F389 /* SSMainViewController_iPhone.xib */,
+				28DC54FA16EEB7D800C4F389 /* SSMainViewController_iPad.xib */,
 				28DC54E316EEB7D800C4F389 /* Supporting Files */,
 			);
 			path = SpartanMissileStrike;
@@ -239,8 +247,9 @@
 				28DC54EF16EEB7D800C4F389 /* Default.png in Resources */,
 				28DC54F116EEB7D800C4F389 /* Default@2x.png in Resources */,
 				28DC54F316EEB7D800C4F389 /* Default-568h@2x.png in Resources */,
-				28DC54F916EEB7D800C4F389 /* SSViewController_iPhone.xib in Resources */,
-				28DC54FC16EEB7D800C4F389 /* SSViewController_iPad.xib in Resources */,
+				28DC54F916EEB7D800C4F389 /* SSMainViewController_iPhone.xib in Resources */,
+				28DC54FC16EEB7D800C4F389 /* SSMainViewController_iPad.xib in Resources */,
+				28A9753B16EED0C7007B970E /* SSSplashScreenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +286,8 @@
 			files = (
 				28DC54E916EEB7D800C4F389 /* main.m in Sources */,
 				28DC54ED16EEB7D800C4F389 /* SSAppDelegate.m in Sources */,
-				28DC54F616EEB7D800C4F389 /* SSViewController.m in Sources */,
+				28DC54F616EEB7D800C4F389 /* SSMainViewController.m in Sources */,
+				28A9753A16EED0C7007B970E /* SSSplashScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,20 +318,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		28DC54F716EEB7D800C4F389 /* SSViewController_iPhone.xib */ = {
+		28DC54F716EEB7D800C4F389 /* SSMainViewController_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				28DC54F816EEB7D800C4F389 /* en */,
 			);
-			name = SSViewController_iPhone.xib;
+			name = SSMainViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
-		28DC54FA16EEB7D800C4F389 /* SSViewController_iPad.xib */ = {
+		28DC54FA16EEB7D800C4F389 /* SSMainViewController_iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				28DC54FB16EEB7D800C4F389 /* en */,
 			);
-			name = SSViewController_iPad.xib;
+			name = SSMainViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 		28DC550C16EEB7D800C4F389 /* InfoPlist.strings */ = {
@@ -472,6 +482,7 @@
 				28DC551616EEB7D800C4F389 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28DC551716EEB7D800C4F389 /* Build configuration list for PBXNativeTarget "SpartanMissileStrikeTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +491,7 @@
 				28DC551916EEB7D800C4F389 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
