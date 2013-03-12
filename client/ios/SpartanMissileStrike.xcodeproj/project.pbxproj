@@ -12,6 +12,10 @@
 		28A9754616EEE72D007B970E /* html in Resources */ = {isa = PBXBuildFile; fileRef = 28A9754516EEE72D007B970E /* html */; };
 		28A9754A16EEEA67007B970E /* SSNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9754916EEEA67007B970E /* SSNativeBridge.m */; };
 		28A9754D16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9754C16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m */; };
+		28A9755516EF9AD8007B970E /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9755416EF9AD8007B970E /* SSAudioManager.m */; };
+		28A9755916EF9C4A007B970E /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755816EF9C4A007B970E /* sounds.plist */; };
+		28A9755B16EFA104007B970E /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755A16EFA104007B970E /* audio */; };
+		28A9755D16EFA1A1007B970E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A9755C16EFA1A1007B970E /* AVFoundation.framework */; };
 		28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
 		28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DE16EEB7D800C4F389 /* Foundation.framework */; };
 		28DC54E116EEB7D800C4F389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */; };
@@ -51,6 +55,11 @@
 		28A9754B16EEEF86007B970E /* NSString+CaseInsensitiveComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CaseInsensitiveComparison.h"; sourceTree = "<group>"; };
 		28A9754C16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CaseInsensitiveComparison.m"; sourceTree = "<group>"; };
 		28A9755116EF03F0007B970E /* SSNativeBridgeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSNativeBridgeDelegate.h; sourceTree = "<group>"; };
+		28A9755316EF9AD8007B970E /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
+		28A9755416EF9AD8007B970E /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
+		28A9755816EF9C4A007B970E /* sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sounds.plist; sourceTree = "<group>"; };
+		28A9755A16EFA104007B970E /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = audio; path = ../../shared/audio; sourceTree = "<group>"; };
+		28A9755C16EFA1A1007B970E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DC54DC16EEB7D800C4F389 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28DC54DE16EEB7D800C4F389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -81,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28A9755D16EFA1A1007B970E /* AVFoundation.framework in Frameworks */,
 				28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */,
 				28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */,
 				28DC54E116EEB7D800C4F389 /* CoreGraphics.framework in Frameworks */,
@@ -134,6 +144,8 @@
 		28A9754716EEE737007B970E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				28A9755816EF9C4A007B970E /* sounds.plist */,
+				28A9755A16EFA104007B970E /* audio */,
 				28A9754516EEE72D007B970E /* html */,
 			);
 			name = Resources;
@@ -161,6 +173,7 @@
 		28DC54D016EEB7D800C4F389 = {
 			isa = PBXGroup;
 			children = (
+				28A9755C16EFA1A1007B970E /* AVFoundation.framework */,
 				28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */,
 				28DC550916EEB7D800C4F389 /* SpartanMissileStrikeTests */,
 				28DC54DB16EEB7D800C4F389 /* Frameworks */,
@@ -193,6 +206,8 @@
 			children = (
 				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
 				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
+				28A9755316EF9AD8007B970E /* SSAudioManager.h */,
+				28A9755416EF9AD8007B970E /* SSAudioManager.m */,
 				28A9755216EF11E0007B970E /* NativeBridge */,
 				28A9754416EEDF03007B970E /* Views */,
 				28A9754716EEE737007B970E /* Resources */,
@@ -315,6 +330,8 @@
 				28DC54FC16EEB7D800C4F389 /* SSMainViewController_iPad.xib in Resources */,
 				28A9754216EEDE77007B970E /* SSSplashScreenViewController.xib in Resources */,
 				28A9754616EEE72D007B970E /* html in Resources */,
+				28A9755916EF9C4A007B970E /* sounds.plist in Resources */,
+				28A9755B16EFA104007B970E /* audio in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +372,7 @@
 				28A9753A16EED0C7007B970E /* SSSplashScreenViewController.m in Sources */,
 				28A9754A16EEEA67007B970E /* SSNativeBridge.m in Sources */,
 				28A9754D16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m in Sources */,
+				28A9755516EF9AD8007B970E /* SSAudioManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
