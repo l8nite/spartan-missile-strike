@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSViewController : UIViewController
+@interface SSMainViewController : UIViewController
 
 @end

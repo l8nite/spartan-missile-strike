@@ -8,7 +8,7 @@
 
 #import "SSAppDelegate.h"
 
-#import "SSViewController.h"
+#import "SSMainViewController.h"
 
 @implementation SSAppDelegate
 
@@ -17,9 +17,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[SSViewController alloc] initWithNibName:@"SSViewController_iPhone" bundle:nil];
+        self.viewController = [[SSMainViewController alloc] initWithNibName:@"SSMainViewController_iPhone" bundle:nil];
     } else {
-        self.viewController = [[SSViewController alloc] initWithNibName:@"SSViewController_iPad" bundle:nil];
+        self.viewController = [[SSMainViewController alloc] initWithNibName:@"SSMainViewController_iPad" bundle:nil];
     }
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
