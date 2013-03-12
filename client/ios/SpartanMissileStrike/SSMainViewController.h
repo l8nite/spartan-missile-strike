@@ -11,10 +11,12 @@
 #import "SSSplashScreenViewController.h"
 
 @class SSNativeBridge;
+@class SSAudioManager;
 
 @interface SSMainViewController : UIViewController <SSNativeBridgeDelegate>
 
 @property (strong, nonatomic) SSNativeBridge *nativeBridge;
+@property (strong, nonatomic) SSAudioManager *audioManager;
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
