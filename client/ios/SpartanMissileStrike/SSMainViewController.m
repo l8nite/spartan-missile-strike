@@ -9,17 +9,21 @@
 #import "SSAppDelegate.h"
 #import "SSMainViewController.h"
 #import "SSNativeBridge.h"
+#import "SSAudioManager.h"
 #import "NSString+CaseInsensitiveComparison.h"
 
 @implementation SSMainViewController
 
 @synthesize webView;
 @synthesize nativeBridge;
+@synthesize audioManager;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    audioManager = [[SSAudioManager alloc] init];
 
     // initialize the native bridge
     nativeBridge = [[SSNativeBridge alloc] init];
@@ -36,6 +40,7 @@
 
 - (void)viewDidUnload
 {
+    [self setAudioManager:nil];
     [self setNativeBridge:nil];
     [self setWebView:nil];
     [super viewDidUnload];
@@ -50,6 +55,8 @@
 
 -(void)nativeBridgeFunction:(NSString *)function withArguments:(NSDictionary *)arguments
 {
+    NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
+    
     if ([function isEqualIgnoringCase:@"getLocationUpdates"]) {
     }
     else if ([function isEqualIgnoringCase:@"getOrientationUpdates"]) {
@@ -68,8 +75,12 @@
         // trigger facebook authentication flow if we don't have access token already
     }
     else if ([function isEqualIgnoringCase:@"playSound"]) {
+        NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
+        [audioManager playSound:soundIdentifier];
     }
     else if ([function isEqualIgnoringCase:@"stopSound"]) {
+        NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
+        [audioManager stopSound:soundIdentifier];
     }
     else if ([function isEqualIgnoringCase:@"hideSplash"]) {
         [(SSAppDelegate *)[[UIApplication sharedApplication] delegate] hideSplashScreen];
