@@ -28,7 +28,6 @@ NativeBridge_iOS.prototype._getOrientationUpdates = function (activate, callback
 };
 
 NativeBridge_iOS.prototype._getCurrentLocation = function (callbackID) {
-    alert('gotcha');
 	this._appendIframe("spartan-missile-strike://getCurrentLocation/?arguments="
 		+ JSON.stringify({
 			identifier : callbackID
