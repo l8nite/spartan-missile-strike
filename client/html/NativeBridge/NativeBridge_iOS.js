@@ -79,7 +79,11 @@ NativeBridge_iOS.prototype.logoutFacebook = function () {
 	this._appendIframe("spartan-missile-strike://logoutFacebook/?arguments=");
 };
 
-NativeBridge_iOS.prototype.playSound = function (options) {
+NativeBridge_iOS.prototype.playSound = function (soundID, options) {
+	if (!options) {
+		options = {};
+	}
+	options.soundID = soundID;
 	this._appendIframe("spartan-missile-strike://playSound/?arguments="
 		+ JSON.stringify(options)
 	);
