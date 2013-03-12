@@ -9,20 +9,30 @@
 #import "SSAppDelegate.h"
 
 #import "SSMainViewController.h"
+#import "SSSplashScreenViewController.h"
 
 @implementation SSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.viewController = [[SSMainViewController alloc] initWithNibName:@"SSMainViewController_iPhone" bundle:nil];
     } else {
         self.viewController = [[SSMainViewController alloc] initWithNibName:@"SSMainViewController_iPad" bundle:nil];
     }
+    
     self.window.rootViewController = self.viewController;
+    
     [self.window makeKeyAndVisible];
+    
+    SSSplashScreenViewController* splashScreenViewController = [[SSSplashScreenViewController alloc] initWithNibName:@"SSSplashScreenViewController" bundle:[NSBundle mainBundle]];
+    splashScreenViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    [self.window.rootViewController presentModalViewController:splashScreenViewController animated:NO];
+    
     return YES;
 }
 
