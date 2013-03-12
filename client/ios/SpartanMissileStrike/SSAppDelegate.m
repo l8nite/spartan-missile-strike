@@ -31,7 +31,7 @@
     SSSplashScreenViewController* splashScreenViewController = [[SSSplashScreenViewController alloc] initWithNibName:@"SSSplashScreenViewController" bundle:[NSBundle mainBundle]];
     splashScreenViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    [self.window.rootViewController presentModalViewController:splashScreenViewController animated:NO];
+    [self.window.rootViewController presentViewController:splashScreenViewController animated:NO completion:nil];
     
     return YES;
 }
