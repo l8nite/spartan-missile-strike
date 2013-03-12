@@ -61,6 +61,7 @@
 		2872BEA316EFB9730051E707 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_57.png; sourceTree = "<group>"; };
 		2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_114.png; sourceTree = "<group>"; };
+		2872BEA916EFC1980051E707 /* SSFacebookManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookManagerDelegate.h; sourceTree = "<group>"; };
 		28A9753716EED0C7007B970E /* SSSplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSSplashScreenViewController.h; path = SpartanMissileStrike/SSSplashScreenViewController.h; sourceTree = "<group>"; };
 		28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSSplashScreenViewController.m; path = SpartanMissileStrike/SSSplashScreenViewController.m; sourceTree = "<group>"; };
 		28A9754116EEDE77007B970E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SpartanMissileStrike/en.lproj/SSSplashScreenViewController.xib; sourceTree = "<group>"; };
@@ -241,6 +242,7 @@
 			children = (
 				28A9756D16EFAFD4007B970E /* SSFacebookManager.h */,
 				28A9756E16EFAFD5007B970E /* SSFacebookManager.m */,
+				2872BEA916EFC1980051E707 /* SSFacebookManagerDelegate.h */,
 				28A9755E16EFA6BC007B970E /* AudioManager */,
 				28A9755216EF11E0007B970E /* NativeBridge */,
 				28A9754416EEDF03007B970E /* Views */,
