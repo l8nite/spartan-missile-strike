@@ -97,25 +97,40 @@ GameMaster.prototype._getGamesFromService = function () {
 
 /* Find out the common names of obscure user ids.
  * Returns a deferred to be resolved with array of names.
+ * Takes a contiguous array.
  */
 GameMaster.prototype._getNamesFromService = function (userids) {
-	function allNamesResolved() {
-		for (var i in userids) {
-			if (!names[i]) {
-				return false;
-			}
-			return true;
-		}
-	}
 	var d = new $.Deferred();
 	var names = [];
+	var responses = 0;
 	for (var j in userids) {
 		$.ajax({
-			url: Imports.serviceurl + "/users/" + this.userid + "/games",
+			url: Imports.serviceurl + "/users/" + userids[j],
 			headers: {
 				"MissileAppSessionId": this._sessionid
 			},
 			dataType: "json"
+		}).done(function (response) {
+			names[response.id] = {
+				username: response.username
+			};
+			$.ajax({
+				url: "http://graph.facebook.com/" + response.facebook_id,
+				dataType: "json"
+			}).done(function (fbResponse) {
+				names[response.id].realname = fbResponse.name;
+			}).always(function () {
+				responses++;
+				if (responses === userids.length) {
+					d.resolve(names);
+				}
+			});
+		}).fail(function () {
+			responses++;
+		}).always(function () {
+			if (responses === userids.length) {
+				d.resolve(names);
+			}
 		});
 	}
 	return d;
