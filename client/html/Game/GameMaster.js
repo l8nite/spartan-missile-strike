@@ -40,14 +40,14 @@ GameMaster.prototype.getGames = function () {
 		var newGames = response;
 		for (var i in that._games.games) {
 			var outofdate = false;
-			for (var j in newGames) {
-				if (that._games.games[i].id === newGames[j].id) {
+			for (var j in response) {
+				if (that._games.games[i].id === response[j].id) {
 					outofdate = true;
 					break;
 				}
 			}
 			if (!outofdate) {
-				newGames.push(that._games.games[i].id);
+				newGames.push(that._games.games[i]);
 			}
 		}
 		that._games.games = newGames;
@@ -177,4 +177,4 @@ GameMaster.prototype._notifyListeners = function () {
 };
 
 // How long before games datastructure becomes stale
-GameMaster.prototype._STALE = 60000;
+GameMaster.prototype._STALE = 10000;

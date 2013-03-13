@@ -89,7 +89,6 @@
 					d.reject();
 				}, 500);
 			}
-			// {username, realname}
 			return d;
 		};
 
@@ -99,9 +98,9 @@
 </head>
 <body>
 	<div id="main-menu">
-		<div id="list-yourturn"></div>
-		<div id="list-histurn"></div>
-		<div id="list-complete"></div>
+		<div id="list-yourturn"><h1>Your Turn</h1></div>
+		<div id="list-histurn"><h1>Not Your Turn</h1></div>
+		<div id="list-complete"><h1>Nobody's Turn</h1></div>
 		<div style="display: none;">
 			<div id="game-prototype">
 				<span class="opponent"></span>
