@@ -40,7 +40,7 @@ GameMaster.prototype.getGames = function () {
 		if (response && response.length > 0) {
 			var newGames = [];
 			for (var i in response) {
-				newGames.push(newGames[i]);
+				newGames.push(response[i]);
 			}
 			for (var i in that._games.games) {
 				var outofdate = false;
