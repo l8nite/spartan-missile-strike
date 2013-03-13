@@ -8,10 +8,11 @@
 
 #import "SSLocationManager.h"
 
-typedef void (^SSLocationManagerLocationChangedCallback)(void);
-
 @implementation SSLocationManager
+
 @synthesize locationManager;
+@synthesize locationManagerCallback;
+
 -(id)init
 {
     if (self = [super init]) {
@@ -25,12 +26,22 @@ typedef void (^SSLocationManagerLocationChangedCallback)(void);
 
 -(void)startUpdatingLocationWithCallback:(SSLocationManagerLocationChangedCallback)callback
 {
+    locationManagerCallback = callback;
+
+    [locationManager startUpdatingLocation];
     // push callback on queue? assume only one ever?
 }
 
 -(void)stopUpdatingLocation
 {
     [locationManager stopUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager*)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *lastLocationUpdate = [locations lastObject];
+    CLLocationCoordinate2D lastLocation = [lastLocationUpdate coordinate];
+    [self locationManagerCallback](lastLocation);
 }
 
 @end
