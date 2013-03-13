@@ -156,7 +156,7 @@ NativeBridge_Abstract.prototype.getLocationUpdates = function (activate, callbac
 			this._getLocationUpdatesCBs = new Fridge();
 			var id = this._getLocationUpdatesCBs.add(callback);
 			this._getLocationUpdates(true, this._registerCallback(function (response) {
-				var a = that._getLocationUpdatesCBs.get();
+				var a = that._getLocationUpdatesCBs.getAll();
 				for (var i in a) {
 					a[i](response);
 				}
