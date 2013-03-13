@@ -10,6 +10,7 @@
 		281AD97116F08CA000E7625C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97016F08CA000E7625C /* AudioToolbox.framework */; };
 		281AD97416F0911300E7625C /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AD97316F0911300E7625C /* SSLocationManager.m */; };
 		281AD97816F1427D00E7625C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97616F1424E00E7625C /* CoreLocation.framework */; };
+		281AD97B16F1464E00E7625C /* SSOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AD97A16F1464E00E7625C /* SSOrientationManager.m */; };
 		283C133C16F0617800D7E351 /* SSFiringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 283C133A16F0617800D7E351 /* SSFiringViewController.m */; };
 		283C133D16F0617800D7E351 /* SSFiringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283C133B16F0617800D7E351 /* SSFiringViewController.xib */; };
 		283C134D16F0803900D7E351 /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 283C134C16F0803900D7E351 /* SSPreferenceManager.m */; };
@@ -64,6 +65,8 @@
 		281AD97216F0911300E7625C /* SSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLocationManager.h; sourceTree = "<group>"; };
 		281AD97316F0911300E7625C /* SSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
 		281AD97616F1424E00E7625C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		281AD97916F1464E00E7625C /* SSOrientationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOrientationManager.h; sourceTree = "<group>"; };
+		281AD97A16F1464E00E7625C /* SSOrientationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOrientationManager.m; sourceTree = "<group>"; };
 		283C133916F0617800D7E351 /* SSFiringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringViewController.h; sourceTree = "<group>"; };
 		283C133A16F0617800D7E351 /* SSFiringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFiringViewController.m; sourceTree = "<group>"; };
 		283C133B16F0617800D7E351 /* SSFiringViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSFiringViewController.xib; sourceTree = "<group>"; };
@@ -155,6 +158,15 @@
 				281AD97316F0911300E7625C /* SSLocationManager.m */,
 			);
 			name = LocationManager;
+			sourceTree = "<group>";
+		};
+		281AD97C16F1465800E7625C /* OrientationManager */ = {
+			isa = PBXGroup;
+			children = (
+				281AD97916F1464E00E7625C /* SSOrientationManager.h */,
+				281AD97A16F1464E00E7625C /* SSOrientationManager.m */,
+			);
+			name = OrientationManager;
 			sourceTree = "<group>";
 		};
 		283C133816F05B3100D7E351 /* FacebookManager */ = {
@@ -296,6 +308,7 @@
 		28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */ = {
 			isa = PBXGroup;
 			children = (
+				281AD97C16F1465800E7625C /* OrientationManager */,
 				281AD97516F0911800E7625C /* LocationManager */,
 				283C134E16F0803F00D7E351 /* PreferenceManager */,
 				283C133816F05B3100D7E351 /* FacebookManager */,
@@ -477,6 +490,7 @@
 				283C133C16F0617800D7E351 /* SSFiringViewController.m in Sources */,
 				283C134D16F0803900D7E351 /* SSPreferenceManager.m in Sources */,
 				281AD97416F0911300E7625C /* SSLocationManager.m in Sources */,
+				281AD97B16F1464E00E7625C /* SSOrientationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
