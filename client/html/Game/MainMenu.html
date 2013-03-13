@@ -8,6 +8,7 @@
 	<script src="../View/MainView.js"></script>
 	<script src="../View/View.js"></script>
 	<script src="../Game/MainMenu.js"></script>
+	<script src="../Game/MapView.js"></script>
 	<script>
 	window.onload = function () {
 		var Imports = {
@@ -22,26 +23,30 @@
 		var c = 0;
 		Imports.GameMaster._getGamesFromService = function (fromWhen) {
 			var d = new $.Deferred();
-			var games = [{
-				id: "game:0",
-				status: "active",
-				creator: "user:0001",
-				opponent: "user:0002",
-				current: "user:0001"
-			}, {
-				id: "game:1",
-				status: "active",
-				creator: "user:0003",
-				opponent: "user:0001",
-				current: "user:0003"
-			}, {
-				id: "game:2",
-				status: "completed",
-				creator: "user:0001",
-				opponent: "user:0004",
-				current: "user:0001"
-			}];
-			if (++c === 3) {
+			var games = [];
+			if (c === 0) {
+				games.push({
+					id: "game:0",
+					status: "active",
+					creator: "user:0001",
+					opponent: "user:0002",
+					current: "user:0001"
+				});
+				games.push({
+					id: "game:1",
+					status: "active",
+					creator: "user:0003",
+					opponent: "user:0001",
+					current: "user:0003"
+				});
+				games.push({
+					id: "game:2",
+					status: "completed",
+					creator: "user:0001",
+					opponent: "user:0004",
+					current: "user:0001"
+				});
+			} else if (c === 3) {
 				games.push({
 					id: "game:3",
 					status: "active",
@@ -49,8 +54,15 @@
 					opponent: "user:0001",
 					current: "user:0001"
 				});
-				games[1].current = "user:0001";
+				games.push({
+					id: "game:1",
+					status: "active",
+					creator: "user:0003",
+					opponent: "user:0001",
+					current: "user:0001"
+				});
 			}
+			c++;
 			setTimeout(function () {
 				d.resolve(games);
 			}, 1000)
