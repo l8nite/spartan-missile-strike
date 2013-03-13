@@ -14,10 +14,12 @@
 #import "SSFacebookManager.h"
 #import "SSSplashScreenViewController.h"
 #import "SSFiringViewController.h"
+#import "SSPreferenceManager.h"
+#import <AudioToolbox/AudioServices.h>
 
 @implementation SSMainViewController
 
-@synthesize webView, nativeBridge, audioManager, facebookManager, firingViewController;
+@synthesize webView, nativeBridge, audioManager, facebookManager, firingViewController, preferenceManager;
 
 - (void)viewDidLoad
 {
@@ -25,6 +27,7 @@
 
     facebookManager = [[SSFacebookManager alloc] init];
     audioManager = [[SSAudioManager alloc] init];
+    preferenceManager = [[SSPreferenceManager alloc] init];
     nativeBridge = [[SSNativeBridge alloc] initWithWebView:webView andDelegate:self];
 
     webView.backgroundColor = [UIColor clearColor];
@@ -100,12 +103,20 @@
         [self showFiringScreen];
     }
     else if ([function isEqualIgnoringCase:@"getPreference"]) {
+        [preferenceManager getPreferences:[arguments objectForKey:@"preferences"] withCompletionHandler:^(NSDictionary *preferences) {
+            [nativeBridge callbackWithDictionary:preferences forFunction:function withArguments:arguments];
+        }];
     }
     else if ([function isEqualIgnoringCase:@"setPreference"]) {
+        __weak typeof(self) weakSelf = self;
+        [preferenceManager setPreferences:[arguments objectForKey:@"preferences"] withCompletionHandler:^(BOOL success) {
+            NSDictionary *response = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:success] forKey:@"succeeded"];
+            [weakSelf.nativeBridge callbackWithDictionary:response forFunction:function withArguments:arguments];
+        }];
     }
     else if ([function isEqualIgnoringCase:@"getFacebookAccessToken"]) {
         [facebookManager getAccessTokenWith:^(NSString *accessToken) {
-            [nativeBridge callbackWithResult:accessToken forFunction:function withArguments:arguments];
+            [nativeBridge callbackWithString:accessToken forFunction:function withArguments:arguments];
         }];
     }
     else if ([function isEqualIgnoringCase:@"playSound"]) {
@@ -122,6 +133,7 @@
         [self hideSplashScreen];
     }
     else if ([function isEqualIgnoringCase:@"vibrate"]) {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
 }
 
