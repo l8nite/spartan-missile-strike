@@ -36,7 +36,7 @@
                 }
                 
                 document.getElementById("debugPlaySound").onclick = function () {
-                    NativeBridge.playSound({soundID: "background_music"});
+                    NativeBridge.playSound("background_music", { loop: true });
                     return false;
                 }
                 
@@ -64,7 +64,7 @@
                 
                 window.setTimeout(function () {
                                   NativeBridge.hideSplash();
-                                  NativeBridge.playSound({soundID: "background_music", loop: true});
+                                  NativeBridge.playSound("background_music", { loop: true });
                                   }, 3000);
             }
         </script>
