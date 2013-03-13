@@ -6,8 +6,7 @@
 function NativeBridge_Android() {
 	NativeBridge_Abstract.call(this);
 }
-NativeBridge_Android.prototype = new NativeBridge_Abstract();
-NativeBridge_Android.prototype.constructor = NativeBridge_Android;
+NativeBridge_Android.prototype = Object.create(NativeBridge_Abstract.prototype);
 
 NativeBridge_Android.prototype._getLocationUpdates = function (activate, callbackID) {
 	AndroidInterface.getLocationUpdates(activate, callbackID);
