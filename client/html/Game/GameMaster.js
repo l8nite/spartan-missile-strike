@@ -12,7 +12,8 @@
  * userid: User ID as per webservice
  * sessionid: Session ID as per webservice
  */
-function GameMaster(userid, sessionid) {
+function GameMaster(userid, sessionid, Imports) {
+	this.Imports = Imports;
 	this.userid = userid;
 	this._sessionid = sessionid;
 	this._listeners = new Fridge();
@@ -105,7 +106,7 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
 		headers["If-Modified-Since"] = fromWhen.toGMTString();
 	}
 	return $.ajax({
-		url: Imports.serviceurl + "/users/" + this.userid + "/games",
+		url: this.Imports.serviceurl + "/users/" + this.userid + "/games",
 		headers: headers,
 		dataType: "json"
 	});
@@ -118,7 +119,7 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
 GameMaster.prototype._getNameFromService = function (userid) {
 	var d = new $.Deferred();
 	$.ajax({
-		url: Imports.serviceurl + "/users/" + userid,
+		url: this.Imports.serviceurl + "/users/" + userid,
 		headers: {
 			"MissileAppSessionId": this._sessionid
 		},
