@@ -26,10 +26,25 @@ MainMenu.prototype.show = function () {
 };
 
 MainMenu.prototype._render = function (games) {
+	var that = this;
 	var gamePrototype = $("#" + this.Imports.domId["MainMenu"] + " #game-prototype");
 	for (var i in games) {
+		var opponentid = games[i].creator;
+		if (opponentid === this.Imports.GameMaster.userid) {
+			opponentid = games[i].opponent;
+		}
 		var g = gamePrototype.clone();
-		g.find(".opponent").replaceWith
+		g.find(".opponent").replaceWith(this.Imports.GameMaster.getName(opponentid));
+		g.click(function () {
+			that._showGame(games[i]);
+		});
+		if (games[i].status === "completed") {
+			$("#" + this.Imports.domId["MainMenu"] + " #list-complete").append(g);
+		} else if (games[i].current === opponentid) {
+			$("#" + this.Imports.domId["MainMenu"] + " #list-histurn").append(g);
+		} else {
+			$("#" + this.Imports.domId["MainMenu"] + " #list-yourturn").append(g);
+		}
 	}
 };
 
