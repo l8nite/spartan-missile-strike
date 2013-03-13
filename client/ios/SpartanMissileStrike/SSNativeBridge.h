@@ -22,7 +22,9 @@
 -(id)initWithWebView:(UIWebView*)webView andDelegate:(id<SSNativeBridgeDelegate>)delegate;
 
 -(void)callbackWithArray:(NSArray*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments;
+
 -(void)callbackWithDictionary:(NSDictionary*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments;
+
 -(void)callbackWithString:(NSString*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments;
 
 @end

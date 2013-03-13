@@ -1,5 +1,5 @@
 //
-//  SSViewController.m
+//  SSMainViewController.m
 //  SpartanMissileStrike
 //
 //  Created by Shaun Guth on 3/11/13.
@@ -94,14 +94,20 @@
 -(void)nativeBridgeFunction:(NSString *)function withArguments:(NSDictionary *)arguments
 {
     NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
-    
+
     if ([function isEqualIgnoringCase:@"getLocationUpdates"]) {
+        [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
+            NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
+            NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
+            NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
+
+            [locationDictionary setObject:latitude forKey:@"latitude"];
+            [locationDictionary setObject:longitude forKey:@"longitude"];
+            
+            [nativeBridge callbackWithDictionary:locationDictionary forFunction:function withArguments:arguments];
+        }];
     }
     else if ([function isEqualIgnoringCase:@"getOrientationUpdates"]) {
-        [locationManager ]
-    }
-    else if ([function isEqualIgnoringCase:@"getCurrentLocation"]) {
-        [nativeBridge callbackWithDictionary:[locationManager getCurrentLocation] forFunction:function withArguments:arguments];
     }
     else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
         [self showFiringScreen];

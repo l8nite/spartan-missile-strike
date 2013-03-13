@@ -1,5 +1,5 @@
 //
-//  SSViewController.h
+//  SSMainViewController.h
 //  SpartanMissileStrike
 //
 //  Created by Shaun Guth on 3/11/13.
