@@ -17,7 +17,9 @@ function GameMaster(userid, sessionid, Imports) {
 	this.userid = userid;
 	this._sessionid = sessionid;
 	this._listeners = new Fridge();
+	this._locationListeners = new Fridge();
 	this._cachedNames = [];
+	this._location = {};
 	this._games = {
 		when: null,
 		games: []
@@ -86,17 +88,40 @@ GameMaster.prototype.getName = function (userid) {
  * If GameMaster is currently not polling the webservice, it starts polling.
  */
 GameMaster.prototype.subscribe = function (when) {
-	when(this._games.games);
+	var that = this;
+	setTimeout(function () {
+		when(that._games.games);
+	}, 0);
 	this._startPollingService();
 	return this._listeners.add(when);
 };
 
 /* Unsubscribe a listener function.
  */
-GameMaster.prototype.unsubscribe = function (callbackid) {
-	this._listeners.remove(callbackid);
+GameMaster.prototype.unsubscribe = function (ticket) {
+	this._listeners.remove(ticket);
 	if (this._listeners.count() === 0) {
 		this._stopPollingService();
+	}
+};
+
+GameMaster.prototype.subscribeLocation = function (when) {
+	var that = this;
+	setTimeout(function () {
+		when(that._location);
+	}, 0);
+	if (!this._locationUpdatesTicket) {
+		this._locationUpdatesTicket = this.Imports.NativeBridge.getLocationUpdates(true, function (location) {
+			that._location = location;
+			that._notifyLocationListeners();
+		});
+	}
+};
+
+GameMaster.prototype.unsubscribeLocation = function (ticket) {
+	this._locationListeners.remove(ticket);
+	if (this._locationListeners.count() === 0) {
+		this.Imports.NativeBridge.getLocationUpdates(false, this._locationUpdatesTicket);
 	}
 };
 
@@ -178,6 +203,13 @@ GameMaster.prototype._notifyListeners = function (games) {
 	var a = this._listeners.getAll();
 	for (var i in a) {
 		a[i](games);
+	}
+};
+
+GameMaster.prototype._notifyLocationListeners = function (location) {
+	var a = this._locationListeners.getAll();
+	for (var i in a) {
+		a[i](location);
 	}
 };
 
