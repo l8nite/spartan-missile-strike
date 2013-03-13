@@ -47,7 +47,7 @@
     NSNumber *callbackIdentifier = (NSNumber*)[arguments objectForKey:@"identifier"];
     NSAssert(callbackIdentifier != nil, @"callback attempted, but no callback identifier present");
     
-    NSString *callbackJS = [NSString stringWithFormat:@"NativeBridge.callback(%d, '%@')", [callbackIdentifier integerValue], result];
+    NSString *callbackJS = [NSString stringWithFormat:@"NativeBridge.callback(%d, %@)", [callbackIdentifier integerValue], result];
     
     NSLog(@"Native Bridge: %@", callbackJS);
 
