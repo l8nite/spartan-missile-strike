@@ -7,19 +7,22 @@
 //
 
 #import "SSAppDelegate.h"
+#import "SSAudioManager.h"
+#import "SSFacebookManager.h"
+#import "SSFiringViewController.h"
+#import "SSLocationManager.h"
 #import "SSMainViewController.h"
 #import "SSNativeBridge.h"
-#import "SSAudioManager.h"
-#import "NSString+CaseInsensitiveComparison.h"
-#import "SSFacebookManager.h"
-#import "SSSplashScreenViewController.h"
-#import "SSFiringViewController.h"
 #import "SSPreferenceManager.h"
+#import "SSSplashScreenViewController.h"
+
+#import "NSString+CaseInsensitiveComparison.h"
+
 #import <AudioToolbox/AudioServices.h>
 
 @implementation SSMainViewController
 
-@synthesize webView, nativeBridge, audioManager, facebookManager, firingViewController, preferenceManager;
+@synthesize webView, nativeBridge, audioManager, facebookManager, firingViewController, preferenceManager, locationManager;
 
 - (void)viewDidLoad
 {
@@ -28,6 +31,7 @@
     facebookManager = [[SSFacebookManager alloc] init];
     audioManager = [[SSAudioManager alloc] init];
     preferenceManager = [[SSPreferenceManager alloc] init];
+    locationManager = [[SSLocationManager alloc] init];
     nativeBridge = [[SSNativeBridge alloc] initWithWebView:webView andDelegate:self];
 
     webView.backgroundColor = [UIColor clearColor];
@@ -94,10 +98,10 @@
     if ([function isEqualIgnoringCase:@"getLocationUpdates"]) {
     }
     else if ([function isEqualIgnoringCase:@"getOrientationUpdates"]) {
-    }
-    else if ([function isEqualIgnoringCase:@"getCurrentOrientation"]) {
+        [locationManager ]
     }
     else if ([function isEqualIgnoringCase:@"getCurrentLocation"]) {
+        [nativeBridge callbackWithDictionary:[locationManager getCurrentLocation] forFunction:function withArguments:arguments];
     }
     else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
         [self showFiringScreen];
