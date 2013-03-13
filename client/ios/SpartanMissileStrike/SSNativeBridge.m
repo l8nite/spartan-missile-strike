@@ -10,6 +10,8 @@
 #import "NSString+CaseInsensitiveComparison.h"
 #import "SSNativeBridgeDelegate.h"
 
+#define NSJSONWritingCompact 0
+
 @implementation SSNativeBridge
 
 @synthesize delegate = _delegate;
@@ -26,12 +28,28 @@
     return self;
 }
 
--(void)callbackWithResult:(NSString*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
+-(void)callbackWithArray:(NSArray*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
+{
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingCompact error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [self callbackWithString:jsonString forFunction:function withArguments:arguments];
+}
+
+-(void)callbackWithDictionary:(NSDictionary*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
+{
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingCompact error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [self callbackWithString:jsonString forFunction:function withArguments:arguments];
+}
+
+-(void)callbackWithString:(NSString*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
 {
     NSNumber *callbackIdentifier = (NSNumber*)[arguments objectForKey:@"identifier"];
     NSAssert(callbackIdentifier != nil, @"callback attempted, but no callback identifier present");
     
     NSString *callbackJS = [NSString stringWithFormat:@"NativeBridge.callback(%d, '%@')", [callbackIdentifier integerValue], result];
+    
+    NSLog(@"Native Bridge: %@", callbackJS);
 
     if ([_webView stringByEvaluatingJavaScriptFromString:callbackJS] == nil) {
         NSLog(@"Error executing callback: %@", callbackJS);

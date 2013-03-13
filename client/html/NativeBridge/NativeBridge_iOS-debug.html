@@ -21,7 +21,9 @@
                 }
 
                 document.getElementById("debugSetPreference").onclick = function () {
-                    NativeBridge.setPreference({one: "one", two: "two"});
+                    NativeBridge.setPreference({one: "one", two: "two"}, function (result) {
+                       alert(result);
+                    });
                     return false;
                 }
                 
@@ -62,6 +64,11 @@
                     return false;
                 }
                 
+                document.getElementById("debugVibrate").onclick = function () {
+                    NativeBridge.vibrate();
+                    return false;
+                }
+                
                 window.setTimeout(function () {
                                   NativeBridge.hideSplash();
                                   NativeBridge.playSound("background_music", { loop: true });
@@ -78,6 +85,7 @@
         <a id="debugStopSound" href="#">Stop Sound</a> <br/>
         <a id="debugShowFireMissileScreen" href="#">Show Fire Missile Screen</a> <br/>
         <a id="debugHideFireMissileScreen" href="#">Hide Fire Missile Screen</a> <br/>
+        <a id="debugVibrate" href="#">Vibrate</a> <br/>
         <a id="debugHideSplash" href="#">Hide Splash</a> <br/>
 	</body>
 </html>
