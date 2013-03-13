@@ -9,17 +9,14 @@
 #import "SSAppDelegate.h"
 
 #import "SSMainViewController.h"
-#import "SSSplashScreenViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation SSAppDelegate
-
-@synthesize splashScreenViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.viewController = [[SSMainViewController alloc] initWithNibName:@"SSMainViewController_iPhone" bundle:nil];
     } else {
@@ -29,25 +26,10 @@
     self.window.rootViewController = self.viewController;
 
     [self.window makeKeyAndVisible];
-  
-    [self showSplashScreen];
+    
+    [self.viewController showSplashScreen];
 
     return YES;
-}
-
-- (void)showSplashScreen
-{
-    NSAssert(splashScreenViewController == nil, @"showSplashScreen but splashScreenViewController is not nil");
-    splashScreenViewController = [[SSSplashScreenViewController alloc] initWithNibName:@"SSSplashScreenViewController" bundle:[NSBundle mainBundle]];
-    splashScreenViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self.viewController presentViewController:splashScreenViewController animated:NO completion:nil];
-}
-
-- (void)hideSplashScreen
-{
-    NSAssert(splashScreenViewController != nil, @"hideSplashScreen but splashScreenViewController is nil");
-    [splashScreenViewController dismissViewControllerAnimated:YES completion:nil];
-    splashScreenViewController = nil;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -79,7 +61,8 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return [self.viewController handleOpenURL:url];
+    // Allow Facebook to intercept openURL requests that it knows about
+    return [FBSession.activeSession handleOpenURL:url];
 }
 
 @end

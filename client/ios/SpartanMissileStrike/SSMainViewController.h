@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SSNativeBridgeDelegate.h"
-#import "SSFacebookManagerDelegate.h"
-#import "SSSplashScreenViewController.h"
 
 @class SSNativeBridge;
 @class SSAudioManager;
 @class SSFacebookManager;
 
-@interface SSMainViewController : UIViewController <SSNativeBridgeDelegate, SSFacebookManagerDelegate>
+@interface SSMainViewController : UIViewController <SSNativeBridgeDelegate>
 
 @property (strong, nonatomic) SSNativeBridge *nativeBridge;
 @property (strong, nonatomic) SSAudioManager *audioManager;
@@ -23,7 +21,6 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
--(void)initializeHtmlContent;
--(BOOL)handleOpenURL:(NSURL *)url;
+-(void)showSplashScreen;
 
 @end

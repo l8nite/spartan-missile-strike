@@ -7,17 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@protocol SSFacebookManagerDelegate;
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface SSFacebookManager : NSObject
 
-@property (unsafe_unretained) id<SSFacebookManagerDelegate> delegate;
-
--(BOOL)isLoggedIn;
--(void)openSession;
--(void)handleDidBecomeActive;
--(BOOL)handleOpenURL:(NSURL *)url;
--(NSString *)accessToken;
+-(void)openSessionAndContinueWith:(void (^)(FBSessionState sessionState))stateHandler;
+-(void)getAccessTokenWith:(void (^)(NSString* accessToken))tokenHandler;
 
 @end

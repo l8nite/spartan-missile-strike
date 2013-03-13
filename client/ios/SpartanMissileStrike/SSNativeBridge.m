@@ -12,7 +12,19 @@
 
 @implementation SSNativeBridge
 
-@synthesize delegate;
+@synthesize delegate = _delegate;
+@synthesize webView = _webView;
+
+-(id)initWithWebView:(UIWebView*)webView andDelegate:(id<SSNativeBridgeDelegate>)delegate
+{
+    if (self = [super init]) {
+        _delegate = delegate;
+        _webView = webView;
+        [_webView setDelegate:self];
+    }
+
+    return self;
+}
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -36,7 +48,7 @@
         NSString *value = [[components objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
         [parameters setObject:value forKey:key];
     }
-    
+
     // get 'arguments' parameter and deserialize JSON (if present)
     NSString *argumentsParam = [parameters objectForKey:@"arguments"];
     NSDictionary *nativeBridgeFunctionArguments = nil;
@@ -46,10 +58,21 @@
     }
     
     // dispatch event to delegate
-    [delegate nativeBridgeFunction:nativeBridgeFunction withArguments:nativeBridgeFunctionArguments];
+    [_delegate nativeBridgeFunction:nativeBridgeFunction withArguments:nativeBridgeFunctionArguments];
 
     return NO;
 }
 
+-(void)callbackWithResult:(NSString*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
+{
+    NSNumber *callbackIdentifier = (NSNumber*)[arguments objectForKey:@"identifier"];
+    NSAssert(callbackIdentifier != nil, @"callback attempted, but no callback identifier present");
+    
+    NSString *callbackJS = [NSString stringWithFormat:@"NativeBridge.callback(%d, '%@')", [callbackIdentifier integerValue], result];
+
+    if ([_webView stringByEvaluatingJavaScriptFromString:callbackJS] == nil) {
+        NSLog(@"Error executing callback: %@", callbackJS);
+    }
+}
 
 @end
