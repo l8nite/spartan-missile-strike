@@ -5,7 +5,7 @@
  */
 function MainMenu(Imports) {
 	this.Imports = Imports;
-	var mainMenuView = View.call(this, this.Imports.domId["MainMenu"]);
+	var mainMenuView = View.call(this, this.Imports.domId["MainMenu"], Imports);
 	// TODO Wire static button events
 }
 
