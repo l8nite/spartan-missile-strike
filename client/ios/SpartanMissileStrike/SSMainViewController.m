@@ -12,77 +12,34 @@
 #import "SSAudioManager.h"
 #import "NSString+CaseInsensitiveComparison.h"
 #import "SSFacebookManager.h"
+#import "SSSplashScreenViewController.h"
 
 @implementation SSMainViewController
 
-@synthesize webView;
-@synthesize nativeBridge;
-@synthesize audioManager;
-@synthesize facebookManager;
+@synthesize webView, nativeBridge, audioManager, facebookManager;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
 
-    // initialize facebook sdk and start log-in process
     facebookManager = [[SSFacebookManager alloc] init];
-    [facebookManager setDelegate:self];
-
-    [facebookManager openSession];
-
-    // listen for events that interest us
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-    
-}
-
-- (void)applicationDidBecomeActive
-{
-    [facebookManager handleDidBecomeActive];
-}
-
-- (BOOL)handleOpenURL:(NSURL *)url
-{
-    return [facebookManager handleOpenURL:url];
-}
-
-- (void)facebookUserDidLogIn
-{
     audioManager = [[SSAudioManager alloc] init];
+    
+    nativeBridge = [[SSNativeBridge alloc] initWithWebView:webView andDelegate:self];
 
-    // initialize the native bridge
-    nativeBridge = [[SSNativeBridge alloc] init];
-    [nativeBridge setDelegate:self];
-    [webView setDelegate:nativeBridge];
-
-    [self initializeHtmlContent];
-}
-
-- (void)facebookUserDidLogOut
-{
-    [facebookManager openSession];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSURL *indexURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/NativeBridge/NativeBridge_iOS-debug" ofType:@"html"] isDirectory:NO];
+    NSURLRequest *initialLoadRequest = [NSURLRequest requestWithURL:indexURL];
+    [webView loadRequest:initialLoadRequest];
 }
 
 - (void)viewDidUnload
 {
-    [self setFacebookManager:nil];
-    [self setAudioManager:nil];
-    [self setNativeBridge:nil];
-    [self setWebView:nil];
-    [super viewDidUnload];
-}
+    facebookManager = nil;
+    audioManager = nil;
+    nativeBridge = nil;
+    webView = nil;
 
-- (void)initializeHtmlContent
-{
-    NSURL *indexURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/NativeBridge/NativeBridge_iOS-debug" ofType:@"html"] isDirectory:NO];
-    NSURLRequest *initialLoadRequest = [NSURLRequest requestWithURL:indexURL];
-    [webView loadRequest:initialLoadRequest];
+    [super viewDidUnload];
 }
 
 -(void)nativeBridgeFunction:(NSString *)function withArguments:(NSDictionary *)arguments
@@ -104,9 +61,9 @@
     else if ([function isEqualIgnoringCase:@"setPreference"]) {
     }
     else if ([function isEqualIgnoringCase:@"getFacebookAccessToken"]) {
-        NSInteger callbackIdentifier = (NSInteger)[arguments objectForKey:@"identifier"];
-        NSString *facebookAccessToken = [facebookManager accessToken];
-        [self nativeBridgeCallback:callbackIdentifier withString:facebookAccessToken];
+        [facebookManager getAccessTokenWith:^(NSString *accessToken) {
+            [nativeBridge callbackWithResults:accessToken forFunction:function withArguments:arguments];
+        }];
     }
     else if ([function isEqualIgnoringCase:@"playSound"]) {
         NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
@@ -119,17 +76,28 @@
         [audioManager stopSound:soundIdentifier];
     }
     else if ([function isEqualIgnoringCase:@"hideSplash"]) {
-        [(SSAppDelegate *)[[UIApplication sharedApplication] delegate] hideSplashScreen];
+        [self hideSplashScreen];
     }
     else if ([function isEqualIgnoringCase:@"vibrate"]) {
     }
 }
 
--(void)nativeBridgeCallback:(NSInteger)callbackIdentifier withString:(NSString *)argument
+
+
+-(void)showSplashScreen
 {
-    // TODO - this doesn't appear to be working yet?
-    NSString *callbackJS = [NSString stringWithFormat:@"NativeBridge.callback(%d, '%@')", callbackIdentifier, argument];
-    [webView stringByEvaluatingJavaScriptFromString:callbackJS];
+    if ([self presentedViewController] == nil) {
+        SSSplashScreenViewController *splashScreenViewController = [[SSSplashScreenViewController alloc] initWithNibName:@"SSSplashScreenViewController" bundle:[NSBundle mainBundle]];
+        splashScreenViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:splashScreenViewController animated:NO completion:nil];
+    }
+}
+
+-(void)hideSplashScreen
+{
+    if ([[self presentedViewController] isKindOfClass:[SSSplashScreenViewController class]]) {
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end

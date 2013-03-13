@@ -38,6 +38,11 @@
                     return false;
                 }
                 
+                document.getElementById("debugHideSplash").onclick = function () {
+                    NativeBridge.hideSplash();
+                    return false;
+                }
+                
                 window.setTimeout(function () {
                                   NativeBridge.hideSplash();
                                   NativeBridge.playSound({soundID: "background_music", loop: true});
@@ -52,6 +57,6 @@
         <a id="debugGetFacebookAccessToken" href="#">Get Facebook Access Token</a> <br/>
         <a id="debugPlaySound" href="#">Play Sound</a> <br/>
         <a id="debugStopSound" href="#">Stop Sound</a> <br/>
-        <a href="spartan-missile-strike://hideSplash/?arguments=">hideSplash</a>
+        <a id="debugHideSplash" href="#">Hide Splash</a> <br/>
 	</body>
 </html>
