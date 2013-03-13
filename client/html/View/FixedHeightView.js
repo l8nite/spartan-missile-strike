@@ -5,4 +5,4 @@ function FixedHeightView(domNode) {
     }
 }
 
-FixedHeightView.prototype = View.prototype;
+FixedHeightView.prototype = Object.create(View.prototype);

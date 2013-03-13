@@ -98,12 +98,15 @@ GameMaster.prototype.unsubscribe = function (callbackid) {
  * Returns a deferred to be resolved with the games array
  */
 GameMaster.prototype._getGamesFromService = function (fromWhen) {
+	var headers = {
+		"MissileAppSessionId": this._sessionid
+	};
+	if (fromWhen) {
+		headers["If-Modified-Since"] = fromWhen.toGMTString();
+	}
 	return $.ajax({
 		url: Imports.serviceurl + "/users/" + this.userid + "/games",
-		headers: {
-			"MissileAppSessionId": this._sessionid,
-			"If-Modified-Since": fromWhen.toGMTString()
-		},
+		headers: headers,
 		dataType: "json"
 	});
 };
