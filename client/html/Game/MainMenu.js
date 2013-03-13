@@ -4,7 +4,7 @@
  * Call MainMenu with the DOM ID of that markup.
  */
 function MainMenu(Imports) {
-	var mainMenuView = View.call(this, Imports.domId["MainMenu"], Imports);
+	View.call(this, Imports.domId["MainMenu"], Imports);
 	// TODO Wire static button events
 }
 
@@ -63,5 +63,5 @@ MainMenu.prototype._showGame = function (game) {
 	if (!this.mapView) {
 		this.mapView = new MapView(this.Imports);
 	}
-	this.mapView.showGame(game);
+	this.mapView.show(game);
 };

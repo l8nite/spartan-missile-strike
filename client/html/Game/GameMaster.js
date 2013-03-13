@@ -37,22 +37,27 @@ GameMaster.prototype.getGames = function () {
 		updated = this._games.games[0].updated;
 	}
 	return this._getGamesFromService(updated).done(function (response) {
-		var newGames = response;
-		for (var i in that._games.games) {
-			var outofdate = false;
-			for (var j in response) {
-				if (that._games.games[i].id === response[j].id) {
-					outofdate = true;
-					break;
+		if (response && response.length > 0) {
+			var newGames = [];
+			for (var i in response) {
+				newGames.push(newGames[i]);
+			}
+			for (var i in that._games.games) {
+				var outofdate = false;
+				for (var j in newGames) {
+					if (that._games.games[i].id === newGames[j].id) {
+						outofdate = true;
+						break;
+					}
+				}
+				if (!outofdate) {
+					newGames.push(that._games.games[i]);
 				}
 			}
-			if (!outofdate) {
-				newGames.push(that._games.games[i]);
-			}
+			that._games.games = newGames;
+			that._notifyListeners(response);
 		}
-		that._games.games = newGames;
 		that._games.when = new Date();
-		that._notifyListeners();
 	});
 };
 
@@ -169,10 +174,10 @@ GameMaster.prototype._stopPollingService = function () {
 
 /* Call all listeners with current games array
  */
-GameMaster.prototype._notifyListeners = function () {
+GameMaster.prototype._notifyListeners = function (games) {
 	var a = this._listeners.getAll();
 	for (var i in a) {
-		a[i](this._games.games);
+		a[i](games);
 	}
 };
 
