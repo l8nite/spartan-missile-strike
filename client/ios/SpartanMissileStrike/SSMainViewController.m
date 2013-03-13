@@ -13,10 +13,11 @@
 #import "NSString+CaseInsensitiveComparison.h"
 #import "SSFacebookManager.h"
 #import "SSSplashScreenViewController.h"
+#import "SSFiringViewController.h"
 
 @implementation SSMainViewController
 
-@synthesize webView, nativeBridge, audioManager, facebookManager;
+@synthesize webView, nativeBridge, audioManager, facebookManager, firingViewController;
 
 - (void)viewDidLoad
 {
@@ -24,8 +25,9 @@
 
     facebookManager = [[SSFacebookManager alloc] init];
     audioManager = [[SSAudioManager alloc] init];
-    
     nativeBridge = [[SSNativeBridge alloc] initWithWebView:webView andDelegate:self];
+
+    webView.backgroundColor = [UIColor clearColor];
 
     NSURL *indexURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/NativeBridge/NativeBridge_iOS-debug" ofType:@"html"] isDirectory:NO];
     NSURLRequest *initialLoadRequest = [NSURLRequest requestWithURL:indexURL];
@@ -58,6 +60,26 @@
     }
 }
 
+-(void)showFiringScreen
+{
+    if (firingViewController != nil) {
+        return;
+    }
+
+    firingViewController = [[SSFiringViewController alloc] initWithNibName:@"SSFiringViewController" bundle:[NSBundle mainBundle]];
+    [self.view insertSubview:firingViewController.view belowSubview:webView];
+}
+
+-(void)hideFiringScreen
+{
+    if (firingViewController == nil) {
+        return;
+    }
+
+    [firingViewController removeFromParentViewController];
+    firingViewController = nil;
+}
+
 @end
 
 @implementation SSMainViewController (SSNativeBridgeDelegate)
@@ -75,6 +97,7 @@
     else if ([function isEqualIgnoringCase:@"getCurrentLocation"]) {
     }
     else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
+        [self showFiringScreen];
     }
     else if ([function isEqualIgnoringCase:@"getPreference"]) {
     }
