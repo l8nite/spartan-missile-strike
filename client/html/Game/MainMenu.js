@@ -4,8 +4,7 @@
  * Call MainMenu with the DOM ID of that markup.
  */
 function MainMenu(Imports) {
-	this.Imports = Imports;
-	var mainMenuView = View.call(this, this.Imports.domId["MainMenu"], Imports);
+	var mainMenuView = View.call(this, Imports.domId["MainMenu"], Imports);
 	// TODO Wire static button events
 }
 
@@ -26,6 +25,31 @@ MainMenu.prototype.show = function () {
 };
 
 MainMenu.prototype._render = function (games) {
+		this.Imports.GameMaster.getName(games[i].opponent.id).done(function (name) {
+			var name = {
+				id: games[i]
+			}
+			if (name.username) {
+				opponent.username = name.username;
+			}
+			if (name.realname) {
+				opponent.realname = name.realname;
+			}
+		}).fail(function () {
+			console.log(opponent);
+		});
+		this.Imports.GameMaster.getName(games[i]creator.id).done(function (name) {
+			if (name.username) {
+				creator.username = name.username;
+			}
+			if (name.realname) {
+				creator.realname = name.realname;
+			}
+		}).fail(function () {
+			console.log(creator);
+		});
+	}
+
 	var that = this;
 	var gamePrototype = $("#" + this.Imports.domId["MainMenu"] + " #game-prototype");
 	for (var i in games) {
