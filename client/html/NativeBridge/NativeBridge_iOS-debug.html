@@ -15,8 +15,18 @@
             var NativeBridge = new NativeBridge_iOS();
             
             window.onload = function () {
+                document.getElementById("debugGetOrientationUpdates").onclick = function (response) {
+                    NativeBridge.getOrientationUpdates(function (response) { document.getElementById("results").innerHTML = response; });
+                    return false;
+                }
+                
+                document.getElementById("debugGetLocationUpdates").onclick = function () {
+                    NativeBridge.getLocationUpdates(function (response) { document.getElementById("results").innerHTML = response; });
+                    return false;
+                }
+                
                 document.getElementById("debugGetCurrentLocation").onclick = function () {
-                    NativeBridge.getCurrentLocation(function (response) { alert(response); });
+                    NativeBridge.getCurrentLocation(function (response) { document.getElementById("results").innerHTML = response; });
                     return false;
                 }
 
@@ -87,5 +97,7 @@
         <a id="debugHideFireMissileScreen" href="#">Hide Fire Missile Screen</a> <br/>
         <a id="debugVibrate" href="#">Vibrate</a> <br/>
         <a id="debugHideSplash" href="#">Hide Splash</a> <br/>
+        
+        <div id="results"></div>
 	</body>
 </html>
