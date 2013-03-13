@@ -25,50 +25,38 @@ MainMenu.prototype.show = function () {
 };
 
 MainMenu.prototype._render = function (games) {
-		this.Imports.GameMaster.getName(games[i].opponent.id).done(function (name) {
-			var name = {
-				id: games[i]
-			}
-			if (name.username) {
-				opponent.username = name.username;
-			}
-			if (name.realname) {
-				opponent.realname = name.realname;
-			}
-		}).fail(function () {
-			console.log(opponent);
-		});
-		this.Imports.GameMaster.getName(games[i]creator.id).done(function (name) {
-			if (name.username) {
-				creator.username = name.username;
-			}
-			if (name.realname) {
-				creator.realname = name.realname;
-			}
-		}).fail(function () {
-			console.log(creator);
-		});
-	}
-
 	var that = this;
-	var gamePrototype = $("#" + this.Imports.domId["MainMenu"] + " #game-prototype");
+	$("#main-menu .game").remove();
 	for (var i in games) {
-		var opponentid = games[i].creator;
-		if (opponentid === this.Imports.GameMaster.userid) {
-			opponentid = games[i].opponent;
-		}
-		var g = gamePrototype.clone();
-		g.find(".opponent").replaceWith(this.Imports.GameMaster.getName(opponentid));
-		g.click(function () {
-			that._showGame(games[i]);
-		});
-		if (games[i].status === "completed") {
-			$("#" + this.Imports.domId["MainMenu"] + " #list-complete").append(g);
-		} else if (games[i].current === opponentid) {
-			$("#" + this.Imports.domId["MainMenu"] + " #list-histurn").append(g);
-		} else {
-			$("#" + this.Imports.domId["MainMenu"] + " #list-yourturn").append(g);
-		}
+		(function (game) {
+			var opponentid = game.creator;
+			if (opponentid === that.Imports.GameMaster.userid) {
+				opponentid = game.opponent;
+			}
+			that.Imports.GameMaster.getName(opponentid).always(function (name) {
+				var nameToUse = opponentid;
+				if (name) {
+					if (name.realname) {
+						nameToUse = name.realname;
+					} else {
+						nameToUse = name.username;
+					}
+				}
+				var g = $("<div>" + nameToUse + "</div>");
+				g.addClass("game");
+				g.click(function () {
+					console.log(game);
+					// that._showGame(game);
+				});
+				if (game.status === "completed") {
+					$("#list-complete").append(g);
+				} else if (game.current === opponentid) {
+					$("#list-histurn").append(g);
+				} else {
+					$("#list-yourturn").append(g);
+				}
+			});
+		})(games[i]);
 	}
 };
 
