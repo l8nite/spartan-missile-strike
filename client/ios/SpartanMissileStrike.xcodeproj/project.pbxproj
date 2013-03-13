@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283C133C16F0617800D7E351 /* SSCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 283C133A16F0617800D7E351 /* SSCameraViewController.m */; };
+		283C133D16F0617800D7E351 /* SSCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283C133B16F0617800D7E351 /* SSCameraViewController.xib */; };
 		2872BE9C16EFB9190051E707 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BE9B16EFB9190051E707 /* FacebookSDK.framework */; };
 		2872BE9E16EFB9400051E707 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2872BE9D16EFB9400051E707 /* FacebookSDKResources.bundle */; };
 		2872BEA016EFB9640051E707 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BE9F16EFB9640051E707 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -54,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		283C133916F0617800D7E351 /* SSCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCameraViewController.h; sourceTree = "<group>"; };
+		283C133A16F0617800D7E351 /* SSCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCameraViewController.m; sourceTree = "<group>"; };
+		283C133B16F0617800D7E351 /* SSCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSCameraViewController.xib; sourceTree = "<group>"; };
 		2872BE9B16EFB9190051E707 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "External/facebook-ios-sdk/build/FacebookSDK.framework"; sourceTree = "<group>"; };
 		2872BE9D16EFB9400051E707 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = "External/facebook-ios-sdk/build/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle"; sourceTree = "<group>"; };
 		2872BE9F16EFB9640051E707 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -140,6 +145,16 @@
 			name = FacebookManager;
 			sourceTree = "<group>";
 		};
+		283C133E16F0617B00D7E351 /* CameraView */ = {
+			isa = PBXGroup;
+			children = (
+				283C133916F0617800D7E351 /* SSCameraViewController.h */,
+				283C133A16F0617800D7E351 /* SSCameraViewController.m */,
+				283C133B16F0617800D7E351 /* SSCameraViewController.xib */,
+			);
+			name = CameraView;
+			sourceTree = "<group>";
+		};
 		28A9753C16EEDA78007B970E /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +182,7 @@
 			children = (
 				28A9754316EEDEE0007B970E /* Main */,
 				28A9753C16EEDA78007B970E /* SplashScreen */,
+				283C133E16F0617B00D7E351 /* CameraView */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -381,6 +397,7 @@
 				2872BE9E16EFB9400051E707 /* FacebookSDKResources.bundle in Resources */,
 				2872BEA716EFBA2C0051E707 /* spartan_appIcon_57.png in Resources */,
 				2872BEA816EFBA2C0051E707 /* spartan_appIcon_114.png in Resources */,
+				283C133D16F0617800D7E351 /* SSCameraViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +440,7 @@
 				28A9754D16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m in Sources */,
 				28A9755516EF9AD8007B970E /* SSAudioManager.m in Sources */,
 				28A9756F16EFAFD5007B970E /* SSFacebookManager.m in Sources */,
+				283C133C16F0617800D7E351 /* SSCameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

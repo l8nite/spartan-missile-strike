@@ -10,7 +10,7 @@
 
 @protocol SSNativeBridgeDelegate;
 
-@interface SSNativeBridge : NSObject <UIWebViewDelegate>
+@interface SSNativeBridge : NSObject
 {
     __weak id<SSNativeBridgeDelegate> _delegate;
     __weak UIWebView *_webView;
@@ -22,4 +22,7 @@
 -(id)initWithWebView:(UIWebView*)webView andDelegate:(id<SSNativeBridgeDelegate>)delegate;
 -(void)callbackWithResult:(NSString*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments;
 
+@end
+
+@interface SSNativeBridge (UIWebViewDelegate) <UIWebViewDelegate>
 @end
