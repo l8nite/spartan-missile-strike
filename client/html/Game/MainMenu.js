@@ -25,6 +25,8 @@ MainMenu.prototype.show = function () {
 };
 
 MainMenu.prototype._render = function (games) {
+	// For now, we cheat!
+	games = this.Imports.GameMaster._games.games;
 	var that = this;
 	$("#main-menu .game").remove();
 	for (var i in games) {
