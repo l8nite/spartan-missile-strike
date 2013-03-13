@@ -9,7 +9,7 @@ function MainMenu(Imports) {
 	// TODO Wire static button events
 }
 
-MainMenu.prototype = View.prototype;
+MainMenu.prototype = Object.create(View.prototype);
 
 MainMenu.prototype.onView = function () {
 	this.GameMasterTicket = this.Imports.GameMaster.subscribe(this._render.bind(this));
