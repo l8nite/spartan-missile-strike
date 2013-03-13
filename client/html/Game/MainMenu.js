@@ -45,8 +45,7 @@ MainMenu.prototype._render = function (games) {
 				var g = $("<div>" + nameToUse + "</div>");
 				g.addClass("game");
 				g.click(function () {
-					console.log(game);
-					// that._showGame(game);
+					that._showGame(game);
 				});
 				if (game.status === "completed") {
 					$("#list-complete").append(g);
