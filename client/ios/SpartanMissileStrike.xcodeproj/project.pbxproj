@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		281AD97116F08CA000E7625C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97016F08CA000E7625C /* AudioToolbox.framework */; };
+		281AD97416F0911300E7625C /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AD97316F0911300E7625C /* SSLocationManager.m */; };
 		283C133C16F0617800D7E351 /* SSFiringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 283C133A16F0617800D7E351 /* SSFiringViewController.m */; };
 		283C133D16F0617800D7E351 /* SSFiringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283C133B16F0617800D7E351 /* SSFiringViewController.xib */; };
 		283C134D16F0803900D7E351 /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 283C134C16F0803900D7E351 /* SSPreferenceManager.m */; };
@@ -59,6 +60,8 @@
 
 /* Begin PBXFileReference section */
 		281AD97016F08CA000E7625C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		281AD97216F0911300E7625C /* SSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLocationManager.h; sourceTree = "<group>"; };
+		281AD97316F0911300E7625C /* SSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
 		283C133916F0617800D7E351 /* SSFiringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringViewController.h; sourceTree = "<group>"; };
 		283C133A16F0617800D7E351 /* SSFiringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFiringViewController.m; sourceTree = "<group>"; };
 		283C133B16F0617800D7E351 /* SSFiringViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSFiringViewController.xib; sourceTree = "<group>"; };
@@ -142,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		281AD97516F0911800E7625C /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				281AD97216F0911300E7625C /* SSLocationManager.h */,
+				281AD97316F0911300E7625C /* SSLocationManager.m */,
+			);
+			name = LocationManager;
+			sourceTree = "<group>";
+		};
 		283C133816F05B3100D7E351 /* FacebookManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,6 +292,7 @@
 		28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */ = {
 			isa = PBXGroup;
 			children = (
+				281AD97516F0911800E7625C /* LocationManager */,
 				283C134E16F0803F00D7E351 /* PreferenceManager */,
 				283C133816F05B3100D7E351 /* FacebookManager */,
 				28A9755E16EFA6BC007B970E /* AudioManager */,
@@ -459,6 +472,7 @@
 				28A9756F16EFAFD5007B970E /* SSFacebookManager.m in Sources */,
 				283C133C16F0617800D7E351 /* SSFiringViewController.m in Sources */,
 				283C134D16F0803900D7E351 /* SSPreferenceManager.m in Sources */,
+				281AD97416F0911300E7625C /* SSLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
