@@ -7,64 +7,63 @@
 //
 
 #import "SSFacebookManager.h"
-#import "SSFacebookManagerDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
 
 @implementation SSFacebookManager
 
-@synthesize delegate;
-
--(void)openSession
+-(id)init
 {
-    NSLog(@"calling openSession");
-    [FBSession openActiveSessionWithReadPermissions:nil
-                                       allowLoginUI:YES
-                                  completionHandler:
-     ^(FBSession *session,
-       FBSessionState state, NSError *error) {
-         [self sessionStateChanged:session state:state error:error];
-     }];
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    }
+    
+    return self;
 }
 
--(BOOL)isLoggedIn
-{
-    return FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded;
-}
-
--(void)handleDidBecomeActive
+-(void)applicationDidBecomeActive
 {
     [FBSession.activeSession handleDidBecomeActive];
 }
 
--(BOOL)handleOpenURL:(NSURL *)url
+-(void)openSessionAndContinueWith:(void (^)(FBSessionState state))stateHandler
 {
-    return [FBSession.activeSession handleOpenURL:url];
+    [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:
+     ^(FBSession *session, FBSessionState state, NSError *error) {
+         if (error) {
+             NSLog(@"openActiveSessionWithReadPermissions error: %@", error);
+         }
+
+         switch (state) {
+             case FBSessionStateOpen:
+                 stateHandler(FBSessionStateOpen);
+                 break;
+             case FBSessionStateClosed:
+             case FBSessionStateClosedLoginFailed:
+                 [FBSession.activeSession closeAndClearTokenInformation];
+                 stateHandler(FBSessionStateClosed);
+                 break;
+             default:
+                 break;
+         }
+     }];
 }
 
-- (void)sessionStateChanged:(FBSession *)session
-                      state:(FBSessionState) state
-                      error:(NSError *)error
+-(void)getAccessTokenWith:(void (^)(NSString*))tokenHandler
 {
-    switch (state) {
-        case FBSessionStateOpen:
-            [delegate facebookUserDidLogIn];
-            break;
-        case FBSessionStateClosed:
-        case FBSessionStateClosedLoginFailed:
-            [FBSession.activeSession closeAndClearTokenInformation];
-            [delegate facebookUserDidLogOut];
-            break;
-        default:
-            break;
+    NSString *accessToken = [[[FBSession activeSession] accessTokenData] accessToken];
+
+    if (accessToken != nil) {
+        tokenHandler(accessToken);
     }
-    
-    if (error) {
-        NSLog(@"sessionStateChanged Error: %@", error);
+    else {
+        [self openSessionAndContinueWith:^(FBSessionState sessionState) {
+            if (sessionState == FBSessionStateOpen) {
+                tokenHandler([[[FBSession activeSession] accessTokenData] accessToken]);
+            }
+            else {
+                tokenHandler(nil);
+            }
+        }];
     }
 }
 
--(NSString *)accessToken
-{
-    return FBSession.activeSession.accessTokenData.accessToken;
-}
 @end

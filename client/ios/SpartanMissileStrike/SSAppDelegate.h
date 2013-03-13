@@ -17,9 +17,5 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) SSMainViewController *viewController;
-@property (strong, nonatomic) SSSplashScreenViewController *splashScreenViewController;
-
-- (void)showSplashScreen;
-- (void)hideSplashScreen;
 
 @end
