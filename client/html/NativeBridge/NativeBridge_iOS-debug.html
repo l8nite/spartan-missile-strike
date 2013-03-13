@@ -1,6 +1,13 @@
 <html>
 	<head>
 		<title>NativeBridge_iOS Debug</title>
+        
+        <style type="text/css">
+            body {
+                background-color: #ffffff;
+            }
+        </style>
+        
         <script src="../Util/Fridge.js"></script>
 		<script src="NativeBridge_Abstract.js"></script>
 		<script src="NativeBridge_iOS.js"></script>
@@ -43,6 +50,18 @@
                     return false;
                 }
                 
+                document.getElementById("debugShowFireMissileScreen").onclick = function () {
+                    document.body.style.backgroundColor = 'transparent';
+                    NativeBridge.showFireMissileScreen(true);
+                    return false;
+                }
+                
+                document.getElementById("debugHideFireMissileScreen").onclick = function () {
+                    document.body.style.backgroundColor = '#ffffff';
+                    NativeBridge.showFireMissileScreen(false);
+                    return false;
+                }
+                
                 window.setTimeout(function () {
                                   NativeBridge.hideSplash();
                                   NativeBridge.playSound({soundID: "background_music", loop: true});
@@ -57,6 +76,8 @@
         <a id="debugGetFacebookAccessToken" href="#">Get Facebook Access Token</a> <br/>
         <a id="debugPlaySound" href="#">Play Sound</a> <br/>
         <a id="debugStopSound" href="#">Stop Sound</a> <br/>
+        <a id="debugShowFireMissileScreen" href="#">Show Fire Missile Screen</a> <br/>
+        <a id="debugHideFireMissileScreen" href="#">Hide Fire Missile Screen</a> <br/>
         <a id="debugHideSplash" href="#">Hide Splash</a> <br/>
 	</body>
 </html>
