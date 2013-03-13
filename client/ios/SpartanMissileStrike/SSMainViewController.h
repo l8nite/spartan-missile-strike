@@ -13,7 +13,7 @@
 @class SSAudioManager;
 @class SSFacebookManager;
 
-@interface SSMainViewController : UIViewController <SSNativeBridgeDelegate>
+@interface SSMainViewController : UIViewController
 
 @property (strong, nonatomic) SSNativeBridge *nativeBridge;
 @property (strong, nonatomic) SSAudioManager *audioManager;
@@ -23,4 +23,7 @@
 
 -(void)showSplashScreen;
 
+@end
+
+@interface SSMainViewController (SSNativeBridgeDelegate) <SSNativeBridgeDelegate>
 @end

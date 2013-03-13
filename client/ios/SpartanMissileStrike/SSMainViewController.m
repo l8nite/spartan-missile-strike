@@ -42,6 +42,26 @@
     [super viewDidUnload];
 }
 
+-(void)showSplashScreen
+{
+    if ([self presentedViewController] == nil) {
+        SSSplashScreenViewController *splashScreenViewController = [[SSSplashScreenViewController alloc] initWithNibName:@"SSSplashScreenViewController" bundle:[NSBundle mainBundle]];
+        splashScreenViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:splashScreenViewController animated:NO completion:nil];
+    }
+}
+
+-(void)hideSplashScreen
+{
+    if ([[self presentedViewController] isKindOfClass:[SSSplashScreenViewController class]]) {
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+@end
+
+@implementation SSMainViewController (SSNativeBridgeDelegate)
+
 -(void)nativeBridgeFunction:(NSString *)function withArguments:(NSDictionary *)arguments
 {
     NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
@@ -79,24 +99,6 @@
         [self hideSplashScreen];
     }
     else if ([function isEqualIgnoringCase:@"vibrate"]) {
-    }
-}
-
-
-
--(void)showSplashScreen
-{
-    if ([self presentedViewController] == nil) {
-        SSSplashScreenViewController *splashScreenViewController = [[SSSplashScreenViewController alloc] initWithNibName:@"SSSplashScreenViewController" bundle:[NSBundle mainBundle]];
-        splashScreenViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:splashScreenViewController animated:NO completion:nil];
-    }
-}
-
--(void)hideSplashScreen
-{
-    if ([[self presentedViewController] isKindOfClass:[SSSplashScreenViewController class]]) {
-        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
