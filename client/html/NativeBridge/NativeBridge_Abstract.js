@@ -12,14 +12,6 @@
  *                 prop_two: "val_two" } )
  *                 See Native Bride API for more details.
  * 
- * resumeGame()
- *     Called by native client with no argument to notify HTML that we have
- *     returned from suspension.
- *
- * setResumeHandler(function fx)
- *     Called by HTML with function as argument to register what to do
- *     when resumed!
- * 
  * getLocationUpdates(boolean activate, function callback)
  *     Called by HTML to get location data as it changes.
  *     activate - de/activate the updates
@@ -30,20 +22,16 @@
  *     activate - de/activate the updates
  *     callback - callback method, takes {pitch, roll, yaw} in radians
  *     
- * getCurrentLocation(function callback)
- *     Called by HTML to get current location
- *     callback - callback method, takes {latitude, longitude} in degrees
- *     
  * showFireMissileScreen(boolean activate)
  *     Called by HTML when showing/hiding fire missile screen
  *     activate - show/hide screen
  *     
- * getPreference(String preference, function callback)
- *     Get specific preference from native client
- *     preference - preference to get
+ * getPreference(String preferences, function callback)
+ *     Get specific preference(s) from native client
+ *     preferences - array of preferences to get
  *     callback - callback method, takes preference
  *     
- * setPreference(Object preference, function callback)
+ * setPreference(Object preferences, function callback)
  *     Set one or multiple persisting preferences
  *     preferences - Hash of preference key and value to store
  *     callback - callback method, takes {boolean suceeded}
@@ -55,10 +43,10 @@
  * logoutFacebook()
  *     Invalidate FB session
  *     
- * playSound(Object options)
+ * playSound(String soundID, Object options)
  *     Play sound with options
- *     options - {String soundID, boolean foreground, boolean loop}
- *         soundID - sound to play
+ *     soundID - sound to play
+ *     options - {boolean foreground, boolean loop}
  *         foreground - play in foreground/background
  *         loop - loop sound/play once
  *         
@@ -98,9 +86,9 @@
  * showFireMissileScreen(boolean activate)
  *     See "Public methods"
  *     
- * _getPreference(String preference, int callbackID)
+ * _getPreference(String preferences, int callbackID)
  *     Retrieve preference and return value through callback()
- *     preference - preference to get
+ *     preferences - preferences array to get
  *     callbackID - Callback identifier to pass to callback()
  *     
  * _setPreference(Object preferences, int callbackID)
@@ -115,7 +103,7 @@
  * logoutFacebook()
  *     See "Public methods"
  *     
- * playSound(Object options)
+ * playSound(String soundID, Object options)
  *     See "Public methods"
  *     
  * stopSound(String soundID)
@@ -205,8 +193,11 @@ NativeBridge_Abstract.prototype.getCurrentLocation = function (callback) {
 	this._getCurrentLocation(this._registerCallback(callback));
 };
 
-NativeBridge_Abstract.prototype.getPreference = function (preference, callback) {
-	this._getPreference(preference, this._registerCallback(callback));
+NativeBridge_Abstract.prototype.getPreference = function (preferences, callback) {
+	if (typeof preferences === "string") {
+		preferences = [preferences];
+	}
+	this._getPreference(preferences, this._registerCallback(callback));
 };
 
 NativeBridge_Abstract.prototype.setPreference = function (preferences, callback) {
