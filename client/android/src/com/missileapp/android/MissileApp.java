@@ -172,6 +172,19 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.getFireScreen().exitFireScreen();
     }
     
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                finishLocationSettings();
+                break;
+
+            default:
+                break;
+        }
+        
+    }
     
     /**
      * Processes user location settings
@@ -188,46 +201,43 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     	
     	//construct message if enabled
     	if(!locationEnabled && !gpsLocationEnabled) {
-    	    MALogger.log(TAG, Log.INFO, "Processing First IF");
-    		AlertDialog.Builder locationAlert = new AlertDialog.Builder(this);
-			locationAlert.setTitle(R.string.location_prompt_title);
-			locationAlert.setMessage(R.string.location_prompt_location_disabled_msg);
-			locationAlert.setCancelable(false);
-			locationAlert.setView(locationCheckBoxView);
-			locationAlert.setPositiveButton(R.string.location_prompt_location_disabled_positive, new DialogInterface.OnClickListener() {
-    			public void onClick(DialogInterface dialog, int which) {
-    				processLocationDialog(dialog, true, false, checkBox.isChecked());
-    			}
-    		 });
+            AlertDialog.Builder locationAlert = new AlertDialog.Builder(this);
+            locationAlert.setIcon(R.drawable.ic_launcher_padded);
+            locationAlert.setTitle(R.string.location_prompt_title);
+            locationAlert.setMessage(R.string.location_prompt_location_disabled_msg);
+            locationAlert.setCancelable(false);
+            locationAlert.setView(locationCheckBoxView);
+            locationAlert.setPositiveButton(R.string.location_prompt_location_disabled_positive, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    processLocationDialog(dialog, true, false, checkBox.isChecked());
+                }
+            });
             locationAlert.setNegativeButton(R.string.location_prompt_location_disabled_negative, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					processLocationDialog(dialog, false, true, checkBox.isChecked());
-				}
-	         });
+                public void onClick(DialogInterface dialog, int which) {
+                    processLocationDialog(dialog, false, true, checkBox.isChecked());
+                }
+            });
             locationAlert.show();
-
-            MALogger.log(TAG, Log.INFO, "opened");
     	}
     	else if (!gpsLocationEnabled && variables.getSettings().getBoolean(PREFERENCES_GPSPROMPT, true)) {
-    	    MALogger.log(TAG, Log.INFO, "Process Second IF");
-    		AlertDialog.Builder locationAlert = new AlertDialog.Builder(this);
-			locationAlert.setTitle(R.string.app_name)
-		         .setMessage(R.string.location_prompt_gps_disabled_msg)
-		         .setCancelable(false)
-		         .setView(checkBox)
-		         .setPositiveButton(R.string.location_prompt_gps_disabled_positive,  new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						processLocationDialog(dialog, true, false, checkBox.isChecked());
-					}
-				 })
-				 .setNegativeButton(R.string.location_prompt_gps_disabled_negative, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						processLocationDialog(dialog, false, false, checkBox.isChecked());
-					}
-				})
-				.show();
+    	    AlertDialog.Builder locationAlert = new AlertDialog.Builder(this);
+    	    locationAlert.setIcon(R.drawable.ic_launcher_padded);
+            locationAlert.setTitle(R.string.location_prompt_title);
+            locationAlert.setMessage(R.string.location_prompt_gps_disabled_msg);
+            locationAlert.setCancelable(false);
+            locationAlert.setView(locationCheckBoxView);
+            locationAlert.setPositiveButton(R.string.location_prompt_gps_disabled_positive, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    processLocationDialog(dialog, true, false, checkBox.isChecked());
+                }
+            });
+            locationAlert.setNegativeButton(R.string.location_prompt_gps_disabled_negative, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    processLocationDialog(dialog, false, false, checkBox.isChecked());
+                }
+            });
+            locationAlert.show();
     	}
-    	MALogger.log(TAG, Log.INFO, "Done prompting");
     }
     
     
@@ -252,42 +262,46 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     	if(showSettings) {
     		openLocationSettings();
     	}
-    	if(exitApplication) {
-    		exitMissileApp();
+    	else if(exitApplication) {
+            exitMissileApp();
+        }
+    	else { 
+    	    finishLocationSettings();
     	}
-    	
-    	// check location seervices are still enabled
-    	LocationManager locationManager = variables.getLocationManager();
-    	boolean locationEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    	boolean gpsLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-    	
-    	
-    	// Exit if no location provider enabled, else register all available services
-    	if(!locationEnabled && !gpsLocationEnabled) {
-    		exitMissileApp();
-    	}
+    }
+    
+    private void finishLocationSettings() {
+        // check location seervices are still enabled
+        LocationManager locationManager = variables.getLocationManager();
+        boolean locationEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        boolean gpsLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        
+        // Exit if no location provider enabled, else register all available services
+        if(!locationEnabled && !gpsLocationEnabled) {
+            exitMissileApp();
+        }
 
-    	if(locationEnabled) {
-    		variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, variables.getLocationManagement());
-    		variables.setEnabled(true);
-    	}
-    	if(gpsLocationEnabled){
-    		variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, variables.getLocationManagement());
-    		variables.setEnabled(true);
-    	}
-    	
-    	variables.setEnabled(true);
-    	if(variables.isHideSplash()) {
-    		Misc.hideSplash(variables, variables.getMissileApp(), variables.getSplashScreen());
-    		variables.setHideSplash(false);
-    	}
+        if(locationEnabled) {
+            variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, variables.getLocationManagement());
+            variables.setEnabled(true);
+        }
+        if(gpsLocationEnabled){
+            variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, variables.getLocationManagement());
+            variables.setEnabled(true);
+        }
+        
+        variables.setEnabled(true);
+        if(variables.isHideSplash()) {
+            Misc.hideSplash(variables, variables.getMissileApp(), variables.getSplashScreen());
+            variables.setHideSplash(false);
+        }
     }
     
     
     /** Opens Location Settings **/
 	private void openLocationSettings() {
         Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        startActivity(settingsIntent);
+        startActivityForResult(settingsIntent, 1);
     }
     
 	
