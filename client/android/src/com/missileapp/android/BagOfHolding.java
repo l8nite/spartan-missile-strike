@@ -14,21 +14,18 @@ import android.os.Vibrator;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 
 /**
  * Bag of Holding - Holds the application data and variables
  */
 public class BagOfHolding extends Application {
-//    private static BagOfHolding boh;
     
     // Primary Classes
     private MissileApp missileApp;             // MissileApp instance
     private AndroidBridge droidBridge;         // Android Interface to the WebView
     
     // Android Views
-    private CheckBox locationCheckBox;         // Checkbox for gps prompts
     private SurfaceView surfaceView;           // Surface View for layout options
     private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
     private WebView webView;                   // WebView for UI
@@ -57,7 +54,6 @@ public class BagOfHolding extends Application {
     public void onCreate() {
         super.onCreate();
         this.isEnabled = false;
-//        BagOfHolding.boh = this;
     }
     
     
@@ -146,15 +142,6 @@ public class BagOfHolding extends Application {
     //
     ///////////////////////////////////////////////
     
-    public CheckBox getLocationCheckBox() {
-		return locationCheckBox;
-	}
-
-
-	public void setLocationCheckBox(CheckBox locationCheckBox) {
-		this.locationCheckBox = locationCheckBox;
-	}
-
     /**
      * Returns the {@link SurfaceView} where the camera preview is drawn on
      * @return the {@link SurfaceView} instance

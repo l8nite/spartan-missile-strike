@@ -14,6 +14,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebSettings.RenderPriority;
@@ -48,8 +49,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @SuppressWarnings("deprecation")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
+        MALogger.log(TAG, Log.INFO, "Creating activity.");
+        
         // Variables
-    	CheckBox checkBoxView;             // Location services checkbox
         SurfaceView surfaceView;           // Surface View for layout options
         SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
         WebView webView;                   // WebView for UI
@@ -67,8 +69,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         surfaceView = (SurfaceView) findViewById(R.id.camview);
         splashScreen = (ImageView) findViewById(R.id.splashview);
         webView = (WebView) findViewById(R.id.webview);
-        checkBoxView = (CheckBox) findViewById(R.id.locationcheckbox);
-
+        
         // Store resource variables
         variables.setSettings(super.getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE));            // User Settings
         variables.setFireScreen(new FireScreen(variables));                                               // Fire Screen, camera
@@ -79,9 +80,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.setLocationManagement(new LocationManagement(variables));                               // MissileApp Location Implementation
         variables.setGyro(new Gyro(variables));                                                           // Gyroscope implementation
         variables.setSensorManager((SensorManager) super.getSystemService(Context.SENSOR_SERVICE));       // Android Sensor Service Implementation
-        
-        // Store the Dialog checkbox
-        variables.setLocationCheckBox(checkBoxView);
         
         // Create surface view for cam preview and register callback functions
         surfaceHolder = surfaceView.getHolder();
@@ -179,35 +177,41 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      * Processes user location settings
      */
     private void processLocationServices() {
+        MALogger.log(TAG, Log.INFO, "Processing Location.");
+        
+        View locationCheckBoxView = View.inflate(this, R.layout.locationcb, null);
+        final CheckBox checkBox = (CheckBox) locationCheckBoxView.findViewById(R.id.gps_checkbox);
+        
     	LocationManager locationManager = variables.getLocationManager();
-    	final CheckBox checkBox = variables.getLocationCheckBox();
     	boolean locationEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     	boolean gpsLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     	
     	//construct message if enabled
     	if(!locationEnabled && !gpsLocationEnabled) {
+    	    MALogger.log(TAG, Log.INFO, "Processing First IF");
     		AlertDialog.Builder locationAlert = new AlertDialog.Builder(this);
-			locationAlert.setIcon(R.drawable.ic_launcher_padded)
-		         .setTitle(R.string.location_prompt_title)
-		         .setMessage(R.string.location_prompt_location_disabled_msg)
-		         .setCancelable(false)
-		         .setView(checkBox)
-		         .setPositiveButton(R.string.location_prompt_location_disabled_positive, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						processLocationDialog(dialog, true, false, checkBox.isChecked());
-					}
-				 })
-		         .setNegativeButton(R.string.location_prompt_location_disabled_negative, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						processLocationDialog(dialog, false, true, checkBox.isChecked());
-					}
-		         })
-		         .show();
+			locationAlert.setTitle(R.string.location_prompt_title);
+			locationAlert.setMessage(R.string.location_prompt_location_disabled_msg);
+			locationAlert.setCancelable(false);
+			locationAlert.setView(locationCheckBoxView);
+			locationAlert.setPositiveButton(R.string.location_prompt_location_disabled_positive, new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int which) {
+    				processLocationDialog(dialog, true, false, checkBox.isChecked());
+    			}
+    		 });
+            locationAlert.setNegativeButton(R.string.location_prompt_location_disabled_negative, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					processLocationDialog(dialog, false, true, checkBox.isChecked());
+				}
+	         });
+            locationAlert.show();
+
+            MALogger.log(TAG, Log.INFO, "opened");
     	}
     	else if (!gpsLocationEnabled && variables.getSettings().getBoolean(PREFERENCES_GPSPROMPT, true)) {
+    	    MALogger.log(TAG, Log.INFO, "Process Second IF");
     		AlertDialog.Builder locationAlert = new AlertDialog.Builder(this);
-			locationAlert.setIcon(R.drawable.ic_launcher_padded)
-		         .setTitle(R.string.app_name)
+			locationAlert.setTitle(R.string.app_name)
 		         .setMessage(R.string.location_prompt_gps_disabled_msg)
 		         .setCancelable(false)
 		         .setView(checkBox)
@@ -223,6 +227,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
 				})
 				.show();
     	}
+    	MALogger.log(TAG, Log.INFO, "Done prompting");
     }
     
     
@@ -234,6 +239,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      * @param GPSPromptIsChecked - save settings from dialogbox
      */
     private void processLocationDialog(DialogInterface dialog, boolean showSettings, boolean exitApplication, boolean GPSPromptIsChecked) {
+        MALogger.log(TAG, Log.INFO, "Processing Location Dialog!");
     	// Close Dialog
     	dialog.dismiss();
     	
@@ -250,7 +256,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     		exitMissileApp();
     	}
     	
-    	// check location services are still enabled
+    	// check location seervices are still enabled
     	LocationManager locationManager = variables.getLocationManager();
     	boolean locationEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     	boolean gpsLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
