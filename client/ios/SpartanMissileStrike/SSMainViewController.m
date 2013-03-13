@@ -62,7 +62,7 @@
     }
     else if ([function isEqualIgnoringCase:@"getFacebookAccessToken"]) {
         [facebookManager getAccessTokenWith:^(NSString *accessToken) {
-            [nativeBridge callbackWithResults:accessToken forFunction:function withArguments:arguments];
+            [nativeBridge callbackWithResult:accessToken forFunction:function withArguments:arguments];
         }];
     }
     else if ([function isEqualIgnoringCase:@"playSound"]) {
