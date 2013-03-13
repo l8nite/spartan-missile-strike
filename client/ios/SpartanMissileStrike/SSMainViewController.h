@@ -12,12 +12,14 @@
 @class SSNativeBridge;
 @class SSAudioManager;
 @class SSFacebookManager;
+@class SSFiringViewController;
 
 @interface SSMainViewController : UIViewController
 
 @property (strong, nonatomic) SSNativeBridge *nativeBridge;
 @property (strong, nonatomic) SSAudioManager *audioManager;
 @property (strong, nonatomic) SSFacebookManager *facebookManager;
+@property (strong, nonatomic) SSFiringViewController *firingViewController;
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
