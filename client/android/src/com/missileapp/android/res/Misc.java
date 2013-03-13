@@ -18,7 +18,7 @@ public class Misc {
     	final String TAG = "HideSplash";
         MALogger.log(TAG, Log.VERBOSE, "CMD Hide Splash");
         
-        if(!variables.isEnabled()) {
+        if(variables.isEnabled()) {
 	        // Runs on the UI Thread
 	        missileapp.runOnUiThread(new Runnable() {
 	            

@@ -38,7 +38,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location, True -> Ask user, False -> skip
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
     private static final String DROIDWB_FILENAME =                         // Webview file to load
-            "file:///android_asset/html/MissileApp-Android.html";
+            "file:///android_asset/html/NativeBridge/NativeBridge_Android-debug.html";
     
     // Varible Bag
     private static BagOfHolding variables;
@@ -46,7 +46,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     /*********************************
      * Android OS call back functions
      *********************************/
-    @SuppressWarnings("deprecation")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         MALogger.log(TAG, Log.INFO, "Creating activity.");
@@ -100,7 +99,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         webView.getSettings().setRenderPriority(RenderPriority.HIGH);
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setSupportZoom(false);
-        webView.getSettings().enableSmoothTransition(); // Deprecated but lets leave it for now
+//        webView.getSettings().enableSmoothTransition(); // Deprecated but lets leave it for now
         
         // JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
