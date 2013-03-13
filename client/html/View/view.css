@@ -12,11 +12,11 @@ body {
     height: 100%;
     display: none;
     position: absolute;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .fixed-height-view {
-    overflow: hidden;
+    overflow-y: hidden;
 }
 
 .active-view {
