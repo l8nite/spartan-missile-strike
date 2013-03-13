@@ -3,6 +3,7 @@ function View(domNode, Imports) {
     this._domNode = document.getElementById(domNode);
     if (this._domNode) {
         this.Imports.DomHelper.addClass(this, "view");
+        document.body.appendChild(this._domNode);
     }
     else {
         console.error("Could not attatch View to domNode!");
