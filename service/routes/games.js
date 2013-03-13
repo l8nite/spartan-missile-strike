@@ -346,6 +346,8 @@ function _updateGameRecord (game, next) {
     var multi = redis.client.multi(),
         now = new Date();
 
+    game.updated = now.toJSON();
+
     multi.set(game.id, JSON.stringify(game));
     multi.zadd('games:' + game.creator, now.getTime(), game.id);
     multi.zadd('games:' + game.opponent, now.getTime(), game.id);
