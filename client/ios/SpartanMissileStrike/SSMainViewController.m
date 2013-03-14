@@ -92,6 +92,7 @@
         return;
     }
 
+    [firingViewController.view removeFromSuperview];
     [firingViewController removeFromParentViewController];
     firingViewController = nil;
 }
@@ -142,7 +143,12 @@
         }
     }
     else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
-        [self showFiringScreen];
+        if ([(NSNumber*)[arguments objectForKey:@"activate"] boolValue]) {
+            [self showFiringScreen];
+        }
+        else {
+            [self hideFiringScreen];
+        }
     }
     else if ([function isEqualIgnoringCase:@"getPreference"]) {
         [preferenceManager getPreferences:[arguments objectForKey:@"preferences"] withCompletionHandler:^(NSDictionary *preferences) {
