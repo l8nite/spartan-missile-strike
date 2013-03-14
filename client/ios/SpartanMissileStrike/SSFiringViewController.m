@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad
 {
+    NSLog(@"Hey I loaded!");
     [super viewDidLoad];
     
     AVCaptureSession *captureSession = [[AVCaptureSession alloc] init];
@@ -50,6 +51,7 @@
 }
 
 - (void)viewDidUnload {
+    NSLog(@"Hey, I unloaded");
     [self setCameraPreviewView:nil];
     [super viewDidUnload];
 }
