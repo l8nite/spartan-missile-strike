@@ -1,8 +1,8 @@
 <html>
 </html>
 <head>
-	<link rel="stylesheet" href="../View/view.css">
-	<link rel="stylesheet" href="MissileApp.css">
+	<link rel="stylesheet" href="View/view.css">
+	<link rel="stylesheet" href="Game/MissileApp.css">
 	<style>
 		body {
 			text-align: center;
@@ -54,7 +54,8 @@
 				"OptionsView": "options-view",
 				"OpponentsView": "opponents-view",
 				"BaseView": "base-view"
-			}
+			},
+			serviceurl: "https://api.missileapp.com:8433"
 		};
 		Imports.GameMaster = new GameMaster("user:0001", "12345", Imports);
 		Imports.ViewManager = new MainView(Imports);
