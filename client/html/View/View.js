@@ -1,7 +1,9 @@
-function View(domNode) {
+function View(domNode, Imports) {
+	this.Imports = Imports;
     this._domNode = document.getElementById(domNode);
     if (this._domNode) {
-        Imports.DomHelper.addClass(this, "view");
+        this.Imports.DomHelper.addClass(this, "view");
+        document.body.appendChild(this._domNode);
     }
     else {
         console.error("Could not attatch View to domNode!");
@@ -9,9 +11,9 @@ function View(domNode) {
 }
 
 View.prototype.onView = function () {
-    Imports.DomHelper.addClass(this, "active-view");
+    this.Imports.DomHelper.addClass(this, "active-view");
 };
 
 View.prototype.offView = function () {
-    Imports.DomHelper.removeClass(this, "active-view");
+    this.Imports.DomHelper.removeClass(this, "active-view");
 };

@@ -1,22 +1,15 @@
 //
-//  SSFiringViewController.h
+//  SSCameraViewController.h
 //  SpartanMissileStrike
 //
-//  Created by Sherif on 3/5/13.
-//  Copyright (c) 2013 Group 2. All rights reserved.
+//  Created by Shaun Guth on 3/13/13.
+//  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@class SSFiringManager, AVCamPreviewView, AVCaptureVideoPreviewLayer;
-@interface SSFiringViewController : UIViewController <UIImagePickerControllerDelegate,UINavigationControllerDelegate> {
-}
+@interface SSFiringViewController : UIViewController
 
-@property (nonatomic,strong) SSFiringManager *captureManager;
-@property (nonatomic,strong) IBOutlet UIView *videoPreviewView;
-@property (nonatomic,strong) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
-
-- (IBAction) showCameraOverlay:(id)sender;
-
+@property (weak, nonatomic) IBOutlet UIView *cameraPreviewView;
 
 @end

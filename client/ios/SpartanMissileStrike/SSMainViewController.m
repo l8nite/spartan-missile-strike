@@ -2,196 +2,181 @@
 //  SSMainViewController.m
 //  SpartanMissileStrike
 //
-//  Created by Sherif on 1/9/13.
-//  Copyright (c) 2013 Group 2. All rights reserved.
+//  Created by Shaun Guth on 3/11/13.
+//  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
-#import "SSMainViewController.h"
-#import "SSAudioManager.h"
 #import "SSAppDelegate.h"
-#import "SSFiringManager.h"
-#import <AVFoundation/AVFoundation.h>
+#import "SSAudioManager.h"
+#import "SSFacebookManager.h"
+#import "SSFiringViewController.h"
+#import "SSLocationManager.h"
+#import "SSMainViewController.h"
+#import "SSNativeBridge.h"
+#import "SSOrientationManager.h"
+#import "SSPreferenceManager.h"
+#import "SSSplashScreenViewController.h"
 
+#import "NSString+CaseInsensitiveComparison.h"
 
-NSString *const SMSActivatesCameraPreviewNotification = @"com.missileapp.Spartan-Missile-Strike:SMSActivatesCameraPreviewNotification";
+#import <AudioToolbox/AudioServices.h>
 
 @implementation SSMainViewController
-@synthesize webView = _webView;
+
+@synthesize webView;
 @synthesize nativeBridge;
-@synthesize session,captureManager,videoPreviewView,captureVideoPreviewLayer;
+@synthesize audioManager;
+@synthesize facebookManager;
+@synthesize firingViewController;
+@synthesize preferenceManager;
+@synthesize locationManager;
+@synthesize orientationManager;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    nativeBridge = [[SSNativeBridge alloc]init];
-    _webView = [[UIWebView alloc] init];
-    CGRect bounds = [self.view bounds];
 
-    [_webView setFrame:bounds];
-    _webView.scalesPageToFit = YES;
-    _webView.opaque = NO;
-    [_webView setDelegate:nativeBridge];
-    _webView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_webView];
-    
-    
-    
-    
-    
-    [ self  loadHTMLContent];
-    
-    
-    
-    //////////v/////////FB Blocks////////////v/////////
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(sessionStateChanged:)
-                                                 name:SMSSessionStateChangedNotification
-                                               object:nil];
-    
-    [FBSession openActiveSessionWithAllowLoginUI:YES];
-    
-    if(FBSession.activeSession.isOpen){
-        [[FBRequest requestForMe] startWithCompletionHandler:
-         ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
-             if (!error) {
-                 //  self.userNameLabel.text = user.name;
-                 // self.userProfileImage.profileID = [user objectForKey:@"id"];
-                 NSLog(@"Facebook User: %@",user.name);
-             }
-         }];
-    }
-    //////////^/////////FB Blocks///////^//////////////
-    
-    
-    //////////v/////////NSNotification Center Adds///////v//////////////
+    facebookManager = [[SSFacebookManager alloc] init];
+    audioManager = [[SSAudioManager alloc] init];
+    preferenceManager = [[SSPreferenceManager alloc] init];
+    locationManager = [[SSLocationManager alloc] init];
+    orientationManager = [[SSOrientationManager alloc] init];
+    nativeBridge = [[SSNativeBridge alloc] initWithWebView:webView andDelegate:self];
 
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(activateCameraPreview:)
-                                                 name:SMSActivatesCameraPreviewNotification
-                                               object:nil];
-    
-    //////////^/////////NSNotification Center Adds///////^//////////////
+    webView.backgroundColor = [UIColor clearColor];
 
-
-    
+    NSURL *indexURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/NativeBridge/NativeBridge_iOS-debug" ofType:@"html"] isDirectory:NO];
+    NSURLRequest *initialLoadRequest = [NSURLRequest requestWithURL:indexURL];
+    [webView loadRequest:initialLoadRequest];
 }
 
-
-
-#pragma mark -
-#pragma Web View Methods
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    
-    
-    NSLog(@"webview: %@",webView.description);
-    
-    return YES;
-}
-
-
-
-
-- (void)didReceiveMemoryWarning
+- (void)viewDidUnload
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    facebookManager = nil;
+    audioManager = nil;
+    nativeBridge = nil;
+    webView = nil;
+
+    [super viewDidUnload];
 }
--(void)viewDidAppear:(BOOL)animated
+
+-(void)showSplashScreen
 {
-    NSLog(@"ViewDID appear");
-    
-    
-    
-    //    sa1 = [[SSAudioManager alloc]init];
-    //    [sa1 playSound:@"MODERATO"];
-}
--(void) loadHTMLContent
-{
-    /**
-     testing usig chris's code
-     @"html/View/ViewFramework-test"
-     */
-    
-    [_webView loadRequest: [NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/View/ViewFramework-test" ofType:@"html"] isDirectory:NO]]];
-    [_webView setScalesPageToFit:YES];
-    _webView.backgroundColor = [UIColor clearColor];
-    
-}
-
--(void) sayHello
-{
-    NSLog(@"HEllo");
-}
-
-
--(void)activateCameraPreview:(NSNotification*)notification{
-
-     if([self captureManager] == nil) {
-              SSFiringManager *manager = [[SSFiringManager alloc] init];
-              [self setCaptureManager:manager]; 
-		
-		if ([[self captureManager] setupSession]) {
-            
-            NSLog(@"Create video preview lay");
-//
-            // Create video preview layer and add it to the UI
-			AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:[[self captureManager] session]];
-            
-            NSLog(@"newcapture:%@",newCaptureVideoPreviewLayer.session.description);
-			UIView *view = [self videoPreviewView];
-            NSLog(@"view det: %@",view.description);
-			CALayer *viewLayer = [view layer];
-			[viewLayer setMasksToBounds:YES];
-			
-			CGRect bounds = [view bounds];
-			[newCaptureVideoPreviewLayer setFrame:bounds];
-            
-			
-			[newCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-			[viewLayer insertSublayer:newCaptureVideoPreviewLayer below:[[viewLayer sublayers] objectAtIndex:0]];
-			[self setCaptureVideoPreviewLayer:newCaptureVideoPreviewLayer];
-            
-			
-            // Start the session. This is done asychronously since -startRunning doesn't return until the session is running.
-			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
-                [[[self captureManager] session] startRunning];
-                
-			});
-
-            UIImageView *reticleView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 220, 220)];
-            reticleView.image = [UIImage imageNamed:@"artilleryreticle3"];
-            //[view addSubview:reticleView];
-            [self.view addSubview:reticleView];
-           // _webView.alpha=0;
-           
-             
-		}
-
- }
-}
-
-
-
-#pragma mark - FBUserSettingsDelegate methods
-
-- (void)sessionStateChanged:(NSNotification*)notification {
-}
-
-- (void)loginViewController:(id)sender receivedError:(NSError *)error{
-    if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",
-                                                                     [SSAppDelegate FBErrorCodeDescription:error.code]]
-                                                            message:error.localizedDescription
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+    if ([self presentedViewController] == nil) {
+        SSSplashScreenViewController *splashScreenViewController = [[SSSplashScreenViewController alloc] initWithNibName:@"SSSplashScreenViewController" bundle:[NSBundle mainBundle]];
+        splashScreenViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:splashScreenViewController animated:NO completion:nil];
     }
 }
 
+-(void)hideSplashScreen
+{
+    if ([[self presentedViewController] isKindOfClass:[SSSplashScreenViewController class]]) {
+        [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+-(void)showFiringScreen
+{
+    if (firingViewController != nil) {
+        return;
+    }
+
+    firingViewController = [[SSFiringViewController alloc] initWithNibName:@"SSFiringViewController" bundle:[NSBundle mainBundle]];
+    [self.view insertSubview:firingViewController.view belowSubview:webView];
+}
+
+-(void)hideFiringScreen
+{
+    if (firingViewController == nil) {
+        return;
+    }
+
+    [firingViewController removeFromParentViewController];
+    firingViewController = nil;
+}
+
+@end
+
+@implementation SSMainViewController (SSNativeBridgeDelegate)
+
+-(void)nativeBridgeFunction:(NSString *)function withArguments:(NSDictionary *)arguments
+{
+    NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
+
+    if ([function isEqualIgnoringCase:@"getLocationUpdates"]) {
+        if ([(NSNumber*)[arguments objectForKey:@"activate"] boolValue]) {
+            [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
+
+                NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
+                NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
+                NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
+
+                [locationDictionary setObject:latitude forKey:@"latitude"];
+                [locationDictionary setObject:longitude forKey:@"longitude"];
+                
+                [nativeBridge callbackWithDictionary:locationDictionary forFunction:function withArguments:arguments];
+            }];
+        }
+        else {
+            [locationManager stopUpdatingLocation];
+        }
+    }
+    else if ([function isEqualIgnoringCase:@"getOrientationUpdates"]) {
+        if ([(NSNumber*)[arguments objectForKey:@"activate"] boolValue]) {
+            [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
+                NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
+                NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
+                NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
+                NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
+                
+                [orientationDictionary setObject:pitch forKey:@"pitch"];
+                [orientationDictionary setObject:yaw forKey:@"yaw"];
+                [orientationDictionary setObject:roll forKey:@"roll"];
+                
+                [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
+            }];
+        }
+        else {
+            [orientationManager stopUpdatingOrientation];
+        }
+    }
+    else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
+        [self showFiringScreen];
+    }
+    else if ([function isEqualIgnoringCase:@"getPreference"]) {
+        [preferenceManager getPreferences:[arguments objectForKey:@"preferences"] withCompletionHandler:^(NSDictionary *preferences) {
+            [nativeBridge callbackWithDictionary:preferences forFunction:function withArguments:arguments];
+        }];
+    }
+    else if ([function isEqualIgnoringCase:@"setPreference"]) {
+        __weak typeof(self) weakSelf = self;
+        [preferenceManager setPreferences:[arguments objectForKey:@"preferences"] withCompletionHandler:^(BOOL success) {
+            NSDictionary *response = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:success] forKey:@"succeeded"];
+            [weakSelf.nativeBridge callbackWithDictionary:response forFunction:function withArguments:arguments];
+        }];
+    }
+    else if ([function isEqualIgnoringCase:@"getFacebookAccessToken"]) {
+        [facebookManager getAccessTokenWith:^(NSString *accessToken) {
+            [nativeBridge callbackWithString:accessToken forFunction:function withArguments:arguments];
+        }];
+    }
+    else if ([function isEqualIgnoringCase:@"playSound"]) {
+        NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
+        NSInteger loop = (NSInteger)[arguments objectForKey:@"loop"];
+        
+        [audioManager playSound:soundIdentifier loopCount:(loop ? -1 : 0)];
+    }
+    else if ([function isEqualIgnoringCase:@"stopSound"]) {
+        NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
+        [audioManager stopSound:soundIdentifier];
+    }
+    else if ([function isEqualIgnoringCase:@"hideSplash"]) {
+        [self hideSplashScreen];
+    }
+    else if ([function isEqualIgnoringCase:@"vibrate"]) {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+}
 
 @end
