@@ -3,9 +3,16 @@
  * Must copy-paste markup into the app.
  */
 function MapView(Imports) {
+	var that = this;
 	FixedHeightView.call(this, Imports.domId["MapView"], Imports);
 	$("#" + Imports.domId["MapView"] + " .backBtn").click(function () {
 		Imports.ViewManager.previousView();
+	});
+	$("#" + Imports.domId["MapView"] + " .fireBtn").click(function () {
+		if (!that._fireView) {
+			that._fireView = new FireView(Imports);
+		}
+		that._fireView.show(that._game);
 	});
 	// TODO Wire static button events
 }
@@ -41,6 +48,11 @@ MapView.prototype._updateWithNewGames = function (games) {
 
 MapView.prototype._updateGame = function () {
 	$("#game").text(JSON.stringify(this._game));
+	if (this._game.current === this.Imports.GameMaster.userid && this._game.status === "active") {
+		$("#" + this.Imports.domId["MapView"] + " .fireBtn").removeClass("hidden");
+	} else {
+		$("#" + this.Imports.domId["MapView"] + " .fireBtn").addClass("hidden");
+	}
 };
 
 MapView.prototype._updateWithNewLocation = function (location) {
