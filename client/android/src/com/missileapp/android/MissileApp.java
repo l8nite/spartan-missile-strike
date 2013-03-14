@@ -4,10 +4,10 @@ import com.missileapp.android.res.FireScreen;
 import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
 import com.missileapp.android.res.MediaManager;
-import com.missileapp.android.res.Misc;
 import com.missileapp.android.res.UserPreferences;
 
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebSettings.RenderPriority;
 import android.widget.CheckBox;
@@ -62,7 +61,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         setContentView(R.layout.main);
         variables = (BagOfHolding) super.getApplication(); 
         variables.setMissileApp(this);
-        variables.setEnabled(false);
         
         // Store Android views:
         surfaceView = (SurfaceView) findViewById(R.id.camview);
@@ -97,7 +95,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Smooth Transition
         webView.setScrollbarFadingEnabled(true);
         webView.getSettings().setRenderPriority(RenderPriority.HIGH);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+//        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setSupportZoom(false);
 //        webView.getSettings().enableSmoothTransition(); // Deprecated but lets leave it for now
         
@@ -118,6 +116,12 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
         
+        // Disable app
+        variables.setEnabled(false);
+        
+        // Switch to audio controls rather than call
+        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        
         // Check location services are enabled.
         this.processLocationServices();
         
@@ -134,7 +138,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     @Override
     public void onBackPressed() {
-    	variables.getDroidBridge().callJSforMainMenuView();
+        super.onBackPressed();
+    	// TODO UNCOMMENT
+        //variables.getDroidBridge().callJSforMainMenuView();
     }
     
     /**
@@ -208,12 +214,16 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             locationAlert.setView(locationCheckBoxView);
             locationAlert.setPositiveButton(R.string.location_prompt_location_disabled_positive, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    processLocationDialog(dialog, true, false, checkBox.isChecked());
+                    dialog.dismiss();
+                    processGPSIgnoreCheckbox(checkBox.isChecked());
+                    openLocationSettings();
                 }
             });
             locationAlert.setNegativeButton(R.string.location_prompt_location_disabled_negative, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    processLocationDialog(dialog, false, true, checkBox.isChecked());
+                    dialog.dismiss();
+                    processGPSIgnoreCheckbox(checkBox.isChecked());
+                    exitMissileApp();
                 }
             });
             locationAlert.show();
@@ -227,46 +237,27 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             locationAlert.setView(locationCheckBoxView);
             locationAlert.setPositiveButton(R.string.location_prompt_gps_disabled_positive, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    processLocationDialog(dialog, true, false, checkBox.isChecked());
+                    dialog.dismiss();
+                    processGPSIgnoreCheckbox(checkBox.isChecked());
+                    openLocationSettings();
                 }
             });
             locationAlert.setNegativeButton(R.string.location_prompt_gps_disabled_negative, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    processLocationDialog(dialog, false, false, checkBox.isChecked());
+                    dialog.dismiss();
+                    processGPSIgnoreCheckbox(checkBox.isChecked());
+                    variables.setEnabled(true);
                 }
             });
             locationAlert.show();
     	}
     }
     
-    
-    /**
-     * Process Location Listener Dialog box
-     * @param dialog - Dialogbox
-     * @param showSettings - shows location settings
-     * @param exitApplication - exit Missile App 
-     * @param GPSPromptIsChecked - save settings from dialogbox
-     */
-    private void processLocationDialog(DialogInterface dialog, boolean showSettings, boolean exitApplication, boolean GPSPromptIsChecked) {
-        MALogger.log(TAG, Log.INFO, "Processing Location Dialog!");
-    	// Close Dialog
-    	dialog.dismiss();
-    	
-    	// Save Prompt
-    	SharedPreferences.Editor prefEditor = variables.getSettings().edit();
-    	prefEditor.putBoolean(PREFERENCES_GPSPROMPT, !GPSPromptIsChecked);
-    	prefEditor.commit();
-    	
-    	// Process user request
-    	if(showSettings) {
-    		openLocationSettings();
-    	}
-    	else if(exitApplication) {
-            exitMissileApp();
-        }
-    	else { 
-    	    finishLocationSettings();
-    	}
+    private void processGPSIgnoreCheckbox(boolean GPSPromptIsChecked) {
+        // Save Prompt
+        SharedPreferences.Editor prefEditor = variables.getSettings().edit();
+        prefEditor.putBoolean(PREFERENCES_GPSPROMPT, !GPSPromptIsChecked);
+        prefEditor.commit();
     }
     
     private void finishLocationSettings() {
@@ -288,10 +279,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         }
         
         variables.setEnabled(true);
-        if(variables.isHideSplash()) {
-            Misc.hideSplash(variables, variables.getMissileApp(), variables.getSplashScreen());
-            variables.setHideSplash(false);
-        }
     }
     
     

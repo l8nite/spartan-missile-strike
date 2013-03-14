@@ -4,6 +4,7 @@ import com.missileapp.android.res.FireScreen;
 import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
 import com.missileapp.android.res.MediaManager;
+import com.missileapp.android.res.Misc;
 import com.missileapp.android.res.UserPreferences;
 
 import android.app.Application;
@@ -235,6 +236,11 @@ public class BagOfHolding extends Application {
      */
 	public void setEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
+		
+		if(hideSplash) {
+		    Misc.hideSplash(this, this.getMissileApp(), this.getSplashScreen());
+		    hideSplash = false;
+		}
 	}
 	
 	/**
