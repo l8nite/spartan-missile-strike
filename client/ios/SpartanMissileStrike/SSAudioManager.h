@@ -2,27 +2,20 @@
 //  SSAudioManager.h
 //  SpartanMissileStrike
 //
-//  Created by Sherif on 1/3/13.
-//  Copyright (c) 2013 Group 2. All rights reserved.
+//  Created by Shaun Guth on 3/12/13.
+//  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-#import <AudioToolbox/AudioToolbox.h>
 
 @interface SSAudioManager : NSObject
 {
-    NSMutableDictionary* playerForSound;
-    NSDictionary* filenameForSound;
-    
-    __strong AVAudioPlayer *player;
-    
+    NSDictionary* filenameForSoundId;
+    NSMutableDictionary* playerForSoundId;
 }
-@property (nonatomic,strong) AVAudioPlayer *player;
--(void)playSound:(NSString*)identifier;
--(AVAudioPlayer*)createAVAudioPlayer;
 
+-(void)playSound:(NSString *)soundIdentifier loopCount:(NSInteger)loops;
+-(void)stopSound:(NSString *)soundIdentifier;
 
 @end
-

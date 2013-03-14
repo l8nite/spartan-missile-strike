@@ -6,8 +6,8 @@
 function NativeBridge_Android() {
 	NativeBridge_Abstract.call(this);
 }
-NativeBridge_Android.prototype = new NativeBridge_Abstract();
-NativeBridge_Android.prototype.constructor = NativeBridge_Android;
+
+NativeBridge_Android.prototype = Object.create(NativeBridge_Abstract.prototype);
 
 NativeBridge_Android.prototype._getLocationUpdates = function (activate, callbackID) {
 	AndroidInterface.getLocationUpdates(activate, callbackID);
@@ -25,17 +25,12 @@ NativeBridge_Android.prototype.showFireMissileScreen = function (activate) {
 	AndroidInterface.showFireMissileScreen(activate);
 };
 
-NativeBridge_Android.prototype._getPreference = function (preference, callbackID) {
-	AndroidInterface.getPreference(preference, callbackID);
+NativeBridge_Android.prototype._getPreference = function (preferences, callbackID) {
+	AndroidInterface.getPreference(preferences, callbackID);
 };
 
-NativeBridge_Android.prototype._setPreference = function (preference, callbackID) {
-	var keyvalue = new Object();
-	for (var i in preference) {
-		keyvalue.key = i;
-		keyvalue.value = preference[i];
-	}
-	AndroidInterface.setPreference(JSON.stringify(keyvalue), callbackID);
+NativeBridge_Android.prototype._setPreference = function (preferences, callbackID) {
+	AndroidInterface.setPreference(preferences, callbackID);
 };
 
 NativeBridge_Android.prototype._getFacebookAccessToken = function (callbackID) {
@@ -50,8 +45,8 @@ NativeBridge_Android.prototype.logoutFacebook = function () {
 	AndroidInterface.logoutFacebook();
 };
 
-NativeBridge_Android.prototype.playSound = function (options) {
-	AndroidInterface.playSound(JSON.parse(options));
+NativeBridge_Android.prototype.playSound = function (soundID, options) {
+	AndroidInterface.playSound(soundID, options);
 };
 
 NativeBridge_Android.prototype.stopSound = function (soundID) {
