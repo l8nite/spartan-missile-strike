@@ -158,6 +158,22 @@
 			}
 		};
 
+		var cantstopwontstop2;
+		Imports.NativeBridge._getOrientationUpdates = function (activate, callbackID) {
+			var that = this;
+			if (activate) {
+				cantstopwontstop2 = setInterval(function () {
+					var orientation = {};
+					orientation.pitch = Math.random();
+					orientation.roll = Math.random();
+					orientation.yaw = Math.random();
+					that.callback(callbackID, orientation);
+				}, 8);
+			} else {
+				clearInterval(cantstopwontstop2);
+			}
+		};
+
 		new MainMenu(Imports).show();
 	};
 	</script>
@@ -175,10 +191,17 @@
 			</div>
 		</div>
 		<div id="map-view">
-			<div style="word-wrap: break-word;" id="game">---</div><br>
-			<div style="word-wrap: break-word;" id="gps">---</div><br>
+			<div style="word-wrap: break-word; max-height: 50%;" class="game">---</div><br>
+			<div style="word-wrap: break-word;" class="gps">---</div><br>
 			<div class="backBtn">Back</div>
 			<div class="fireBtn">Fire</div>
+		</div>
+		<div id="fire-view">
+			<div style="word-wrap: break-word; max-height: 50%;" class="game">---</div><br>
+			<div style="word-wrap: break-word;" class="gps">---</div><br>
+			<div style="word-wrap: break-word;" class="orientation">---</div><br>
+			<div class="backBtn">Back</div>
+			<div class="fireBtn">Fire!</div>
 		</div>
 	</div>
 </body>

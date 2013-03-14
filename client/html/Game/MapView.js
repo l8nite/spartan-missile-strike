@@ -47,7 +47,7 @@ MapView.prototype._updateWithNewGames = function (games) {
 };
 
 MapView.prototype._updateGame = function () {
-	$("#game").text(JSON.stringify(this._game));
+	$("#" + this.Imports.domId["MapView"] + " .game").text(JSON.stringify(this._game));
 	if (this._game.current === this.Imports.GameMaster.userid && this._game.status === "active") {
 		$("#" + this.Imports.domId["MapView"] + " .fireBtn").removeClass("hidden");
 	} else {
@@ -61,5 +61,5 @@ MapView.prototype._updateWithNewLocation = function (location) {
 };
 
 MapView.prototype._updateLocation = function () {
-	$("#gps").text(JSON.stringify(this._location));
+	$("#" + this.Imports.domId["MapView"] + " .gps").text(JSON.stringify(this._location));
 };
