@@ -24,12 +24,16 @@ function _initializeRestifyServer (done) {
         version: '0.0.1',
     });
 
+    server.use(restify.CORS());
+    server.use(restify.fullResponse());
+
     server.use(restify.bodyParser());
     server.use(restify.queryParser());
 
     routes.installPublicRouteHandlers(server); // no authentication required
     server.use(sessions.requireValidSession(database.client));
     routes.installAuthenticatedRouteHandlers(server); // authentication required
+
 
     server.listen(ports.apiServer, function () {
         console.log('%s listening at %s', server.name, server.url);
