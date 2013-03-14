@@ -125,9 +125,13 @@ describe('fire-missile', function () {
             client1.put(path, shot, function (err, req, res, obj) {
                 res.statusCode.should.equal(200);
                 should.not.exist(err);
-                obj.should.have.property('destination');
-                obj.should.have.property('hit');
-                obj.hit.should.equal(false);
+                obj.should.have.property('status');
+                obj.should.have.property(client1.user.id);
+                obj[client1.user.id].should.have.property('shots');
+                var shots = obj[client1.user.id].shots;
+                shots.length.should.be.above(0);
+                shots[shots.length - 1].should.have.property('hit');
+                shots[shots.length - 1].hit.should.equal(false);
                 done();
             });
         });
@@ -141,9 +145,10 @@ describe('fire-missile', function () {
             client2.put(path, shot, function (err, req, res, obj) {
                 res.statusCode.should.equal(200);
                 should.not.exist(err);
-                obj.should.have.property('destination');
-                obj.should.have.property('hit');
-                obj.hit.should.equal(true);
+                var shots = obj[client2.user.id].shots;
+                shots.length.should.be.above(0);
+                shots[shots.length - 1].should.have.property('hit');
+                shots[shots.length - 1].hit.should.equal(true);
                 done();
             });
         });

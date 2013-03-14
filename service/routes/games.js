@@ -259,11 +259,13 @@ function _calculateMissileTrajectory (request, game, next) {
 }
 
 function _updateGameWithShotFired (game, shot, next) {
-    if (!game.hasOwnProperty('shots')) {
-        game.shots = [];
+    var player = game[game.current];
+
+    if (!player.hasOwnProperty('shots')) {
+        player.shots = [];
     }
 
-    game.shots.push(shot);
+    player.shots.push(shot);
 
     if (shot.hit) {
         game.status = 'completed';
@@ -278,7 +280,7 @@ function _updateGameWithShotFired (game, shot, next) {
             return next(new restify.InternalError());
         }
 
-        next(null, 200, shot);
+        next(null, 200, game);
     });
 }
 
