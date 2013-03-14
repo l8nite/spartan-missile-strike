@@ -30,6 +30,14 @@ public class AndroidBridge {
     }
     
     /**
+     * Allows logging to Native Bridge
+     * @param data - data to Log
+     */
+    public void log(String data) {
+        MALogger.log("NativeBridge", Log.INFO, data);
+    }
+    
+    /**
      * Notify Native Bridge to Wake
      */
     public void callJSforWake() {
