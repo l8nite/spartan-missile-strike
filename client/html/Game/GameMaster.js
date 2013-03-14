@@ -40,23 +40,7 @@ GameMaster.prototype.getGames = function () {
 	}
 	return this._getGamesFromService(updated).done(function (response) {
 		if (response && response.length > 0) {
-			var newGames = [];
-			for (var i in response) {
-				newGames.push(response[i]);
-			}
-			for (var i in that._games.games) {
-				var outofdate = false;
-				for (var j in newGames) {
-					if (that._games.games[i].id === newGames[j].id) {
-						outofdate = true;
-						break;
-					}
-				}
-				if (!outofdate) {
-					newGames.push(that._games.games[i]);
-				}
-			}
-			that._games.games = newGames;
+			that._mixGames(response);
 			that._notifyListeners(response);
 		}
 		that._games.when = new Date();
@@ -123,6 +107,37 @@ GameMaster.prototype.unsubscribeLocation = function (ticket) {
 	if (this._locationListeners.count() === 0) {
 		this.Imports.NativeBridge.getLocationUpdates(false, this._locationUpdatesTicket);
 	}
+};
+
+GameMaster.prototype.doFire = function (game, location, orientation, power) {
+	var that = this;
+	var gameid = game;
+	if (typeof gameid === "object") {
+		gameid = gameid.id;
+	}
+	this._doFireOnService(gameid, location, orientation, power).done(function (response) {
+		that._mixGames(response);
+		that._notifyListeners(response);
+	});
+};
+
+GameMaster.prototype._doFireOnService = function (gameid, location, orientation, power) {
+	var shot = {
+		latitude: location.latitude,
+		longitude: location.longitude,
+		angle: orientation.pitch * 180 / Math.PI,
+		heading: orientation.yaw * 180 / Math.PI,
+		power: power
+	};
+	return $.ajax({
+		url: this.Imports.serviceurl + "/games/" + gameid + "/fire-missile",
+		type: "PUT",
+		headers: {
+			"MissileAppSessionId": this._sessionid
+		},
+		dataType: "json",
+		data: JSON.stringify(shot)
+	});
 };
 
 /* Call to the webservice.
@@ -211,6 +226,26 @@ GameMaster.prototype._notifyLocationListeners = function (location) {
 	for (var i in a) {
 		a[i](location);
 	}
+};
+
+GameMaster.prototype._mixGames = function (games) {
+	var newGames = [];
+	for (var i in games) {
+		newGames.push(games[i]);
+	}
+	for (var i in this._games.games) {
+		var outofdate = false;
+		for (var j in games) {
+			if (this._games.games[i].id === games[j].id) {
+				outofdate = true;
+				break;
+			}
+		}
+		if (!outofdate) {
+			newGames.push(this._games.games[i]);
+		}
+	}
+	this._games.games = newGames;
 };
 
 // How long before games datastructure becomes stale
