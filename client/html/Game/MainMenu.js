@@ -62,8 +62,8 @@ MainMenu.prototype._render = function (games) {
 };
 
 MainMenu.prototype._showGame = function (game) {
-	if (!this.mapView) {
-		this.mapView = new MapView(this.Imports);
+	if (!this._mapView) {
+		this._mapView = new MapView(this.Imports);
 	}
-	this.mapView.show(game);
+	this._mapView.show(game);
 };
