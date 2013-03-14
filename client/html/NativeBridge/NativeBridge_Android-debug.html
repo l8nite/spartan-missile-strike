@@ -9,7 +9,9 @@
             
             window.onload = function () {
                 document.getElementById("debugGetCurrentLocation").onclick = function () {
-                    NativeBridge.getCurrentLocation(function (response) { alert(response); });
+                    NativeBridge.getCurrentLocation(function (response) { 
+						document.getElementById("debugSetPreference").innerHTML = response;
+					});
                     return false;
                 }
 
@@ -19,7 +21,9 @@
                 }
                 
                 document.getElementById("debugGetPreference").onclick = function () {
-                    NativeBridge.getPreference("one", function (response) { alert(response); });
+                    NativeBridge.getPreference("one", function (response) { 
+						document.getElementById("debugSetPreference").innerHTML = response;
+					});
                     return false;
                 }
                 
@@ -58,5 +62,7 @@
         <a id="debugPlaySound" href="#">Play Sound</a> <br/>
         <a id="debugStopSound" href="#">Stop Sound</a> <br/>
         <a id="debugHideSplash" href="#">hideSplash</a>
+		
+		<div id="respmsg"></div>
 	</body>
 </html>
