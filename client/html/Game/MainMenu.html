@@ -1,0 +1,208 @@
+<html>
+</html>
+<head>
+	<link rel="stylesheet" href="../View/view.css">
+	<link rel="stylesheet" href="MissileApp.css">
+	<style>
+		body {
+			text-align: center;
+			background-color: transparent;
+		}
+		#main-menu {
+			background-color: #8080F0;
+		}
+		#map-view {
+			background-color: #F08080;
+		}
+		#fire-view {
+			background-color: transparent;
+		}
+		#fire-view div {
+			background-color: #80F080;
+		}
+		#options-view {
+			background-color: #F0F080;
+		}
+		#opponents-view {
+			background-color: #808080;
+		}
+		#base-view {
+			background-color: #F080F0;
+		}
+	</style>
+	<script src="../jquery/jquery.js"></script>
+	<script src="../Util/DomHelper.js"></script>
+	<script src="../Util/Fridge.js"></script>
+	<script src="../NativeBridge/NativeBridge_Abstract.js"></script>
+	<script src="../NativeBridge/NativeBridge_iOS.js"></script>
+	<script src="../Game/GameMaster.js"></script>
+	<script src="../View/MainView.js"></script>
+	<script src="../View/View.js"></script>
+	<script src="../View/FixedHeightView.js"></script>
+	<script src="../Game/MainMenu.js"></script>
+	<script src="../Game/MapView.js"></script>
+	<script src="../Game/FireView.js"></script>
+	<script>
+	window.onload = function () {
+		var Imports = {
+			DomHelper: new DomHelper(),
+			NativeBridge: new NativeBridge_iOS(),
+			domId: {
+				"MainMenu": "main-menu",
+				"MapView": "map-view",
+				"FireView": "fire-view",
+				"OptionsView": "options-view",
+				"OpponentsView": "opponents-view",
+				"BaseView": "base-view"
+			}
+		};
+		Imports.GameMaster = new GameMaster("user:0001", "12345", Imports);
+		Imports.ViewManager = new MainView(Imports);
+
+		var c = 0;
+		Imports.GameMaster._getGamesFromService = function (fromWhen) {
+			var d = new $.Deferred();
+			var games = [];
+			if (c === 0) {
+				games.push({
+					id: "game:0",
+					status: "active",
+					creator: "user:0001",
+					opponent: "user:0002",
+					current: "user:0001"
+				});
+				games.push({
+					id: "game:1",
+					status: "active",
+					creator: "user:0003",
+					opponent: "user:0001",
+					current: "user:0003"
+				});
+				games.push({
+					id: "game:2",
+					status: "completed",
+					creator: "user:0001",
+					opponent: "user:0004",
+					current: "user:0001"
+				});
+			} else if (c === 3) {
+				games.push({
+					id: "game:3",
+					status: "active",
+					creator: "user:0005",
+					opponent: "user:0001",
+					current: "user:0001"
+				});
+				games.push({
+					id: "game:1",
+					status: "active",
+					creator: "user:0003",
+					opponent: "user:0001",
+					current: "user:0001"
+				});
+			}
+			c++;
+			setTimeout(function () {
+				d.resolve(games);
+			}, 1000)
+			return d;
+		};
+
+		Imports.GameMaster._getNameFromService = function (userid) {
+			var d = new $.Deferred();
+			var name;
+			if (userid === "user:0001") {
+				name = {
+					username: "Chris.Cook",
+					realname: "Chris Cook"
+				};
+			} else if (userid === "user:0002") {
+				name = {
+					username: "Shaun.Guth",
+					realname: "Shaun Guth"
+				};
+			} else if (userid === "user:0003") {
+				name = {
+					username: "Saiteja.Karra"
+				};
+			} else if (userid === "user:0004") {
+				name = {
+					username: "Jomana.Sherif"
+				};
+			}
+
+			if (name) {
+				setTimeout(function () {
+					d.resolve(name);
+				}, 500);
+			} else {
+				setTimeout(function () {
+					d.reject();
+				}, 500);
+			}
+			return d;
+		};
+
+		var cantstopwontstop;
+		Imports.NativeBridge._getLocationUpdates = function (activate, callbackID) {
+			var that = this;
+			if (activate) {
+				cantstopwontstop = setInterval(function () {
+					var loc = {};
+					loc.latitude = Math.random();
+					loc.longitude = Math.random();
+					that.callback(callbackID, loc);
+				}, 200);
+			} else {
+				clearInterval(cantstopwontstop);
+			}
+		};
+
+		var cantstopwontstop2;
+		Imports.NativeBridge._getOrientationUpdates = function (activate, callbackID) {
+			var that = this;
+			if (activate) {
+				cantstopwontstop2 = setInterval(function () {
+					var orientation = {};
+					orientation.pitch = Math.random();
+					orientation.roll = Math.random();
+					orientation.yaw = Math.random();
+					that.callback(callbackID, orientation);
+				}, 8);
+			} else {
+				clearInterval(cantstopwontstop2);
+			}
+		};
+
+		new MainMenu(Imports).show();
+	};
+	</script>
+</head>
+<body>
+	<div style="display:none;">
+		<div id="main-menu">
+			<div id="list-yourturn"><h1>Your Turn</h1></div>
+			<div id="list-histurn"><h1>Not Your Turn</h1></div>
+			<div id="list-complete"><h1>Nobody's Turn</h1></div>
+			<div style="display: none;">
+				<div id="game-prototype">
+					<span class="opponent"></span>
+				</div>
+			</div>
+		</div>
+		<div id="map-view">
+			<div style="word-wrap: break-word; max-height: 50%;" class="game">---</div><br>
+			<div style="word-wrap: break-word;" class="gps">---</div><br>
+			<div class="backBtn">Back</div>
+			<div class="fireBtn">Fire</div>
+		</div>
+		<div id="fire-view">
+			<div style="word-wrap: break-word; max-height: 50%;" class="game">---</div><br>
+			<div style="word-wrap: break-word;" class="gps">---</div><br>
+			<div style="word-wrap: break-word;" class="orientation">---</div><br>
+			<div class="backBtn">Back</div>
+			<div class="fireBtn">Fire!</div>
+		</div>
+	</div>
+</body>
+</html>
