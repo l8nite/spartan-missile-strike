@@ -144,7 +144,7 @@ NativeBridge_Abstract.prototype.getLocationUpdates = function (activate, callbac
 			this._getLocationUpdatesCBs = new Fridge();
 			var id = this._getLocationUpdatesCBs.add(callback);
 			this._getLocationUpdates(true, this._registerCallback(function (response) {
-				var a = that._getLocationUpdatesCBs.get();
+				var a = that._getLocationUpdatesCBs.getAll();
 				for (var i in a) {
 					a[i](response);
 				}
@@ -171,7 +171,7 @@ NativeBridge_Abstract.prototype.getOrientationUpdates = function (activate, call
 			this._getOrientationUpdatesCBs = new Fridge();
 			var id = this._getOrientationUpdatesCBs.add(callback);
 			this._getOrientationUpdates(true, this._registerCallback(function (response) {
-				var a = that._getOrientationUpdatesCBs.get();
+				var a = that._getOrientationUpdatesCBs.getAll();
 				for (var i in a) {
 					a[i](response);
 				}

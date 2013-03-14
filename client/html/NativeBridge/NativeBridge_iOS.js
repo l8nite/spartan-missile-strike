@@ -6,7 +6,8 @@
 function NativeBridge_iOS() {
 	NativeBridge_Abstract.call(this);
 }
-NativeBridge_iOS.prototype = new NativeBridge_Abstract();
+
+NativeBridge_iOS.prototype = Object.create(NativeBridge_Abstract.prototype);
 
 NativeBridge_iOS.prototype._getLocationUpdates = function (activate, callbackID) {
     alert('getLocationupdates(' + activate + ')');
