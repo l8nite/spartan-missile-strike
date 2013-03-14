@@ -2,34 +2,36 @@
 //  SSMainViewController.h
 //  SpartanMissileStrike
 //
-//  Created by Sherif on 1/9/13.
-//  Copyright (c) 2013 Group 2. All rights reserved.
+//  Created by Shaun Guth on 3/11/13.
+//  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "SSAudioManager.h"
-#import "SSNativeBridge.h"
-#import <FacebookSDK/FacebookSDK.h>
-#import "SSFiringViewController.h"
+#import "SSNativeBridgeDelegate.h"
 
-@class SSFiringManager, AVCaptureVideoPreviewLayer;///Took this out: AVCamPreviewView
-@interface SSMainViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-{
-    SSAudioManager* sa1;
-    FBSession* session;
-    SSFiringManager *captureManager;
-    
- }
+@class SSNativeBridge;
+@class SSAudioManager;
+@class SSFacebookManager;
+@class SSFiringViewController;
+@class SSPreferenceManager;
+@class SSLocationManager;
+@class SSOrientationManager;
 
-@property (nonatomic,strong) SSFiringManager *captureManager;
-@property (nonatomic,strong) UIView *videoPreviewView;
-@property (nonatomic,strong) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
+@interface SSMainViewController : UIViewController
 
-@property (nonatomic,retain) IBOutlet SSNativeBridge* nativeBridge;
-@property (nonatomic, strong) FBSession* session;
-@property (nonatomic,retain) IBOutlet UIWebView* webView;
+@property (strong, nonatomic) SSNativeBridge *nativeBridge;
+@property (strong, nonatomic) SSAudioManager *audioManager;
+@property (strong, nonatomic) SSFacebookManager *facebookManager;
+@property (strong, nonatomic) SSPreferenceManager *preferenceManager;
+@property (strong, nonatomic) SSLocationManager *locationManager;
+@property (strong, nonatomic) SSOrientationManager *orientationManager;
+@property (strong, nonatomic) SSFiringViewController *firingViewController;
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
+-(void)showSplashScreen;
 
+@end
 
+@interface SSMainViewController (SSNativeBridgeDelegate) <SSNativeBridgeDelegate>
 @end

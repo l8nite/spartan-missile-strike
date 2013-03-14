@@ -2,25 +2,32 @@
 //  SSNativeBridge.h
 //  SpartanMissileStrike
 //
-//  Created by Sherif on 1/6/13.
-//  Copyright (c) 2013 Group 2. All rights reserved.
+//  Created by Shaun Guth on 3/11/13.
+//  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "SSAudioManager.h"
-#import <CoreLocation/CoreLocation.h>
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
- 
-@interface SSNativeBridge : NSObject <UIWebViewDelegate>
+@protocol SSNativeBridgeDelegate;
+
+@interface SSNativeBridge : NSObject
 {
-  
-    SSAudioManager* sa1;
-
+    __weak id<SSNativeBridgeDelegate> _delegate;
+    __weak UIWebView *_webView;
 }
--(BOOL)dispatchNativeBridgeEventsFromURL:(NSURL*)url; 
-- (BOOL)webView: (UIWebView*)webView shouldStartLoadWithRequest: (NSURLRequest*)request navigationType: (UIWebViewNavigationType)navigationType;
 
--(void)vibrate;
+@property (weak) id<SSNativeBridgeDelegate> delegate;
+@property (weak) UIWebView* webView;
+
+-(id)initWithWebView:(UIWebView*)webView andDelegate:(id<SSNativeBridgeDelegate>)delegate;
+
+-(void)callbackWithArray:(NSArray*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments;
+
+-(void)callbackWithDictionary:(NSDictionary*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments;
+
+-(void)callbackWithString:(NSString*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments;
+
+@end
+
+@interface SSNativeBridge (UIWebViewDelegate) <UIWebViewDelegate>
 @end
