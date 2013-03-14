@@ -6,10 +6,11 @@
 function NativeBridge_iOS() {
 	NativeBridge_Abstract.call(this);
 }
-NativeBridge_iOS.prototype = new NativeBridge_Abstract();
-NativeBridge_iOS.prototype.constructor = NativeBridge_iOS;
+
+NativeBridge_iOS.prototype = Object.create(NativeBridge_Abstract.prototype);
 
 NativeBridge_iOS.prototype._getLocationUpdates = function (activate, callbackID) {
+    alert('getLocationupdates(' + activate + ')');
 	this._appendIframe("spartan-missile-strike://getLocationUpdates/?arguments="
 		+ JSON.stringify({
 			activate : activate,
@@ -43,25 +44,19 @@ NativeBridge_iOS.prototype.showFireMissileScreen = function (activate) {
 	);
 };
 
-NativeBridge_iOS.prototype._getPreference = function (preference, callbackID) {
+NativeBridge_iOS.prototype._getPreference = function (preferences, callbackID) {
 	this._appendIframe("spartan-missile-strike://getPreference/?arguments="
 		+ JSON.stringify({
-			preference : preference,
+			preferences : preferences,
 			identifier : callbackID
 		})
 	);
 };
 
 NativeBridge_iOS.prototype._setPreference = function (preferences, callbackID) {
-	var keyvalue = new Object();
-	for (var i in preference) {
-		keyvalue.key = i;
-		keyvalue.value = preference[i];
-		break;
-	}
 	this._appendIframe("spartan-missile-strike://setPreference/?arguments="
 		+ JSON.stringify({
-			preference : keyvalue,
+			preferences : preferences,
 			identifier : callbackID
 		})
 	);
@@ -79,7 +74,11 @@ NativeBridge_iOS.prototype.logoutFacebook = function () {
 	this._appendIframe("spartan-missile-strike://logoutFacebook/?arguments=");
 };
 
-NativeBridge_iOS.prototype.playSound = function (options) {
+NativeBridge_iOS.prototype.playSound = function (soundID, options) {
+	if (!options) {
+		options = {};
+	}
+	options.soundID = soundID;
 	this._appendIframe("spartan-missile-strike://playSound/?arguments="
 		+ JSON.stringify(options)
 	);

@@ -2,129 +2,105 @@
 //  SSNativeBridge.m
 //  SpartanMissileStrike
 //
-//  Created by Sherif on 1/6/13.
-//  Copyright (c) 2013 Group 2. All rights reserved.
+//  Created by Shaun Guth on 3/11/13.
+//  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
 #import "SSNativeBridge.h"
-#import "SSAppDelegate.h"
-#import <math.h>
+#import "NSString+CaseInsensitiveComparison.h"
+#import "SSNativeBridgeDelegate.h"
 
+#define NSJSONWritingCompact 0
 
 @implementation SSNativeBridge
-/**
- "spartan-missile-strike://functionName[calledHOST]:arguments(callbackIdentifier )"
- schema://hostname/path?key=value1&key2=value2
- /?:&
- */
-//NO MESSING WITH UI
 
--(id)init
+@synthesize delegate = _delegate;
+@synthesize webView = _webView;
+
+-(id)initWithWebView:(UIWebView*)webView andDelegate:(id<SSNativeBridgeDelegate>)delegate
 {
-    self = [super init];
-    sa1 = [[SSAudioManager alloc] init];
+    if (self = [super init]) {
+        _delegate = delegate;
+        _webView = webView;
+        [_webView setDelegate:self];
+    }
+
     return self;
 }
 
--(BOOL)dispatchNativeBridgeEventsFromURL:(NSURL*)url
+-(void)callbackWithArray:(NSArray*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
 {
-    /**
-     Bails out if not spartan-missile-strike
-     */
-    NSLog(@"DISPATCHING!!!");
-    NSString* scheme = [url scheme];
-    
-    NSLog(@"scheme: %@",scheme);
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingCompact error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [self callbackWithString:jsonString forFunction:function withArguments:arguments];
+}
 
-    if (![scheme isEqualToString:@"spartan-missile-strike"])
-    {
+-(void)callbackWithDictionary:(NSDictionary*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
+{
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingCompact error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [self callbackWithString:jsonString forFunction:function withArguments:arguments];
+}
+
+-(void)callbackWithString:(NSString*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
+{
+    NSNumber *callbackIdentifier = (NSNumber*)[arguments objectForKey:@"identifier"];
+    NSAssert(callbackIdentifier != nil, @"callback attempted, but no callback identifier present");
+    
+    NSString *callbackJS = [NSString stringWithFormat:@"NativeBridge.callback(%d, %@)", [callbackIdentifier integerValue], result];
+    
+    NSLog(@"Native Bridge: %@", callbackJS);
+
+    [self performSelectorOnMainThread:@selector(_executeJavascriptOnWebView:) withObject:callbackJS waitUntilDone:NO];
+}
+
+-(void)_executeJavascriptOnWebView:(NSString*)javascript
+{
+    NSString *result = [_webView stringByEvaluatingJavaScriptFromString:javascript];
+    if (result == nil) {
+        NSLog(@"Error executing javascript: %@", javascript);
+    }
+}
+
+@end
+
+@implementation SSNativeBridge (UIWebViewDelegate)
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSURL *url = [request URL];
+    NSString *urlScheme = [url scheme];
+    
+    // NSLog(@"%@", url);
+    
+    if (![urlScheme isEqualIgnoringCase:@"spartan-missile-strike"]) {
         return YES;
     }
-    /// parsing the encoded string into a JSON object
-    NSString* query= [url query];
-    NSLog(@"query: %@",query);
-
-    NSArray* parameters= [query componentsSeparatedByString:@"="];
-    NSString* arguments= [parameters objectAtIndex:1];
-    NSString* decoded = [arguments stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSData* dDecoded = [decoded dataUsingEncoding:NSUTF8StringEncoding];
-    NSString* functionName = [url host];
     
+    NSString *nativeBridgeFunction = [url host];
     
-    NSLog(@"function name: %@",functionName);
-    if ([functionName isEqualToString:@"getCurrentLocation"])
-    {
-        SSAppDelegate *appDelegate = (SSAppDelegate *)[[UIApplication sharedApplication] delegate];
-        float currentLatitude = appDelegate.locationManager.location.coordinate.latitude;
-        float currentLongitude = appDelegate.locationManager.location.coordinate.latitude;
-        NSLog(@"Current Device location %f %f",currentLatitude,currentLongitude);
-        
-
-    }   else if ([functionName isEqualToString:@"playSound"])
-    {
-        NSError* e;
-        NSDictionary* jsonObject = [NSJSONSerialization JSONObjectWithData:dDecoded options:0 error:&e];
-        NSLog(@"jsonOBJ %@",jsonObject);
-        NSString *soundIDKey = [jsonObject valueForKey:@"soundID"];
-        [sa1 playSound:soundIDKey];// PULL IT OUT OF THE JSON OBJECT
-        
-    }
-        else if ([functionName isEqualToString:@"showFireMissileScreen"])
-    {
-        NSLog(@"showscreen");
-        NSString *nativeAction = @"showFireMissileScreen";
-        [[NSNotificationCenter defaultCenter] postNotificationName:SMSActivatesCameraPreviewNotification object:nativeAction];
-        //syncronously location gets updated
-               
-        
-    }   else if([functionName isEqualToString:@"fireMissile"])
-    {
-        
-        NSLog(@"Get Device Attitude");
-    //Motion manager as well
-        SSAppDelegate *appDelegate = (SSAppDelegate *)[[UIApplication sharedApplication] delegate];
-        float currentYaw = appDelegate.sharedMotionManager.deviceMotion.attitude.yaw*180/M_PI;
-        float currentPitch = appDelegate.sharedMotionManager.deviceMotion.attitude.pitch* 180/M_PI;
-        float currentRoll = appDelegate.sharedMotionManager.deviceMotion.attitude.roll* 180/M_PI;
-    
-        NSLog(@"yaw is %f",currentYaw);
-        NSLog(@"pitch is %f",currentPitch);
-        NSLog(@"roll is %f",currentRoll);
-    
-    }else if ([functionName isEqualToString:@"vibrate"])
-    {
-        /////Apple has locked the API to set vibrate length to preserve battery
-        ///Seeting vibrate duration is not supported without heavy lifting
-        
-        AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
-        
+    // parse query parameters into a dictionary
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    NSArray *keyValuePairs = [[url query] componentsSeparatedByString:@"&"];
+    for (NSString *keyValuePair in keyValuePairs) {
+        NSArray *components = [keyValuePair componentsSeparatedByString:@"="];
+        NSString *key = [[components objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+        NSString *value = [[components objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+        [parameters setObject:value forKey:key];
     }
     
-    ////NSLog(@"I am a spartan missile strike handler");
+    // get 'arguments' parameter and deserialize JSON (if present)
+    NSString *argumentsParam = [parameters objectForKey:@"arguments"];
+    NSDictionary *nativeBridgeFunctionArguments = nil;
+    
+    if (argumentsParam != nil) {
+        nativeBridgeFunctionArguments = [NSJSONSerialization JSONObjectWithData:[argumentsParam dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    }
+    
+    // dispatch event to delegate
+    [_delegate nativeBridgeFunction:nativeBridgeFunction withArguments:nativeBridgeFunctionArguments];
+    
     return NO;
-    
 }
-
-
-
-
-
-
-/**
- Vibration
- */
--(void)vibrate
-{
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    
-}
-- (BOOL)webView: (UIWebView*)webView shouldStartLoadWithRequest: (NSURLRequest*)request navigationType: (UIWebViewNavigationType)navigationType
-{
-    NSLog(@"entered webview should...");
-    
-    return [self dispatchNativeBridgeEventsFromURL:[request URL]];
-}
-
-
 
 @end
