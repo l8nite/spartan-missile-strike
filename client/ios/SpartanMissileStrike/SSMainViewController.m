@@ -105,31 +105,41 @@
     NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
 
     if ([function isEqualIgnoringCase:@"getLocationUpdates"]) {
-        // TODO: check activated parameter and call stop if it is false
-        [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
-            NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
-            NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
-            NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
+        if ([(NSNumber*)[arguments objectForKey:@"activate"] boolValue]) {
+            [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
 
-            [locationDictionary setObject:latitude forKey:@"latitude"];
-            [locationDictionary setObject:longitude forKey:@"longitude"];
-            
-            [nativeBridge callbackWithDictionary:locationDictionary forFunction:function withArguments:arguments];
-        }];
+                NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
+                NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
+                NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
+
+                [locationDictionary setObject:latitude forKey:@"latitude"];
+                [locationDictionary setObject:longitude forKey:@"longitude"];
+                
+                [nativeBridge callbackWithDictionary:locationDictionary forFunction:function withArguments:arguments];
+            }];
+        }
+        else {
+            [locationManager stopUpdatingLocation];
+        }
     }
     else if ([function isEqualIgnoringCase:@"getOrientationUpdates"]) {
-        [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
-            NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
-            NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
-            NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
-            NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
-            
-            [orientationDictionary setObject:pitch forKey:@"pitch"];
-            [orientationDictionary setObject:yaw forKey:@"yaw"];
-            [orientationDictionary setObject:roll forKey:@"roll"];
-            
-            [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
-        }];
+        if ([(NSNumber*)[arguments objectForKey:@"activate"] boolValue]) {
+            [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
+                NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
+                NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
+                NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
+                NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
+                
+                [orientationDictionary setObject:pitch forKey:@"pitch"];
+                [orientationDictionary setObject:yaw forKey:@"yaw"];
+                [orientationDictionary setObject:roll forKey:@"roll"];
+                
+                [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
+            }];
+        }
+        else {
+            [orientationManager stopUpdatingOrientation];
+        }
     }
     else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
         [self showFiringScreen];
