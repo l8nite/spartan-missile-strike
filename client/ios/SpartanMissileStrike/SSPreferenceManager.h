@@ -1,26 +1,18 @@
 //
 //  SSPreferenceManager.h
-//  Spartan Missile Strike
+//  SpartanMissileStrike
 //
-//  Created by Sherif on 12/22/12.
-//  Copyright (c) 2012 Jomana Sherif. All rights reserved.
+//  Created by Shaun Guth on 3/13/13.
+//  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-//singletin
-// set preference and get preference 
+@interface SSPreferenceManager : NSObject
 
-@interface SSPreferenceManager :NSObject
-{
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
 
-NSUserDefaults *userDefault;
+-(void)setPreferences:(NSDictionary*)preferences withCompletionHandler:(void (^)(BOOL success))completionHandler;
+-(void)getPreferences:(NSArray*)preferences withCompletionHandler:(void (^)(NSDictionary* preferences))completionHandler;
 
-}
-
-//instance methods
-
--(void)setPreference:(NSString *) value forKey:(NSString *) key;
--(NSString *)preferenceForKey: (NSString *)key;
 @end
- 

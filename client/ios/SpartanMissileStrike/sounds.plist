@@ -2,13 +2,40 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BOMB</key>
-	<string>shared/audio/Bomb</string>
-	<key>MISSILELAUNCHED</key>
-	<string>shared/audio/MissileLaunched</string>
-	<key>MODERATO</key>
-	<string>shared/audio/Moderato</string>
-	<key>EXPLOSION</key>
-	<string>shared/audio/Explosion</string>
+	<key>background_music</key>
+	<dict>
+		<key>ResourceName</key>
+		<string>audio/24 - The Ants Go Marching (Instrumental Only)</string>
+		<key>ResourceType</key>
+		<string>mp3</string>
+	</dict>
+	<key>explosion</key>
+	<dict>
+		<key>ResourceName</key>
+		<string>audio/Explosion</string>
+		<key>ResourceType</key>
+		<string>mp3</string>
+	</dict>
+	<key>camera_focused</key>
+	<dict>
+		<key>ResourceName</key>
+		<string>audio/Bomb</string>
+		<key>ResourceType</key>
+		<string>mp3</string>
+	</dict>
+	<key>page_transition</key>
+	<dict>
+		<key>ResourceName</key>
+		<string>audio/Bomb</string>
+		<key>ResourceType</key>
+		<string>mp3</string>
+	</dict>
+	<key>turret_moving</key>
+	<dict>
+		<key>ResourceName</key>
+		<string>audio/Bomb</string>
+		<key>ResourceType</key>
+		<string>mp3</string>
+	</dict>
 </dict>
 </plist>

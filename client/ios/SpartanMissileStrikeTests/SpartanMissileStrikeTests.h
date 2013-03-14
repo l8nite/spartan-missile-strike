@@ -2,8 +2,8 @@
 //  SpartanMissileStrikeTests.h
 //  SpartanMissileStrikeTests
 //
-//  Created by Sherif on 1/3/13.
-//  Copyright (c) 2013 Group 2. All rights reserved.
+//  Created by Shaun Guth on 3/11/13.
+//  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
 #import <SenTestingKit/SenTestingKit.h>
