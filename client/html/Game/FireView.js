@@ -3,11 +3,12 @@
  * Must copy-paste markup into the app.
  */
 function FireView(Imports) {
+	var that = this;
 	$("#" + Imports.domId["FireView"] + " .backBtn").click(function () {
 		Imports.ViewManager.previousView();
 	});
 	$("#" + Imports.domId["FireView"] + " .fireBtn").click(function () {
-		Imports.GameMaster.doFire(this._game, this._location, this._orientation);
+		Imports.GameMaster.doFire(that._game, that._location, that._orientation, 100);
 		Imports.ViewManager.previousView();
 	});
 	FixedHeightView.call(this, Imports.domId["FireView"], Imports);
