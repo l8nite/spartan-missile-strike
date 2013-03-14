@@ -282,11 +282,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
 
         if(locationEnabled) {
             variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, variables.getLocationManagement());
-            variables.setEnabled(true);
         }
         if(gpsLocationEnabled){
             variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, variables.getLocationManagement());
-            variables.setEnabled(true);
         }
         
         variables.setEnabled(true);
