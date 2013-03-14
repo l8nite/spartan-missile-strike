@@ -30,7 +30,7 @@ import android.graphics.Color;
 import android.hardware.SensorManager;
 
 @SuppressLint("SetJavaScriptEnabled")
-public class MissileApp extends Activity implements SurfaceHolder.Callback {
+public class MissileAppBackUp extends Activity implements SurfaceHolder.Callback {
     // Settings Variables
     private static final String TAG = "MainApp";                           // Class Name for Logging
     private static final String PREFERENCES_FILENAME = "SMSFilePref";      // The name of the preference file
@@ -60,7 +60,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         variables = (BagOfHolding) super.getApplication(); 
-        variables.setMissileApp(this);
+//        variables.setMissileApp(this);
         
         // Store Android views:
         surfaceView = (SurfaceView) findViewById(R.id.camview);
@@ -94,7 +94,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Smooth Transition
         webView.setScrollbarFadingEnabled(true);
-        webView.getSettings().setRenderPriority(RenderPriority.HIGH);
+//        webView.getSettings().setRenderPriority(RenderPriority.HIGH);
 //        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setSupportZoom(false);
 //        webView.getSettings().enableSmoothTransition(); // Deprecated but lets leave it for now
