@@ -13,6 +13,7 @@
 #import "SSLocationManager.h"
 #import "SSMainViewController.h"
 #import "SSNativeBridge.h"
+#import "SSOrientationManager.h"
 #import "SSPreferenceManager.h"
 #import "SSSplashScreenViewController.h"
 
@@ -22,7 +23,14 @@
 
 @implementation SSMainViewController
 
-@synthesize webView, nativeBridge, audioManager, facebookManager, firingViewController, preferenceManager, locationManager;
+@synthesize webView;
+@synthesize nativeBridge;
+@synthesize audioManager;
+@synthesize facebookManager;
+@synthesize firingViewController;
+@synthesize preferenceManager;
+@synthesize locationManager;
+@synthesize orientationManager;
 
 - (void)viewDidLoad
 {
@@ -32,6 +40,7 @@
     audioManager = [[SSAudioManager alloc] init];
     preferenceManager = [[SSPreferenceManager alloc] init];
     locationManager = [[SSLocationManager alloc] init];
+    orientationManager = [[SSOrientationManager alloc] init];
     nativeBridge = [[SSNativeBridge alloc] initWithWebView:webView andDelegate:self];
 
     webView.backgroundColor = [UIColor clearColor];
@@ -96,6 +105,7 @@
     NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
 
     if ([function isEqualIgnoringCase:@"getLocationUpdates"]) {
+        // TODO: check activated parameter and call stop if it is false
         [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
             NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
             NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
@@ -108,6 +118,18 @@
         }];
     }
     else if ([function isEqualIgnoringCase:@"getOrientationUpdates"]) {
+        [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
+            NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
+            NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
+            NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
+            NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
+            
+            [orientationDictionary setObject:pitch forKey:@"pitch"];
+            [orientationDictionary setObject:yaw forKey:@"yaw"];
+            [orientationDictionary setObject:roll forKey:@"roll"];
+            
+            [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
+        }];
     }
     else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
         [self showFiringScreen];

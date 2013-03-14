@@ -6,6 +6,10 @@
             body {
                 background-color: #ffffff;
             }
+            
+            a {
+                font-size: 20pt;
+            }
         </style>
         
         <script src="../Util/Fridge.js"></script>
@@ -15,20 +19,15 @@
             var NativeBridge = new NativeBridge_iOS();
             
             window.onload = function () {
-//                document.getElementById("debugGetOrientationUpdates").onclick = function (response) {
-//                    NativeBridge.getOrientationUpdates(function (response) { document.getElementById("results").innerHTML = response; });
-//                    return false;
-//                }
+                document.getElementById("debugGetOrientationUpdates").onclick = function (response) {
+                    NativeBridge.getOrientationUpdates(function (response) { document.getElementById("results").innerHTML = response; });
+                    return false;
+                }
                 
                 document.getElementById("debugGetLocationUpdates").onclick = function () {
                     NativeBridge.getLocationUpdates(function (response) { document.getElementById("results").innerHTML = response; });
                     return false;
                 }
-           
-//                document.getElementById("debugGetCurrentLocation").onclick = function () {
-//                    NativeBridge.getCurrentLocation(function (response) { document.getElementById("results").innerHTML = response; });
-//                    return false;
-//                }
 
                 document.getElementById("debugSetPreference").onclick = function () {
                     NativeBridge.setPreference({one: "one", two: "two"}, function (result) {
@@ -88,6 +87,7 @@
     </head>
 	<body>
         <a id="debugGetLocationUpdates" href="#">Get Location Updates</a> <br/>
+        <a id="debugGetOrientationUpdates" href="#">Get Orientation Updates</a> <br/>
         <a id="debugSetPreference" href="#">Set Preference</a> <br/>
         <a id="debugGetPreference" href="#">Get Preference</a> <br/>
         <a id="debugGetFacebookAccessToken" href="#">Get Facebook Access Token</a> <br/>

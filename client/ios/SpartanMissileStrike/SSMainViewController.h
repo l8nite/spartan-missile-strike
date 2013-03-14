@@ -15,6 +15,7 @@
 @class SSFiringViewController;
 @class SSPreferenceManager;
 @class SSLocationManager;
+@class SSOrientationManager;
 
 @interface SSMainViewController : UIViewController
 
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) SSFacebookManager *facebookManager;
 @property (strong, nonatomic) SSPreferenceManager *preferenceManager;
 @property (strong, nonatomic) SSLocationManager *locationManager;
+@property (strong, nonatomic) SSOrientationManager *orientationManager;
 @property (strong, nonatomic) SSFiringViewController *firingViewController;
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;

@@ -51,8 +51,14 @@
     
     NSLog(@"Native Bridge: %@", callbackJS);
 
-    if ([_webView stringByEvaluatingJavaScriptFromString:callbackJS] == nil) {
-        NSLog(@"Error executing callback: %@", callbackJS);
+    [self performSelectorOnMainThread:@selector(_executeJavascriptOnWebView:) withObject:callbackJS waitUntilDone:NO];
+}
+
+-(void)_executeJavascriptOnWebView:(NSString*)javascript
+{
+    NSString *result = [_webView stringByEvaluatingJavaScriptFromString:javascript];
+    if (result == nil) {
+        NSLog(@"Error executing javascript: %@", javascript);
     }
 }
 

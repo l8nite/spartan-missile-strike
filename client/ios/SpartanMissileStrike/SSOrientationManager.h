@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreMotion/CoreMotion.h>
+
+typedef void (^SSOrientationManagerOrientationChangedCallback)(CMAttitude *attitude);
 
 @interface SSOrientationManager : NSObject
+@property (strong, nonatomic) CMMotionManager *motionManager;
+
+-(void)startUpdatingOrientationWithCallback:(SSOrientationManagerOrientationChangedCallback)callback;
+-(void)stopUpdatingOrientation;
 
 @end
