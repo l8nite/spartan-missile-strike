@@ -113,6 +113,7 @@ describe('/users', function () {
                 res.statusCode.should.equal(200);
                 obj.should.have.property('games');
                 obj.games.length.should.be.above(0);
+                obj.games[0].should.have.property('updated');
                 done();
             });
         });
