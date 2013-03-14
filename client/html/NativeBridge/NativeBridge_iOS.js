@@ -9,6 +9,7 @@ function NativeBridge_iOS() {
 NativeBridge_iOS.prototype = new NativeBridge_Abstract();
 
 NativeBridge_iOS.prototype._getLocationUpdates = function (activate, callbackID) {
+    alert('getLocationupdates(' + activate + ')');
 	this._appendIframe("spartan-missile-strike://getLocationUpdates/?arguments="
 		+ JSON.stringify({
 			activate : activate,
