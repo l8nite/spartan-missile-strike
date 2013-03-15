@@ -97,7 +97,7 @@
 						gm.unsubscribe(cb0);
 						gm.unsubscribe(cb1);
 						gm.unsubscribe(cb2);
-						ok(gm._listeners.count() === 0, "All callbacks deleted");
+						ok(gm._gameListeners.count() === 0, "All callbacks deleted");
 						ok(!gm._poll, "No longer polling service for games");
 						start();
 					}
@@ -181,7 +181,7 @@
 						stash_t0 = d;
 						gm.unsubscribe(cb0);
 						setTimeout(function () {
-							ok(gm._listeners.count() === 0, "Listeners is empty");
+							ok(gm._gameListeners.count() === 0, "Listeners is empty");
 							ok(!gm._poll, "No longer polling service");
 							start();
 							stop();
@@ -204,7 +204,7 @@
 						stash_t0 = d;
 						gm.unsubscribe(cb0);
 						setTimeout(function () {
-							ok(gm._listeners.count() === 0, "Listeners is empty");
+							ok(gm._gameListeners.count() === 0, "Listeners is empty");
 							ok(!gm._poll, "No longer polling service");
 							setTimeout(start, 0);
 						}, 1000);
@@ -256,7 +256,7 @@
 
 				var cb = gm.subscribe(f0);
 				gm.unsubscribe(cb);
-				ok(gm._listeners.count() === 0, "Listeners is empty");
+				ok(gm._gameListeners.count() === 0, "Listeners is empty");
 				ok(!gm._poll, "No longer polling service");
 				setTimeout(function () {
 					ok(timescalled === 1, "f0 called only once");

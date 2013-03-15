@@ -16,7 +16,7 @@ function GameMaster(userid, sessionid, Imports) {
 	this.Imports = Imports;
 	this.userid = userid;
 	this._sessionid = sessionid;
-	this._listeners = new Fridge();
+	this._gameListeners = new Fridge();
 	this._locationListeners = new Fridge();
 	this._cachedNames = [];
 	this._location = {};
@@ -77,14 +77,14 @@ GameMaster.prototype.subscribe = function (when) {
 		when(that._games.games);
 	}, 0);
 	this._startPollingService();
-	return this._listeners.add(when);
+	return this._gameListeners.add(when);
 };
 
 /* Unsubscribe a listener function.
  */
 GameMaster.prototype.unsubscribe = function (ticket) {
-	this._listeners.remove(ticket);
-	if (this._listeners.count() === 0) {
+	this._gameListeners.remove(ticket);
+	if (this._gameListeners.count() === 0) {
 		this._stopPollingService();
 	}
 };
@@ -95,8 +95,8 @@ GameMaster.prototype.subscribeLocation = function (when) {
 		when(that._location);
 	}, 0);
 	if (!this._locationUpdatesTicket) {
-		this._locationUpdatesTicket = this.Imports.NativeBridge.getLocationUpdates(true, function (location) {
-			that._location = location;
+		this._locationUpdatesTicket = this.Imports.NativeBridge.getLocationUpdates(true, function (loc) {
+			that._location = loc;
 			that._notifyLocationListeners();
 		});
 	}
@@ -109,22 +109,22 @@ GameMaster.prototype.unsubscribeLocation = function (ticket) {
 	}
 };
 
-GameMaster.prototype.doFire = function (game, location, orientation, power) {
+GameMaster.prototype.doFire = function (game, loc, orientation, power) {
 	var that = this;
 	var gameid = game;
 	if (typeof gameid === "object") {
 		gameid = gameid.id;
 	}
-	this._doFireOnService(gameid, location, orientation, power).done(function (response) {
+	this._doFireOnService(gameid, loc, orientation, power).done(function (response) {
 		that._mixGames(response);
 		that._notifyListeners(response);
 	});
 };
 
-GameMaster.prototype._doFireOnService = function (gameid, location, orientation, power) {
+GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, power) {
 	var shot = {
-		latitude: location.latitude,
-		longitude: location.longitude,
+		latitude: loc.latitude,
+		longitude: loc.longitude,
 		angle: orientation.pitch * 180 / Math.PI,
 		heading: orientation.yaw * 180 / Math.PI,
 		power: power
@@ -215,16 +215,16 @@ GameMaster.prototype._stopPollingService = function () {
 /* Call all listeners with current games array
  */
 GameMaster.prototype._notifyListeners = function (games) {
-	var a = this._listeners.getAll();
+	var a = this._gameListeners.getAll();
 	for (var i in a) {
 		a[i](games);
 	}
 };
 
-GameMaster.prototype._notifyLocationListeners = function (location) {
+GameMaster.prototype._notifyLocationListeners = function (loc) {
 	var a = this._locationListeners.getAll();
 	for (var i in a) {
-		a[i](location);
+		a[i](loc);
 	}
 };
 
