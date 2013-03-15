@@ -116,7 +116,7 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
         initialPos[i] = this.Imports.DomHelper.getPos(nodes[i]).x;
     }
     setTimeout(function () {
-        doMove()
+        doMove();
     }, 1000 / this._MAXFPS - new Date().getTime() + initialTime);
 };
 
