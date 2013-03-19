@@ -5,33 +5,42 @@
  * 
  * Public methods:
  * 
- * callback(int identifier, Object arguments)
+ * callback(number identifier, Object arguments)
  *     Called by the native client to return stuff to HTML.
  *     identifier - integer designating the store callback method
  *     arguments - object containing requested valued (ex. { prop_one: val_one,
  *                 prop_two: "val_two" } )
  *                 See Native Bride API for more details.
  * 
- * getLocationUpdates(boolean activate, function callback)
+ * startLocationUpdates(function callback)
  *     Called by HTML to get location data as it changes.
- *     activate - de/activate the updates
  *     callback - callback method, takes {latitude, longitude} in degrees
+ *     returns a numerical ticket to be used with stopLocationUpdates
  *     
- * getOrientationUpdates(boolean activate, function callback)
+ * stopLocationUpdates(number callbackid)
+ *     Called by HTML to stop streaming of location data.
+ *     callbackid - callback ticket from startLocationUpdates
+ *     
+ * startOrientationUpdates(function callback)
  *     Called by HTML to get orientation data as it changes.
- *     activate - de/activate the updates
  *     callback - callback method, takes {pitch, roll, yaw} in radians
  *     
- * showFireMissileScreen(boolean activate)
- *     Called by HTML when showing/hiding fire missile screen
- *     activate - show/hide screen
+ * stopOrientationUpdates(number callbackid)
+ *     Called by HTML to stop streaming of orientation data.
+ *     callbackid - callback ticket from startOrientationUpdates
  *     
- * getPreference(String preferences, function callback)
- *     Get specific preference(s) from native client
- *     preferences - array of preferences to get
- *     callback - callback method, takes preference
+ * showFireMissileScreen()
+ *     Called by HTML to show fire missile screen i.e. turn on camera
  *     
- * setPreference(Object preferences, function callback)
+ * hideFireMissileScreen()
+ *     Called by HTML to hide fire missile screen i.e. turn off camera
+
+ * getPreferences(String[] preferences, function callback)
+ *     Get specified preference(s) from native client
+ *     preferences - array of preferences to get, can accept string of one preference.
+ *     callback - callback method, takes hash of preferences
+ *     
+ * setPreferences(Object preferences, function callback)
  *     Set one or multiple persisting preferences
  *     preferences - Hash of preference key and value to store
  *     callback - callback method, takes {boolean suceeded}
@@ -58,45 +67,46 @@
  *     Called by HTML to indicate that it is finished loading and is safe to hide
  *     splash
  *     
- * vibrate(int time)
+ * vibrate(number time)
  *     Called by HTML to tell the device to dance
  *     time - milliseconds to vibrate for
+ * 
  *
- * onMainMenu()
- *     Called by native client to check if we're on the main menu.
- *     Native client is called with the response asynchronously.
- *     
- * 
  * Unimplemented methods:
+ * (These methods implement the code that generate the events each platform client
+ * will intercept. will have differenct implementations depending on platform.)
  * 
- * _getLocationUpdates(boolean activate, int callbackID)
+ * _startLocationUpdates(number callbackID)
  *     Request location updates through callback() as they change.
- *     activate - de/activate the updates
  *     callbackID - Callback identifier to pass to callback()
+ *
+ * _stopLocationUpdates()
+ *     Request to stop streaming location updates
  * 
- * _getOrientationUpdates(boolean activate, int callbackID)
+ * _startOrientationUpdates(number callbackID)
  *     Request orientation updates through callback() as they change.
- *     activate - de/activate the updates
  *     callbackID - Callback identifier to pass to callback()
  *     
- * _getCurrentLocation(int callbackID)
- *     Request current location through callback().
- *     callbackID - Callback identifier to pass to callback()
+ * _stopOrientationUpdates()
+ *     Request termination of orientation updates.
  *     
- * showFireMissileScreen(boolean activate)
+ * showFireMissileScreen()
  *     See "Public methods"
  *     
- * _getPreference(String preferences, int callbackID)
- *     Retrieve preference and return value through callback()
+ * hideFireMissileScreen()
+ *     See "Public methods"
+ *     
+ * _getPreferences(String[] preferences, number callbackID)
+ *     Retrieve preferences and return value through callback()
  *     preferences - preferences array to get
  *     callbackID - Callback identifier to pass to callback()
  *     
- * _setPreference(Object preferences, int callbackID)
+ * _setPreferences(Object preferences, number callbackID)
  *     Set preferences locally, indicate success through callback()
  *     preferences - Hash of preference key and value to store
  *     callbackID - Callback identifier to pass to callback()
  *     
- * _getFacebookAccessToken(int callbackID)
+ * _getFacebookAccessToken(number callbackID)
  *     Request Facebook token through callback()
  *     callbackID - Callback identifier to pass to callback()
  *     
@@ -112,7 +122,7 @@
  * hideSplah()
  *     See "Public methods"
  *     
- * vibrate(int time)
+ * vibrate(number time)
  *     See "Public methods"
  */
 
@@ -135,83 +145,74 @@ NativeBridge_Abstract.prototype.callback = function (identifier, response) {
 	}
 };
 
-NativeBridge_Abstract.prototype.getLocationUpdates = function (activate, callback) {
+NativeBridge_Abstract.prototype.startLocationUpdates = function (callback) {
 	var that = this;
-	if (activate) {
-		if (this._getLocationUpdatesCBs) {
-			return this._getLocationUpdatesCBs.add(callback);
-		} else {
-			this._getLocationUpdatesCBs = new Fridge();
-			var id = this._getLocationUpdatesCBs.add(callback);
-			this._getLocationUpdates(true, this._registerCallback(function (response) {
-				var a = that._getLocationUpdatesCBs.getAll();
-				for (var i in a) {
-					a[i](response);
-				}
-			}, true));
-			return id;
-		}
+	if (this._getLocationUpdatesCBs) {
+		return this._getLocationUpdatesCBs.add(callback);
 	} else {
-		if (this._getLocationUpdatesCBs) {
-			this._getLocationUpdatesCBs.remove(callback);
-			if (this._getLocationUpdatesCBs.count() === 0) {
-				delete this._getLocationUpdatesCBs;
-				this._getLocationUpdates(false);
+		this._getLocationUpdatesCBs = new Fridge();
+		var id = this._getLocationUpdatesCBs.add(callback);
+		this._startLocationUpdates(this._registerCallback(function (response) {
+			var a = that._getLocationUpdatesCBs.getAll();
+			for (var i in a) {
+				a[i](response);
 			}
+		}, true));
+		return id;
+	}
+};
+
+NativeBridge_Abstract.prototype.stopLocationUpdates = function (callbackid) {
+	if (this._getLocationUpdatesCBs) {
+		this._getLocationUpdatesCBs.remove(callbackid);
+		if (this._getOrientationUpdatesCBs.count() === 0) {
+			delete this._getLocationUpdatesCBs;
+			this._stopLocationUpdates();
 		}
 	}
 };
 
-NativeBridge_Abstract.prototype.getOrientationUpdates = function (activate, callback) {
+NativeBridge_Abstract.prototype.startOrientationUpdates = function (callback) {
 	var that = this;
-	if (activate) {
-		if (this._getOrientationUpdatesCBs) {
-			return this._getOrientationUpdatesCBs.add(callback);
-		} else {
-			this._getOrientationUpdatesCBs = new Fridge();
-			var id = this._getOrientationUpdatesCBs.add(callback);
-			this._getOrientationUpdates(true, this._registerCallback(function (response) {
-				var a = that._getOrientationUpdatesCBs.getAll();
-				for (var i in a) {
-					a[i](response);
-				}
-			}, true));
-			return id;
-		}
+	if (this._getOrientationUpdatesCBs) {
+		return this._getOrientationUpdatesCBs.add(callback);
 	} else {
-		if (this._getOrientationUpdatesCBs) {
-			this._getOrientationUpdatesCBs.remove(callback);
-			if (this._getOrientationUpdatesCBs.count() === 0) {
-				delete this._getOrientationUpdatesCBs;
-				this._getOrientationUpdates(false);
+		this._getOrientationUpdatesCBs = new Fridge();
+		var id = this._getOrientationUpdatesCBs.add(callback);
+		this._startOrientationUpdates(this._registerCallback(function (response) {
+			var a = that._getOrientationUpdatesCBs.getAll();
+			for (var i in a) {
+				a[i](response);
 			}
+		}, true));
+		return id;
+	}
+};
+
+NativeBridge_Abstract.prototype.stopOrientationUpdates = function (callbackid) {
+	if (this._getOrientationUpdatesCBs) {
+		this._getOrientationUpdatesCBs.remove(callback);
+		if (this._getOrientationUpdatesCBs.count() === 0) {
+			delete this._getOrientationUpdatesCBs;
+			this._stopOrientationUpdates();
 		}
 	}
 };
 
-NativeBridge_Abstract.prototype.getCurrentLocation = function (callback) {
-	this._getCurrentLocation(this._registerCallback(callback));
-};
-
-NativeBridge_Abstract.prototype.getPreference = function (preferences, callback) {
+NativeBridge_Abstract.prototype.getPreferences = function (preferences, callback) {
 	if (typeof preferences === "string") {
 		preferences = [preferences];
 	}
-	this._getPreference(preferences, this._registerCallback(callback));
+	this._getPreferences(preferences, this._registerCallback(callback));
 };
 
-NativeBridge_Abstract.prototype.setPreference = function (preferences, callback) {
-	this._setPreference(preferences, this._registerCallback(callback));
+NativeBridge_Abstract.prototype.setPreferences = function (preferences, callback) {
+	this._setPreferences(preferences, this._registerCallback(callback));
 };
 
 NativeBridge_Abstract.prototype.getFacebookAccessToken = function (callback) {
 	this._getFacebookAccessToken(this._registerCallback(callback));
 };
-
-NativeBridge_Abstract.prototype.onMainMenu = function () {
-	this._onMainMenu(Imports.ViewManager.onInitialView());
-};
-
 
 //
 // Private
