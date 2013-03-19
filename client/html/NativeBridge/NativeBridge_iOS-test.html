@@ -7,43 +7,163 @@
 		<div id="qunit"></div>
 		<div id="qunit-fixture"></div>
 		<script src="../qunit/qunit.js"></script>
+		<script src="../Util/Fridge.js"></script>
 		<script src="NativeBridge_Abstract.js"></script>
 		<script src="NativeBridge_iOS.js"></script>
 		<script>
-			asyncTest("getCurrentLocation()", 2, function () {
-				var NativeBridge = new NativeBridge_iOS();
-				NativeBridge.getCurrentLocation(function (response) {
-					ok(("latitude" in response) && ("longitude" in response), "Correct properties names");
-					ok((typeof(response.latitude) == "number") && (typeof(response.longitude) == "number"), "Correct property types");
+
+		// start/stopLocationUpdates
+		// Subscribes two listeners to get location updates
+		// Checks to see if callback values are valid
+		// Removes both listeners
+		// 
+		// Post conditions
+		// locationUpdates callback fridge has been deleted
+		// Client has turned off GPS or location services
+		asyncTest("start/stopLocationUpdates", 5, function () {
+			function validateCoords(coords) {
+				if (!coords || !coords.longitude || !coords.latitude) {
+					return false;
+				}
+				if (typeof coords.longitude !== "number" || typeof coords.latitude !== "number") {
+					return false;
+				}
+				if (coords.longitude < -180 || coords.longitude > 180) {
+					return false;
+				}
+				if (coords.latitude < -90 || coords.latitude > 90) {
+					return false;
+				}
+				return true;
+			}
+
+			var cb0called = false;
+			function testcb0(coords) {
+				cb0called = true;
+				ok(true, "CB0 called");
+				ok(validateCoords(coords), "CB0 coords valid");
+				if (cb1called) {
+					continueTest();
+				}
+			}
+
+			var cb1called = false;
+			function testcb1(coords) {
+				cb1called = true;
+				ok(true, "CB1 called");
+				ok(validateCoords(coords), "CB1 coords valid");
+				if (cb0called) {
+					continueTest();
+				}
+			}
+
+			function continueTest() {
+				NativeBridge.stopLocationUpdates(cb0ticket);
+				NativeBridge.stopLocationUpdates(cb1ticket);
+				ok(!NativeBridge._getLocationUpdatesCBs, "Fridge deleted");
+				start();
+			}
+
+			var NativeBridge = new NativeBridge_iOS();
+			var cb0ticket = NativeBridge.startLocationUpdates(testcb0);
+			var cb1ticker = NativeBridge.startLocationUpdates(testcb1);
+		});
+
+		// start/stopLocationUpdates
+		// Same as start/stopLocationUpdates
+		asyncTest("start/stopOrientationUpdates", 5, function () {
+			function validateRot(rot) {
+				if (!rot || !rot.azimuth || !rot.altitude) {
+					return false;
+				}
+				if (typeof rot.azimuth !== "number" || typeof rot.altitude !== "number") {
+					return false;
+				}
+				if (rot.azimuth < 0 || rot.azimuth > 2 * Math.PI) {
+					return false;
+				}
+				if (rot.altitude < 0 || rot.altitude > Math.PI / 2) {
+					return false;
+				}
+				return true;
+			}
+
+			var cb0called = false;
+			function testcb0(rot) {
+				cb0called = true;
+				ok(true, "CB0 called");
+				ok(validateRot(rot), "CB0 rot valid");
+				if (cb1called) {
+					continueTest();
+				}
+			}
+
+			var cb1called = false;
+			function testcb1(rot) {
+				cb1called = true;
+				ok(true, "CB1 called");
+				ok(validateRot(rot), "CB1 rot valid");
+				if (cb0called) {
+					continueTest();
+				}
+			}
+
+			function continueTest() {
+				NativeBridge.stopOrientationUpdates(cb0ticket);
+				NativeBridge.stopOrientationUpdates(cb1ticket);
+				ok(!NativeBridge._getOrientationUpdatesCBs, "Fridge deleted");
+				start();
+			}
+
+			var NativeBridge = new NativeBridge_iOS();
+			var cb0ticket = NativeBridge.startOrientationUpdates(testcb0);
+			var cb1ticker = NativeBridge.startOrientationUpdates(testcb1);
+		});
+
+		// get/setPreferences
+		// sets and gets preferences, checking for correctness
+		asyncTest("get/setPreferences", 3, function () {
+			var NativeBridge = new NativeBridge_iOS();
+			NativeBridge.setPreferences({
+				"one": "uno",
+				"two": "dos"
+			}, function (success) {
+				ok(success, "setPreferences successful");
+				NativeBridge.getPreferences(["one", "two"], function (response) {
+					ok(response, "getPreferences returned a response");
+					ok(response["one"] === "uno" && response["two"] === "dos", "Received correct values");
 					start();
 				});
 			});
+		});
 
-			asyncTest("getPreference & setPreference", 2, function () {
-				var NativeBridge = new NativeBridge_iOS();
-				NativeBridge.setPreference({
-					one : "one",
-					two : "two"
-				});
-				NativeBridge.getPreference("one", function (response) {
-					ok(response == "one", "First preference set/got correctly");
-				});
-				NativeBridge.getPreference("two", function (response) {
-					ok(response == "two", "Second preference set/got correctly");
-				});
+		// getFacebookAccessToken
+		asyncTest("getFacebookAccessToken", 1, function () {
+			new NativeBridge_iOS().getFacebookAccessToken(function (token) {
+				ok(typeof token === "string", "FB token received and is a string");
+				start();
 			});
+		});
 
-			test("appendIframe", function () {
-				var NativeBridge = new NativeBridge_iOS();
-				var srcStr = "spartan-missile-strike://dummySrc/?arguments={\"some\":\"json\",\"object\":999}";
-				NativeBridge._appendIframe(srcStr);
-				var iframes = document.getElementsByTagName("iframe");
-				for (var i in iframes) {
-					if (!isNaN(i) && iframes[i].getAttribute("src") == srcStr && iframes[i].getAttribute("style") == "display: none;") {
-						ok(true, "iframe appended correctly");
-					}
-				}
+		// play/stopSound
+		// Play BG music for 5 seconds, then stop
+		(function () {
+			var NativeBridge = new NativeBridge_iOS();
+			NativeBridge.playSound("background_music", {
+				foreground: false,
+				loop: true
 			});
+			setTimeout(function () {
+				NativeBridge.stopSound("background_music");
+			}, 5000);
+		})();
+
+		// vibrate
+		// Vibrate for 400ms
+		(function () {
+			new NativeBridge_iOS().vibrate(400);
+		})();
+
 		</script>
 	</body>
 </html>
