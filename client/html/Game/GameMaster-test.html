@@ -37,7 +37,7 @@
 				return (dt >= expectedDelta - skew && dt <= expectedDelta + skew);
 			}
 
-			asyncTest("Many callbacks, service dropouts, stop poll at end", 14, function () {
+			asyncTest("Many games callbacks, service dropouts, stop poll at end", 14, function () {
 				var gm = new GameMaster("fake-user", "fake-session-id");
 				// Since the service doesn't work yet, we need to reappropriate _getGamesFromService. It returns a jQuery deferred and resolves with a games datastructure.
 				var timescalled = 0;
@@ -134,7 +134,7 @@
 				cb0 = gm.subscribeGames(f0);
 			});
 
-			asyncTest("Many callbacks, stop poll during test and immediately resume", 17, function () {
+			asyncTest("Many games callbacks, stop poll during test and immediately resume", 17, function () {
 				var gm = new GameMaster("fake-user", "fake-session-id");
 				var timescalled = 0;
 				var serviceLatency = 500;
@@ -236,7 +236,7 @@
 				cb0 = gm.subscribeGames(f0);
 			});
 
-			asyncTest("Subscribe then immediately unsubscribe", 4, function () {
+			asyncTest("Subscribe to games then immediately unsubscribe", 4, function () {
 				var serviceLatency = 500;
 				var gm = new GameMaster("fake-user", "fake-session-id");
 				gm._getGamesFromService = function () {
@@ -263,6 +263,7 @@
 					start();
 				});
 			});
+
 		</script>
 	</body>
 </html>
