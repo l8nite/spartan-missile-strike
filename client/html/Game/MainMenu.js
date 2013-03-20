@@ -12,12 +12,12 @@ function MainMenu(Imports) {
 MainMenu.prototype = Object.create(View.prototype);
 
 MainMenu.prototype.onView = function () {
-	this.GameMasterTicket = this.Imports.GameMaster.subscribe(this._render.bind(this));
+	this.GameMasterTicket = this.Imports.GameMaster.subscribeGames(this._render.bind(this));
 	View.prototype.onView.call(this);
 };
 
 MainMenu.prototype.offView = function () {
-	this.Imports.GameMaster.unsubscribe(this.GameMasterTicket);
+	this.Imports.GameMaster.unsubscribeGames(this.GameMasterTicket);
 	View.prototype.offView.call(this);
 };
 

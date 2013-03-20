@@ -144,34 +144,34 @@
 		};
 
 		var cantstopwontstop;
-		Imports.NativeBridge._getLocationUpdates = function (activate, callbackID) {
+		Imports.NativeBridge._startLocationUpdates = function (callbackID) {
 			var that = this;
-			if (activate) {
-				cantstopwontstop = setInterval(function () {
-					var loc = {};
-					loc.latitude = Math.random();
-					loc.longitude = Math.random();
-					that.callback(callbackID, loc);
-				}, 200);
-			} else {
-				clearInterval(cantstopwontstop);
-			}
+			cantstopwontstop = setInterval(function () {
+				var loc = {};
+				loc.latitude = Math.random();
+				loc.longitude = Math.random();
+				that.callback(callbackID, loc);
+			}, 200);
+		};
+
+		Imports.NativeBridge._stopLocationUpdates = function (callbackID) {
+			clearInterval(cantstopwontstop);
 		};
 
 		var cantstopwontstop2;
-		Imports.NativeBridge._getOrientationUpdates = function (activate, callbackID) {
+		Imports.NativeBridge._startOrientationUpdates = function (callbackID) {
 			var that = this;
-			if (activate) {
-				cantstopwontstop2 = setInterval(function () {
-					var orientation = {};
-					orientation.pitch = Math.random();
-					orientation.roll = Math.random();
-					orientation.yaw = Math.random();
-					that.callback(callbackID, orientation);
-				}, 8);
-			} else {
-				clearInterval(cantstopwontstop2);
-			}
+			cantstopwontstop2 = setInterval(function () {
+				var orientation = {};
+				orientation.pitch = Math.random();
+				orientation.roll = Math.random();
+				orientation.yaw = Math.random();
+				that.callback(callbackID, orientation);
+			}, 8);
+		};
+
+		Imports.NativeBridge._stopOrientationUpdates = function (callbackID) {
+			clearInterval(cantstopwontstop2);
 		};
 
 		new MainMenu(Imports).show();

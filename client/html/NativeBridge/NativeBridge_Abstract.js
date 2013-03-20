@@ -165,7 +165,7 @@ NativeBridge_Abstract.prototype.startLocationUpdates = function (callback) {
 NativeBridge_Abstract.prototype.stopLocationUpdates = function (callbackid) {
 	if (this._getLocationUpdatesCBs) {
 		this._getLocationUpdatesCBs.remove(callbackid);
-		if (this._getOrientationUpdatesCBs.count() === 0) {
+		if (this._getLocationUpdatesCBs.count() === 0) {
 			delete this._getLocationUpdatesCBs;
 			this._stopLocationUpdates();
 		}
@@ -191,7 +191,7 @@ NativeBridge_Abstract.prototype.startOrientationUpdates = function (callback) {
 
 NativeBridge_Abstract.prototype.stopOrientationUpdates = function (callbackid) {
 	if (this._getOrientationUpdatesCBs) {
-		this._getOrientationUpdatesCBs.remove(callback);
+		this._getOrientationUpdatesCBs.remove(callbackid);
 		if (this._getOrientationUpdatesCBs.count() === 0) {
 			delete this._getOrientationUpdatesCBs;
 			this._stopOrientationUpdates();
