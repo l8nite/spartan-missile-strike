@@ -4,7 +4,8 @@
  * Call MainMenu with the DOM ID of that markup.
  */
 function MainMenu(Imports) {
-	View.call(this, Imports.domId["MainMenu"], Imports);
+	this.Imports = Imports;
+	View.call(this, Imports.domId["MainMenu"]);
 	// TODO Wire static button events
 }
 
