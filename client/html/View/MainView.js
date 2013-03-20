@@ -1,5 +1,4 @@
-function MainView(Imports) {
-    this.Imports = Imports;
+function MainView() {
     this._viewAnimationQueue = [];
     this._viewStack = [];
     this._animating = false;
@@ -41,7 +40,7 @@ MainView.prototype._loadViewAnimation = function (view, arbitraryPrevView) {
             this._postAnimation();
             return;
         }
-        this.Imports.DomHelper.moveTo(view, window.innerWidth, 0);
+        DomHelper.moveTo(view, window.innerWidth, 0);
         view.onView();
         this._moveAnimation([view, oldView], window.innerWidth * -1, this._TRANSITION_TIME, this._SMOOTHING, function () {
             oldView.offView();
@@ -52,7 +51,7 @@ MainView.prototype._loadViewAnimation = function (view, arbitraryPrevView) {
             that._postAnimation();
         });
     } else {
-        this.Imports.DomHelper.moveTo(view, 0, 0);
+        DomHelper.moveTo(view, 0, 0);
         view.onView();
         this._viewStack.push(view);
         this._postAnimation();
@@ -71,7 +70,7 @@ MainView.prototype._previousViewAnimation = function () {
         this._postAnimation();
         return;
     }
-    this.Imports.DomHelper.moveTo(newView, window.innerWidth * -1, 0);
+    DomHelper.moveTo(newView, window.innerWidth * -1, 0);
     newView.onView();
     this._moveAnimation([newView, oldView], window.innerWidth, this._TRANSITION_TIME, this._SMOOTHING, function () {
         oldView.offView();
@@ -85,7 +84,7 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
         var currentFrameTime = new Date().getTime();
         if (currentFrameTime >= initialTime + time) {
             for (var i in nodes) {
-                that.Imports.DomHelper.moveTo(nodes[i], initialPos[i] + translation_x);
+                DomHelper.moveTo(nodes[i], initialPos[i] + translation_x);
             }
             then();
         }
@@ -99,7 +98,7 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
             t = Math.min(smoothing, Math.max(t_total - smoothing - plateauTime, 0));
             x += (2 * smoothing - t) * velocity * t / 2 / smoothing;
             for (var i in nodes) {
-                that.Imports.DomHelper.moveTo(nodes[i], initialPos[i] + x);
+                DomHelper.moveTo(nodes[i], initialPos[i] + x);
             }
             setTimeout(function () {
                 doMove();
@@ -113,7 +112,7 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
         velocity = translation_x / (time - smoothing),
         plateauTime = time - 2 * smoothing;
     for (var i in nodes) {
-        initialPos[i] = this.Imports.DomHelper.getPos(nodes[i]).x;
+        initialPos[i] = DomHelper.getPos(nodes[i]).x;
     }
     setTimeout(function () {
         doMove();
