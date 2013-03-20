@@ -1,5 +1,5 @@
 (function () {
-	var DomHelper;
+	var DomHelper = {};
 
 	DomHelper.addClass = function (node, classname) {
 		var classes = node._domNode.getAttribute("class");
