@@ -4,6 +4,7 @@
  */
 function FireView(Imports) {
 	var that = this;
+	this.Imports = Imports;
 	$("#" + Imports.domId["FireView"] + " .backBtn").click(function () {
 		Imports.ViewManager.previousView();
 	});
@@ -11,7 +12,7 @@ function FireView(Imports) {
 		Imports.GameMaster.doFire(that._game, that._location, that._orientation, 100);
 		Imports.ViewManager.previousView();
 	});
-	FixedHeightView.call(this, Imports.domId["FireView"], Imports);
+	FixedHeightView.call(this, Imports.domId["FireView"]);
 }
 
 FireView.prototype = Object.create(FixedHeightView.prototype);

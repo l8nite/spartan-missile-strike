@@ -4,7 +4,8 @@
  */
 function MapView(Imports) {
 	var that = this;
-	FixedHeightView.call(this, Imports.domId["MapView"], Imports);
+	this.Imports = Imports;
+	FixedHeightView.call(this, Imports.domId["MapView"]);
 	$("#" + Imports.domId["MapView"] + " .backBtn").click(function () {
 		Imports.ViewManager.previousView();
 	});
