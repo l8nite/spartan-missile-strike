@@ -21,14 +21,14 @@ function MapView(Imports) {
 MapView.prototype = Object.create(FixedHeightView.prototype);
 
 MapView.prototype.onView = function () {
-	this.GameMasterTicket = this.Imports.GameMaster.subscribe(this._updateWithNewGames.bind(this));
-	this.NBLocationTicket = this.Imports.NativeBridge.getLocationUpdates(true, this._updateWithNewLocation.bind(this));
+	this.GameMasterTicket = this.Imports.GameMaster.subscribeGames(this._updateWithNewGames.bind(this));
+	this.NBLocationTicket = this.Imports.NativeBridge.startLocationUpdates(this._updateWithNewLocation.bind(this));
 	FixedHeightView.prototype.onView.call(this);
 };
 
 MapView.prototype.offView = function () {
-	this.Imports.GameMaster.unsubscribe(this.GameMasterTicket);
-	this.Imports.NativeBridge.getLocationUpdates(false, this.NBLocationTicket);
+	this.Imports.GameMaster.unsubscribeGames(this.GameMasterTicket);
+	this.Imports.NativeBridge.stopLocationUpdates(this.NBLocationTicket);
 	FixedHeightView.prototype.offView.call(this);
 };
 

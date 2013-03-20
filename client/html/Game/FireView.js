@@ -18,14 +18,14 @@ function FireView(Imports) {
 FireView.prototype = Object.create(FixedHeightView.prototype);
 
 FireView.prototype.onView = function () {
-	this.NBLocationTicket = this.Imports.NativeBridge.getLocationUpdates(true, this._updateWithNewLocation.bind(this));
-	this.NBOrientationTicket = this.Imports.NativeBridge.getOrientationUpdates(true, this._updateWithNewOrientation.bind(this));
+	this.NBLocationTicket = this.Imports.NativeBridge.startLocationUpdates(this._updateWithNewLocation.bind(this));
+	this.NBOrientationTicket = this.Imports.NativeBridge.startOrientationUpdates(this._updateWithNewOrientation.bind(this));
 	FixedHeightView.prototype.onView.call(this);
 };
 
 FireView.prototype.offView = function () {
-	this.Imports.NativeBridge.getLocationUpdates(false, this.NBLocationTicket);
-	this.Imports.NativeBridge.getOrientationUpdates(false, this.NBOrientationTicket);
+	this.Imports.NativeBridge.stopLocationUpdates(this.NBLocationTicket);
+	this.Imports.NativeBridge.stopOrientationUpdates(this.NBOrientationTicket);
 	FixedHeightView.prototype.offView.call(this);
 };
 
