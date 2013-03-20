@@ -4,19 +4,20 @@
  * Call MainMenu with the DOM ID of that markup.
  */
 function MainMenu(Imports) {
-	View.call(this, Imports.domId["MainMenu"], Imports);
+	this.Imports = Imports;
+	View.call(this, Imports.domId["MainMenu"]);
 	// TODO Wire static button events
 }
 
 MainMenu.prototype = Object.create(View.prototype);
 
 MainMenu.prototype.onView = function () {
-	this.GameMasterTicket = this.Imports.GameMaster.subscribe(this._render.bind(this));
+	this.GameMasterTicket = this.Imports.GameMaster.subscribeGames(this._render.bind(this));
 	View.prototype.onView.call(this);
 };
 
 MainMenu.prototype.offView = function () {
-	this.Imports.GameMaster.unsubscribe(this.GameMasterTicket);
+	this.Imports.GameMaster.unsubscribeGames(this.GameMasterTicket);
 	View.prototype.offView.call(this);
 };
 

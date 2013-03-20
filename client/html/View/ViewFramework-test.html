@@ -68,15 +68,13 @@
 		<div onmousedown="mainView.loadView(map, mainMenu)">Begin game</div>
 	</div>
 	<script>
-		Imports = {};
-		Imports.DomHelper = new DomHelper();
-		mainView = new MainView(Imports);
-		mainMenu = new View("main-menu", Imports);
-		map = new FixedHeightView("map", Imports);
-		fire = new FixedHeightView("fire", Imports);
-		options = new FixedHeightView("options", Imports);
-		opponents = new FixedHeightView("opponents", Imports);
-		base = new FixedHeightView("base", Imports);
+		mainView = new MainView();
+		mainMenu = new View("main-menu");
+		map = new FixedHeightView("map");
+		fire = new FixedHeightView("fire");
+		options = new FixedHeightView("options");
+		opponents = new FixedHeightView("opponents");
+		base = new FixedHeightView("base");
 		mainView.loadView(mainMenu);
 	</script>
 </body>

@@ -1,8 +1,7 @@
-function View(domNode, Imports) {
-	this.Imports = Imports;
+function View(domNode) {
     this._domNode = document.getElementById(domNode);
     if (this._domNode) {
-        this.Imports.DomHelper.addClass(this, "view");
+        DomHelper.addClass(this, "view");
         document.body.appendChild(this._domNode);
     }
     else {
@@ -11,9 +10,9 @@ function View(domNode, Imports) {
 }
 
 View.prototype.onView = function () {
-    this.Imports.DomHelper.addClass(this, "active-view");
+    DomHelper.addClass(this, "active-view");
 };
 
 View.prototype.offView = function () {
-    this.Imports.DomHelper.removeClass(this, "active-view");
+    DomHelper.removeClass(this, "active-view");
 };
