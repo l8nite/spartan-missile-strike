@@ -2,7 +2,7 @@
 </html>
 <head>
 	<link rel="stylesheet" href="View/view.css">
-	<link rel="stylesheet" href="Game/MissileApp.css">
+	<link rel="stylesheet" href="MissileApp.css">
 	<style>
 		body {
 			text-align: center;
@@ -46,6 +46,7 @@
 	window.onload = function () {
 		var Imports = {
 			NativeBridge: new NativeBridge_iOS(),
+			ViewManager: new MainView(),
 			domId: {
 				"MainMenu": "main-menu",
 				"MapView": "map-view",
@@ -56,10 +57,25 @@
 			},
 			serviceurl: "https://api.missileapp.com:8433"
 		};
-		Imports.GameMaster = new GameMaster("user:0001", "12345", Imports);
-		Imports.ViewManager = new MainView(Imports);
-		new MainMenu(Imports).show();
-		Imports.NativeBridge.hideSplash();
+
+		// First thing we need is a FB token, we use that to get our userid 
+		Imports.NativeBridge.getFacebookAccessToken(function (token) {
+			// Now get our userid
+			$.ajax(Imports.serviceurl + "/sessions", {
+				type: "POST",
+				dataType: "json",
+				data: {
+					facebook_access_token: token
+				}
+			}).done(function (response) {
+				var sessionid = response.session.id,
+					userid = response.user.id,
+					isNewUser = response.user.newUser;
+				// Now we make the GM and start the game!
+				Imports.GameMaster = new GameMaster(userid, sessionid);
+				new MainMenu(Imports).show();
+			});
+		});
 	};
 	</script>
 </head>

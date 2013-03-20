@@ -37,7 +37,7 @@
 				return (dt >= expectedDelta - skew && dt <= expectedDelta + skew);
 			}
 
-			asyncTest("Many callbacks, service dropouts, stop poll at end", 14, function () {
+			asyncTest("Many games callbacks, service dropouts, stop poll at end", 14, function () {
 				var gm = new GameMaster("fake-user", "fake-session-id");
 				// Since the service doesn't work yet, we need to reappropriate _getGamesFromService. It returns a jQuery deferred and resolves with a games datastructure.
 				var timescalled = 0;
@@ -80,7 +80,7 @@
 					else if (c0 === 2) {
 						ok(arrEqual(games, ["g0", "g1"]), "CB0 2");
 						c1 = c0;
-						cb1 = gm.subscribe(f1);
+						cb1 = gm.subscribeGames(f1);
 					}
 					else if (c0 === 3) {
 						ok(arrEqual(games, ["g1", "g2", "g3"]), "CB0 3");
@@ -88,16 +88,16 @@
 					else if (c0 === 4) {
 						ok(arrEqual(games, ["g2", "g3", "g4"]), "CB0 4");
 						c2 = c0;
-						cb2 = gm.subscribe(f2);
+						cb2 = gm.subscribeGames(f2);
 					}
 					else if (c0 === 5) {
 						ok(arrEqual(games, ["g2", "g3", "g4"]), "CB0 5");
 					}
 					else if (c0 === 6) {
-						gm.unsubscribe(cb0);
-						gm.unsubscribe(cb1);
-						gm.unsubscribe(cb2);
-						ok(gm._gameListeners.count() === 0, "All callbacks deleted");
+						gm.unsubscribeGames(cb0);
+						gm.unsubscribeGames(cb1);
+						gm.unsubscribeGames(cb2);
+						ok(gm._gamesListeners.count() === 0, "All callbacks deleted");
 						ok(!gm._poll, "No longer polling service for games");
 						start();
 					}
@@ -131,10 +131,10 @@
 				}
 
 				c0 = 0;
-				cb0 = gm.subscribe(f0);
+				cb0 = gm.subscribeGames(f0);
 			});
 
-			asyncTest("Many callbacks, stop poll during test and immediately resume", 17, function () {
+			asyncTest("Many games callbacks, stop poll during test and immediately resume", 17, function () {
 				var gm = new GameMaster("fake-user", "fake-session-id");
 				var timescalled = 0;
 				var serviceLatency = 500;
@@ -166,7 +166,7 @@
 					}
 					else if (c0 === 1) {
 						c1 = c0;
-						cb1 = gm.subscribe(f1);
+						cb1 = gm.subscribeGames(f1);
 						c0++;
 						ok(arrEqual(games, ["g0"]), "CB0 1");
 						var d = new Date();
@@ -179,14 +179,18 @@
 						var d = new Date();
 						ok(datesClose(stash_t0, d, gm._STALE + serviceLatency, 50), "CB0 2 time");
 						stash_t0 = d;
-						gm.unsubscribe(cb0);
+						gm.unsubscribeGames(cb0);
 						setTimeout(function () {
+<<<<<<< HEAD
 							ok(gm._gameListeners.count() === 0, "Listeners is empty");
+=======
+							ok(gm._gamesListeners.count() === 0, "Listeners is empty");
+>>>>>>> fd1c7d7407f4ad2a8ee0bce50db8a8e5038f59ce
 							ok(!gm._poll, "No longer polling service");
 							start();
 							stop();
-							cb0 = gm.subscribe(f0);
-							cb1 = gm.subscribe(f1);
+							cb0 = gm.subscribeGames(f0);
+							cb1 = gm.subscribeGames(f1);
 						}, 1000);
 					}
 					else if (c0 === 3) {
@@ -202,9 +206,13 @@
 						var d = new Date();
 						ok(datesClose(stash_t0, d, serviceLatency, 50), "CB0 4 time");
 						stash_t0 = d;
-						gm.unsubscribe(cb0);
+						gm.unsubscribeGames(cb0);
 						setTimeout(function () {
+<<<<<<< HEAD
 							ok(gm._gameListeners.count() === 0, "Listeners is empty");
+=======
+							ok(gm._gamesListeners.count() === 0, "Listeners is empty");
+>>>>>>> fd1c7d7407f4ad2a8ee0bce50db8a8e5038f59ce
 							ok(!gm._poll, "No longer polling service");
 							setTimeout(start, 0);
 						}, 1000);
@@ -219,7 +227,7 @@
 					else if (c1 === 2) {
 						c1++;
 						ok(arrEqual(games, ["g0"]), "CB1 2");
-						gm.unsubscribe(cb1);
+						gm.unsubscribeGames(cb1);
 					}
 					else if (c1 === 3) {
 						c1++;
@@ -228,15 +236,15 @@
 					else if (c1 === 4) {
 						c1++;
 						ok(arrEqual(games, ["g0", "g1"]), "CB1 4");
-						gm.unsubscribe(cb1);
+						gm.unsubscribeGames(cb1);
 					}
 				}
 
 				c0 = 0;
-				cb0 = gm.subscribe(f0);
+				cb0 = gm.subscribeGames(f0);
 			});
 
-			asyncTest("Subscribe then immediately unsubscribe", 4, function () {
+			asyncTest("Subscribe to games then immediately unsubscribe", 4, function () {
 				var serviceLatency = 500;
 				var gm = new GameMaster("fake-user", "fake-session-id");
 				gm._getGamesFromService = function () {
@@ -254,15 +262,22 @@
 					ok(games.length === 0, "f0 called with empty array");
 				}
 
+<<<<<<< HEAD
 				var cb = gm.subscribe(f0);
 				gm.unsubscribe(cb);
 				ok(gm._gameListeners.count() === 0, "Listeners is empty");
+=======
+				var cb = gm.subscribeGames(f0);
+				gm.unsubscribeGames(cb);
+				ok(gm._gamesListeners.count() === 0, "Listeners is empty");
+>>>>>>> fd1c7d7407f4ad2a8ee0bce50db8a8e5038f59ce
 				ok(!gm._poll, "No longer polling service");
 				setTimeout(function () {
 					ok(timescalled === 1, "f0 called only once");
 					start();
 				});
 			});
+
 		</script>
 	</body>
 </html>

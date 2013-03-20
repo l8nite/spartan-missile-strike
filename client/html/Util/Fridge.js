@@ -26,8 +26,10 @@ Fridge.prototype.count = function () {
 
 Fridge.prototype.getAll = function () {
 	var a = [];
-	for (var i in this._store) {
-		a.push(this._store[i]);
+	for (var i = 0; i < this._store.length; i++) {
+		if (this._store[i] !== undefined) {
+			a.push(this._store[i]);
+		}
 	}
 	return a;
 };
