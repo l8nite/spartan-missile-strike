@@ -16,6 +16,12 @@ describe('cross origin request header test', function () {
                 res.headers['access-control-allow-origin'].should.equal('*');
                 done();
             });
+
+            client.get({ path: '/', headers: { 'Origin': 'null' }}, function (err, req, res) {
+                res.headers.should.have.property('access-control-allow-origin');
+                res.headers['access-control-allow-origin'].should.equal('*');
+                done();
+            });
         });
     });
 });
