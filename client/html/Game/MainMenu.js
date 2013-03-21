@@ -29,6 +29,7 @@ MainMenu.prototype.offView = function () {
 };
 
 MainMenu.prototype.show = function () {
+	$("#" + this.Imports.domId["MainMenu"] + " .yourname").text(this.Imports.GameMaster.userid);
 	this.Imports.ViewManager.loadView(this);
 };
 
