@@ -331,8 +331,8 @@ function _updateGameWithSelectedBase (request, game, next) {
         latitude: request.params.latitude,
         longitude: request.params.longitude,
     };
+
     // currently opponent's turn (creator base set @ creation)
-    game.current = game.creator;
 
     _updateGameRecord(game, function (err) {
         if (err) {
