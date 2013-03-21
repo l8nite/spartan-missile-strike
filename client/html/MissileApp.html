@@ -66,14 +66,16 @@
 		// END DELETE THIS!
 
 		// First thing we need is a FB token, we use that to get our userid 
-		Imports.NativeBridge.getFacebookAccessToken(function (token) {
+		// Imports.NativeBridge.getFacebookAccessToken(function (token) {
 			// Now get our userid
+			var token = "AAABvzfRP6w0BANkVwSFsAtkx1Aa3MvtOUD3JUxB0zFqcQqWZBaE2rr4PN6ll68ZBnZAdtQDX2gSqfMP2htd5H9O95KdEEvZAykP3XTz6qAZDZD";
 			$.ajax(Imports.serviceurl + "/sessions", {
 				type: "POST",
 				dataType: "json",
-				data: {
+				contentType: "application/json",
+				data: JSON.stringify({
 					facebook_access_token: token
-				}
+				})
 			}).done(function (response) {
 				var sessionid = response.session.id,
 					userid = response.user.id,
@@ -82,7 +84,7 @@
 				Imports.GameMaster = new GameMaster(userid, sessionid, Imports);
 				new MainMenu(Imports).show();
 			});
-		});
+		// });
 	};
 	</script>
 </head>

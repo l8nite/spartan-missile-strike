@@ -80,8 +80,8 @@ GameMaster.prototype.subscribeLocation = function (when) {
 		when(that._location);
 	}, 0);
 	if (!this._locationUpdatesTicket) {
-		this._locationUpdatesTicket = this.Imports.NativeBridge.startLocationUpdates(function (location) {
-			that._location = location;
+		this._locationUpdatesTicket = this.Imports.NativeBridge.startLocationUpdates(function (loc) {
+			that._location = loc;
 			that._notifyLocationListeners();
 		});
 	}
@@ -102,13 +102,13 @@ GameMaster.prototype.unsubscribeLocation = function (ticket) {
  * and updates the locally maintained games list, notifying listeners of changes.
  * Returns a $.Deferred resolved with the updated game.
  */
-GameMaster.prototype.doFire = function (game, location, orientation, power) {
+GameMaster.prototype.doFire = function (game, loc, orientation, power) {
 	var that = this;
 	var gameid = game;
 	if (typeof gameid === "object") {
 		gameid = gameid.id;
 	}
-	return this._doFireOnService(gameid, location, orientation, power).done(function (response) {
+	return this._doFireOnService(gameid, loc, orientation, power).done(function (response) {
 		that._mixGames(response);
 		that._notifyGamesListeners(response);
 	});
@@ -137,37 +137,48 @@ GameMaster.prototype._getGames = function () {
 
 /* Returns a $.Deferred resolved with the webservice's response to the shot
  */
-GameMaster.prototype._doFireOnService = function (gameid, location, orientation, power) {
+GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, power) {
 	var shot = {
-		latitude: location.latitude,
-		longitude: location.longitude,
+		latitude: loc.latitude,
+		longitude: loc.longitude,
 		angle: orientation.pitch * 180 / Math.PI,
 		heading: orientation.yaw * 180 / Math.PI,
 		power: power
 	};
 	return $.ajax(this.Imports.serviceurl + "/games/" + encodeURIComponent(gameid) + "/fire-missile", {
 		type: "PUT",
+		contentType: "application/json",
 		headers: {
 			"MissileAppSessionId": this._sessionid
 		},
 		dataType: "json",
 		data: JSON.stringify(shot)
+	}).pipe(function (response) {
+		response.created = new Date(response.created);
+		response.updated = new Date(response.updated);
+		return response;
 	});
-};
 
 /* Call to the webservice.
  * Returns a deferred to be resolved with the games array
  */
 GameMaster.prototype._getGamesFromService = function (fromWhen) {
+	var headers = {
+			"MissileAppSessionId": this._sessionid
+		};
 	if (fromWhen) {
 		headers["If-Modified-Since"] = fromWhen.toGMTString();
 	}
 	return $.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(this.userid) + "/games", {
-		headers: {
-			"MissileAppSessionId": this._sessionid
-		},
-		contentType: "application/json",
+		headers: headers,
 		dataType: "json"
+	}).pipe(function (response) {
+		var games = response.games;
+		games.forEach(function (e, i, a) {
+			e.created = new Date(e.created);
+			e.updated = new Date(e.updated);
+		});
+		return games;
 	});
 };
 
@@ -235,10 +246,10 @@ GameMaster.prototype._notifyGamesListeners = function (games) {
 
 /* Call all location listeners with updated location
  */
-GameMaster.prototype._notifyLocationListeners = function (location) {
+GameMaster.prototype._notifyLocationListeners = function (loc) {
 	var a = this._locationListeners.getAll();
 	for (var i in a) {
-		a[i](location);
+		a[i](loc);
 	}
 };
 
@@ -265,4 +276,4 @@ GameMaster.prototype._mixGames = function (games) {
 };
 
 // How long before games datastructure becomes stale
-GameMaster.prototype._STALE = 60000;
+GameMaster.prototype._STALE = 10000;
