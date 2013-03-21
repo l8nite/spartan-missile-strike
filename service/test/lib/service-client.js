@@ -51,3 +51,7 @@ ServiceClient.prototype.post = function () {
 ServiceClient.prototype.put = function () {
     this.client.put.apply(this.client, arguments);
 };
+
+ServiceClient.prototype.opts = function () {
+    this.client.opts.apply(this.client, arguments);
+};
