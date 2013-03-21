@@ -203,7 +203,7 @@ GameMaster.prototype._newGameOnService = function (opponent, loc) {
 };
 
 GameMaster.prototype._selectBaseOnService = function (gameid, loc) {
-	return $.ajax(this.Imports.serviceurl + "/games/" + encodeURIComponent(gameid), {
+	return $.ajax(this.Imports.serviceurl + "/games/" + encodeURIComponent(gameid) + "/select-base", {
 		type: "PUT",
 		contentType: "application/json",
 		headers: {
