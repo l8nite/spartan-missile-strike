@@ -55,8 +55,15 @@
 				"OpponentsView": "opponents-view",
 				"BaseView": "base-view"
 			},
-			serviceurl: "https://api.missileapp.com:8433"
+			serviceurl: "https://api.missileapp.com:8443"
 		};
+
+		// DEBUG
+		// BEGIN DELETE THIS!
+		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
+			fn("AAACEdEose0cBAJ1CT1RVklgzIQxyG1W8jZAFUyCbpxkUi6CZBe6J3M3oZBVMsNDuNomhSSM9SRdfWZCUMG86grHlQVelhZBDmLjK5jRRWemjzVdPuaRpZA");
+		};
+		// END DELETE THIS!
 
 		// First thing we need is a FB token, we use that to get our userid 
 		Imports.NativeBridge.getFacebookAccessToken(function (token) {
@@ -72,7 +79,7 @@
 					userid = response.user.id,
 					isNewUser = response.user.newUser;
 				// Now we make the GM and start the game!
-				Imports.GameMaster = new GameMaster(userid, sessionid);
+				Imports.GameMaster = new GameMaster(userid, sessionid, Imports);
 				new MainMenu(Imports).show();
 			});
 		});
