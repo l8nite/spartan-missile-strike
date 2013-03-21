@@ -45,6 +45,28 @@ GameMaster.prototype.getName = function (userid) {
 	return d;
 };
 
+/* Add a new game
+ * Returns a $.Deferred
+ */
+GameMaster.prototype.newGame = function (opponent, loc) {
+	var that = this;
+	return this._newGameOnService(opponent, loc).done(function (response) {
+		that._mixGames([response]);
+		that._notifyGamesListeners(response);
+	});
+};
+
+/* Accept a game invitation with a base selection
+ * Returns a $.Deferred
+ */
+GameMaster.prototype.acceptInvitation = function (gameid, loc) {
+	var that = this;
+	return this._selectBaseOnService(gameid, loc).done(function (response) {
+		that._mixGames([response]);
+		that._notifyGamesListeners(response);
+	});
+};
+
 /* Subscribe a listener function to game updates.
  * Returns a callback ID with which you can unsubscribe the specified listener.
  * On subscribe, listener is immediately called with current games array.
@@ -109,7 +131,7 @@ GameMaster.prototype.doFire = function (game, loc, orientation, power) {
 		gameid = gameid.id;
 	}
 	return this._doFireOnService(gameid, loc, orientation, power).done(function (response) {
-		that._mixGames(response);
+		that._mixGames([response]);
 		that._notifyGamesListeners(response);
 	});
 };
@@ -153,6 +175,45 @@ GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, powe
 		},
 		dataType: "json",
 		data: JSON.stringify(shot)
+	}).pipe(function (response) {
+		response.created = new Date(response.created);
+		response.updated = new Date(response.updated);
+		return response;
+	});
+};
+
+GameMaster.prototype._newGameOnService = function (opponent, loc) {
+	return $.ajax(this.Imports.serviceurl + "/games", {
+		type: "POST",
+		contentType: "application/json",
+		headers: {
+			"MissileAppSessionId": this._sessionid
+		},
+		dataType: "json",
+		data: JSON.stringify({
+			opponent: opponent,
+			latitude: loc.latitude,
+			longitude: loc.longitude
+		})
+	}).pipe(function (response) {
+		response.created = new Date(response.created);
+		response.updated = new Date(response.updated);
+		return response;
+	});
+};
+
+GameMaster.prototype._selectBaseOnService = function (gameid, loc) {
+	return $.ajax(this.Imports.serviceurl + "/games/" + encodeURIComponent(gameid), {
+		type: "PUT",
+		contentType: "application/json",
+		headers: {
+			"MissileAppSessionId": this._sessionid
+		},
+		dataType: "json",
+		data: JSON.stringify({
+			latitude: loc.latitude,
+			longitude: loc.longitude
+		})
 	}).pipe(function (response) {
 		response.created = new Date(response.created);
 		response.updated = new Date(response.updated);
