@@ -1,7 +1,7 @@
 <html>
 </html>
 <head>
-	<link rel="stylesheet" href="../View/view.css">
+	<link rel="stylesheet" href="View/view.css">
 	<link rel="stylesheet" href="MissileApp.css">
 	<style>
 		body {
@@ -30,22 +30,21 @@
 			background-color: #F080F0;
 		}
 	</style>
-	<script src="../jquery/jquery.js"></script>
-	<script src="../Util/DomHelper.js"></script>
-	<script src="../Util/Fridge.js"></script>
-	<script src="../NativeBridge/NativeBridge_Abstract.js"></script>
-	<script src="../NativeBridge/NativeBridge_iOS.js"></script>
-	<script src="../Game/GameMaster.js"></script>
-	<script src="../View/MainView.js"></script>
-	<script src="../View/View.js"></script>
-	<script src="../View/FixedHeightView.js"></script>
-	<script src="../Game/MainMenu.js"></script>
-	<script src="../Game/MapView.js"></script>
-	<script src="../Game/FireView.js"></script>
+	<script src="jquery/jquery.js"></script>
+	<script src="Util/DomHelper.js"></script>
+	<script src="Util/Fridge.js"></script>
+	<script src="NativeBridge/NativeBridge_Abstract.js"></script>
+	<script src="NativeBridge/NativeBridge_iOS.js"></script>
+	<script src="Game/GameMaster.js"></script>
+	<script src="View/MainView.js"></script>
+	<script src="View/View.js"></script>
+	<script src="View/FixedHeightView.js"></script>
+	<script src="Game/MainMenu.js"></script>
+	<script src="Game/MapView.js"></script>
+	<script src="Game/FireView.js"></script>
 	<script>
 	window.onload = function () {
 		var Imports = {
-			DomHelper: new DomHelper(),
 			NativeBridge: new NativeBridge_iOS(),
 			domId: {
 				"MainMenu": "main-menu",
@@ -54,7 +53,8 @@
 				"OptionsView": "options-view",
 				"OpponentsView": "opponents-view",
 				"BaseView": "base-view"
-			}
+			},
+			serviceurl: "https://api.missileapp.com:8433"
 		};
 		Imports.GameMaster = new GameMaster("user:0001", "12345", Imports);
 		Imports.ViewManager = new MainView(Imports);
@@ -144,34 +144,34 @@
 		};
 
 		var cantstopwontstop;
-		Imports.NativeBridge._getLocationUpdates = function (activate, callbackID) {
+		Imports.NativeBridge._startLocationUpdates = function (callbackID) {
 			var that = this;
-			if (activate) {
-				cantstopwontstop = setInterval(function () {
-					var loc = {};
-					loc.latitude = Math.random();
-					loc.longitude = Math.random();
-					that.callback(callbackID, loc);
-				}, 200);
-			} else {
-				clearInterval(cantstopwontstop);
-			}
+			cantstopwontstop = setInterval(function () {
+				var loc = {};
+				loc.latitude = Math.random();
+				loc.longitude = Math.random();
+				that.callback(callbackID, loc);
+			}, 200);
+		};
+
+		Imports.NativeBridge._stopLocationUpdates = function (callbackID) {
+			clearInterval(cantstopwontstop);
 		};
 
 		var cantstopwontstop2;
-		Imports.NativeBridge._getOrientationUpdates = function (activate, callbackID) {
+		Imports.NativeBridge._startOrientationUpdates = function (callbackID) {
 			var that = this;
-			if (activate) {
-				cantstopwontstop2 = setInterval(function () {
-					var orientation = {};
-					orientation.pitch = Math.random();
-					orientation.roll = Math.random();
-					orientation.yaw = Math.random();
-					that.callback(callbackID, orientation);
-				}, 8);
-			} else {
-				clearInterval(cantstopwontstop2);
-			}
+			cantstopwontstop2 = setInterval(function () {
+				var orientation = {};
+				orientation.pitch = Math.random();
+				orientation.roll = Math.random();
+				orientation.yaw = Math.random();
+				that.callback(callbackID, orientation);
+			}, 8);
+		};
+
+		Imports.NativeBridge._stopOrientationUpdates = function (callbackID) {
+			clearInterval(cantstopwontstop2);
 		};
 
 		new MainMenu(Imports).show();

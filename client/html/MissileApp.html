@@ -33,7 +33,7 @@
 	<script src="Util/DomHelper.js"></script>
 	<script src="Util/Fridge.js"></script>
 	<script src="NativeBridge/NativeBridge_Abstract.js"></script>
-	<script src="NativeBridge/NativeBridge_Android.js"></script>
+	<script src="NativeBridge/NativeBridge_iOS.js"></script>
 	<script src="Game/GameMaster.js"></script>
 	<script src="View/MainView.js"></script>
 	<script src="View/View.js"></script>
@@ -46,7 +46,7 @@
 	<script>
 	window.onload = function () {
 		var Imports = {
-			NativeBridge: new NativeBridge_Android(),
+			NativeBridge: new NativeBridge_iOS(),
 			ViewManager: new MainView(),
 			domId: {
 				"MainMenu": "main-menu",
@@ -60,9 +60,15 @@
 		};
 
 		window.NativeBridge = {
-			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge),
-			onMainMenu: Imports.ViewManager.onInitialView.bind(Imports.ViewManager)
+			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
 		};
+
+		// DEBUG
+		// BEGIN DELETE THIS!
+		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
+			fn("AAABvzfRP6w0BANkVwSFsAtkx1Aa3MvtOUD3JUxB0zFqcQqWZBaE2rr4PN6ll68ZBnZAdtQDX2gSqfMP2htd5H9O95KdEEvZAykP3XTz6qAZDZD");
+		};
+		// END DELETE THIS!
 
 		Imports.NativeBridge.playSound("background_music", {
 			foreground: false,
