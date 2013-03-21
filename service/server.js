@@ -24,7 +24,12 @@ function _initializeRestifyServer (done) {
         version: '0.0.1',
     });
 
-    server.use(restify.CORS());
+    // TODO: This doesn't work, I hacked restify source
+    server.use(restify.CORS({
+        origins: ['*'],
+        headers: ['missileappsessionid', 'origin', 'accept'],
+    }));
+
     server.use(restify.fullResponse());
 
     server.use(restify.bodyParser());
@@ -33,6 +38,7 @@ function _initializeRestifyServer (done) {
     routes.installPublicRouteHandlers(server); // no authentication required
     server.use(sessions.requireValidSession(database.client));
     routes.installAuthenticatedRouteHandlers(server); // authentication required
+
 
 
     server.listen(ports.apiServer, function () {
