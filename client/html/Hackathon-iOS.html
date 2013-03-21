@@ -2,7 +2,7 @@
 </html>
 <head>
 	<link rel="stylesheet" href="View/view.css">
-	<link rel="stylesheet" href="MissileApp.css">
+	<link rel="stylesheet" href="Game/MissileApp.css">
 	<style>
 		body {
 			text-align: center;
@@ -42,13 +42,10 @@
 	<script src="Game/MainMenu.js"></script>
 	<script src="Game/MapView.js"></script>
 	<script src="Game/FireView.js"></script>
-	<script src="Game/OpponentsView.js"></script>
-	<script src="Game/BaseView.js"></script>
 	<script>
 	window.onload = function () {
 		var Imports = {
 			NativeBridge: new NativeBridge_iOS(),
-			ViewManager: new MainView(),
 			domId: {
 				"MainMenu": "main-menu",
 				"MapView": "map-view",
@@ -57,48 +54,18 @@
 				"OpponentsView": "opponents-view",
 				"BaseView": "base-view"
 			},
-			serviceurl: "https://api.missileapp.com:8443"
+			serviceurl: "https://api.missileapp.com:8433"
 		};
-
-		window.NativeBridge = {
-			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
-		};
-
-		Imports.NativeBridge.playSound("background_music", {
-			foreground: false,
-			loop: true
-		});
-		// First thing we need is a FB token, we use that to get our userid 
-		Imports.NativeBridge.getFacebookAccessToken(function (token) {
-			// Now get our userid
-			$.ajax(Imports.serviceurl + "/sessions", {
-				type: "POST",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify({
-					facebook_access_token: token
-				})
-			}).done(function (response) {
-				var sessionid = response.session.id,
-					userid = response.user.id,
-					isNewUser = response.user.newUser;
-				// Now we make the GM and start the game!
-				Imports.GameMaster = new GameMaster(userid, sessionid, Imports);
-				Imports.Views = [];
-				Imports.Views["MainMenu"] = new MainMenu(Imports);
-				Imports.Views["MainMenu"].show();
-				Imports.NativeBridge.hideSplash();
-			});
-		});
+		Imports.GameMaster = new GameMaster("user:0001", "12345", Imports);
+		Imports.ViewManager = new MainView(Imports);
+		new MainMenu(Imports).show();
+		Imports.NativeBridge.hideSplash();
 	};
 	</script>
 </head>
 <body>
 	<div style="display:none;">
 		<div id="main-menu">
-			<div>Welcome,</div>
-			<div class="yourname"></div><br>
-			<div class="newGameBtn">New Game</div>
 			<div id="list-yourturn"><h1>Your Turn</h1></div>
 			<div id="list-histurn"><h1>Not Your Turn</h1></div>
 			<div id="list-complete"><h1>Nobody's Turn</h1></div>
@@ -108,27 +75,18 @@
 				</div>
 			</div>
 		</div>
-		<div id="opponents-view">
-			<div><input type="text" id="opponent-input"></div><br>
-			<div class="startBtn">Start game</div>
-			<div class="backBtn">Back</div>
-		</div>
-		<div id="base-view">
-			<div style="word-wrap: break-word;" class="gps">---</div><br>
-			<div class="startBtn">Use current location</div>
-			<div class="backBtn">Back</div>
-		</div>
 		<div id="map-view">
 			<div style="word-wrap: break-word; max-height: 50%;" class="game">---</div><br>
 			<div style="word-wrap: break-word;" class="gps">---</div><br>
-			<div class="fireBtn">Fire</div>
 			<div class="backBtn">Back</div>
+			<div class="fireBtn">Fire</div>
 		</div>
 		<div id="fire-view">
+			<div style="word-wrap: break-word; max-height: 50%;" class="game">---</div><br>
 			<div style="word-wrap: break-word;" class="gps">---</div><br>
 			<div style="word-wrap: break-word;" class="orientation">---</div><br>
-			<div class="fireBtn">Fire!</div>
 			<div class="backBtn">Back</div>
+			<div class="fireBtn">Fire!</div>
 		</div>
 	</div>
 </body>

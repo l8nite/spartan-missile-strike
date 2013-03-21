@@ -21,31 +21,23 @@
 				}, 10000);
 
 				// Reappropriation of setPreference()
-				nb._setPreference = function (pref, callback) {
+				nb._setPreferences = function (pref, callback) {
 					if (callback + 1 > largest) {
 						largest = callback + 1;
 					}
 					setTimeout(function () {
 						nb.callback(callback, pref);
 					}, Math.random() * 100);
-				}
+				};
+
 				for (var i = 0; i < calls; i++) {
 					setTimeout(function () {
-						nb.setPreference(i, function (result) {
+						nb.setPreferences(i, function (result) {
 							equal(result, i, "Callback " + i);
 							start();
 						});
 					}, Math.random() * 200);
 				}
-			});
-
-			asyncTest("Resume game", 1, function () {
-				var NativeBridge = new NativeBridge_Abstract();
-				NativeBridge.setResumeHandler(function (){
-					ok(true, "Resume handler successfully registered and called");
-					start();
-				});
-				NativeBridge.resumeGame();
 			});
 		</script>
 	</body>
