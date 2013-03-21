@@ -10,10 +10,10 @@ function MapView(Imports) {
 		Imports.ViewManager.previousView();
 	});
 	$("#" + Imports.domId["MapView"] + " .fireBtn").click(function () {
-		if (!that._fireView) {
-			that._fireView = new FireView(Imports);
+		if (!Imports.Views["FireView"]) {
+			Imports.Views["FireView"] = new FireView(Imports);
 		}
-		that._fireView.show(that._game);
+		Imports.Views["FireView"].show(that._game);
 	});
 	// TODO Wire static button events
 }
@@ -35,7 +35,7 @@ MapView.prototype.offView = function () {
 MapView.prototype.show = function (game) {
 	this._game = game;
 	this._updateGame();
-	this.Imports.ViewManager.loadView(this);
+	this.Imports.ViewManager.loadView(this, this.Imports.Views["MainMenu"]);
 };
 
 MapView.prototype._updateWithNewGames = function (games) {

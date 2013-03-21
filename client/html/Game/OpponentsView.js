@@ -9,10 +9,10 @@ function OpponentsView(Imports) {
 
 	$("#" + Imports.domId["OpponentsView"] + " .startBtn").click(function () {
 		var opponentid = $("#opponent-input").val();
-		if (!that.baseView) {
-			that.baseView = new BaseView(Imports);
+		if (!Imports.Views["BaseView"]) {
+			Imports.Views["BaseView"] = new BaseView(Imports);
 		}
-		that.baseView.show(opponentid);
+		Imports.Views["BaseView"].show(opponentid);
 	});
 	$("#" + Imports.domId["OpponentsView"] + " .backBtn").click(function () {
 		Imports.ViewManager.previousView();
