@@ -71,6 +71,10 @@
 		};
 		// END DELETE THIS!
 
+		Imports.NativeBridge.playSound("background_music", {
+			foreground: false,
+			loop: true
+		});
 		// First thing we need is a FB token, we use that to get our userid 
 		Imports.NativeBridge.getFacebookAccessToken(function (token) {
 			// Now get our userid
