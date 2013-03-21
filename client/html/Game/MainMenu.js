@@ -4,9 +4,16 @@
  * Call MainMenu with the DOM ID of that markup.
  */
 function MainMenu(Imports) {
+	var that = this;
 	this.Imports = Imports;
 	View.call(this, Imports.domId["MainMenu"]);
-	// TODO Wire static button events
+
+	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").click(function () {
+		if (!that.opponentsView) {
+			that.opponentsView = new OpponentsView(Imports);
+		}
+		that.opponentsView.show();
+	});
 }
 
 MainMenu.prototype = Object.create(View.prototype);
