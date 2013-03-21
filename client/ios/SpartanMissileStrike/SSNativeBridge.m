@@ -32,23 +32,29 @@
 {
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingCompact error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    [self callbackWithString:jsonString forFunction:function withArguments:arguments];
+    [self _sendCallbackWithArgument:jsonString forFunction:function withArguments:arguments];
 }
 
 -(void)callbackWithDictionary:(NSDictionary*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
 {
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingCompact error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    [self callbackWithString:jsonString forFunction:function withArguments:arguments];
+    [self _sendCallbackWithArgument:jsonString forFunction:function withArguments:arguments];
 }
 
 -(void)callbackWithString:(NSString*)result forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
 {
+    NSString *callbackJS = [NSString stringWithFormat:@"'%@'", result];
+    [self _sendCallbackWithArgument:callbackJS forFunction:function withArguments:arguments];
+}
+
+-(void)_sendCallbackWithArgument:(NSString*)arg forFunction:(NSString*)function withArguments:(NSDictionary*)arguments
+{
     NSNumber *callbackIdentifier = (NSNumber*)[arguments objectForKey:@"identifier"];
     NSAssert(callbackIdentifier != nil, @"callback attempted, but no callback identifier present");
     
-    NSString *callbackJS = [NSString stringWithFormat:@"NativeBridge.callback(%d, %@)", [callbackIdentifier integerValue], result];
-    
+    NSString *callbackJS = [NSString stringWithFormat:@"NativeBridge.callback(%d, %@)", [callbackIdentifier integerValue], arg];
+
     NSLog(@"Native Bridge: %@", callbackJS);
 
     [self performSelectorOnMainThread:@selector(_executeJavascriptOnWebView:) withObject:callbackJS waitUntilDone:NO];
