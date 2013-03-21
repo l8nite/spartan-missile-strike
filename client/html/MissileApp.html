@@ -42,6 +42,8 @@
 	<script src="Game/MainMenu.js"></script>
 	<script src="Game/MapView.js"></script>
 	<script src="Game/FireView.js"></script>
+	<script src="Game/OpponentsView.js"></script>
+	<script src="Game/BaseView.js"></script>
 	<script>
 	window.onload = function () {
 		var Imports = {
@@ -59,7 +61,7 @@
 		};
 
 		window.NativeBridge = {
-			callback = Imports.NativeBridge.callback.bind(Imports.NativeBridge);
+			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
 		};
 
 		// DEBUG
