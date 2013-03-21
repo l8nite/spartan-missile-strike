@@ -168,13 +168,18 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
 		"MissileAppSessionId": this._sessionid
 	};
 	if (fromWhen) {
-		headers["If-Modified-Since"] = fromWhen.toGMTString();
+		headers["If-Modified-Since"] = fromWhen.toISOString();
 	}
 	return $.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(this.userid) + "/games", {
 		headers: headers,
 		dataType: "json"
 	}).pipe(function (response) {
-		var games = response.games;
+		var games;
+		if (response !== undefined) {
+			games = response.games;
+		} else {
+			games = [];
+		}
 		games.forEach(function (e, i, a) {
 			e.created = new Date(e.created);
 			e.updated = new Date(e.updated);
