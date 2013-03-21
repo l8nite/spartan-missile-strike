@@ -1,7 +1,7 @@
-function FixedHeightView(domNode, Imports) {
-	View.call(this, domNode, Imports);
+function FixedHeightView(domNode) {
+	View.call(this, domNode);
 	if (this._domNode) {
-        Imports.DomHelper.addClass(this, "fixed-height-view");
+        DomHelper.addClass(this, "fixed-height-view");
     }
 }
 

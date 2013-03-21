@@ -9,42 +9,39 @@ function NativeBridge_iOS() {
 
 NativeBridge_iOS.prototype = Object.create(NativeBridge_Abstract.prototype);
 
-NativeBridge_iOS.prototype._getLocationUpdates = function (activate, callbackID) {
-    alert('getLocationupdates(' + activate + ')');
-	this._appendIframe("spartan-missile-strike://getLocationUpdates/?arguments="
-		+ JSON.stringify({
-			activate : activate,
-			identifier : callbackID
-		})
-	);
-};
-
-NativeBridge_iOS.prototype._getOrientationUpdates = function (activate, callbackID) {
-	this._appendIframe("spartan-missile-strike://getOrientationUpdates/?arguments="
-		+ JSON.stringify({
-			activate : activate,
-			identifier : callbackID
-		})
-	);
-};
-
-NativeBridge_iOS.prototype._getCurrentLocation = function (callbackID) {
-	this._appendIframe("spartan-missile-strike://getCurrentLocation/?arguments="
+NativeBridge_iOS.prototype._startLocationUpdates = function (callbackID) {
+	this._appendIframe("spartan-missile-strike://startLocationUpdates/?arguments="
 		+ JSON.stringify({
 			identifier : callbackID
 		})
 	);
 };
 
-NativeBridge_iOS.prototype.showFireMissileScreen = function (activate) {
-	this._appendIframe("spartan-missile-strike://showFireMissileScreen/?arguments="
+NativeBridge_iOS.prototype._stopLocationUpdates = function () {
+	this._appendIframe("spartan-missile-strike://stopLocationUpdates/?arguments=");
+};
+
+NativeBridge_iOS.prototype._startOrientationUpdates = function (callbackID) {
+	this._appendIframe("spartan-missile-strike://startOrientationUpdates/?arguments="
 		+ JSON.stringify({
-			activate : activate
+			identifier : callbackID
 		})
 	);
 };
 
-NativeBridge_iOS.prototype._getPreference = function (preferences, callbackID) {
+NativeBridge_iOS.prototype._stopOrientationUpdates = function () {
+	this._appendIframe("spartan-missile-strike://stopOrientationUpdates/?arguments=");
+};
+
+NativeBridge_iOS.prototype.showFireMissileScreen = function () {
+	this._appendIframe("spartan-missile-strike://showFireMissileScreen/?arguments=");
+};
+
+NativeBridge_iOS.prototype.hideFireMissileScreen = function () {
+	this._appendIframe("spartan-missile-strike://hideFireMissileScreen/?arguments=");
+};
+
+NativeBridge_iOS.prototype._getPreferences = function (preferences, callbackID) {
 	this._appendIframe("spartan-missile-strike://getPreference/?arguments="
 		+ JSON.stringify({
 			preferences : preferences,
@@ -53,7 +50,7 @@ NativeBridge_iOS.prototype._getPreference = function (preferences, callbackID) {
 	);
 };
 
-NativeBridge_iOS.prototype._setPreference = function (preferences, callbackID) {
+NativeBridge_iOS.prototype._setPreferences = function (preferences, callbackID) {
 	this._appendIframe("spartan-missile-strike://setPreference/?arguments="
 		+ JSON.stringify({
 			preferences : preferences,
