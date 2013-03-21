@@ -32,8 +32,6 @@ FireView.prototype.offView = function () {
 FireView.prototype.show = function (game) {
 	this._game = game;
 	this.Imports.ViewManager.loadView(this);
-
-	$("#" + this.Imports.domId["FireView"] + " .game").text(JSON.stringify(game));
 };
 
 FireView.prototype._updateWithNewLocation = function (location) {
