@@ -45,6 +45,8 @@ function _initializeRestifyServer (done) {
         }
     });
 
+    server.use(restify.CORS());
+
     server.use(restify.bodyParser());
     server.use(restify.queryParser());
 
