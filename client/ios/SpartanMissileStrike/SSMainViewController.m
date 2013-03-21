@@ -45,7 +45,7 @@
 
     webView.backgroundColor = [UIColor clearColor];
 
-    NSURL *indexURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/NativeBridge/NativeBridge_iOS-debug" ofType:@"html"] isDirectory:NO];
+    NSURL *indexURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/MissileApp-iOS" ofType:@"html"] isDirectory:NO];
     NSURLRequest *initialLoadRequest = [NSURLRequest requestWithURL:indexURL];
     [webView loadRequest:initialLoadRequest];
 }
@@ -92,6 +92,7 @@
         return;
     }
 
+    [firingViewController.view removeFromSuperview];
     [firingViewController removeFromParentViewController];
     firingViewController = nil;
 }
@@ -104,45 +105,44 @@
 {
     NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
 
-    if ([function isEqualIgnoringCase:@"getLocationUpdates"]) {
-        if ([(NSNumber*)[arguments objectForKey:@"activate"] boolValue]) {
-            [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
+    if ([function isEqualIgnoringCase:@"startLocationUpdates"]) {
+        [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
 
-                NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
-                NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
-                NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
+            NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
+            NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
+            NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
 
-                [locationDictionary setObject:latitude forKey:@"latitude"];
-                [locationDictionary setObject:longitude forKey:@"longitude"];
-                
-                [nativeBridge callbackWithDictionary:locationDictionary forFunction:function withArguments:arguments];
-            }];
-        }
-        else {
-            [locationManager stopUpdatingLocation];
-        }
+            [locationDictionary setObject:latitude forKey:@"latitude"];
+            [locationDictionary setObject:longitude forKey:@"longitude"];
+            
+            [nativeBridge callbackWithDictionary:locationDictionary forFunction:function withArguments:arguments];
+        }];
     }
-    else if ([function isEqualIgnoringCase:@"getOrientationUpdates"]) {
-        if ([(NSNumber*)[arguments objectForKey:@"activate"] boolValue]) {
-            [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
-                NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
-                NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
-                NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
-                NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
-                
-                [orientationDictionary setObject:pitch forKey:@"pitch"];
-                [orientationDictionary setObject:yaw forKey:@"yaw"];
-                [orientationDictionary setObject:roll forKey:@"roll"];
-                
-                [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
-            }];
-        }
-        else {
-            [orientationManager stopUpdatingOrientation];
-        }
+    else if ([function isEqualIgnoringCase:@"stopLocationUpdates"]) {
+        [locationManager stopUpdatingLocation];
+    }
+    else if ([function isEqualIgnoringCase:@"startOrientationUpdates"]) {
+        [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
+            NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
+            NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
+            NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
+            NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
+            
+            [orientationDictionary setObject:pitch forKey:@"pitch"];
+            [orientationDictionary setObject:yaw forKey:@"yaw"];
+            [orientationDictionary setObject:roll forKey:@"roll"];
+            
+            [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
+        }];
+    }
+    else if ([function isEqualIgnoringCase:@"stopOrientationUpdates"]) {
+        [orientationManager stopUpdatingOrientation];
     }
     else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
         [self showFiringScreen];
+    }
+    else if ([function isEqualIgnoringCase:@"hideFireMissileScreen"]) {
+        [self hideFiringScreen];
     }
     else if ([function isEqualIgnoringCase:@"getPreference"]) {
         [preferenceManager getPreferences:[arguments objectForKey:@"preferences"] withCompletionHandler:^(NSDictionary *preferences) {

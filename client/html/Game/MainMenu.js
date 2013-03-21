@@ -4,23 +4,32 @@
  * Call MainMenu with the DOM ID of that markup.
  */
 function MainMenu(Imports) {
-	View.call(this, Imports.domId["MainMenu"], Imports);
-	// TODO Wire static button events
+	var that = this;
+	this.Imports = Imports;
+	View.call(this, Imports.domId["MainMenu"]);
+
+	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").click(function () {
+		if (!Imports.Views["OpponentsView"]) {
+			Imports.Views["OpponentsView"] = new OpponentsView(Imports);
+		}
+		Imports.Views["OpponentsView"].show();
+	});
 }
 
 MainMenu.prototype = Object.create(View.prototype);
 
 MainMenu.prototype.onView = function () {
-	this.GameMasterTicket = this.Imports.GameMaster.subscribe(this._render.bind(this));
+	this.GameMasterTicket = this.Imports.GameMaster.subscribeGames(this._render.bind(this));
 	View.prototype.onView.call(this);
 };
 
 MainMenu.prototype.offView = function () {
-	this.Imports.GameMaster.unsubscribe(this.GameMasterTicket);
+	this.Imports.GameMaster.unsubscribeGames(this.GameMasterTicket);
 	View.prototype.offView.call(this);
 };
 
 MainMenu.prototype.show = function () {
+	$("#" + this.Imports.domId["MainMenu"] + " .yourname").text(this.Imports.GameMaster.userid);
 	this.Imports.ViewManager.loadView(this);
 };
 
@@ -62,8 +71,8 @@ MainMenu.prototype._render = function (games) {
 };
 
 MainMenu.prototype._showGame = function (game) {
-	if (!this._mapView) {
-		this._mapView = new MapView(this.Imports);
+	if (!this.Imports.Views["MapView"]) {
+		this.Imports.Views["MapView"] = new MapView(this.Imports);
 	}
-	this._mapView.show(game);
+	this.Imports.Views["MapView"].show(game);
 };
