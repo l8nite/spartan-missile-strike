@@ -43,7 +43,8 @@ function listGames (request, msUser, done) {
         rangeMax = '+inf';
 
     if (request.headers.hasOwnProperty('if-modified-since')) {
-        rangeMin = (new Date(request.headers['if-modified-since'])).getTime();
+        // +1ms because we don't want to include games that fall on the boundary
+        rangeMin = (new Date(request.headers['if-modified-since'])).getTime() + 1;
     }
 
     redis.client.zrevrangebyscore('games:' + msUser.id, rangeMax, rangeMin, function (err, gameIdentifiers) {
