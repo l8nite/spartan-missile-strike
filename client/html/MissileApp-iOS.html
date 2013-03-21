@@ -42,6 +42,8 @@
 	<script src="Game/MainMenu.js"></script>
 	<script src="Game/MapView.js"></script>
 	<script src="Game/FireView.js"></script>
+	<script src="Game/OpponentsView.js"></script>
+	<script src="Game/BaseView.js"></script>
 	<script>
 	window.onload = function () {
 		var Imports = {
@@ -62,6 +64,10 @@
 			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
 		};
 
+		Imports.NativeBridge.playSound("background_music", {
+			foreground: false,
+			loop: true
+		});
 		// First thing we need is a FB token, we use that to get our userid 
 		Imports.NativeBridge.getFacebookAccessToken(function (token) {
 			// Now get our userid
@@ -78,8 +84,9 @@
 					isNewUser = response.user.newUser;
 				// Now we make the GM and start the game!
 				Imports.GameMaster = new GameMaster(userid, sessionid, Imports);
-				new MainMenu(Imports).show();
-				Imports.NativeBridge.hideSplash();
+				Imports.Views = [];
+				Imports.Views["MainMenu"] = new MainMenu(Imports);
+				Imports.Views["MainMenu"].show();
 			});
 		});
 	};
@@ -88,6 +95,8 @@
 <body>
 	<div style="display:none;">
 		<div id="main-menu">
+			<div>Welcome,</div>
+			<div class="yourname"></div><br>
 			<div class="newGameBtn">New Game</div>
 			<div id="list-yourturn"><h1>Your Turn</h1></div>
 			<div id="list-histurn"><h1>Not Your Turn</h1></div>
@@ -99,13 +108,13 @@
 			</div>
 		</div>
 		<div id="opponents-view">
-			<div><input type="text" id="opponent-input"></div>
+			<div><input type="text" id="opponent-input"></div><br>
 			<div class="startBtn">Start game</div>
 			<div class="backBtn">Back</div>
 		</div>
 		<div id="base-view">
 			<div style="word-wrap: break-word;" class="gps">---</div><br>
-			<div class="fireBtn">Use current location</div>
+			<div class="startBtn">Use current location</div>
 			<div class="backBtn">Back</div>
 		</div>
 		<div id="map-view">
