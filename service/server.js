@@ -24,8 +24,28 @@ function _initializeRestifyServer (done) {
         version: '0.0.1',
     });
 
+    server.on('MethodNotAllowed', function (req, res) {
+        if (req.method.toLowerCase() === 'options') {
+            var allowHeaders = ['Accept', 'Accept-Version', 'Content-Type', 'If-Modified-Since', 'Request-Id', 'Origin', 'X-API-Version', 'X-Request-Id', 'MissileAppSessionId'];
+
+            if (res.methods.indexOf('OPTIONS') === -1) {
+                res.methods.push('OPTIONS');
+            }
+
+            // TODO we should check that the access-control-request-headers match our allowHeaders
+            res.header('Access-Control-Allow-Credentials', true);
+            res.header('Access-Control-Allow-Headers', allowHeaders.join(', '));
+            res.header('Access-Control-Allow-Methods', res.methods.join(', '));
+            res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+
+            return res.send(204);
+        }
+        else {
+            return res.send(new restify.MethodNotAllowedError());
+        }
+    });
+
     server.use(restify.CORS());
-    server.use(restify.fullResponse());
 
     server.use(restify.bodyParser());
     server.use(restify.queryParser());
@@ -33,6 +53,7 @@ function _initializeRestifyServer (done) {
     routes.installPublicRouteHandlers(server); // no authentication required
     server.use(sessions.requireValidSession(database.client));
     routes.installAuthenticatedRouteHandlers(server); // authentication required
+
 
 
     server.listen(ports.apiServer, function () {
