@@ -158,14 +158,15 @@ GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, powe
 		response.updated = new Date(response.updated);
 		return response;
 	});
+};
 
 /* Call to the webservice.
  * Returns a deferred to be resolved with the games array
  */
 GameMaster.prototype._getGamesFromService = function (fromWhen) {
 	var headers = {
-			"MissileAppSessionId": this._sessionid
-		};
+		"MissileAppSessionId": this._sessionid
+	};
 	if (fromWhen) {
 		headers["If-Modified-Since"] = fromWhen.toGMTString();
 	}
