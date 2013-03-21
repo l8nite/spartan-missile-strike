@@ -16,7 +16,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebSettings.RenderPriority;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.annotation.SuppressLint;

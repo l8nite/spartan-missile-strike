@@ -16,7 +16,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebSettings.RenderPriority;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.annotation.SuppressLint;
@@ -94,10 +93,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Smooth Transition
         webView.setScrollbarFadingEnabled(true);
-        webView.getSettings().setRenderPriority(RenderPriority.HIGH);
+//        webView.getSettings().setRenderPriority(RenderPriority.HIGH);
 //        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setSupportZoom(false);
-//        webView.getSettings().enableSmoothTransition(); // Deprecated but lets leave it for now
         
         // JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
@@ -211,18 +209,18 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             locationAlert.setTitle(R.string.location_prompt_title);
             locationAlert.setMessage(R.string.location_prompt_location_disabled_msg);
             locationAlert.setCancelable(false);
-            locationAlert.setView(locationCheckBoxView);
+//            locationAlert.setView(locationCheckBoxView);
             locationAlert.setPositiveButton(R.string.location_prompt_location_disabled_positive, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                    processGPSIgnoreCheckbox(checkBox.isChecked());
+//                    processGPSIgnoreCheckbox(checkBox.isChecked());
                     openLocationSettings();
                 }
             });
             locationAlert.setNegativeButton(R.string.location_prompt_location_disabled_negative, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                    processGPSIgnoreCheckbox(checkBox.isChecked());
+//                    processGPSIgnoreCheckbox(checkBox.isChecked());
                     exitMissileApp();
                 }
             });
@@ -274,7 +272,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         if(locationEnabled) {
             variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, variables.getLocationManagement());
         }
-        if(gpsLocationEnabled){
+        if(gpsLocationEnabled) {
             variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, variables.getLocationManagement());
         }
         
