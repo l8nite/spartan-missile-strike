@@ -249,13 +249,18 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             });
             locationAlert.show();
     	}
+    	else {
+    	    variables.setEnabled(true);
+    	}
     }
     
     private void processGPSIgnoreCheckbox(boolean GPSPromptIsChecked) {
-        // Save Prompt
-        SharedPreferences.Editor prefEditor = variables.getSettings().edit();
-        prefEditor.putBoolean(PREFERENCES_GPSPROMPT, !GPSPromptIsChecked);
-        prefEditor.commit();
+        if(GPSPromptIsChecked) {
+            // Save Prompt
+            SharedPreferences.Editor prefEditor = variables.getSettings().edit();
+            prefEditor.putBoolean(PREFERENCES_GPSPROMPT, !GPSPromptIsChecked);
+            prefEditor.commit();
+        }
     }
     
     private void finishLocationSettings() {
