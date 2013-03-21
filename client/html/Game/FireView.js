@@ -42,10 +42,10 @@ FireView.prototype.show = function (game) {
 	this.Imports.ViewManager.loadView(this);
 };
 
-FireView.prototype._updateWithNewLocation = function (location) {
-	this._location = location;
+FireView.prototype._updateWithNewLocation = function (loc) {
+	this._location = loc;
 
-	$("#" + this.Imports.domId["FireView"] + " .gps").text(JSON.stringify(location));
+	$("#" + this.Imports.domId["FireView"] + " .gps").text(JSON.stringify(loc));
 };
 
 FireView.prototype._updateWithNewOrientation = function (orientation) {
