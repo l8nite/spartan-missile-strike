@@ -5,6 +5,14 @@
 function FireView(Imports) {
 	var that = this;
 	this.Imports = Imports;
+	this._location = {
+		latitude: 0,
+		longitude: 0
+	};
+	this._orientation = {
+		azimuth: 0,
+		altitude: 0
+	};
 	$("#" + Imports.domId["FireView"] + " .backBtn").click(function () {
 		Imports.ViewManager.previousView();
 	});
