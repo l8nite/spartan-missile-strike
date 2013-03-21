@@ -58,7 +58,13 @@ describe('select-base', function () {
             var base = { latitude: 0, longitude: 0 };
             client2.put(path, base, function (err, req, res, obj) {
                 should.not.exist(err);
-                res.statusCode.should.equal(200);
+                res.statusCode.should.equal(201);
+                var properties = ['id', 'status', 'created', 'creator', 'opponent', 'current'];
+
+                properties.forEach(function (p) {
+                    obj.should.have.property(p);
+                });
+
                 done();
             });
         });
