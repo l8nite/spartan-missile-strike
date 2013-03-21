@@ -9,10 +9,10 @@ function MainMenu(Imports) {
 	View.call(this, Imports.domId["MainMenu"]);
 
 	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").click(function () {
-		if (!that.opponentsView) {
-			that.opponentsView = new OpponentsView(Imports);
+		if (!Imports.Views["OpponentsView"]) {
+			Imports.Views["OpponentsView"] = new OpponentsView(Imports);
 		}
-		that.opponentsView.show();
+		Imports.Views["OpponentsView"].show();
 	});
 }
 
@@ -70,8 +70,8 @@ MainMenu.prototype._render = function (games) {
 };
 
 MainMenu.prototype._showGame = function (game) {
-	if (!this._mapView) {
-		this._mapView = new MapView(this.Imports);
+	if (!this.Imports.Views["MapView"]) {
+		this.Imports.Views["MapView"] = new MapView(this.Imports);
 	}
-	this._mapView.show(game);
+	this.Imports.Views["MapView"].show(game);
 };
