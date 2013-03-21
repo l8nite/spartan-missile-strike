@@ -339,7 +339,7 @@ function _updateGameWithSelectedBase (request, game, next) {
             return next(new restify.InternalError());
         }
 
-        return next(null);
+        return next(null, 201, game);
     });
 
 }
