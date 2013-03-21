@@ -61,14 +61,13 @@
 		// DEBUG
 		// BEGIN DELETE THIS!
 		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
-			fn("AAACEdEose0cBAJ1CT1RVklgzIQxyG1W8jZAFUyCbpxkUi6CZBe6J3M3oZBVMsNDuNomhSSM9SRdfWZCUMG86grHlQVelhZBDmLjK5jRRWemjzVdPuaRpZA");
+			fn("AAABvzfRP6w0BANkVwSFsAtkx1Aa3MvtOUD3JUxB0zFqcQqWZBaE2rr4PN6ll68ZBnZAdtQDX2gSqfMP2htd5H9O95KdEEvZAykP3XTz6qAZDZD");
 		};
 		// END DELETE THIS!
 
 		// First thing we need is a FB token, we use that to get our userid 
-		// Imports.NativeBridge.getFacebookAccessToken(function (token) {
+		Imports.NativeBridge.getFacebookAccessToken(function (token) {
 			// Now get our userid
-			var token = "AAABvzfRP6w0BANkVwSFsAtkx1Aa3MvtOUD3JUxB0zFqcQqWZBaE2rr4PN6ll68ZBnZAdtQDX2gSqfMP2htd5H9O95KdEEvZAykP3XTz6qAZDZD";
 			$.ajax(Imports.serviceurl + "/sessions", {
 				type: "POST",
 				dataType: "json",
@@ -84,7 +83,7 @@
 				Imports.GameMaster = new GameMaster(userid, sessionid, Imports);
 				new MainMenu(Imports).show();
 			});
-		// });
+		});
 	};
 	</script>
 </head>
