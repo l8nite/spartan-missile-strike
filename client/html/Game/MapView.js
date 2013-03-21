@@ -4,15 +4,16 @@
  */
 function MapView(Imports) {
 	var that = this;
-	FixedHeightView.call(this, Imports.domId["MapView"], Imports);
+	this.Imports = Imports;
+	FixedHeightView.call(this, Imports.domId["MapView"]);
 	$("#" + Imports.domId["MapView"] + " .backBtn").click(function () {
 		Imports.ViewManager.previousView();
 	});
 	$("#" + Imports.domId["MapView"] + " .fireBtn").click(function () {
-		if (!that._fireView) {
-			that._fireView = new FireView(Imports);
+		if (!Imports.Views["FireView"]) {
+			Imports.Views["FireView"] = new FireView(Imports);
 		}
-		that._fireView.show(that._game);
+		Imports.Views["FireView"].show(that._game);
 	});
 	// TODO Wire static button events
 }
@@ -20,21 +21,21 @@ function MapView(Imports) {
 MapView.prototype = Object.create(FixedHeightView.prototype);
 
 MapView.prototype.onView = function () {
-	this.GameMasterTicket = this.Imports.GameMaster.subscribe(this._updateWithNewGames.bind(this));
-	this.NBLocationTicket = this.Imports.NativeBridge.getLocationUpdates(true, this._updateWithNewLocation.bind(this));
+	this.GameMasterTicket = this.Imports.GameMaster.subscribeGames(this._updateWithNewGames.bind(this));
+	this.NBLocationTicket = this.Imports.NativeBridge.startLocationUpdates(this._updateWithNewLocation.bind(this));
 	FixedHeightView.prototype.onView.call(this);
 };
 
 MapView.prototype.offView = function () {
-	this.Imports.GameMaster.unsubscribe(this.GameMasterTicket);
-	this.Imports.NativeBridge.getLocationUpdates(false, this.NBLocationTicket);
+	this.Imports.GameMaster.unsubscribeGames(this.GameMasterTicket);
+	this.Imports.NativeBridge.stopLocationUpdates(this.NBLocationTicket);
 	FixedHeightView.prototype.offView.call(this);
 };
 
 MapView.prototype.show = function (game) {
 	this._game = game;
 	this._updateGame();
-	this.Imports.ViewManager.loadView(this);
+	this.Imports.ViewManager.loadView(this, this.Imports.Views["MainMenu"]);
 };
 
 MapView.prototype._updateWithNewGames = function (games) {
@@ -55,8 +56,8 @@ MapView.prototype._updateGame = function () {
 	}
 };
 
-MapView.prototype._updateWithNewLocation = function (location) {
-	this._location = location;
+MapView.prototype._updateWithNewLocation = function (loc) {
+	this._location = loc;
 	this._updateLocation();
 };
 
