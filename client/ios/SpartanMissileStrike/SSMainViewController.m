@@ -115,7 +115,7 @@
 
                 [locationDictionary setObject:latitude forKey:@"latitude"];
                 [locationDictionary setObject:longitude forKey:@"longitude"];
-                
+
                 [nativeBridge callbackWithDictionary:locationDictionary forFunction:function withArguments:arguments];
             }];
         }
@@ -130,11 +130,10 @@
                 NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
                 NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
                 NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
-                
-                [orientationDictionary setObject:pitch forKey:@"pitch"];
-                [orientationDictionary setObject:yaw forKey:@"yaw"];
-                [orientationDictionary setObject:roll forKey:@"roll"];
-                
+
+                [orientationDictionary setObject:yaw forKey:@"azimuth"];
+                [orientationDictionary setObject:pitch forKey:@"altitude"];
+
                 [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
             }];
         }
@@ -170,7 +169,7 @@
     else if ([function isEqualIgnoringCase:@"playSound"]) {
         NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
         NSInteger loop = (NSInteger)[arguments objectForKey:@"loop"];
-        
+
         [audioManager playSound:soundIdentifier loopCount:(loop ? -1 : 0)];
     }
     else if ([function isEqualIgnoringCase:@"stopSound"]) {
