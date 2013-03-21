@@ -141,8 +141,8 @@ GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, powe
 	var shot = {
 		latitude: loc.latitude,
 		longitude: loc.longitude,
-		angle: orientation.pitch * 180 / Math.PI,
-		heading: orientation.yaw * 180 / Math.PI,
+		angle: orientation.altitude * 180 / Math.PI,
+		heading: orientation.azimuth * 180 / Math.PI,
 		power: power
 	};
 	return $.ajax(this.Imports.serviceurl + "/games/" + encodeURIComponent(gameid) + "/fire-missile", {
