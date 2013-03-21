@@ -58,6 +58,10 @@
 			serviceurl: "https://api.missileapp.com:8443"
 		};
 
+		window.NativeBridge = {
+			callback = Imports.NativeBridge.callback.bind(Imports.NativeBridge);
+		};
+
 		// DEBUG
 		// BEGIN DELETE THIS!
 		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
@@ -90,6 +94,7 @@
 <body>
 	<div style="display:none;">
 		<div id="main-menu">
+			<div class="newGameBtn">New Game</div>
 			<div id="list-yourturn"><h1>Your Turn</h1></div>
 			<div id="list-histurn"><h1>Not Your Turn</h1></div>
 			<div id="list-complete"><h1>Nobody's Turn</h1></div>
@@ -99,17 +104,27 @@
 				</div>
 			</div>
 		</div>
+		<div id="opponents-view">
+			<div><input type="text" id="opponent-input"></div>
+			<div class="startBtn">Start game</div>
+			<div class="backBtn">Back</div>
+		</div>
+		<div id="base-view">
+			<div style="word-wrap: break-word;" class="gps">---</div><br>
+			<div class="fireBtn">Use current location</div>
+			<div class="backBtn">Back</div>
+		</div>
 		<div id="map-view">
 			<div style="word-wrap: break-word; max-height: 50%;" class="game">---</div><br>
 			<div style="word-wrap: break-word;" class="gps">---</div><br>
-			<div class="backBtn">Back</div>
 			<div class="fireBtn">Fire</div>
+			<div class="backBtn">Back</div>
 		</div>
 		<div id="fire-view">
 			<div style="word-wrap: break-word;" class="gps">---</div><br>
 			<div style="word-wrap: break-word;" class="orientation">---</div><br>
-			<div class="backBtn">Back</div>
 			<div class="fireBtn">Fire!</div>
+			<div class="backBtn">Back</div>
 		</div>
 	</div>
 </body>
