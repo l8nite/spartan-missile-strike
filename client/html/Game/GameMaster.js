@@ -16,7 +16,7 @@ function GameMaster(userid, sessionid, Imports) {
 	this.Imports = Imports;
 	this.userid = userid;
 	this._sessionid = sessionid;
-	this._listeners = new Fridge();
+	this._gamesListeners = new Fridge();
 	this._locationListeners = new Fridge();
 	this._cachedNames = [];
 	this._location = {};
@@ -25,27 +25,6 @@ function GameMaster(userid, sessionid, Imports) {
 		games: []
 	};
 }
-
-/* Returns a $.Deferred which will be resolved with a fresh games data structure.
- * The deferred will reject if a problem was encountered getting fresh games.
- * If no problems were encountered, getGames records the fresh games data structure and when it was received
- * (used to determine when fresh games go stale and need to be fetched again), then calls listeners with the
- * fresh games array.
- */
-GameMaster.prototype.getGames = function () {
-	var that = this;
-	var updated;
-	if (this._games.games[0]) {
-		updated = this._games.games[0].updated;
-	}
-	return this._getGamesFromService(updated).done(function (response) {
-		if (response && response.length > 0) {
-			that._mixGames(response);
-			that._notifyListeners(response);
-		}
-		that._games.when = new Date();
-	});
-};
 
 /* Returns a $.Deferred which will be resolved with a the name belonging to the requested userid.
  * For speed, a names are cached to later retrieval!
@@ -66,77 +45,179 @@ GameMaster.prototype.getName = function (userid) {
 	return d;
 };
 
-/* Subscribe a listener function.
+/* Add a new game
+ * Returns a $.Deferred
+ */
+GameMaster.prototype.newGame = function (opponent, loc) {
+	var that = this;
+	return this._newGameOnService(opponent, loc).done(function (response) {
+		that._mixGames([response]);
+		that._notifyGamesListeners(response);
+	});
+};
+
+/* Accept a game invitation with a base selection
+ * Returns a $.Deferred
+ */
+GameMaster.prototype.acceptInvitation = function (gameid, loc) {
+	var that = this;
+	return this._selectBaseOnService(gameid, loc).done(function (response) {
+		that._mixGames([response]);
+		that._notifyGamesListeners(response);
+	});
+};
+
+/* Subscribe a listener function to game updates.
  * Returns a callback ID with which you can unsubscribe the specified listener.
  * On subscribe, listener is immediately called with current games array.
  * If GameMaster is currently not polling the webservice, it starts polling.
  */
-GameMaster.prototype.subscribe = function (when) {
+GameMaster.prototype.subscribeGames = function (when) {
 	var that = this;
 	setTimeout(function () {
 		when(that._games.games);
 	}, 0);
 	this._startPollingService();
-	return this._listeners.add(when);
+	return this._gamesListeners.add(when);
 };
 
-/* Unsubscribe a listener function.
+/* Unsubscribe a listener listening for games.
  */
-GameMaster.prototype.unsubscribe = function (ticket) {
-	this._listeners.remove(ticket);
-	if (this._listeners.count() === 0) {
+GameMaster.prototype.unsubscribeGames = function (ticket) {
+	this._gamesListeners.remove(ticket);
+	if (this._gamesListeners.count() === 0) {
 		this._stopPollingService();
 	}
 };
 
+/* Subscribe a listener function to location updates.
+ * Returns a callback ID (ticket) which is used to unsubscribe the listener at
+ * a later time.
+ * On subscribe, the listener is immediately called with the location data stored
+ * in memory. If this is the first listener, the NB is called to receive location updates.
+ */
 GameMaster.prototype.subscribeLocation = function (when) {
 	var that = this;
 	setTimeout(function () {
 		when(that._location);
 	}, 0);
 	if (!this._locationUpdatesTicket) {
-		this._locationUpdatesTicket = this.Imports.NativeBridge.getLocationUpdates(true, function (location) {
-			that._location = location;
+		this._locationUpdatesTicket = this.Imports.NativeBridge.startLocationUpdates(function (loc) {
+			that._location = loc;
 			that._notifyLocationListeners();
 		});
 	}
 };
 
+/* Unsubscribe a location listener with the specified ticket.
+ * If no more listeners are present, stop location updates.
+ */
 GameMaster.prototype.unsubscribeLocation = function (ticket) {
 	this._locationListeners.remove(ticket);
 	if (this._locationListeners.count() === 0) {
-		this.Imports.NativeBridge.getLocationUpdates(false, this._locationUpdatesTicket);
+		this.Imports.NativeBridge.stopLocationUpdates(this._locationUpdatesTicket);
 	}
 };
 
-GameMaster.prototype.doFire = function (game, location, orientation, power) {
+/* Fire a missile with a specified location, orientation, and power.
+ * The call to the service returns the updated game post-shot; this method takes that update
+ * and updates the locally maintained games list, notifying listeners of changes.
+ * Returns a $.Deferred resolved with the updated game.
+ */
+GameMaster.prototype.doFire = function (game, loc, orientation, power) {
 	var that = this;
 	var gameid = game;
 	if (typeof gameid === "object") {
 		gameid = gameid.id;
 	}
-	this._doFireOnService(gameid, location, orientation, power).done(function (response) {
-		that._mixGames(response);
-		that._notifyListeners(response);
+	return this._doFireOnService(gameid, loc, orientation, power).done(function (response) {
+		that._mixGames([response]);
+		that._notifyGamesListeners(response);
 	});
 };
 
-GameMaster.prototype._doFireOnService = function (gameid, location, orientation, power) {
+/* Returns a $.Deferred which will be resolved with a fresh games data structure.
+ * The deferred will reject if a problem was encountered getting fresh games.
+ * If no problems were encountered, _getGames records the fresh games data structure and when it was received
+ * (used to determine when fresh games go stale and need to be fetched again), then calls listeners with the
+ * fresh games array.
+ */
+GameMaster.prototype._getGames = function () {
+	var that = this;
+	var updated;
+	if (this._games.games[0]) {
+		updated = this._games.games[0].updated;
+	}
+	return this._getGamesFromService(updated).done(function (response) {
+		if (response && response.length > 0) {
+			that._mixGames(response);
+			that._notifyGamesListeners(response);
+		}
+		that._games.when = new Date();
+	});
+};
+
+/* Returns a $.Deferred resolved with the webservice's response to the shot
+ */
+GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, power) {
 	var shot = {
-		latitude: location.latitude,
-		longitude: location.longitude,
-		angle: orientation.pitch * 180 / Math.PI,
-		heading: orientation.yaw * 180 / Math.PI,
+		latitude: loc.latitude,
+		longitude: loc.longitude,
+		angle: orientation.altitude * 180 / Math.PI,
+		heading: orientation.azimuth * 180 / Math.PI,
 		power: power
 	};
-	return $.ajax({
-		url: this.Imports.serviceurl + "/games/" + gameid + "/fire-missile",
+	return $.ajax(this.Imports.serviceurl + "/games/" + encodeURIComponent(gameid) + "/fire-missile", {
 		type: "PUT",
+		contentType: "application/json",
 		headers: {
 			"MissileAppSessionId": this._sessionid
 		},
 		dataType: "json",
 		data: JSON.stringify(shot)
+	}).pipe(function (response) {
+		response.created = new Date(response.created);
+		response.updated = new Date(response.updated);
+		return response;
+	});
+};
+
+GameMaster.prototype._newGameOnService = function (opponent, loc) {
+	return $.ajax(this.Imports.serviceurl + "/games", {
+		type: "POST",
+		contentType: "application/json",
+		headers: {
+			"MissileAppSessionId": this._sessionid
+		},
+		dataType: "json",
+		data: JSON.stringify({
+			opponent: opponent,
+			latitude: loc.latitude,
+			longitude: loc.longitude
+		})
+	}).pipe(function (response) {
+		response.created = new Date(response.created);
+		response.updated = new Date(response.updated);
+		return response;
+	});
+};
+
+GameMaster.prototype._selectBaseOnService = function (gameid, loc) {
+	return $.ajax(this.Imports.serviceurl + "/games/" + encodeURIComponent(gameid) + "/select-base", {
+		type: "PUT",
+		contentType: "application/json",
+		headers: {
+			"MissileAppSessionId": this._sessionid
+		},
+		dataType: "json",
+		data: JSON.stringify({
+			latitude: loc.latitude,
+			longitude: loc.longitude
+		})
+	}).pipe(function (response) {
+		response.created = new Date(response.created);
+		response.updated = new Date(response.updated);
+		return response;
 	});
 };
 
@@ -148,12 +229,23 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
 		"MissileAppSessionId": this._sessionid
 	};
 	if (fromWhen) {
-		headers["If-Modified-Since"] = fromWhen.toGMTString();
+		headers["If-Modified-Since"] = fromWhen.toISOString();
 	}
-	return $.ajax({
-		url: this.Imports.serviceurl + "/users/" + this.userid + "/games",
+	return $.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(this.userid) + "/games", {
 		headers: headers,
 		dataType: "json"
+	}).pipe(function (response) {
+		var games;
+		if (response !== undefined) {
+			games = response.games;
+		} else {
+			games = [];
+		}
+		games.forEach(function (e, i, a) {
+			e.created = new Date(e.created);
+			e.updated = new Date(e.updated);
+		});
+		return games;
 	});
 };
 
@@ -163,8 +255,7 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
  */
 GameMaster.prototype._getNameFromService = function (userid) {
 	var d = new $.Deferred();
-	$.ajax({
-		url: this.Imports.serviceurl + "/users/" + userid,
+	$.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(userid), {
 		headers: {
 			"MissileAppSessionId": this._sessionid
 		},
@@ -173,8 +264,7 @@ GameMaster.prototype._getNameFromService = function (userid) {
 		name = {
 			username: MAResponse.username
 		};
-		$.ajax({
-			url: "http://graph.facebook.com/" + response.facebook_id,
+		$.ajax("http://graph.facebook.com/" + encodeURIComponent(response.facebook_id), {
 			dataType: "json"
 		}).done(function (fbResponse) {
 			name.realname = fbResponse.name;
@@ -187,13 +277,13 @@ GameMaster.prototype._getNameFromService = function (userid) {
 	return d;
 };
 
-/* If not already polling, start polling!
+/* If not already polling for games, start polling!
  */
 GameMaster.prototype._startPollingService = function () {
 	if (!this._poll) {
 		var that = this;
 		function poll() {
-			that.getGames().always(function () {
+			that._getGames().always(function () {
 				if (that._poll) {
 					that._poll = setTimeout(poll, that._STALE);
 				}
@@ -203,7 +293,7 @@ GameMaster.prototype._startPollingService = function () {
 	}
 };
 
-/* Stop polling
+/* Stop polling for games
  */
 GameMaster.prototype._stopPollingService = function () {
 	if (this._poll) {
@@ -212,22 +302,26 @@ GameMaster.prototype._stopPollingService = function () {
 	}
 };
 
-/* Call all listeners with current games array
+/* Call all games listeners with current games array
  */
-GameMaster.prototype._notifyListeners = function (games) {
-	var a = this._listeners.getAll();
+GameMaster.prototype._notifyGamesListeners = function (games) {
+	var a = this._gamesListeners.getAll();
 	for (var i in a) {
 		a[i](games);
 	}
 };
 
-GameMaster.prototype._notifyLocationListeners = function (location) {
+/* Call all location listeners with updated location
+ */
+GameMaster.prototype._notifyLocationListeners = function (loc) {
 	var a = this._locationListeners.getAll();
 	for (var i in a) {
-		a[i](location);
+		a[i](loc);
 	}
 };
 
+/* Takes an array of games and mixes the replaces outdated games currently in the games array
+ */
 GameMaster.prototype._mixGames = function (games) {
 	var newGames = [];
 	for (var i in games) {
