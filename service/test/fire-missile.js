@@ -74,7 +74,7 @@ describe('fire-missile', function () {
             var path = '/games/' + encodeURIComponent(game12.id) + '/select-base';
             var base = { latitude: PORTLAND.latitude, longitude: PORTLAND.longitude };
             client2.put(path, base, function (err, req, res, obj) {
-                res.statusCode.should.equal(200);
+                res.statusCode.should.equal(201);
                 done();
             });
         });
@@ -83,7 +83,7 @@ describe('fire-missile', function () {
             var path = '/games/' + encodeURIComponent(game23.id) + '/select-base';
             var base = { latitude: NEW_YORK.latitude, longitude: NEW_YORK.longitude };
             client3.put(path, base, function (err, req, res, obj) {
-                res.statusCode.should.equal(200);
+                res.statusCode.should.equal(201);
                 done();
             });
         });
