@@ -46,7 +46,7 @@ function listGames (request, msUser, done) {
         rangeMin = (new Date(request.headers['if-modified-since'])).getTime();
     }
 
-    redis.client.zrangebyscore('games:' + msUser.id, rangeMin, rangeMax, function (err, gameIdentifiers) {
+    redis.client.zrevrangebyscore('games:' + msUser.id, rangeMin, rangeMax, function (err, gameIdentifiers) {
         if (err) {
             return done(new restify.InternalError());
         }
@@ -111,7 +111,7 @@ function _getRecentParticipatedGames (msUser, userIdsFromFacebook, next) {
     var rangeMin = (new Date(now.getTime() + RECENT_GAMES_DELTA_MS)).getTime(),
         rangeMax = '+inf';
 
-    redis.client.zrangebyscore('games:' + msUser.id, rangeMin, rangeMax, function (err, gameIdentifiers) {
+    redis.client.zrevrangebyscore('games:' + msUser.id, rangeMin, rangeMax, function (err, gameIdentifiers) {
         if (err) {
             return next(new restify.InternalError());
         }
