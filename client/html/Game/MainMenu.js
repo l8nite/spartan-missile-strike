@@ -71,8 +71,15 @@ MainMenu.prototype._render = function (games) {
 };
 
 MainMenu.prototype._showGame = function (game) {
-	if (!this.Imports.Views["MapView"]) {
-		this.Imports.Views["MapView"] = new MapView(this.Imports);
+	if (!game[this.Imports.GameMaster.userid].base) {
+		if (!this.Imports.Views["BaseView"]) {
+			this.Imports.Views["BaseView"] = new BaseView(this.Imports);
+		}
+		this.Imports.Views["BaseView"].show(game);
+	} else {
+		if (!this.Imports.Views["MapView"]) {
+			this.Imports.Views["MapView"] = new MapView(this.Imports);
+		}
+		this.Imports.Views["MapView"].show(game);
 	}
-	this.Imports.Views["MapView"].show(game);
 };
