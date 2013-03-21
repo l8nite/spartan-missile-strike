@@ -79,6 +79,7 @@
 				// Now we make the GM and start the game!
 				Imports.GameMaster = new GameMaster(userid, sessionid, Imports);
 				new MainMenu(Imports).show();
+				Imports.NativeBridge.hideSplash();
 			});
 		});
 	};
