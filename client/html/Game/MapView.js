@@ -56,8 +56,8 @@ MapView.prototype._updateGame = function () {
 	}
 };
 
-MapView.prototype._updateWithNewLocation = function (location) {
-	this._location = location;
+MapView.prototype._updateWithNewLocation = function (loc) {
+	this._location = loc;
 	this._updateLocation();
 };
 
