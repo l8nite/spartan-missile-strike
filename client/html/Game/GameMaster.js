@@ -145,8 +145,7 @@ GameMaster.prototype._doFireOnService = function (gameid, location, orientation,
 		heading: orientation.yaw * 180 / Math.PI,
 		power: power
 	};
-	return $.ajax({
-		url: this.Imports.serviceurl + "/games/" + gameid + "/fire-missile",
+	return $.ajax(this.Imports.serviceurl + "/games/" + encodeURIComponent(gameid) + "/fire-missile", {
 		type: "PUT",
 		headers: {
 			"MissileAppSessionId": this._sessionid
@@ -160,15 +159,14 @@ GameMaster.prototype._doFireOnService = function (gameid, location, orientation,
  * Returns a deferred to be resolved with the games array
  */
 GameMaster.prototype._getGamesFromService = function (fromWhen) {
-	var headers = {
-		"MissileAppSessionId": this._sessionid
-	};
 	if (fromWhen) {
 		headers["If-Modified-Since"] = fromWhen.toGMTString();
 	}
-	return $.ajax({
-		url: this.Imports.serviceurl + "/users/" + this.userid + "/games",
-		headers: headers,
+	return $.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(this.userid) + "/games", {
+		headers: {
+			"MissileAppSessionId": this._sessionid
+		},
+		contentType: "application/json",
 		dataType: "json"
 	});
 };
@@ -179,8 +177,7 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
  */
 GameMaster.prototype._getNameFromService = function (userid) {
 	var d = new $.Deferred();
-	$.ajax({
-		url: this.Imports.serviceurl + "/users/" + userid,
+	$.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(userid), {
 		headers: {
 			"MissileAppSessionId": this._sessionid
 		},
@@ -189,8 +186,7 @@ GameMaster.prototype._getNameFromService = function (userid) {
 		name = {
 			username: MAResponse.username
 		};
-		$.ajax({
-			url: "http://graph.facebook.com/" + response.facebook_id,
+		$.ajax("http://graph.facebook.com/" + encodeURIComponent(response.facebook_id), {
 			dataType: "json"
 		}).done(function (fbResponse) {
 			name.realname = fbResponse.name;
