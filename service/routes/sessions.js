@@ -1,7 +1,7 @@
 var async = require('async'),
     uuid = require('node-uuid'),
     redis = require('../lib/database.js'),
-    util = require('../lib/util.js'),
+    routeutil = require('../lib/routeutil.js'),
     restify = require('restify'),
     fbgraph = require('fbgraph');
 
@@ -17,7 +17,7 @@ function createSession (request, response, done) {
         _checkForExistingSession,
         _createOrUpdateSession,
         _formatCreateSessionResponse,
-    ], util.routeResponder(response, done));
+    ], routeutil.routeResponder(response, done));
 }
 
 function _getFacebookAccessTokenFromRequest (request, next) {
@@ -156,7 +156,7 @@ function deleteSession (request, response, done) {
     async.waterfall([
         function (next) { next(null, request); }, // enables arguments to first callback
         _deleteSessionFromDatabase,
-    ], util.routeResponder(response, done));
+    ], routeutil.routeResponder(response, done));
 }
 
 function _deleteSessionFromDatabase(request, next) {
