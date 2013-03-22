@@ -164,6 +164,7 @@ describe('fire-missile', function () {
             var path = '/games/' + encodeURIComponent(game12.id) + '/fire-missile';
             var shot = { latitude: C1BASE.latitude, longitude: C1BASE.longitude, angle: 45, heading: 355, power: 5 };
             client1.put(path, shot, function (err, req, res, obj) {
+                err.name.should.equal('InvalidGameStateError');
                 res.statusCode.should.equal(409);
                 done();
             });
