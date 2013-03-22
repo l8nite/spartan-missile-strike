@@ -27,6 +27,7 @@ describe('authenticated route', function () {
             it('should return a 403', function (done) {
                 var test = function (err, req, res) {
                     res.statusCode.should.equal(403);
+                    err.name.should.equal('NotAuthorizedError');
                     done();
                 };
 
