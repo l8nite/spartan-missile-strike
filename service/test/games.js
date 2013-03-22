@@ -9,21 +9,33 @@ describe('/games', function () {
         client.login('Service General Unit Tests', done);
     });
 
-    describe('/games', function () {
-        var parameters = [
-            // missing parameters
+    describe('parameter validation', function () {
+        var missingParameters = [
             { opponent: undefined, latitude: 0, longitude: 0 },
             { opponent: "random", latitude: undefined, longitude: 0 },
             { opponent: "random", latitude: 0, longitude: undefined },
-            // invalid parameters
+        ];
+
+        var invalidParameters = [
             { opponent: "invalid", latitude: 0, longitude: 0 },
             { opponent: "random", latitude: -91, longitude: 0 },
             { opponent: "random", latitude: 0, longitude: -181 },
         ];
 
-        parameters.forEach(function (body) {
-            it('should return a 409 conflict', function (done) {
+        missingParameters.forEach(function (body) {
+            it('should return MissingParameterError', function (done) {
                 client.post('/games', body, function (err, req, res, obj) {
+                    err.name.should.equal('MissingParameterError');
+                    res.statusCode.should.equal(409);
+                    done();
+                });
+            });
+        });
+
+        invalidParameters.forEach(function (body) {
+            it('should return InvalidArgumentError', function (done) {
+                client.post('/games', body, function (err, req, res, obj) {
+                    err.name.should.equal('InvalidArgumentError');
                     res.statusCode.should.equal(409);
                     done();
                 });
@@ -68,6 +80,7 @@ describe('/games', function () {
 
         it('should not allow a new game against yourself', function (done) {
             client.post('/games', { opponent: client.user.id, latitude: 0, longitude: 0 }, function (err, req, res, obj) {
+                err.name.should.equal('InvalidArgumentError');
                 res.statusCode.should.equal(409);
                 done();
             });
