@@ -1,6 +1,6 @@
 var restify = require('restify'),
     redis = require('../lib/database.js'),
-    util = require('../lib/util.js'),
+    routeutil = require('../lib/routeutil.js'),
     uuid = require('node-uuid'),
     async = require('async'),
     vincenty = require('node-vincenty'),
@@ -18,7 +18,7 @@ function createGame (request, response, done) {
         _determineOpponent,
         _createNewGame,
         _renderGameCreatedResponse,
-    ], util.routeResponder(response, done));
+    ], routeutil.routeResponder(response, done));
 }
 
 function isValidLatitude (latitude) {
@@ -159,7 +159,7 @@ function fireMissile (request, response, done) {
         _validateFireMissileConditions,
         _calculateMissileTrajectory,
         _updateGameWithShotFired,
-    ], util.routeResponder(response, done));
+    ], routeutil.routeResponder(response, done));
 }
 
 function _validateFireMissileParameters (request, next) {
@@ -291,7 +291,7 @@ function selectBase (request, response, done) {
         _loadGameAndEnsureItsOurTurn,
         _validateSelectBaseConditions,
         _updateGameWithSelectedBase,
-    ], util.routeResponder(response, done));
+    ], routeutil.routeResponder(response, done));
 }
 
 function _validateSelectBaseParameters (request, next) {
