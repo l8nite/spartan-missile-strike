@@ -24,7 +24,10 @@ function BaseView(Imports) {
 		} else {
 			// _game is a game
 			Imports.GameMaster.acceptInvitation(that._game.id, that._location).done(function (game) {
-				// TODO
+				if (!Imports.Views["MapView"]) {
+					Imports.Views["MapView"] = new MapView(Imports);
+				}
+				Imports.Views["MapView"].show(game);
 			});
 		}
 	});
