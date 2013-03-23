@@ -3,6 +3,7 @@ package com.missileapp.android.res;
 import com.missileapp.android.BagOfHolding;
 import com.missileapp.android.MALogger;
 
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.util.Log;
 import android.widget.Toast;
@@ -62,6 +63,9 @@ public class FireScreen {
             // Create and Save Variables, default to rear facing camera
             cam = Camera.open();
             if(cam != null) {
+                // Color Transparent
+                variables.getWebView().setBackgroundColor(Color.TRANSPARENT);
+                
                 // Set Orientation and display  
                 cam.setDisplayOrientation(CAMERA_ORIENTATION);
                 cam.setPreviewDisplay(variables.getSurfaceHolder());
@@ -92,6 +96,12 @@ public class FireScreen {
         try {
             // Stop Preview, unlock, and release
             if(cam != null) {
+                // Color Transparent
+                variables.getWebView().setBackgroundColor(Color.MAGENTA);
+                //TODO REMOVE, update main.xml layout file
+                //variables.getWebView().setBackgroundColor(Color.BLACK);
+                
+                // Process stop request
             	variables.getSurfaceHolder().setKeepScreenOn(false);
                 cam.stopPreview();
                 cam.unlock();

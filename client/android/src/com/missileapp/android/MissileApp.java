@@ -16,6 +16,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebSettings.RenderPriority;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.annotation.SuppressLint;
@@ -25,7 +26,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.hardware.SensorManager;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -93,16 +93,12 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Smooth Transition
         webView.setScrollbarFadingEnabled(true);
-//        webView.getSettings().setRenderPriority(RenderPriority.HIGH);
-//        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webView.getSettings().setRenderPriority(RenderPriority.HIGH);
         webView.getSettings().setSupportZoom(false);
         
         // JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
-        
-        // Color Transparent
-        webView.setBackgroundColor(Color.TRANSPARENT);
         
         // Load WebView
         webView.loadUrl(DROIDWB_FILENAME);
