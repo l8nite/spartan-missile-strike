@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.hardware.SensorManager;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -99,6 +100,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
+        
+        //TODO REMOVE
+        webView.setBackgroundColor(Color.MAGENTA);
         
         // Load WebView
         webView.loadUrl(DROIDWB_FILENAME);
