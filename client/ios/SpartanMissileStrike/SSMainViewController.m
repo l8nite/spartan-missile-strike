@@ -42,13 +42,11 @@
     locationManager = [[SSLocationManager alloc] init];
     orientationManager = [[SSOrientationManager alloc] init];
     nativeBridge = [[SSNativeBridge alloc] initWithWebView:webView andDelegate:self];
-   
     [self _initWebView];
 
     NSURL *indexURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/MissileApp-iOS" ofType:@"html"] isDirectory:NO];
     NSURLRequest *initialLoadRequest = [NSURLRequest requestWithURL:indexURL];
-    [webView loadRequest:initialLoadRequest];
-    
+    [webView loadRequest:initialLoadRequest];    
 }
 
 -(void)_initWebView
