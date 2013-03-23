@@ -27,7 +27,6 @@
 @property (strong, nonatomic) SSOrientationManager *orientationManager;
 @property (strong, nonatomic) SSFiringViewController *firingViewController;
 
-
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 -(void)showSplashScreen;
