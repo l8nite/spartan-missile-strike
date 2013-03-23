@@ -61,6 +61,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         setContentView(R.layout.main);
         variables = (BagOfHolding) super.getApplication(); 
         variables.setMissileApp(this);
+
+        // Disable app
+        variables.setEnabled(false);
         
         // Store Android views:
         surfaceView = (SurfaceView) findViewById(R.id.camview);
@@ -114,9 +117,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
         
-        // Disable app
-        variables.setEnabled(false);
-        
         // Switch to audio controls rather than call
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         
@@ -127,7 +127,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.getFireScreen().processResumeRequest();
         
         // Notify Native Bridge to Wake
-        variables.getDroidBridge().callJSforWake();
+        variables.getDroidBridge().wakeNativeBridge();
     }
     
     

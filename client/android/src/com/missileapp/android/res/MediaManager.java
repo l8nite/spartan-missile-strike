@@ -90,7 +90,6 @@ public class MediaManager {
 		{	return -1;	}
     }
     
-    
     /**
      * Returns the sound pool id given the native bridge id
      * @param nativeBridgeID the NativeBridgeID to retrieve
@@ -99,7 +98,6 @@ public class MediaManager {
     public int getSoundPoolMappingFromRawID(String nativeBridgeID) {
 		return getSoundPoolMappingFromRawID(translateSoundIDToRawPointer(nativeBridgeID));
 	}
-    
     
     /**
      * Returns the sound pool id given the raw uri to the file
@@ -110,8 +108,6 @@ public class MediaManager {
     	return soundMap.get(rawID);
     }
     
-    
-    
     /**
      * Play a sound with the provided options
      * @param options - the audio options:
@@ -119,7 +115,8 @@ public class MediaManager {
      *            foreground - true if fore, else background
      *            loop - ture to loop the audio
      */
-    public void playSound(String options) {
+    public void playSound(String soundID, String options) {
+        //TODO REWRITE
     	float volume;
 		int priority;
 		int loopTimes;
@@ -129,7 +126,7 @@ public class MediaManager {
         	
         	// Parse options
 			JSONObject playSound =  new JSONObject(options);
-			int soundPoolID = getSoundPoolMappingFromRawID(playSound.getString("soundID"));
+			int soundPoolID = getSoundPoolMappingFromRawID(soundID);
 			boolean foreground = playSound.getBoolean("foreground");
 			boolean loop = playSound.getBoolean("loop");
 			
@@ -154,7 +151,6 @@ public class MediaManager {
         	MALogger.log(TAG, Log.ERROR, "Could not play audio options" , e);
 		}
     }
-    
     
     /**
      * If app is sent to pause/stop request
@@ -189,10 +185,9 @@ public class MediaManager {
     public void stopSound(String soundID) {
     	try {
         	MALogger.log(TAG, Log.INFO, "Stop Sound");
-        	
-			int soundPoolID = getSoundPoolMappingFromRawID(soundID);
 			
-			// Play sound with options
+			// stop sound
+        	int soundPoolID = getSoundPoolMappingFromRawID(soundID);
 			soundPool.stop(soundPoolID);
 		}
         catch (Exception e) {

@@ -2,7 +2,6 @@ package com.missileapp.android;
 
 import org.json.JSONException;
 
-import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.Misc;
 
 import android.content.Context;
@@ -12,9 +11,9 @@ import android.webkit.WebView;
 public class AndroidBridge {
     // Data
     private static final String TAG = "AndroidBridge";                     // TAG for logging
-    private static final String CallJSPrefix = "javascript:"; 
-    private static final String NBCallBack_prefix = "NativeBridge.callback(";
-    private static final String NBCallBack_postfix = ");";
+    private static final String CALL_NB_PREFIX = "javascript:NativeBridge."; 
+    private static final String CALLBACK_PREFIX = "callback(";
+    private static final String CALLBACK_POSTFIX = ")";
     
     // Variables
     private BagOfHolding variables;           // Bag Of Holding for Variables
@@ -30,27 +29,27 @@ public class AndroidBridge {
     }
     
     /**
-     * Allows logging to Native Bridge
-     * @param data - data to Log
+     * Calls the native bridge call back function
+     * @param url - javascript to run
      */
-    public void log(String data) {
-        MALogger.log("NativeBridge", Log.INFO, data);
+    public void callNativeBridge(String url) {
+        variables.getWebView().loadUrl(CALL_NB_PREFIX +  url);
     }
     
     /**
      * Notify Native Bridge to Wake
      */
-    public void callJSforWake() {
-    	final String url = "NativeBridge.wake();";
-    	this.callJS(url);
+    public void wakeNativeBridge() {
+    	final String url = "wake()";
+    	this.callNativeBridge(url);
     }
     
     /**
      * Asks native if in main menu
      */
-    public void callJSforMainMenuView() {
-    	final String url = "NativeBridge.onMainMenu();";
-    	this.callJS(url);
+    public void requestMainMenuViewStatus() {
+    	final String url = "onMainMenu()";
+    	this.callNativeBridge(url);
     }
     
     /**
@@ -58,79 +57,63 @@ public class AndroidBridge {
      * @param callbackident - callback identifier, see Native Bridge
      * @param callbackData - data to pass to the callback identifier
      */
-    public void callJSforCallBack(String callbackident, String callbackData) {
-        String url = NBCallBack_prefix + callbackident + "," + callbackData + NBCallBack_postfix;
-        this.callJS(url);
-    }
-    
-    /**
-     * Calls the JavaScript and executes the 
-     * @param url - javascript to run
-     */
-    public void callJS(String url) {
-        variables.getWebView().loadUrl(CallJSPrefix +  url);
+    public void notifyNativeBridgeCallback(String callbackident, String callbackData) {
+        String url = CALLBACK_PREFIX + callbackident + "," + callbackData + CALLBACK_POSTFIX;
+        this.callNativeBridge(url);
     }
     
     /**
      * If in Main Menu, process back else, call back function
-     * @param inMainMenu
+     * @param inMainMenu true if in main menu
      */
     public void onMainMenu(String inMainMenu) {
     	Misc.processBackButton(variables, inMainMenu);
     }
     
     /**
-     * Subscribe to location updates 
-     * @param activate - true to subscribe; else false
+     * Starts location updates to Native Bridge
+     * @param callbackID - callback identifier
      */
-    public void getLocationUpdates(String activate) {
-        this.getLocationUpdates(activate, null);
+    public void startLocationUpdates(String callbackID) {
+        variables.getLocationManagement().startLocationUpdates(callbackID);
     }
     
     /**
-     * Subscribe to location updates 
-     * @param activate - true to subscribe; else false
-     * @param callbackID - native bridge callback identifer
+     * Stops location updates to Native Bridge
      */
-    public void getLocationUpdates(String activate, String callbackID) {
-    	variables.getLocationManagement().getLocationUpdates(activate, callbackID);
+    public void stopLocationUpdates() {
+        variables.getLocationManagement().stopLocationUpdates();
     }
     
     /**
-     * Return's the user current location
-     * @param callbackIdentifier
+     * Starts orientation updates to Native Bridge
+     * @param callbackID callback identifier
      */
-    public void getCurrentLocation(String callbackIdentifier) {
-        variables.getLocationManagement().getCurrentLocation(callbackIdentifier);
+    public void startOrientationUpdates(String callbackID) {
+        variables.getGyro().startOrientationUpdates(callbackID);
     }
     
     /**
-     * Subscribe to location updates 
-     * @param activate - true to subscribe; else false
+     * Starts orientation updates to Native Bridge
+     * @param callbackID callback identifier
      */
-    public void getOrientationUpdates(String activate) {
-        this.getOrientationUpdates(activate, null);
+    public void stopOrientationUpdates() {
+        variables.getGyro().stopOrientationUpdates();
     }
     
     /**
-     * Subscribe to location updates 
-     * @param activate - true to subscribe; else false
-     * @param callbackID - native bridge callback identifer
+     * Starts up Firescreen
      */
-    public void getOrientationUpdates(String activate, String callbackID) {
-        variables.getGyro().getOrientationUpdates(activate, callbackID);
+    public void showFireMissileScreen() {
+        variables.getFireScreen().enterFireScreen();
     }
-    
     
     /**
-     * If in firescreen, cuts camera and sets the background white
-     * If not in firescreen, rolls camera and sets the background transparent
-     * @param showFireScreen - true to enter fire screen, false to exit
+     * Exits FireScreen
      */
-    public void showFireMissileScreen(String showFireScreen) {
-        variables.getFireScreen().showFireMissileScreen(showFireScreen);
+    public void hideFireMissileScreen() {
+        variables.getFireScreen().exitFireScreen();
     }
-    
     
     /**
      * Get a user preference
@@ -138,12 +121,11 @@ public class AndroidBridge {
      * @param callbackID - callback function to asscoiate with
      * @throws JSONException - thrown if there was an exception 
      */
-    public void getPreference(String preference, String callbackID) {
+    public void getPreferences(String preference, String callbackID) {
         try {
 			variables.getUserPrefs().getPreference(callbackID, preference);
 		} catch (JSONException e) {}
     }
-    
     
     /**
      * Set (a) user preference(s)
@@ -151,12 +133,11 @@ public class AndroidBridge {
      * @param callbackID - callback function to asscoiate with
      * @throws JSONException - throws {@link JSONException} if error
      */
-    public void setPreference(String preference, String callbackID) {
+    public void setPreferences(String preference, String callbackID) {
         try {
 			variables.getUserPrefs().setPreferences(callbackID, preference);
 		} catch (JSONException e) { }
     }
-    
     
     /**
      * Returns the Facebook Access Token
@@ -173,23 +154,22 @@ public class AndroidBridge {
     	//TODO: Implement
     }
     
-    
     /**
-     * Plays Sound Effect/Music
-     * @param options {@link MediaManager#playSound(String)}
+     * Plays Sound 
+     * @param soundID - sound id to play
+     * @param options - play options
      */
-    public void playSound(String options) {
-    	variables.getMediaManager().playSound(options);
+    public void playSound(String soundID, String options) {
+        //variables.getMediaManager().playSound(options);
     }
     
     /**
-     * Stops Sound Effect/Music
-     * @param soundID {@link MediaManager#stopSound(String)}
+     * Stops sound
+     * @param soundID - sound id to stop
      */
     public void stopSound(String soundID) {
-    	variables.getMediaManager().stopSound(soundID);
+        //variables.getMediaManager().playSound(options);
     }
-    
     
     /**
      * Hides Splash Screen when the webView has been fully loaded
@@ -204,6 +184,14 @@ public class AndroidBridge {
      * @param time - time to vibrate the device
      */
     public void vibrate(String time) {
-    	Misc.vibrate(variables.getVibrator(), time);
+    	Misc.vibrate(variables, time);
+    }
+    
+    /**
+     * Allows logging to Native Bridge
+     * @param data - data to Log
+     */
+    public void log(String data) {
+        MALogger.log("NativeBridge", Log.INFO, data);
     }
 }

@@ -13,11 +13,9 @@ import com.missileapp.android.BagOfHolding;
 import com.missileapp.android.MALogger;
 
 public class UserPreferences {
-    
     // Variables
     private static final String TAG = "UserPrefs";             // TAG for logging
     private BagOfHolding varibles;                             // Bag Of Holding for Variables
-    
     
     /**
      * User Preference Constructor
@@ -26,7 +24,6 @@ public class UserPreferences {
     public UserPreferences(BagOfHolding variables) {
         this.varibles = variables;
     }
-    
     
     /**
      * Sets the new user preferences  
@@ -70,7 +67,7 @@ public class UserPreferences {
         }
         
         // Notify the Native Bridge
-        varibles.getDroidBridge().callJSforCallBack(callbackIdent, (new JSONObject()).put("succeeded", success).toString());
+        varibles.getDroidBridge().notifyNativeBridgeCallback(callbackIdent, (new JSONObject()).put("succeeded", success).toString());
     }
     
     
@@ -95,6 +92,6 @@ public class UserPreferences {
 		}
     	
         // Call Back Native Bridge
-        varibles.getDroidBridge().callJSforCallBack(callbackIdent, values.toString());
+        varibles.getDroidBridge().notifyNativeBridgeCallback(callbackIdent, values.toString());
     }
 }

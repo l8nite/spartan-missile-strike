@@ -16,7 +16,6 @@ public class LocationManagement implements LocationListener {
     private static final String TAG = "LocationManagement";       // TAG for logging
     private BagOfHolding variables;                               // Variable bag
     private Location lastKnownLocation;                           // Last known lcoation
-    private boolean isNativeBridgeSubscribed;                     // true of native bridge is subscribed
     private String callbackID;                                    // call back ident for native brigde
 
     /**
@@ -30,30 +29,20 @@ public class LocationManagement implements LocationListener {
             lastKnownLocation = variables.getLocationManager().getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         } catch (Exception e) {}
     }
-
+    
     /**
-     * Returns the current location to native bridge
-     * @param callbackIdentifier call back identifier
+     * Starts sending location updates to Native Bridge
+     * @param callbackID - callback identifier
      */
-    public void getCurrentLocation(String callbackIdentifier) {
-        try {
-            sendLocationToNativeBridge(callbackIdentifier);
-        } catch (Exception e) { }
+    public synchronized void startLocationUpdates(String callbackID) {
+        this.callbackID = callbackID;
     }
-
+    
     /**
-     * Set location subscription to Native Bridge
-     * @param activate true to send, else false
-     * @param callbackID native bridge call back identifier
+     * Stops sending location updates to Native Bridge
      */
-    public void getLocationUpdates(String activate, String callbackID) {
-        try {
-            isNativeBridgeSubscribed = Boolean.valueOf(activate);
-            this.callbackID = callbackID;
-        }
-        catch (Exception e) {
-            isNativeBridgeSubscribed = false;
-        }
+    public synchronized void stopLocationUpdates() {
+        this.callbackID = null;
     }
     
     /**
@@ -61,23 +50,17 @@ public class LocationManagement implements LocationListener {
      * @param callbackIdent callback identifier
      * @throws JSONException could not constuct JSON
      */
-    public void sendLocationToNativeBridge(String callbackIdent) throws JSONException {
-        if(lastKnownLocation != null && callbackIdent != null) {
-            double latitude = 0.0;
-            double longitude = 0.0;
-            synchronized (lastKnownLocation) {
-                if (lastKnownLocation != null) {
-                    latitude = lastKnownLocation.getLatitude();
-                    longitude = lastKnownLocation.getLongitude();
-                }
-            }
-
-            if (isNativeBridgeSubscribed) {
-                JSONObject callbackData = new JSONObject();
-                callbackData.put("latitude", latitude);
-                callbackData.put("longitude", longitude);
-                variables.getDroidBridge().callJSforCallBack(callbackIdent, callbackData.toString());
-            }
+    public synchronized void sendLocationToNativeBridge() throws JSONException {
+        if(lastKnownLocation != null && this.callbackID != null) {
+            // Get Location
+            double latitude = lastKnownLocation.getLatitude();
+            double longitude = lastKnownLocation.getLongitude();
+            
+            // Construct Data
+            JSONObject callbackData = new JSONObject();
+            callbackData.put("latitude", latitude);
+            callbackData.put("longitude", longitude);
+            variables.getDroidBridge().notifyNativeBridgeCallback(this.callbackID, callbackData.toString());
         }
     }
 
@@ -99,13 +82,13 @@ public class LocationManagement implements LocationListener {
         }
 
         try {
-            sendLocationToNativeBridge(callbackID);
+            sendLocationToNativeBridge();
         } catch (Exception e) { }
     }
 
-    // //////////////////////
-    // Google Code //
-    // //////////////////////
+    ////////////////////////
+    //     Google Code    //
+    ////////////////////////
     private boolean isBetterLocation(Location location) {
         final int TWO_MINUTES = 1000 * 60 * 2;
 

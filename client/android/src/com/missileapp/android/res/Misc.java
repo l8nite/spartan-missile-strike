@@ -21,7 +21,6 @@ public class Misc {
         if(variables.isEnabled()) {
 	        // Runs on the UI Thread
 	        missileapp.runOnUiThread(new Runnable() {
-	            
 	            @Override
 	            public void run() {
 	                try {
@@ -45,7 +44,7 @@ public class Misc {
      * Vibrates the Android device 
      * @param time - time to vibrate the device
      */
-    public static void vibrate(Vibrator vibrator, String time) {
+    public static void vibrate(BagOfHolding variables, String time) {
     	final String TAG = "Vibrate";
         long milliseconds;
         
@@ -58,7 +57,8 @@ public class Misc {
         }
         MALogger.log(TAG, Log.INFO, "Vibrate command: " + time + ", parsed to: " + milliseconds + ".");
         
-        // Vibrate if the vibrator instance is created, has a vibrator, and the time to vibrate is greater than 0ms 
+        // Vibrate if the vibrator instance is created, has a vibrator, and the time to vibrate is greater than 0ms
+        Vibrator vibrator = variables.getVibrator();
         if (vibrator != null && vibrator.hasVibrator() && milliseconds > 0) {
             vibrator.vibrate(milliseconds);
         }
@@ -75,6 +75,7 @@ public class Misc {
     	
     	MALogger.log(TAG, Log.INFO, "ProcessBackButton command: " + inMainMenu + ".");
     	
+    	// Parse State
     	try {
             inMainMenuView = Boolean.valueOf(inMainMenu);
         }
@@ -83,12 +84,14 @@ public class Misc {
             MALogger.log(TAG, Log.ERROR, "Error: " + e.getMessage() , e);
         }
     	MALogger.log(TAG, Log.INFO, "ProcessBackButton command: " + inMainMenu + ", parsed to: " + inMainMenuView + ".");
+    	
+    	// Process back request
     	if(inMainMenuView) {
-    		final String url = "NativeBridge.previousView()";
-    		variables.getDroidBridge().callJS(url);
+    	    variables.getMissileApp().callBackButton();
     	}
     	else {
-    		variables.getMissileApp().callBackButton();
+    	    final String url = "previousView()";
+            variables.getDroidBridge().callNativeBridge(url);
     	}
     }
 }

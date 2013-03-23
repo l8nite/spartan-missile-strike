@@ -7,7 +7,7 @@ import android.hardware.SensorManager;
 
 import com.missileapp.android.BagOfHolding;
 
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public class Gyro implements SensorEventListener{
     // DATA
     private static final String TAG = "Gyro";               // TAG for logging
@@ -23,30 +23,30 @@ public class Gyro implements SensorEventListener{
     public Gyro(BagOfHolding variables) {
         this.variables = variables;
     }
-
+    
     /**
-     * Set location subscription to Native Bridge
-     * @param activate true to send, else false
-     * @param callbackID native bridge call back identifier
+     * Starts orientation updates to Native Bridge
+     * @param callbackID callback identifier
      */
-    public void getOrientationUpdates(String activate, String callbackID) {
-        try {
-            isNativeBridgeSubscribed = Boolean.valueOf(activate);
-            this.callbackID = callbackID;
-            
-            if(isNativeBridgeSubscribed) {
-                
-            }
-            else {
-
-            }
-            
-        }
-        catch (Exception e) {
-            isNativeBridgeSubscribed = false;
+    public synchronized void startOrientationUpdates(String callbackID) {
+        this.callbackID = callbackID;
+    }
+    
+    /**
+     * Starts orientation updates to Native Bridge
+     * @param callbackID callback identifier
+     */
+    public synchronized void stopOrientationUpdates() {
+        this.callbackID = null;
+    }
+    
+    public synchronized void notifyNativeBridgeWithOrientation() {
+        if(this.callbackID != null ) {
+            String callbackData = "";
+            variables.getDroidBridge().notifyNativeBridgeCallback(this.callbackID, callbackData);
         }
     }
-
+    
     /** Accuracy changes */
     public void onAccuracyChanged(Sensor sensor, int accuracy) { }
 
