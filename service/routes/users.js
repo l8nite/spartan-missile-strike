@@ -27,6 +27,8 @@ function updateUser (request, msUser, done) {
         return done(new restify.InvalidArgumentError());
     }
 
+    // TODO: check if username already exists, return 304 if so
+
     msUser.username = username;
 
     redis.client.set(msUser.id, JSON.stringify(msUser), function (err, result) {
