@@ -44,25 +44,28 @@ describe('/users', function () {
     });
 
     describe('PUT /users/:id', function () {
-        it('should return a 409 if you use an invalid username', function (done) {
+        it('should return an InvalidArgumentError if you use an invalid username', function (done) {
             var username = client.user.username;
             client.put(path, { username: username + '_' }, function (err, req, res, obj) {
                 res.statusCode.should.equal(409);
+                err.name.should.equal('InvalidArgumentError');
                 done();
             });
         });
 
-        it('should return a 409 if you use an empty username', function (done) {
+        it('should return a MissingParameterError if you use an empty username', function (done) {
             async.parallel([
                 function (next) {
                     client.put(path, { username: undefined }, function (err, req, res, obj) {
                         res.statusCode.should.equal(409);
+                        err.name.should.equal('MissingParameterError');
                         next();
                     });
                 },
                 function (next) {
                     client.put(path, {}, function (err, req, res, obj) {
                         res.statusCode.should.equal(409);
+                        err.name.should.equal('MissingParameterError');
                         next();
                     });
                 },
@@ -130,9 +133,10 @@ describe('/users', function () {
     });
 
     describe('invalid id', function () {
-        it('should return a 409 conflict', function (done) {
+        it('should return an InvalidArgumentError conflict', function (done) {
             client.get('/users/user%3Ainvalid', function (err, req, res, obj) {
                 res.statusCode.should.equal(409);
+                err.name.should.equal('InvalidArgumentError');
                 done();
             });
         });
@@ -142,6 +146,7 @@ describe('/users', function () {
         it('should return a 403 forbidden', function (done) {
             client.get('/users/user%3A00000000-0000-0000-0000-000000000000', function (err, req, res, obj) {
                 res.statusCode.should.equal(403);
+                err.name.should.equal('NotAuthorizedError');
                 done();
             });
         });
