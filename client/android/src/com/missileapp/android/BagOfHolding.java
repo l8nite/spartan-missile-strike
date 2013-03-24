@@ -1,32 +1,32 @@
 package com.missileapp.android;
 
 import com.missileapp.android.res.FireScreen;
+import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
 import com.missileapp.android.res.MediaManager;
+import com.missileapp.android.res.Misc;
 import com.missileapp.android.res.UserPreferences;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.Vibrator;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.webkit.WebView;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 
 /**
  * Bag of Holding - Holds the application data and variables
  */
 public class BagOfHolding extends Application {
-//    private static BagOfHolding boh;
     
     // Primary Classes
     private MissileApp missileApp;             // MissileApp instance
     private AndroidBridge droidBridge;         // Android Interface to the WebView
     
     // Android Views
-    private CheckBox locationCheckBox;         // Checkbox for gps prompts
     private SurfaceView surfaceView;           // Surface View for layout options
     private SurfaceHolder surfaceHolder;       // Surface Holder to place Cam Preview
     private WebView webView;                   // WebView for UI
@@ -42,6 +42,8 @@ public class BagOfHolding extends Application {
     private MediaManager mediaManager;                // Media Manager that keeps track of all files
     private LocationManager locationManager;          // Android System Service giving access to location info
     private LocationManagement locationManagement;    // MissileApp Local Location Managements 
+    private Gyro gyro;                                // Gyroscope implementation
+    private SensorManager sensorManager;              // Android hardware sensor manager
     
     /*********************************
      * Android OS call back functions
@@ -53,7 +55,6 @@ public class BagOfHolding extends Application {
     public void onCreate() {
         super.onCreate();
         this.isEnabled = false;
-//        BagOfHolding.boh = this;
     }
     
     
@@ -63,6 +64,11 @@ public class BagOfHolding extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+        if(webView != null) {
+        	webView.clearAnimation();
+        	webView.clearCache(true);
+        	webView.freeMemory();
+        }
     }
     
     
@@ -137,15 +143,6 @@ public class BagOfHolding extends Application {
     //
     ///////////////////////////////////////////////
     
-    public CheckBox getLocationCheckBox() {
-		return locationCheckBox;
-	}
-
-
-	public void setLocationCheckBox(CheckBox locationCheckBox) {
-		this.locationCheckBox = locationCheckBox;
-	}
-
     /**
      * Returns the {@link SurfaceView} where the camera preview is drawn on
      * @return the {@link SurfaceView} instance
@@ -239,6 +236,11 @@ public class BagOfHolding extends Application {
      */
 	public void setEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
+		
+		if(hideSplash) {
+		    Misc.hideSplash(this, this.getMissileApp(), this.getSplashScreen());
+		    hideSplash = false;
+		}
 	}
 	
 	/**
@@ -356,7 +358,6 @@ public class BagOfHolding extends Application {
 		this.locationManager = locationManager;
 	}
 
-
 	/**
 	 * Returns the MissileApp {@link LocationManagement} implementation
 	 * @return {@link LocationManagement} implementation
@@ -372,4 +373,36 @@ public class BagOfHolding extends Application {
 	public void setLocationManagement(LocationManagement locationManagement) {
 		this.locationManagement = locationManagement;
 	}
+	
+	/**
+	 * Returns {@link Gyro} implementation
+	 * @return {@link Gyro} class
+	 */
+    public Gyro getGyro() {
+        return gyro;
+    }
+    
+    /**
+     * Set {@link Gyro} implementation
+     * @param gyro implement the gyro class.
+     */
+    public void setGyro(Gyro gyro) {
+        this.gyro = gyro;
+    }
+    
+    /**
+     * Returns {@link SensorManager} implemetation
+     * @return {@link SensorManager} implemenation
+     */
+    public SensorManager getSensorManager() {
+        return sensorManager;
+    }
+    
+    /**
+     * Set {@link SensorManager} implemenation
+     * @param sensorManager {@link SensorManager} implementation
+     */
+    public void setSensorManager(SensorManager sensorManager) {
+        this.sensorManager = sensorManager;
+    }
 }

@@ -13,6 +13,7 @@
     <WebView android:id="@+id/webview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:background="@android:color/black"
     />
 
     <ImageView android:id="@+id/splashview"
@@ -22,15 +23,4 @@
         android:background="@android:color/black"
         android:src="@drawable/splashscreen"
     />
-    
-    <FrameLayout android:layout_width="fill_parent"
-    	android:layout_height="wrap_content" >
-
-	    <CheckBox android:id="@+id/locationcheckbox"
-	        android:text="@string/location_prompt_gps_checkbox_msg"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	    />
-	</FrameLayout>
-
 </RelativeLayout>

@@ -64,3 +64,7 @@ NativeBridge_Android.prototype.hideSplash = function () {
 NativeBridge_Android.prototype.vibrate = function (time) {
 	AndroidInterface.vibrate(time);
 };
+
+NativeBridge_Android.prototype.log = function (msg) {
+	AndroidInterface.log(msg);
+};
