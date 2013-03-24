@@ -12,7 +12,6 @@ public class Gyro implements SensorEventListener{
     // DATA
     private static final String TAG = "Gyro";               // TAG for logging
     private BagOfHolding variables;                         // Variable bag
-    private boolean isNativeBridgeSubscribed;               // true of native bridge is subscribed
     private String callbackID;                              // call back ident for native bridge
     private Sensor gyro;                                    // Gyro sensor implementation
     

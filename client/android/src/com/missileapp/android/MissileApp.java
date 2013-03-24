@@ -136,9 +136,8 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-    	// TODO UNCOMMENT
-        //variables.getDroidBridge().callJSforMainMenuView();
+        // super.onBackPressed();
+        variables.getDroidBridge().requestMainMenuViewStatus();
     }
     
     /**
@@ -209,18 +208,15 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             locationAlert.setTitle(R.string.location_prompt_title);
             locationAlert.setMessage(R.string.location_prompt_location_disabled_msg);
             locationAlert.setCancelable(false);
-//            locationAlert.setView(locationCheckBoxView);
             locationAlert.setPositiveButton(R.string.location_prompt_location_disabled_positive, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-//                    processGPSIgnoreCheckbox(checkBox.isChecked());
                     openLocationSettings();
                 }
             });
             locationAlert.setNegativeButton(R.string.location_prompt_location_disabled_negative, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-//                    processGPSIgnoreCheckbox(checkBox.isChecked());
                     exitMissileApp();
                 }
             });
