@@ -160,7 +160,7 @@ public class AndroidBridge {
      * @param options - play options
      */
     public void playSound(String soundID, String options) {
-        //variables.getMediaManager().playSound(options);
+        variables.getMediaManager().playSound(soundID, options);
     }
     
     /**
@@ -168,7 +168,7 @@ public class AndroidBridge {
      * @param soundID - sound id to stop
      */
     public void stopSound(String soundID) {
-        //variables.getMediaManager().playSound(options);
+        variables.getMediaManager().stopSound(soundID);
     }
     
     /**
