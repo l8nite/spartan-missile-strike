@@ -89,6 +89,7 @@ public class LocationManagement implements LocationListener {
     ////////////////////////
     //     Google Code    //
     ////////////////////////
+    /* http://developer.android.com/guide/topics/location/strategies.html  */
     private boolean isBetterLocation(Location location) {
         final int TWO_MINUTES = 1000 * 60 * 2;
 
