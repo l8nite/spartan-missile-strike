@@ -193,10 +193,12 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     private void processLocationServices() {
         MALogger.log(TAG, Log.INFO, "Processing Location.");
-        
+
         View locationCheckBoxView = View.inflate(this, R.layout.locationcb, null);
         final CheckBox checkBox = (CheckBox) locationCheckBoxView.findViewById(R.id.gps_checkbox);
-        
+        checkBox.setPadding(checkBox.getPaddingLeft() + (int) (10.0f * this.getResources().getDisplayMetrics().density + 0.5f),
+                checkBox.getPaddingTop(), checkBox.getPaddingRight(), checkBox.getPaddingBottom());
+
     	LocationManager locationManager = variables.getLocationManager();
     	boolean locationEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     	boolean gpsLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
