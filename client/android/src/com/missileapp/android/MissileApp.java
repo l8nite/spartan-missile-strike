@@ -268,6 +268,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Exit if no location provider enabled, else register all available services
         if(!locationEnabled && !gpsLocationEnabled) {
             exitMissileApp();
+            return;
         }
 
         if(locationEnabled) {
