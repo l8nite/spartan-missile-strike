@@ -110,46 +110,49 @@ public class MediaManager {
     
     /**
      * Play a sound with the provided options
+     * @param soundID - sound to play
      * @param options - the audio options:
-     *            soundID - sound to play
      *            foreground - true if fore, else background
      *            loop - ture to loop the audio
      */
     public void playSound(String soundID, String options) {
-        //TODO REWRITE
-    	float volume;
-		int priority;
-		int loopTimes;
-		
         try {
-        	MALogger.log(TAG, Log.INFO, "Play Sound");
-        	
-        	// Parse options
-			JSONObject playSound =  new JSONObject(options);
-			int soundPoolID = getSoundPoolMappingFromRawID(soundID);
-			boolean foreground = playSound.getBoolean("foreground");
-			boolean loop = playSound.getBoolean("loop");
-			
-			// Set up volume, loop time, priority, and play rate
-			if(foreground) {
-				volume = foregroundVolume;
-				priority  = DEFAULT_PRIORITY;
-			}
-			else {
-				volume = backgroundVolume;
-				priority = BACKGROUND_PRIORITY;
-			}
-			loopTimes = (loop) ? PLAYBACK_LOOP_VALUE : PLAYBACK_DEFAULT_VALUE;
-			
-			// Play sound with options
-			soundPool.play(soundPoolID, volume, volume, priority, loopTimes, DEFAULT_PLAY_RATE);
-		}
-        catch (JSONException e) {
-			MALogger.log(TAG, Log.ERROR, "Could not parse options" , e);
-		}
+            MALogger.log(TAG, Log.INFO, "Play Sound");
+
+            // Create objects with defaults: foreground vol & priority, play once
+            float volume = foregroundVolume;
+            int priority = DEFAULT_PRIORITY;
+            int loopTimes = PLAYBACK_DEFAULT_VALUE;
+            int soundPoolID = getSoundPoolMappingFromRawID(soundID);
+            JSONObject playOptions = new JSONObject((options == null) ? "{}" : options);
+
+            // Get foreground if it exists
+            try {
+                if (!playOptions.getBoolean("foreground")) {
+                    volume = backgroundVolume;
+                    priority = BACKGROUND_PRIORITY;
+                }
+            }
+            catch (JSONException e) {
+                MALogger.log(TAG, Log.ERROR, "Could not get foreground in JSON", e);
+            }
+
+            // Get loop if it exists
+            try {
+                if (playOptions.getBoolean("loop")) {
+                    loopTimes = PLAYBACK_LOOP_VALUE;
+                }
+            }
+            catch (JSONException e) {
+                MALogger.log(TAG, Log.ERROR, "Could not get foreground in JSON", e);
+            }
+
+            // Play sound with options
+            soundPool.play(soundPoolID, volume, volume, priority, loopTimes, DEFAULT_PLAY_RATE);
+        }
         catch (Exception e) {
-        	MALogger.log(TAG, Log.ERROR, "Could not play audio options" , e);
-		}
+            MALogger.log(TAG, Log.ERROR, "Could not play audio options", e);
+        }
     }
     
     /**
