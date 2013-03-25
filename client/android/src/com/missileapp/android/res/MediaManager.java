@@ -167,7 +167,6 @@ public class MediaManager {
     	}
     }
     
-    
     /**
      * Resume sound when Resuming
      */
@@ -179,7 +178,6 @@ public class MediaManager {
     		MALogger.log(TAG, Log.ERROR, "Could not resume music.", e);
     	}
     }
-    
     
     /**
      * Stop a specific sound
