@@ -11,11 +11,10 @@
     <uses-permission android:name="ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" /><!-- TODO REMOVE  -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
+    
     <application android:name="BagOfHolding"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
