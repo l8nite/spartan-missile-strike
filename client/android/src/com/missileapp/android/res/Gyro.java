@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.missileapp.android.BagOfHolding;
 import com.missileapp.android.MALogger;
@@ -43,14 +44,19 @@ public class Gyro implements SensorEventListener {
     public synchronized void startOrientationUpdates(String callbackID) {
         this.callbackID = callbackID;
         
-        // Accelerometer
-        if(accelerometer != null ) {
-            variables.getSensorManager().registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+        if(accelerometer == null || magnetometer == null) {
+            Toast.makeText(variables.getMissileApp(), "Gyro unavailable or faulty", Toast.LENGTH_SHORT).show();
         }
-        
-        // Magnetometer to calibrate
-        if(magnetometer != null ) {
-            variables.getSensorManager().registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_GAME);
+        else {
+            // Accelerometer
+            if(accelerometer != null ) {
+                variables.getSensorManager().registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+            }
+            
+            // Magnetometer to calibrate
+            if(magnetometer != null ) {
+                variables.getSensorManager().registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_GAME);
+            }
         }
     }
     
@@ -79,7 +85,7 @@ public class Gyro implements SensorEventListener {
             variables.getDroidBridge().notifyNativeBridgeCallback(this.callbackID, callbackData.toString());
         }
     }
-
+    
     @Override
     public void onSensorChanged(SensorEvent event) {
         // Store new values
