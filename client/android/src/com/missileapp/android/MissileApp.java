@@ -79,8 +79,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE));               // Android System Service Vibrator
         variables.setLocationManager((LocationManager) getSystemService(Context.LOCATION_SERVICE));       // Android System Service Location Manager
         variables.setLocationManagement(new LocationManagement(variables));                               // MissileApp Location Implementation
-        variables.setGyro(new Gyro(variables));                                                           // Gyroscope implementation
         variables.setSensorManager((SensorManager) super.getSystemService(Context.SENSOR_SERVICE));       // Android Sensor Service Implementation
+        variables.setGyro(new Gyro(variables));                                                           // Gyroscope implementation
+
         
         // Create surface view for cam preview and register callback functions
         surfaceHolder = surfaceView.getHolder();
@@ -187,7 +188,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             default:
                 break;
         }
-        
     }
     
     /**
