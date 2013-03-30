@@ -7,10 +7,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.missileapp.android.BagOfHolding;
+import com.missileapp.android.MALogger;
 
-@SuppressWarnings("unused")
 public class LocationManagement implements LocationListener {
     // DATA
     private static final String TAG = "LocationManagement";       // TAG for logging
@@ -24,10 +25,13 @@ public class LocationManagement implements LocationListener {
      */
     public LocationManagement(BagOfHolding variables) {
         this.variables = variables;
-
+        
         try {
             lastKnownLocation = variables.getLocationManager().getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        } catch (Exception e) {}
+            MALogger.log(TAG, Log.ERROR, lastKnownLocation.toString());
+        } catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
+        }
     }
     
     /**
@@ -35,6 +39,7 @@ public class LocationManagement implements LocationListener {
      * @param callbackID - callback identifier
      */
     public synchronized void startLocationUpdates(String callbackID) {
+        MALogger.log(TAG, Log.ERROR, "Location subscription recieved");
         this.callbackID = callbackID;
     }
     
@@ -42,6 +47,7 @@ public class LocationManagement implements LocationListener {
      * Stops sending location updates to Native Bridge
      */
     public synchronized void stopLocationUpdates() {
+        MALogger.log(TAG, Log.ERROR, "Recieved Location revoked");
         this.callbackID = null;
     }
     
@@ -51,6 +57,8 @@ public class LocationManagement implements LocationListener {
      * @throws JSONException could not constuct JSON
      */
     public synchronized void sendLocationToNativeBridge() throws JSONException {
+        MALogger.log(TAG, Log.ERROR, "Sending location data: " + ((lastKnownLocation == null) ? "null." : lastKnownLocation.toString()));
+        
         if(lastKnownLocation != null && this.callbackID != null) {
             // Get Location
             double latitude = lastKnownLocation.getLatitude();
@@ -83,7 +91,9 @@ public class LocationManagement implements LocationListener {
 
         try {
             sendLocationToNativeBridge();
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
+        }
     }
 
     ////////////////////////
