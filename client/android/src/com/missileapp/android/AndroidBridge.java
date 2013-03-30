@@ -32,8 +32,14 @@ public class AndroidBridge {
      * Calls the native bridge call back function
      * @param url - javascript to run
      */
-    public void callNativeBridge(String url) {
-        variables.getWebView().loadUrl(CALL_NB_PREFIX +  url);
+    public void callNativeBridge(final String url) {
+        variables.getMissileApp().runOnUiThread(new Runnable() {
+            
+            @Override
+            public void run() {
+                variables.getWebView().loadUrl(CALL_NB_PREFIX +  url);
+            }
+        });
     }
     
     /**
@@ -145,6 +151,8 @@ public class AndroidBridge {
      */
     public void getFacebookAccessToken(String callbackID) {
     	//TODO: Implement
+        this.notifyNativeBridgeCallback(callbackID,
+          "\"BAACEdEose0cBAFh7wybIH39EOt8KhQZC72mf9wUo7OIKVBDzkY7Hl1TQmvAyUaoB0DIs8LYwbujJproj0F46uFSxYFsCfZCZCpIbTJWSLMgTZAd1xrdX4xEytTno6MwZD\"");
     }
     
     /**
