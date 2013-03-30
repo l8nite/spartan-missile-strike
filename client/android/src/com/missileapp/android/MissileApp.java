@@ -9,6 +9,7 @@ import com.missileapp.android.res.UserPreferences;
 
 import android.location.LocationManager;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -27,7 +28,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.hardware.SensorManager;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -46,7 +46,8 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     /*********************************
      * Android OS call back functions
      *********************************/
-	@Override
+	@SuppressLint("NewApi")
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         MALogger.log(TAG, Log.INFO, "Creating activity.");
         
@@ -81,7 +82,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.setLocationManagement(new LocationManagement(variables));                               // MissileApp Location Implementation
         variables.setSensorManager((SensorManager) super.getSystemService(Context.SENSOR_SERVICE));       // Android Sensor Service Implementation
         variables.setGyro(new Gyro(variables));                                                           // Gyroscope implementation
-
         
         // Create surface view for cam preview and register callback functions
         surfaceHolder = surfaceView.getHolder();
@@ -104,11 +104,16 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            try {
+                webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+            }
+            catch(Exception e) {
+                System.out.println(e.toString());
+            }
+        }
         webView.setWebChromeClient(new MAWebChromeClient());
         webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
-        
-        //TODO REMOVE
-        webView.setBackgroundColor(Color.MAGENTA);
         
         // Load WebView
         webView.loadUrl(DROIDWB_FILENAME);
@@ -184,7 +189,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             case 1:
                 finishLocationSettings();
                 break;
-
+            
             default:
                 break;
         }
@@ -272,17 +277,10 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Exit if no location provider enabled, else register all available services
         if(!locationEnabled && !gpsLocationEnabled) {
             exitMissileApp();
-            return;
         }
-
-        if(locationEnabled) {
-            variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, variables.getLocationManagement());
+        else {
+            variables.setEnabled(true);
         }
-        if(gpsLocationEnabled) {
-            variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, variables.getLocationManagement());
-        }
-        
-        variables.setEnabled(true);
     }
     
     

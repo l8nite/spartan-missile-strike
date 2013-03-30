@@ -25,13 +25,6 @@ public class LocationManagement implements LocationListener {
      */
     public LocationManagement(BagOfHolding variables) {
         this.variables = variables;
-        
-        try {
-            lastKnownLocation = variables.getLocationManager().getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            MALogger.log(TAG, Log.ERROR, lastKnownLocation.toString());
-        } catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
-        }
     }
     
     /**
@@ -41,6 +34,30 @@ public class LocationManagement implements LocationListener {
     public synchronized void startLocationUpdates(String callbackID) {
         MALogger.log(TAG, Log.ERROR, "Location subscription recieved");
         this.callbackID = callbackID;
+        
+        boolean locationEnabled = variables.getLocationManager().isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        boolean gpsLocationEnabled = variables.getLocationManager().isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if(locationEnabled) {
+            variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, variables.getLocationManagement());
+        }
+        if(gpsLocationEnabled) {
+            variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, variables.getLocationManagement());
+        }
+        
+        try {
+            lastKnownLocation = variables.getLocationManager().getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            MALogger.log(TAG, Log.ERROR, lastKnownLocation.toString());
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
+        }
+        
+        try {
+            sendLocationToNativeBridge();
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
+        }
     }
     
     /**
@@ -84,60 +101,14 @@ public class LocationManagement implements LocationListener {
     /** Location Changed */
     public void onLocationChanged(Location location) {
         synchronized (lastKnownLocation) {
-            if (isBetterLocation(location)) {
-                lastKnownLocation = location;
-            }
+            lastKnownLocation = location;
         }
 
         try {
             sendLocationToNativeBridge();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
-        }
-    }
-
-    ////////////////////////
-    //     Google Code    //
-    ////////////////////////
-    /* http://developer.android.com/guide/topics/location/strategies.html  */
-    private boolean isBetterLocation(Location location) {
-        final int TWO_MINUTES = 1000 * 60 * 2;
-
-        if (lastKnownLocation != null) {
-            long timeDelta = location.getTime() - lastKnownLocation.getTime();
-            boolean isSignificantlyNewer = timeDelta > TWO_MINUTES;
-            boolean isSignificantlyOlder = timeDelta < -TWO_MINUTES;
-            boolean isNewer = timeDelta > 0;
-
-            if (isSignificantlyNewer) {
-                return true;
-            }
-            else if (isSignificantlyOlder) {
-                return false;
-            }
-            else {
-                int accuracyDelta = (int) (location.getAccuracy() - lastKnownLocation.getAccuracy());
-                boolean isLessAccurate = accuracyDelta > 0;
-                boolean isMoreAccurate = accuracyDelta < 0;
-                boolean isSignificantlyLessAccurate = accuracyDelta > 200;
-                boolean isFromSameProvider = (location.getProvider() == null) ? lastKnownLocation.getProvider() == null : location.equals(lastKnownLocation);
-
-                if (isMoreAccurate) {
-                    return true;
-                }
-                else if (isNewer && !isLessAccurate) {
-                    return true;
-                }
-                else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-        }
-        else {
-            return true;
         }
     }
 }
