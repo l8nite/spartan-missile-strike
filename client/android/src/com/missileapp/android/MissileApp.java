@@ -3,6 +3,7 @@ package com.missileapp.android;
 import com.missileapp.android.res.FireScreen;
 import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
+import com.missileapp.android.res.MAWebChromeClient;
 import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.UserPreferences;
 
@@ -102,6 +103,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new MAWebChromeClient());
         webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
         
         //TODO REMOVE

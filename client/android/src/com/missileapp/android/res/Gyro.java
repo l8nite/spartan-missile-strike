@@ -16,6 +16,7 @@ import com.missileapp.android.MALogger;
 public class Gyro implements SensorEventListener {
     // DATA
     private static final String TAG = "Gyro";               // TAG for logging
+    private static final float RADS_TO_DEGREES = 57.2957795f;
     private BagOfHolding variables;                         // Variable bag
     private String callbackID;                              // call back ident for native bridge
     
@@ -109,8 +110,8 @@ public class Gyro implements SensorEventListener {
                 float[] orientation = new float[3];
                 SensorManager.getOrientation(R, orientation);
                 
-                azimuth = orientation[0];
-                altitude = orientation[1];
+                azimuth = orientation[0] * RADS_TO_DEGREES;
+                altitude = orientation[1] * RADS_TO_DEGREES;
             }
         }
     }
