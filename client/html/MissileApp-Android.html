@@ -63,7 +63,9 @@
 
 		window.NativeBridge = {
 			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge),
-			onMainMenu: AndroidInterface.onMainMenu(Imports.ViewManager.onInitialView()),
+			onMainMenu: function () {
+				AndroidInterface.onMainMenu(Imports.ViewManager.onInitialView());
+			},
 			previousView: Imports.ViewManager.previousView.bind(Imports.ViewManager),
 			wake: Imports.SuspendManager.wake.bind(Imports.SuspendManager)
 		};
