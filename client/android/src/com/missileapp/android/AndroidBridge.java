@@ -152,7 +152,7 @@ public class AndroidBridge {
     public void getFacebookAccessToken(String callbackID) {
     	//TODO: Implement
         this.notifyNativeBridgeCallback(callbackID,
-          "\"BAACEdEose0cBAFh7wybIH39EOt8KhQZC72mf9wUo7OIKVBDzkY7Hl1TQmvAyUaoB0DIs8LYwbujJproj0F46uFSxYFsCfZCZCpIbTJWSLMgTZAd1xrdX4xEytTno6MwZD\"");
+          "\"AAACEdEose0cBAK5sUCdhDzeEdTbIpTTrPWTSRsqAsjvtoCAYhnvFMUCZCpsbXTXuvykPqFPJObnBOJ34oR7Fl1vaiU7JZCvuwI9gnCOgPGTGBYnezL\"");
     }
     
     /**
