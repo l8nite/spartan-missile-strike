@@ -130,6 +130,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Check location services are enabled.
         this.processLocationServices();
+        variables.getLocationManagement().processResumeRequest();
         
         // Re-enter Fire Screen
         variables.getFireScreen().processResumeRequest();
@@ -165,7 +166,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.getFireScreen().processPauseRequest();
         
         // Remove Location Updates for GPS and Network
-        variables.getLocationManager().removeUpdates(variables.getLocationManagement());
+        variables.getLocationManagement().processPauseRequest();
     }
     
     @Override

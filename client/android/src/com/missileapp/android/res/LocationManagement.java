@@ -34,14 +34,48 @@ public class LocationManagement implements LocationListener {
     public synchronized void startLocationUpdates(String callbackID) {
         MALogger.log(TAG, Log.ERROR, "Location subscription recieved");
         this.callbackID = callbackID;
-        
+        this.startLocationListener();
+    }
+    
+    /**
+     * Stops sending location updates to Native Bridge
+     */
+    public synchronized void stopLocationUpdates() {
+        MALogger.log(TAG, Log.ERROR, "Recieved Location revoked");
+        this.callbackID = null;
+        this.stopLocationListener();
+    }
+    
+    /**
+     * Fired when app resumes
+     */
+    public void processResumeRequest() {
+        if(callbackID != null) {
+            this.startLocationListener();
+        }
+    }
+    
+    /**
+     * Fired when app resumes
+     */
+    public void processPauseRequest() {
+        if(callbackID != null) {
+            this.stopLocationListener();
+        }
+    }
+    
+    
+    /**
+     * Starts Location Listener
+     */
+    private void startLocationListener() {
         boolean locationEnabled = variables.getLocationManager().isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         boolean gpsLocationEnabled = variables.getLocationManager().isProviderEnabled(LocationManager.GPS_PROVIDER);
         if(locationEnabled) {
-            variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, variables.getLocationManagement());
+            variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         }
         if(gpsLocationEnabled) {
-            variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, variables.getLocationManagement());
+            variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
         
         try {
@@ -61,12 +95,12 @@ public class LocationManagement implements LocationListener {
     }
     
     /**
-     * Stops sending location updates to Native Bridge
+     * Stops Location Listener
      */
-    public synchronized void stopLocationUpdates() {
-        MALogger.log(TAG, Log.ERROR, "Recieved Location revoked");
-        this.callbackID = null;
+    private void stopLocationListener() {
+        variables.getLocationManager().removeUpdates(this);
     }
+    
     
     /**
      * Sends the last known location to Native Bridge
@@ -103,7 +137,7 @@ public class LocationManagement implements LocationListener {
         synchronized (lastKnownLocation) {
             lastKnownLocation = location;
         }
-
+        
         try {
             sendLocationToNativeBridge();
         }
