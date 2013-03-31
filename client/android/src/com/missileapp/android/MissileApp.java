@@ -21,6 +21,7 @@ import android.webkit.WebView;
 import android.webkit.WebSettings.RenderPriority;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -42,6 +43,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     
     // Varible Bag
     private static BagOfHolding variables;
+    private static boolean mainMenuViewVerified;
     
     /*********************************
      * Android OS call back functions
@@ -61,8 +63,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Init -> super create, set view, get variable data
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        variables = (BagOfHolding) super.getApplication(); 
+        variables = (BagOfHolding) super.getApplication();
         variables.setMissileApp(this);
+        mainMenuViewVerified = false;
 
         // Disable app
         variables.setEnabled(false);
@@ -145,15 +148,21 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     @Override
     public void onBackPressed() {
-        // super.onBackPressed();
-        variables.getDroidBridge().requestMainMenuViewStatus();
+        if(!mainMenuViewVerified) {
+            variables.getDroidBridge().requestMainMenuViewStatus();
+        }
+        else {
+            super.onBackPressed();
+        }
+        mainMenuViewVerified = false;
     }
     
     /**
      * Calls back button
      */
     public void callBackButton() {
-    	super.onBackPressed();
+        mainMenuViewVerified = true;
+        Toast.makeText(this, "Press back again", Toast.LENGTH_SHORT).show();
     }
     
     
