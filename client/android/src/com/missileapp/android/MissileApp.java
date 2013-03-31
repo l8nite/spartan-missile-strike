@@ -109,7 +109,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
                 webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
             }
             catch(Exception e) {
-                System.out.println(e.toString());
+                MALogger.log(TAG, Log.ERROR, "Content-Access-Control: " + e.getMessage(), e);
             }
         }
         webView.setWebChromeClient(new MAWebChromeClient());

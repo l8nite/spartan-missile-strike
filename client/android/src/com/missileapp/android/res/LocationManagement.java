@@ -41,7 +41,7 @@ public class LocationManagement implements LocationListener {
      * Stops sending location updates to Native Bridge
      */
     public synchronized void stopLocationUpdates() {
-        MALogger.log(TAG, Log.ERROR, "Recieved Location revoked");
+        MALogger.log(TAG, Log.ERROR, "Location subscription revoked");
         this.callbackID = null;
         this.stopLocationListener();
     }
@@ -80,13 +80,15 @@ public class LocationManagement implements LocationListener {
         
         try {
             lastKnownLocation = variables.getLocationManager().getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            MALogger.log(TAG, Log.ERROR, lastKnownLocation.toString());
+            Location lastKnownGPSLocation = variables.getLocationManager().getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            lastKnownLocation = (isBetterLocation(lastKnownGPSLocation)) ? lastKnownGPSLocation : lastKnownLocation;
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
         }
         
         try {
+            MALogger.log(TAG, Log.ERROR, "Starting Location Updates");
             sendLocationToNativeBridge();
         }
         catch (Exception e) {
@@ -135,7 +137,9 @@ public class LocationManagement implements LocationListener {
     /** Location Changed */
     public void onLocationChanged(Location location) {
         synchronized (lastKnownLocation) {
-            lastKnownLocation = location;
+            if(isBetterLocation(location)) {
+                lastKnownLocation = location;
+            }
         }
         
         try {
@@ -143,6 +147,51 @@ public class LocationManagement implements LocationListener {
         }
         catch (Exception e) {
             MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
+        }
+    }
+    
+    ////////////////////////
+    //     Google Code    //
+    ////////////////////////
+    /* http://developer.android.com/guide/topics/location/strategies.html  */
+    private boolean isBetterLocation(Location location) {
+        final int TWO_MINUTES = 1000 * 60 * 2;
+
+        if (lastKnownLocation != null) {
+            long timeDelta = location.getTime() - lastKnownLocation.getTime();
+            boolean isSignificantlyNewer = timeDelta > TWO_MINUTES;
+            boolean isSignificantlyOlder = timeDelta < -TWO_MINUTES;
+            boolean isNewer = timeDelta > 0;
+
+            if (isSignificantlyNewer) {
+                return true;
+            }
+            else if (isSignificantlyOlder) {
+                return false;
+            }
+            else {
+                int accuracyDelta = (int) (location.getAccuracy() - lastKnownLocation.getAccuracy());
+                boolean isLessAccurate = accuracyDelta > 0;
+                boolean isMoreAccurate = accuracyDelta < 0;
+                boolean isSignificantlyLessAccurate = accuracyDelta > 200;
+                boolean isFromSameProvider = (location.getProvider() == null) ? lastKnownLocation.getProvider() == null : location.equals(lastKnownLocation);
+
+                if (isMoreAccurate) {
+                    return true;
+                }
+                else if (isNewer && !isLessAccurate) {
+                    return true;
+                }
+                else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+        else {
+            return true;
         }
     }
 }
