@@ -107,7 +107,9 @@ public class Gyro implements SensorEventListener {
             
             if(SensorManager.getRotationMatrix(R, I, gravity, magentic)) {
                 float[] orientation = new float[3];
-                SensorManager.getOrientation(R, orientation);
+                float[] reMappedR = new float[9];
+                SensorManager.remapCoordinateSystem(R, SensorManager.AXIS_X, SensorManager.AXIS_Z, reMappedR);
+                SensorManager.getOrientation(reMappedR, orientation);
                 
                 azimuth = orientation[0];
                 altitude = orientation[1];

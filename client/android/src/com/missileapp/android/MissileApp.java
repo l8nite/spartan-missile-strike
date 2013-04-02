@@ -153,8 +153,8 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         }
         else {
             super.onBackPressed();
+            mainMenuViewVerified = false;
         }
-        mainMenuViewVerified = false;
     }
     
     /**
@@ -316,7 +316,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.setSurfaceHolder(holder);
     }
     
-    
     /**
      * Surface Holder changes
      * @param holder - the holder to draw the camera preview, {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
@@ -329,7 +328,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         MALogger.log(TAG, Log.VERBOSE, "Surface Changed.");
         variables.setSurfaceHolder(holder);
     }
-
     
     /**
      * Surface Holder was destroyed
