@@ -18,7 +18,7 @@ function GameMaster(userid, sessionid, Imports) {
 	this._sessionid = sessionid;
 	this._gamesListeners = new Fridge();
 	this._locationListeners = new Fridge();
-	this._cachedNames = [];
+	this._opponents = [];
 	this._location = {};
 	this._games = {
 		when: null,
@@ -27,22 +27,36 @@ function GameMaster(userid, sessionid, Imports) {
 }
 
 /* Returns a $.Deferred which will be resolved with a the name belonging to the requested userid.
- * For speed, a names are cached to later retrieval!
  */
 GameMaster.prototype.getName = function (userid) {
 	var that = this;
 	var d = new $.Deferred();
-	if (this._cachedNames[userid]) {
-		d.resolve(this._cachedNames[userid]);
-	} else {
-		this._getNameFromService(userid).done(function (name) {
-			that._cachedNames[userid] = name;
-			d.resolve(name);
-		}).fail(function () {
-			d.reject();
-		});
+	for (var i = 0; i < this._opponents.length; i++) {
+		if (this._opponents[i].id === userid) {
+			d.resolve(this._opponents[i].username);
+			return d;
+		}
 	}
+	this.getOpponents().done(function () {
+		for (var i = 0; i < that._opponents.length; i++) {
+			if (that._opponents[i].id === userid) {
+				console.log(that._opponents[i].username);
+				d.resolve(that._opponents[i].username);
+			}
+		}
+	}).fail(function () {
+		d.reject();
+	});
 	return d;
+};
+
+/* Retrieves and returns a $.Deferred resolved with list of opponents
+ */
+GameMaster.prototype.getOpponents = function () {
+	var that = this;
+	return this._getOpponentsFromService().done(function (opponents) {
+		that._opponents = opponents;
+	});
 };
 
 /* Add a new game
@@ -253,28 +267,16 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
  * Returns a deferred to be resolved with array of names.
  * Takes a contiguous array.
  */
-GameMaster.prototype._getNameFromService = function (userid) {
+GameMaster.prototype._getOpponentsFromService = function () {
 	var d = new $.Deferred();
-	$.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(userid), {
+	return $.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(this.userid) + "/opponents", {
 		headers: {
 			"MissileAppSessionId": this._sessionid
 		},
 		dataType: "json"
-	}).done(function (MAResponse) {
-		name = {
-			username: MAResponse.username
-		};
-		$.ajax("http://graph.facebook.com/" + encodeURIComponent(response.facebook_id), {
-			dataType: "json"
-		}).done(function (fbResponse) {
-			name.realname = fbResponse.name;
-		}).always(function () {
-			d.resolve(name);
-		});
-	}).fail(function () {
-		d.reject();
+	}).pipe(function (response) {
+		return response.opponents;
 	});
-	return d;
 };
 
 /* If not already polling for games, start polling!
