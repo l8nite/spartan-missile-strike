@@ -47,11 +47,7 @@ MainMenu.prototype._render = function (games) {
 			that.Imports.GameMaster.getName(opponentid).always(function (name) {
 				var nameToUse = opponentid;
 				if (name) {
-					if (name.realname) {
-						nameToUse = name.realname;
-					} else {
-						nameToUse = name.username;
-					}
+					nameToUse = name;
 				}
 				var g = $("<div>" + nameToUse + "</div>");
 				g.addClass("game");
