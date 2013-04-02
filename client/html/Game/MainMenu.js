@@ -44,23 +44,24 @@ MainMenu.prototype._render = function (games) {
 			if (opponentid === that.Imports.GameMaster.userid) {
 				opponentid = game.opponent;
 			}
+			var g = $("<div></div>");
+			g.addClass("game");
+			g.click(function () {
+				that._showGame(game);
+			});
+			if (game.status === "completed") {
+				$("#list-complete").append(g);
+			} else if (game.current === opponentid) {
+				$("#list-histurn").append(g);
+			} else {
+				$("#list-yourturn").append(g);
+			}
 			that.Imports.GameMaster.getName(opponentid).always(function (name) {
 				var nameToUse = opponentid;
 				if (name) {
 					nameToUse = name;
 				}
-				var g = $("<div>" + nameToUse + "</div>");
-				g.addClass("game");
-				g.click(function () {
-					that._showGame(game);
-				});
-				if (game.status === "completed") {
-					$("#list-complete").append(g);
-				} else if (game.current === opponentid) {
-					$("#list-histurn").append(g);
-				} else {
-					$("#list-yourturn").append(g);
-				}
+				g.text(nameToUse);
 			});
 		})(games[i]);
 	}
