@@ -14,6 +14,14 @@ function MainMenu(Imports) {
 		}
 		Imports.Views["OpponentsView"].show();
 	});
+	
+	//JOMANA ADDED//
+	$("#" + Imports.domId["MainMenu"] + " .optionsBtn").click(function () {
+		if (!Imports.Views["Options"]) {
+			Imports.Views["Options"] = new OpponentsView(Imports);
+		}
+		Imports.Views["Options"].show();
+	});
 }
 
 MainMenu.prototype = Object.create(View.prototype);
