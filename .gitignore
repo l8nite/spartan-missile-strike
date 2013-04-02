@@ -3,6 +3,10 @@
 ###
 .DS_Store
 
+###
+### Shared UI
+###
+/client/shared/visual
 
 ###
 ### Node.JS
