@@ -40,7 +40,6 @@ GameMaster.prototype.getName = function (userid) {
 	this.getOpponents().done(function () {
 		for (var i = 0; i < that._opponents.length; i++) {
 			if (that._opponents[i].id === userid) {
-				console.log(that._opponents[i].username);
 				d.resolve(that._opponents[i].username);
 			}
 		}
