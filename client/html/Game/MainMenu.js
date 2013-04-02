@@ -15,12 +15,11 @@ function MainMenu(Imports) {
 		Imports.Views["OpponentsView"].show();
 	});
 	
-	//JOMANA ADDED//
 	$("#" + Imports.domId["MainMenu"] + " .optionsBtn").click(function () {
-		if (!Imports.Views["Options"]) {
-			Imports.Views["Options"] = new OpponentsView(Imports);
+		if (!Imports.Views["OptionsView"]) {
+			Imports.Views["OptionsView"] = new OptionsView(Imports);
 		}
-		Imports.Views["Options"].show();
+		Imports.Views["OptionsView"].show();
 	});
 }
 
