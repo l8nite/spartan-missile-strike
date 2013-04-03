@@ -2,33 +2,6 @@
 <head>
 	<link rel="stylesheet" href="View/view.css">
 	<link rel="stylesheet" href="MissileApp.css">
-	<style>
-		body {
-			text-align: center;
-			background-color: transparent;
-		}
-		#main-menu {
-			background-color: #8080F0;
-		}
-		#map-view {
-			background-color: #F08080;
-		}
-		#fire-view {
-			background-color: transparent;
-		}
-		#fire-view div {
-			background-color: #80F080;
-		}
-		#options-view {
-			background-color: #F0F080;
-		}
-		#opponents-view {
-			background-color: #808080;
-		}
-		#base-view {
-			background-color: #F080F0;
-		}
-	</style>
 	<script src="jquery/jquery.js"></script>
 	<script src="Util/DomHelper.js"></script>
 	<script src="Util/Fridge.js"></script>
@@ -102,12 +75,25 @@
 <body>
 	<div style="display:none;">
 		<div id="main-menu">
-			<div>Welcome,</div>
-			<div class="yourname"></div><br>
-			<div class="newGameBtn">New Game</div>
-			<div id="list-yourturn"><h1>Your Turn</h1></div>
-			<div id="list-histurn"><h1>Not Your Turn</h1></div>
-			<div id="list-complete"><h1>Nobody's Turn</h1></div>
+			<div class="games-list">
+				<img class="menu-bomb" src="../shared/visual/Image Assets/spartanStrike_mainIcon.png">
+				<div id="list-yourturn">
+					<img class="yourturn label" src="../shared/visual/Image Assets/spartanStrike_yourMove.png">
+				</div>
+				<div id="list-histurn">
+					<img class="histurn label" src="../shared/visual/Image Assets/spartanStrike_theirMove.png">
+				</div>
+				<div id="list-complete">
+					Completed Games
+				</div>
+			</div>
+			<div class="footer">
+				<img class="redline" src="../shared/visual/Image Assets/spartanStrike_lowerRedline.png">
+				<img class="redline" src="../shared/visual/Image Assets/spartanStrike_upperRedline.png">
+				<div class="buttons">
+					<span class="newGameBtn">New Game</span>
+				</div>
+			</div>
 			<div style="display: none;">
 				<div id="game-prototype">
 					<span class="opponent"></span>
