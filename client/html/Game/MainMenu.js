@@ -6,7 +6,7 @@
 function MainMenu(Imports) {
 	var that = this;
 	this.Imports = Imports;
-	View.call(this, Imports.domId["MainMenu"]);
+	FixedHeightView.call(this, Imports.domId["MainMenu"]);
 
 	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").click(function () {
 		if (!Imports.Views["OpponentsView"]) {
@@ -29,7 +29,6 @@ MainMenu.prototype.offView = function () {
 };
 
 MainMenu.prototype.show = function () {
-	$("#" + this.Imports.domId["MainMenu"] + " .yourname").text(this.Imports.GameMaster.userid);
 	this.Imports.ViewManager.loadView(this);
 };
 
