@@ -23,3 +23,22 @@ OptionsView.prototype.offView = function () {
 OptionsView.prototype.show = function () {
 	this.Imports.ViewManager.loadView(this);
 };
+
+<script type="text/javascript">
+function func()
+{
+var afterImageClick = document.createElement("afterClick");
+afterImageClick.src = "./images/musicOn.png";
+
+document.getElementById('musicToggle').onclick = function() {
+       if (document.getElementById('yes').checked) {
+           alert('music on');
+       } else  (document.getElementById('no').checked) {
+           alert('music on');
+       } 
+       }
+
+}
+</script>
+
+
