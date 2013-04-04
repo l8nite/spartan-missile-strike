@@ -63,8 +63,8 @@ public class AndroidBridge {
      * @param callbackident - callback identifier, see Native Bridge
      * @param callbackData - data to pass to the callback identifier
      */
-    public void notifyNativeBridgeCallback(String callbackident, String callbackData) {
-        String url = CALLBACK_PREFIX + callbackident + "," + callbackData + CALLBACK_POSTFIX;
+    public void notifyNativeBridgeCallback(String callbackID, String callbackData) {
+        String url = CALLBACK_PREFIX + callbackID + "," + callbackData + CALLBACK_POSTFIX;
         this.callNativeBridge(url);
     }
     

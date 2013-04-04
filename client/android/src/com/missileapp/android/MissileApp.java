@@ -1,5 +1,6 @@
 package com.missileapp.android;
 
+import com.missileapp.android.res.FacebookAuth;
 import com.missileapp.android.res.FireScreen;
 import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
@@ -77,6 +78,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Store resource variables
         variables.setSettings(super.getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE));            // User Settings
+        variables.setFacebookAuth(new FacebookAuth(variables));                                           // Facebook Auth  
         variables.setFireScreen(new FireScreen(variables));                                               // Fire Screen, camera
         variables.setUserPrefs(new UserPreferences(variables));                                           // User Preferences, app data
         variables.setMediaManager(new MediaManager(variables));                                           // Media Manager, preloads the necessary audio

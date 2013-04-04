@@ -1,5 +1,6 @@
 package com.missileapp.android;
 
+import com.missileapp.android.res.FacebookAuth;
 import com.missileapp.android.res.FireScreen;
 import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
@@ -35,6 +36,7 @@ public class BagOfHolding extends Application {
     // Resource variables
     private boolean isEnabled;                        // Application is enabled
     private boolean hideSplash;                       // Hide Splash registered before enabled;
+    private FacebookAuth facebookAuth;                // Facebook Session Management
     private SharedPreferences settings;               // System User Preferences
     private UserPreferences userPrefs;                // Droid Native Bridge user prefs implementation
     private Vibrator vibrator;                        // Vibrator unit
@@ -252,6 +254,22 @@ public class BagOfHolding extends Application {
 	}
 	
 	/**
+	 * Get Facebook Session Management
+	 * @return {@link FacebookAuth} 
+	 */
+	public FacebookAuth getFacebookAuth() {
+        return facebookAuth;
+    }
+	
+	/**
+	 * Sets Facebook Session Management
+	 * @param facebookAuth instance of {@link FacebookAuth}
+	 */
+    public void setFacebookAuth(FacebookAuth facebookAuth) {
+        this.facebookAuth = facebookAuth;
+    }
+    
+    /**
 	 * Set to hide splash after missile app is enabled
 	 * @return true to hide splash, else false
 	 */
