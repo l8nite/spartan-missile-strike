@@ -1,13 +1,14 @@
 /* MissileApp options view.
  */
  
- 
 
- jQuery(function(){
-    jQuery('.MusicOn').live("click", function(e){
-        var src = $(this).attr("src");
-        $(this).attr("src", $(this).data("altsrc"));
-        $(this).data("altsrc", src);
+$(function(){
+//console.log('called');
+    $('.MusicOn').on('click', function(e){
+ //   console.log("running");
+        var src = $(this).attr('src');
+        $(this).attr('src', $(this).data('src'));
+        $(this).data('src', src);
     });
 });
 
