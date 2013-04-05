@@ -15,10 +15,12 @@ $(function(){
 
 // this is for the SFX  (foreground)
 $(function(){
-//console.log('called');
-    $('.SFXOnOff').on('click', function(e){
- //   console.log("running");
-        var src = $(this).attr('src');
+     $('.SFXOnOff').on('click', function(e){
+     // will have a switch statement (state it is currently)
+     // either change the picture or not then break;
+     // the other case when stopped
+     // play sound remove X break;
+         var src = $(this).attr('src');
         $(this).attr('src', $(this).data('src'));
         $(this).data('src', src);
     });
