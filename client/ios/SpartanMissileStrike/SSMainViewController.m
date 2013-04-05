@@ -116,9 +116,8 @@
             NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
             //NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
             //NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
-            
-            NSNumber *altitude = (double) locationManager.location.altitude;
-            NSNumber *azimuth =  (double) locationManager.heading.magneticHeading;
+            NSNumber *altitude = [NSNumber numberWithDouble:(double)locationManager.location.altitude]; 
+            NSNumber *azimuth = [NSNumber numberWithDouble:(double) locationManager.heading.magneticHeading];
             
  
             //[locationDictionary setObject:latitude forKey:@"latitude"];
