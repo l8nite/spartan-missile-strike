@@ -1,10 +1,22 @@
 /* MissileApp options view.
  */
  
-
+// This is for the music  (background)
 $(function(){
 //console.log('called');
-    $('.MusicOn').on('click', function(e){
+    $('.MusicOnOff').on('click', function(e){
+ //   console.log("running");
+        var src = $(this).attr('src');
+        $(this).attr('src', $(this).data('src'));
+        $(this).data('src', src);
+    });
+});
+
+
+// this is for the SFX  (foreground)
+$(function(){
+//console.log('called');
+    $('.SFXOnOff').on('click', function(e){
  //   console.log("running");
         var src = $(this).attr('src');
         $(this).attr('src', $(this).data('src'));
