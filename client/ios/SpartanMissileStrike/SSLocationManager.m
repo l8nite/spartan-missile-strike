@@ -41,6 +41,10 @@
 {
     CLLocation *lastLocationUpdate = [locations lastObject];
     CLLocationCoordinate2D lastLocation = [lastLocationUpdate coordinate];
+    
+    altitude = (float) manager.location.altitude;
+    
+    
     [self locationManagerCallback](lastLocation);
 }
 
