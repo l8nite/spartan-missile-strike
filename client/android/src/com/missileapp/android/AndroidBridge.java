@@ -150,16 +150,16 @@ public class AndroidBridge {
      * @param callbackID - Native Bridge Callback Identifier
      */
     public void getFacebookAccessToken(String callbackID) {
-    	//TODO: Implement
-        this.notifyNativeBridgeCallback(callbackID,
-          "\"AAACEdEose0cBAHU0yDMi1gYUZCDBrvLhXv1BFPx5wZAKCfRI3IfWMRCyfMfZBIoZAUcomgeyFj14N2nly91E8F7zMDx80iQLmLMJxJWVT9eutZCyU742l\"");
+        MALogger.log(TAG, Log.INFO, "SENDING FACEBOOK ACCESS TOKEN");
+        variables.getFacebookAuth().notifyNativeBridgeAccessToken(callbackID);
     }
     
     /**
      * Logout of Facebook
      */
     public void logoutFacebook() {
-    	//TODO: Implement
+        MALogger.log(TAG, Log.INFO, "Logging Out of Facebook");
+    	variables.getFacebookAuth().logoutFacebook();
     }
     
     /**

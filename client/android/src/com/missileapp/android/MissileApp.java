@@ -141,7 +141,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.getFireScreen().processResumeRequest();
         
         // Notify Native Bridge to Wake
-        variables.getDroidBridge().wakeNativeBridge();
+        if(variables.isEnabled()) {
+            variables.getDroidBridge().wakeNativeBridge();
+        }
     }
     
     
@@ -184,6 +186,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onStop() {
         super.onStop();
         MALogger.log(TAG, Log.INFO, "Stopping activity.");
+        variables.getFacebookAuth().processStopRequest();
         variables.getFireScreen().processPauseRequest();
     }
     
@@ -197,6 +200,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        variables.getFacebookAuth().setActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 1:
                 finishLocationSettings();
