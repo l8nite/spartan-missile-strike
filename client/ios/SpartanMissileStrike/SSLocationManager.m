@@ -12,6 +12,7 @@
 
 @synthesize locationManager;
 @synthesize locationManagerCallback;
+@synthesize azimuth; 
 
 -(id)init
 {
@@ -39,13 +40,24 @@
 
 -(void)locationManager:(CLLocationManager*)manager didUpdateLocations:(NSArray *)locations
 {
+ NSNumber* latitude = [NSNumber numberWithDouble:(double) manager.location.coordinate.latitude];
+ NSNumber* longitude = [NSNumber numberWithDouble:(double)manager.location.coordinate.longitude];
+ NSNumber* altitude = [NSNumber numberWithDouble:(double)manager.location.altitude];
+    
     CLLocation *lastLocationUpdate = [locations lastObject];
     CLLocationCoordinate2D lastLocation = [lastLocationUpdate coordinate];
-    
-    altitude = (float) manager.location.altitude;
-    
-    
     [self locationManagerCallback](lastLocation);
 }
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+{
+   NSNumber *azimuth  = [NSNumber numberWithDouble:(double)manager.heading.magneticHeading];
+ }
+
+
+ 
+ 
+
+
 
 @end
