@@ -114,18 +114,20 @@
         [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
 
             NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
-            //NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
-            //NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
+            /**
+             NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
+             NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
+            */
             
-            //NSNumber *altitude = [NSNumber numberWithDouble:(double)locationManager.location.altitude];
-            //NSNumber *azimuth = [NSNumber numberWithDouble:(double) locationManager.heading.magneticHeading];
-            
+            /**
+             NSNumber *altitude = [NSNumber numberWithDouble:(double)locationManager.location.altitude];
+            NSNumber *azimuth = [NSNumber numberWithDouble:(double) locationManager.heading.magneticHeading];
+            **/
             NSNumber *azimuth = [NSNumber numberWithDouble:(double)location.latitude];
             NSNumber *altitude = [NSNumber numberWithDouble:(double)location.longitude];
  
             //[locationDictionary setObject:latitude forKey:@"latitude"];
             //[locationDictionary setObject:longitude forKey:@"longitude"];
-            
             [locationDictionary setObject:azimuth forKey:@"azimuth" ];
             [locationDictionary setObject:altitude forKey:@"altitude"];
             
