@@ -117,9 +117,9 @@
             //NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
             //NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
             
-            NSNumber *azimuth =  (double) locationManager.heading.magneticHeading;
             NSNumber *altitude = (double) locationManager.location.altitude;
- 
+            NSNumber *azimuth =  (double) locationManager.heading.magneticHeading;
+            
  
             //[locationDictionary setObject:latitude forKey:@"latitude"];
             //[locationDictionary setObject:longitude forKey:@"longitude"];
