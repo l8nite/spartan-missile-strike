@@ -4,18 +4,26 @@ var should = require('should'),
     _ = require('underscore');
 
 describe('/users', function () {
-    var client,
+    var client, client2,
         path;
 
     before(function (done) {
-        client = new ServiceClient();
-        client.login('Service General Unit Tests', function (err) {
-            if (err) {
-                return done(err);
-            }
-
-            path = '/users/' + encodeURIComponent(client.user.id);
-            done();
+        async.parallel([
+            function (next) {
+                client = new ServiceClient();
+                client.login('Service General Unit Tests', function (err) {
+                    path = '/users/' + encodeURIComponent(client.user.id);
+                    next(err);
+                });
+            },
+            function (next) {
+                client2 = new ServiceClient();
+                client2.login('Service Session Unit Tests', function (err) {
+                    next(err);
+                });
+            },
+        ], function (err) {
+            done(err);
         });
     });
 
@@ -34,10 +42,33 @@ describe('/users', function () {
         });
     });
 
+    describe("GET someone else's /users/:id", function() {
+        it('should return user details', function (done) {
+            client2.get(path, function(err, req, res, obj) {
+                should.not.exist(err);
+                should.exist(obj);
+                obj.should.have.property('id');
+                obj.id.should.equal(client.user.id);
+                res.statusCode.should.equal(200);
+                done();
+            });
+        });
+    });
+
     describe('PUT /users/:id', function () {
         it('should return a 304 if you try to set the same username', function (done) {
             client.put(path, { username: client.user.username }, function(err, req, res, obj) {
                 res.statusCode.should.equal(304);
+                done();
+            });
+        });
+    });
+
+    describe("PUT someone else's /users/:id", function () {
+        it('should return a 403 not authorized', function (done) {
+            client2.put(path, { username: client2.user.username }, function (err, req, res, obj) {
+                res.statusCode.should.equal(403);
+                err.name.should.equal('NotAuthorizedError');
                 done();
             });
         });
@@ -142,11 +173,11 @@ describe('/users', function () {
         });
     });
 
-    describe('GET /users/:id with a valid but not authorized id', function () {
-        it('should return a 403 forbidden', function (done) {
+    describe('GET /users/:id with an id that does not exist', function () {
+        it('should return a 404 not found', function (done) {
             client.get('/users/user%3A00000000-0000-0000-0000-000000000000', function (err, req, res, obj) {
-                res.statusCode.should.equal(403);
-                err.name.should.equal('NotAuthorizedError');
+                res.statusCode.should.equal(404);
+                err.name.should.equal('ResourceNotFoundError');
                 done();
             });
         });
