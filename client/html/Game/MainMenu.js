@@ -14,6 +14,10 @@ function MainMenu(Imports) {
 		}
 		Imports.Views["OpponentsView"].show();
 	});
+
+	var footerHeight = window.innerWidth / 6;
+	$("#" + Imports.domId["MainMenu"] + " .footer").css("height", footerHeight);
+	$("#" + Imports.domId["MainMenu"] + " .games").css("height", window.innerHeight - footerHeight);
 }
 
 MainMenu.prototype = Object.create(View.prototype);

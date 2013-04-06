@@ -29,7 +29,7 @@
 				"OpponentsView": "opponents-view",
 				"BaseView": "base-view"
 			},
-			serviceurl: "https://api.missileapp.com:8443"
+			serviceurl: "https://api.missileapp.com:443"
 		};
 
 		window.NativeBridge = {
@@ -75,23 +75,29 @@
 <body>
 	<div style="display:none;">
 		<div id="main-menu">
-			<div class="games-list">
-				<img class="menu-bomb" src="../shared/visual/Image Assets/spartanStrike_mainIcon.png">
-				<div id="list-yourturn">
-					<img class="yourturn label" src="../shared/visual/Image Assets/spartanStrike_yourMove.png">
+			<div class="games">
+				<div class="header">
+					<img class="menu-bomb" src="../shared/Image Assets/spartanStrike_menuBomb.png">
+					<div class="new-game-overlay">
+						<img class="newGameBtn" src="../shared/Image Assets/spartanStrike_newGame.png">
+					</div>
 				</div>
-				<div id="list-histurn">
-					<img class="histurn label" src="../shared/visual/Image Assets/spartanStrike_theirMove.png">
+				<div id="list-yourturn" class="games-list">
+					<img class="yourturn label" src="../shared/Image Assets/spartanStrike_yourMove.png">
 				</div>
-				<div id="list-complete">
+				<div id="list-histurn" class="games-list">
+					<img class="histurn label" src="../shared/Image Assets/spartanStrike_theirMove.png">
+				</div>
+				<div id="list-complete" class="games-list">
 					Completed Games
 				</div>
 			</div>
 			<div class="footer">
-				<img class="redline" src="../shared/visual/Image Assets/spartanStrike_lowerRedline.png">
-				<img class="redline" src="../shared/visual/Image Assets/spartanStrike_upperRedline.png">
+				<img class="redline" src="../shared/Image Assets/spartanStrike_lowerRedline.png">
+				<img class="redline" src="../shared/Image Assets/spartanStrike_upperRedline.png">
 				<div class="buttons">
-					<span class="newGameBtn">New Game</span>
+					<img class="optionsBtn" src="../shared/Image Assets/spartanStrike_options.png">
+					<div class="clear"></div>
 				</div>
 			</div>
 			<div style="display: none;">
