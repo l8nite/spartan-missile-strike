@@ -6,7 +6,8 @@
 ###
 ### Shared UI
 ###
-/client/shared/visual
+/client/shared/Fonts
+/client/shared/Image Assets
 
 ###
 ### Node.JS
