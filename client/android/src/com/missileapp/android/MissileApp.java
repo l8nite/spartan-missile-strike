@@ -1,13 +1,16 @@
 package com.missileapp.android;
 
+import com.missileapp.android.res.FacebookAuth;
 import com.missileapp.android.res.FireScreen;
 import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
+import com.missileapp.android.res.MAWebChromeClient;
 import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.UserPreferences;
 
 import android.location.LocationManager;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -19,6 +22,7 @@ import android.webkit.WebView;
 import android.webkit.WebSettings.RenderPriority;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,7 +30,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.hardware.SensorManager;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -37,15 +40,17 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     private static final String PREFERENCES_GPSPROMPT = "DROIDASKGPS";     // The key for asking user for GPS location, True -> Ask user, False -> skip
     private static final String DROIDNB_VARNAME = "AndroidInterface";      // Native Bridge name
     private static final String DROIDWB_FILENAME =                         // Webview file to load
-            "file:///android_asset/html/NativeBridge/NativeBridge_Android-debug.html";
+            "file:///android_asset/html/MissileApp-Android.html";
     
     // Varible Bag
     private static BagOfHolding variables;
+    private static boolean mainMenuViewVerified;
     
     /*********************************
      * Android OS call back functions
      *********************************/
-	@Override
+	@SuppressLint("NewApi")
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         MALogger.log(TAG, Log.INFO, "Creating activity.");
         
@@ -59,8 +64,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Init -> super create, set view, get variable data
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        variables = (BagOfHolding) super.getApplication(); 
+        variables = (BagOfHolding) super.getApplication();
         variables.setMissileApp(this);
+        mainMenuViewVerified = false;
 
         // Disable app
         variables.setEnabled(false);
@@ -72,14 +78,15 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Store resource variables
         variables.setSettings(super.getSharedPreferences(PREFERENCES_FILENAME, MODE_PRIVATE));            // User Settings
+        variables.setFacebookAuth(new FacebookAuth(variables));                                           // Facebook Auth  
         variables.setFireScreen(new FireScreen(variables));                                               // Fire Screen, camera
         variables.setUserPrefs(new UserPreferences(variables));                                           // User Preferences, app data
         variables.setMediaManager(new MediaManager(variables));                                           // Media Manager, preloads the necessary audio
         variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE));               // Android System Service Vibrator
         variables.setLocationManager((LocationManager) getSystemService(Context.LOCATION_SERVICE));       // Android System Service Location Manager
         variables.setLocationManagement(new LocationManagement(variables));                               // MissileApp Location Implementation
-        variables.setGyro(new Gyro(variables));                                                           // Gyroscope implementation
         variables.setSensorManager((SensorManager) super.getSystemService(Context.SENSOR_SERVICE));       // Android Sensor Service Implementation
+        variables.setGyro(new Gyro(variables));                                                           // Gyroscope implementation
         
         // Create surface view for cam preview and register callback functions
         surfaceHolder = surfaceView.getHolder();
@@ -102,10 +109,16 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            try {
+                webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+            }
+            catch(Exception e) {
+                MALogger.log(TAG, Log.ERROR, "Content-Access-Control: " + e.getMessage(), e);
+            }
+        }
+        webView.setWebChromeClient(new MAWebChromeClient());
         webView.addJavascriptInterface(droidBridge, DROIDNB_VARNAME);
-        
-        //TODO REMOVE
-        webView.setBackgroundColor(Color.MAGENTA);
         
         // Load WebView
         webView.loadUrl(DROIDWB_FILENAME);
@@ -122,12 +135,15 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // Check location services are enabled.
         this.processLocationServices();
+        variables.getLocationManagement().processResumeRequest();
         
         // Re-enter Fire Screen
         variables.getFireScreen().processResumeRequest();
         
         // Notify Native Bridge to Wake
-        variables.getDroidBridge().wakeNativeBridge();
+        if(variables.isEnabled()) {
+            variables.getDroidBridge().wakeNativeBridge();
+        }
     }
     
     
@@ -136,15 +152,21 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     @Override
     public void onBackPressed() {
-        // super.onBackPressed();
-        variables.getDroidBridge().requestMainMenuViewStatus();
+        if(!mainMenuViewVerified) {
+            variables.getDroidBridge().requestMainMenuViewStatus();
+        }
+        else {
+            super.onBackPressed();
+            mainMenuViewVerified = false;
+        }
     }
     
     /**
      * Calls back button
      */
     public void callBackButton() {
-    	super.onBackPressed();
+        mainMenuViewVerified = true;
+        Toast.makeText(this, "Press back again", Toast.LENGTH_SHORT).show();
     }
     
     
@@ -157,13 +179,14 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.getFireScreen().processPauseRequest();
         
         // Remove Location Updates for GPS and Network
-        variables.getLocationManager().removeUpdates(variables.getLocationManagement());
+        variables.getLocationManagement().processPauseRequest();
     }
     
     @Override
     protected void onStop() {
         super.onStop();
         MALogger.log(TAG, Log.INFO, "Stopping activity.");
+        variables.getFacebookAuth().processStopRequest();
         variables.getFireScreen().processPauseRequest();
     }
     
@@ -177,15 +200,15 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        variables.getFacebookAuth().setActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 1:
                 finishLocationSettings();
                 break;
-
+            
             default:
                 break;
         }
-        
     }
     
     /**
@@ -270,17 +293,10 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         // Exit if no location provider enabled, else register all available services
         if(!locationEnabled && !gpsLocationEnabled) {
             exitMissileApp();
-            return;
         }
-
-        if(locationEnabled) {
-            variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, variables.getLocationManagement());
+        else {
+            variables.setEnabled(true);
         }
-        if(gpsLocationEnabled) {
-            variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, variables.getLocationManagement());
-        }
-        
-        variables.setEnabled(true);
     }
     
     
@@ -306,7 +322,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.setSurfaceHolder(holder);
     }
     
-    
     /**
      * Surface Holder changes
      * @param holder - the holder to draw the camera preview, {@link SurfaceHolder.Callback2#surfaceChanged(SurfaceHolder, int, int, int)}
@@ -319,7 +334,6 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         MALogger.log(TAG, Log.VERBOSE, "Surface Changed.");
         variables.setSurfaceHolder(holder);
     }
-
     
     /**
      * Surface Holder was destroyed
