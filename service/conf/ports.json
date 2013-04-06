@@ -1,4 +1,4 @@
 {
-    "documentationServer": 8080,
-    "apiServer": 8443
+    "documentationServer": 80,
+    "apiServer": 443
 }
