@@ -154,7 +154,11 @@
             //[orientationDictionary setObject:yaw forKey:@"yaw"];
             //[orientationDictionary setObject:roll forKey:@"roll"];
             
-            //"yaw" is "azimuth"
+            /** Notes for the follwing 
+             "yaw" is "azimuth", "pitch" is the tilt of the phone with respect to ground, or zenith, and "roll" is about the vector pointing through the screen
+             (lat, lon, alt) is equivalent to(pitch, yaw, roll).
+            */
+             
             [orientationDictionary setObject:yaw forKey:@"azimuth"];
             [orientationDictionary setObject:pitch forKey:@"altitude"];
             
