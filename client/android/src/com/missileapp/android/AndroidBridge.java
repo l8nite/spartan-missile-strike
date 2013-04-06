@@ -32,8 +32,14 @@ public class AndroidBridge {
      * Calls the native bridge call back function
      * @param url - javascript to run
      */
-    public void callNativeBridge(String url) {
-        variables.getWebView().loadUrl(CALL_NB_PREFIX +  url);
+    public void callNativeBridge(final String url) {
+        variables.getMissileApp().runOnUiThread(new Runnable() {
+            
+            @Override
+            public void run() {
+                variables.getWebView().loadUrl(CALL_NB_PREFIX +  url);
+            }
+        });
     }
     
     /**
@@ -57,8 +63,8 @@ public class AndroidBridge {
      * @param callbackident - callback identifier, see Native Bridge
      * @param callbackData - data to pass to the callback identifier
      */
-    public void notifyNativeBridgeCallback(String callbackident, String callbackData) {
-        String url = CALLBACK_PREFIX + callbackident + "," + callbackData + CALLBACK_POSTFIX;
+    public void notifyNativeBridgeCallback(String callbackID, String callbackData) {
+        String url = CALLBACK_PREFIX + callbackID + "," + callbackData + CALLBACK_POSTFIX;
         this.callNativeBridge(url);
     }
     
@@ -144,14 +150,16 @@ public class AndroidBridge {
      * @param callbackID - Native Bridge Callback Identifier
      */
     public void getFacebookAccessToken(String callbackID) {
-    	//TODO: Implement
+        MALogger.log(TAG, Log.INFO, "SENDING FACEBOOK ACCESS TOKEN");
+        variables.getFacebookAuth().notifyNativeBridgeAccessToken(callbackID);
     }
     
     /**
      * Logout of Facebook
      */
     public void logoutFacebook() {
-    	//TODO: Implement
+        MALogger.log(TAG, Log.INFO, "Logging Out of Facebook");
+    	variables.getFacebookAuth().logoutFacebook();
     }
     
     /**

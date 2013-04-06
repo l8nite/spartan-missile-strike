@@ -13,12 +13,12 @@
     <WebView android:id="@+id/webview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@android:color/black"
     />
 
     <ImageView android:id="@+id/splashview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:scaleType="fitXY"
         android:contentDescription="@string/splash_screen_info"
         android:background="@android:color/black"
         android:src="@drawable/splashscreen"
