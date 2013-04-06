@@ -109,27 +109,16 @@
 -(void)nativeBridgeFunction:(NSString *)function withArguments:(NSDictionary *)arguments
 {
     NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
-
+    
     if ([function isEqualIgnoringCase:@"startLocationUpdates"]) {
         [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
-
-            NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
-            /**
-             NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
-             NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
-            */
             
-            /**
-             NSNumber *altitude = [NSNumber numberWithDouble:(double)locationManager.location.altitude];
-            NSNumber *azimuth = [NSNumber numberWithDouble:(double) locationManager.heading.magneticHeading];
-            **/
-            NSNumber *azimuth = [NSNumber numberWithDouble:(double)location.latitude];
-            NSNumber *altitude = [NSNumber numberWithDouble:(double)location.longitude];
- 
-            //[locationDictionary setObject:latitude forKey:@"latitude"];
-            //[locationDictionary setObject:longitude forKey:@"longitude"];
-            [locationDictionary setObject:azimuth forKey:@"azimuth" ];
-            [locationDictionary setObject:altitude forKey:@"altitude"];
+            NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
+            NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
+            NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
+            
+            [locationDictionary setObject:latitude forKey:@"latitude"];
+            [locationDictionary setObject:longitude forKey:@"longitude"];
             
             [nativeBridge callbackWithDictionary:locationDictionary forFunction:function withArguments:arguments];
         }];
@@ -147,6 +136,27 @@
             [orientationDictionary setObject:pitch forKey:@"pitch"];
             [orientationDictionary setObject:yaw forKey:@"yaw"];
             [orientationDictionary setObject:roll forKey:@"roll"];
+            
+            [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
+        }];
+    }
+    else if ([function isEqualIgnoringCase:@"stopOrientationUpdates"]) {
+        [orientationManager stopUpdatingOrientation];
+    }
+    else if ([function isEqualIgnoringCase:@"startOrientationUpdates"]) {
+        [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
+            NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
+            NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
+            NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
+            NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
+            
+            //[orientationDictionary setObject:pitch forKey:@"pitch"];
+            //[orientationDictionary setObject:yaw forKey:@"yaw"];
+            //[orientationDictionary setObject:roll forKey:@"roll"];
+            
+            //"yaw" is "azimuth"
+            [orientationDictionary setObject:yaw forKey:@"azimuth"];
+            [orientationDictionary setObject:pitch forKey:@"altitude"];
             
             [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
         }];
