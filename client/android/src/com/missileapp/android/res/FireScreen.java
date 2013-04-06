@@ -3,6 +3,7 @@ package com.missileapp.android.res;
 import com.missileapp.android.BagOfHolding;
 import com.missileapp.android.MALogger;
 
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.util.Log;
 import android.widget.Toast;
@@ -23,33 +24,6 @@ public class FireScreen {
         this.variables = variables;
     }
     
-    
-    /**
-     * If in firescreen, cuts camera and sets the background white
-     * If not in firescreen, rolls camera and sets the background transparent
-     * @param showFireScreen - true to enter fire screen, false to exit
-     */
-    public void showFireMissileScreen(String showFireScreen) {
-        boolean showScreen;
-        
-        // Parse command
-        try {
-            showScreen = Boolean.parseBoolean(showFireScreen);
-        }
-        catch (Exception e) {
-            showScreen = false;
-        }
-        MALogger.log(TAG, Log.INFO, "Fire Screen command: " + showFireScreen + ", parsed to: " + showScreen + ".");
-        
-        if (showScreen) {
-            variables.getFireScreen().enterFireScreen();
-        }
-        else {
-            variables.getFireScreen().exitFireScreen();
-        }
-    }
-    
-    
     /**
      * Enters the firesceen
      *  Requests the reat-facing  {@link Camera}
@@ -62,6 +36,9 @@ public class FireScreen {
             // Create and Save Variables, default to rear facing camera
             cam = Camera.open();
             if(cam != null) {
+                // Color Transparent
+                variables.getWebView().setBackgroundColor(Color.TRANSPARENT);
+                
                 // Set Orientation and display  
                 cam.setDisplayOrientation(CAMERA_ORIENTATION);
                 cam.setPreviewDisplay(variables.getSurfaceHolder());
@@ -69,6 +46,8 @@ public class FireScreen {
                 // Lock and Start Preview
                 cam.lock();
                 cam.startPreview();
+                
+                variables.getSurfaceHolder().setKeepScreenOn(true);
             }
             else {
                 MALogger.log(TAG, Log.WARN, "No Camera.");
@@ -90,6 +69,13 @@ public class FireScreen {
         try {
             // Stop Preview, unlock, and release
             if(cam != null) {
+                // Color Transparent
+                variables.getWebView().setBackgroundColor(Color.MAGENTA);
+                //TODO REMOVE, update main.xml layout file
+                //variables.getWebView().setBackgroundColor(Color.BLACK);
+                
+                // Process stop request
+            	variables.getSurfaceHolder().setKeepScreenOn(false);
                 cam.stopPreview();
                 cam.unlock();
                 cam.release();

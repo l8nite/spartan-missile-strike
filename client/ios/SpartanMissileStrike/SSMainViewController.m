@@ -2,7 +2,7 @@
 //  SSMainViewController.m
 //  SpartanMissileStrike
 //
-//  Created by Shaun Guth on 3/11/13.
+//  Created   on 3/11/13.
 //  Copyright (c) 2013 missileapp.com. All rights reserved.
 //
 
@@ -42,12 +42,17 @@
     locationManager = [[SSLocationManager alloc] init];
     orientationManager = [[SSOrientationManager alloc] init];
     nativeBridge = [[SSNativeBridge alloc] initWithWebView:webView andDelegate:self];
-
-    webView.backgroundColor = [UIColor clearColor];
+    [self _initWebView];
 
     NSURL *indexURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"html/MissileApp-iOS" ofType:@"html"] isDirectory:NO];
     NSURLRequest *initialLoadRequest = [NSURLRequest requestWithURL:indexURL];
-    [webView loadRequest:initialLoadRequest];
+    [webView loadRequest:initialLoadRequest];    
+}
+
+-(void)_initWebView
+{
+    webView.backgroundColor = [UIColor clearColor];
+    webView.scrollView.bounces = NO;    
 }
 
 - (void)viewDidUnload

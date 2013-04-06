@@ -1,6 +1,6 @@
 var restify = require('restify'),
     redis = require('../lib/database.js'),
-    util = require('../lib/util.js'),
+    routeutil = require('../lib/routeutil.js'),
     async = require('async'),
     fbgraph = require('fbgraph'),
     _ = require('underscore');
@@ -174,7 +174,7 @@ function userIdRequiredHandler (handler) {
             _validateUserIdParameter,
             _fetchUserFromDatabase,
             handler,
-        ], util.routeResponder(response, done));
+        ], routeutil.routeResponder(response, done));
     };
 }
 
