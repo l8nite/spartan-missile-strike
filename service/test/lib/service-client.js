@@ -7,7 +7,7 @@ var fbAccessTokenForUser = require('../conf/test-users.json');
 
 function ServiceClient () {
     this.client = restify.createJsonClient({
-        url: 'https://localhost:' + ports.apiServer,
+        url: 'https://api.missileapp.com:' + ports.apiServer,
         version: '*'
     });
 }
