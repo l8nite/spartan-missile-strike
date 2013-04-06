@@ -18,6 +18,7 @@
     "node-uuid": "~1.4.0",
     "underscore": "~1.4.4",
     "restify": "~2.2.1",
-    "node-vincenty": "0.0.4"
+    "node-vincenty": "0.0.4",
+    "bunyan": "~0.21.1"
   }
 }
