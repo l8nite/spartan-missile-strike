@@ -23,7 +23,7 @@ public class Gyro implements SensorEventListener {
     private Sensor accelerometer;                           // accelerometer
     private Sensor magnetometer;                            // geomagenotometer
     private float[] gravity;                                // last known gravity sensor data
-    private float[] magentic;                               // last known geomagentic sensor data
+    private float[] magnetic;                               // last known geomagnetic sensor data
     private float azimuth;                                  // last known azimuth
     private float altitude;                                 // last known altitude
     
@@ -95,17 +95,17 @@ public class Gyro implements SensorEventListener {
                 break;
 
             case Sensor.TYPE_MAGNETIC_FIELD:
-                magentic = event.values;
+                magnetic = event.values;
                 break;
             default:
                 break;
         }
         
-        if(gravity != null && magentic != null) {
+        if(gravity != null && magnetic != null) {
             float[] R = new float[9];
             float[] I = new float[9];
             
-            if(SensorManager.getRotationMatrix(R, I, gravity, magentic)) {
+            if(SensorManager.getRotationMatrix(R, I, gravity, magnetic)) {
                 float[] orientation = new float[3];
                 float[] reMappedR = new float[9];
                 SensorManager.remapCoordinateSystem(R, SensorManager.AXIS_X, SensorManager.AXIS_Z, reMappedR);

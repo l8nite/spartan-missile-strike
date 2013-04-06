@@ -69,18 +69,19 @@ public class LocationManagement implements LocationListener {
      * Starts Location Listener
      */
     private void startLocationListener() {
-        boolean locationEnabled = variables.getLocationManager().isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        boolean gpsLocationEnabled = variables.getLocationManager().isProviderEnabled(LocationManager.GPS_PROVIDER);
+        LocationManager locationManager = variables.getLocationManager();
+        boolean locationEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        boolean gpsLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if(locationEnabled) {
-            variables.getLocationManager().requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         }
         if(gpsLocationEnabled) {
-            variables.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
         
         try {
-            lastKnownLocation = variables.getLocationManager().getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            Location lastKnownGPSLocation = variables.getLocationManager().getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Location lastKnownGPSLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             lastKnownLocation = (isBetterLocation(lastKnownGPSLocation)) ? lastKnownGPSLocation : lastKnownLocation;
         }
         catch (Exception e) {
