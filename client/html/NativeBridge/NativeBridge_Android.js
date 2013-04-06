@@ -10,7 +10,7 @@ function NativeBridge_Android() {
 NativeBridge_Android.prototype = Object.create(NativeBridge_Abstract.prototype);
 
 NativeBridge_Android.prototype._startLocationUpdates = function (callbackID) {
-	AndroidInterface.startLocationUpdates(callbackID);
+	AndroidInterface.startLocationUpdates(JSON.stringify(callbackID));
 };
 
 NativeBridge_Android.prototype._stopLocationUpdates = function () {
@@ -18,7 +18,7 @@ NativeBridge_Android.prototype._stopLocationUpdates = function () {
 };
 
 NativeBridge_Android.prototype._startOrientationUpdates = function (callbackID) {
-	AndroidInterface.startOrientationUpdates(callbackID);
+	AndroidInterface.startOrientationUpdates(JSON.stringify(callbackID));
 };
 
 NativeBridge_Android.prototype._stopOrientationUpdates = function () {
@@ -34,15 +34,15 @@ NativeBridge_Android.prototype.hideFireMissileScreen = function () {
 };
 
 NativeBridge_Android.prototype._getPreferences = function (preferences, callbackID) {
-	AndroidInterface.getPreferences(preferences, callbackID);
+	AndroidInterface.getPreferences(JSON.stringify(preferences), JSON.stringify(callbackID));
 };
 
 NativeBridge_Android.prototype._setPreferences = function (preferences, callbackID) {
-	AndroidInterface.setPreferences(preferences, callbackID);
+	AndroidInterface.setPreferences(JSON.stringify(preferences), JSON.stringify(callbackID));
 };
 
 NativeBridge_Android.prototype._getFacebookAccessToken = function (callbackID) {
-	AndroidInterface.getFacebookAccessToken(callbackID);
+	AndroidInterface.getFacebookAccessToken(JSON.stringify(callbackID));
 };
 
 NativeBridge_Android.prototype.logoutFacebook = function () {
@@ -50,11 +50,11 @@ NativeBridge_Android.prototype.logoutFacebook = function () {
 };
 
 NativeBridge_Android.prototype.playSound = function (soundID, options) {
-	AndroidInterface.playSound(soundID, options);
+	AndroidInterface.playSound(JSON.stringify(soundID), JSON.stringify(options));
 };
 
 NativeBridge_Android.prototype.stopSound = function (soundID) {
-	AndroidInterface.stopSound(soundID);
+	AndroidInterface.stopSound(JSON.stringify(soundID));
 };
 
 NativeBridge_Android.prototype.hideSplash = function () {
@@ -62,5 +62,9 @@ NativeBridge_Android.prototype.hideSplash = function () {
 };
 
 NativeBridge_Android.prototype.vibrate = function (time) {
-	AndroidInterface.vibrate(time);
+	AndroidInterface.vibrate(JSON.stringify(time));
+};
+
+NativeBridge_Android.prototype.log = function (msg) {
+	AndroidInterface.log(JSON.stringify(msg));
 };
