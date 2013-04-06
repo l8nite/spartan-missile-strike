@@ -36,6 +36,7 @@ public class BagOfHolding extends Application {
     // Resource variables
     private boolean isEnabled;                        // Application is enabled
     private boolean hideSplash;                       // Hide Splash registered before enabled;
+    private String facebookCallBackID;                // facebookCallBackID to notify NB if not yet enabled
     private FacebookAuth facebookAuth;                // Facebook Session Management
     private SharedPreferences settings;               // System User Preferences
     private UserPreferences userPrefs;                // Droid Native Bridge user prefs implementation
@@ -237,12 +238,17 @@ public class BagOfHolding extends Application {
      * @param isEnabled, true to enable
      */
 	public void setEnabled(boolean isEnabled) {
-		this.isEnabled = isEnabled;
-		
-		if(hideSplash) {
-		    Misc.hideSplash(this, this.getMissileApp(), this.getSplashScreen());
-		    hideSplash = false;
-		}
+        this.isEnabled = isEnabled;
+        if (isEnabled) {
+            if (hideSplash) {
+                Misc.hideSplash(this, this.getMissileApp(), this.getSplashScreen());
+                hideSplash = false;
+            }
+            if (facebookCallBackID != null) {
+                facebookAuth.notifyNativeBridgeAccessToken(facebookCallBackID);
+                facebookCallBackID = null;
+            }
+        }
 	}
 	
 	/**
@@ -253,7 +259,16 @@ public class BagOfHolding extends Application {
 		return hideSplash;
 	}
 	
-	/**
+	public String getFacebookCallBackID() {
+        return facebookCallBackID;
+    }
+
+    public void setFacebookCallBackID(String callbackID) {
+        this.facebookCallBackID = callbackID;
+    }
+
+
+    /**
 	 * Get Facebook Session Management
 	 * @return {@link FacebookAuth} 
 	 */

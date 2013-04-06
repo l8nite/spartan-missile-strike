@@ -74,7 +74,6 @@ public class FacebookAuth {
             }
             return false;
         }
-        
     }
     
     /**
@@ -83,20 +82,24 @@ public class FacebookAuth {
      */
     public void notifyNativeBridgeAccessToken(String callbackID) {
         MALogger.log(TAG, Log.INFO, "Sending NB Access Token: " + callbackID);
-        if(checkIfSessionExists()) {
-            MALogger.log(TAG, Log.INFO, "Sending NB Access Token");
-            variables.getDroidBridge().notifyNativeBridgeCallback(callbackID, facebookToken);
+        if(variables.isEnabled()) {
+            if(checkIfSessionExists()) {
+                MALogger.log(TAG, Log.INFO, "Sending NB Access Token");
+                variables.getDroidBridge().notifyNativeBridgeCallback(callbackID, facebookToken);
+            }
+            else {
+                nbCallbackID = callbackID;
+            }
         }
         else {
-            nbCallbackID = callbackID;
+            MALogger.log(TAG, Log.INFO, "Missile App Not Yet Enabled");
+            variables.setFacebookCallBackID(callbackID);
         }
     }
     
     private void loginFacebook() {
-        if(!checkIfSessionExists()) {
-            Session session = Session.openActiveSession(variables.getMissileApp(), true, statusCallback);
-            Session.setActiveSession(session);
-        }
+        Session session = Session.openActiveSession(variables.getMissileApp(), true, statusCallback);
+        Session.setActiveSession(session);
     }
     
     private void processSession(Session session) {
@@ -129,7 +132,7 @@ public class FacebookAuth {
         
         // Notify Facebook
         Session session = Session.getActiveSession();
-        if (!session.isClosed()) {
+        if (session != null && !session.isClosed()) {
             session.closeAndClearTokenInformation();
         } 
     }
