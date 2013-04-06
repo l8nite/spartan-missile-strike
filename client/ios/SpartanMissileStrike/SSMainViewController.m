@@ -109,14 +109,14 @@
 -(void)nativeBridgeFunction:(NSString *)function withArguments:(NSDictionary *)arguments
 {
     NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
-
+    
     if ([function isEqualIgnoringCase:@"startLocationUpdates"]) {
         [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
-
+            
             NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
             NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
             NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
-
+            
             [locationDictionary setObject:latitude forKey:@"latitude"];
             [locationDictionary setObject:longitude forKey:@"longitude"];
             
@@ -136,6 +136,31 @@
             [orientationDictionary setObject:pitch forKey:@"pitch"];
             [orientationDictionary setObject:yaw forKey:@"yaw"];
             [orientationDictionary setObject:roll forKey:@"roll"];
+            
+            [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
+        }];
+    }
+    else if ([function isEqualIgnoringCase:@"stopOrientationUpdates"]) {
+        [orientationManager stopUpdatingOrientation];
+    }
+    else if ([function isEqualIgnoringCase:@"startOrientationUpdates"]) {
+        [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
+            NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
+            NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
+            NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
+            NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
+            
+            //[orientationDictionary setObject:pitch forKey:@"pitch"];
+            //[orientationDictionary setObject:yaw forKey:@"yaw"];
+            //[orientationDictionary setObject:roll forKey:@"roll"];
+            
+            /** Notes for the follwing 
+             "yaw" is "azimuth", "pitch" is the tilt of the phone with respect to ground, or zenith, and "roll" is about the vector pointing through the screen
+             (lat, lon, alt) is equivalent to(pitch, yaw, roll).
+            */
+             
+            [orientationDictionary setObject:yaw forKey:@"azimuth"];
+            [orientationDictionary setObject:pitch forKey:@"altitude"];
             
             [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
         }];

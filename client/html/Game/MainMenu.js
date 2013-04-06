@@ -14,6 +14,13 @@ function MainMenu(Imports) {
 		}
 		Imports.Views["OpponentsView"].show();
 	});
+	
+	$("#" + Imports.domId["MainMenu"] + " .optionsBtn").click(function () {
+		if (!Imports.Views["OptionsView"]) {
+			Imports.Views["OptionsView"] = new OptionsView(Imports);
+		}
+		Imports.Views["OptionsView"].show();
+	});
 }
 
 MainMenu.prototype = Object.create(View.prototype);

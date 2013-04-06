@@ -2,6 +2,7 @@
 <head>
 	<link rel="stylesheet" href="View/view.css">
 	<link rel="stylesheet" href="MissileApp.css">
+	<link rel="stylesheet" href="Options.css">
 	<style>
 		body {
 			text-align: center;
@@ -43,6 +44,7 @@
 	<script src="Game/FireView.js"></script>
 	<script src="Game/OpponentsView.js"></script>
 	<script src="Game/BaseView.js"></script>
+	<script src="Game/OptionsView.js"></script>
 	<script>
 	window.onload = function () {
 		var Imports = {
@@ -108,6 +110,8 @@
 			<div id="list-yourturn"><h1>Your Turn</h1></div>
 			<div id="list-histurn"><h1>Not Your Turn</h1></div>
 			<div id="list-complete"><h1>Nobody's Turn</h1></div>
+			<div class="OptionsBtn">Options</div>
+
 			<div style="display: none;">
 				<div id="game-prototype">
 					<span class="opponent"></span>
@@ -136,6 +140,15 @@
 			<div class="fireBtn">Fire!</div>
 			<div class="backBtn">Back</div>
 		</div>
+		<div id="options-view">
+			<div class="musicToggle">Music</div>
+			<div class="sfxToggle">SFX</div>
+			<div class="backBtn">Back</div>
+			<img class="MusicOnOff" src="./images/options/MusicOn.png" 
+			data-src="./images/options/MuicOff.png"style="float:right;">			
+			
+			<img class="SFXOnOff" src="./images/options/SFXOn.png" 
+			data-src="./images/options/SFXOff.png" style="float:left;">	
 	</div>
 </body>
 </html>
