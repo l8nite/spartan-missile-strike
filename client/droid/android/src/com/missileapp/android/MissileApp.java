@@ -128,6 +128,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         super.onResume();
         MALogger.log(TAG, Log.INFO, "Resuming activity.");
         
+        //TODO have to change this to something else instead of getting visibility
         boolean hideSplashWhenDone = (variables.getSplashScreen().getVisibility() == View.GONE);
         
         this.runOnUiThread(new Runnable() {
