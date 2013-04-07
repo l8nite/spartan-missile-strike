@@ -1,3 +1,8 @@
+HTML Assets:
+Before coding/testing the Android client, make a symbolic link for the android/assets folder to the client/html folder
+For Windows, the command is "mklink /d assets\ ..\..\html\" (assuming that you are in the root directory of the android project). You may need to delete the assets the folder if you encounter "Access is Denied"
+
+
 Android SDK
 
 1. Download Android SDK from http://developer.android.com/sdk/index.html
