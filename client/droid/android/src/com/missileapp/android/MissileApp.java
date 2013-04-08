@@ -82,6 +82,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         variables.setFireScreen(new FireScreen(variables));                                               // Fire Screen, camera
         variables.setUserPrefs(new UserPreferences(variables));                                           // User Preferences, app data
         variables.setMediaManager(new MediaManager(variables));                                           // Media Manager, preloads the necessary audio
+        variables.getMediaManager().loadSound();
         variables.setVibrator((Vibrator) super.getSystemService(Context.VIBRATOR_SERVICE));               // Android System Service Vibrator
         variables.setLocationManager((LocationManager) getSystemService(Context.LOCATION_SERVICE));       // Android System Service Location Manager
         variables.setLocationManagement(new LocationManagement(variables));                               // MissileApp Location Implementation
@@ -149,7 +150,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
 
         // Switch to audio controls rather than call
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        variables.getMediaManager().loadSound();
+        variables.getMediaManager().processResume();
 
         // Re-enter Fire Screen
         variables.getFireScreen().processResumeRequest();
@@ -176,6 +177,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             variables.getWebView().loadUrl(DROIDWB_FILENAME);
             variables.setHasWebViewLoaded(true);
         }
+        
     }
     
     
@@ -206,6 +208,9 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     protected void onPause() {
         super.onPause();
         MALogger.log(TAG, Log.INFO, "Pausing activity.");
+        
+        // Pause Media
+        variables.getMediaManager().processPause();
         
         // Exit Fire Screen
         variables.getFireScreen().processPauseRequest();
