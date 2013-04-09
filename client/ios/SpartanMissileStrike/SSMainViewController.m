@@ -133,9 +133,12 @@
             NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
             NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
             
-            [orientationDictionary setObject:pitch forKey:@"pitch"];
-            [orientationDictionary setObject:yaw forKey:@"yaw"];
-            [orientationDictionary setObject:roll forKey:@"roll"];
+            /** Notes for the follwing
+             "yaw" is "azimuth", "pitch" is the tilt of the phone with respect to ground, or zenith, and "roll" is about the vector pointing through the screen
+             */
+            
+            [orientationDictionary setObject:yaw forKey:@"azimuth"];
+            [orientationDictionary setObject:roll forKey:@"altitude"];
             
             [nativeBridge callbackWithDictionary:orientationDictionary forFunction:function withArguments:arguments];
         }];
@@ -143,6 +146,7 @@
     else if ([function isEqualIgnoringCase:@"stopOrientationUpdates"]) {
         [orientationManager stopUpdatingOrientation];
     }
+
     else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
         [self showFiringScreen];
     }
