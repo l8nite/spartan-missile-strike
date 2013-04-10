@@ -2,45 +2,42 @@ var should = require('should'),
     async = require('async'),
     ServiceClient = require('./lib/service-client.js');
 
-describe('create users', function () {
-    var client1 = new ServiceClient();
-    var client2 = new ServiceClient();
+describe('creating two new users with identical usernames', function () {
 
-    it('should create a new session', function (done) {
-        var fbAccessTokenForUser = require('./conf/test-users.json');
-        client.post('/sessions', { facebook_access_token: fbAccessTokenForUser['Service Session Unit Tests'] },
-            function (err, req, res, obj) {
-                should.not.exist(err);
-                res.statusCode.should.equal(201);
-                obj.should.have.property('session');
-                obj.session.should.have.property('id');
-                obj.should.have.property('user');
-                obj.user.should.have.property('facebook_access_token');
+    var client1, client2;
+
+    before(function (done) {
+        async.series([
+            // log identical users in
+            function (next) {
+                async.parallel([
+                    function (next) {
+                        client1 = new ServiceClient();
+                        client1.login('Identical User 1', function (err) {
+                            next(err);
+                        });
+                    },
+                    function (next) {
+                        client2 = new ServiceClient();
+                        client2.login('Identical User 2', function (err) {
+                            next(err);
+                        });
+                    }
+                ],
+
+                function (err) {
+                    next(err);
+                });
+            },
+
+            function (next) {
                 done();
             }
-        );
-    });
-});
-
-describe('deleting /sessions', function() {
-    var client;
-
-    before(function(done) {
-        client = new ServiceClient();
-        client.login('Service Session Unit Tests', done);
+        ]);
     });
 
-    it('should delete valid sessions and then disallow further access', function(done) {
-        client.del('/sessions', function(err, req, res, obj) {
-            should.not.exist(err);
-            res.statusCode.should.equal(204);
-
-            client.del('/sessions', function(err, req, res, obj) {
-                // 403 means we're not authorized any more, aka the session was invalidated
-                res.statusCode.should.equal(403);
-                err.name.should.equal('NotAuthorizedError');
-                done();
-            });
-        });
+    it('should append a number to client2\'s username', function (done) {
+        // Note: this is a manual test, check the database directly
+        done();
     });
 });

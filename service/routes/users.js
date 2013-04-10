@@ -12,31 +12,46 @@ function showUser (request, msUser, done) {
     done(null, 200, sanitizeUser(msUser));
 }
 
-function updateUser (request, msUser, done) {
+function updateUsername (request, msUser, done) {
     var username = request.params.username;
 
     if (username === undefined ) {
         return done(new restify.MissingParameterError());
     }
 
-    if (username === msUser.username) {
-        return done(null, 304);
-    }
-
     if (!/^[a-zA-Z ]+$/.test(username)) {
         return done(new restify.InvalidArgumentError());
     }
 
-    // TODO: check if username already exists, return 304 if so
+    if (username === msUser.username) {
+        return done(null, 304);
+    }
 
-    msUser.username = username;
-
-    redis.client.set(msUser.id, JSON.stringify(msUser), function (err, result) {
+    redis.client.sismember('usernames', username, function (err, usernameInUse) {
         if (err) {
-            return done(new restify.InternalError());
+            return done(err);
         }
 
-        return done(null, 200);
+        if (usernameInUse) {
+            return done(null, 304);
+        }
+
+        // save updated user to database, modify usernames set
+        var oldUsername = msUser.username;
+        msUser.username = username;
+
+        var multi = redis.client.multi();
+        multi.set(msUser.id, JSON.stringify(msUser));
+        multi.srem('usernames', oldUsername);
+        multi.sadd('usernames', username);
+
+        multi.exec(function (err, result) {
+            if (err) {
+                return done(new restify.InternalError());
+            }
+
+            return done(null, 200);
+        });
     });
 }
 
@@ -218,7 +233,7 @@ function sanitizeUser (msUser) {
 
 module.exports.installAuthenticatedRouteHandlers = function (server) {
     server.get('/users/:id', userIdRequiredHandler(showUser));
-    server.put('/users/:id', userIdRequiredHandler(updateUser));
+    server.put('/users/:id', userIdRequiredHandler(updateUsername));
     server.get('/users/:id/games', userIdRequiredHandler(listGames));
     server.get('/users/:id/opponents', userIdRequiredHandler(listOpponents));
 };
