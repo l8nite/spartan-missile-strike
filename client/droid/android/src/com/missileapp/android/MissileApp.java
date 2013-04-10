@@ -110,7 +110,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         
         // JavaScript
         webView.getSettings().setJavaScriptEnabled(true);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             try {
                 webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
             }
@@ -138,7 +138,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             }
         });
         
-        if(variables.getFacebookAuth().processResumeRequest(hideSplashWhenDone)) {
+        if (variables.getFacebookAuth().processResumeRequest(hideSplashWhenDone)) {
             finishProcessingResume(hideSplashWhenDone);
         }
     }
@@ -165,7 +165,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             });
         }
         
-        if(hideSplashWhenDone) {
+        if (hideSplashWhenDone) {
             runOnUiThread(new Runnable() {
                 public void run() {
                     variables.getSplashScreen().setVisibility(View.GONE);
@@ -173,7 +173,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
             });
         }
         
-        if(!variables.isWebViewLoaded()) {
+        if (!variables.isWebViewLoaded()) {
             variables.getWebView().loadUrl(DROIDWB_FILENAME);
             variables.setHasWebViewLoaded(true);
         }
@@ -186,7 +186,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
      */
     @Override
     public void onBackPressed() {
-        if(!mainMenuViewVerified) {
+        if (!mainMenuViewVerified) {
             variables.getDroidBridge().requestMainMenuViewStatus();
         }
         else {
@@ -264,7 +264,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     	boolean gpsLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     	
     	//construct message if enabled
-    	if(!locationEnabled && !gpsLocationEnabled) {
+    	if (!locationEnabled && !gpsLocationEnabled) {
             AlertDialog.Builder locationAlert = new AlertDialog.Builder(this);
             locationAlert.setIcon(R.drawable.ic_launcher_padded);
             locationAlert.setTitle(R.string.location_prompt_title);
@@ -313,7 +313,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
     }
     
     private void processGPSIgnoreCheckbox(boolean GPSPromptIsChecked) {
-        if(GPSPromptIsChecked) {
+        if (GPSPromptIsChecked) {
             // Save Prompt
             SharedPreferences.Editor prefEditor = variables.getSettings().edit();
             prefEditor.putBoolean(PREFERENCES_GPSPROMPT, !GPSPromptIsChecked);
@@ -328,7 +328,7 @@ public class MissileApp extends Activity implements SurfaceHolder.Callback {
         boolean gpsLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         
         // Exit if no location provider enabled, else register all available services
-        if(!locationEnabled && !gpsLocationEnabled) {
+        if (!locationEnabled && !gpsLocationEnabled) {
             exitMissileApp();
         }
         else {
