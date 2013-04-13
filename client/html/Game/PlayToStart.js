@@ -29,4 +29,8 @@ function PlayToStart(Imports) {
 	});
 }
 
-MainMenu.prototype = Object.create(View.prototype);
+PlayToStart.prototype = Object.create(View.prototype);
+
+PlayToStart.prototype.show = function () {
+	this.Imports.ViewManager.loadView(this);
+};
