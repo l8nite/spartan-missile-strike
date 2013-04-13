@@ -3,7 +3,7 @@
 function PlayToStart(Imports) {
 	var that = this;
 	this.Imports = Imports;
-	View.call(this, Imports.domId["PlayToStart"]);
+	FixedHeightView.call(this, Imports.domId["PlayToStart"]);
 
 	$("#" + Imports.domId["PlayToStart"]).click(function () {
 		Imports.NativeBridge.getFacebookAccessToken(function (token) {
@@ -29,7 +29,7 @@ function PlayToStart(Imports) {
 	});
 }
 
-PlayToStart.prototype = Object.create(View.prototype);
+PlayToStart.prototype = Object.create(FixedHeightView.prototype);
 
 PlayToStart.prototype.show = function () {
 	this.Imports.ViewManager.loadView(this);
