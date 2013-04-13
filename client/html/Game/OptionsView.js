@@ -1,33 +1,40 @@
 /* MissileApp options view.
  */
- 
-// This is for the music  (background)
-$(function(){
-//console.log('called');
-    $('.MusicOnOff').on('click', function(e){
- //   console.log("running");
-        var src = $(this).attr('src');
-        $(this).attr('src', $(this).data('src'));
-        $(this).data('src', src);
-    });
-});
-
-
-// this is for the SFX  (foreground)
-$(function(){
-     $('.SFXOnOff').on('click', function(e){
-     // will have a switch statement (state it is currently)
-     // either change the picture or not then break;
-     // the other case when stopped
-     // play sound remove X break;
-         var src = $(this).attr('src');
-        $(this).attr('src', $(this).data('src'));
-        $(this).data('src', src);
-    });
-});
-
 
 function OptionsView(Imports) {
+
+        $(function () {
+            $('#musicButton').click(function () {
+                if ($('#musicX').is(':visible')) {
+                    // if the X is visible, and they clicked it, it means we want to UNMUTE the music
+                    $('#musicX').hide();
+					NativeBridge.setPreference({"soundEffectMuted":"0"});
+                }
+                else {
+                    // else if the X is hidden, and they clicked it, it means we want to MUTE the music
+                    $('#musicX').show();
+                    NativeBridge.setPreference({"soundEffectOn":"1"});
+
+                }
+            });
+
+            $('#sfxButton').click(function () {
+                if ($('#sfxX').is(':visible')) {
+                    // if the X is visible, and they clicked it, it means we want to UNMUTE the music
+                    $('#sfxX').hide();
+                    NativeBridge.setPreference({"sfxMuted":"0"});
+
+                }
+                else {
+                    // else if the X is hidden, and they clicked it, it means we want to MUTE the music
+                    $('#sfxX').show();
+                    NativeBridge.setPreference({"sfxOn":"1"});
+
+                }
+            });
+        });
+ 
+ 
 	var that = this;
 	this.Imports = Imports;
 	View.call(this, Imports.domId["OptionsView"]);
@@ -54,23 +61,3 @@ OptionsView.prototype.offView = function () {
 OptionsView.prototype.show = function () {
 	this.Imports.ViewManager.loadView(this);
 };
-
-
- 
-// function func()
-// {
-// var afterImageClick = document.createElement("afterClick");
-// afterImageClick.src = "./images/musicOn.png";
-// 
-// document.getElementById('musicToggle').onclick = function() {
-//        if (document.getElementById('yes').checked) {
-//            alert('music on');
-//        } else  (document.getElementById('no').checked) {
-//            alert('music on');
-//        } 
-//        }
-// 
-// }
-//  
-
-
