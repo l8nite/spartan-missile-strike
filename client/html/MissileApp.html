@@ -44,7 +44,7 @@
 	<script src="Game/OpponentsView.js"></script>
 	<script src="Game/BaseView.js"></script>
 	<script>
-	window.onload = function () {
+	document.onload = function () {
 		var Imports = {
 			NativeBridge: new NativeBridge_iOS(),
 			ViewManager: new MainView(),
@@ -56,13 +56,25 @@
 				"OpponentsView": "opponents-view",
 				"BaseView": "base-view"
 			},
-			serviceurl: "https://api.missileapp.com:8443"
+			serviceurl: "https://api.missileapp.com:8443",
+			Views:  []
 		};
 
 		window.NativeBridge = {
 			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
 		};
 
+		setTimeout(function () {
+			Imports.Views["PlayToStart"] = new PlayToStart(Imports);
+			Imports.Views["PlayToStart"].show();
+			Imports.NativeBridge.playSound("background_music", {
+				foreground: false,
+				loop: true
+			});
+			Imports.NativeBridge.hideSplash();
+		}, 2000);
+
+		/*
 		// DEBUG
 		// BEGIN DELETE THIS!
 		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
@@ -90,12 +102,12 @@
 					isNewUser = response.user.newUser;
 				// Now we make the GM and start the game!
 				Imports.GameMaster = new GameMaster(userid, sessionid, Imports);
-				Imports.Views = [];
 				Imports.Views["MainMenu"] = new MainMenu(Imports);
 				Imports.Views["MainMenu"].show();
 				Imports.NativeBridge.hideSplash();
 			});
 		});
+		*/
 	};
 	</script>
 </head>
