@@ -6,13 +6,6 @@ function PlayToStart(Imports) {
 	View.call(this, Imports.domId["PlayToStart"]);
 
 	$("#" + Imports.domId["PlayToStart"]).click(function () {
-		/*
-		if (!Imports.Views["OpponentsView"]) {
-			Imports.Views["OpponentsView"] = new OpponentsView(Imports);
-		}
-		Imports.Views["OpponentsView"].show();
-		*/
-
 		Imports.NativeBridge.getFacebookAccessToken(function (token) {
 			if (token) {
 				$.ajax(Imports.serviceurl + "/sessions", {
