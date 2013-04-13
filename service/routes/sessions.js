@@ -71,21 +71,51 @@ function _createNewUser (fbAccessToken, fbUser, next) {
         facebook: fbUser,
     };
 
-    var multi = redis.client.multi();
-
-    multi.mset(
-        'facebook:' + fbUser.id, msUser.id,
-        msUser.id, JSON.stringify(msUser)
-    );
-
-    multi.sadd('users', msUser.id);
-
-    multi.exec(function (err, res) {
+    _pickUnusedUsername(msUser.username, function (err, username) {
         if (err) {
-            return next(new restify.InternalError());
+            return next(err);
         }
 
-        next(null, msUser);
+        msUser.username = username;
+
+        var multi = redis.client.multi();
+
+        multi.mset(
+            'facebook:' + fbUser.id, msUser.id,
+            msUser.id, JSON.stringify(msUser)
+        );
+
+        multi.sadd('users', msUser.id);
+        multi.sadd('usernames', msUser.username);
+
+        multi.exec(function (err, res) {
+            if (err) {
+                return next(new restify.InternalError());
+            }
+
+            next(null, msUser);
+        });
+    });
+}
+
+function _pickUnusedUsername (username, next) {
+    redis.client.sadd('usernames', username, function (err, added) {
+        if (err) {
+            return next(err);
+        }
+
+        if (added) {
+            return next(null, username);
+        }
+
+        // increment user count in order to generate unique username
+        redis.client.incr('count:duplicates', function (err, count) {
+            if (err) {
+                return next(err);
+            }
+
+            return next(null, username + count);
+        });
     });
 }
 
