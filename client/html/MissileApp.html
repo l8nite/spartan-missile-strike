@@ -45,7 +45,7 @@
 	<script src="Game/OpponentsView.js"></script>
 	<script src="Game/BaseView.js"></script>
 	<script>
-	document.onload = function () {
+	window.onload = function () {
 		var Imports = {
 			NativeBridge: new NativeBridge_iOS(),
 			ViewManager: new MainView(),
@@ -66,6 +66,13 @@
 			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
 		};
 
+		// DEBUG
+		// BEGIN DELETE THIS!
+		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
+			fn("AAABvzfRP6w0BANkVwSFsAtkx1Aa3MvtOUD3JUxB0zFqcQqWZBaE2rr4PN6ll68ZBnZAdtQDX2gSqfMP2htd5H9O95KdEEvZAykP3XTz6qAZDZD");
+		};
+		// END DELETE THIS!
+
 		setTimeout(function () {
 			Imports.Views["PlayToStart"] = new PlayToStart(Imports);
 			Imports.Views["PlayToStart"].show();
@@ -75,15 +82,8 @@
 			});
 			Imports.NativeBridge.hideSplash();
 		}, 2000);
-
+		
 		/*
-		// DEBUG
-		// BEGIN DELETE THIS!
-		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
-			fn("AAABvzfRP6w0BANkVwSFsAtkx1Aa3MvtOUD3JUxB0zFqcQqWZBaE2rr4PN6ll68ZBnZAdtQDX2gSqfMP2htd5H9O95KdEEvZAykP3XTz6qAZDZD");
-		};
-		// END DELETE THIS!
-
 		Imports.NativeBridge.playSound("background_music", {
 			foreground: false,
 			loop: true
