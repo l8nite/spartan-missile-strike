@@ -35,6 +35,7 @@
 	<script src="NativeBridge/NativeBridge_Abstract.js"></script>
 	<script src="NativeBridge/NativeBridge_Android.js"></script>
 	<script src="Game/GameMaster.js"></script>
+	<script src="Game/SuspendManager.js"></script>
 	<script src="View/MainView.js"></script>
 	<script src="View/View.js"></script>
 	<script src="View/FixedHeightView.js"></script>
@@ -48,6 +49,7 @@
 		var Imports = {
 			NativeBridge: new NativeBridge_Android(),
 			ViewManager: new MainView(),
+			SuspendManager: new SuspendManager(),
 			domId: {
 				"MainMenu": "main-menu",
 				"MapView": "map-view",
@@ -61,7 +63,11 @@
 
 		window.NativeBridge = {
 			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge),
-			onMainMenu: Imports.ViewManager.onInitialView.bind(Imports.ViewManager)
+			onMainMenu: function () {
+				AndroidInterface.onMainMenu(Imports.ViewManager.onInitialView());
+			},
+			previousView: Imports.ViewManager.previousView.bind(Imports.ViewManager),
+			wake: Imports.SuspendManager.wake.bind(Imports.SuspendManager)
 		};
 
 		Imports.NativeBridge.playSound("background_music", {

@@ -70,9 +70,7 @@ public class FireScreen {
             // Stop Preview, unlock, and release
             if(cam != null) {
                 // Color Transparent
-                variables.getWebView().setBackgroundColor(Color.MAGENTA);
-                //TODO REMOVE, update main.xml layout file
-                //variables.getWebView().setBackgroundColor(Color.BLACK);
+                variables.getWebView().setBackgroundColor(Color.BLACK);
                 
                 // Process stop request
             	variables.getSurfaceHolder().setKeepScreenOn(false);
@@ -91,7 +89,6 @@ public class FireScreen {
             cam = null;
         }
     }
-
     
     /**
      * Release cam temporarily if it's in firescreen
@@ -109,7 +106,6 @@ public class FireScreen {
             }
         }
     }
-
     
     /**
      * Reopen camera if it was in firescreen

@@ -7,10 +7,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.missileapp.android.BagOfHolding;
+import com.missileapp.android.MALogger;
 
-@SuppressWarnings("unused")
 public class LocationManagement implements LocationListener {
     // DATA
     private static final String TAG = "LocationManagement";       // TAG for logging
@@ -24,10 +25,6 @@ public class LocationManagement implements LocationListener {
      */
     public LocationManagement(BagOfHolding variables) {
         this.variables = variables;
-
-        try {
-            lastKnownLocation = variables.getLocationManager().getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        } catch (Exception e) {}
     }
     
     /**
@@ -35,15 +32,78 @@ public class LocationManagement implements LocationListener {
      * @param callbackID - callback identifier
      */
     public synchronized void startLocationUpdates(String callbackID) {
+        MALogger.log(TAG, Log.ERROR, "Location subscription recieved");
         this.callbackID = callbackID;
+        this.startLocationListener();
     }
     
     /**
      * Stops sending location updates to Native Bridge
      */
     public synchronized void stopLocationUpdates() {
+        MALogger.log(TAG, Log.ERROR, "Location subscription revoked");
         this.callbackID = null;
+        this.stopLocationListener();
     }
+    
+    /**
+     * Fired when app resumes
+     */
+    public void processResumeRequest() {
+        if(callbackID != null) {
+            this.startLocationListener();
+        }
+    }
+    
+    /**
+     * Fired when app resumes
+     */
+    public void processPauseRequest() {
+        if(callbackID != null) {
+            this.stopLocationListener();
+        }
+    }
+    
+    
+    /**
+     * Starts Location Listener
+     */
+    private void startLocationListener() {
+        LocationManager locationManager = variables.getLocationManager();
+        boolean locationEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        boolean gpsLocationEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if(locationEnabled) {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+        }
+        if(gpsLocationEnabled) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        }
+        
+        try {
+            lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Location lastKnownGPSLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            lastKnownLocation = (isBetterLocation(lastKnownGPSLocation)) ? lastKnownGPSLocation : lastKnownLocation;
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
+        }
+        
+        try {
+            MALogger.log(TAG, Log.ERROR, "Starting Location Updates");
+            sendLocationToNativeBridge();
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
+        }
+    }
+    
+    /**
+     * Stops Location Listener
+     */
+    private void stopLocationListener() {
+        variables.getLocationManager().removeUpdates(this);
+    }
+    
     
     /**
      * Sends the last known location to Native Bridge
@@ -51,6 +111,8 @@ public class LocationManagement implements LocationListener {
      * @throws JSONException could not constuct JSON
      */
     public synchronized void sendLocationToNativeBridge() throws JSONException {
+        MALogger.log(TAG, Log.ERROR, "Sending location data: " + ((lastKnownLocation == null) ? "null." : lastKnownLocation.toString()));
+        
         if(lastKnownLocation != null && this.callbackID != null) {
             // Get Location
             double latitude = lastKnownLocation.getLatitude();
@@ -76,16 +138,19 @@ public class LocationManagement implements LocationListener {
     /** Location Changed */
     public void onLocationChanged(Location location) {
         synchronized (lastKnownLocation) {
-            if (isBetterLocation(location)) {
+            if(isBetterLocation(location)) {
                 lastKnownLocation = location;
             }
         }
-
+        
         try {
             sendLocationToNativeBridge();
-        } catch (Exception e) { }
+        }
+        catch (Exception e) {
+            MALogger.log(TAG, Log.ERROR, e.getMessage(), e);
+        }
     }
-
+    
     ////////////////////////
     //     Google Code    //
     ////////////////////////

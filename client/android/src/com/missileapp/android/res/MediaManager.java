@@ -117,14 +117,14 @@ public class MediaManager {
      */
     public void playSound(String soundID, String options) {
         try {
-            MALogger.log(TAG, Log.INFO, "Play Sound");
+            MALogger.log(TAG, Log.INFO, "Play Sound:" + soundID + ". options: " + options + ".");
 
             // Create objects with defaults: foreground vol & priority, play once
             float volume = foregroundVolume;
             int priority = DEFAULT_PRIORITY;
             int loopTimes = PLAYBACK_DEFAULT_VALUE;
             int soundPoolID = getSoundPoolMappingFromRawID(soundID);
-            JSONObject playOptions = new JSONObject((options == null) ? "{}" : options);
+            JSONObject playOptions = new JSONObject((options == null || options.trim().equalsIgnoreCase("undefined")) ? "{}" : options);
 
             // Get foreground if it exists
             try {
@@ -167,7 +167,6 @@ public class MediaManager {
     	}
     }
     
-    
     /**
      * Resume sound when Resuming
      */
@@ -179,7 +178,6 @@ public class MediaManager {
     		MALogger.log(TAG, Log.ERROR, "Could not resume music.", e);
     	}
     }
-    
     
     /**
      * Stop a specific sound
