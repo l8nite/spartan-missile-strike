@@ -5,7 +5,43 @@ function PlayToStart(Imports) {
 	this.Imports = Imports;
 	FixedHeightView.call(this, Imports.domId["PlayToStart"]);
 
-	$("#" + Imports.domId["PlayToStart"]).click(function () {
+	$("#" + Imports.domId["PlayToStart"]).css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.png\")")
+		.css("background-size", "100%")
+		.append($("<img></img>")
+			.attr("src", "../shared/Image Assets/spartanStrike_title.png")
+			.css("position", "absolute")
+			.css("top", window.innerHeight * .025)
+			.css("left", window.innerWidth / 2 - window.innerWidth * .3)
+			.css("width", window.innerWidth * .6)
+		)
+		.append($("<img></img>")
+			.attr("src", "../shared/Image Assets/spartanStrike_upperRedline.png")
+			.css("position", "absolute")
+			.css("top", window.innerHeight * .05 + window.innerWidth * .6 * 294 / 402)
+			.css("left", 0)
+			.css("width", window.innerWidth)
+		)
+		.append($("<img></img>")
+			.attr("src", "../shared/Image Assets/spartanStrike_mainIcon.png")
+			.css("position", "absolute")
+			.css("top", (((window.innerHeight * .05 + window.innerWidth * .6 * 294 / 402) + (window.innerHeight * .96)) / 2) - ((window.innerWidth * .96 * 294 / 402) / 2))
+			.css("left", window.innerWidth * .02)
+			.css("width", window.innerWidth * .96)
+		)
+		.append($("<img></img>")
+			.attr("src", "../shared/Image Assets/spartanStrike_play.png")
+			.css("position", "absolute")
+			.css("top", 0)
+			.css("left", 0)
+		)
+		.append($("<img></img>")
+			.attr("src", "../shared/Image Assets/spartanStrike_lowerRedline.png")
+			.css("position", "absolute")
+			.css("top", window.innerHeight * .96)
+			.css("left", 0)
+			.css("width", window.innerWidth)
+		)
+		.click(function () {
 		Imports.NativeBridge.getFacebookAccessToken(function (token) {
 			if (token) {
 				$.ajax(Imports.serviceurl + "/sessions", {
