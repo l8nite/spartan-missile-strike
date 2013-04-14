@@ -31,12 +31,15 @@
 				};
 
 				for (var i = 0; i < calls; i++) {
-					setTimeout(function () {
-						nb.setPreferences(i, function (result) {
-							equal(result, i, "Callback " + i);
-							start();
-						});
-					}, Math.random() * 200);
+					(function () {
+						var j = i;
+						setTimeout(function () {
+							nb.setPreferences(j, function (result) {
+								equal(result, j, "Callback " + j);
+								start();
+							});
+						}, Math.random() * 200);
+					})();
 				}
 			});
 		</script>
