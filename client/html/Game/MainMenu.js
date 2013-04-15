@@ -6,7 +6,7 @@
 function MainMenu(Imports) {
 	var that = this;
 	this.Imports = Imports;
-	FixedHeightView.call(this, Imports.domId["MainMenu"]);
+	View.call(this, Imports.domId["MainMenu"]);
 
 	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").click(function () {
 		if (!Imports.Views["OpponentsView"]) {
@@ -15,9 +15,19 @@ function MainMenu(Imports) {
 		Imports.Views["OpponentsView"].show();
 	});
 
-	var footerHeight = window.innerWidth / 6;
-	$("#" + Imports.domId["MainMenu"] + " .footer").css("height", footerHeight);
-	$("#" + Imports.domId["MainMenu"] + " .games").css("height", window.innerHeight - footerHeight);
+	$("#" + Imports.domId["MainMenu"] + " .scrollable").css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.png\")")
+	.css("background-size", "100%")
+	.css("min-height", window.innerHeight);
+	$("#" + Imports.domId["MainMenu"] + " .buttons").css("height", window.innerWidth * .2)
+	.css("padding-top", window.innerWidth * .02)
+	.css("padding-bottom", window.innerWidth * .02)
+	.css("text-align", "center");
+	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").css("height", "100%");
+	$("#" + Imports.domId["MainMenu"] + " .optionsBtn").css("height", "100%");
+	$("#" + Imports.domId["MainMenu"] + " .menu-bomb").css("height", "100%");
+	$("#" + Imports.domId["MainMenu"] + " .games-list").css("width", window.innerWidth * .9)
+	.css("margin-left", "auto")
+	.css("margin-right", "auto");
 }
 
 MainMenu.prototype = Object.create(View.prototype);
