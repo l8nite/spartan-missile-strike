@@ -21,14 +21,13 @@ function FireView(Imports) {
 
 	var scope = $("<img src=\"../shared/Image Assets/spartanStrike_scope.png\">");
 	scope.css("position", "absolute");
-	scope.css("z-index", "-10");
+	scope.css("z-index", "-1");
 	scope.css("width", width * .9);
 	scope.css("left", width * .05);
 	scope.css("top", height * .5 - width * .45);
 
 	var bigredbutton = $("<img src=\"../shared/Image Assets/spartanStrike_redButton.png\">");
 	bigredbutton.css("position", "absolute");
-	bigredbutton.css("z-index", "-9");
 	bigredbutton.css("width", width * .6);
 	bigredbutton.css("left", width * .2);
 	bigredbutton.css("top", height - (width * .6) * 164 / 272);
@@ -37,8 +36,9 @@ function FireView(Imports) {
 		Imports.ViewManager.previousView();
 	});
 
-	$("body").append(scope);
-	$("body").append(bigredbutton);
+	var fireview = $("#" + Imports.domId["FireView"]);
+	fireview.append(scope);
+	fireview.append(bigredbutton);
 }
 
 FireView.prototype = Object.create(FixedHeightView.prototype);
