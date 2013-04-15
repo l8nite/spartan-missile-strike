@@ -1,7 +1,4 @@
 /* MissileApp main menu.
- * 
- * Must copy-paste the MainMenu.html markup into the app.
- * Call MainMenu with the DOM ID of that markup.
  */
 function MainMenu(Imports) {
 	var that = this;
