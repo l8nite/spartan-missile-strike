@@ -199,6 +199,25 @@ NativeBridge_Abstract.prototype.stopOrientationUpdates = function (callbackid) {
 	}
 };
 
+
+NativeBridge_iOS.prototype.playSound = function (soundID, options) {
+	var preferenceName = "musicMuted";
+	if (options.foreground === true)
+	{
+		preferenceName = "sfxMuted"; 
+	}
+ 	this.getPreferences([preferenceName],function(preferences)
+ 	{
+ 		//callback if muted or not muted 
+		if (preferences[preferenceName] === "0")
+		{
+			this._playSound(soundID, options);
+			
+		}	
+ 	});
+	
+};
+
 NativeBridge_Abstract.prototype.getPreferences = function (preferences, callback) {
 	if (typeof preferences === "string") {
 		preferences = [preferences];

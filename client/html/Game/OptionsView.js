@@ -4,17 +4,39 @@
 function OptionsView(Imports) {
 
         $(function () {
+        // do the .getpreference
+        NativeBridge.getPreference(["musicMuted", "sfxMuted"], function (preferences){
+        if ( preferences.musicMuted == "0")
+       {
+      		   $('#musicX').show();
+        }
+        else 
+        {
+                 $('#musicX').hide();
+
+        }
+        
+          if ( preferences.sfxMuted == "0")
+       {
+      		   $('#sfxX').show();
+        }
+        else 
+        {
+                 $('#sfxX').hide();
+
+        }
+         //install the click handlers
             $('#musicButton').click(function () {
                 if ($('#musicX').is(':visible')) {
                     // if the X is visible, and they clicked it, it means we want to UNMUTE the music
                     $('#musicX').hide();
-					NativeBridge.setPreference({"soundEffectMuted":"0"});
+					NativeBridge.setPreference({"musicMuted":"0"});
+					
                 }
                 else {
                     // else if the X is hidden, and they clicked it, it means we want to MUTE the music
                     $('#musicX').show();
-                    NativeBridge.setPreference({"soundEffectOn":"1"});
-
+                    NativeBridge.setPreference({"musicMuted":"1"});
                 }
             });
 
@@ -28,10 +50,14 @@ function OptionsView(Imports) {
                 else {
                     // else if the X is hidden, and they clicked it, it means we want to MUTE the music
                     $('#sfxX').show();
-                    NativeBridge.setPreference({"sfxOn":"1"});
+                    NativeBridge.setPreference({"sfxMuted":"1"});
 
                 }
             });
+        });
+        
+        
+       
         });
  
  
