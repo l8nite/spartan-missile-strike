@@ -1,4 +1,5 @@
 var async = require('async');
+var bunyan = require('bunyan');
 var ports = require('./conf/ports.json');
 var database = require('./lib/database.js');
 var sessions = require('./lib/sessions.js');
@@ -14,7 +15,26 @@ function _initializeRestifyServer (done) {
     var restify = require('restify'),
         fs = require('fs'),
         routes = require('./routes.js'),
+        log,
         server;
+
+    log = bunyan.createLogger({
+        name: 'api.missileapp.com',
+        streams: [
+            {
+                stream: process.stdout,
+                level: 'debug',
+            },
+            {
+                path: 'api.missileapp.com.log',
+                level: 'trace',
+            }
+        ],
+        serializers: {
+            req: bunyan.stdSerializers.req,
+            res: bunyan.stdSerializers.res,
+        },
+    });
 
     server = restify.createServer({
         ca: fs.readFileSync('./certs/api.missileapp.com.ca-bundle'),
@@ -22,7 +42,10 @@ function _initializeRestifyServer (done) {
         key: fs.readFileSync('./certs/api.missileapp.com.key'),
         name: 'api.missileapp.com',
         version: '0.0.1',
+        log: log,
     });
+
+    server.use(restify.requestLogger());
 
     server.on('MethodNotAllowed', function (req, res) {
         if (req.method.toLowerCase() === 'options') {
@@ -30,6 +53,10 @@ function _initializeRestifyServer (done) {
 
             if (res.methods.indexOf('OPTIONS') === -1) {
                 res.methods.push('OPTIONS');
+            }
+
+            if (res.methods.indexOf('PUT') === -1) {
+                res.methods.push('PUT');
             }
 
             // TODO we should check that the access-control-request-headers match our allowHeaders
@@ -54,8 +81,6 @@ function _initializeRestifyServer (done) {
     server.use(sessions.requireValidSession(database.client));
     routes.installAuthenticatedRouteHandlers(server); // authentication required
 
-
-
     server.listen(ports.apiServer, function () {
         console.log('%s listening at %s', server.name, server.url);
     });
@@ -70,16 +95,24 @@ var startDocumentationServer = function (done) {
 
     var staticServer = new(nodeStatic.Server)('./www');
     var docServer = http.createServer(function (request, response) {
-        request.addListener('end', function () {
-            staticServer.serve(request, response);
+        staticServer.serve(request, response, function (err, res) {
+            if (err) {
+                console.error("> Error serving " + request.url + " - " + err.message);
+                response.writeHead(err.status, err.headers);
+                response.end();
+            }
+            else {
+                console.log("> " + request.url + " - " + res.message);
+            }
         });
     });
 
-    docServer.listen(ports.documentationServer, function () {
-        console.log('documentation server listening on :' + ports.documentationServer);
-    });
+    docServer.listen(ports.documentationServer);
 
-    docServer.on('listening', done);
+    docServer.on('listening', function() {
+        console.log('> documentation server listening on :' + ports.documentationServer);
+        done();
+    });
 };
 
 exports.start = function (done) {
