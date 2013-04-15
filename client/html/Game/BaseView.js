@@ -1,6 +1,4 @@
 /* MissileApp base view.
- * 
- * Must copy-paste the BaseView.html markup into the app.
  */
 function BaseView(Imports) {
 	var that = this;
