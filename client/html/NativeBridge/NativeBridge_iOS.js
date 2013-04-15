@@ -101,6 +101,14 @@ NativeBridge_iOS.prototype.vibrate = function (time) {
 	);
 };
 
+NativeBridge_iOS.prototype.log = function (msg) {
+	this._appendIframe("spartan-missile-strike://log/?arguments="
+		+ JSON.stringify({
+			msg : msg
+		})
+	);
+};
+
 NativeBridge_iOS.prototype._appendIframe = function (src) {
 	var iframe = document.createElement("iframe");
 	iframe.style.display = "none";

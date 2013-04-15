@@ -1,6 +1,4 @@
 /* MissileApp fire screen.
- * 
- * Must copy-paste markup into the app.
  */
 function FireView(Imports) {
 	var that = this;
