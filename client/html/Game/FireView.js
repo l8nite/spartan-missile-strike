@@ -19,24 +19,34 @@ function FireView(Imports) {
 	var width = window.innerWidth;
 	var height = window.innerHeight;
 
-	var scope = $("<img src=\"../shared/Image Assets/spartanStrike_scope.png\">");
-	scope.css("position", "absolute");
-	scope.css("z-index", "-1");
-	scope.css("width", width * .9);
-	scope.css("left", width * .05);
-	scope.css("top", height * .5 - width * .45);
+	var scope = $("<img src=\"../shared/Image Assets/spartanStrike_scope.png\">")
+	.css("position", "absolute")
+	.css("z-index", "-1")
+	.css("width", width * .9)
+	.css("left", width * .05)
+	.css("top", height * .5 - width * .45);
 
-	var bigredbutton = $("<img src=\"../shared/Image Assets/spartanStrike_redButton.png\">");
-	bigredbutton.css("position", "absolute");
-	bigredbutton.css("width", width * .6);
-	bigredbutton.css("left", width * .2);
-	bigredbutton.css("top", height - (width * .6) * 164 / 272);
-	bigredbutton.click(function () {
+	var bigredbutton = $("<img src=\"../shared/Image Assets/spartanStrike_redButton.png\">")
+	.css("position", "absolute")
+	.css("width", width * .6)
+	.css("left", width * .2)
+	.css("top", height - (width * .6) * 164 / 272)
+	.click(function () {
 		Imports.GameMaster.doFire(that._game, that._location, that._orientation, 100);
 		Imports.ViewManager.previousView();
 	});
 
+	var backbutton = $("<img src=\"../shared/Image Assets/spartanStrike_mapViewIcon.png\">")
+	.css("position", "absolute")
+	.css("top", window.innerWidth * .05)
+	.css("left", window.innerWidth * .05)
+	.css("width", window.innerWidth * .15)
+	.click(function () {
+		Imports.ViewManager.previousView();
+	});
+
 	var fireview = $("#" + Imports.domId["FireView"]);
+	fireview.append(backbutton);
 	fireview.append(scope);
 	fireview.append(bigredbutton);
 }
