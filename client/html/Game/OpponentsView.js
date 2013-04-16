@@ -1,6 +1,4 @@
 /* MissileApp opponents view.
- * 
- * Must copy-paste the OpponentsView.html markup into the app.
  */
 function OpponentsView(Imports) {
 	var that = this;

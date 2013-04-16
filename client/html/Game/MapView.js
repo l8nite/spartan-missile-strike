@@ -1,6 +1,4 @@
 /* MissileApp map menu.
- * 
- * Must copy-paste markup into the app.
  */
 function MapView(Imports) {
 	var that = this;

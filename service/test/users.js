@@ -122,6 +122,15 @@ describe('/users', function () {
         });
     });
 
+    describe('PUT /users/:id', function () {
+        it('should return a 304 if you attempt to use a name already in use', function (done) {
+            client.put(path, { username: client2.user.username }, function (err, req, res, obj) {
+                res.statusCode.should.equal(304);
+                done(err);
+            });
+        });
+    });
+
     describe('/users/:id/games', function() {
         // create a game before we attempt to test list games..
         before(function (done) {
