@@ -4,9 +4,8 @@
 function OptionsView(Imports) {
 
         $(function () {
-        // do the .getpreference
         NativeBridge.getPreference(["musicMuted", "sfxMuted"], function (preferences){
-        if ( preferences.musicMuted == "0")
+        if ( preferences.musicMuted === "0")
        {
       		   $('#musicX').show();
         }
@@ -31,7 +30,6 @@ function OptionsView(Imports) {
                     // if the X is visible, and they clicked it, it means we want to UNMUTE the music
                     $('#musicX').hide();
 					NativeBridge.setPreference({"musicMuted":"0"});
-					
                 }
                 else {
                     // else if the X is hidden, and they clicked it, it means we want to MUTE the music
