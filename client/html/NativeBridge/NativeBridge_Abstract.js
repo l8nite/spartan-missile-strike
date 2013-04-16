@@ -200,7 +200,7 @@ NativeBridge_Abstract.prototype.stopOrientationUpdates = function (callbackid) {
 };
 
 
-NativeBridge_iOS.prototype.playSound = function (soundID, options) {
+NativeBridge_Abstract.prototype.playSound = function (soundID, options) {
 	var preferenceName = "musicMuted";
 	if (options.foreground === true)
 	{
