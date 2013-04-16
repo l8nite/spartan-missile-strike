@@ -109,14 +109,14 @@
 -(void)nativeBridgeFunction:(NSString *)function withArguments:(NSDictionary *)arguments
 {
     NSLog(@"Native Bridge: %@ called with arguments: %@", function, arguments);
-
+    
     if ([function isEqualIgnoringCase:@"startLocationUpdates"]) {
         [locationManager startUpdatingLocationWithCallback:^(CLLocationCoordinate2D location) {
-
+            
             NSMutableDictionary *locationDictionary = [[NSMutableDictionary alloc] init];
             NSNumber *latitude = [NSNumber numberWithDouble:(double)location.latitude];
             NSNumber *longitude = [NSNumber numberWithDouble:(double)location.longitude];
-
+            
             [locationDictionary setObject:latitude forKey:@"latitude"];
             [locationDictionary setObject:longitude forKey:@"longitude"];
             
@@ -146,7 +146,6 @@
     else if ([function isEqualIgnoringCase:@"stopOrientationUpdates"]) {
         [orientationManager stopUpdatingOrientation];
     }
-
     else if ([function isEqualIgnoringCase:@"showFireMissileScreen"]) {
         [self showFiringScreen];
     }
