@@ -38,6 +38,7 @@
 	<script src="View/MainView.js"></script>
 	<script src="View/View.js"></script>
 	<script src="View/FixedHeightView.js"></script>
+	<script src="Game/PlayToStart.js"></script>
 	<script src="Game/MainMenu.js"></script>
 	<script src="Game/MapView.js"></script>
 	<script src="Game/FireView.js"></script>
@@ -49,6 +50,7 @@
 			NativeBridge: new NativeBridge_iOS(),
 			ViewManager: new MainView(),
 			domId: {
+				"PlayToStart": "play-to-start",
 				"MainMenu": "main-menu",
 				"MapView": "map-view",
 				"FireView": "fire-view",
@@ -56,44 +58,33 @@
 				"OpponentsView": "opponents-view",
 				"BaseView": "base-view"
 			},
+<<<<<<< HEAD
 			serviceurl: "https://api.missileapp.com:443"
+=======
+			serviceurl: "https://api.missileapp.com:443",
+			Views:  []
+>>>>>>> development
 		};
 
 		window.NativeBridge = {
 			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
 		};
 
-		Imports.NativeBridge.playSound("background_music", {
-			foreground: false,
-			loop: true
-		});
-		// First thing we need is a FB token, we use that to get our userid 
-		Imports.NativeBridge.getFacebookAccessToken(function (token) {
-			// Now get our userid
-			$.ajax(Imports.serviceurl + "/sessions", {
-				type: "POST",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify({
-					facebook_access_token: token
-				})
-			}).done(function (response) {
-				var sessionid = response.session.id,
-					userid = response.user.id,
-					isNewUser = response.user.newUser;
-				// Now we make the GM and start the game!
-				Imports.GameMaster = new GameMaster(userid, sessionid, Imports);
-				Imports.Views = [];
-				Imports.Views["MainMenu"] = new MainMenu(Imports);
-				Imports.Views["MainMenu"].show();
-				Imports.NativeBridge.hideSplash();
+		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
+		Imports.Views["PlayToStart"].show();
+		setTimeout(function () {
+			Imports.NativeBridge.playSound("background_music", {
+				foreground: false,
+				loop: true
 			});
-		});
+			Imports.NativeBridge.hideSplash();
+		}, 2000);
 	};
 	</script>
 </head>
 <body>
 	<div style="display:none;">
+		<div id="play-to-start"></div>
 		<div id="main-menu">
 			<div>Welcome,</div>
 			<div class="yourname"></div><br>
