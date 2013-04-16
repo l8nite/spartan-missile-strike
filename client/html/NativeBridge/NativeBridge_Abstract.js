@@ -208,7 +208,7 @@ NativeBridge_iOS.prototype.playSound = function (soundID, options) {
 	}
  	this.getPreferences([preferenceName],function(preferences)
  	{
- 		//callback if muted or not muted 
+	//play the sound if we're not muted
 		if (preferences[preferenceName] === "0")
 		{
 			this._playSound(soundID, options);
