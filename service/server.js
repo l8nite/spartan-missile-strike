@@ -55,6 +55,10 @@ function _initializeRestifyServer (done) {
                 res.methods.push('OPTIONS');
             }
 
+            if (res.methods.indexOf('PUT') === -1) {
+                res.methods.push('PUT');
+            }
+
             // TODO we should check that the access-control-request-headers match our allowHeaders
             res.header('Access-Control-Allow-Credentials', true);
             res.header('Access-Control-Allow-Headers', allowHeaders.join(', '));
