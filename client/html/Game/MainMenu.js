@@ -11,13 +11,19 @@ function MainMenu(Imports) {
 		}
 		Imports.Views["OpponentsView"].show();
 	});
-	
-	$("#" + Imports.domId["MainMenu"] + " .optionsBtn").click(function () {
-		if (!Imports.Views["OptionsView"]) {
-			Imports.Views["OptionsView"] = new OptionsView(Imports);
-		}
-		Imports.Views["OptionsView"].show();
-	});
+	$("#" + Imports.domId["MainMenu"] + " .scrollable").css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.png\")")
+	.css("background-size", "100%")
+	.css("min-height", window.innerHeight);
+	$("#" + Imports.domId["MainMenu"] + " .buttons").css("height", window.innerWidth * .2)
+	.css("padding-top", window.innerWidth * .02)
+	.css("padding-bottom", window.innerWidth * .02)
+	.css("text-align", "center");
+	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").css("height", "100%");
+	$("#" + Imports.domId["MainMenu"] + " .optionsBtn").css("height", "100%");
+	$("#" + Imports.domId["MainMenu"] + " .menu-bomb").css("height", "100%");
+	$("#" + Imports.domId["MainMenu"] + " .games-list").css("width", window.innerWidth * .9)
+	.css("margin-left", "auto")
+	.css("margin-right", "auto");
 }
 
 MainMenu.prototype = Object.create(View.prototype);
@@ -33,7 +39,6 @@ MainMenu.prototype.offView = function () {
 };
 
 MainMenu.prototype.show = function () {
-	$("#" + this.Imports.domId["MainMenu"] + " .yourname").text(this.Imports.GameMaster.userid);
 	this.Imports.ViewManager.loadView(this);
 };
 
@@ -48,27 +53,24 @@ MainMenu.prototype._render = function (games) {
 			if (opponentid === that.Imports.GameMaster.userid) {
 				opponentid = game.opponent;
 			}
+			var g = $("<div></div>");
+			g.addClass("game");
+			g.click(function () {
+				that._showGame(game);
+			});
+			if (game.status === "completed") {
+				$("#list-complete").append(g);
+			} else if (game.current === opponentid) {
+				$("#list-histurn").append(g);
+			} else {
+				$("#list-yourturn").append(g);
+			}
 			that.Imports.GameMaster.getName(opponentid).always(function (name) {
 				var nameToUse = opponentid;
 				if (name) {
-					if (name.realname) {
-						nameToUse = name.realname;
-					} else {
-						nameToUse = name.username;
-					}
+					nameToUse = name;
 				}
-				var g = $("<div>" + nameToUse + "</div>");
-				g.addClass("game");
-				g.click(function () {
-					that._showGame(game);
-				});
-				if (game.status === "completed") {
-					$("#list-complete").append(g);
-				} else if (game.current === opponentid) {
-					$("#list-histurn").append(g);
-				} else {
-					$("#list-yourturn").append(g);
-				}
+				g.text(nameToUse);
 			});
 		})(games[i]);
 	}
