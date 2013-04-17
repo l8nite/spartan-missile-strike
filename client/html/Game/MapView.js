@@ -17,7 +17,6 @@ function MapView(Imports) {
 		}
 		Imports.Views["FireView"].show(that._game);
 	});
-
 	
 	$(function() {
 		var buttonSize = { 'width' : 300,  'height' : 50  };
@@ -56,7 +55,6 @@ MapView.prototype.offView = function () {
 
 MapView.prototype.show = function (game) {
 	this._game = game;
-	//this._updateGame();
 	this.Imports.ViewManager.loadView(this, this.Imports.Views["MainMenu"]);
 };
 
@@ -85,8 +83,7 @@ MapView.prototype._updateWithNewLocation = function (loc) {
 };
 
 MapView.prototype._generateMapView = function () {
-
-	if(map == null) {
+	if(map === null) {
 		map = new Microsoft.Maps.Map(document.getElementById("bingmap"), { 
 			credentials: "AodC7AaauHfjsY9pK8qi6U-JN1s1HfroLZiCw3afJUoicmW-CH9RasOjp5hcsmFe",
 			mapTypeId: Microsoft.Maps.MapTypeId.road,  // Change map style, types: aerial, birdseye, road
@@ -112,17 +109,17 @@ MapView.prototype._updateMapView = function () {
 	var timeDelta = 1.0 / 100; 	// Smoothness
 	
 	// Push Pins Styles
-	var pushPinOptions_currentUserHitShot = { htmlContent: "<img class=\"bingMapsPishPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
-	var pushPinOptions_currentUserMissedShots = { htmlContent: "<img class=\"bingMapsPishPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
-	var pushPinOptions_currentUserLocation = { htmlContent: "<img class=\"bingMapsPishPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
-	var pushPinOptions_currentUserBase = { htmlContent: "<img class=\"bingMapsPishPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
-	var pushPinOptions_opponentBase = { htmlContent: "<img class=\"bingMapsPishPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
-	
+	var pushPinOptions_currentUserHitShot = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
+	var pushPinOptions_currentUserMissedShots = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
+	var pushPinOptions_currentUserLocation = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
+	var pushPinOptions_currentUserBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
+	var pushPinOptions_opponentBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/Image Assets/spartanStrike_optionX.png\">"};
 	
 	// PROCESS Locations
 	//Remove existing Pushpins
 	for(var i=map.entities.getLength()-1;i>=0;i--) {
-		if (map.entities.get(i) instanceof Microsoft.Maps.Pushpin) {
+		if ((map.entities.get(i) instanceof Microsoft.Maps.Pushpin)
+			|| (map.entities.get(i) instanceof Microsoft.Maps.Polyline)	{
 			map.entities.removeAt(i);
 		}
 	}
