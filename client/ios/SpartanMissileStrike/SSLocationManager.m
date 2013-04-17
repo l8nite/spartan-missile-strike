@@ -12,7 +12,7 @@
 
 @synthesize locationManager;
 @synthesize locationManagerCallback;
-
+ 
 -(id)init
 {
     if (self = [super init]) {
@@ -38,10 +38,17 @@
 }
 
 -(void)locationManager:(CLLocationManager*)manager didUpdateLocations:(NSArray *)locations
-{
+{    
     CLLocation *lastLocationUpdate = [locations lastObject];
     CLLocationCoordinate2D lastLocation = [lastLocationUpdate coordinate];
     [self locationManagerCallback](lastLocation);
 }
+
+ 
+
+ 
+ 
+
+
 
 @end
