@@ -9,19 +9,19 @@
 	height: 100%;
 }
 
-#map-view .bingMapsPishPin {
+#map-view .bingMapsPushPin {
 	width: 20px;
 	height: 20px;
 }
 
 #map-view .buttons .fireBtn {
-	background-image:url('../shared/Image Assets/spartanStrike_play.png');
+	background-image:url('../shared/Image%20Assets/spartanStrike_play.png');
 	background-repeat:no-repeat;
 	background-position:right bottom;
 }
 
 #map-view .buttons .backBtn {
-	background-image:url('../shared/Image Assets/spartanStrike_cancel.png');
+	background-image:url('../shared/Image%20Assets/spartanStrike_cancel.png');
 	background-repeat:no-repeat;
 	background-position:left bottom;
 }
