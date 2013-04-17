@@ -1,3 +1,96 @@
+body {
+	font-family: sans-serif;
+	background-color: transparent;
+}
+
+.clear {
+	clear: both;
+}
+
 .hidden {
 	display: none;
+}
+
+.redline {
+	width: 100%;
+}
+
+#main-menu .games {
+	background-image: url("../shared/Image Assets/spartanStrike_BG.png");
+	background-size: 100% auto;
+	background-attachment: scroll;
+	overflow: scroll;
+}
+
+#main-menu .games-list {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#main-menu .menu-bomb {
+	width: 10%;
+	opacity: 0.3;
+}
+
+#main-menu .newGameBtn {
+	width: 33%;
+	vertical-align: middle;
+}
+
+#main-menu .header {
+	margin-top: 0.5em;
+	position: relative;
+	text-align: center;
+}
+
+#main-menu .footer {
+	background-image: url("../shared/Image Assets/spartanStrike_BG.png");
+	background-size: 100% auto;
+}
+
+#main-menu .footer .buttons .optionsBtn {
+	float: right;
+}
+
+#main-menu .footer .buttons * {
+}
+
+#main-menu .new-game-overlay {
+	position: absolute;
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+	height: 100%;
+	top: 0;
+}
+
+#main-menu .label {
+	width: 33%;
+	margin-top: 1em;
+}
+
+
+#map-view .map {
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#map-view .bingMapsPishPin {
+	width: 20px;
+	height: 20px;
+}
+
+#map-view .buttons .fireBtn {
+	background-image:url('../shared/Image Assets/spartanStrike_play.png');
+	background-repeat:no-repeat;
+	background-position:right bottom;
+}
+
+#map-view .buttons .backBtn {
+	background-image:url('../shared/Image Assets/spartanStrike_cancel.png');
+	background-repeat:no-repeat;
+	background-position:left bottom;
 }
