@@ -1,3 +1,27 @@
 .hidden {
 	display: none;
 }
+
+#map-view .map {
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#map-view .bingMapsPushPin {
+	width: 20px;
+	height: 20px;
+}
+
+#map-view .buttons .fireBtn {
+	background-image:url('../shared/Image%20Assets/spartanStrike_play.png');
+	background-repeat:no-repeat;
+	background-position:right bottom;
+}
+
+#map-view .buttons .backBtn {
+	background-image:url('../shared/Image%20Assets/spartanStrike_cancel.png');
+	background-repeat:no-repeat;
+	background-position:left bottom;
+}
