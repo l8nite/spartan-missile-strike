@@ -65,8 +65,6 @@ DerivedData
 ###
 
 # Package Files #
-*.jar
-!/client/android/libs/*
 *.war
 *.ear
 # built application files
