@@ -186,6 +186,9 @@
     else if ([function isEqualIgnoringCase:@"vibrate"]) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
+    else if ([function isEqualIgnoringCase:@"log"]) {
+        NSLog(@"NativeBridge.log: %@", [arguments objectForKey:@"msg"]);
+    }
 }
 
 @end
