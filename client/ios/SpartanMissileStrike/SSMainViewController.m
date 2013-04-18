@@ -129,7 +129,7 @@
     else if ([function isEqualIgnoringCase:@"startOrientationUpdates"]) {
         [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
             NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
-git             NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
+            NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
             NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
             
             /** Notes for the follwing
