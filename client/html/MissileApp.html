@@ -50,13 +50,11 @@
 		// END DELETE THIS!
 		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
 		Imports.Views["PlayToStart"].show();
-		setTimeout(function () {
-			Imports.NativeBridge.playSound("background_music", {
-				foreground: false,
-				loop: true
-			});
-			Imports.NativeBridge.hideSplash();
-		}, 2000);
+		Imports.NativeBridge.playSound("background_music", {
+			foreground: false,
+			loop: true
+		});
+		Imports.NativeBridge.hideSplash();
 	};
 	</script>
 </head>
