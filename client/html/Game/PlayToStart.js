@@ -57,7 +57,9 @@ function PlayToStart(Imports) {
 						userid = response.user.id,
 						isNewUser = response.user.newUser;
 					Imports.GameMaster = new GameMaster(userid, sessionid, Imports);
-					Imports.Views["MainMenu"] = new MainMenu(Imports);
+					if (!Imports.Views["MainMenu"]) {
+						Imports.Views["MainMenu"] = new MainMenu(Imports);
+					}
 					Imports.Views["MainMenu"].show();
 				});
 			}
