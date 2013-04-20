@@ -22,7 +22,6 @@ function OptionsView(Imports) {
 
         //install the click handlers
         $('#musicButton').click(function() {
-
             if ($('#musicX').is(':visible')) {
                 // if the X is visible, and they clicked it, it means we want to UNMUTE the music
                 $('#musicX').hide();
@@ -55,18 +54,12 @@ function OptionsView(Imports) {
 
             }
         });
-
     });
 
-    var that = this;
     this.Imports = Imports;
     View.call(this, Imports.domId["OptionsView"]);
 
-    $("#" + Imports.domId["OptionsView"] + " .backBtn").click(function() {
-        Imports.ViewManager.previousView();
-    });
-
-    $("#" + Imports.domId["OptionsView"] + " .sfxToggle").click(function() {
+    $('#clickToDismiss').click(function() {
         Imports.ViewManager.previousView();
     });
 }
@@ -83,4 +76,8 @@ OptionsView.prototype.offView = function() {
 
 OptionsView.prototype.show = function() {
     this.Imports.ViewManager.loadView(this);
+};
+
+OptionsView.prototype.getTransitionStyle = function() {
+    return 'popup';
 };
