@@ -54,13 +54,13 @@ MainMenu.prototype._render = function (games) {
 			if (opponentid === that.Imports.GameMaster.userid) {
 				opponentid = game.opponent;
 			}
-			var g = $("<div></div>");
-			g.addClass("game");
-			g.click(function () {
+			var gameDiv = $("<div></div>");
+			gameDiv.addClass("game");
+			gameDiv.click(function () {
 				that._showGame(game);
 			});
 			if (game.status === "completed") {
-				$("#list-complete").append(g);
+				$("#list-complete").append(gameDiv);
 			} else if (game.current === opponentid) {
 				$("#list-his-turn").append(gameDiv);
 			} else {
@@ -71,7 +71,7 @@ MainMenu.prototype._render = function (games) {
 				if (name) {
 					nameToUse = name;
 				}
-				g.text(nameToUse);
+				gameDiv.text(nameToUse);
 			});
 		})(games[i]);
 	}
