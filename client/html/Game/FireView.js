@@ -24,7 +24,7 @@ function FireView(Imports) {
 	.css("left", width * .05)
 	.css("top", height * .5 - width * .45);
 
-	var bigredbutton = $("<img src=\"../shared/Image Assets/spartanStrike_redButton.png\">")
+	var bigRedButton = $("<img src=\"../shared/Image Assets/spartanStrike_redButton.png\">")
 	.css("position", "absolute")
 	.css("width", width * .6)
 	.css("left", width * .2)
@@ -34,7 +34,7 @@ function FireView(Imports) {
 		Imports.ViewManager.previousView();
 	});
 
-	var backbutton = $("<img src=\"../shared/Image Assets/spartanStrike_mapViewIcon.png\">")
+	var backButton = $("<img src=\"../shared/Image Assets/spartanStrike_mapViewIcon.png\">")
 	.css("position", "absolute")
 	.css("top", window.innerWidth * .05)
 	.css("left", window.innerWidth * .05)
@@ -43,10 +43,10 @@ function FireView(Imports) {
 		Imports.ViewManager.previousView();
 	});
 
-	var fireview = $("#" + Imports.domId["FireView"]);
-	fireview.append(backbutton);
-	fireview.append(scope);
-	fireview.append(bigredbutton);
+	$("#" + Imports.domId["FireView"])
+	.append(backButton)
+	.append(scope)
+	.append(bigRedButton);
 }
 
 FireView.prototype = Object.create(FixedHeightView.prototype);
