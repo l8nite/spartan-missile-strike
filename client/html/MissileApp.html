@@ -18,6 +18,7 @@
 	<script src="Game/OpponentsView.js"></script>
 	<script src="Game/BaseView.js"></script>
 	<script src="Game/OptionsView.js"></script>
+	<script charset="UTF-8" type="text/javascript" 	src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
 	<script>
 	window.onload = function () {
 		var Imports = {
@@ -94,10 +95,11 @@
 			<div class="backBtn">Back</div>
 		</div>
 		<div id="map-view">
-			<div style="word-wrap: break-word; max-height: 50%;" class="game">---</div><br>
-			<div style="word-wrap: break-word;" class="gps">---</div><br>
-			<div class="fireBtn">Fire</div>
-			<div class="backBtn">Back</div>
+			<div class="map" id="bingmap"></div>
+			<div class="buttons">
+				<div class="fireBtn"></div>
+				<div class="backBtn"></div>
+			</div>
 		</div>
 		<div id="fire-view">
 		</div>
