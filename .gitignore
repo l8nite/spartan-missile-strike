@@ -4,12 +4,6 @@
 .DS_Store
 
 ###
-### Shared UI
-###
-/client/shared/Fonts
-/client/shared/Image Assets
-
-###
 ### vim
 ###
 .*.s[a-w][a-z]
