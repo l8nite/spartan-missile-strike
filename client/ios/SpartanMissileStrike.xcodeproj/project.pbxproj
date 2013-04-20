@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10FD94491723071200617DFF /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 10FD94481723071200617DFF /* shared */; };
 		281AD97116F08CA000E7625C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97016F08CA000E7625C /* AudioToolbox.framework */; };
 		281AD97416F0911300E7625C /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AD97316F0911300E7625C /* SSLocationManager.m */; };
 		281AD97816F1427D00E7625C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97616F1424E00E7625C /* CoreLocation.framework */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10FD94481723071200617DFF /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../shared; sourceTree = "<group>"; };
 		281AD97016F08CA000E7625C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		281AD97216F0911300E7625C /* SSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLocationManager.h; sourceTree = "<group>"; };
 		281AD97316F0911300E7625C /* SSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		28A9754716EEE737007B970E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				10FD94481723071200617DFF /* shared */,
 				28A9755816EF9C4A007B970E /* sounds.plist */,
 				28A9755A16EFA104007B970E /* audio */,
 				28A9754516EEE72D007B970E /* html */,
@@ -449,6 +452,7 @@
 				2872BEA716EFBA2C0051E707 /* spartan_appIcon_57.png in Resources */,
 				2872BEA816EFBA2C0051E707 /* spartan_appIcon_114.png in Resources */,
 				283C133D16F0617800D7E351 /* SSFiringViewController.xib in Resources */,
+				10FD94491723071200617DFF /* shared in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
