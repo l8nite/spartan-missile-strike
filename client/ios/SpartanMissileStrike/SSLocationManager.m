@@ -43,12 +43,4 @@
     CLLocationCoordinate2D lastLocation = [lastLocationUpdate coordinate];
     [self locationManagerCallback](lastLocation);
 }
-
- 
-
- 
- 
-
-
-
 @end
