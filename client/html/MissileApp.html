@@ -2,33 +2,6 @@
 <head>
 	<link rel="stylesheet" href="View/view.css">
 	<link rel="stylesheet" href="MissileApp.css">
-	<style>
-		body {
-			text-align: center;
-			background-color: transparent;
-		}
-		#main-menu {
-			background-color: #8080F0;
-		}
-		#map-view {
-			background-color: #F08080;
-		}
-		#fire-view {
-			background-color: transparent;
-		}
-		#fire-view div {
-			background-color: #80F080;
-		}
-		#options-view {
-			background-color: #F0F080;
-		}
-		#opponents-view {
-			background-color: #808080;
-		}
-		#base-view {
-			background-color: #F080F0;
-		}
-	</style>
 	<script src="jquery/jquery.js"></script>
 	<script src="Util/DomHelper.js"></script>
 	<script src="Util/Fridge.js"></script>
@@ -44,6 +17,7 @@
 	<script src="Game/FireView.js"></script>
 	<script src="Game/OpponentsView.js"></script>
 	<script src="Game/BaseView.js"></script>
+	<script src="Game/OptionsView.js"></script>
 	<script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
 	<script>
 	window.onload = function () {
@@ -66,14 +40,12 @@
 		window.NativeBridge = {
 			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
 		};
-
 		// DEBUG
 		// BEGIN DELETE THIS!
 		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
-			fn("AAABvzfRP6w0BANkVwSFsAtkx1Aa3MvtOUD3JUxB0zFqcQqWZBaE2rr4PN6ll68ZBnZAdtQDX2gSqfMP2htd5H9O95KdEEvZAykP3XTz6qAZDZD");
+			fn("BAABvzfRP6w0BAPN2i9uffC82liXIaFZCpYVfL3Gjx7UEamjHbanvBAvD0EpK97fTMIOwmjSZBkbqs0BWDhBa1uje57GWVtOecqJwhLAiXOpy64Ut8wD9oYBKmZBrQeyGDSMap8laLZChfZBRTFglK96vEHDoePiEks0XpkFUHCZCF1FYRqiUJUn4MGJVMsGooZD");
 		};
 		// END DELETE THIS!
-
 		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
 		Imports.Views["PlayToStart"].show();
 		setTimeout(function () {
@@ -90,15 +62,25 @@
 	<div style="display:none;">
 		<div id="play-to-start"></div>
 		<div id="main-menu">
-			<div>Welcome,</div>
-			<div class="yourname"></div><br>
-			<div class="newGameBtn">New Game</div>
-			<div id="list-yourturn"><h1>Your Turn</h1></div>
-			<div id="list-histurn"><h1>Not Your Turn</h1></div>
-			<div id="list-complete"><h1>Nobody's Turn</h1></div>
-			<div style="display: none;">
-				<div id="game-prototype">
-					<span class="opponent"></span>
+			<div class="scrollable">
+				<div class="buttons">
+					<img class="newGameBtn" src="../shared/Image Assets/spartanStrike_newGameIcon.png">
+					<img class="menu-bomb" src="../shared/Image Assets/spartanStrike_menuBomb.png">
+					<img class="optionsBtn" src="../shared/Image Assets/spartanStrike_optionsIcon.png">
+				</div>
+				<div id="list-your-turn" class="games-list">
+					<img class="your-turn label" src="../shared/Image Assets/spartanStrike_yourMove.png">
+				</div>
+				<div id="list-his-turn" class="games-list">
+					<img class="his-turn label" src="../shared/Image Assets/spartanStrike_theirMove.png">
+				</div>
+				<div id="list-complete" class="games-list">
+					Completed Games
+				</div>
+				<div style="display: none;">
+					<div id="game-prototype">
+						<span class="opponent"></span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -120,11 +102,21 @@
 			</div>
 		</div>
 		<div id="fire-view">
-			<div style="word-wrap: break-word;" class="gps">---</div><br>
-			<div style="word-wrap: break-word;" class="orientation">---</div><br>
-			<div class="fireBtn">Fire!</div>
-			<div class="backBtn">Back</div>
 		</div>
+		<div id="options-view">
+			<div  style= "background-color: rgba(0,0,0,0.5);">
+                <div style="padding-top: 15%;">
+                    <div style="position: relative; margin-left: auto; margin-right: auto; background-image: url('../shared/Image Assets/spartanStrike_optionBox.png'); width: 397px; height: 265px;">
+                        <div id="musicButton" style="width: 50%; height: 100%; float: left;">
+                            <img id="musicX" style="display: none; position: absolute; width: 83px; height: 83px; left: 72px; top: 111px;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
+                        </div>
+                        <div id="sfxButton" style="width: 50%; height: 100%; float: right;">
+                            <img id="sfxX" style="display: none; position: absolute; width: 83px; height: 83px; left: 237px; top: 111px;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
 </body>
 </html>
