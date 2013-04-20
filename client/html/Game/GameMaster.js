@@ -53,7 +53,7 @@ GameMaster.prototype.getName = function (userid) {
  */
 GameMaster.prototype.getOpponents = function () {
 	var that = this;
-	return this._getOpponentsFromService().done(function (opponents) {
+	return this.getOpponentsFromService().done(function (opponents) {
 		that._opponents = opponents;
 	});
 };
@@ -266,7 +266,7 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
  * Returns a deferred to be resolved with array of names.
  * Takes a contiguous array.
  */
-GameMaster.prototype._getOpponentsFromService = function () {
+GameMaster.prototype.getOpponentsFromService = function () {
 	var d = new $.Deferred();
 	return $.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(this.userid) + "/opponents", {
 		headers: {
