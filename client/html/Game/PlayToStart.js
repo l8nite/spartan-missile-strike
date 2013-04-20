@@ -5,7 +5,7 @@ function PlayToStart(Imports) {
 	this.Imports = Imports;
 	FixedHeightView.call(this, Imports.domId["PlayToStart"]);
 
-	$("#" + Imports.domId["PlayToStart"]).css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.png\")")
+	$("#" + Imports.domId["PlayToStart"]).css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.jpg\")")
 		.css("background-size", "100%")
 		.append($("<img></img>")
 			.attr("src", "../shared/Image Assets/spartanStrike_title.png")
