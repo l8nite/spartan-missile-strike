@@ -202,20 +202,15 @@ NativeBridge_Abstract.prototype.stopOrientationUpdates = function (callbackid) {
 
 NativeBridge_Abstract.prototype.playSound = function (soundID, options) {
 	var preferenceName = "musicMuted";
-	if (options.foreground === true)
-	{
-		preferenceName = "sfxMuted"; 
+	if (options.foreground === true) {
+		preferenceName = "sfxMuted";
 	}
- 	this.getPreferences([preferenceName],function(preferences)
- 	{
+	this.getPreferences([preferenceName],function(preferences) {
 	//play the sound if we're not muted
-		if (preferences[preferenceName] === "0")
-		{
+		if (preferences[preferenceName] === "0") {
 			this._playSound(soundID, options);
-			
 		}	
- 	});
-	
+	});
 };
 
 NativeBridge_Abstract.prototype.getPreferences = function (preferences, callback) {
