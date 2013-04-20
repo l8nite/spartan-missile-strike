@@ -49,7 +49,7 @@ NativeBridge_Android.prototype.logoutFacebook = function () {
 	AndroidInterface.logoutFacebook();
 };
 
-NativeBridge_Android.prototype.playSound = function (soundID, options) {
+NativeBridge_Android.prototype._playSound = function (soundID, options) {
 	AndroidInterface.playSound(JSON.stringify(soundID), JSON.stringify(options));
 };
 
