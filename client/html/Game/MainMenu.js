@@ -11,6 +11,14 @@ function MainMenu(Imports) {
 		}
 		Imports.Views["OpponentsView"].show();
 	});
+
+	$("#" + Imports.domId["MainMenu"] + " .optionsBtn").click(function () {
+		if (!Imports.Views["OptionsView"]) {
+			Imports.Views["OptionsView"] = new OptionsView(Imports);
+		}
+		Imports.Views["OptionsView"].show();
+	});
+
 	$("#" + Imports.domId["MainMenu"] + " .scrollable").css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.png\")")
 	.css("background-size", "100%")
 	.css("min-height", window.innerHeight);
