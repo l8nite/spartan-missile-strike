@@ -49,14 +49,6 @@ public class UserPreferences {
                 
                 // Save new preference
                 prefs.putString(key, value);
-                
-                // Notify Media Manager to change volume
-                if(key.equalsIgnoreCase("foreVolume")) {
-                	varibles.getMediaManager().setForegroundVolume(value);
-                }
-                else if(key.equalsIgnoreCase("backVolume")) {
-                	varibles.getMediaManager().setBackgroundVolume(value);
-                }
             }
             
             success = prefs.commit();
