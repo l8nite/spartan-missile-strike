@@ -34,7 +34,7 @@ function FireView(Imports) {
 		Imports.ViewManager.previousView();
 	});
 
-	var backbutton = $("<img src=\"../shared/Image Assets/spartanStrike_mapViewIcon.png\">")
+	var backButton = $("<img src=\"../shared/Image Assets/spartanStrike_mapViewIcon.png\">")
 	.css("position", "absolute")
 	.css("top", window.innerWidth * .05)
 	.css("left", window.innerWidth * .05)
@@ -44,7 +44,7 @@ function FireView(Imports) {
 	});
 
 	$("#" + Imports.domId["FireView"])
-	.append(backbutton)
+	.append(backButton)
 	.append(scope)
 	.append(bigRedButton);
 }
