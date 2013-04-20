@@ -119,7 +119,7 @@ MapView.prototype._updateMapView = function () {
 	//Remove existing Pushpins
 	for(var i=map.entities.getLength()-1;i>=0;i--) {
 		if ((map.entities.get(i) instanceof Microsoft.Maps.Pushpin)
-			|| (map.entities.get(i) instanceof Microsoft.Maps.Polyline)	{
+			|| (map.entities.get(i) instanceof Microsoft.Maps.Polyline)) {
 			map.entities.removeAt(i);
 		}
 	}
