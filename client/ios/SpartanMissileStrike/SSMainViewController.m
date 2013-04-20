@@ -129,13 +129,9 @@
     else if ([function isEqualIgnoringCase:@"startOrientationUpdates"]) {
         [orientationManager startUpdatingOrientationWithCallback:^(CMAttitude *attitude) {
             NSMutableDictionary *orientationDictionary = [[NSMutableDictionary alloc] init];
-            NSNumber *pitch = [NSNumber numberWithDouble:(double)attitude.pitch];
+            
             NSNumber *yaw = [NSNumber numberWithDouble:(double)attitude.yaw];
             NSNumber *roll = [NSNumber numberWithDouble:(double)attitude.roll];
-            
-            /** Notes for the follwing
-             "yaw" is "azimuth", "pitch" is the tilt of the phone with respect to ground, or zenith, and "roll" is about the vector pointing through the screen
-             */
             
             [orientationDictionary setObject:yaw forKey:@"azimuth"];
             [orientationDictionary setObject:roll forKey:@"altitude"];
@@ -185,6 +181,9 @@
     }
     else if ([function isEqualIgnoringCase:@"vibrate"]) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+    else if ([function isEqualIgnoringCase:@"log"]) {
+        NSLog(@"NativeBridge.log: %@", [arguments objectForKey:@"msg"]);
     }
 }
 
