@@ -53,8 +53,7 @@ public class MediaManager {
         foregroundMap = new HashMap<String, Boolean>();
         
         // Get Volume Data
-        foregroundVolume = variables.getSettings().getFloat("foreVolume", DEFAULT_SPEAKER_VOLUME);
-        backgroundVolume = variables.getSettings().getFloat("backVolume", DEFAULT_SPEAKER_VOLUME);
+        foregroundVolume = backgroundVolume = DEFAULT_SPEAKER_VOLUME;
     }
 
     public void loadSound() {
@@ -282,66 +281,6 @@ public class MediaManager {
         }
         else {
             MALogger.log(TAG, Log.WARN, "Sound (" + soundID + ") does not exist or is not playing.");
-        }
-    }
-    
-    /**
-     * Sets foreground volume and updates sound pool
-     * @param newVolume the new volume
-     */
-    public void setForegroundVolume(String newVolume) {
-        MALogger.log(TAG, Log.INFO, "Setting Foreground: " + newVolume);
-        // Parse Volume
-        float volume = DEFAULT_SPEAKER_VOLUME;
-        try {
-            volume = Float.parseFloat(newVolume);
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Parse New Volume: " + e.getMessage() , e);
-        }
-        
-        // Save Volume
-        foregroundVolume = volume;
-        
-        // Update all foreground music
-        Iterator<String> iterator = foregroundMap.keySet().iterator();
-        while (iterator.hasNext()) {
-            String key = iterator.next();
-            if(foregroundMap.get(key)) {
-                try {
-                    sounds.get(key).setVolume(volume, volume);
-                } catch (Exception e) { }
-            }
-        }
-    }
-    
-    /**
-     * Sets background volume and updates sound pool
-     * @param newVolume the new volume
-     */
-    public void setBackgroundVolume(String newVolume) {
-        MALogger.log(TAG, Log.INFO, "Setting Foreground: " + newVolume);
-        // Parse Volume
-        float volume = DEFAULT_SPEAKER_VOLUME;
-        try {
-            volume = Float.parseFloat(newVolume);
-        }
-        catch (Exception e) {
-            MALogger.log(TAG, Log.ERROR, "Parse New Volume: " + e.getMessage() , e);
-        }
-        
-        // Save Volume
-        backgroundVolume = volume;
-        
-        // Update all background music
-        Iterator<String> iterator = foregroundMap.keySet().iterator();
-        while (iterator.hasNext()) {
-            String key = iterator.next();
-            if(!foregroundMap.get(key)) {
-                try {
-                    sounds.get(key).setVolume(volume, volume);
-                } catch (Exception e) { }
-            }
         }
     }
     
