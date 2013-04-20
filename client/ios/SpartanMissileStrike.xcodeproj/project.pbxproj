@@ -373,6 +373,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28DC551416EEB7D800C4F389 /* Build configuration list for PBXNativeTarget "SpartanMissileStrike" */;
 			buildPhases = (
+				283BD99817233EBB00A0CFB4 /* ShellScript */,
 				28DC54D516EEB7D800C4F389 /* Sources */,
 				28DC54D616EEB7D800C4F389 /* Frameworks */,
 				28DC54D716EEB7D800C4F389 /* Resources */,
@@ -467,6 +468,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		283BD99817233EBB00A0CFB4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find \"${PROJECT_DIR}/../shared\" -exec touch -cm {} \\;";
+		};
 		28DC550016EEB7D800C4F389 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
