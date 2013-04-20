@@ -199,6 +199,26 @@ NativeBridge_Abstract.prototype.stopOrientationUpdates = function (callbackid) {
 	}
 };
 
+
+NativeBridge_Abstract.prototype.playSound = function (soundID, options) {
+	var preferenceName = "musicMuted";
+	if (options.foreground === true) {
+		preferenceName = "sfxMuted";
+	}
+	var that = this;
+	this.getPreferences([preferenceName],function(preferences) {
+		// setting user defaults
+		if (preferences[preferenceName] === null) {
+			preferences[preferenceName] = "0";
+		}
+		
+		//play the sound if we're not muted
+		if (preferences[preferenceName] === "0" ) {
+			that._playSound(soundID, options);
+		}	
+	});
+};
+
 NativeBridge_Abstract.prototype.getPreferences = function (preferences, callback) {
 	if (typeof preferences === "string") {
 		preferences = [preferences];
