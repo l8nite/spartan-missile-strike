@@ -21,7 +21,8 @@ function OptionsView(Imports) {
         });
 
         //install the click handlers
-        $('#musicButton').click(function() {
+        $('#musicButton').click(function(event) {
+            event.stopPropagation();
             if ($('#musicX').is(':visible')) {
                 // if the X is visible, and they clicked it, it means we want to UNMUTE the music
                 $('#musicX').hide();
@@ -37,7 +38,8 @@ function OptionsView(Imports) {
             }
         });
 
-        $('#sfxButton').click(function() {
+        $('#sfxButton').click(function(event) {
+            event.stopPropagation();
             if ($('#sfxX').is(':visible')) {
                 // if the X is visible, and they clicked it, it means we want to UNMUTE the music
                 $('#sfxX').hide();
@@ -59,7 +61,8 @@ function OptionsView(Imports) {
     this.Imports = Imports;
     View.call(this, Imports.domId["OptionsView"]);
 
-    $('#clickToDismiss').click(function() {
+    $('#clickToDismiss').click(function(event) {
+        event.stopPropagation();
         Imports.ViewManager.previousView();
     });
 }
