@@ -6,7 +6,6 @@ import com.missileapp.android.res.Gyro;
 import com.missileapp.android.res.LocationManagement;
 import com.missileapp.android.res.MediaManager;
 import com.missileapp.android.res.UserPreferences;
-import com.missileapp.android.res.Utilities;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -34,9 +33,6 @@ public class BagOfHolding extends Application {
     private ImageView splashScreen;            // ImageView
     
     // Resource variables
-    private boolean isEnabled;                        // Application is enabled
-    private boolean hideSplash;                       // Hide Splash registered before enabled
-    private boolean hasWebViewLoaded;                 // Marker to keep track of if webView has been loaded or not
     private FacebookAuth facebookAuth;                // Facebook Session Management
     private SharedPreferences settings;               // System User Preferences
     private UserPreferences userPrefs;                // Droid Native Bridge user prefs implementation
@@ -57,7 +53,6 @@ public class BagOfHolding extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        this.isEnabled = false;
     }
     
     
@@ -218,52 +213,6 @@ public class BagOfHolding extends Application {
     //
     ///////////////////////////////////////////////
 
-    /**
-     * Is MissileApp enabled? (location turned on)
-     * @return true if enabled, else false
-     */
-    public boolean isEnabled() {
-		return isEnabled;
-	}
-
-    /**
-     * Set enabled status of MissileApp
-     * @param isEnabled, true to enable
-     */
-	public void setEnabled(boolean isEnabled) {
-        this.isEnabled = isEnabled;
-        if (isEnabled) {
-            if (hideSplash) {
-                Utilities.hideSplash(this);
-                hideSplash = false;
-            }
-        }
-	}
-	
-	/**
-	 * Set to hide splash
-	 * @return true to hide splash, else false
-	 */
-	public boolean isHideSplash() {
-		return hideSplash;
-	}
-	
-	/**
-     * Set to hide splash after missile app is enabled
-     * @return true to hide splash, else false
-     */
-    public void setHideSplash(boolean hideSplash) {
-        this.hideSplash = hideSplash;
-    }
-	
-    public boolean isWebViewLoaded() {
-        return hasWebViewLoaded;
-    }
-    
-    public void setHasWebViewLoaded(boolean hasWebViewLoaded) {
-        this.hasWebViewLoaded = hasWebViewLoaded;
-    }
-    
     /**
 	 * Get Facebook Session Management
 	 * @return {@link FacebookAuth} 
