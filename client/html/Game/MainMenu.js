@@ -37,7 +37,16 @@ function MainMenu(Imports) {
 MainMenu.prototype = Object.create(View.prototype);
 
 MainMenu.prototype.onView = function () {
+	var that = this;
+	this.location = null;
 	this.GameMasterTicket = this.Imports.GameMaster.subscribeGames(this._render.bind(this));
+	this.locationTicket = this.Imports.NativeBridge.startLocationUpdates(function (location) {
+		if (location) {
+			that.location = location;
+		} else {
+			// TODO Prompt user to enable location services
+		}
+	});
 	View.prototype.onView.call(this);
 };
 
@@ -58,13 +67,26 @@ MainMenu.prototype._render = function (games) {
 	for (var i in games) {
 		(function (game) {
 			var opponentid = game.creator;
+			var yourid = that.Imports.GameMaster.userid;
 			if (opponentid === that.Imports.GameMaster.userid) {
 				opponentid = game.opponent;
 			}
 			var gameDiv = $("<div></div>");
 			gameDiv.addClass("game");
 			gameDiv.click(function () {
-				that._showGame(game);
+				if (!game[yourid] || !game[yourid].base) {
+					if (that.location) {
+						that.Imports.GameMaster.acceptInvitation(game.gameid, that.location).done(function (acceptedGame) {
+							that._showGame(acceptedGame);
+						}).fail(function () {
+							// TODO Notify user that the service was unreachable
+						});
+					} else {
+						// TODO Notify user that they don't haven't got a good location yet
+					}
+				} else {
+					that._showGame(game);
+				}
 			});
 			if (game.status === "completed") {
 				$("#list-complete").append(gameDiv);
