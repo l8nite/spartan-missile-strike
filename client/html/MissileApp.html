@@ -52,11 +52,12 @@
 			orientation: {
 				azimuth: 0,
 				altitude: 0
-			}
+			},
+			token: "BAABvzfRP6w0BAPz7jJY4yRhMPBNQIzJ1R7xGyMWItO9CwHutS6v2suoT6rhqXlsfxk29OPzz3FFg2ZAjE1uKOimPplFAuRt8E7tz35hftF6xRZAoCkpuucZBiMvkbg6eKiaCGxqN52sYpGL0SuRtodU1VXSTDLLTxBJrDuiDBxrfKGjPqDhOmRtF2YZClqoLQmm9mtlgjBbBdwASCZCWy"
 		};
 		var locationInterval, orientationInterval;
 		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
-			fn("BAABvzfRP6w0BAPz7jJY4yRhMPBNQIzJ1R7xGyMWItO9CwHutS6v2suoT6rhqXlsfxk29OPzz3FFg2ZAjE1uKOimPplFAuRt8E7tz35hftF6xRZAoCkpuucZBiMvkbg6eKiaCGxqN52sYpGL0SuRtodU1VXSTDLLTxBJrDuiDBxrfKGjPqDhOmRtF2YZClqoLQmm9mtlgjBbBdwASCZCWy");
+			fn(token);
 		};
 		Imports.NativeBridge._startLocationUpdates = function (callbackId) {
 			locationInterval = setInterval(function () {
