@@ -10,6 +10,10 @@ function BaseView(Imports) {
 	};
 	View.call(this, Imports.domId["BaseView"]);
 
+	$("#" + that.Imports.domId["BaseView"])
+	.css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.jpg\")")
+	.css("background-size", "100%");
+
 	$("#" + Imports.domId["BaseView"] + " .startBtn").click(function () {
 		if (typeof that._game === "string") {
 			// _game is a userid
