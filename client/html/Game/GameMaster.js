@@ -188,6 +188,8 @@ GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, powe
 		},
 		dataType: "json",
 		data: JSON.stringify(shot)
+	}).fail(function (error) {
+		console.error(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		response.created = new Date(response.created);
 		response.updated = new Date(response.updated);
@@ -208,6 +210,8 @@ GameMaster.prototype._newGameOnService = function (opponent, loc) {
 			latitude: loc.latitude,
 			longitude: loc.longitude
 		})
+	}).fail(function (error) {
+		console.error(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		response.created = new Date(response.created);
 		response.updated = new Date(response.updated);
@@ -227,6 +231,8 @@ GameMaster.prototype._selectBaseOnService = function (gameid, loc) {
 			latitude: loc.latitude,
 			longitude: loc.longitude
 		})
+	}).fail(function (error) {
+		console.error(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		response.created = new Date(response.created);
 		response.updated = new Date(response.updated);
@@ -247,6 +253,8 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
 	return $.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(this.userid) + "/games", {
 		headers: headers,
 		dataType: "json"
+	}).fail(function (error) {
+		console.error(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		var games;
 		if (response !== undefined) {
@@ -273,6 +281,8 @@ GameMaster.prototype.getOpponentsFromService = function () {
 			"MissileAppSessionId": this._sessionid
 		},
 		dataType: "json"
+	}).fail(function (error) {
+		console.error(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		return response.opponents;
 	});
