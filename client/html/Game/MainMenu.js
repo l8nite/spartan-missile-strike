@@ -77,7 +77,7 @@ MainMenu.prototype._render = function (games) {
 			gameDiv.click(function () {
 				if (!game[yourid] || !game[yourid].base) {
 					if (that.location) {
-						that.Imports.GameMaster.acceptInvitation(game.gameid, that.location).done(function (acceptedGame) {
+						that.Imports.GameMaster.acceptInvitation(game.id, that.location).done(function (acceptedGame) {
 							that._showGame(acceptedGame);
 						}).fail(function () {
 							// TODO Notify user that the service was unreachable
