@@ -20,7 +20,11 @@ OpponentsView.prototype.onView = function () {
 	var that = this;
 	this.location = null;
 	this.locationTicket = this.Imports.NativeBridge.startLocationUpdates(function (location) {
-		that.location = location;
+		if (location) {
+			that.location = location;
+		} else {
+			// TODO Prompt user to enable location services
+		}
 	});
 	this.Imports.GameMaster.getOpponentsFromService().done(function (opponents) {
 		$("#" + that.Imports.domId["OpponentsView"] + " .player-list").empty();
