@@ -85,7 +85,7 @@ MainMenu.prototype._render = function (games) {
 						});
 					} else {
 						// TODO Notify user that they don't haven't got a good location yet
-						console.error("Your location is needed to accept this invitation. Please try again when you have GPS signal.")
+						console.error("Your location is needed to accept this invitation. Please try again when you have GPS signal.");
 					}
 				} else {
 					that._showGame(game);
