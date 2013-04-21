@@ -44,8 +44,38 @@
 		};
 		// DEBUG
 		// BEGIN DELETE THIS!
+		debug = {
+			location: {
+				latitude: 0,
+				longitude: 0
+			},
+			orientation: {
+				azimuth: 0,
+				altitude: 0
+			}
+		};
+		var locationInterval, orientationInterval;
 		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
-			fn("BAABvzfRP6w0BAPN2i9uffC82liXIaFZCpYVfL3Gjx7UEamjHbanvBAvD0EpK97fTMIOwmjSZBkbqs0BWDhBa1uje57GWVtOecqJwhLAiXOpy64Ut8wD9oYBKmZBrQeyGDSMap8laLZChfZBRTFglK96vEHDoePiEks0XpkFUHCZCF1FYRqiUJUn4MGJVMsGooZD");
+			fn("BAABvzfRP6w0BAPz7jJY4yRhMPBNQIzJ1R7xGyMWItO9CwHutS6v2suoT6rhqXlsfxk29OPzz3FFg2ZAjE1uKOimPplFAuRt8E7tz35hftF6xRZAoCkpuucZBiMvkbg6eKiaCGxqN52sYpGL0SuRtodU1VXSTDLLTxBJrDuiDBxrfKGjPqDhOmRtF2YZClqoLQmm9mtlgjBbBdwASCZCWy");
+		};
+		Imports.NativeBridge._startLocationUpdates = function (callbackId) {
+			locationInterval = setInterval(function () {
+				Imports.NativeBridge.callback(callbackId, debug.location);
+				if (!debug.location) {
+					clearInterval(locationInterval);
+				}
+			}, 500);
+		};
+		Imports.NativeBridge._stopLocationUpdates = function () {
+			clearInterval(locationInterval);
+		};
+		Imports.NativeBridge._startOrientationUpdates = function (callbackId) {
+			orientationInterval = setInterval(function () {
+				Imports.NativeBridge.callback(callbackId, debug.orientation);
+			}, 4);
+		};
+		Imports.NativeBridge._stopOrientationUpdates = function () {
+			clearInterval(orientationInterval);
 		};
 		// END DELETE THIS!
 		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
