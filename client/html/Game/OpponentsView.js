@@ -24,6 +24,7 @@ OpponentsView.prototype.onView = function () {
 			that.location = location;
 		} else {
 			// TODO Prompt user to enable location services
+			console.error("Location services must be enabled for this application to operate as intended.");
 		}
 	});
 	this.Imports.GameMaster.getOpponentsFromService().done(function (opponents) {
@@ -42,9 +43,11 @@ OpponentsView.prototype.onView = function () {
 								that.Imports.Views["MapView"].show(game);
 							}).fail(function () {
 								// TODO Notify user that the service was unreachable
+								console.error("Service unavailable. Could not accept invitation.");
 							});
 						} else {
 							// TODO Notify user that they can't start the game yet!
+							console.error("Your location is needed to accept this invitation. Please try again when you have GPS signal.");
 						}
 					})
 				);
