@@ -42,11 +42,24 @@ MainView.prototype._loadViewAnimation = function (view, arbitraryPrevView) {
         }
         DomHelper.moveTo(view, window.innerWidth, 0);
         view.onView();
-        this._moveAnimation([view, oldView], window.innerWidth * -1, this._TRANSITION_TIME, this._SMOOTHING, function () {
-            oldView.offView();
+
+        var transitionTime = this._TRANSITION_TIME;
+        var nodes = [view];
+        if (view.getTransitionStyle() !== 'popup') {
+            nodes.push(oldView);
+        } else {
+            transitionTime = 0;
+        }
+
+        this._moveAnimation(nodes, window.innerWidth * -1, transitionTime, this._SMOOTHING, function () {
+            if (view.getTransitionStyle() != 'popup') {
+                oldView.offView();
+            }
+
             if (arbitraryPrevView) {
                 that._viewStack = that._viewStack.slice(0, that._viewStack.indexOf(arbitraryPrevView) + 1);
             }
+
             that._viewStack.push(view);
             that._postAnimation();
         });
@@ -70,9 +83,19 @@ MainView.prototype._previousViewAnimation = function () {
         this._postAnimation();
         return;
     }
-    DomHelper.moveTo(newView, window.innerWidth * -1, 0);
-    newView.onView();
-    this._moveAnimation([newView, oldView], window.innerWidth, this._TRANSITION_TIME, this._SMOOTHING, function () {
+
+    var transitionTime = this._TRANSITION_TIME;
+    var nodes = [oldView];
+
+    if (oldView.getTransitionStyle() !== 'popup') {
+        DomHelper.moveTo(newView, window.innerWidth * -1, 0);
+        newView.onView();
+        nodes.push(newView);
+    } else {
+        transitionTime = 0;
+    }
+
+    this._moveAnimation(nodes, window.innerWidth, transitionTime, this._SMOOTHING, function () {
         oldView.offView();
         that._viewStack.pop();
         that._postAnimation();
@@ -87,8 +110,7 @@ MainView.prototype._moveAnimation = function (nodes, translation_x, time, smooth
                 DomHelper.moveTo(nodes[i], initialPos[i] + translation_x);
             }
             then();
-        }
-        else {
+        } else {
             var x = 0,
                 t_total = currentFrameTime - initialTime,
                 t = Math.min(smoothing, Math.max(t_total, 0));
