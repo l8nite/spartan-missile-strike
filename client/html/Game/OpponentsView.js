@@ -36,7 +36,7 @@ OpponentsView.prototype.onView = function () {
 					$("<div>" + opponent.username + "</div>")
 					.click(function () {
 						if (that.location) {
-							that.Imports.GameMaster.newGame(opponent, that.location).done(function (game) {
+							that.Imports.GameMaster.newGame(opponent.id, that.location).done(function (game) {
 								if (!that.Imports.Views["MapView"]) {
 									that.Imports.Views["MapView"] = new MapView(that.Imports);
 								}
