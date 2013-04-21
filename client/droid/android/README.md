@@ -7,8 +7,8 @@ SETTING UP ANDROID SDK:
     set SMSGIT=
     cd %SMSGIT%\client\droid\android\
     del assets\
-    mklink /d assets\ ..\..\html\
-    mklink /d shared\ ..\..\shared\
+    mklink /d assets\html\ ..\..\..\html\
+    mklink /d assets\shared\ ..\..\..\shared\
 
   For Windows, the command for creating the facebook debug keyhash: (you will need download openssl, for windows: https://code.google.com/p/openssl-for-windows/)
     set OPENSSLDIR=
