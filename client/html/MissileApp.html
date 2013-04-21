@@ -57,7 +57,7 @@
 		};
 		var locationInterval, orientationInterval;
 		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
-			fn(token);
+			fn(debug.token);
 		};
 		Imports.NativeBridge._startLocationUpdates = function (callbackId) {
 			locationInterval = setInterval(function () {
