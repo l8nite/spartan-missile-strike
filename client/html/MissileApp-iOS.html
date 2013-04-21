@@ -8,6 +8,7 @@
 	<script src="NativeBridge/NativeBridge_Abstract.js"></script>
 	<script src="NativeBridge/NativeBridge_iOS.js"></script>
 	<script src="Game/GameMaster.js"></script>
+	<script src="Game/SuspendManager.js"></script>
 	<script src="View/MainView.js"></script>
 	<script src="View/View.js"></script>
 	<script src="View/FixedHeightView.js"></script>
@@ -24,6 +25,7 @@
 		var Imports = {
 			NativeBridge: new NativeBridge_iOS(),
 			ViewManager: new MainView(),
+			SuspendManager: new SuspendManager(),
 			domId: {
 				"PlayToStart": "play-to-start",
 				"MainMenu": "main-menu",
@@ -43,13 +45,11 @@
 
 		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
 		Imports.Views["PlayToStart"].show();
-		setTimeout(function () {
-			Imports.NativeBridge.playSound("background_music", {
-				foreground: false,
-				loop: true
-			});
-			Imports.NativeBridge.hideSplash();
-		}, 2000);
+		Imports.NativeBridge.playSound("background_music", {
+			foreground: false,
+			loop: true
+		});
+		Imports.NativeBridge.hideSplash();
 	};
 	</script>
 </head>
@@ -99,7 +99,7 @@
 		<div id="fire-view">
 		</div>
 		<div id="options-view">
-			<div  style= "background-color: rgba(0,0,0,0.5);">
+			<div id="clickToDismiss" style="background-color: rgba(0,0,0,0.5); height: 100%;">
 				<div style="padding-top: 15%;">
 					<div style="position: relative; margin-left: auto; margin-right: auto; background-image: url('../shared/Image Assets/spartanStrike_optionBox.png'); width: 397px; height: 265px;">
 						<div id="musicButton" style="width: 50%; height: 100%; float: left;">

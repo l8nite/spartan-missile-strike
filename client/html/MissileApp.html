@@ -8,6 +8,7 @@
 	<script src="NativeBridge/NativeBridge_Abstract.js"></script>
 	<script src="NativeBridge/NativeBridge_iOS.js"></script>
 	<script src="Game/GameMaster.js"></script>
+	<script src="Game/SuspendManager.js"></script>
 	<script src="View/MainView.js"></script>
 	<script src="View/View.js"></script>
 	<script src="View/FixedHeightView.js"></script>
@@ -24,6 +25,7 @@
 		var Imports = {
 			NativeBridge: new NativeBridge_iOS(),
 			ViewManager: new MainView(),
+			SuspendManager: new SuspendManager(),
 			domId: {
 				"PlayToStart": "play-to-start",
 				"MainMenu": "main-menu",
@@ -48,13 +50,11 @@
 		// END DELETE THIS!
 		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
 		Imports.Views["PlayToStart"].show();
-		setTimeout(function () {
-			Imports.NativeBridge.playSound("background_music", {
-				foreground: false,
-				loop: true
-			});
-			Imports.NativeBridge.hideSplash();
-		}, 2000);
+		Imports.NativeBridge.playSound("background_music", {
+			foreground: false,
+			loop: true
+		});
+		Imports.NativeBridge.hideSplash();
 	};
 	</script>
 </head>
@@ -85,9 +85,10 @@
 			</div>
 		</div>
 		<div id="opponents-view">
-			<div><input type="text" id="opponent-input"></div><br>
-			<div class="startBtn">Start game</div>
-			<div class="backBtn">Back</div>
+			<div class="nav-buttons">
+				<img class="backBtn" src="../shared/Image Assets/spartanStrike_cancel.png">
+			</div>	
+			<div class="player-list"></div>
 		</div>
 		<div id="base-view">
 			<div style="word-wrap: break-word;" class="gps">---</div><br>
@@ -104,19 +105,19 @@
 		<div id="fire-view">
 		</div>
 		<div id="options-view">
-			<div  style= "background-color: rgba(0,0,0,0.5);">
-                <div style="padding-top: 15%;">
-                    <div style="position: relative; margin-left: auto; margin-right: auto; background-image: url('../shared/Image Assets/spartanStrike_optionBox.png'); width: 397px; height: 265px;">
-                        <div id="musicButton" style="width: 50%; height: 100%; float: left;">
-                            <img id="musicX" style="display: none; position: absolute; width: 83px; height: 83px; left: 72px; top: 111px;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
-                        </div>
-                        <div id="sfxButton" style="width: 50%; height: 100%; float: right;">
-                            <img id="sfxX" style="display: none; position: absolute; width: 83px; height: 83px; left: 237px; top: 111px;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+			<div id="clickToDismiss" style="background-color: rgba(0,0,0,0.5); height: 100%;">
+				<div style="padding-top: 15%;">
+					<div style="position: relative; margin-left: auto; margin-right: auto; background-image: url('../shared/Image Assets/spartanStrike_optionBox.png'); width: 397px; height: 265px;">
+						<div id="musicButton" style="width: 50%; height: 100%; float: left;">
+							<img id="musicX" style="display: none; position: absolute; width: 83px; height: 83px; left: 72px; top: 111px;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
+						</div>
+						<div id="sfxButton" style="width: 50%; height: 100%; float: right;">
+							<img id="sfxX" style="display: none; position: absolute; width: 83px; height: 83px; left: 237px; top: 111px;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
