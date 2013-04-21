@@ -18,6 +18,10 @@ OpponentsView.prototype = Object.create(View.prototype);
 
 OpponentsView.prototype.onView = function () {
 	var that = this;
+	this.location = null;
+	this.locationTicket = this.Imports.NativeBridge.startLocationUpdates(function (location) {
+		that.location = location;
+	});
 	this.Imports.GameMaster.getOpponentsFromService().done(function (opponents) {
 		$("#" + that.Imports.domId["OpponentsView"] + " .player-list").empty();
 		for (var i = 0; i < opponents.length; i++) {
@@ -26,10 +30,18 @@ OpponentsView.prototype.onView = function () {
 				$("#" + that.Imports.domId["OpponentsView"] + " .player-list").append(
 					$("<div>" + opponent.username + "</div>")
 					.click(function () {
-						if (!that.Imports.Views["BaseView"]) {
-							that.Imports.Views["BaseView"] = new BaseView(that.Imports);
+						if (that.location) {
+							that.Imports.GameMaster.newGame(opponent, that.location).done(function (game) {
+								if (!that.Imports.Views["MapView"]) {
+									that.Imports.Views["MapView"] = new MapView(that.Imports);
+								}
+								that.Imports.Views["MapView"].show(game);
+							}).fail(function () {
+								// TODO Notify user that the service was unreachable
+							});
+						} else {
+							// TODO Notify user that they can't start the game yet!
 						}
-						that.Imports.Views["BaseView"].show(opponent.id);
 					})
 				);
 			})();
@@ -39,6 +51,7 @@ OpponentsView.prototype.onView = function () {
 };
 
 OpponentsView.prototype.offView = function () {
+	this.Imports.NativeBridge.stopLocationUpdates(this.locationTicket);
 	View.prototype.offView.call(this);
 };
 
