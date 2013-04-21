@@ -207,6 +207,7 @@ public class MediaManager {
                     mp.start();
                 } catch (Exception e) { }
             }
+            playingSounds = null;
         }
     }
     

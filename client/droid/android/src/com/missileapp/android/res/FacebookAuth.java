@@ -17,8 +17,7 @@ public class FacebookAuth {
     private static final String FBSETTING_ACCESS_TOKEN_EXPIRE = "SMSFB_AccessTokenExpire";
     
     private final BagOfHolding variables;
-    private boolean resumeRequestInhibited;
-    private boolean hideSplashWhenDone;
+    private String callbackID;
     private String facebookToken;
     private Date facebookTokenExpiration;
     private Session.StatusCallback statusCallback;
@@ -27,25 +26,13 @@ public class FacebookAuth {
         this.variables = variables;
         getFacebookAccessTokenFromPrefs();
         statusCallback = new SessionStatusCallback();
+        callbackID = null;
     }
     
     public void setActivityResult(int requestCode, int resultCode, Intent data) {
         Session activeSession = Session.getActiveSession();
         if(activeSession != null) {
             activeSession.onActivityResult(variables.getMissileApp(), requestCode, resultCode, data);
-        }
-    }
-    
-    public boolean processResumeRequest(Boolean hideSplashWhenDone) {
-        if(checkIfSessionExistsFromPrefs() || checkIfSessionExistsFromFacebook(true)) {
-            resumeRequestInhibited = false;
-            return true;
-        }
-        else {
-            resumeRequestInhibited = true;
-            this.hideSplashWhenDone = hideSplashWhenDone;
-            loginToFacebook();
-            return false;
         }
     }
     
@@ -61,7 +48,7 @@ public class FacebookAuth {
      */
     private void getFacebookAccessTokenFromPrefs() {
         SharedPreferences prefs = variables.getSettings();
-        facebookToken = prefs.getString(FBSETTING_ACCESS_TOKEN, "");
+        facebookToken = prefs.getString(FBSETTING_ACCESS_TOKEN, null);
         facebookTokenExpiration = new Date(prefs.getLong(FBSETTING_ACCESS_TOKEN_EXPIRE, 0));
     }
     
@@ -105,7 +92,24 @@ public class FacebookAuth {
      */
     public void notifyNativeBridgeAccessToken(String callbackID) {
         MALogger.log(TAG, Log.INFO, "Sending NB Access Token");
-        variables.getDroidBridge().notifyNativeBridgeCallback(callbackID, "\"" +facebookToken + "\"");
+        this.callbackID = callbackID;
+        if(checkIfSessionExistsFromPrefs() || checkIfSessionExistsFromFacebook(true)) {
+            sendFacebookAccessTokenToNB();
+        }
+        else {
+            loginToFacebook();
+        }
+        
+    }
+    
+    /**
+     * Sends Facebook Access Token To Native Bridge
+     */
+    private void sendFacebookAccessTokenToNB() {
+        if(callbackID != null) {
+            variables.getDroidBridge().notifyNativeBridgeCallback(callbackID, "\"" +facebookToken + "\"");
+            callbackID = null;
+        }
     }
     
     /**
@@ -136,18 +140,22 @@ public class FacebookAuth {
     }
     
     private class SessionStatusCallback implements Session.StatusCallback {
-        @Override
         public void call(Session session, SessionState state, Exception exception) {
-            if(session.isOpened()) {
-                facebookToken = session.getAccessToken();
-                facebookTokenExpiration = session.getExpirationDate();
-                if(!saveFacebookAccessTokenToPrefs()) {
-                    MALogger.log(TAG, Log.INFO, "Saving Facebook Data Failed");
+            if(state == SessionState.OPENED || state == SessionState.OPENED_TOKEN_UPDATED || session.isOpened()) {
+                try {
+                    facebookToken = session.getAccessToken();
+                    facebookTokenExpiration = session.getExpirationDate();
+                    if(!saveFacebookAccessTokenToPrefs()) {
+                        MALogger.log(TAG, Log.INFO, "Saving Facebook Data Failed");
+                    }
+                    sendFacebookAccessTokenToNB();
                 }
+                catch (Exception e) {
+                    MALogger.log(TAG, Log.ERROR, "Error in Facebook callback", e);
+                }
+            }
+            else {
                 
-                if(resumeRequestInhibited) {
-                    variables.getMissileApp().finishProcessingResume(hideSplashWhenDone);
-                }
             }
         }
     }
