@@ -21,6 +21,10 @@
 
 -(void)_initAudioPlayers
 {
+    // Set AudioSession category to "Ambient" to allow other application's audio to play
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+
     filenameForSoundId = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"sounds" ofType:@"plist"]];
     playerForSoundId = [[NSMutableDictionary alloc] init];
 
@@ -36,8 +40,19 @@
     }
 }
 
--(void)playSound:(NSString *)soundIdentifier loopCount:(NSInteger)loops
+-(void)playSound:(NSString *)soundIdentifier loopCount:(NSInteger)loops inForeground:(BOOL)inForeground
 {
+    if (!inForeground) {
+        UInt32 otherAudioIsPlaying;
+        UInt32 size = sizeof(otherAudioIsPlaying);
+        AudioSessionGetProperty(kAudioSessionProperty_OtherAudioIsPlaying, &size, &otherAudioIsPlaying);
+		
+        if (otherAudioIsPlaying) {
+            NSLog(@"background music already playing, ignoring request to playSound('%@')", soundIdentifier);
+            return;
+        }
+    }
+
     AVAudioPlayer *player = (AVAudioPlayer *)[playerForSoundId objectForKey:soundIdentifier];
     NSAssert(player != nil, @"soundIdentifier is not recognized");
     [player setNumberOfLoops:loops];
