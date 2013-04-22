@@ -15,7 +15,7 @@
     NSMutableDictionary* playerForSoundId;
 }
 
--(void)playSound:(NSString *)soundIdentifier loopCount:(NSInteger)loops;
+-(void)playSound:(NSString *)soundIdentifier loopCount:(NSInteger)loops inForeground:(BOOL)inForeground;
 -(void)stopSound:(NSString *)soundIdentifier;
 
 @end
