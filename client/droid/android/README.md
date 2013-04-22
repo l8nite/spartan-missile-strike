@@ -12,7 +12,7 @@ SETTING UP ANDROID SDK:
 
   For Windows, the command for creating the facebook debug keyhash: (you will need download openssl, for windows: https://code.google.com/p/openssl-for-windows/)
     set OPENSSLDIR=
-    keytool -exportcert -alias androiddebugkey -keystore %HOMEPATH%\.android\debug.keystore | %OPENSSLDIR%\openssl.exe sha1 -binary | %OPENSSLDIR%\openssl.exe base64
+    keytool -exportcert -alias androiddebugkey -keystore "%HOMEPATH%"\.android\debug.keystore | "%OPENSSLDIR%"\openssl.exe sha1 -binary | "%OPENSSLDIR%"\openssl.exe base64
     <<password = 'android' (without quotes)>>
 
 
