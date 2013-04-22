@@ -47,7 +47,7 @@
         UInt32 size = sizeof(otherAudioIsPlaying);
         AudioSessionGetProperty(kAudioSessionProperty_OtherAudioIsPlaying, &size, &otherAudioIsPlaying);
 		
-        if (otherAudioIsPlaying){
+        if (otherAudioIsPlaying) {
             NSLog(@"background music already playing, ignoring request to playSound('%@')", soundIdentifier);
             return;
         }
