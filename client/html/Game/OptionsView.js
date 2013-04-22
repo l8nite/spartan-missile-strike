@@ -6,16 +6,16 @@ function OptionsView(Imports) {
     $(function() {
         Imports.NativeBridge.getPreferences(["musicMuted", "sfxMuted"], function(preferences) {
             if (preferences.musicMuted === "0") {
-                $('#musicX').show();
-            } else {
                 $('#musicX').hide();
+            } else {
+                $('#musicX').show();
 
             }
 
             if (preferences.sfxMuted == "0") {
-                $('#sfxX').show();
-            } else {
                 $('#sfxX').hide();
+            } else {
+                $('#sfxX').show();
 
             }
         });
