@@ -62,7 +62,7 @@ function OptionsView(Imports) {
     this.Imports = Imports;
     View.call(this, Imports.domId["OptionsView"]);
 
-    $('#clickToDismiss').click(function(event) {
+    $('#optionsView > #clickToDismiss').click(function(event) {
         event.stopPropagation();
         Imports.ViewManager.previousView();
     });
