@@ -1,0 +1,169 @@
+<html>
+	<head>
+		<title>NativeBridge_Android Test</title>
+		<link rel="stylesheet" href="../qunit/qunit.css">
+	</head>
+	<body>
+		<div id="qunit"></div>
+		<div id="qunit-fixture"></div>
+		<script src="../qunit/qunit.js"></script>
+		<script src="../Util/Fridge.js"></script>
+		<script src="NativeBridge_Abstract.js"></script>
+		<script src="NativeBridge_Android.js"></script>
+		<script>
+
+		// start/stopLocationUpdates
+		// Subscribes two listeners to get location updates
+		// Checks to see if callback values are valid
+		// Removes both listeners
+		// 
+		// Post conditions
+		// locationUpdates callback fridge has been deleted
+		// Client has turned off GPS or location services
+		asyncTest("start/stopLocationUpdates", 5, function () {
+			function validateCoords(coords) {
+				if (!coords || !coords.longitude || !coords.latitude) {
+					return false;
+				}
+				if (typeof coords.longitude !== "number" || typeof coords.latitude !== "number") {
+					return false;
+				}
+				if (coords.longitude < -180 || coords.longitude > 180) {
+					return false;
+				}
+				if (coords.latitude < -90 || coords.latitude > 90) {
+					return false;
+				}
+				return true;
+			}
+
+			var cb0called = false;
+			function testcb0(coords) {
+				cb0called = true;
+				ok(true, "CB0 called");
+				ok(validateCoords(coords), "CB0 coords valid");
+				if (cb1called) {
+					continueTest();
+				}
+			}
+
+			var cb1called = false;
+			function testcb1(coords) {
+				cb1called = true;
+				ok(true, "CB1 called");
+				ok(validateCoords(coords), "CB1 coords valid");
+				if (cb0called) {
+					continueTest();
+				}
+			}
+
+			function continueTest() {
+				NativeBridge.stopLocationUpdates(cb0ticket);
+				NativeBridge.stopLocationUpdates(cb1ticket);
+				ok(!NativeBridge._getLocationUpdatesCBs, "Fridge deleted");
+				start();
+			}
+
+			var NativeBridge = new NativeBridge_Android();
+			var cb0ticket = NativeBridge.startLocationUpdates(testcb0);
+			var cb1ticker = NativeBridge.startLocationUpdates(testcb1);
+		});
+
+		// start/stopLocationUpdates
+		// Same as start/stopLocationUpdates
+		asyncTest("start/stopOrientationUpdates", 5, function () {
+			function validateRot(rot) {
+				if (!rot || !rot.azimuth || !rot.altitude) {
+					return false;
+				}
+				if (typeof rot.azimuth !== "number" || typeof rot.altitude !== "number") {
+					return false;
+				}
+				if (rot.azimuth < 0 || rot.azimuth > 2 * Math.PI) {
+					return false;
+				}
+				if (rot.altitude < Math.PI / -2 || rot.altitude > Math.PI / 2) {
+					return false;
+				}
+				return true;
+			}
+
+			var cb0called = false;
+			function testcb0(rot) {
+				cb0called = true;
+				ok(true, "CB0 called");
+				ok(validateRot(rot), "CB0 rot valid");
+				if (cb1called) {
+					continueTest();
+				}
+			}
+
+			var cb1called = false;
+			function testcb1(rot) {
+				cb1called = true;
+				ok(true, "CB1 called");
+				ok(validateRot(rot), "CB1 rot valid");
+				if (cb0called) {
+					continueTest();
+				}
+			}
+
+			function continueTest() {
+				NativeBridge.stopOrientationUpdates(cb0ticket);
+				NativeBridge.stopOrientationUpdates(cb1ticket);
+				ok(!NativeBridge._getOrientationUpdatesCBs, "Fridge deleted");
+				start();
+			}
+
+			var NativeBridge = new NativeBridge_Android();
+			var cb0ticket = NativeBridge.startOrientationUpdates(testcb0);
+			var cb1ticker = NativeBridge.startOrientationUpdates(testcb1);
+		});
+
+		// get/setPreferences
+		// sets and gets preferences, checking for correctness
+		asyncTest("get/setPreferences", 3, function () {
+			var NativeBridge = new NativeBridge_Android();
+			NativeBridge.setPreferences({
+				"one": "uno",
+				"two": "dos"
+			}, function (success) {
+				ok(success, "setPreferences successful");
+				NativeBridge.getPreferences(["one", "two"], function (response) {
+					ok(response, "getPreferences returned a response");
+					ok(response["one"] === "uno" && response["two"] === "dos", "Received correct values");
+					start();
+				});
+			});
+		});
+
+		// getFacebookAccessToken
+		asyncTest("getFacebookAccessToken", 1, function () {
+			new NativeBridge_Android().getFacebookAccessToken(function (token) {
+				ok(typeof token === "string", "FB token received and is a string");
+				start();
+			});
+		});
+
+		// play/stopSound
+		// Play BG music for 5 seconds, then stop
+		(function () {
+			var NativeBridge = new NativeBridge_Android();
+			NativeBridge.playSound("background_music", {
+				foreground: false,
+				loop: true
+			});
+			setTimeout(function () {
+				NativeBridge.stopSound("background_music");
+			}, 5000);
+		})();
+
+		// vibrate
+		// Vibrate for 400ms
+		(function () {
+			new NativeBridge_Android().vibrate(400);
+		})();
+
+		</script>
+	</body>
+</html>

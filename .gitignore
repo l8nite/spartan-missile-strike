@@ -1,3 +1,24 @@
+###
+### Other
+###
+.DS_Store
+
+###
+### vim
+###
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+
+###
+### Node.JS
+###
+
+node_modules
+npm-debug.log
 lib-cov
 *.seed
 *.log
@@ -11,5 +32,59 @@ pids
 logs
 results
 
-node_modules
 npm-debug.log
+
+###
+### Objective-C
+###
+
+# Xcode
+.DS_Store
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.class
+
+
+###
+### Java/Android/Eclipse
+###
+
+# Package Files #
+*.war
+*.ear
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+.settings/
+bin/
+gen/
+/client/droid/android/assets/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath
+.project
