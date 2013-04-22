@@ -37,7 +37,17 @@ function MainMenu(Imports) {
 MainMenu.prototype = Object.create(View.prototype);
 
 MainMenu.prototype.onView = function () {
+	var that = this;
+	this.location = null;
 	this.GameMasterTicket = this.Imports.GameMaster.subscribeGames(this._render.bind(this));
+	this.locationTicket = this.Imports.NativeBridge.startLocationUpdates(function (location) {
+		if (location) {
+			that.location = location;
+		} else {
+			// TODO Prompt user to enable location services
+			that.Imports.NativeBridge.log("Location services must be enabled for this application to operate as intended.");
+		}
+	});
 	View.prototype.onView.call(this);
 };
 
@@ -58,13 +68,28 @@ MainMenu.prototype._render = function (games) {
 	for (var i in games) {
 		(function (game) {
 			var opponentid = game.creator;
+			var yourid = that.Imports.GameMaster.userid;
 			if (opponentid === that.Imports.GameMaster.userid) {
 				opponentid = game.opponent;
 			}
 			var gameDiv = $("<div></div>");
 			gameDiv.addClass("game");
 			gameDiv.click(function () {
-				that._showGame(game);
+				if (!game[yourid] || !game[yourid].base) {
+					if (that.location) {
+						that.Imports.GameMaster.acceptInvitation(game.id, that.location).done(function (acceptedGame) {
+							that._showGame(acceptedGame);
+						}).fail(function () {
+							// TODO Notify user that the service was unreachable
+							that.Imports.NativeBridge.log("Service unavailable. Could not accept invitation.");
+						});
+					} else {
+						// TODO Notify user that they haven't got a good location yet
+						that.Imports.NativeBridge.log("Your location is needed to accept this invitation. Please try again when you have GPS signal.");
+					}
+				} else {
+					that._showGame(game);
+				}
 			});
 			if (game.status === "completed") {
 				$("#list-complete").append(gameDiv);
