@@ -44,9 +44,3 @@ body {
     height: 100%;
     padding-top: 15%;
 }
-
-#options-view > #options-container {
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-}
