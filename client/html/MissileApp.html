@@ -56,6 +56,9 @@
 			token: "BAABvzfRP6w0BAPz7jJY4yRhMPBNQIzJ1R7xGyMWItO9CwHutS6v2suoT6rhqXlsfxk29OPzz3FFg2ZAjE1uKOimPplFAuRt8E7tz35hftF6xRZAoCkpuucZBiMvkbg6eKiaCGxqN52sYpGL0SuRtodU1VXSTDLLTxBJrDuiDBxrfKGjPqDhOmRtF2YZClqoLQmm9mtlgjBbBdwASCZCWy"
 		};
 		var locationInterval, orientationInterval;
+		Imports.NativeBridge.log = function (msg) {
+			console.error(msg);
+		};
 		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
 			fn(debug.token);
 		};
