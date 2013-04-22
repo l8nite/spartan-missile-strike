@@ -295,19 +295,19 @@
 		28DC54DB16EEB7D800C4F389 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				281AD97D16F14EBA00E7625C /* CoreMotion.framework */,
-				281AD97616F1424E00E7625C /* CoreLocation.framework */,
-				281AD97016F08CA000E7625C /* AudioToolbox.framework */,
-				2872BEA316EFB9730051E707 /* Social.framework */,
 				2872BEA116EFB96B0051E707 /* Accounts.framework */,
 				2872BE9F16EFB9640051E707 /* AdSupport.framework */,
+				281AD97016F08CA000E7625C /* AudioToolbox.framework */,
+				28A9755C16EFA1A1007B970E /* AVFoundation.framework */,
+				28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */,
+				281AD97616F1424E00E7625C /* CoreLocation.framework */,
+				281AD97D16F14EBA00E7625C /* CoreMotion.framework */,
 				2872BE9D16EFB9400051E707 /* FacebookSDKResources.bundle */,
 				2872BE9B16EFB9190051E707 /* FacebookSDK.framework */,
-				28A9755C16EFA1A1007B970E /* AVFoundation.framework */,
-				28DC54DC16EEB7D800C4F389 /* UIKit.framework */,
 				28DC54DE16EEB7D800C4F389 /* Foundation.framework */,
-				28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */,
 				28DC550316EEB7D800C4F389 /* SenTestingKit.framework */,
+				2872BEA316EFB9730051E707 /* Social.framework */,
+				28DC54DC16EEB7D800C4F389 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
