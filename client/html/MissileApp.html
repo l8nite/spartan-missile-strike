@@ -31,8 +31,7 @@
 				"MapView": "map-view",
 				"FireView": "fire-view",
 				"OptionsView": "options-view",
-				"OpponentsView": "opponents-view",
-				"BaseView": "base-view"
+				"OpponentsView": "opponents-view"
 			},
 			serviceurl: "https://api.missileapp.com:443",
 			Views:  []
@@ -52,7 +51,7 @@
 				azimuth: 0,
 				altitude: 0
 			},
-			token: "BAABvzfRP6w0BAPz7jJY4yRhMPBNQIzJ1R7xGyMWItO9CwHutS6v2suoT6rhqXlsfxk29OPzz3FFg2ZAjE1uKOimPplFAuRt8E7tz35hftF6xRZAoCkpuucZBiMvkbg6eKiaCGxqN52sYpGL0SuRtodU1VXSTDLLTxBJrDuiDBxrfKGjPqDhOmRtF2YZClqoLQmm9mtlgjBbBdwASCZCWy"
+			token: ""
 		};
 		var locationInterval, orientationInterval;
 		Imports.NativeBridge.log = function (msg) {
@@ -92,6 +91,7 @@
 			}
 		});
 		Imports.NativeBridge.hideSplash();
+
 	};
 	</script>
 </head>
@@ -142,15 +142,14 @@
 		<div id="fire-view">
 		</div>
 		<div id="options-view">
-			<div id="clickToDismiss" style="background-color: rgba(0,0,0,0.5); height: 100%;">
-				<div style="padding-top: 15%;">
-					<div style="position: relative; margin-left: auto; margin-right: auto; background-image: url('../shared/Image Assets/spartanStrike_optionBox.png'); width: 397px; height: 265px;">
-						<div id="musicButton" style="width: 50%; height: 100%; float: left;">
-							<img id="musicX" style="display: none; position: absolute; width: 83px; height: 83px; left: 72px; top: 111px;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
-						</div>
-						<div id="sfxButton" style="width: 50%; height: 100%; float: right;">
-							<img id="sfxX" style="display: none; position: absolute; width: 83px; height: 83px; left: 237px; top: 111px;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
-						</div>
+			<div id="clickToDismiss">
+				<div id="options-container">
+					<img id="options-image" src="../shared/Image Assets/spartanStrike_optionBox.png"/>
+					<div id="musicButton">
+						<img id="musicX" style="display: none;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
+					</div>
+					<div id="sfxButton">
+						<img id="sfxX" style="display: none;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
 					</div>
 				</div>
 			</div>
