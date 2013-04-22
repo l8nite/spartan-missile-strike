@@ -53,7 +53,7 @@ GameMaster.prototype.getName = function (userid) {
  */
 GameMaster.prototype.getOpponents = function () {
 	var that = this;
-	return this._getOpponentsFromService().done(function (opponents) {
+	return this.getOpponentsFromService().done(function (opponents) {
 		that._opponents = opponents;
 	});
 };
@@ -173,6 +173,7 @@ GameMaster.prototype._getGames = function () {
 /* Returns a $.Deferred resolved with the webservice's response to the shot
  */
 GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, power) {
+	var that = this;
 	var shot = {
 		latitude: loc.latitude,
 		longitude: loc.longitude,
@@ -188,6 +189,8 @@ GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, powe
 		},
 		dataType: "json",
 		data: JSON.stringify(shot)
+	}).fail(function (error) {
+		that.Imports.NativeBridge.log(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		response.created = new Date(response.created);
 		response.updated = new Date(response.updated);
@@ -196,6 +199,7 @@ GameMaster.prototype._doFireOnService = function (gameid, loc, orientation, powe
 };
 
 GameMaster.prototype._newGameOnService = function (opponent, loc) {
+	var that = this;
 	return $.ajax(this.Imports.serviceurl + "/games", {
 		type: "POST",
 		contentType: "application/json",
@@ -208,6 +212,8 @@ GameMaster.prototype._newGameOnService = function (opponent, loc) {
 			latitude: loc.latitude,
 			longitude: loc.longitude
 		})
+	}).fail(function (error) {
+		that.Imports.NativeBridge.log(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		response.created = new Date(response.created);
 		response.updated = new Date(response.updated);
@@ -216,6 +222,7 @@ GameMaster.prototype._newGameOnService = function (opponent, loc) {
 };
 
 GameMaster.prototype._selectBaseOnService = function (gameid, loc) {
+	var that = this;
 	return $.ajax(this.Imports.serviceurl + "/games/" + encodeURIComponent(gameid) + "/select-base", {
 		type: "PUT",
 		contentType: "application/json",
@@ -227,6 +234,8 @@ GameMaster.prototype._selectBaseOnService = function (gameid, loc) {
 			latitude: loc.latitude,
 			longitude: loc.longitude
 		})
+	}).fail(function (error) {
+		that.Imports.NativeBridge.log(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		response.created = new Date(response.created);
 		response.updated = new Date(response.updated);
@@ -238,6 +247,7 @@ GameMaster.prototype._selectBaseOnService = function (gameid, loc) {
  * Returns a deferred to be resolved with the games array
  */
 GameMaster.prototype._getGamesFromService = function (fromWhen) {
+	var that = this;
 	var headers = {
 		"MissileAppSessionId": this._sessionid
 	};
@@ -247,6 +257,8 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
 	return $.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(this.userid) + "/games", {
 		headers: headers,
 		dataType: "json"
+	}).fail(function (error) {
+		that.Imports.NativeBridge.log(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		var games;
 		if (response !== undefined) {
@@ -266,13 +278,16 @@ GameMaster.prototype._getGamesFromService = function (fromWhen) {
  * Returns a deferred to be resolved with array of names.
  * Takes a contiguous array.
  */
-GameMaster.prototype._getOpponentsFromService = function () {
+GameMaster.prototype.getOpponentsFromService = function () {
+	var that = this;
 	var d = new $.Deferred();
 	return $.ajax(this.Imports.serviceurl + "/users/" + encodeURIComponent(this.userid) + "/opponents", {
 		headers: {
 			"MissileAppSessionId": this._sessionid
 		},
 		dataType: "json"
+	}).fail(function (error) {
+		that.Imports.NativeBridge.log(JSON.parse(error.responseText));
 	}).pipe(function (response) {
 		return response.opponents;
 	});
