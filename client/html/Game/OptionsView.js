@@ -59,9 +59,9 @@ function OptionsView(Imports) {
         });
 
         // BEWARE: thar be dragons here
-        // 62% of screen width, 3:2 aspect ratio 
+        // 82% of screen width, 3:2 aspect ratio
         var size = {};
-        size.width = $(window).width() * 0.62;
+        size.width = $(window).width() * 0.82;
         size.height = (size.width * 2) / 3;
 
         // horizontally centered, 15% from top of screen
@@ -76,7 +76,7 @@ function OptionsView(Imports) {
         var musicX = $('#options-view #musicX');
         var sfxX = $('#options-view #sfxX');
 
-        $(optionsImage).css({
+        optionsImage.css({
             'width' : size.width,
             'height' : size.height,
             'left': position.left,
@@ -84,7 +84,7 @@ function OptionsView(Imports) {
             'position': 'absolute',
         });
 
-        $(musicButton).css({
+        musicButton.css({
             'width': size.width / 2,
             'height': size.height,
             'left': position.left,
@@ -92,7 +92,7 @@ function OptionsView(Imports) {
             'position': 'absolute',
         });
 
-        $(sfxButton).css({
+        sfxButton.css({
             'width': size.width / 2,
             'height': size.height,
             'left': position.left + size.width / 2,
@@ -105,19 +105,19 @@ function OptionsView(Imports) {
         xSize.width = (size.width) * 0.21;
         xSize.height = (size.height) * 0.31;
 
-        $(musicX).css({
+        musicX.css({
             'width': xSize.width,
             'height': xSize.height,
-            'left': $(musicButton).position().left + ($(musicButton).width() * 0.59 - xSize.width / 2),
-            'top': $(musicButton).position().top + ($(musicButton).height() * 0.56 - xSize.height / 2),
+            'left': musicButton.position().left + (musicButton.width() * 0.59 - xSize.width / 2),
+            'top': musicButton.position().top + (musicButton.height() * 0.56 - xSize.height / 2),
             'position': 'absolute',
         });
 
-        $('#options-view #sfxX').css({
+        sfxX.css({
             'width': xSize.width,
             'height': xSize.height,
-            'left': $(sfxButton).position().left + ($(sfxButton).width() * 0.40 - xSize.width / 2),
-            'top': $(sfxButton).position().top + ($(sfxButton).height() * 0.56 - xSize.height / 2),
+            'left': sfxButton.position().left + (sfxButton.width() * 0.40 - xSize.width / 2),
+            'top': sfxButton.position().top + (sfxButton.height() * 0.56 - xSize.height / 2),
             'position': 'absolute',
         });
 
