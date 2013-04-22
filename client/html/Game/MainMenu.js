@@ -45,7 +45,7 @@ MainMenu.prototype.onView = function () {
 			that.location = location;
 		} else {
 			// TODO Prompt user to enable location services
-			console.error("Location services must be enabled for this application to operate as intended.");
+			that.Imports.NativeBridge.log("Location services must be enabled for this application to operate as intended.");
 		}
 	});
 	View.prototype.onView.call(this);
@@ -81,11 +81,11 @@ MainMenu.prototype._render = function (games) {
 							that._showGame(acceptedGame);
 						}).fail(function () {
 							// TODO Notify user that the service was unreachable
-							console.error("Service unavailable. Could not accept invitation.");
+							that.Imports.NativeBridge.log("Service unavailable. Could not accept invitation.");
 						});
 					} else {
-						// TODO Notify user that they don't haven't got a good location yet
-						console.error("Your location is needed to accept this invitation. Please try again when you have GPS signal.");
+						// TODO Notify user that they haven't got a good location yet
+						that.Imports.NativeBridge.log("Your location is needed to accept this invitation. Please try again when you have GPS signal.");
 					}
 				} else {
 					that._showGame(game);
