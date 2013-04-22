@@ -1,0 +1,159 @@
+<html>
+<head>
+	<link rel="stylesheet" href="View/view.css">
+	<link rel="stylesheet" href="MissileApp.css">
+	<script src="jquery/jquery.js"></script>
+	<script src="Util/DomHelper.js"></script>
+	<script src="Util/Fridge.js"></script>
+	<script src="NativeBridge/NativeBridge_Abstract.js"></script>
+	<script src="NativeBridge/NativeBridge_iOS.js"></script>
+	<script src="Game/GameMaster.js"></script>
+	<script src="Game/SuspendManager.js"></script>
+	<script src="View/MainView.js"></script>
+	<script src="View/View.js"></script>
+	<script src="View/FixedHeightView.js"></script>
+	<script src="Game/PlayToStart.js"></script>
+	<script src="Game/MainMenu.js"></script>
+	<script src="Game/MapView.js"></script>
+	<script src="Game/FireView.js"></script>
+	<script src="Game/OpponentsView.js"></script>
+	<script src="Game/OptionsView.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+	<script>
+	window.onload = function () {
+		var Imports = {
+			NativeBridge: new NativeBridge_iOS(),
+			ViewManager: new MainView(),
+			SuspendManager: new SuspendManager(),
+			domId: {
+				"PlayToStart": "play-to-start",
+				"MainMenu": "main-menu",
+				"MapView": "map-view",
+				"FireView": "fire-view",
+				"OptionsView": "options-view",
+				"OpponentsView": "opponents-view"
+			},
+			serviceurl: "https://api.missileapp.com:443",
+			Views:  []
+		};
+
+		window.NativeBridge = {
+			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
+		};
+		// DEBUG
+		// BEGIN DELETE THIS!
+		debug = {
+			location: {
+				latitude: 0,
+				longitude: 0
+			},
+			orientation: {
+				azimuth: 0,
+				altitude: 0
+			},
+			token: ""
+		};
+		var locationInterval, orientationInterval;
+		Imports.NativeBridge.log = function (msg) {
+			console.error(msg);
+		};
+		Imports.NativeBridge.getFacebookAccessToken = function (fn) {
+			fn(debug.token);
+		};
+		Imports.NativeBridge._startLocationUpdates = function (callbackId) {
+			locationInterval = setInterval(function () {
+				Imports.NativeBridge.callback(callbackId, debug.location);
+				if (!debug.location) {
+					clearInterval(locationInterval);
+				}
+			}, 500);
+		};
+		Imports.NativeBridge._stopLocationUpdates = function () {
+			clearInterval(locationInterval);
+		};
+		Imports.NativeBridge._startOrientationUpdates = function (callbackId) {
+			orientationInterval = setInterval(function () {
+				Imports.NativeBridge.callback(callbackId, debug.orientation);
+			}, 4);
+		};
+		Imports.NativeBridge._stopOrientationUpdates = function () {
+			clearInterval(orientationInterval);
+		};
+		// END DELETE THIS!
+		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
+		Imports.Views["PlayToStart"].show();
+		Imports.NativeBridge.getPreferences(["musicMuted"], function(preferences) {
+			if (preferences.musicMuted === "0") {
+				Imports.NativeBridge.playSound("background_music", {
+					foreground: false,
+					loop: true
+				});
+			}
+		});
+		Imports.NativeBridge.hideSplash();
+
+	};
+	</script>
+</head>
+<body>
+	<div style="display:none;">
+		<div id="play-to-start"></div>
+		<div id="main-menu">
+			<div class="scrollable">
+				<div class="buttons">
+					<img class="newGameBtn" src="../shared/Image Assets/spartanStrike_newGameIcon.png">
+					<img class="menu-bomb" src="../shared/Image Assets/spartanStrike_menuBomb.png">
+					<img class="optionsBtn" src="../shared/Image Assets/spartanStrike_optionsIcon.png">
+				</div>
+				<div id="list-your-turn" class="games-list">
+					<img class="your-turn label" src="../shared/Image Assets/spartanStrike_yourMove.png">
+				</div>
+				<div id="list-his-turn" class="games-list">
+					<img class="his-turn label" src="../shared/Image Assets/spartanStrike_theirMove.png">
+				</div>
+				<div id="list-complete" class="games-list">
+					Completed Games
+				</div>
+				<div style="display: none;">
+					<div id="game-prototype">
+						<span class="opponent"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="opponents-view">
+			<div class="nav-buttons">
+				<img class="backBtn" src="../shared/Image Assets/spartanStrike_cancel.png">
+			</div>
+			<div class="player-list"></div>
+		</div>
+		<div id="base-view">
+			<div style="word-wrap: break-word;" class="gps">---</div><br>
+			<div class="startBtn">Use current location</div>
+			<div class="backBtn">Back</div>
+		</div>
+		<div id="map-view">
+			<div class="map" id="bingmap"></div>
+			<div class="buttons">
+				<div class="fireBtn"></div>
+				<div class="backBtn"></div>
+			</div>
+		</div>
+		<div id="fire-view">
+		</div>
+		<div id="options-view">
+			<div id="clickToDismiss">
+				<div id="options-container">
+					<img id="options-image" src="../shared/Image Assets/spartanStrike_optionBox.png"/>
+					<div id="musicButton">
+						<img id="musicX" style="display: none;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
+					</div>
+					<div id="sfxButton">
+						<img id="sfxX" style="display: none;" src="../shared/Image Assets/spartanStrike_optionX.png"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

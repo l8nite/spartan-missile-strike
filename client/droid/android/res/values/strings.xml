@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spartan Missile Strike</string>
+    <string name="splash_screen_info">Splash Screen</string>
+    <string name="app_id">122930357857037</string>
+    <string name="location_prompt_title">MissileApp Location Services</string>
+    <string name="location_prompt_button">I understand</string>
+    <string name="location_prompt_message">You need to enable Location Services so we can sell your location to the government or else&#8230;</string>
+</resources>

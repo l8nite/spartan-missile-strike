@@ -1,4 +1,20 @@
-spartan-missile-strike
+Spartan Missile Strike
 ======================
 
-Spartan Missile Strike
+            |
+            |
+           / \
+          /   \
+         | .-. |
+         |'._.'|
+         |     |
+         |  S  |
+         |  M  |
+         |  S  |
+         |     |
+       ,'|  |  |`.
+      /  |__|__|  \
+      | /       \ |
+      |/         \|
+  ---------------------
+

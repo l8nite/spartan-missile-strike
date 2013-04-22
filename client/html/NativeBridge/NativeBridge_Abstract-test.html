@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title>NativeBridge_Abstract Test</title>
+		<link rel="stylesheet" href="../qunit/qunit.css">
+	</head>
+	<body>
+		<div id="qunit"></div>
+		<div id="qunit-fixture"></div>
+		<script src="../qunit/qunit.js"></script>
+		<script src="../Util/Fridge.js"></script>
+		<script src="NativeBridge_Abstract.js"></script>
+		<script>
+			test("Callback handler test", function () {
+				var nb = new NativeBridge_Abstract();
+				var largest = 0;
+				var calls = 10000;
+				stop(calls);
+
+				setTimeout(function () {
+					console.log(largest);
+				}, 10000);
+
+				// Reappropriation of setPreference()
+				nb._setPreferences = function (pref, callback) {
+					if (callback + 1 > largest) {
+						largest = callback + 1;
+					}
+					setTimeout(function () {
+						nb.callback(callback, pref);
+					}, Math.random() * 100);
+				};
+
+				for (var i = 0; i < calls; i++) {
+					(function () {
+						var j = i;
+						setTimeout(function () {
+							nb.setPreferences(j, function (result) {
+								equal(result, j, "Callback " + j);
+								start();
+							});
+						}, Math.random() * 200);
+					})();
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,750 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10FD94491723071200617DFF /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 10FD94481723071200617DFF /* shared */; };
+		281AD97116F08CA000E7625C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97016F08CA000E7625C /* AudioToolbox.framework */; };
+		281AD97416F0911300E7625C /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AD97316F0911300E7625C /* SSLocationManager.m */; };
+		281AD97816F1427D00E7625C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97616F1424E00E7625C /* CoreLocation.framework */; };
+		281AD97B16F1464E00E7625C /* SSOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AD97A16F1464E00E7625C /* SSOrientationManager.m */; };
+		281AD97E16F14EBA00E7625C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97D16F14EBA00E7625C /* CoreMotion.framework */; };
+		283C133C16F0617800D7E351 /* SSFiringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 283C133A16F0617800D7E351 /* SSFiringViewController.m */; };
+		283C133D16F0617800D7E351 /* SSFiringViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283C133B16F0617800D7E351 /* SSFiringViewController.xib */; };
+		283C134D16F0803900D7E351 /* SSPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 283C134C16F0803900D7E351 /* SSPreferenceManager.m */; };
+		2872BE9C16EFB9190051E707 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BE9B16EFB9190051E707 /* FacebookSDK.framework */; };
+		2872BE9E16EFB9400051E707 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2872BE9D16EFB9400051E707 /* FacebookSDKResources.bundle */; };
+		2872BEA016EFB9640051E707 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BE9F16EFB9640051E707 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2872BEA216EFB96B0051E707 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BEA116EFB96B0051E707 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2872BEA416EFB9730051E707 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BEA316EFB9730051E707 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2872BEA716EFBA2C0051E707 /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */; };
+		2872BEA816EFBA2C0051E707 /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */; };
+		28A9753A16EED0C7007B970E /* SSSplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */; };
+		28A9754216EEDE77007B970E /* SSSplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9754016EEDE77007B970E /* SSSplashScreenViewController.xib */; };
+		28A9754616EEE72D007B970E /* html in Resources */ = {isa = PBXBuildFile; fileRef = 28A9754516EEE72D007B970E /* html */; };
+		28A9754A16EEEA67007B970E /* SSNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9754916EEEA67007B970E /* SSNativeBridge.m */; };
+		28A9754D16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9754C16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m */; };
+		28A9755516EF9AD8007B970E /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9755416EF9AD8007B970E /* SSAudioManager.m */; };
+		28A9755916EF9C4A007B970E /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755816EF9C4A007B970E /* sounds.plist */; };
+		28A9755B16EFA104007B970E /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755A16EFA104007B970E /* audio */; };
+		28A9755D16EFA1A1007B970E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A9755C16EFA1A1007B970E /* AVFoundation.framework */; };
+		28A9756F16EFAFD5007B970E /* SSFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9756E16EFAFD5007B970E /* SSFacebookManager.m */; };
+		28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
+		28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DE16EEB7D800C4F389 /* Foundation.framework */; };
+		28DC54E116EEB7D800C4F389 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */; };
+		28DC54E716EEB7D800C4F389 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54E516EEB7D800C4F389 /* InfoPlist.strings */; };
+		28DC54E916EEB7D800C4F389 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DC54E816EEB7D800C4F389 /* main.m */; };
+		28DC54ED16EEB7D800C4F389 /* SSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */; };
+		28DC54EF16EEB7D800C4F389 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54EE16EEB7D800C4F389 /* Default.png */; };
+		28DC54F116EEB7D800C4F389 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F016EEB7D800C4F389 /* Default@2x.png */; };
+		28DC54F316EEB7D800C4F389 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */; };
+		28DC54F616EEB7D800C4F389 /* SSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DC54F516EEB7D800C4F389 /* SSMainViewController.m */; };
+		28DC54F916EEB7D800C4F389 /* SSMainViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F716EEB7D800C4F389 /* SSMainViewController_iPhone.xib */; };
+		28DC54FC16EEB7D800C4F389 /* SSMainViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54FA16EEB7D800C4F389 /* SSMainViewController_iPad.xib */; };
+		28DC550416EEB7D800C4F389 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC550316EEB7D800C4F389 /* SenTestingKit.framework */; };
+		28DC550516EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
+		28DC550616EEB7D800C4F389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DE16EEB7D800C4F389 /* Foundation.framework */; };
+		28DC550E16EEB7D800C4F389 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 28DC550C16EEB7D800C4F389 /* InfoPlist.strings */; };
+		28DC551116EEB7D800C4F389 /* SpartanMissileStrikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DC551016EEB7D800C4F389 /* SpartanMissileStrikeTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		28DC550716EEB7D800C4F389 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28DC54D116EEB7D800C4F389 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28DC54D816EEB7D800C4F389;
+			remoteInfo = SpartanMissileStrike;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		10FD94481723071200617DFF /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../shared; sourceTree = "<group>"; };
+		281AD97016F08CA000E7625C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		281AD97216F0911300E7625C /* SSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLocationManager.h; sourceTree = "<group>"; };
+		281AD97316F0911300E7625C /* SSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
+		281AD97616F1424E00E7625C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		281AD97916F1464E00E7625C /* SSOrientationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOrientationManager.h; sourceTree = "<group>"; };
+		281AD97A16F1464E00E7625C /* SSOrientationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOrientationManager.m; sourceTree = "<group>"; };
+		281AD97D16F14EBA00E7625C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		283C133916F0617800D7E351 /* SSFiringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFiringViewController.h; sourceTree = "<group>"; };
+		283C133A16F0617800D7E351 /* SSFiringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFiringViewController.m; sourceTree = "<group>"; };
+		283C133B16F0617800D7E351 /* SSFiringViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSFiringViewController.xib; sourceTree = "<group>"; };
+		283C134B16F0803900D7E351 /* SSPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPreferenceManager.h; sourceTree = "<group>"; };
+		283C134C16F0803900D7E351 /* SSPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPreferenceManager.m; sourceTree = "<group>"; };
+		2872BE9B16EFB9190051E707 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "External/facebook-ios-sdk/build/FacebookSDK.framework"; sourceTree = "<group>"; };
+		2872BE9D16EFB9400051E707 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = "External/facebook-ios-sdk/build/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle"; sourceTree = "<group>"; };
+		2872BE9F16EFB9640051E707 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2872BEA116EFB96B0051E707 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		2872BEA316EFB9730051E707 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_57.png; sourceTree = "<group>"; };
+		2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_114.png; sourceTree = "<group>"; };
+		28A9753716EED0C7007B970E /* SSSplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSSplashScreenViewController.h; path = SpartanMissileStrike/SSSplashScreenViewController.h; sourceTree = "<group>"; };
+		28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSSplashScreenViewController.m; path = SpartanMissileStrike/SSSplashScreenViewController.m; sourceTree = "<group>"; };
+		28A9754116EEDE77007B970E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SpartanMissileStrike/en.lproj/SSSplashScreenViewController.xib; sourceTree = "<group>"; };
+		28A9754516EEE72D007B970E /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = ../../html; sourceTree = "<group>"; };
+		28A9754816EEEA67007B970E /* SSNativeBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNativeBridge.h; sourceTree = "<group>"; };
+		28A9754916EEEA67007B970E /* SSNativeBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNativeBridge.m; sourceTree = "<group>"; };
+		28A9754B16EEEF86007B970E /* NSString+CaseInsensitiveComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CaseInsensitiveComparison.h"; sourceTree = "<group>"; };
+		28A9754C16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CaseInsensitiveComparison.m"; sourceTree = "<group>"; };
+		28A9755116EF03F0007B970E /* SSNativeBridgeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSNativeBridgeDelegate.h; sourceTree = "<group>"; };
+		28A9755316EF9AD8007B970E /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
+		28A9755416EF9AD8007B970E /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
+		28A9755816EF9C4A007B970E /* sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sounds.plist; sourceTree = "<group>"; };
+		28A9755A16EFA104007B970E /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = audio; path = ../../shared/audio; sourceTree = "<group>"; };
+		28A9755C16EFA1A1007B970E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		28A9756D16EFAFD4007B970E /* SSFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookManager.h; sourceTree = "<group>"; };
+		28A9756E16EFAFD5007B970E /* SSFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookManager.m; sourceTree = "<group>"; };
+		28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpartanMissileStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28DC54DC16EEB7D800C4F389 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		28DC54DE16EEB7D800C4F389 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28DC54E416EEB7D800C4F389 /* SpartanMissileStrike-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpartanMissileStrike-Info.plist"; sourceTree = "<group>"; };
+		28DC54E616EEB7D800C4F389 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		28DC54E816EEB7D800C4F389 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		28DC54EA16EEB7D800C4F389 /* SpartanMissileStrike-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpartanMissileStrike-Prefix.pch"; sourceTree = "<group>"; };
+		28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAppDelegate.h; sourceTree = "<group>"; };
+		28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSAppDelegate.m; sourceTree = "<group>"; };
+		28DC54EE16EEB7D800C4F389 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		28DC54F016EEB7D800C4F389 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		28DC54F416EEB7D800C4F389 /* SSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSMainViewController.h; sourceTree = "<group>"; };
+		28DC54F516EEB7D800C4F389 /* SSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSMainViewController.m; sourceTree = "<group>"; };
+		28DC54F816EEB7D800C4F389 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SSMainViewController_iPhone.xib; sourceTree = "<group>"; };
+		28DC54FB16EEB7D800C4F389 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SSMainViewController_iPad.xib; sourceTree = "<group>"; };
+		28DC550216EEB7D800C4F389 /* SpartanMissileStrikeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpartanMissileStrikeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28DC550316EEB7D800C4F389 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		28DC550B16EEB7D800C4F389 /* SpartanMissileStrikeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpartanMissileStrikeTests-Info.plist"; sourceTree = "<group>"; };
+		28DC550D16EEB7D800C4F389 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		28DC550F16EEB7D800C4F389 /* SpartanMissileStrikeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpartanMissileStrikeTests.h; sourceTree = "<group>"; };
+		28DC551016EEB7D800C4F389 /* SpartanMissileStrikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpartanMissileStrikeTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		28DC54D616EEB7D800C4F389 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				281AD97E16F14EBA00E7625C /* CoreMotion.framework in Frameworks */,
+				281AD97816F1427D00E7625C /* CoreLocation.framework in Frameworks */,
+				281AD97116F08CA000E7625C /* AudioToolbox.framework in Frameworks */,
+				2872BEA416EFB9730051E707 /* Social.framework in Frameworks */,
+				2872BEA216EFB96B0051E707 /* Accounts.framework in Frameworks */,
+				2872BEA016EFB9640051E707 /* AdSupport.framework in Frameworks */,
+				28A9755D16EFA1A1007B970E /* AVFoundation.framework in Frameworks */,
+				28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */,
+				28DC54DF16EEB7D800C4F389 /* Foundation.framework in Frameworks */,
+				28DC54E116EEB7D800C4F389 /* CoreGraphics.framework in Frameworks */,
+				2872BE9C16EFB9190051E707 /* FacebookSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DC54FE16EEB7D800C4F389 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DC550416EEB7D800C4F389 /* SenTestingKit.framework in Frameworks */,
+				28DC550516EEB7D800C4F389 /* UIKit.framework in Frameworks */,
+				28DC550616EEB7D800C4F389 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		281AD97516F0911800E7625C /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				281AD97216F0911300E7625C /* SSLocationManager.h */,
+				281AD97316F0911300E7625C /* SSLocationManager.m */,
+			);
+			name = LocationManager;
+			sourceTree = "<group>";
+		};
+		281AD97C16F1465800E7625C /* OrientationManager */ = {
+			isa = PBXGroup;
+			children = (
+				281AD97916F1464E00E7625C /* SSOrientationManager.h */,
+				281AD97A16F1464E00E7625C /* SSOrientationManager.m */,
+			);
+			name = OrientationManager;
+			sourceTree = "<group>";
+		};
+		283C133816F05B3100D7E351 /* FacebookManager */ = {
+			isa = PBXGroup;
+			children = (
+				28A9756D16EFAFD4007B970E /* SSFacebookManager.h */,
+				28A9756E16EFAFD5007B970E /* SSFacebookManager.m */,
+			);
+			name = FacebookManager;
+			sourceTree = "<group>";
+		};
+		283C133E16F0617B00D7E351 /* Firing */ = {
+			isa = PBXGroup;
+			children = (
+				283C133916F0617800D7E351 /* SSFiringViewController.h */,
+				283C133A16F0617800D7E351 /* SSFiringViewController.m */,
+				283C133B16F0617800D7E351 /* SSFiringViewController.xib */,
+			);
+			name = Firing;
+			sourceTree = "<group>";
+		};
+		283C134E16F0803F00D7E351 /* PreferenceManager */ = {
+			isa = PBXGroup;
+			children = (
+				283C134B16F0803900D7E351 /* SSPreferenceManager.h */,
+				283C134C16F0803900D7E351 /* SSPreferenceManager.m */,
+			);
+			name = PreferenceManager;
+			sourceTree = "<group>";
+		};
+		28A9753C16EEDA78007B970E /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				28A9754016EEDE77007B970E /* SSSplashScreenViewController.xib */,
+				28A9753716EED0C7007B970E /* SSSplashScreenViewController.h */,
+				28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */,
+			);
+			name = SplashScreen;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		28A9754316EEDEE0007B970E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				28DC54F416EEB7D800C4F389 /* SSMainViewController.h */,
+				28DC54F516EEB7D800C4F389 /* SSMainViewController.m */,
+				28DC54F716EEB7D800C4F389 /* SSMainViewController_iPhone.xib */,
+				28DC54FA16EEB7D800C4F389 /* SSMainViewController_iPad.xib */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		28A9754416EEDF03007B970E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28A9754316EEDEE0007B970E /* Main */,
+				28A9753C16EEDA78007B970E /* SplashScreen */,
+				283C133E16F0617B00D7E351 /* Firing */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		28A9754716EEE737007B970E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				10FD94481723071200617DFF /* shared */,
+				28A9755816EF9C4A007B970E /* sounds.plist */,
+				28A9755A16EFA104007B970E /* audio */,
+				28A9754516EEE72D007B970E /* html */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		28A9754E16EEEFE1007B970E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				28A9754B16EEEF86007B970E /* NSString+CaseInsensitiveComparison.h */,
+				28A9754C16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		28A9755216EF11E0007B970E /* NativeBridge */ = {
+			isa = PBXGroup;
+			children = (
+				28A9754816EEEA67007B970E /* SSNativeBridge.h */,
+				28A9754916EEEA67007B970E /* SSNativeBridge.m */,
+				28A9755116EF03F0007B970E /* SSNativeBridgeDelegate.h */,
+			);
+			name = NativeBridge;
+			sourceTree = "<group>";
+		};
+		28A9755E16EFA6BC007B970E /* AudioManager */ = {
+			isa = PBXGroup;
+			children = (
+				28A9755316EF9AD8007B970E /* SSAudioManager.h */,
+				28A9755416EF9AD8007B970E /* SSAudioManager.m */,
+			);
+			name = AudioManager;
+			sourceTree = "<group>";
+		};
+		28DC54D016EEB7D800C4F389 = {
+			isa = PBXGroup;
+			children = (
+				28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */,
+				28DC550916EEB7D800C4F389 /* SpartanMissileStrikeTests */,
+				28DC54DB16EEB7D800C4F389 /* Frameworks */,
+				28DC54DA16EEB7D800C4F389 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		28DC54DA16EEB7D800C4F389 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */,
+				28DC550216EEB7D800C4F389 /* SpartanMissileStrikeTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		28DC54DB16EEB7D800C4F389 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2872BEA116EFB96B0051E707 /* Accounts.framework */,
+				2872BE9F16EFB9640051E707 /* AdSupport.framework */,
+				281AD97016F08CA000E7625C /* AudioToolbox.framework */,
+				28A9755C16EFA1A1007B970E /* AVFoundation.framework */,
+				28DC54E016EEB7D800C4F389 /* CoreGraphics.framework */,
+				281AD97616F1424E00E7625C /* CoreLocation.framework */,
+				281AD97D16F14EBA00E7625C /* CoreMotion.framework */,
+				2872BE9D16EFB9400051E707 /* FacebookSDKResources.bundle */,
+				2872BE9B16EFB9190051E707 /* FacebookSDK.framework */,
+				28DC54DE16EEB7D800C4F389 /* Foundation.framework */,
+				28DC550316EEB7D800C4F389 /* SenTestingKit.framework */,
+				2872BEA316EFB9730051E707 /* Social.framework */,
+				28DC54DC16EEB7D800C4F389 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		28DC54E216EEB7D800C4F389 /* SpartanMissileStrike */ = {
+			isa = PBXGroup;
+			children = (
+				281AD97C16F1465800E7625C /* OrientationManager */,
+				281AD97516F0911800E7625C /* LocationManager */,
+				283C134E16F0803F00D7E351 /* PreferenceManager */,
+				283C133816F05B3100D7E351 /* FacebookManager */,
+				28A9755E16EFA6BC007B970E /* AudioManager */,
+				28A9755216EF11E0007B970E /* NativeBridge */,
+				28A9754416EEDF03007B970E /* Views */,
+				28A9754716EEE737007B970E /* Resources */,
+				28DC54E316EEB7D800C4F389 /* Supporting Files */,
+				28A9754E16EEEFE1007B970E /* Utilities */,
+			);
+			path = SpartanMissileStrike;
+			sourceTree = "<group>";
+		};
+		28DC54E316EEB7D800C4F389 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
+				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
+				28DC54E416EEB7D800C4F389 /* SpartanMissileStrike-Info.plist */,
+				28DC54E516EEB7D800C4F389 /* InfoPlist.strings */,
+				28DC54E816EEB7D800C4F389 /* main.m */,
+				28DC54EA16EEB7D800C4F389 /* SpartanMissileStrike-Prefix.pch */,
+				2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */,
+				2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */,
+				28DC54EE16EEB7D800C4F389 /* Default.png */,
+				28DC54F016EEB7D800C4F389 /* Default@2x.png */,
+				28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		28DC550916EEB7D800C4F389 /* SpartanMissileStrikeTests */ = {
+			isa = PBXGroup;
+			children = (
+				28DC550F16EEB7D800C4F389 /* SpartanMissileStrikeTests.h */,
+				28DC551016EEB7D800C4F389 /* SpartanMissileStrikeTests.m */,
+				28DC550A16EEB7D800C4F389 /* Supporting Files */,
+			);
+			path = SpartanMissileStrikeTests;
+			sourceTree = "<group>";
+		};
+		28DC550A16EEB7D800C4F389 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				28DC550B16EEB7D800C4F389 /* SpartanMissileStrikeTests-Info.plist */,
+				28DC550C16EEB7D800C4F389 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		28DC54D816EEB7D800C4F389 /* SpartanMissileStrike */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28DC551416EEB7D800C4F389 /* Build configuration list for PBXNativeTarget "SpartanMissileStrike" */;
+			buildPhases = (
+				283BD99817233EBB00A0CFB4 /* ShellScript */,
+				28DC54D516EEB7D800C4F389 /* Sources */,
+				28DC54D616EEB7D800C4F389 /* Frameworks */,
+				28DC54D716EEB7D800C4F389 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpartanMissileStrike;
+			productName = SpartanMissileStrike;
+			productReference = 28DC54D916EEB7D800C4F389 /* SpartanMissileStrike.app */;
+			productType = "com.apple.product-type.application";
+		};
+		28DC550116EEB7D800C4F389 /* SpartanMissileStrikeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28DC551716EEB7D800C4F389 /* Build configuration list for PBXNativeTarget "SpartanMissileStrikeTests" */;
+			buildPhases = (
+				28DC54FD16EEB7D800C4F389 /* Sources */,
+				28DC54FE16EEB7D800C4F389 /* Frameworks */,
+				28DC54FF16EEB7D800C4F389 /* Resources */,
+				28DC550016EEB7D800C4F389 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28DC550816EEB7D800C4F389 /* PBXTargetDependency */,
+			);
+			name = SpartanMissileStrikeTests;
+			productName = SpartanMissileStrikeTests;
+			productReference = 28DC550216EEB7D800C4F389 /* SpartanMissileStrikeTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		28DC54D116EEB7D800C4F389 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SS;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = missileapp.com;
+			};
+			buildConfigurationList = 28DC54D416EEB7D800C4F389 /* Build configuration list for PBXProject "SpartanMissileStrike" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 28DC54D016EEB7D800C4F389;
+			productRefGroup = 28DC54DA16EEB7D800C4F389 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				28DC54D816EEB7D800C4F389 /* SpartanMissileStrike */,
+				28DC550116EEB7D800C4F389 /* SpartanMissileStrikeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		28DC54D716EEB7D800C4F389 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DC54E716EEB7D800C4F389 /* InfoPlist.strings in Resources */,
+				28DC54EF16EEB7D800C4F389 /* Default.png in Resources */,
+				28DC54F116EEB7D800C4F389 /* Default@2x.png in Resources */,
+				28DC54F316EEB7D800C4F389 /* Default-568h@2x.png in Resources */,
+				28DC54F916EEB7D800C4F389 /* SSMainViewController_iPhone.xib in Resources */,
+				28DC54FC16EEB7D800C4F389 /* SSMainViewController_iPad.xib in Resources */,
+				28A9754216EEDE77007B970E /* SSSplashScreenViewController.xib in Resources */,
+				28A9754616EEE72D007B970E /* html in Resources */,
+				28A9755916EF9C4A007B970E /* sounds.plist in Resources */,
+				28A9755B16EFA104007B970E /* audio in Resources */,
+				2872BE9E16EFB9400051E707 /* FacebookSDKResources.bundle in Resources */,
+				2872BEA716EFBA2C0051E707 /* spartan_appIcon_57.png in Resources */,
+				2872BEA816EFBA2C0051E707 /* spartan_appIcon_114.png in Resources */,
+				283C133D16F0617800D7E351 /* SSFiringViewController.xib in Resources */,
+				10FD94491723071200617DFF /* shared in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DC54FF16EEB7D800C4F389 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DC550E16EEB7D800C4F389 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		283BD99817233EBB00A0CFB4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find \"${PROJECT_DIR}/../shared\" -exec touch -cm {} \\;";
+		};
+		28DC550016EEB7D800C4F389 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		28DC54D516EEB7D800C4F389 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DC54E916EEB7D800C4F389 /* main.m in Sources */,
+				28DC54ED16EEB7D800C4F389 /* SSAppDelegate.m in Sources */,
+				28DC54F616EEB7D800C4F389 /* SSMainViewController.m in Sources */,
+				28A9753A16EED0C7007B970E /* SSSplashScreenViewController.m in Sources */,
+				28A9754A16EEEA67007B970E /* SSNativeBridge.m in Sources */,
+				28A9754D16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m in Sources */,
+				28A9755516EF9AD8007B970E /* SSAudioManager.m in Sources */,
+				28A9756F16EFAFD5007B970E /* SSFacebookManager.m in Sources */,
+				283C133C16F0617800D7E351 /* SSFiringViewController.m in Sources */,
+				283C134D16F0803900D7E351 /* SSPreferenceManager.m in Sources */,
+				281AD97416F0911300E7625C /* SSLocationManager.m in Sources */,
+				281AD97B16F1464E00E7625C /* SSOrientationManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DC54FD16EEB7D800C4F389 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DC551116EEB7D800C4F389 /* SpartanMissileStrikeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		28DC550816EEB7D800C4F389 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28DC54D816EEB7D800C4F389 /* SpartanMissileStrike */;
+			targetProxy = 28DC550716EEB7D800C4F389 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		28A9754016EEDE77007B970E /* SSSplashScreenViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28A9754116EEDE77007B970E /* en */,
+			);
+			name = SSSplashScreenViewController.xib;
+			sourceTree = "<group>";
+		};
+		28DC54E516EEB7D800C4F389 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28DC54E616EEB7D800C4F389 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		28DC54F716EEB7D800C4F389 /* SSMainViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28DC54F816EEB7D800C4F389 /* en */,
+			);
+			name = SSMainViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		28DC54FA16EEB7D800C4F389 /* SSMainViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28DC54FB16EEB7D800C4F389 /* en */,
+			);
+			name = SSMainViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		28DC550C16EEB7D800C4F389 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28DC550D16EEB7D800C4F389 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		28DC551216EEB7D800C4F389 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		28DC551316EEB7D800C4F389 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		28DC551516EEB7D800C4F389 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/facebook-ios-sdk/build\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
+				HEADER_SEARCH_PATHS = "External/**";
+				INFOPLIST_FILE = "SpartanMissileStrike/SpartanMissileStrike-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		28DC551616EEB7D800C4F389 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/facebook-ios-sdk/build\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
+				HEADER_SEARCH_PATHS = "External/**";
+				INFOPLIST_FILE = "SpartanMissileStrike/SpartanMissileStrike-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		28DC551816EEB7D800C4F389 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SpartanMissileStrike.app/SpartanMissileStrike";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
+				INFOPLIST_FILE = "SpartanMissileStrikeTests/SpartanMissileStrikeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		28DC551916EEB7D800C4F389 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SpartanMissileStrike.app/SpartanMissileStrike";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpartanMissileStrike/SpartanMissileStrike-Prefix.pch";
+				INFOPLIST_FILE = "SpartanMissileStrikeTests/SpartanMissileStrikeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28DC54D416EEB7D800C4F389 /* Build configuration list for PBXProject "SpartanMissileStrike" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28DC551216EEB7D800C4F389 /* Debug */,
+				28DC551316EEB7D800C4F389 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28DC551416EEB7D800C4F389 /* Build configuration list for PBXNativeTarget "SpartanMissileStrike" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28DC551516EEB7D800C4F389 /* Debug */,
+				28DC551616EEB7D800C4F389 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28DC551716EEB7D800C4F389 /* Build configuration list for PBXNativeTarget "SpartanMissileStrikeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28DC551816EEB7D800C4F389 /* Debug */,
+				28DC551916EEB7D800C4F389 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 28DC54D116EEB7D800C4F389 /* Project object */;
+}
