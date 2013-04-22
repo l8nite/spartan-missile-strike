@@ -50,9 +50,13 @@
 
 		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
 		Imports.Views["PlayToStart"].show();
-		Imports.NativeBridge.playSound("background_music", {
-			foreground: false,
-			loop: true
+		Imports.NativeBridge.getPreferences(["musicMuted"], function(preferences) {
+			if (preferences.musicMuted === "0") {
+				Imports.NativeBridge.playSound("background_music", {
+					foreground: false,
+					loop: true
+				});
+			}
 		});
 		Imports.NativeBridge.hideSplash();
 	};

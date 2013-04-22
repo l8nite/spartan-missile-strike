@@ -6,16 +6,16 @@ function OptionsView(Imports) {
     $(function() {
         Imports.NativeBridge.getPreferences(["musicMuted", "sfxMuted"], function(preferences) {
             if (preferences.musicMuted === "0") {
-                $('#musicX').show();
-            } else {
                 $('#musicX').hide();
+            } else {
+                $('#musicX').show();
 
             }
 
             if (preferences.sfxMuted == "0") {
-                $('#sfxX').show();
-            } else {
                 $('#sfxX').hide();
+            } else {
+                $('#sfxX').show();
 
             }
         });
@@ -29,12 +29,14 @@ function OptionsView(Imports) {
                 Imports.NativeBridge.setPreferences({
                     "musicMuted": "0"
                 });
+                Imports.NativeBridge.playSound('background_music', { foreground: false, loop: true });
             } else {
                 // else if the X is hidden, and they clicked it, it means we want to MUTE the music
                 $('#musicX').show();
                 Imports.NativeBridge.setPreferences({
                     "musicMuted": "1"
                 });
+                Imports.NativeBridge.stopSound('background_music');
             }
         });
 
@@ -46,14 +48,13 @@ function OptionsView(Imports) {
                 Imports.NativeBridge.setPreferences({
                     "sfxMuted": "0"
                 });
-
             } else {
                 // else if the X is hidden, and they clicked it, it means we want to MUTE the music
                 $('#sfxX').show();
                 Imports.NativeBridge.setPreferences({
                     "sfxMuted": "1"
                 });
-
+                Imports.NativeBridge.stopSound(); // no param = stop all sounds
             }
         });
     });
