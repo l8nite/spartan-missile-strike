@@ -34,3 +34,17 @@ body {
 	background-repeat:no-repeat;
 	background-position:left bottom;
 }
+
+#options-view {
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+}
+
+div#options-view > div#clickDismiss {
+    height: 100%;
+}
+
+div#options-view > div#options-container {
+    padding-top: 15%;
+}
+
