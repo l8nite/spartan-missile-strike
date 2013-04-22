@@ -1,129 +1,124 @@
 /* NativeBridge_Abstract
  * Abstract class for NativeBridge, the conduit HTML uses to speak to the native
  * client and vice versa. iOS and Android should have separate implementations.
- * 
- * 
+ *
+ *
  * Public methods:
- * 
+ *
  * callback(number identifier, Object arguments)
- *     Called by the native client to return stuff to HTML.
- *     identifier - integer designating the store callback method
- *     arguments - object containing requested valued (ex. { prop_one: val_one,
- *                 prop_two: "val_two" } )
- *                 See Native Bride API for more details.
- * 
+ *	 Called by the native client to return stuff to HTML.
+ *	 identifier - integer designating the store callback method
+ *	 arguments - object containing requested valued (ex. { prop_one: val_one,
+ *				 prop_two: "val_two" } )
+ *				 See Native Bride API for more details.
+ *
  * startLocationUpdates(function callback)
- *     Called by HTML to get location data as it changes.
- *     callback - callback method, takes {latitude, longitude} in degrees
- *     returns a numerical ticket to be used with stopLocationUpdates
- *     
+ *	 Called by HTML to get location data as it changes.
+ *	 callback - callback method, takes {latitude, longitude} in degrees
+ *	 returns a numerical ticket to be used with stopLocationUpdates
+ *
  * stopLocationUpdates(number callbackid)
- *     Called by HTML to stop streaming of location data.
- *     callbackid - callback ticket from startLocationUpdates
- *     
+ *	 Called by HTML to stop streaming of location data.
+ *	 callbackid - callback ticket from startLocationUpdates
+ *
  * startOrientationUpdates(function callback)
- *     Called by HTML to get orientation data as it changes.
- *     callback - callback method, takes {pitch, roll, yaw} in radians
- *     
+ *	 Called by HTML to get orientation data as it changes.
+ *	 callback - callback method, takes {pitch, roll, yaw} in radians
+ *
  * stopOrientationUpdates(number callbackid)
- *     Called by HTML to stop streaming of orientation data.
- *     callbackid - callback ticket from startOrientationUpdates
- *     
+ *	 Called by HTML to stop streaming of orientation data.
+ *	 callbackid - callback ticket from startOrientationUpdates
+ *
  * showFireMissileScreen()
- *     Called by HTML to show fire missile screen i.e. turn on camera
- *     
+ *	 Called by HTML to show fire missile screen i.e. turn on camera
+ *
  * hideFireMissileScreen()
- *     Called by HTML to hide fire missile screen i.e. turn off camera
+ *	 Called by HTML to hide fire missile screen i.e. turn off camera
 
  * getPreferences(String[] preferences, function callback)
- *     Get specified preference(s) from native client
- *     preferences - array of preferences to get, can accept string of one preference.
- *     callback - callback method, takes hash of preferences
- *     
+ *	 Get specified preference(s) from native client
+ *	 preferences - array of preferences to get, can accept string of one preference.
+ *	 callback - callback method, takes hash of preferences
+ *
  * setPreferences(Object preferences, function callback)
- *     Set one or multiple persisting preferences
- *     preferences - Hash of preference key and value to store
- *     callback - callback method, takes {boolean suceeded}
- *     
+ *	 Set one or multiple persisting preferences
+ *	 preferences - Hash of preference key and value to store
+ *	 callback - callback method, takes {boolean suceeded}
+ *
  * getFacebookAccessToken(function callback)
- *     Get Facebook access token
- *     callback -  callback method, takes {String token}
- *     
+ *	 Get Facebook access token
+ *	 callback -  callback method, takes {String token}
+ *
  * logoutFacebook()
- *     Invalidate FB session
- *     
+ *	 Invalidate FB session
+ *
  * playSound(String soundID, Object options)
- *     Play sound with options
- *     soundID - sound to play
- *     options - {boolean foreground, boolean loop}
- *         foreground - play in foreground/background
- *         loop - loop sound/play once
- *         
+ *	 Play sound with options
+ *	 soundID - sound to play
+ *	 options - {boolean foreground, boolean loop}
+ *		 foreground - play in foreground/background
+ *		 loop - loop sound/play once
+ *
  * stopSound(String soundID)
- *     Immediately stop sound from looping
- *     soundID - sound to stop playing
- *     
+ *	 Immediately stop sound from looping
+ *	 soundID - sound to stop playing
+ *	 If soundID is not passed, will stop all sounds
+ *
  * hideSplash()
- *     Called by HTML to indicate that it is finished loading and is safe to hide
- *     splash
- *     
+ *	 Called by HTML to indicate that it is finished loading and is safe to hide
+ *	 splash
+ *
  * vibrate(number time)
- *     Called by HTML to tell the device to dance
- *     time - milliseconds to vibrate for
- * 
+ *	 Called by HTML to tell the device to dance
+ *	 time - milliseconds to vibrate for
+ *
  *
  * Unimplemented methods:
  * (These methods implement the code that generate the events each platform client
  * will intercept. will have differenct implementations depending on platform.)
- * 
+ *
  * _startLocationUpdates(number callbackID)
- *     Request location updates through callback() as they change.
- *     callbackID - Callback identifier to pass to callback()
+ *	 Request location updates through callback() as they change.
+ *	 callbackID - Callback identifier to pass to callback()
  *
  * _stopLocationUpdates()
- *     Request to stop streaming location updates
- * 
+ *	 Request to stop streaming location updates
+ *
  * _startOrientationUpdates(number callbackID)
- *     Request orientation updates through callback() as they change.
- *     callbackID - Callback identifier to pass to callback()
- *     
+ *	 Request orientation updates through callback() as they change.
+ *	 callbackID - Callback identifier to pass to callback()
+ *
  * _stopOrientationUpdates()
- *     Request termination of orientation updates.
- *     
+ *	 Request termination of orientation updates.
+ *
  * showFireMissileScreen()
- *     See "Public methods"
- *     
+ *	 See "Public methods"
+ *
  * hideFireMissileScreen()
- *     See "Public methods"
- *     
+ *	 See "Public methods"
+ *
  * _getPreferences(String[] preferences, number callbackID)
- *     Retrieve preferences and return value through callback()
- *     preferences - preferences array to get
- *     callbackID - Callback identifier to pass to callback()
- *     
+ *	 Retrieve preferences and return value through callback()
+ *	 preferences - preferences array to get
+ *	 callbackID - Callback identifier to pass to callback()
+ *
  * _setPreferences(Object preferences, number callbackID)
- *     Set preferences locally, indicate success through callback()
- *     preferences - Hash of preference key and value to store
- *     callbackID - Callback identifier to pass to callback()
- *     
+ *	 Set preferences locally, indicate success through callback()
+ *	 preferences - Hash of preference key and value to store
+ *	 callbackID - Callback identifier to pass to callback()
+ *
  * _getFacebookAccessToken(number callbackID)
- *     Request Facebook token through callback()
- *     callbackID - Callback identifier to pass to callback()
- *     
+ *	 Request Facebook token through callback()
+ *	 callbackID - Callback identifier to pass to callback()
+ *
  * logoutFacebook()
- *     See "Public methods"
- *     
- * playSound(String soundID, Object options)
- *     See "Public methods"
- *     
- * stopSound(String soundID)
- *     See "Public methods"
- *     
+ *	 See "Public methods"
+ *
  * hideSplah()
- *     See "Public methods"
- *     
+ *	 See "Public methods"
+ *
  * vibrate(number time)
- *     See "Public methods"
+ *	 See "Public methods"
  */
 
 function NativeBridge_Abstract() {
@@ -207,16 +202,33 @@ NativeBridge_Abstract.prototype.playSound = function (soundID, options) {
 	}
 	var that = this;
 	this.getPreferences([preferenceName],function(preferences) {
-		// setting user defaults
+		// setting user default to not muted
 		if (preferences[preferenceName] === null) {
 			preferences[preferenceName] = "0";
 		}
-		
+
 		//play the sound if we're not muted
 		if (preferences[preferenceName] === "0" ) {
 			that._playSound(soundID, options);
-		}	
+			if (options.foreground) {
+				if (!that.hasOwnProperty('_playedSounds')) {
+					that._playedSounds = {};
+				}
+
+				that._playedSounds[soundID] = 1;
+			}
+		}
 	});
+};
+
+NativeBridge_Abstract.prototype.stopSound = function (soundID) {
+	if (soundID === undefined) {
+		for (var soundID in this._playedSounds) {
+			this._stopSound(soundID);
+		}
+	} else {
+		this._stopSound(soundID);
+	}
 };
 
 NativeBridge_Abstract.prototype.getPreferences = function (preferences, callback) {
