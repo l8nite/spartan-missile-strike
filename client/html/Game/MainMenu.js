@@ -75,21 +75,7 @@ MainMenu.prototype._render = function (games) {
 			var gameDiv = $("<div></div>");
 			gameDiv.addClass("game");
 			gameDiv.click(function () {
-				if (!game[yourid] || !game[yourid].base) {
-					if (that.location) {
-						that.Imports.GameMaster.acceptInvitation(game.id, that.location).done(function (acceptedGame) {
-							that._showGame(acceptedGame);
-						}).fail(function () {
-							// TODO Notify user that the service was unreachable
-							that.Imports.NativeBridge.log("Service unavailable. Could not accept invitation.");
-						});
-					} else {
-						// TODO Notify user that they haven't got a good location yet
-						that.Imports.NativeBridge.log("Your location is needed to accept this invitation. Please try again when you have GPS signal.");
-					}
-				} else {
-					that._showGame(game);
-				}
+				that._showGame(game);
 			});
 			if (game.status === "completed") {
 				$("#list-complete").append(gameDiv);
@@ -110,11 +96,22 @@ MainMenu.prototype._render = function (games) {
 };
 
 MainMenu.prototype._showGame = function (game) {
+	var that = this;
 	if (!game[this.Imports.GameMaster.userid].base) {
-		if (!this.Imports.Views["BaseView"]) {
-			this.Imports.Views["BaseView"] = new BaseView(this.Imports);
+		if (this.location) {
+			this.Imports.GameMaster.acceptInvitation(game.id, this.location).done(function (acceptedGame) {
+				if (!that.Imports.Views["MapView"]) {
+					that.Imports.Views["MapView"] = new MapView(that.Imports);
+				}
+				that.Imports.Views["MapView"].show(acceptedGame);
+			}).fail(function () {
+				// TODO Notify user that the service was unreachable
+				that.Imports.NativeBridge.log("Service unavailable. Could not accept invitation.");
+			});
+		} else {
+			// TODO Notify user that they haven't got a good location yet
+			this.Imports.NativeBridge.log("Your location is needed to accept this invitation. Please try again when you have GPS signal.");
 		}
-		this.Imports.Views["BaseView"].show(game);
 	} else {
 		if (!this.Imports.Views["MapView"]) {
 			this.Imports.Views["MapView"] = new MapView(this.Imports);
