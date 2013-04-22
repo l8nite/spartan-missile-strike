@@ -40,7 +40,7 @@
 		window.NativeBridge = {
 			callback: Imports.NativeBridge.callback.bind(Imports.NativeBridge)
 		};
-
+		
 		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
 		Imports.Views["PlayToStart"].show();
 		Imports.NativeBridge.getPreferences(["musicMuted"], function(preferences) {
@@ -52,6 +52,7 @@
 			}
 		});
 		Imports.NativeBridge.hideSplash();
+
 	};
 	</script>
 </head>
@@ -82,9 +83,10 @@
 			</div>
 		</div>
 		<div id="opponents-view">
-			<div><input type="text" id="opponent-input"></div><br>
-			<div class="startBtn">Start game</div>
-			<div class="backBtn">Back</div>
+			<div class="nav-buttons">
+				<img class="backBtn" src="../shared/Image Assets/spartanStrike_cancel.png">
+			</div>
+			<div class="player-list"></div>
 		</div>
 		<div id="base-view">
 			<div style="word-wrap: break-word;" class="gps">---</div><br>
