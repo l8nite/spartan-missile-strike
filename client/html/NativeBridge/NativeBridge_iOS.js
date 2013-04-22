@@ -81,7 +81,7 @@ NativeBridge_iOS.prototype._playSound = function (soundID, options) {
 	);
 };
 
-NativeBridge_iOS.prototype.stopSound = function (soundID) {
+NativeBridge_iOS.prototype._stopSound = function (soundID) {
 	this._appendIframe("spartan-missile-strike://stopSound/?arguments="
 		+ JSON.stringify({
 			soundID : soundID

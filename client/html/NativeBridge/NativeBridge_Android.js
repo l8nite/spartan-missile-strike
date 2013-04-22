@@ -53,7 +53,7 @@ NativeBridge_Android.prototype._playSound = function (soundID, options) {
 	AndroidInterface.playSound(JSON.stringify(soundID), JSON.stringify(options));
 };
 
-NativeBridge_Android.prototype.stopSound = function (soundID) {
+NativeBridge_Android.prototype._stopSound = function (soundID) {
 	AndroidInterface.stopSound(JSON.stringify(soundID));
 };
 
