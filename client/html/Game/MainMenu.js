@@ -19,7 +19,7 @@ function MainMenu(Imports) {
 		Imports.Views["OptionsView"].show();
 	});
 
-	$("#" + Imports.domId["MainMenu"] + " .scrollable").css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.jpg\")")
+	$("#" + Imports.domId["MainMenu"] + " .scrollable").css("background-image", "url(\"assets/images/spartanStrike_BG.jpg\")")
 	.css("background-size", "100%")
 	.css("min-height", window.innerHeight);
 	$("#" + Imports.domId["MainMenu"] + " .buttons").css("height", window.innerWidth * .2)
