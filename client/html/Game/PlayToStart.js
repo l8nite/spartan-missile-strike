@@ -61,6 +61,8 @@ function PlayToStart(Imports) {
 						Imports.Views["MainMenu"] = new MainMenu(Imports);
 					}
 					Imports.Views["MainMenu"].show();
+				}).fail(function (error) {
+					that.Imports.NativeBridge.log(JSON.parse(error.responseText));
 				});
 			}
 		});
