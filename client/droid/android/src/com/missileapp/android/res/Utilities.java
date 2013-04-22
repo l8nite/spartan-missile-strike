@@ -16,25 +16,20 @@ public class Utilities {
     	final String TAG = "HideSplash";
         MALogger.log(TAG, Log.VERBOSE, "CMD Hide Splash");
         
-        if(variables.isEnabled()) {
-	        // Runs on the UI Thread
-            variables.getMissileApp().runOnUiThread(new Runnable() {
-	            @Override
-	            public void run() {
-	                try {
-	                    variables.getSplashScreen().setVisibility(View.GONE);
-	                    MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
-	                }
-	                catch (Exception e) {
-	                    // There should be no exception here but just in case...
-	                    MALogger.log(TAG, Log.ERROR, "Unable to hide splash: " + e.getMessage(), e);
-	                }
-	            }
-	        });
-        }
-        else {
-        	variables.setHideSplash(true);
-        }
+        // Runs on the UI Thread
+        variables.getMissileApp().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    variables.getSplashScreen().setVisibility(View.GONE);
+                    MALogger.log(TAG, Log.VERBOSE, "Splash Screen Removed.");
+                }
+                catch (Exception e) {
+                    // There should be no exception here but just in case...
+                    MALogger.log(TAG, Log.ERROR, "Unable to hide splash: " + e.getMessage(), e);
+                }
+            }
+        });
     }
     
 	
