@@ -67,7 +67,7 @@ public class FacebookAuth {
      * Returns true if we have a session currently saved
      */
     private boolean checkIfSessionExistsFromPrefs() {
-        return (!facebookToken.isEmpty() && (facebookTokenExpiration.compareTo(new Date()) == -1));
+        return (facebookToken != null && !facebookToken.isEmpty() && (facebookTokenExpiration.compareTo(new Date()) == -1));
     }
     
     /**
@@ -99,7 +99,6 @@ public class FacebookAuth {
         else {
             loginToFacebook();
         }
-        
     }
     
     /**
