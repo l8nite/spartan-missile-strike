@@ -167,9 +167,10 @@
     }
     else if ([function isEqualIgnoringCase:@"playSound"]) {
         NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
-        NSInteger loop = (NSInteger)[arguments objectForKey:@"loop"];
+        NSNumber *loop = (NSNumber*)[arguments objectForKey:@"loop"];
+        NSNumber *foreground = (NSNumber*)[arguments objectForKey:@"foreground"];
 
-        [audioManager playSound:soundIdentifier loopCount:(loop ? -1 : 0)];
+        [audioManager playSound:soundIdentifier loopCount:([loop integerValue] ? -1 : 0) inForeground:[foreground boolValue]];
     }
     else if ([function isEqualIgnoringCase:@"stopSound"]) {
         NSString *soundIdentifier = (NSString *)[arguments objectForKey:@"soundID"];
