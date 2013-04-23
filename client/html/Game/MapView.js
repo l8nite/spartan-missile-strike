@@ -106,7 +106,7 @@ MapView.prototype._updateMapView = function () {
 	// Shot Style
 	var lastShotColor = new Microsoft.Maps.Color(255, 0, 0, 0); //opacity,rgb
 	var lastShotWidth = 3;
-	var timeDelta = 1.0 / 100; 	// Smoothness
+	var timeDelta = 1.0 / 200; 	// Smoothness
 	
 	// Push Pins Styles
 	var pushPinOptions_currentUserHitShot = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
