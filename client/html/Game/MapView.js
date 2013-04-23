@@ -8,17 +8,9 @@ function MapView(Imports) {
 	var that = this;
 	this.Imports = Imports;
 	FixedHeightView.call(this, Imports.domId["MapView"]);
-	$("#" + Imports.domId["MapView"] + " .backBtn").click(function () {
-		Imports.ViewManager.previousView();
-	});
-	$("#" + Imports.domId["MapView"] + " .fireBtn").click(function () {
-		if (!Imports.Views["FireView"]) {
-			Imports.Views["FireView"] = new FireView(Imports);
-		}
-		Imports.Views["FireView"].show(that._game);
-	});
-	
+
 	$(function() {
+	/*
 		var buttonSize = { 'width' : 300,  'height' : 50  };
 		$('#map-view .buttons .backBtn').css({
 			'top' : (window.innerHeight - buttonSize.height),
@@ -35,6 +27,37 @@ function MapView(Imports) {
 			'height' : buttonSize.height,
 			'position' : 'absolute'
 		});
+		*/
+		
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+
+		var fireBtn = $("<img src=\"../assets/shared/images/spartanStrike_playButton.png\">")
+			.css("position", "absolute")
+			//.css("z-index", "1")
+			.css("width", width * .25)
+			.css("right", 0)
+			.css("bottom", 0)
+			.click(function () {
+				if (!Imports.Views["FireView"]) {
+					Imports.Views["FireView"] = new FireView(Imports);
+				}
+				Imports.Views["FireView"].show(that._game);
+			});
+			
+		var backBtn = $("<img src=\"../assets/shared/images/navigationArrow.png\">")
+			.css("position", "absolute")
+			//.css("z-index", "1")
+			.css("width", width * .25)
+			.css("left", 0)
+			.css("bottom", 0)
+			.click(function () {
+				Imports.ViewManager.previousView();
+			});
+		
+		$("#" + Imports.domId["MapView"])
+		.append(fireBtn)
+		.append(backBtn);
 	});
 }
 
@@ -109,11 +132,12 @@ MapView.prototype._updateMapView = function () {
 	var timeDelta = 1.0 / 200; 	// Smoothness
 	
 	// Push Pins Styles
-	var pushPinOptions_currentUserHitShot = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
-	var pushPinOptions_currentUserMissedShots = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
-	var pushPinOptions_currentUserLocation = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
-	var pushPinOptions_currentUserBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
-	var pushPinOptions_opponentBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
+	// Push Pins Styles
+	var pushPinOptions_currentUserHitShot = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/mapHitIcon.png\">"};
+	//var pushPinOptions_currentUserMissedShots = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
+	var pushPinOptions_currentUserLocation = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_scope.png\">"};
+	var pushPinOptions_currentUserBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/mapBaseIcon.png\">"};
+	var pushPinOptions_opponentBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/mapBaseOpponentIcon.png\">"};
 	
 	// PROCESS Locations
 	//Remove existing Pushpins
