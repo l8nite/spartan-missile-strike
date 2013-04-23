@@ -21,7 +21,7 @@ function MainMenu(Imports) {
 
 	$("#" + Imports.domId["MainMenu"] + " .scrollable").css("background-image", "url(\"../assets/shared/images/longBG_smaller.jpg\")")
 	.css("background-size", "100%")
-	.css("height", window.innerHeight - window.innerWidth * .1);
+	.css("min-height", window.innerHeight);
 	$("#" + Imports.domId["MainMenu"] + " .buttons").css("height", window.innerWidth * .1)
 	.css("padding-top", window.innerWidth * .02)
 	.css("padding-bottom", window.innerWidth * .02)
