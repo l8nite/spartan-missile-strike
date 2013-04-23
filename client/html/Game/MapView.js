@@ -10,25 +10,6 @@ function MapView(Imports) {
 	FixedHeightView.call(this, Imports.domId["MapView"]);
 
 	$(function() {
-	/*
-		var buttonSize = { 'width' : 300,  'height' : 50  };
-		$('#map-view .buttons .backBtn').css({
-			'top' : (window.innerHeight - buttonSize.height),
-			'left' :  0,
-			'width' : buttonSize.width,
-			'height' : buttonSize.height,
-			'position' : 'absolute'
-		});
-		
-		$('#map-view .buttons .fireBtn').css({
-			'top' : (window.innerHeight - buttonSize.height),
-			'right' : 0,
-			'width' : buttonSize.width,
-			'height' : buttonSize.height,
-			'position' : 'absolute'
-		});
-		*/
-		
 		var width = window.innerWidth;
 		var height = window.innerHeight;
 
