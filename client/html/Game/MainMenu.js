@@ -117,6 +117,7 @@ MainMenu.prototype._render = function (games) {
 				opponentid = game.opponent;
 			}
 			var gameDiv = $("<div></div>")
+			.addClass("game")
 			.css("background-image", "url(\"../assets/shared/images/spartanStrike_menuBox.png\")")
 			.css("background-size", "100% 100%")
 			.css("margin-bottom", window.innerWidth * 0.005)
