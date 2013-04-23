@@ -83,7 +83,7 @@
 		Imports.Views["PlayToStart"] = new PlayToStart(Imports);
 		Imports.Views["PlayToStart"].show();
 		Imports.NativeBridge.getPreferences(["musicMuted"], function(preferences) {
-			if (preferences.musicMuted === "0") {
+			if (preferences.musicMuted === "0" || preferences.musicMuted === null) {
 				Imports.NativeBridge.playSound("background_music", {
 					foreground: false,
 					loop: true
