@@ -48,12 +48,12 @@ MainMenu.prototype.onView = function () {
 			that.Imports.NativeBridge.log("Location services must be enabled for this application to operate as intended.");
 		}
 	});
-	FixedHeightView.prototype.onFixedHeightView.call(this);
+	FixedHeightView.prototype.onView.call(this);
 };
 
 MainMenu.prototype.offView = function () {
 	this.Imports.GameMaster.unsubscribeGames(this.GameMasterTicket);
-	FixedHeightView.prototype.offFixedHeightView.call(this);
+	FixedHeightView.prototype.offView.call(this);
 };
 
 MainMenu.prototype.show = function () {
