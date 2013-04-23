@@ -12,7 +12,7 @@
 		281290951726246A003AF638 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 281290901726246A003AF638 /* Default@2x.png */; };
 		281290961726246A003AF638 /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 281290911726246A003AF638 /* spartan_appIcon_57.png */; };
 		281290971726246A003AF638 /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 281290921726246A003AF638 /* spartan_appIcon_114.png */; };
-		281290991726250A003AF638 /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 281290981726250A003AF638 /* shared */; };
+		281290A117263639003AF638 /* shared in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2812909C17263516003AF638 /* shared */; };
 		281AD97116F08CA000E7625C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97016F08CA000E7625C /* AudioToolbox.framework */; };
 		281AD97416F0911300E7625C /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AD97316F0911300E7625C /* SSLocationManager.m */; };
 		281AD97816F1427D00E7625C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97616F1424E00E7625C /* CoreLocation.framework */; };
@@ -61,13 +61,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		281290A017263623003AF638 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = assets;
+			dstSubfolderSpec = 7;
+			files = (
+				281290A117263639003AF638 /* shared in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2812908E1726246A003AF638 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../assets/ios/Default-568h@2x.png"; sourceTree = "<group>"; };
 		2812908F1726246A003AF638 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../../assets/ios/Default.png; sourceTree = "<group>"; };
 		281290901726246A003AF638 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../../assets/ios/Default@2x.png"; sourceTree = "<group>"; };
 		281290911726246A003AF638 /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_57.png; path = ../../assets/ios/spartan_appIcon_57.png; sourceTree = "<group>"; };
 		281290921726246A003AF638 /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_114.png; path = ../../assets/ios/spartan_appIcon_114.png; sourceTree = "<group>"; };
-		281290981726250A003AF638 /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../assets/shared; sourceTree = "<group>"; };
+		2812909C17263516003AF638 /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../../assets/shared; sourceTree = "<group>"; };
 		281AD97016F08CA000E7625C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		281AD97216F0911300E7625C /* SSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLocationManager.h; sourceTree = "<group>"; };
 		281AD97316F0911300E7625C /* SSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
@@ -154,6 +167,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2812909B17263489003AF638 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				2812909C17263516003AF638 /* shared */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
 		281AD97516F0911800E7625C /* LocationManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,8 +256,8 @@
 		28A9754716EEE737007B970E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2812909B17263489003AF638 /* assets */,
 				28A9755816EF9C4A007B970E /* sounds.plist */,
-				281290981726250A003AF638 /* shared */,
 				28A9754516EEE72D007B970E /* html */,
 			);
 			name = Resources;
@@ -374,6 +395,7 @@
 				28DC54D516EEB7D800C4F389 /* Sources */,
 				28DC54D616EEB7D800C4F389 /* Frameworks */,
 				28DC54D716EEB7D800C4F389 /* Resources */,
+				281290A017263623003AF638 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -436,7 +458,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				281290991726250A003AF638 /* shared in Resources */,
 				28DC54E716EEB7D800C4F389 /* InfoPlist.strings in Resources */,
 				28DC54F916EEB7D800C4F389 /* SSMainViewController_iPhone.xib in Resources */,
 				28DC54FC16EEB7D800C4F389 /* SSMainViewController_iPad.xib in Resources */,
