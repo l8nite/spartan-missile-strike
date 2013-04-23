@@ -13,9 +13,8 @@ function MapView(Imports) {
 		var width = window.innerWidth;
 		var height = window.innerHeight;
 
-		var fireBtn = $("<img src=\"../assets/shared/images/spartanStrike_playButton.png\">")
+		var fireBtn = $("<img class=\"fireBtn\" src=\"../assets/shared/images/spartanStrike_playButton.png\">")
 			.css("position", "absolute")
-			//.css("z-index", "1")
 			.css("width", width * .25)
 			.css("right", 0)
 			.css("bottom", 0)
@@ -26,9 +25,8 @@ function MapView(Imports) {
 				Imports.Views["FireView"].show(that._game);
 			});
 			
-		var backBtn = $("<img src=\"../assets/shared/images/navigationArrow.png\">")
+		var backBtn = $("<img class=\"backBtn\" src=\"../assets/shared/images/navigationArrow.png\">")
 			.css("position", "absolute")
-			//.css("z-index", "1")
 			.css("width", width * .25)
 			.css("left", 0)
 			.css("bottom", 0)
