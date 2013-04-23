@@ -4,6 +4,23 @@ function PlayToStart(Imports) {
 	var that = this;
 	this.Imports = Imports;
 	FixedHeightView.call(this, Imports.domId["PlayToStart"]);
+	
+	var playImage = $("<img></img>")
+			.attr("src", "../shared/Image Assets/spartanStrike_play.png")
+			.css("position", "absolute")
+			.css("top", (((window.innerHeight * .05 + window.innerWidth * .6 * 294 / 402) + (window.innerHeight * .96)) / 2) - ((window.innerWidth * .96 * 494 / 620) / 2) + window.innerWidth * .605)
+			.css("left", window.innerWidth * .86 / 2)
+			.css("width", window.innerWidth * .14);
+
+	$(playImage).bind('fade-cycle', function () {
+		$(this).fadeOut(1000, function () {
+			$(this).fadeIn(1000, function () {
+				$(this).trigger('fade-cycle');
+			});
+		});
+	});
+
+	$(playImage).trigger('fade-cycle');
 
 	$("#" + Imports.domId["PlayToStart"]).css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.jpg\")")
 		.css("background-size", "100%")
@@ -28,13 +45,7 @@ function PlayToStart(Imports) {
 			.css("left", window.innerWidth * .02)
 			.css("width", window.innerWidth * .96)
 		)
-		.append($("<img></img>")
-			.attr("src", "../shared/Image Assets/spartanStrike_play.png")
-			.css("position", "absolute")
-			.css("top", (((window.innerHeight * .05 + window.innerWidth * .6 * 294 / 402) + (window.innerHeight * .96)) / 2) - ((window.innerWidth * .96 * 494 / 620) / 2) + window.innerWidth * .605)
-			.css("left", window.innerWidth * .86 / 2)
-			.css("width", window.innerWidth * .14)
-		)
+		.append(playImage)
 		.append($("<img></img>")
 			.attr("src", "../shared/Image Assets/spartanStrike_lowerRedline.png")
 			.css("position", "absolute")
