@@ -17,14 +17,14 @@ function FireView(Imports) {
 	var width = window.innerWidth;
 	var height = window.innerHeight;
 
-	var scope = $("<img src=\"../shared/images/spartanStrike_scope.png\">")
+	var scope = $("<img src=\"../assets/shared/images/spartanStrike_scope.png\">")
 	.css("position", "absolute")
 	.css("z-index", "-1")
 	.css("width", width * .9)
 	.css("left", width * .05)
 	.css("top", height * .5 - width * .45);
 
-	var bigRedButton = $("<img src=\"../shared/images/spartanStrike_redButton.png\">")
+	var bigRedButton = $("<img src=\"../assets/shared/images/spartanStrike_redButton.png\">")
 	.css("position", "absolute")
 	.css("width", width * .6)
 	.css("left", width * .2)
@@ -34,7 +34,7 @@ function FireView(Imports) {
 		Imports.ViewManager.previousView();
 	});
 
-	var backButton = $("<img src=\"../shared/images/spartanStrike_mapViewIcon.png\">")
+	var backButton = $("<img src=\"../assets/shared/images/spartanStrike_mapViewIcon.png\">")
 	.css("position", "absolute")
 	.css("top", window.innerWidth * .05)
 	.css("left", window.innerWidth * .05)

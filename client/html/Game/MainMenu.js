@@ -19,7 +19,7 @@ function MainMenu(Imports) {
 		Imports.Views["OptionsView"].show();
 	});
 
-	$("#" + Imports.domId["MainMenu"] + " .scrollable").css("background-image", "url(\"../shared/images/longBG_smaller.jpg\")")
+	$("#" + Imports.domId["MainMenu"] + " .scrollable").css("background-image", "url(\"../assets/shared/images/longBG_smaller.jpg\")")
 	.css("background-size", "100%")
 	.css("min-height", window.innerHeight);
 	$("#" + Imports.domId["MainMenu"] + " .buttons").css("height", window.innerWidth * .2)
