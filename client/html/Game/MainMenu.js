@@ -3,7 +3,7 @@
 function MainMenu(Imports) {
 	var that = this;
 	this.Imports = Imports;
-	View.call(this, Imports.domId["MainMenu"]);
+	FixedHeightView.call(this, Imports.domId["MainMenu"]);
 
 	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").click(function () {
 		if (!Imports.Views["OpponentsView"]) {
@@ -34,7 +34,7 @@ function MainMenu(Imports) {
 	.css("margin-right", "auto");
 }
 
-MainMenu.prototype = Object.create(View.prototype);
+MainMenu.prototype = Object.create(FixedHeightView.prototype);
 
 MainMenu.prototype.onView = function () {
 	var that = this;
@@ -48,12 +48,12 @@ MainMenu.prototype.onView = function () {
 			that.Imports.NativeBridge.log("Location services must be enabled for this application to operate as intended.");
 		}
 	});
-	View.prototype.onView.call(this);
+	FixedHeightView.prototype.onFixedHeightView.call(this);
 };
 
 MainMenu.prototype.offView = function () {
 	this.Imports.GameMaster.unsubscribeGames(this.GameMasterTicket);
-	View.prototype.offView.call(this);
+	FixedHeightView.prototype.offFixedHeightView.call(this);
 };
 
 MainMenu.prototype.show = function () {
