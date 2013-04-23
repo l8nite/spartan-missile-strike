@@ -139,7 +139,7 @@ MapView.prototype._updateMapView = function () {
 	
 	// Current User Base
 	try {
-		if(currentUser !== undefined && currentUser.base.latitude !== undefined && currentUser.base.longitude !== undefined) {
+		if(currentUser && currentUser.base && currentUser.base.latitude !== undefined && currentUser.base.longitude !== undefined) {
 			var currentUserBase = new Microsoft.Maps.Location(currentUser.base.latitude, currentUser.base.longitude);
 			var pushPin_currentUserBase = new Microsoft.Maps.Pushpin(currentUserBase, pushPinOptions_currentUserBase);
 			map.entities.push(pushPin_currentUserBase);
@@ -152,7 +152,7 @@ MapView.prototype._updateMapView = function () {
 	
 	// Opponent Base
 	try {
-		if(opponent !== undefined && opponent.base.latitude !== undefined && opponent.base.longitude !== undefined) {
+		if(opponent && opponent.base && opponent.base.latitude !== undefined && opponent.base.longitude !== undefined) {
 			var opponentBase = new Microsoft.Maps.Location(opponent.base.latitude, opponent.base.longitude);	
 			var pushPin_opponentBase = new Microsoft.Maps.Pushpin(opponentBase, pushPinOptions_opponentBase);
 			map.entities.push(pushPin_opponentBase);
@@ -165,7 +165,7 @@ MapView.prototype._updateMapView = function () {
 	
 	// Current User Location
 	try {
-		if(currentLocation !== undefined && currentLocation.latitude !== undefined && currentLocation.longitude !== undefined) {
+		if(currentLocation && currentLocation.latitude !== undefined && currentLocation.longitude !== undefined) {
 			var currentUserLocation = new Microsoft.Maps.Location(currentLocation.latitude, currentLocation.longitude);
 			var pushPin_currentUserLocation = new Microsoft.Maps.Pushpin(currentUserLocation, pushPinOptions_currentUserLocation);
 			map.entities.push(pushPin_currentUserLocation);
@@ -178,12 +178,14 @@ MapView.prototype._updateMapView = function () {
 	
 	// Shots Fired
 	try {
-		for (var i in currentUser.shots) {
-			var shot = currentUser.shots[i];
-			var shotLocation = new Microsoft.Maps.Location(shot.destination.latitude, shot.destination.longitude);
-			var pushPin_shotFired = new Microsoft.Maps.Pushpin(shotLocation, (shot.hit) ? pushPinOptions_currentUserHitShot : pushPinOptions_currentUserMissedShots );
-			map.entities.push(pushPin_shotFired);
-			boundingBoxLocations.push(shotLocation);
+		if(currentUser.shots) {
+			for (var i in currentUser.shots) {
+				var shot = currentUser.shots[i];
+				var shotLocation = new Microsoft.Maps.Location(shot.destination.latitude, shot.destination.longitude);
+				var pushPin_shotFired = new Microsoft.Maps.Pushpin(shotLocation, (shot.hit) ? pushPinOptions_currentUserHitShot : pushPinOptions_currentUserMissedShots );
+				map.entities.push(pushPin_shotFired);
+				boundingBoxLocations.push(shotLocation);
+			}
 		}
 	}
   	catch(err) {
@@ -192,7 +194,7 @@ MapView.prototype._updateMapView = function () {
 	
 	// Draw opponent's last shot
 	try {
-		if(true || mapOverViewShot && mapOverViewShot[mapOverViewShot.length - 1]) {
+		if(mapOverViewShot && mapOverViewShot[mapOverViewShot.length - 1]) {
 			var lastShot = mapOverViewShot[mapOverViewShot.length - 1];
 			var center = new Object();
 			center.latitude = (lastShot.destination.latitude + lastShot.origin.latitude) / 2.0;
