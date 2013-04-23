@@ -5,35 +5,35 @@
 	<key>background_music</key>
 	<dict>
 		<key>ResourceName</key>
-		<string>audio/24 - The Ants Go Marching (Instrumental Only)</string>
+		<string>assets/shared/audio/24 - The Ants Go Marching (Instrumental Only)</string>
 		<key>ResourceType</key>
 		<string>mp3</string>
 	</dict>
 	<key>explosion</key>
 	<dict>
 		<key>ResourceName</key>
-		<string>audio/Explosion</string>
+		<string>assets/shared/audio/Explosion</string>
 		<key>ResourceType</key>
 		<string>mp3</string>
 	</dict>
 	<key>camera_focused</key>
 	<dict>
 		<key>ResourceName</key>
-		<string>audio/Bomb</string>
+		<string>assets/shared/audio/Bomb</string>
 		<key>ResourceType</key>
 		<string>mp3</string>
 	</dict>
 	<key>page_transition</key>
 	<dict>
 		<key>ResourceName</key>
-		<string>audio/Bomb</string>
+		<string>assets/shared/audio/Bomb</string>
 		<key>ResourceType</key>
 		<string>mp3</string>
 	</dict>
 	<key>turret_moving</key>
 	<dict>
 		<key>ResourceName</key>
-		<string>audio/Bomb</string>
+		<string>assets/shared/audio/Bomb</string>
 		<key>ResourceType</key>
 		<string>mp3</string>
 	</dict>
