@@ -27,18 +27,6 @@ body {
 	height: 20px;
 }
 
-#map-view .buttons .fireBtn {
-	background-image:url('../assets/shared/images/spartanStrike_play.png');
-	background-repeat:no-repeat;
-	background-position:right bottom;
-}
-
-#map-view .buttons .backBtn {
-	background-image:url('../assets/shared/images/spartanStrike_cancel.png');
-	background-repeat:no-repeat;
-	background-position:left bottom;
-}
-
 #options-view {
     background-color: rgba(0,0,0,0.5);
     height: 100%;
