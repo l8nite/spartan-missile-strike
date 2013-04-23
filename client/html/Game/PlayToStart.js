@@ -4,7 +4,7 @@ function PlayToStart(Imports) {
 	var that = this;
 	this.Imports = Imports;
 	FixedHeightView.call(this, Imports.domId["PlayToStart"]);
-	
+
 	var playImage = $("<img></img>")
 			.attr("src", "../shared/Image Assets/spartanStrike_play.png")
 			.css("position", "absolute")
@@ -22,24 +22,24 @@ function PlayToStart(Imports) {
 
 	$(playImage).trigger('fade-cycle');
 
-	$("#" + Imports.domId["PlayToStart"]).css("background-image", "url(\"../shared/Image Assets/spartanStrike_BG.jpg\")")
+	$("#" + Imports.domId["PlayToStart"]).css("background-image", "url(\"assets/images/spartanStrike_BG.jpg\")")
 		.css("background-size", "100%")
 		.append($("<img></img>")
-			.attr("src", "../shared/Image Assets/spartanStrike_title.png")
+			.attr("src", "assets/images/spartanStrike_title.png")
 			.css("position", "absolute")
 			.css("top", window.innerHeight * .025)
 			.css("left", window.innerWidth / 2 - window.innerWidth * .3)
 			.css("width", window.innerWidth * .6)
 		)
 		.append($("<img></img>")
-			.attr("src", "../shared/Image Assets/spartanStrike_upperRedline.png")
+			.attr("src", "assets/images/spartanStrike_upperRedline.png")
 			.css("position", "absolute")
 			.css("top", window.innerHeight * .05 + window.innerWidth * .6 * 294 / 402)
 			.css("left", 0)
 			.css("width", window.innerWidth)
 		)
 		.append($("<img></img>")
-			.attr("src", "../shared/Image Assets/spartanStrike_mainIcon.png")
+			.attr("src", "assets/images/spartanStrike_mainIcon.png")
 			.css("position", "absolute")
 			.css("top", (((window.innerHeight * .05 + window.innerWidth * .6 * 294 / 402) + (window.innerHeight * .96)) / 2) - ((window.innerWidth * .96 * 494 / 620) / 2))
 			.css("left", window.innerWidth * .02)
@@ -47,7 +47,7 @@ function PlayToStart(Imports) {
 		)
 		.append(playImage)
 		.append($("<img></img>")
-			.attr("src", "../shared/Image Assets/spartanStrike_lowerRedline.png")
+			.attr("src", "assets/images/spartanStrike_lowerRedline.png")
 			.css("position", "absolute")
 			.css("top", window.innerHeight * .96)
 			.css("left", 0)

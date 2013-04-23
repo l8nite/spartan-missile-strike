@@ -28,13 +28,13 @@ body {
 }
 
 #map-view .buttons .fireBtn {
-	background-image:url('../shared/Image%20Assets/spartanStrike_play.png');
+	background-image:url('assets/images/spartanStrike_play.png');
 	background-repeat:no-repeat;
 	background-position:right bottom;
 }
 
 #map-view .buttons .backBtn {
-	background-image:url('../shared/Image%20Assets/spartanStrike_cancel.png');
+	background-image:url('assets/images/spartanStrike_cancel.png');
 	background-repeat:no-repeat;
 	background-position:left bottom;
 }
