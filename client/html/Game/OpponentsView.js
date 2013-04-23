@@ -6,7 +6,7 @@ function OpponentsView(Imports) {
 	View.call(this, Imports.domId["OpponentsView"]);
 
 	$("#" + that.Imports.domId["OpponentsView"])
-	.css("background-image", "url(\"assets/images/spartanStrike_BG.jpg\")")
+	.css("background-image", "url(\"../shared/images/longBG_smaller.jpg\")")
 	.css("background-size", "100%");
 
 	$("#" + Imports.domId["OpponentsView"] + " .backBtn").click(function () {
