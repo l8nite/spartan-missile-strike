@@ -182,8 +182,12 @@ MapView.prototype._updateMapView = function () {
 			for (var i in currentUser.shots) {
 				var shot = currentUser.shots[i];
 				var shotLocation = new Microsoft.Maps.Location(shot.destination.latitude, shot.destination.longitude);
-				var pushPin_shotFired = new Microsoft.Maps.Pushpin(shotLocation, (shot.hit) ? pushPinOptions_currentUserHitShot : pushPinOptions_currentUserMissedShots );
-				map.entities.push(pushPin_shotFired);
+				if(shot.hit) {
+					var pushPin_shotFired = new Microsoft.Maps.Pushpin(shotLocation, pushPinOptions_currentUserHitShot);
+					map.entities.push(pushPin_shotFired);
+				}
+				//var pushPin_shotFired = new Microsoft.Maps.Pushpin(shotLocation, (shot.hit) ? pushPinOptions_currentUserHitShot : pushPinOptions_currentUserMissedShots );
+				//map.entities.push(pushPin_shotFired);
 				boundingBoxLocations.push(shotLocation);
 			}
 		}
