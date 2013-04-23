@@ -81,6 +81,7 @@ DerivedData
 bin/
 gen/
 /client/droid/android/assets/
+/client/droid/facebook/
 
 # Local configuration file (sdk path, etc)
 local.properties
