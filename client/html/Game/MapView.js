@@ -109,11 +109,11 @@ MapView.prototype._updateMapView = function () {
 	var timeDelta = 1.0 / 100; 	// Smoothness
 	
 	// Push Pins Styles
-	var pushPinOptions_currentUserHitShot = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/images/spartanStrike_optionX.png\">"};
-	var pushPinOptions_currentUserMissedShots = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/images/spartanStrike_optionX.png\">"};
-	var pushPinOptions_currentUserLocation = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/images/spartanStrike_optionX.png\">"};
-	var pushPinOptions_currentUserBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/images/spartanStrike_optionX.png\">"};
-	var pushPinOptions_opponentBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../shared/images/spartanStrike_optionX.png\">"};
+	var pushPinOptions_currentUserHitShot = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
+	var pushPinOptions_currentUserMissedShots = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
+	var pushPinOptions_currentUserLocation = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
+	var pushPinOptions_currentUserBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
+	var pushPinOptions_opponentBase = { htmlContent: "<img class=\"bingMapsPushPin\" src=\"../assets/shared/images/spartanStrike_optionX.png\">"};
 	
 	// PROCESS Locations
 	//Remove existing Pushpins
