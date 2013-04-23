@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10FD94491723071200617DFF /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 10FD94481723071200617DFF /* shared */; };
+		281290931726246A003AF638 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2812908E1726246A003AF638 /* Default-568h@2x.png */; };
+		281290941726246A003AF638 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2812908F1726246A003AF638 /* Default.png */; };
+		281290951726246A003AF638 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 281290901726246A003AF638 /* Default@2x.png */; };
+		281290961726246A003AF638 /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 281290911726246A003AF638 /* spartan_appIcon_57.png */; };
+		281290971726246A003AF638 /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 281290921726246A003AF638 /* spartan_appIcon_114.png */; };
+		281290A117263639003AF638 /* shared in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2812909C17263516003AF638 /* shared */; };
 		281AD97116F08CA000E7625C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97016F08CA000E7625C /* AudioToolbox.framework */; };
 		281AD97416F0911300E7625C /* SSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AD97316F0911300E7625C /* SSLocationManager.m */; };
 		281AD97816F1427D00E7625C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281AD97616F1424E00E7625C /* CoreLocation.framework */; };
@@ -21,8 +26,6 @@
 		2872BEA016EFB9640051E707 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BE9F16EFB9640051E707 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2872BEA216EFB96B0051E707 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BEA116EFB96B0051E707 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2872BEA416EFB9730051E707 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872BEA316EFB9730051E707 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2872BEA716EFBA2C0051E707 /* spartan_appIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */; };
-		2872BEA816EFBA2C0051E707 /* spartan_appIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */; };
 		28A9753A16EED0C7007B970E /* SSSplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */; };
 		28A9754216EEDE77007B970E /* SSSplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9754016EEDE77007B970E /* SSSplashScreenViewController.xib */; };
 		28A9754616EEE72D007B970E /* html in Resources */ = {isa = PBXBuildFile; fileRef = 28A9754516EEE72D007B970E /* html */; };
@@ -30,7 +33,6 @@
 		28A9754D16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9754C16EEEF86007B970E /* NSString+CaseInsensitiveComparison.m */; };
 		28A9755516EF9AD8007B970E /* SSAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9755416EF9AD8007B970E /* SSAudioManager.m */; };
 		28A9755916EF9C4A007B970E /* sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755816EF9C4A007B970E /* sounds.plist */; };
-		28A9755B16EFA104007B970E /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9755A16EFA104007B970E /* audio */; };
 		28A9755D16EFA1A1007B970E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A9755C16EFA1A1007B970E /* AVFoundation.framework */; };
 		28A9756F16EFAFD5007B970E /* SSFacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9756E16EFAFD5007B970E /* SSFacebookManager.m */; };
 		28DC54DD16EEB7D800C4F389 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28DC54DC16EEB7D800C4F389 /* UIKit.framework */; };
@@ -39,9 +41,6 @@
 		28DC54E716EEB7D800C4F389 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54E516EEB7D800C4F389 /* InfoPlist.strings */; };
 		28DC54E916EEB7D800C4F389 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DC54E816EEB7D800C4F389 /* main.m */; };
 		28DC54ED16EEB7D800C4F389 /* SSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */; };
-		28DC54EF16EEB7D800C4F389 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54EE16EEB7D800C4F389 /* Default.png */; };
-		28DC54F116EEB7D800C4F389 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F016EEB7D800C4F389 /* Default@2x.png */; };
-		28DC54F316EEB7D800C4F389 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */; };
 		28DC54F616EEB7D800C4F389 /* SSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DC54F516EEB7D800C4F389 /* SSMainViewController.m */; };
 		28DC54F916EEB7D800C4F389 /* SSMainViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54F716EEB7D800C4F389 /* SSMainViewController_iPhone.xib */; };
 		28DC54FC16EEB7D800C4F389 /* SSMainViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DC54FA16EEB7D800C4F389 /* SSMainViewController_iPad.xib */; };
@@ -62,8 +61,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		281290A017263623003AF638 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = assets;
+			dstSubfolderSpec = 7;
+			files = (
+				281290A117263639003AF638 /* shared in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		10FD94481723071200617DFF /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../shared; sourceTree = "<group>"; };
+		2812908E1726246A003AF638 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../assets/ios/Default-568h@2x.png"; sourceTree = "<group>"; };
+		2812908F1726246A003AF638 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../../assets/ios/Default.png; sourceTree = "<group>"; };
+		281290901726246A003AF638 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../../assets/ios/Default@2x.png"; sourceTree = "<group>"; };
+		281290911726246A003AF638 /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_57.png; path = ../../assets/ios/spartan_appIcon_57.png; sourceTree = "<group>"; };
+		281290921726246A003AF638 /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spartan_appIcon_114.png; path = ../../assets/ios/spartan_appIcon_114.png; sourceTree = "<group>"; };
+		2812909C17263516003AF638 /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../../assets/shared; sourceTree = "<group>"; };
 		281AD97016F08CA000E7625C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		281AD97216F0911300E7625C /* SSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLocationManager.h; sourceTree = "<group>"; };
 		281AD97316F0911300E7625C /* SSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLocationManager.m; sourceTree = "<group>"; };
@@ -81,8 +98,6 @@
 		2872BE9F16EFB9640051E707 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2872BEA116EFB96B0051E707 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		2872BEA316EFB9730051E707 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_57.png; sourceTree = "<group>"; };
-		2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spartan_appIcon_114.png; sourceTree = "<group>"; };
 		28A9753716EED0C7007B970E /* SSSplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSSplashScreenViewController.h; path = SpartanMissileStrike/SSSplashScreenViewController.h; sourceTree = "<group>"; };
 		28A9753816EED0C7007B970E /* SSSplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSSplashScreenViewController.m; path = SpartanMissileStrike/SSSplashScreenViewController.m; sourceTree = "<group>"; };
 		28A9754116EEDE77007B970E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SpartanMissileStrike/en.lproj/SSSplashScreenViewController.xib; sourceTree = "<group>"; };
@@ -95,7 +110,6 @@
 		28A9755316EF9AD8007B970E /* SSAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSAudioManager.h; sourceTree = "<group>"; };
 		28A9755416EF9AD8007B970E /* SSAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSAudioManager.m; sourceTree = "<group>"; };
 		28A9755816EF9C4A007B970E /* sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sounds.plist; sourceTree = "<group>"; };
-		28A9755A16EFA104007B970E /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = audio; path = ../../shared/audio; sourceTree = "<group>"; };
 		28A9755C16EFA1A1007B970E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		28A9756D16EFAFD4007B970E /* SSFacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSFacebookManager.h; sourceTree = "<group>"; };
 		28A9756E16EFAFD5007B970E /* SSFacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSFacebookManager.m; sourceTree = "<group>"; };
@@ -109,9 +123,6 @@
 		28DC54EA16EEB7D800C4F389 /* SpartanMissileStrike-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpartanMissileStrike-Prefix.pch"; sourceTree = "<group>"; };
 		28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAppDelegate.h; sourceTree = "<group>"; };
 		28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSAppDelegate.m; sourceTree = "<group>"; };
-		28DC54EE16EEB7D800C4F389 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		28DC54F016EEB7D800C4F389 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		28DC54F416EEB7D800C4F389 /* SSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSMainViewController.h; sourceTree = "<group>"; };
 		28DC54F516EEB7D800C4F389 /* SSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSMainViewController.m; sourceTree = "<group>"; };
 		28DC54F816EEB7D800C4F389 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SSMainViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -156,6 +167,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2812909B17263489003AF638 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				2812909C17263516003AF638 /* shared */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
 		281AD97516F0911800E7625C /* LocationManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,9 +256,8 @@
 		28A9754716EEE737007B970E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				10FD94481723071200617DFF /* shared */,
+				2812909B17263489003AF638 /* assets */,
 				28A9755816EF9C4A007B970E /* sounds.plist */,
-				28A9755A16EFA104007B970E /* audio */,
 				28A9754516EEE72D007B970E /* html */,
 			);
 			name = Resources;
@@ -332,17 +350,17 @@
 		28DC54E316EEB7D800C4F389 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2812908E1726246A003AF638 /* Default-568h@2x.png */,
+				2812908F1726246A003AF638 /* Default.png */,
+				281290901726246A003AF638 /* Default@2x.png */,
+				281290911726246A003AF638 /* spartan_appIcon_57.png */,
+				281290921726246A003AF638 /* spartan_appIcon_114.png */,
 				28DC54EB16EEB7D800C4F389 /* SSAppDelegate.h */,
 				28DC54EC16EEB7D800C4F389 /* SSAppDelegate.m */,
 				28DC54E416EEB7D800C4F389 /* SpartanMissileStrike-Info.plist */,
 				28DC54E516EEB7D800C4F389 /* InfoPlist.strings */,
 				28DC54E816EEB7D800C4F389 /* main.m */,
 				28DC54EA16EEB7D800C4F389 /* SpartanMissileStrike-Prefix.pch */,
-				2872BEA516EFBA2C0051E707 /* spartan_appIcon_57.png */,
-				2872BEA616EFBA2C0051E707 /* spartan_appIcon_114.png */,
-				28DC54EE16EEB7D800C4F389 /* Default.png */,
-				28DC54F016EEB7D800C4F389 /* Default@2x.png */,
-				28DC54F216EEB7D800C4F389 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -377,6 +395,7 @@
 				28DC54D516EEB7D800C4F389 /* Sources */,
 				28DC54D616EEB7D800C4F389 /* Frameworks */,
 				28DC54D716EEB7D800C4F389 /* Resources */,
+				281290A017263623003AF638 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -440,20 +459,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				28DC54E716EEB7D800C4F389 /* InfoPlist.strings in Resources */,
-				28DC54EF16EEB7D800C4F389 /* Default.png in Resources */,
-				28DC54F116EEB7D800C4F389 /* Default@2x.png in Resources */,
-				28DC54F316EEB7D800C4F389 /* Default-568h@2x.png in Resources */,
 				28DC54F916EEB7D800C4F389 /* SSMainViewController_iPhone.xib in Resources */,
 				28DC54FC16EEB7D800C4F389 /* SSMainViewController_iPad.xib in Resources */,
 				28A9754216EEDE77007B970E /* SSSplashScreenViewController.xib in Resources */,
 				28A9754616EEE72D007B970E /* html in Resources */,
 				28A9755916EF9C4A007B970E /* sounds.plist in Resources */,
-				28A9755B16EFA104007B970E /* audio in Resources */,
 				2872BE9E16EFB9400051E707 /* FacebookSDKResources.bundle in Resources */,
-				2872BEA716EFBA2C0051E707 /* spartan_appIcon_57.png in Resources */,
-				2872BEA816EFBA2C0051E707 /* spartan_appIcon_114.png in Resources */,
 				283C133D16F0617800D7E351 /* SSFiringViewController.xib in Resources */,
-				10FD94491723071200617DFF /* shared in Resources */,
+				281290931726246A003AF638 /* Default-568h@2x.png in Resources */,
+				281290941726246A003AF638 /* Default.png in Resources */,
+				281290951726246A003AF638 /* Default@2x.png in Resources */,
+				281290961726246A003AF638 /* spartan_appIcon_57.png in Resources */,
+				281290971726246A003AF638 /* spartan_appIcon_114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,7 +496,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "find \"${PROJECT_DIR}/../shared\" -exec touch -cm {} \\;";
+			shellScript = "find \"${PROJECT_DIR}/../assets\" -exec touch -cm {} \\;";
 		};
 		28DC550016EEB7D800C4F389 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
