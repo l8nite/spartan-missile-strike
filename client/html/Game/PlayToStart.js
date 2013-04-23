@@ -6,7 +6,7 @@ function PlayToStart(Imports) {
 	FixedHeightView.call(this, Imports.domId["PlayToStart"]);
 
 	var playImage = $("<img></img>")
-			.attr("src", "../shared/Image Assets/spartanStrike_play.png")
+			.attr("src", "assets/images/spartanStrike_play.png")
 			.css("position", "absolute")
 			.css("top", (((window.innerHeight * .05 + window.innerWidth * .6 * 294 / 402) + (window.innerHeight * .96)) / 2) - ((window.innerWidth * .96 * 494 / 620) / 2) + window.innerWidth * .605)
 			.css("left", window.innerWidth * .86 / 2)
