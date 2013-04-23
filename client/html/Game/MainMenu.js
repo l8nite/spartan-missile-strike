@@ -21,7 +21,9 @@ function MainMenu(Imports) {
 
 	$("#" + Imports.domId["MainMenu"] + " .bg").css("background-image", "url(\"../assets/shared/images/longBG_smaller.jpg\")")
 	.css("background-size", "100%")
-	.css("min-height", window.innerHeight - window.innerWidth * .17);
+	.css("min-height", window.innerHeight - window.innerWidth * .17)
+	.css("padding-left", window.innerWidth * .05)
+	.css("padding-right", window.innerWidth * .05);
 
 	$("#" + Imports.domId["MainMenu"] + " .scrollable")
 	.css("height", window.innerHeight - window.innerWidth * .17)
@@ -70,6 +72,10 @@ function MainMenu(Imports) {
 	$("#" + Imports.domId["MainMenu"] + " .games-list").css("width", window.innerWidth * .9)
 	.css("margin-left", "auto")
 	.css("margin-right", "auto");
+
+	$("#" + Imports.domId["MainMenu"] + " .scrollable .label").css("width", window.innerWidth * .4)
+	.css("margin-top", window.innerWidth * .03)
+	.css("margin-bottom", window.innerWidth * .02);
 }
 
 MainMenu.prototype = Object.create(FixedHeightView.prototype);
@@ -110,9 +116,18 @@ MainMenu.prototype._render = function (games) {
 			if (opponentid === that.Imports.GameMaster.userid) {
 				opponentid = game.opponent;
 			}
-			var gameDiv = $("<div></div>");
-			gameDiv.addClass("game");
-			gameDiv.click(function () {
+			var gameDiv = $("<div></div>")
+			.css("background-image", "url(\"../assets/shared/images/spartanStrike_menuBox.png\")")
+			.css("background-size", "100% 100%")
+			.css("margin-bottom", window.innerWidth * 0.005)
+			.css("text-align", "center")
+			.css("vertical-align", "center")
+			.css("line-height", "1.2em")
+			.css("font-size", "36pt")
+			.css("width", "100%")
+			.css("height", "1.2em")
+			.css("overflow", "hidden")
+			.click(function () {
 				that._showGame(game);
 			});
 			if (game.status === "completed") {
