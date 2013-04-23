@@ -3,7 +3,7 @@
 function MainMenu(Imports) {
 	var that = this;
 	this.Imports = Imports;
-	View.call(this, Imports.domId["MainMenu"]);
+	FixedHeightView.call(this, Imports.domId["MainMenu"]);
 
 	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").click(function () {
 		if (!Imports.Views["OpponentsView"]) {
@@ -19,12 +19,13 @@ function MainMenu(Imports) {
 		Imports.Views["OptionsView"].show();
 	});
 
-	$("#" + Imports.domId["MainMenu"] + " .scrollable").css("background-image", "url(\"../assets/shared/images/longBG_smaller.jpg\")")
+	$("#" + Imports.domId["MainMenu"] + " .bg").css("background-image", "url(\"../assets/shared/images/longBG_smaller.jpg\")")
 	.css("background-size", "100%")
-	.css("min-height", window.innerHeight);
-	$("#" + Imports.domId["MainMenu"] + " .buttons").css("height", window.innerWidth * .1)
-	.css("padding-top", window.innerWidth * .02)
-	.css("padding-bottom", window.innerWidth * .02)
+	.css("min-height", window.innerHeight - window.innerWidth * .12);
+	$("#" + Imports.domId["MainMenu"] + " .scrollable")
+	.css("height", window.innerHeight - window.innerWidth * .12)
+	.css("overflow", "scroll");
+	$("#" + Imports.domId["MainMenu"] + " .buttons").css("height", window.innerWidth * .12)
 	.css("text-align", "center");
 	$("#" + Imports.domId["MainMenu"] + " .newGameBtn").css("height", "100%");
 	$("#" + Imports.domId["MainMenu"] + " .optionsBtn").css("height", "100%");
@@ -34,7 +35,7 @@ function MainMenu(Imports) {
 	.css("margin-right", "auto");
 }
 
-MainMenu.prototype = Object.create(View.prototype);
+MainMenu.prototype = Object.create(FixedHeightView.prototype);
 
 MainMenu.prototype.onView = function () {
 	var that = this;
@@ -48,12 +49,12 @@ MainMenu.prototype.onView = function () {
 			that.Imports.NativeBridge.log("Location services must be enabled for this application to operate as intended.");
 		}
 	});
-	View.prototype.onView.call(this);
+	FixedHeightView.prototype.onView.call(this);
 };
 
 MainMenu.prototype.offView = function () {
 	this.Imports.GameMaster.unsubscribeGames(this.GameMasterTicket);
-	View.prototype.offView.call(this);
+	FixedHeightView.prototype.offView.call(this);
 };
 
 MainMenu.prototype.show = function () {
