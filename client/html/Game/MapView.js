@@ -15,6 +15,7 @@ function MapView(Imports) {
 
 		var fireBtn = $("<img class=\"fireBtn\" src=\"../assets/shared/images/spartanStrike_playButton.png\">")
 			.css("position", "absolute")
+			.css("z-index", "2")
 			.css("width", width * .25)
 			.css("right", 0)
 			.css("bottom", 0)
@@ -27,6 +28,7 @@ function MapView(Imports) {
 			
 		var backBtn = $("<img class=\"backBtn\" src=\"../assets/shared/images/navigationArrow.png\">")
 			.css("position", "absolute")
+			.css("z-index", "2")
 			.css("width", width * .25)
 			.css("left", 0)
 			.css("bottom", 0)
@@ -34,7 +36,17 @@ function MapView(Imports) {
 				Imports.ViewManager.previousView();
 			});
 		
+		var imageForeOverLay = $("<img class=\"imageOverlay\" src=\"../assets/shared/images/longBG_smaller.jpg\">")
+			.css("position", "absolute")
+			.css("z-index", "1")
+			.css("opacity", 0.3)
+			.css("width", width)
+			.css("height", height)
+			.css("top", 0)
+			.css("left", 0);
+		
 		$("#" + Imports.domId["MapView"])
+		.append(imageForeOverLay)
 		.append(fireBtn)
 		.append(backBtn);
 	});
