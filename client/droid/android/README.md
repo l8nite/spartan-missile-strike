@@ -17,7 +17,8 @@ SETTING UP ANDROID SDK:
     keytool -exportcert -alias androiddebugkey -keystore "%HOMEPATH%"\.android\debug.keystore | "%OPENSSLDIR%"\openssl.exe sha1 -binary | "%OPENSSLDIR%"\openssl.exe base64
     <<password = 'android' (without quotes)>>
 
-
+Facebook Android SDK:
+	git submodule init && git submodule update
 
 Android SDK
 1. Download Android SDK from http://developer.android.com/sdk/index.html
