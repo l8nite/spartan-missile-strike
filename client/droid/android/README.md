@@ -3,12 +3,14 @@ SETTING UP ANDROID SDK:
     - make a symbolic link for the android/assets folder to the client/html and client/shared folder
     - make a keyhash for Facebook SDK (must be given to Facebook)
 
-  For Windows, the command for creating symlinks are:
+  For Windows, the command for creating symlinks are: (RUN CMD AS ADMIN)
     set SMSGIT=
     cd %SMSGIT%\client\droid\android\
-    del assets\
-    mklink /d assets\html\ ..\..\..\html\
-    mklink /d assets\shared\ ..\..\..\shared\
+	mklink /D res\ ..\..\assets\android\res\
+	mklink ic_launcher-web.png ..\..\assets\android\ic_launcher-web.png
+	mkdir assets\assets\shared\
+	mklink /D assets\html\ ..\..\..\html\
+	mklink /D assets\assets\shared\images\ ..\..\..\..\..\assets\shared\images\
 
   For Windows, the command for creating the facebook debug keyhash: (you will need download openssl, for windows: https://code.google.com/p/openssl-for-windows/)
     set OPENSSLDIR=
@@ -16,6 +18,8 @@ SETTING UP ANDROID SDK:
     <<password = 'android' (without quotes)>>
 
 
+Facebook Android SDK:
+	git submodule init && git submodule update
 
 Android SDK
 1. Download Android SDK from http://developer.android.com/sdk/index.html
