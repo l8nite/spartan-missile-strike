@@ -15,6 +15,7 @@ function MapView(Imports) {
 
 		var fireBtn = $("<img class=\"fireBtn\" src=\"../assets/shared/images/spartanStrike_playButton.png\">")
 			.css("position", "absolute")
+			.css("z-index", "2")
 			.css("width", width * .25)
 			.css("right", 0)
 			.css("bottom", 0)
@@ -27,6 +28,7 @@ function MapView(Imports) {
 			
 		var backBtn = $("<img class=\"backBtn\" src=\"../assets/shared/images/navigationArrow.png\">")
 			.css("position", "absolute")
+			.css("z-index", "2")
 			.css("width", width * .25)
 			.css("left", 0)
 			.css("bottom", 0)
@@ -34,7 +36,17 @@ function MapView(Imports) {
 				Imports.ViewManager.previousView();
 			});
 		
+		var imageForeOverLay = $("<img class=\"imageOverlay\" src=\"../assets/shared/images/longBGHueCompressed.jpg\">")
+			.css("position", "absolute")
+			.css("z-index", "1")
+			.css("opacity", 0.4)
+			.css("width", width)
+			.css("height", height)
+			.css("top", 0)
+			.css("left", 0);
+		
 		$("#" + Imports.domId["MapView"])
+		.append(imageForeOverLay)
 		.append(fireBtn)
 		.append(backBtn);
 	});
@@ -88,7 +100,8 @@ MapView.prototype._generateMapView = function () {
 	if(map === null) {
 		map = new Microsoft.Maps.Map(document.getElementById("bingmap"), { 
 			credentials: "AodC7AaauHfjsY9pK8qi6U-JN1s1HfroLZiCw3afJUoicmW-CH9RasOjp5hcsmFe",
-			mapTypeId: Microsoft.Maps.MapTypeId.road,  // Change map style, types: aerial, birdseye, road
+			backgroundColor: new Microsoft.Maps.Color(255,0,0,0),
+			mapTypeId: Microsoft.Maps.MapTypeId.aerial,  // Change map style, types: aerial, birdseye, road
 			
 			// Limit Functionality
 			enableSearchLogo: false,		//Disable search
