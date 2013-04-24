@@ -36,10 +36,10 @@ function MapView(Imports) {
 				Imports.ViewManager.previousView();
 			});
 		
-		var imageForeOverLay = $("<img class=\"imageOverlay\" src=\"../assets/shared/images/longBG_smaller.jpg\">")
+		var imageForeOverLay = $("<img class=\"imageOverlay\" src=\"../assets/shared/images/longBGHueCompressed.jpg\">")
 			.css("position", "absolute")
 			.css("z-index", "1")
-			.css("opacity", 0.3)
+			.css("opacity", 0.4)
 			.css("width", width)
 			.css("height", height)
 			.css("top", 0)
