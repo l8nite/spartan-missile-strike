@@ -100,7 +100,8 @@ MapView.prototype._generateMapView = function () {
 	if(map === null) {
 		map = new Microsoft.Maps.Map(document.getElementById("bingmap"), { 
 			credentials: "AodC7AaauHfjsY9pK8qi6U-JN1s1HfroLZiCw3afJUoicmW-CH9RasOjp5hcsmFe",
-			mapTypeId: Microsoft.Maps.MapTypeId.road,  // Change map style, types: aerial, birdseye, road
+			backgroundColor: new Microsoft.Maps.Color(255,0,0,0),
+			mapTypeId: Microsoft.Maps.MapTypeId.aerial,  // Change map style, types: aerial, birdseye, road
 			
 			// Limit Functionality
 			enableSearchLogo: false,		//Disable search
