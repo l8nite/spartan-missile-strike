@@ -221,6 +221,7 @@ public class MediaManager {
      */
     public void playSound(String soundID, String options) {
         try {
+            // Trim quotes if they exist
             try {
                 if(soundID.charAt(0) == '"') {
                    soundID = soundID.substring(1);
@@ -276,8 +277,22 @@ public class MediaManager {
      */
     public void stopSound(String soundID) {
         MALogger.log(TAG, Log.INFO, "Stopping sound: " + soundID);
+
+        // Trim quotes if they exist
+        try {
+            if (soundID.charAt(0) == '"') {
+                soundID = soundID.substring(1);
+            }
+        } catch (Exception ex) { }
+        try {
+            if (soundID.charAt(soundID.length() - 1) == '"') {
+                soundID = soundID.substring(0, soundID.length() - 1);
+            }
+        } catch (Exception ex) { }
+        
+        // Stop Sound
         MediaPlayer mp = sounds.get(soundID);
-        if(mp != null && mp.isPlaying()) {
+        if (mp != null && mp.isPlaying()) {
             mp.pause();
         }
         else {
