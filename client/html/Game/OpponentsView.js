@@ -50,8 +50,7 @@ OpponentsView.prototype = Object.create(FixedHeightView.prototype);
 
 OpponentsView.prototype.onView = function () {
 	var that = this;
-	this.location = null;
-	this.locationTicket = this.Imports.NativeBridge.startLocationUpdates(function (location) {
+	this.locationTicket = this.Imports.GameMaster.subscribeLocation(function (location) {
 		if (location) {
 			that.location = location;
 		} else {
@@ -100,7 +99,7 @@ OpponentsView.prototype.onView = function () {
 };
 
 OpponentsView.prototype.offView = function () {
-	this.Imports.NativeBridge.stopLocationUpdates(this.locationTicket);
+	this.Imports.GameMaster.unsubscribeLocation(this.locationTicket);
 	FixedHeightView.prototype.offView.call(this);
 };
 

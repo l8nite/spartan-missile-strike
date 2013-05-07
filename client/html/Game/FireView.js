@@ -67,7 +67,7 @@ FireView.prototype = Object.create(FixedHeightView.prototype);
 FireView.prototype.onView = function () {
 	var that = this;
 	this.Imports.NativeBridge.showFireMissileScreen();
-	this.NBLocationTicket = this.Imports.NativeBridge.startLocationUpdates(this._updateWithNewLocation.bind(this));
+	this.locationTicket = this.Imports.GameMaster.subscribeLocation(this._updateWithNewLocation.bind(this));
 	this.NBOrientationTicket = this.Imports.NativeBridge.startOrientationUpdates(this._updateWithNewOrientation.bind(this));
 	this.compassRenderInterval = setInterval(function () {
 		if (that._orientation) {
@@ -80,7 +80,7 @@ FireView.prototype.onView = function () {
 
 FireView.prototype.offView = function () {
 	this.Imports.NativeBridge.hideFireMissileScreen();
-	this.Imports.NativeBridge.stopLocationUpdates(this.NBLocationTicket);
+	this.Imports.GameMaster.unsubscribeLocation(this.locationTicket);
 	this.Imports.NativeBridge.stopOrientationUpdates(this.NBOrientationTicket);
 	clearInterval(this.compassRenderInterval);
 	FixedHeightView.prototype.offView.call(this);

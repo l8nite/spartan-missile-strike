@@ -82,9 +82,8 @@ MainMenu.prototype = Object.create(FixedHeightView.prototype);
 
 MainMenu.prototype.onView = function () {
 	var that = this;
-	this.location = null;
 	this.GameMasterTicket = this.Imports.GameMaster.subscribeGames(this._render.bind(this));
-	this.locationTicket = this.Imports.NativeBridge.startLocationUpdates(function (location) {
+	this.locationTicket = this.Imports.GameMaster.subscribeLocation(function (location) {
 		if (location) {
 			that.location = location;
 		} else {
@@ -97,6 +96,7 @@ MainMenu.prototype.onView = function () {
 
 MainMenu.prototype.offView = function () {
 	this.Imports.GameMaster.unsubscribeGames(this.GameMasterTicket);
+	this.Imports.GameMaster.unsubscribeLocation(this.locationTicket);
 	FixedHeightView.prototype.offView.call(this);
 };
 
